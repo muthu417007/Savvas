@@ -1,0 +1,26 @@
+.footerContainer{
+    padding: 20px;
+    border-top: 1px solid rgba(23, 55, 112, .2);
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.2px;
+    text-align: left;
+    color: #173770;
+}
+@media (min-width:768px){
+	.footerLinks{
+        text-align: right;
+    }
+}
+.slds-col{
+    padding-bottom: 10px;
+}
+a.footerLinks{
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.2px;
+    text-align: left;
+    color: #173770;
+}

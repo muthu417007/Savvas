@@ -1,0 +1,915 @@
+.confirmation-message{
+    border-radius: 10px;
+    background-color: #F0F4E6;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    color: #008816;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0px auto 0;
+    border: 1px solid #B3CA83;
+    padding: 13px;
+}
+.Register{
+    font-family: 'Poppins', sans-serif;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 38.5px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #173770;
+    padding: 25px 70px 10px;
+}
+.firstpageheading{
+	font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #173770;
+	/* margin-top: 15px;
+	margin-bottom: 15px; */
+    padding: 0.5rem 0rem;
+
+}
+/*.slds-form-element__control, .zipcodemarhin{
+	margin-top:-22px;
+}*/
+.schoolzip-container{
+    position: relative;
+    font-family:'Poppins', sans-serif;
+    padding-left: 20px;
+}
+.lastname-container{
+    padding-left: 20px;
+}
+.mergingspace{
+	position: absolute;
+    top: 82px;
+    left: 20px;
+    width: calc(100% - 20px);
+    margin: 0;
+}
+.centered-buttons{
+    padding: 0;
+}  
+/* button.true {
+    background-color: blue;  Change to desired color 
+    color: rgb(187, 34, 34);  Change to desired text color 
+} */
+/* .register-button {
+    background-color: #AFC3D8;
+    color: #0C1E3D;
+}
+.register-button:not([disabled]) {
+    background-color:#9ECA47;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding: 10px 30px;
+    border-radius: 90px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19.8px;
+    color: #ffffff;
+    margin: 10px 0;
+    height: 55px;
+} */
+.verifyBtnClass {
+    background-color: #AFC3D8;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding: 10px 30px;
+    border-radius: 90px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19.8px;
+    color: #ffffff;
+    margin: 10px 0;
+    height: 55px;
+    border: none;
+    cursor: no-drop;
+}
+.verifyBtnClass:not([aria-disabled=true]) {
+    background-color: #9ECA47;
+    color: #0C1E3D;
+    cursor: pointer;
+}
+.slds-registerbutton{
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding: 10px 30px;
+    border-radius: 90px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19.8px;
+    background-color: #9ECA47;
+    color: #0C1E3D;
+    margin: 10px 0 20px;
+    height: 55px;
+    border: none;
+}
+/* .register-button button{
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    vertical-align: sub;
+} */
+
+.slds-button {
+    justify-content: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    line-height: 21px;
+    color: #2150A3;
+}
+
+
+
+.RegisterNewUser {
+   /* width: 100%;  Ensure the card takes up the available width */
+   /* max-width: 600px; /* Set a maximum width for the card to prevent it from becoming too wide */
+    width: 680px;
+    height: auto;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+
+}
+.slds-align_absolute-center::-webkit-scrollbar {
+  			display: none;
+	}
+
+.fixed-width-input {
+     width: 260px;
+     height: 55px;
+     top: 23px; 
+     border: 1px solid #AFC3D8;/*Adjust the width as needed */
+     border-radius: 5px;
+    color: #173770;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.4px;
+    text-align: left;
+    background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+    background-position: 5px 5px, 0, 100% 0;
+    background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+    /* padding: 1.5rem; */
+    margin-bottom: 20px;
+
+}  
+
+/* This for Sprint 4 Figma Changes */
+
+.selfRegister-form{
+    background-color: #ffffff;
+    background-image: var(--landing-page-bgimage-path);
+    background-size: cover;
+    padding: 106px 0 92px;
+    background-repeat: no-repeat;
+    background-position: inherit;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0;
+    overflow-x: hidden;
+    background-attachment: fixed;
+    overflow-y: scroll;
+} 
+
+.selfRegister-form::-webkit-scrollbar {
+  			display: none;
+		}
+
+.slds-form-element__label{
+    display: block;
+}
+.slds-form_horizontal .fixed-width-input{
+    width: 100%;
+    height: 55px;
+    border: 1px solid #AFC3D8;
+    border-radius: 5px;
+    color: #173770;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.4px;
+    text-align: left;
+    background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+    background-position: 5px 5px, 0, 100% 0;
+    background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+    padding: 1.5rem;
+}
+
+.registration-text {
+    text-align: center;
+    padding: 10px 15px; 
+    border: 1px solid #FFCDCD;
+    background-color: #FFF4F4;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+.registration-text p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: justify;
+    color: #B40000;
+}
+.registration-text p a{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    color: #2150A3;
+    text-decoration: underline;
+}
+.registration-text.already-registered-signInlink{
+    text-align: left;
+}
+.registration-text.already-registered-signInlink span{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #B40000;
+}
+.registration-text.already-registered-signInlink a{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: #2150A3;
+    text-decoration: underline;
+}
+.blue-link {
+    color:brgb(10, 112, 156)
+}
+.select-container {
+    position: relative; /* Ensure relative positioning */
+   z-index: 1 !important; /* Ensure overflow is visible */
+}
+
+/* Style the dropdown options */
+.select-container select {
+    position: relative; /* Ensure relative positioning */
+}
+
+/* Style the dropdown options list */
+/* .select-container select option {
+     Add any necessary styling for the dropdown options 
+} */
+
+/* .slds-input {
+    max-width: 200px;  Adjust the maximum width as needed 
+} */
+
+/* .slds-form_horizontal.slds-form.slds-grid.slds-wrap{
+	margin-top: 50px;
+	margin-bottom: 0px;
+} */
+
+.info {
+    margin-bottom: 3px;
+}
+
+
+.label {
+    display: inline-block;
+    /* width: 200px;  Adjust width as needed 
+	padding-left: 10px; */
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    color: #173770;
+
+}
+
+
+.detail {
+    display: inline-block;
+    /* margin-left: 10px; Adjust margin as needed */
+    vertical-align: top;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    color: #0C1E3D;
+
+}
+
+.registered-user-message {
+    text-align: center;
+    padding: 20px; 
+}
+
+
+.registered-user-message a.blue-link {
+    color: blue; /* Blue color for links */
+}
+
+
+.registered-user-message p {
+    color: red; /* Red color for other text */
+}
+
+.registration-details {
+    text-align: center;
+}
+
+
+.registration-heading {
+    margin: 0px 0px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    color: #173770;
+
+}
+
+
+.registration-info {
+    /* display: flex;
+    flex-direction: column; */
+    /* align-items: left;
+    padding-right: 20px;
+    padding-left: 86px;*/
+    gap: 3px;
+}
+
+
+/*.registration-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+.registration-label {
+    margin-right: 10px;
+    font-weight: bold;
+    align-items: left;
+    direction: 1tr;
+}
+
+.registration-value{
+    align-items: right;
+    direction: 1tr;
+}*/
+.registration-row {
+    /* display: flex;
+    align-items: center;
+    margin-bottom: 10px; */
+    float: left;
+    width: 50%;
+    word-break: break-word;
+}
+.registration-schoolname{
+    width: 49%;
+    display: inline-block;
+    padding-left: 20px;
+}
+
+.registration-label {
+    /* font-weight: bold;
+    margin-right: 10px;
+    width: 150px; Adjust as needed 
+    direction: rtl; Set direction to right-to-left
+    display: inline-block; */
+    /* width: 200px;  Adjust width as needed 
+	padding-left: 10px; */
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    line-height: 24px !important;
+    text-align: left !important;
+    color: #173770 !important;
+}
+
+.registration-value {
+    /* flex: 1; Expand to fill remaining space 
+    margin-left: 68px;  Adjust as needed 
+    direction: ltr;  Set direction to right-to-left */
+    display: inline-block;
+    /* margin-left: 10px; Adjust margin as needed */
+    vertical-align: top;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 24px !important;
+    text-align: left !important;
+    color: #0C1E3D !important;
+    word-break: break-all !important;
+}
+
+
+.backdrop{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #173770;
+    opacity: 80%;
+    z-index: 990;
+}
+.slds-modal{
+    top: 50%;
+    transform: translateY(-50%);
+    outline: none;
+}
+.good-news-modal.slds-modal{
+    top: 42%;
+}
+.slds-modal__container1 {
+    background-color: #ffffff;
+    width: 625px;
+    min-width: auto;
+    padding: 0;
+    height: auto;
+    border-radius: 20px;
+}
+
+.slds-modal__container {
+    background-color: #ffffff;
+    width: 625px;
+    min-width: auto;
+    padding: 0;
+    height: auto;
+    border-radius: 20px;
+    overflow: auto;
+}
+
+.slds-modal__header {
+    padding: 50px 55px 10px;
+    border: none;
+}
+.slds-modal__header h2{
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 38.5px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #173770;
+    width: 80%;
+    margin: 0 auto;
+}
+.slds-button.slds-button_icon.slds-modal__close{
+    top: 10px;
+    right: 10px;
+    font-size: 9px;
+    width: 50px;
+    height: 50px;
+    border-radius: 90px;
+    background-color: #0C1E3D;
+}
+.slds-modal__content{
+    padding: 0 77px;
+}
+.slds-modal__content p{
+    font-size: 15.9px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: center;
+    color: #173770;
+}
+.slds-modal__footer {
+    border: none;
+    padding: 30px 0 40px;
+}
+.modal-confirm-button{
+    display: block;
+    text-align: center;
+}
+
+.modal-cancel-button{
+    display: block;
+    text-align: center;
+}
+
+.registration-success {
+   text-align: center;
+}
+.center-align {
+   text-align: center;
+}
+.user-info p {
+   margin: 8px 0;
+}
+.user-info p strong {
+   margin-right: 8px;
+}
+.text-value-changed{
+    padding: 0 70px 30px;
+}
+
+.footer-links{
+    gap: 12px;
+}
+
+.register-footer-links{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    display: inline-block;
+    margin-right: 5px;
+}
+.register-blue-footer{
+    background-color: #173770;
+    text-align: center;
+    padding: 20px 100px;
+}
+.register-footer-copyright-text{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.2px;
+    text-align: left;
+    color: #ffffff;
+    display: inline-block;
+}
+.not-a-dealer-container{
+    border-top: 1px solid rgba(23, 55, 112, 0.2);
+    padding: 30px 70px;
+    /* margin-top: 30px; */
+}
+.not-a-dealer-title{
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    text-align: left;
+    color: #0C1E3D;
+}
+.not-a-dealer-links a{
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #173770;
+    text-decoration: none !important;
+    margin-top: 8px;
+    display: inline-block;
+}
+.chevron-circle{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #679608;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+.company-name{
+    float: left;
+    width: 49%;
+}
+.address-container{
+    width: 49%;
+    display: inline-block;
+    padding-left: 20px;
+}
+.access-type-wrapper{
+    margin-top: 40px;
+}
+.access-type span{
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 22px;
+    text-align: left;
+    color: #173770;
+    margin-bottom: 20px;
+    display: block;
+}
+.access-type-checkbox-group{
+    margin-bottom: 10px;
+}
+.school-not-found{
+    margin-bottom: 20px;
+}
+.school-not-found p{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    color: #173770;
+}
+.school-not-found p a{
+    font-weight: 600;
+    text-decoration: underline;
+}
+.dropdown-toggle {
+    padding: 13px;
+    background: #f4f4f4;
+    border: 1px solid #AFC3D8;
+    cursor: pointer;
+    width: 93%;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+    color: #173770;
+    margin-top: 10px;
+}
+.dropdown {
+    position: absolute;
+    top:80px;
+    width: 93%;
+    border: 1px solid #AFC3D8;
+    background: white;
+    box-shadow: 0px 4px 8px 0px #2150A31A;
+    z-index: 1000;
+    border-radius: 5px;
+    margin-top: 7px;
+}
+
+.dropdown-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.dropdown-item {
+    height: auto;
+    padding: 12px;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+    color: #173770;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background: #E5F1FD;
+    color: #173770;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.addressTextArea{
+    --sds-c-textarea-sizing-min-height:125px;
+}
+
+.descriptionTextArea{
+    --sds-c-textarea-sizing-min-height:175px;
+}
+.submit-case-popup .slds-modal{
+    position: absolute;
+    top: 0;
+    transform: none;
+    text-wrap: inherit;
+    word-wrap: break-word;
+}
+.submit-case-popup .slds-modal__container{
+    width: 100%;
+}
+.submit-case-popup .slds-modal__footer{
+    padding: 0 55px 50px;
+}
+.submit-case-popup .slds-modal__content{
+    padding: 14px 55px 0;
+}
+.submit-case-popup .slds-modal__content p{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    color: #173770;
+}
+.submit-case-popup .case-detail-label{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    /*text-align: right;*/
+    color: #173770;
+    display: inline-block;
+    width: 58px;
+    margin-right: 25px;
+    display: block;
+    word-wrap: break-word;
+}
+.submit-case-popup .case-detail-label.long{
+    width: 125px;
+}
+.submit-case-popup .case-detail-value{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    color: #0C1E3D;
+    display: block;
+}
+.submit-case-popup .address-container{
+    padding-left: 0;
+}
+.submit-case-popup .slds-modal__header .slds-modal__close{
+    top: 10px;
+    right: 10px;
+    background-color: #0C1E3D;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-family: sans-serif !important;
+    font-size: 24px;
+    color: #fff;
+    border: none;
+}
+.submit-case-popup .slds-modal__header h3{
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 38.5px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #173770;
+}
+.slds-text-color_error{
+    color: #D73A59 !important;
+}
+/*scrollbar style*/
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #AFC3D8; 
+    border-radius: 10px;
+}
+.mobile-only{
+    display: none;
+    background-color: #fff;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    padding: 20px;
+    z-index: 2;
+}
+@media only screen and (max-width: 767px){
+    .mobile-only{
+        display: block;
+    }
+    .selfRegister-form{
+        background-image: var(--landing-page-bgimage-mobile-path);
+        padding: 28px 15px;
+    }
+    .RegisterNewUser{
+        width: 92vw;
+        margin-top: 64px;
+        border-radius: 10px;
+    }
+    .mobile-layout{
+        flex-direction: column;
+    }
+    .mobile-layout .fixed-width-input{
+        width: 100%;
+    }
+    .Register{
+        padding: 0 25px 10px;
+        font-size: 26px;
+        line-height: 28.6px;
+    }
+    .text-value-changed{
+        padding: 0 25px 40px;
+    }
+    .lastname-container{
+        padding-left: 0;
+    }
+    .schoolzip-container{
+        padding-left: 0;
+    }
+    .not-a-dealer-container{
+        padding: 30px 25px 36px;
+    }
+    .not-a-dealer-title{
+        font-size: 14px;
+        line-height: 19.6px;
+    }
+    .not-a-dealer-title a{
+        font-size: 14px;
+        line-height: 21px;
+    }
+    .register-blue-footer{
+        padding: 20px 18px;
+    }
+    .firstpageheading{
+        font-size: 14px;
+        line-height: 21px;
+    }
+    .verifyBtnClass{
+        height: 50px;
+        margin-top: 5px;
+    }
+    .not-a-dealer-links a{
+        font-size: 14px;
+        line-height: 21px;
+    }
+    .register-footer-copyright-text{
+        font-size: 12px;
+        line-height: 16.8px;
+        text-align: center;
+    }
+    .register-footer-links{
+        font-size: 13px;
+        line-height: 19.5px;
+        margin: 10px 10px 0;
+    }
+    .company-name{
+        width: 100%;
+    }
+    .address-container{
+        width: 100%;
+        padding: 0;
+        margin-top: 25px;
+    }
+    .label{
+        font-size: 14px;
+        line-height: 21px;
+    }
+    .detail{
+        font-size: 15px;
+        line-height: 22.5px;
+    }
+    .school-not-found p{
+        font-size: 14px;
+        line-height: 21px;
+    }
+    .school-not-found p a{
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .registration-text p{
+        font-size: 14px;
+        line-height: 21px;
+    }
+    .registration-row{
+        width: 100%;
+    }
+    .registration-schoolname{
+        width: 100%;
+        padding: 0;
+        margin-top: 25px;
+    }
+    .slds-registerbutton{
+        height: 50px;
+        margin-top: 0;
+        font-size: 16px;
+        line-height: 17.6px;
+    }
+    .slds-modal__container{
+        width: 92%;
+        margin: 0 auto;
+    }
+    .slds-modal__header{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .slds-modal__content{
+        padding: 0 20px;
+    }
+    .slds-modal__header h2{
+        font-size: 26px;
+        line-height: 28.6px;
+    }
+    .slds-modal__content p{
+        font-size: 14px;
+        line-height: 21px;
+    }
+    .modal-confirm-button button{
+        height: 50px;
+    }
+    .chevron-circle{
+        width: 18px;
+        height: 18px;
+        text-align: center;
+    }
+}

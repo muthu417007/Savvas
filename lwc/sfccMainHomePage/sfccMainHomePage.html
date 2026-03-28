@@ -1,0 +1,62 @@
+<template>
+    <lightning-card>
+        <div class="slds-grid slds-wrap slds-align-middle slds-align_absolute-center">
+            <div class="slds-col">
+                <h4 class="slds-text-heading_medium slds-m-around_small recent-order">Recent Orders</h4>
+            </div>
+            <template lwc:if={hasRecentOrder}>
+                 <div class="slds-col slds-text-align_right slds-m-right_medium">
+                    <p class="view-all-link">{getRecentOrderCount} Items</p> 
+                        <span class="slds-p-horizontal_small">|</span>
+                         <a href="#" class="view-all-link">
+                            View All
+                            <div class="chevron-circle" >
+                            <lightning-icon class="chevron-icon " icon-name='utility:chevronright' alternative-text='chevronright' size='xx-small' title='chevronright'></lightning-icon>
+                            </div>  
+                            </a>
+                 </div>
+            </template>
+        </div>
+        <div class="slds-m-around_medium">
+            <template lwc:if={hasRecentOrder}>
+                <template for:each={orders} for:item="order">
+                    <div key={order.Id} class="slds-box slds-m-bottom_medium">
+                         <div class="slds-grid slds-wrap">
+                            <div class="slds-size_1-of-5">
+                                    <p class="order-label">PO #</p>
+                                    <p class="order-value">{order.Column1}</p>
+                                </div>
+                                <div class="slds-size_1-of-5 slds-text-align_left">
+                                    <p class="order-label">Order #</p>
+                                    <p class="order-link"><a href={orderrecorddetail}>{order.Column2}</a></p>
+                                </div>
+                                <div class="slds-size_1-of-5 slds-text-align_left">
+                                    <p class="order-label">Ship to Name</p>
+                                    <p class="order-value">{order.Column3}</p>
+                                </div>
+                                <div class="slds-size_1-of-5 slds-text-align_left">
+                                    <p class="order-label">Order Date</p>
+                                    <p class="order-value">{order.Column4}</p>
+                                </div>
+                                <div class="slds-size_1-of-5 slds-text-align_left">
+                                    <p class="status-label">Status</p>
+                                    <p class="order-value">{order.Column5}</p>
+                                </div>
+                            </div>
+                    </div>
+                </template>
+            </template>
+            <template lwc:else>
+                <div class="slds-box no-recent-order-box">
+                    <div class=" slds-align_absolute-center"> 
+                        <img src={noRecentOrderImage}><br>
+                    </div><span></span>
+                    <h5 class="slds-align_absolute-center no-recent-order-text">No Recent Orders</h5>
+                </div>
+            </template>
+            <template if:true={error}>
+                 <!-- Handle error condition -->
+             </template>
+         </div>
+    </lightning-card>
+</template>

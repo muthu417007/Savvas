@@ -1,0 +1,93 @@
+<template>
+    <header class="header">
+        <template if:true={isLoading}>
+            <div class="exampleHolder">
+                <lightning-spinner alternative-text="Loading" size="xx-small"></lightning-spinner>
+            </div>
+        </template>
+        <div class="header-top-section">
+            <div class="needhelpwrap">
+                <div class="help-link">
+                    <!-- Need Help link -->
+                    <span><img src={labels.scc_need_help_icon} alt="Need Help">Need Help?<lightning-icon icon-name='utility:chevrondown' alternative-text='chevrondown' size='small' title='chevrondown'></lightning-icon></span>
+                    <!-- <template if:true={showDropdownMenu}> -->
+                    <div class="dropdown">
+                        <ul>
+                            <li><a href={labels.scc_header_FAQ_URL} >{labels.scc_header_FAQ}</a></li>
+                            <li><a href={labels.scc_header_Site_Training_URL} >{labels.scc_header_Site_Training}</a></li>
+                            <li><a href={labels.scc_header_Contact_Commerce_Cloud_Support_URL} >{labels.scc_header_Contact_Commerce_Cloud_Support}</a></li>
+                            <li><a href={labels.scc_header_Contact_Customer_Service_Support_URL} >{labels.scc_header_Contact_Customer_Service_Support}</a></li>
+                        </ul>
+                    </div>
+                    <!-- </template> -->
+                </div>
+            </div>
+            <div class="other-apps">
+                <span>Other Apps<lightning-icon icon-name='utility:chevrondown' alternative-text='chevrondown' size='small' title='chevrondown'></lightning-icon></span>
+                <div class="dropdown2">
+                    <div class="dropdown2-content">
+                        <ul>
+                            <li><a href="https://test.salesforce.com">{labels.scc_header_Profile}</a></li>
+                            <li><a class="otherAppSect" href="https://test.salesforce.com/">{labels.scc_header_Other_Apps}</a> 
+                                <ul class="submenu">
+                                    <li><a href={labels.scc_header_WorkText_National_URL}>{labels.scc_header_WorkText_National}</a></li>
+                                    <li><a href={labels.scc_header_WorkText_TX_URL}>{labels.scc_header_WorkText_TX}</a></li>
+                                    <li><a href={labels.scc_header_SIOP_Registration_URL}>{labels.scc_header_SIOP_Registration}</a></li>
+                                    <li><a href={labels.scc_header_Workbook_URL}>{labels.scc_header_Workbook}</a></li>
+                                    <li><a href={labels.scc_header_Novel_TX_URL}>{labels.scc_header_Novel_TX}</a></li>
+                                </ul>
+                            </li>
+                            <li><a href={labels.scc_header_Sign_Out_URL} target="_self"  onclick={updateCart}>{labels.scc_header_Sign_Out}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div> 
+            <div class="account-options">
+                <div class="username"><img src={labels.scc_profile_avatar} alt="Profile Avatar">Hi, {userName}<lightning-icon icon-name='utility:chevrondown' alternative-text='chevrondown' size='small' title='chevrondown'></lightning-icon></div>
+            </div>
+        </div> 
+        <nav class="nav-links header-bottom-section">
+            <div class="logo-container">
+                <!-- Replace 'logo.png' with your company logo -->
+                <img src={labels.scc_brand_logo} class="brand-logo-desktop logo" alt="Company Logo">
+                <img src={labels.scc_brand_logo_mobile} class="brand-logo-mobile logo" alt="Company Logo">
+            </div>
+            <ul>
+                <li class="nav-item">
+                    <a href="#" class={homeClass} onclick={handleTabClick} data-tab="home">{labels.scc_header_Home}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class={OrderStatusClass} onclick={handleTabClick} data-tab="OrderStatus">{labels.scc_header_Order_Status}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class={CheckPriceAvailabilityClass} onclick={handleTabClick}
+                        data-tab="CheckPriceAvailability">{labels.scc_header_Check_Price_Availability}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class={PlaceOrderClass} onclick={handleTabClick} data-tab="PlaceOrder">{labels.scc_header_Place_Order}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class={FileClaimClass} onclick={handleTabClick} data-tab="FileClaim">{labels.scc_header_File_Claim}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class={GenerateRequestsClass} onclick={handleTabClick}
+                        data-tab="GenerateRequests">{labels.scc_header_Generate_Requests}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class={RequestDocumentsClass} onclick={handleTabClick}
+                        data-tab="RequestDocuments">{labels.scc_header_Request_Documents}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class={CheckAccessCodeClass} onclick={handleTabClick}
+                        data-tab="CheckAccessCode">{labels.scc_header_Check_Access_Code}</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- <template if:true={showSiteDesc}>
+        <div class="content-header slds-align_absolute-center slds-var-p-around_xx-small">
+            {labels.scc_header_Site_Name_Description}
+        </div>
+    </template> -->
+
+</template>

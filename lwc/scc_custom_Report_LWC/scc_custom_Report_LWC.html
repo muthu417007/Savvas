@@ -1,0 +1,237 @@
+<template>
+	<template if:true={mainPage}>
+		<!-- added by sudha // W-014819 BreadCrumb  -->
+		<div
+			class="slds-grid slds-wrap slds-grid_vertical slds-gutters slds-p-around_large order-status-BG slds-is-relative">
+			<div class="slds-col">
+				<nav role="navigation" aria-label="Breadcrumbs">
+					<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+						<li class="slds-breadcrumb__item">
+							<a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+						</li>
+						<li class="slds-breadcrumb__item">
+							<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Reports</a>
+						</li>
+					</ol>
+				</nav>
+			</div>
+			<!--  Buttons    -->
+			<div class="slds-col slds-size_3-of-3 title-page-content">
+
+				<div class="slds-text-align_right shopping-buttons">
+					<button class="slds-button  view-sample" onclick={viewSamplehander} aria-disabled={viewSampleDisabled}>View Sample</button>
+					<button class="slds-button  delete-report" onclick={deletereporthander} aria-disabled={deletereportDisabled}>Delete Report</button>
+					<button class="slds-button  edit-criteria" onclick={editcriteriahander} aria-disabled={editcriteriaDisabled}>Edit Criteria</button>
+					<button class="slds-button  run-report" onclick={runreportbuttonhander} aria-disabled ={runreportDisabled}>Run Report</button>
+				</div>
+			</div>
+			<!--   ended  by sudha W-014819  -->
+			<!-- Multi Address Section Start -->
+			 <template if:true={showMultiAddressPage}>
+			<div class="slds-col slds-size_3-of-3">
+				<h1 class="slds-assistive-text">Reports</h1>
+				<div class="slds-m-top_medium slds-p-top_large confirm-address-cards">
+					<h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">Select
+						Billing
+						Address to Report on</span></h2>
+					<div class="slds-p-right_large slds-m-bottom_medium slds-float_right confirm-address-filter">
+						<label class="slds-form-element__label slds-p-right_none slds-m-left_x-small" for="filter-search-input">Filter Results<span class="slds-assistive-text">Filter by name or zip / Postal Code. Showing {totalBillToRecords} of {totalBillToRecords} results</span></label>
+						<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+							<div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i
+							</div>
+							<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+								<div class="slds-popover__body">Filter by name or zip / Postal Code</div>
+							</div>
+						</div>
+						<div class="slds-is-relative">
+							<input type="text" id="filter-search-input" class="filter-search-input" value={searchTerm} onchange={handleUserInputs} onkeyup={handleUserInputs} />
+							<a href="#" class="slds-button filter-clear" onclick={clearFilterInputBill} aria-label="close" role="button">x</a>
+						</div>
+						<div class="slds-form-element__label item-count" role="alert">{totalBillToRecords} of {totalBillToRecords}
+							Items
+						</div>
+					</div>
+					<div class="slds-grid slds-wrap slds-gutters_x-small slds-p-vertical_medium slds-p-left_x-large slds-p-right_small card-container">
+					 <template for:each={filteredresult} for:item="sAddress">
+							<div class="slds-col slds-size_3-of-12" key={sAddress.AccId}>
+								<div class="slds-visual-picker slds-visual-picker_medium slds-m-bottom_small">
+									<input type="radio" id={sAddress.AccId} value={sAddress.AccId} name="BillingAddresss" onclick={handleRowClick} data-record-id={sAddress.AccId}
+									data-attribute-billtonumber ={sAddress.BillToNumber} />
+									<label for={sAddress.AccId}>
+                                            <div class="card-size"  >
+                                                <span class="slds-visual-picker__figure slds-visual-picker__text card-size slds-p-around_medium card-padding">
+                                                    <span>
+                                                        <p>{sAddress.name} {sAddress.AccountName}</p>
+                                                        {sAddress.BillinStreet}<br/>
+                                                        {sAddress.BillingCity} {sAddress.State}{sAddress.ZipCode}<br/>
+                                                        {sAddress.BillingCountry}
+                                                    </span>
+                                                </span>
+                                                <span class="slds-icon_container slds-visual-picker__text-check">
+                                                    <svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true"></svg>
+                                                </span>
+                                            </div>
+                                        </label>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+			<div class="slds-col slds-size_3-of-3">
+				<div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+					<h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">Select
+						Shipping
+						Address to Report on (Optional)</h2>
+					<div class="slds-p-right_large slds-m-bottom_medium slds-float_right confirm-address-filter">
+						<label class="slds-form-element__label slds-p-right_none slds-m-left_x-small" for="filter-search-input1">Filter Results<span class="slds-assistive-text">Filter by name or zip / Postal Code. Showing {totalShipToRecords} of {totalShipToRecords} results</span></label>
+						<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+							<div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i
+							</div>
+							<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+								<div class="slds-popover__body">Filter by name or zip / Postal Code</div>
+							</div>
+						</div>
+						<div class="slds-is-relative">
+							<input type="text" id="filter-search-input1" class="filter-search-input" value={searchTermShip} onchange={handleUserInputsShip} onkeyup={handleUserInputsShip} />
+							<a href="#" class="slds-button filter-clear" onclick={clearFilterInputShip} aria-label="close" role="button">x</a>
+						</div>
+						<div class="slds-form-element__label item-count" role="alert">{totalShipToRecords} of {totalShipToRecords}
+							Items
+						</div>
+					</div>
+					<div class="slds-p-horizontal_x-large allow-drop-ship">
+						<lightning-input type="checkbox" label="Include Reports for any associated Shipping Address"
+							checked={isChecked} onchange={handlecheckboxChange} id="allow-drop-ship"></lightning-input>
+					</div>
+					<div class="slds-grid slds-wrap slds-gutters_x-small slds-p-vertical_medium slds-p-left_x-large slds-p-right_small ship-address-container">
+						<template for:each={filteredresultt} for:item="shippaddr">
+							<div class="slds-col slds-size_3-of-12" key={shippaddr.AccShipId}>
+								<div class="slds-visual-picker slds-visual-picker_medium slds-m-bottom_small">
+									<input type="radio" id={shippaddr.AccShipId} value={shippaddr.AccShipId} name="shipping-address"
+                                            onclick={handleShipRowClick} data-record-id={shippaddr.AccShipId} 	data-attribute-shiptonumber ={shippaddr.ShipToNumber} />
+									<label for={shippaddr.AccShipId}>
+                                            <div class="card-size"  id={shippaddr.AccShipId}   onclick={handleShipRowClick} data-record-id={shippaddr.AccShipId} >
+                                                  <span class="slds-visual-picker__figure slds-visual-picker__text card-size slds-p-around_medium card-padding">
+                                                        <span style="text-align: left;">
+                                                            <p>{shippaddr.SAccountName}</p>
+                                                            {shippaddr.ShipStreet} <br />
+                                                            {shippaddr.ShippingCity} {shippaddr.Provionce} {shippaddr.PostalCode}<br/>
+                                                            {shippaddr.ShippingCountry}
+                                                        </span>
+                                                    </span>
+                                                    <span class="slds-icon_container slds-visual-picker__text-check">
+                                                        <svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true"></svg>
+                                                    </span>
+                                           </div>
+                                     </label>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+			</div>
+		</template> 
+			<!-- Multi Address Section End-->
+
+			<!--   added   by sudha  W-014819 // Report Section  -->
+			<div class="slds-col slds-size_3-of-3 slds-m-vertical_large">
+				<div class="max-width-container">
+					<lightning-card class="search-result-cards">
+						<h1 aria-level="2"
+							class="slds-text-heading_medium slds-m-around_small slds-p-horizontal_large search-criteria-title order-detail-table-header">
+							Reports
+						</h1>
+						<template if:true={isEmailSent}>
+							<div class="alert-message">
+								<div class="alert-icon slds-show_inline-block slds-text-align_center">!</div>
+								<div>The requested report will be emailed to the email address(es) provided.</div>
+							</div>
+						</template>
+						<div
+							class="slds-form slds-p-top_large slds-p-horizontal_large slds-p-bottom_x-large search-fields-group slds-show slds-grid slds-wrap">
+							<div class="slds-col slds-size_5-of-12">
+								<!-- <p role="alert">**Indicates custom report</p> -->
+								<div class="slds-form-element">
+
+									<lightning-combobox class="statuscombobox" label="Report"
+										aria-labelledby="indicates-customreport" placeholder="Select option"
+										value={SearchByvalue} options={SearchByOptions}
+										onchange={handleSearchOptionChange}>
+									</lightning-combobox>
+									<!-- <div class="slds-assistive-text" >**Indicates custom report</div> -->
+									<div class="custom-report-label" id="indicates-customreport">
+										<span class="slds-assistive-text">Report</span>**Indicates custom report</div>
+								</div>
+							</div>							
+
+							<template if:true={SelectedValue}>
+								<div class="slds-col slds-size_7-of-12">
+									<div class="custom-report-label">
+										<label class="report__label" for="order-to-date12">Report Description</label>
+									</div>
+									<div class="report-Description" role="alert">
+										{Description}
+									</div>
+								</div>
+							</template>
+							<!-- second part  -->
+						</div>
+					</lightning-card>
+				</div>
+			</div>
+		</div>
+		<template if:true={showDelete}>
+			<div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog" aria-label="Delete Report">
+				<div class="slds-modal__container">
+					<!------HEADER Section-->
+					<div class="slds-modal__header">
+						<button class="slds-modal__close closebtnOnFocus deleteRprtCloseBtn" onclick={closeDetailModal} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+						<h3 aria-level="2">Delete Report</h3>
+					</div>
+					<!------Body Section-->
+					<div class="slds-modal__content slds-p-around_medium">
+
+						<template if:true={isLoading}>							
+							<div style="position:relative;  height:120px;">
+								<lightning-spinner alternative-text="Loading" size="medium" variant="brand">
+								</lightning-spinner>
+							</div>
+							<!-- </div> -->
+						</template>
+						<template if:false={isLoading}>
+							<div class="slds-form_horizontal slds-text-align_left">
+								<p> Are you sure you want to delete this Report. This action cannot be undone.</p>
+							</div>
+						</template>
+
+					</div>
+
+					<!------Footer Section-->
+					<div class="slds-modal__footer slds-p-bottom_medium">
+						<button class="slds-button clear-cart-modal-button" onclick={selectDeleteHander} aria-disabled={deletereportDisabled}>Delete Report</button>
+						<button class="slds-button cancel-modal-button" onclick={CancelDeletePopUp} onfocusout={focusOutButton}>Cancel</button>
+					</div>
+				</div>
+			</div>
+
+		</template>
+
+	</template>
+
+
+	<template if:true={isSelectedviewsample}>
+		<c-scc_-view_-run_-report_-l-w-c selectedreport={selectedReportType} showdetailpage={showpageopen}
+			onclose={handleClose} ondetailclose={handleDetailClose} shipnum={ShipToNumber} billnum={billToNumber}
+			customdescription={customReportDescription} editedreport={EditedReportName} cmsg={msgfromc}
+			childrecords={records} onemailsent={handleEmailSent} originalreporttype={originalReportTypefromEdit}>
+		</c-scc_-view_-run_-report_-l-w-c>
+	</template>
+	<!-- Edit Component  -->
+	<template if:true={editCriteria}>
+		<c-scc_edit-criteria-l-w-c editedreport={EditedReportName} ondataretrieved={handleDataRetrieved}
+			onopen={handleOpen} records-data={records} selectedreport={selectedReportType}
+			customdescription={customReportDescription} oldreporttype={originalReportType}></c-scc_edit-criteria-l-w-c>
+	</template>
+</template>
+<!-- ended by sudha  -->

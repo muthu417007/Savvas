@@ -1,0 +1,39 @@
+<!-- sldsValidatorIgnore -->
+<template >
+    <lightning-card title= {title} variant="narrow" icon-name="standard:work_type" class="slds-text-title_caps slds-text-heading_large">
+        <div class="slds-m-around_medium">
+            <template if:true={data}>
+                <div style="background: antiquewhite">
+                <lightning-datatable
+                    data={data}
+                    columns={columns}
+                    max-row-selection="1"
+                    key-field="WorkOrderNumber"
+                    onrowselection={getSelectedName}>
+                </lightning-datatable>
+                </div>
+            </template>
+            <template if:true={noData}>
+                {noData}
+            </template>
+            <template if:true={error}>
+                {error}
+            </template>
+            </br>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <span><lightning-button variant="brand" label="Previous" title="Previous" onclick={handleNavigation} > </lightning-button></span>
+                </div>
+                <div class="slds-col">
+                    <span><lightning-button variant="brand" label="Clear Selection" onclick={clearSelection}  disabled={noRowSelected} class="slds-float_left"> </lightning-button></span>
+                </div>
+                <div class="slds-col">
+                    <span><lightning-button variant="brand" label="Complete This Service Request" onclick={handleNavigation}  disabled={noRowSelected} class="slds-align_absolute-center"> </lightning-button></span>
+                </div>
+                <div class="slds-col">
+                    <span><lightning-button variant="brand" label="Create New Service Request" onclick={handleNavigation}  disabled={rowSelected} class="slds-float_right"> </lightning-button></span>
+                </div>               
+            </div>
+        </div>
+    </lightning-card>
+</template>

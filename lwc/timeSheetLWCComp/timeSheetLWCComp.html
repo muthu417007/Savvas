@@ -1,0 +1,535 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 04-17-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+	<div class="container">
+
+		<!-- 0 Header with week days UI -->
+		<div class="slds-grid slds-wrap savs_top-header slds-gutters slds-m-horizontal_none">
+			<div class="slds-col slds-size_5-of-12 ">
+				<div class="savs_username">{currentUserName}</div>
+			</div>
+
+			<div class="slds-grid  slds-grid_align-space slds-col_bump-left">
+				<div class="slds-col" style="text-align: center;" onclick={prevweekHandler}>
+					<img style="height: 30px;margin-top: 13px;" alt="calendar" src={left_arrow_ico} />
+                </div>
+					<div class="slds-col">
+						<!--<lightning-input type="date" value={startDate} onchange={handleStartDateChange}></lightning-input>-->
+						<img style="height: 30px;margin-top: 13px;" alt="calendar" class={myClass} disabled={isDisablednextWeek} onclick={nextweekHandler}
+                        src={right_arrow_ico} />
+                </div>
+						<div class="slds-col slds-align_absolute-center">
+							<img onclick={calendarHandler} style="height: 50px;margin-left: 30%;margin-top: 5px;" alt="calendar"
+                        src={calendar_ico} />
+							<!-- <lightning-input style="width:40px" type="date" name="input1" label="Enter a date" variant="label-hidden">
+                           </lightning-input> -->
+						</div>
+					</div>
+				</div>
+
+				<div class="slds-scrollable tblwidth-equal slds-m-top_xx-small h-100vh">
+					<table class="slds-table cstmTable " aria-label="Example table of Opportunities with no row hovers">
+						<thead>
+							<tr class="TableHeadRow slds-line-height_reset">
+								<!--  <th>Work Order</th>-->
+								<th>
+									<div class="">
+										<!--Work Order Subject-->
+									</div>
+								</th>
+								<th>
+									<div class="">Service Appointment</div>
+								</th>
+								<th>
+									<!-- <div class="">Activity</div> -->
+								</th>
+
+								<th>
+									<!-- <div class="">Activity Type</div> -->
+								</th>
+
+								<th>
+									<!-- <div class="">Discipline</div> -->
+								</th>
+
+								<th>
+									<!-- <div class="">State</div> -->
+								</th>
+
+								<th>
+									<!-- <div class="">Territory</div> -->
+								</th>
+
+								<th>
+									<!-- <div class="">Break During Delivery</div> -->
+								</th>
+
+								<template for:each={weekDays} for:item="day">
+									<th key={day.index} width="140">
+										<div class="">{day.label}<br>{day.date}</div>
+									</th>
+								</template>
+								<th>
+									<div class="">Status</div>
+								</th>
+
+								<th>
+									<div class="">Comments</div>
+								</th>
+								<th>&nbsp;</th>
+								<th>&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody class="p-relative">
+
+							<template if:true={noRecordsFound}>
+								<div class="TableErrorMessage">
+									
+									{noRecordsFoundErrorMessage}
+								</div>
+								<td colspan="20">&nbsp;</td>
+								
+							</template>
+
+							<template if:false={noRecordsFound}>
+								<template for:each={mainTimesheetMappedData} for:item="data">
+									<tr key={data.Id} class="row">
+										<!-- <td valign="top">
+                                    <div class="slds-truncate white-normal">{data.Sav_FSL_WorkOrderSubject__c}</div>
+                                </td> -->
+										<td>&nbsp;</td>
+										<td valign="top">
+											<div class="slds-truncate white-normal">{data.ServiceAppointmentSubject__c}
+											</div>
+										</td>
+										<td></td>
+										<td valign="top">
+											<div class="">
+												<!--- <lightning-combobox name="Activitytype" placeholder="-ActivityType-"
+                                       value={timesheet.Sav_FSL_Activity_Type__c} options={woActivityTypeValues}
+                                       onchange={handleHeaderActivityTypeChange} data-id={timesheet.Id}>
+                                   </lightning-combobox>-->
+												<lightning-combobox name="Activitytype" class="minwidth-200"
+													data-uniqueid={data.Id} placeholder="-ActivityType-"
+													value={data.Sav_FSL_Activity_Type__c}
+													options={activityTypeHeaderOptions}
+													onchange={handleHeaderActivityTypeChange} data-name={main}
+													data-id={data.Id} disabled={data.isDisabled} required
+													variant="label-hidden">
+												</lightning-combobox>
+											</div>
+										</td>
+										<td valign="top">
+											<lightning-combobox name="Discipline" class="minwidth-200" data-name={main}
+												placeholder="-Discipline-" value={data.Sav_FSL_Discipline__c}
+												data-uniqueid={data.Id} data-id={data.Id}
+												options={headerDisiplineOptions} onchange={handleHeaderDisciplineChange}
+												disabled={data.isDisabled} required variant="label-hidden">
+											</lightning-combobox>
+										</td>
+										<td></td>
+										<td></td>
+										<td></td>
+
+										<td valign="top">
+											<div class="TableRow">
+												<lightning-input type="text" value={data.Sav_FSL_Monday__c}
+													onblur={handleMondayChange} class="hour-input" data-id={data.Id}
+													required variant="label-hidden" data-day='Monday' max-length="5"
+													disabled={data.isDisabled}>
+												</lightning-input>
+											</div>
+										</td>
+										<td valign="top">
+											<div class="TableRow">
+												<lightning-input type="text" value={data.Sav_FSL_Tuesday__c}
+													onblur={handleTuesdayChange} class="hour-input" data-id={data.Id}
+													required variant="label-hidden" max-length="5" data-day='Tuesday'
+													disabled={data.isDisabled}>
+												</lightning-input>
+											</div>
+										</td>
+										<td valign="top">
+											<div class="TableRow">
+												<lightning-input type="text" value={data.Sav_FSL_Wednesday__c}
+													onblur={handleWednesdayChange} class="hour-input"
+													data-id={data.Id} required variant="label-hidden" max-length="5"
+													data-day='Wednesday' disabled={data.isDisabled}>
+												</lightning-input>
+											</div>
+										</td>
+										<td valign="top">
+											<div class="TableRow">
+												<lightning-input type="text" value={data.Sav_FSL_Thursday__c}
+													onblur={handleThursdayChange} class="hour-input" data-id={data.Id}
+													required variant="label-hidden" max-length="5" data-day='Thursday'
+													disabled={data.isDisabled}>
+												</lightning-input>
+											</div>
+										</td>
+										<td valign="top">
+											<div class="TableRow">
+												<lightning-input type="text" value={data.Sav_FSL_Friday__c}
+													onblur={handleFridayChange} class="hour-input" max-length="5"
+													data-id={data.Id} required variant="label-hidden" data-day='Friday'
+													disabled={data.isDisabled}>
+												</lightning-input>
+											</div>
+										</td>
+										<td valign="top">
+											<div class="TableRow">
+												<lightning-input type="text" value={data.Sav_FSL_Saturday__c}
+													onblur={handleSaturdayChange} max-length="5" class="hour-input"
+													data-id={data.Id} required variant="label-hidden"
+													data-day='Saturday' disabled={data.isDisabled}>
+												</lightning-input>
+											</div>
+										</td>
+										<td valign="top">
+											<div class="TableRow">
+												<lightning-input type="text" value={data.Sav_FSL_Sunday__c}
+													onblur={handleSundayChange} class="hour-input" max-length="5"
+													data-id={data.Id} required variant="label-hidden" data-day='Sunday'
+													disabled={data.isDisabled}>
+												</lightning-input>
+											</div>
+										</td>
+										<td valign="top">
+											<div>{data.Status}</div>
+										</td>
+										<td valign="top">
+											<c-add-comments-time-sheet time-sheet-record-id={data.Id}
+												oncomments={handleComments} disabled={data.isDisabled}
+												comments-value={data.Comments__c}></c-add-comments-time-sheet>
+										</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+									</tr>
+								</template>
+							</template>
+
+
+
+
+
+
+							<tr class="custom-background">
+
+								<td colspan="6"><button class="btnOther" onclick={getwireTimeSheetOthers} > + </button>
+									&nbsp;
+									Others &nbsp; <span class="asterisk">*</span> <span>{OthersHelpTextLabel}</span>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+
+							<template if:true={isLoading}>
+								<div class="demo-only demo-only_viewport demo--inverse"
+									style="height:6rem;background-color:#16325c;position:relative">
+									<div class="slds-spinner_container slds-is-fixed">
+										<div role="status" class="slds-spinner slds-spinner_medium">
+											<span class="slds-assistive-text">Loading</span>
+											<div class="slds-spinner__dot-a"></div>
+											<div class="slds-spinner__dot-b"></div>
+										</div>
+									</div>
+								</div>
+				</div>
+</template>
+
+<template if:false={isLoading} for:each={otherTimesheetMappedData} for:item="data">
+	<tr key={data.Id}>
+		<td></td>
+		<td valign="top">
+			<lightning-combobox name="Activity" class="minwidth-200" placeholder="--Choose Activity--"
+				value={data.Sav_FSL_Activity__c} options={activityOptions} data-uniqueid={data.Id}
+				onchange={handleActivityCombobox} data-id={data.Id} disabled={data.isDisabled} required
+				variant="label-hidden">
+			</lightning-combobox>
+		</td>
+		<td valign="top">
+			<template if:true={data.Sav_FSL_Activity__c}>
+				<c-child-activity-type-combobox this-data-id={data.Id} onvalueselect={handleActivityTypeChange}
+					this-value={data.Sav_FSL_Activity_Type__c} metadata-master-list={metadataMasterList}
+					selected-activity={data.Sav_FSL_Activity__c} disabled={data.isDisabled} required
+					variant="label-hidden">
+				</c-child-activity-type-combobox>
+			</template>
+		</td>
+		<td valign="top">
+			<template if:true={data.Sav_FSL_Activity__c}>
+				<c-child-discipline-combobox this-data-id={data.Id} onvalueselect={handleDisciplineChange}
+					this-value={data.Sav_FSL_Discipline__c} metadata-master-list={metadataMasterList}
+					selected-activity={data.Sav_FSL_Activity__c} disabled={data.isDisabled} required
+					variant="label-hidden">
+				</c-child-discipline-combobox>
+			</template>
+		</td>
+		<td valign="top">
+			<template if:true={data.Sav_FSL_Activity__c}>
+				<c-child-state-combobox this-data-id={data.Id} onvalueselect={handleStateChange}
+					this-value={data.Sav_FSL_State__c} metadata-master-list={metadataMasterList}
+					selected-activity={data.Sav_FSL_Activity__c} disabled={data.isDisabled} required
+					variant="label-hidden">
+				</c-child-state-combobox>
+			</template>
+		</td>
+
+		<td valign="top" class="minwidth-200">
+			<template if:true={data.Sav_FSL_Activity__c}>
+				<!--	<template if:true={data.isDisabled}>
+					<lightning-input type="text" value={data.Sav_FSL_Account_Name__c} disabled={data.isDisabled}>
+					</lightning-input>
+				</template>-->
+				<!--	<template if:false={data.isDisabled}>-->
+
+				<c-searchable-combobox selected-activity={data.Sav_FSL_Activity__c} selected-value={data.Account__c}
+					icon-name='standard:account' icon-title='Account' place-holder='-Select Account-'
+					onchange={accountChangeHandler} this-data-id={data.Id} disabled={data.isDisabled} required
+					variant="label-hidden">
+				</c-searchable-combobox>
+				<!--</template>-->
+			</template>
+
+
+		</td>
+		<td valign="top">
+			<template if:true={data.Sav_FSL_Activity__c}>
+				<c-child-territory-combobox this-data-id={data.Id} onvalueselect={handleTerritoryChange}
+					this-value={data.Sav_FSL_Territory__c} metadata-master-list={metadataMasterList}
+					selected-activity={data.Sav_FSL_Activity__c} disabled={data.isDisabled} required
+					variant="label-hidden">
+				</c-child-territory-combobox>
+			</template>
+		</td>
+		<td valign="top">
+			<template if:true={data.Sav_FSL_Activity__c}>
+				<c-child-break-combobox this-data-id={data.Id} onvalueselect={handleBreakChange}
+					this-value={data.Sav_FSL_Break_During_Delivery_Of__c} metadata-master-list={metadataMasterList}
+					selected-activity={data.Sav_FSL_Activity__c} disabled={data.isDisabled} required
+					variant="label-hidden">
+				</c-child-break-combobox>
+			</template>
+
+		</td>
+
+		<td valign="top">
+			<lightning-input type="text" value={data.Sav_FSL_Monday__c} onblur={handleMondayChange} data-id={data.Id}
+				data-day='Monday' max-length="5" required variant="label-hidden" disabled={data.isDisabled}>
+			</lightning-input>
+		</td>
+		<td valign="top">
+			<lightning-input type="text" value={data.Sav_FSL_Tuesday__c} onblur={handleTuesdayChange}
+				data-id={data.Id} data-day='Tuesday' max-length="5" required variant="label-hidden"
+				disabled={data.isDisabled}>
+			</lightning-input>
+		</td>
+		<td valign="top">
+			<lightning-input type="text" value={data.Sav_FSL_Wednesday__c} onblur={handleWednesdayChange}
+				data-id={data.Id} data-day='Wednesday' max-length="5" required variant="label-hidden"
+				disabled={data.isDisabled}>
+			</lightning-input>
+		</td>
+		<td valign="top">
+			<lightning-input type="text" value={data.Sav_FSL_Thursday__c} onblur={handleThursdayChange}
+				data-id={data.Id} data-day='Thursday' max-length="5" required variant="label-hidden"
+				disabled={data.isDisabled}>
+			</lightning-input>
+		</td>
+		<td valign="top">
+			<lightning-input type="text" value={data.Sav_FSL_Friday__c} onblur={handleFridayChange} data-id={data.Id}
+				data-day='Friday' max-length="5" required variant="label-hidden" disabled={data.isDisabled}>
+			</lightning-input>
+		</td>
+		<td valign="top">
+			<lightning-input type="text" value={data.Sav_FSL_Saturday__c} onblur={handleSaturdayChange}
+				data-id={data.Id} data-day='Saturday' max-length="5" required variant="label-hidden"
+				disabled={data.isDisabled}>
+			</lightning-input>
+		</td>
+		<td valign="top">
+			<lightning-input type="text" value={data.Sav_FSL_Sunday__c} onblur={handleSundayChange} data-id={data.Id}
+				data-day='Sunday' max-length="5" required variant="label-hidden" disabled={data.isDisabled}>
+			</lightning-input>
+		</td>
+		<!-- <td></td> -->
+		<td valign="middle">{data.Status}</td>
+		<td valign="top">
+			<c-add-comments-time-sheet time-sheet-record-id={data.Id} oncomments={handleComments} disabled={data.isDisabled} 
+				comments-value={data.Comments__c}></c-add-comments-time-sheet>
+		</td>
+		<!-- <td valign="middle">
+                        {data.TotalDurationInHours}
+                    </td> -->
+		<td valign="middle">
+			<lightning-button-icon icon-name="utility:delete" disabled={data.isDisabled} onclick={handleDelete}
+				data-id={data.Id} alternative-text="Delete!" title="Delete" class="tblColum-del">
+			</lightning-button-icon>
+			<!--- <button name="delete" data-id={data.Id} type="button" onclick={handleDelete} class="btn">delete</button>-->
+		</td>
+	</tr>
+
+</template>
+
+<!--Row Total Hours-->
+<tr>
+	<td colspan="20">&nbsp;</td>
+</tr>
+<!--Row Total Hours-->
+<tr style="background-color:#eee; height:30px;">
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>
+		<div><b>Total Hours</b></div>
+	</td>
+	<td valign="top">
+		<lightning-input type="text" value={mondayTotal} variant="label-hidden" disabled={isDisabled}>
+		</lightning-input>
+	</td>
+
+	<td valign="top">
+		<lightning-input type="text" value={tuesdayTotal} variant="label-hidden" disabled={isDisabled}>
+		</lightning-input>
+	</td>
+
+	<td valign="top">
+		<lightning-input type="text" value={wednesdaytotal} variant="label-hidden" disabled={isDisabled}>
+		</lightning-input>
+	</td>
+
+	<td valign="top">
+		<lightning-input type="text" value={thursdayTotal} variant="label-hidden" disabled={isDisabled}>
+		</lightning-input>
+	</td>
+
+	<td valign="top">
+		<lightning-input type="text" value={fridayTotal} variant="label-hidden" disabled={isDisabled}>
+		</lightning-input>
+	</td>
+	<td valign="top">
+		<lightning-input type="text" value={saturdayTotal} variant="label-hidden" disabled={isDisabled}>
+		</lightning-input>
+	</td>
+	<td valign="top">
+		<lightning-input type="text" value={sundayTotal} variant="label-hidden" disabled={isDisabled}>
+		</lightning-input>
+	</td>
+	<td>
+		<!--	<div class="TableRow">{saturdayTotal}</div>-->
+	</td>
+	<td>
+		<!--<div class="TableRow">{sundayTotal}</div>-->
+	</td>
+	<td>
+		<div class="TableRow"></div>
+	</td>
+	<td>
+		<div class="TableRow"></div>
+	</td>
+</tr>
+
+<!--Row Total Hours End-->
+</tbody>
+</table>
+<!--Vishnu - brought save and submit button inside time container-->
+<div class="btncontainer">
+	<button name="save"  type="button" onclick={saveBtnHandler} disabled={showError} class="btn">Save</button>
+	<button name="submit"  type="button" onclick={saveBtnHandler}  disabled={showError} class="btn">Submit</button>
+</div>
+</div>
+<!--Vishnu - brought save and submit button inside time container-->
+<!--<div class="btncontainer">
+	<button name="save"  type="button" onclick={saveBtnHandler} disabled={showError} class="btn">Save</button>
+	<button name="submit"  type="button" onclick={saveBtnHandler}  disabled={showError} class="btn">Submit</button>
+</div>-->
+</div>
+<template if:true={isModalOpen}>
+	<!-- Modal/Popup Box LWC starts here -->
+	<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+		aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+		<div class="slds-modal__container">
+			<!-- Modal/Popup Box LWC header here -->
+			<header class="slds-modal__header">
+				<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+				<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Timesheet Missing Assignment
+				</h2>
+			</header>
+			<!-- Modal/Popup Box LWC body starts here -->
+			<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+				<p><b><!--You are assigned to Service Appointments but you have not entered any time against it. Are you sure you want to submit your timesheet?-->
+				{noSAEntry}
+                    </b></p>
+				<!-- <p><b>This paradigm is utilized in instances that include the creation or modification of a record, as well as numerous forms of messaging and wizards.
+ 
+                    </b></p>-->
+
+			</div>
+			<!-- Modal/Popup Box LWC footer starts here -->
+			<footer class="slds-modal__footer">
+				<button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+				<button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">Submit</button>
+			</footer>
+		</div>
+	</section>
+	<div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+<template if:true={isModalOpenSubmit}>
+	<!-- Modal/Popup Box LWC starts here -->
+	<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+		aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+		<div class="slds-modal__container">
+			<!-- Modal/Popup Box LWC header here -->
+			<header class="slds-modal__header">
+				<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModalSubmit}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+				<h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Timesheet Compliance</h2>
+			</header>
+			<!-- Modal/Popup Box LWC body starts here -->
+			<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+				<p><b> {TimeSheetsCompliance}
+                    </b></p>
+
+
+			</div>
+			<!-- Modal/Popup Box LWC footer starts here -->
+			<footer class="slds-modal__footer">
+				<button class="slds-button slds-button_neutral" onclick={closeModalSubmit} title="Cancel">Cancel</button>
+				<button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">Submit</button>
+			</footer>
+		</div>
+	</section>
+	<div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+</template>

@@ -1,0 +1,76 @@
+.chevron-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #679608;
+   
+    margin-left: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+ }
+ .chevron-icon {
+    --slds-c-icon-color-foreground-default: white; /* Set the color of the icon */
+    --slds-icon_xx-small:5px;
+ }
+ .view-all-link {
+    display: inline-block;
+    color: #173770;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+ }
+ .recent-order{
+   font-family: 'Poppins', sans-serif;
+   font-size: 26px;
+   font-weight: 700;
+   line-height: 28.6px;
+   letter-spacing: -0.01em;
+   text-align: left;
+   color: #173770;
+ }
+ .order-label{
+   font-family: 'Poppins', sans-serif;
+   font-size: 14px;
+   font-weight: 500;
+   line-height: 21px;
+   text-align: left;
+   color:#173770;
+ }
+ .order-value{
+   font-family: 'Poppins', sans-serif;
+   font-size: 14px;
+   font-weight: 600;
+   line-height: 21px;
+   text-align: left;
+   color:#173770;
+ }
+ .order-link{
+   font-family: 'Poppins', sans-serif;
+   font-size: 14px;
+   font-weight: 600;
+   line-height: 21px;
+   text-align: left;
+   color:#2150A3;
+   text-decoration: underline;
+ }
+ .no-recent-order-box{
+   height: 220px;
+   top: 846px;
+   left: 280px;
+   gap: 0px;
+   border-radius: 5px 0px 0px 0px;
+   opacity: 0px;  
+   background-color:#F5F9FE;
+ }
+ .no-recent-order-text{
+   font-family: 'Poppins', sans-serif;
+   font-size: 20px;
+   font-weight: 600;
+   line-height: 22px;
+   text-align: left;
+   color:#173770;
+ }

@@ -1,0 +1,171 @@
+.header {
+    display: flex;
+    flex-direction: column; /* Change the layout direction to column */
+    padding: 0 20px;
+    background-color: #251F4C; /* Dark blue background */
+	font-size: 12px;
+	border-bottom: 4px solid #97BB37;
+	margin-top: 0px;
+}
+
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Ensure the top section spans the full width */
+	margin-bottom: 40px;
+	margin-top: 0px;
+}
+
+.logo-container {
+    margin-right: 20px;
+}
+
+.logo {
+    max-width: 150px;
+}
+
+.account-options {
+    margin-left: auto; /* Adjust margin for spacing */
+	font-size: 10px;
+}
+
+.account-options a,
+.help-link a {
+    text-decoration: none;
+    color: #fff; /* White text color for account options and Need Help link */
+	
+}
+
+.help-link {
+	font-size: 10px;
+	margin-top: 0px !important;
+    color: #fff;
+}
+
+.nav-links ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff; /* White text color for navigation links */
+}
+
+.username,.account-text{
+	display: block;
+	margin-bottom: 1px;
+	text-align: right;
+	color: #fff;
+}
+
+.account-icon{
+	display: flex;
+	align-items: center;
+}
+
+
+.nav-item {
+  list-style: none;
+  margin-right: 2rem;
+  align-items: left;
+
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: white;
+  transition: all 200ms ease-in;
+}
+
+.nav-item a:hover {
+  border-bottom: 4px solid #3787CA;
+}
+
+.active {
+  border-bottom: 4px solid #3787CA;
+}
+
+
+
+
+/* Styles for the dropdown menu */
+.dropdown2 {
+    position: absolute;
+    top: 36%;
+    right: 80px;
+    background-color:#251F4C; /* Background color for the dropdown menu */
+    border: 1px solid #ccc; /* Border */
+    border-radius: 4px; /* Border radius */
+    padding: 2px 0; /* Padding */
+    z-index: 999; /* Ensure the dropdown appears above other content */
+}
+
+.dropdown2 ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown2 li {
+    padding: 8px 16px;
+}
+
+.dropdown2 li:hover {
+    background-color: #251F4C; /* Background color on hover */
+    display: block;
+}
+
+
+.dropdown2 {
+    display: none;
+}
+.mytest:hover .dropdown2 {
+    display: block;
+}
+
+
+/* Styles for the dropdown menu */
+.dropdown {
+    position: absolute;
+    top: 30%;
+    right: 10px;
+    background-color:#251F4C; /* Background color for the dropdown menu */
+    border: 1px solid #ccc; /* Border */
+    border-radius: 4px; /* Border radius */
+    padding: 2px 0; /* Padding */
+    z-index: 999; /* Ensure the dropdown appears above other content */
+}
+
+.dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown li {
+    padding: 8px 16px;
+}
+
+.dropdown li:hover {
+    background-color: #251F4C; /* Background color on hover */
+    display: block;
+    color: white;
+    border: white;
+}
+
+
+.dropdown {
+    display: none;
+}
+
+.help-link:hover .dropdown {
+    display: block;
+}

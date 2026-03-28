@@ -1,0 +1,166 @@
+<template>
+    <template if:true={showMultiAddressPage}>
+     <div class="slds-col slds-size_3-of-3">
+                    <div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+                        <h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">Select Billing Address</span></h2>
+                        <div class="slds-p-right_large slds-m-bottom_medium slds-float_right confirm-address-filter">
+                            <label class="slds-form-element__label slds-p-right_none slds-m-left_x-small" for="filter-search-input">Filter Results</label>
+                            <div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+                                <div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+                                <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+                                    <div class="slds-popover__body">Filter by name or zip / Postal Code</div>
+                                </div>
+                            </div>
+                            <div class="slds-is-relative">
+                                <input type="text" id="filter-search-input" class="slds-input filter-search-input" value={searchTerm} onchange={handleUserInputs} onkeyup={handleUserInputs} />
+                                <a href="#" class="slds-button filter-clear" onclick={clearFilterInputBill} >x</a>
+                            </div>
+                            <div class="slds-form-element__label item-count">{totalBillToRecords} of {totalBillToRecords} Items</div>
+                            <div class="slds-is-relative slds-show_inline-block">
+          
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap slds-gutters_x-small slds-p-vertical_medium slds-p-left_x-large slds-p-right_small card-container">
+                            <template for:each={filteredresult} for:item="sAddress">
+                                <div class="slds-col slds-size_3-of-12" key={sAddress.AccId}>
+                                    <div class="slds-visual-picker slds-visual-picker_medium slds-m-bottom_small">
+                                        <input type="radio" id={sAddress.AccId} value={sAddress.AccId} name="BillingAddresss"   onclick={handleRowClick}     data-record-id={sAddress.AccId}   />
+                                        <label for={sAddress.AccId}>
+                                            <div class="card-size"      onclick={handleRowClick}     data-record-id={sAddress.AccId}  >
+                                                <span class="slds-visual-picker__figure slds-visual-picker__text card-size slds-p-around_medium card-padding">
+                                                    <span>
+                                                        <h6>{sAddress.name} {sAddress.AccountName}</h6>
+                                                        {sAddress.BillinStreet}<br/>
+                                                        {sAddress.BillingCity} {sAddress.State}{sAddress.ZipCode}<br/>
+                                                        {sAddress.BillingCountry}
+                                                    </span>
+                                                </span>
+                                                <span class="slds-icon_container slds-visual-picker__text-check">
+                                                    <svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true"></svg>
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_3-of-3">
+                    <div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+                        <h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">Select Shipping Address (Optional)</h2>
+                        <div class="slds-p-right_large slds-m-bottom_medium slds-float_right confirm-address-filter">
+                            <label class="slds-form-element__label slds-p-right_none slds-m-left_x-small" for="filter-search-input1">Filter Results</label>
+                            <div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+                                <div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+                                <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+                                    <div class="slds-popover__body">Filter by name or zip / Postal Code</div>
+                                </div>
+                            </div>
+                            <div class="slds-is-relative">
+                                <input type="text" id="filter-search-input1" class="slds-input filter-search-input" value={searchTermShip} onchange={handleUserInputsShip} onkeyup={handleUserInputsShip} />
+                                <a href="#" class="slds-button filter-clear" onclick={clearFilterInputShip} >x</a>
+                            </div>
+                            <div class="slds-form-element__label item-count">{totalShipToRecords} of {totalShipToRecords} Items</div>
+                            <div class="slds-is-relative slds-show_inline-block">
+                           
+                            </div>
+                        </div>
+                       <div class="slds-p-horizontal_x-large allow-drop-ship">
+                                <lightning-input type="checkbox" label="Return documents for any associated Shipping Addres" checked={isChecked} onchange={handlecheckboxChange} id="allow-drop-ship"></lightning-input>
+                       </div>
+                        <div class="slds-grid slds-wrap slds-gutters_x-small slds-p-vertical_medium slds-p-left_x-large slds-p-right_small ship-address-container">
+                          
+                                <template for:each={filteredresultt} for:item="shippaddr">
+                                    <div class="slds-col slds-size_3-of-12" key={shippaddr.AccShipId}>
+                                        <div class="slds-visual-picker slds-visual-picker_medium slds-m-bottom_small">
+                                            <input type="radio" id={shippaddr.AccShipId} value={shippaddr.AccShipId} name="shipping-address" 
+                                            onclick={handleShipRowClick} data-record-id={shippaddr.AccShipId}/>
+                                            <label for={shippaddr.AccShipId}>
+                                                <div class="card-size" >
+                                                    <span class="slds-visual-picker__figure slds-visual-picker__text card-size slds-p-around_medium card-padding">
+                                                        <span style="text-align: left;">
+                                                            <h6>{shippaddr.SAccountName}</h6>
+                                                            {shippaddr.ShipStreet} <br />
+                                                            {shippaddr.ShippingCity} {shippaddr.Provionce} {shippaddr.PostalCode}<br/>
+                                                            {shippaddr.ShippingCountry}
+                                                        </span>
+                                                    </span>
+                                                    <span class="slds-icon_container slds-visual-picker__text-check">
+                                                        <svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true"></svg>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </template>
+                           
+                        </div>
+                    </div>
+                </div>
+    </template>
+    <template if:true={showSingleAddressPage}>
+				<div class="slds-col slds-size_3-of-3">
+					<div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+						<h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">Review Addresses
+						</h2>
+						<div class="slds-p-right_large slds-m-bottom_medium slds-float_right confirm-address-filter">
+							<button class="search-pdts-button" onclick={returnProductDetailpageOnclick}>Search for Documents</button>
+						</div>
+				
+						<div class="slds-grid slds-wrap slds-gutters slds-p-bottom_x-large slds-p-left_x-large slds-p-right_small review-address-container"
+							key={Billaddr.id}>
+							<div class="slds-col slds-size_5-of-12">
+								<div class="slds-grid slds-wrap slds-gutters">
+									<div class="slds-col slds-size_4-of-12">
+										<p class="address-label">Billing Account</p>
+									</div>
+									<div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+										<p class="address-value">{selectedBilling.BillToNumber}<br>{selectedBilling.AccountName}</p>
+									</div>
+									<div class="slds-col slds-size_4-of-12">
+										<p class="address-label">Billing Address</p>
+									</div>
+									<div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+										<p class="address-value">
+											{selectedBilling.BillinStreet}<br>{selectedBilling.BillingCity} {selectedBilling.State}{selectedBilling.ZipCode}<br>{selectedBilling.BillingCountry}</p>
+									</div>
+								</div>
+							</div>
+							<div class="slds-col slds-size_6-of-12">
+				
+								<template if:false={showShipAddressEmptyPage}>
+									<div class="slds-grid slds-wrap slds-gutters" key={Shipaddr.id}>
+										<div class="slds-col slds-size_4-of-12">
+											<p class="address-label">Shipping Account</p>
+										</div>
+										<div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+											<p class="address-value">
+												{selectedShipping.ShipToNumber}<br>{selectedShipping.SAccountName}</p>
+										</div>
+										<div class="slds-col slds-size_4-of-12">
+											<p class="address-label">Shipping Address</p>
+										</div>
+										<div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+											<p class="address-value">
+												{selectedShipping.ShipStreet}<br>{selectedShipping.ShippingCity}{selectedShipping.Provionce} {selectedShipping.PostalCode}<br>{selectedShipping.ShippingCountry}</p>
+										</div>
+									</div>
+								</template>
+				
+								<template if:true={showShipAddressEmptyPage}>
+									<div class="slds-grid slds-wrap slds-gutters">
+										<div class="slds-col slds-size_11-of-12">
+											<p class="address-label">Return documents for any associated Shipping Address </p>
+										</div>
+										<div class="slds-col slds-size_8-of-12">
+											<p class="address-value"></p>
+										</div>
+									</div>
+								</template>
+							</div>
+						</div>
+					</div>
+				</div>
+            </template>
+</template>

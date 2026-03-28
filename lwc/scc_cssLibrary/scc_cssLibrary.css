@@ -1,0 +1,40 @@
+.statuscombobox .slds-combobox__input{
+  height: 55px;
+  border: 1px solid #AFC3D8;
+  border-radius: 5px;
+  color: #173770;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22.4px !important;
+  text-align: left;
+  background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+  background-position: 5px 5px, 0, 100% 0;
+  background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+  padding: 1rem;
+}
+.statuscombobox .slds-combobox__input[data-value=""] span{
+	color: #173770;
+	opacity: 50%;
+}
+.slds-combobox .slds-input__icon-group{
+	display: none;
+}
+.slds-combobox button:after {
+    content: "\203A";
+    font-weight: 500;
+    position: absolute;
+    right: 10px;
+    transform: rotate(90deg);
+	font-size: 26px;
+    font-family: arial;
+}
+.slds-form-element__label{
+    font-size: 16px;
+    font-weight: 600 !important;
+    line-height: 22.4px;
+    text-align: left;
+    color: #0C1E3D;
+    display: block;
+    font-family: Poppins !important;
+}

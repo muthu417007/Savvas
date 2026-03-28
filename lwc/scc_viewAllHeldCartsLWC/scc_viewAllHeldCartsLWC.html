@@ -1,0 +1,179 @@
+<template>
+    <template if:true={showAllHeldCarts}>
+        <div class="slds-grid slds-wrap slds-grid_vertical slds-p-around_large related-pdt-BG slds-is-relative">
+            <div class="slds-col">
+                <nav role="navigation" aria-label="Breadcrumbs">
+                    <ol class="slds-breadcrumb slds-list_horizontal slds-wrap slds-m-bottom_large">
+                        <li class="slds-breadcrumb__item">
+                            <a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+                        </li>
+                        <li class="slds-breadcrumb__item">
+                            <a href="#" class="slds-m-horizontal_small breadcrumb-label">Place Order</a>
+                        </li>
+                        <li class="slds-breadcrumb__item">
+                            <a class="slds-m-left_small slds-text-title_bold breadcrumb-label">View Held Carts</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="slds-col slds-size_3-of-3">
+                <div class="slds-m-top_xx-large slds-p-top_large held-carts-wrapper">
+                    <button class="slds-button back-button" onclick={returnHome}>Return Home</button>
+                    <h2 class="slds-p-horizontal_x-large slds-is-relative slds-float_left held-carts-title">Held Carts</h2>
+
+                    <div class="slds-p-right_large slds-m-bottom_medium slds-float_right held-cart-filter">
+                        <template if:true={showUpdateCartNameInput}>
+                            <div class="slds-form-element__label slds-m-left_x-small" style="text-align:left!important">Cart Name</div>
+                            <div class="slds-form-element__label slds-m-left_x-small">
+                                <input type="text" maxlength="32" class="custom-button" onkeyup={handleCartNameChange} variant="standard" name="name" placeholder="Enter cart name here..." aria-label="Cart Name"></input>
+                            </div>
+                        </template>
+                        <button slds-button id="renameButton" onclick={updateCartName} aria-disabled={disableButton}>Rename Selected Cart</button>
+                        <label class="slds-form-element__label slds-m-left_x-small" for="filter-search-input">Filter Results <span class="slds-assistive-text" id="filter-status">Filter Results,Showing {transformedDataLength} of {totalCount} Items,Enter a keyword to filter within the current set of search results.</span></label>
+
+                        <div class="slds-is-relative">
+
+                            <lightning-input type="text" variant="label-hidden" name="searchFilter" value={searchValue} onchange={handleFilter} aria-describedby="filter-status">
+
+                            </lightning-input>
+                            <a href="#" class="slds-button filter-clear" onclick={clearFilterInput} aria-label="close" role="button">x</a>
+                        </div>
+                        <div class="slds-form-element__label item-count" role="alert">
+                            {transformedDataLength} of {totalCount} Items &nbsp;</div>
+                        <div class="slds-is-relative slds-show_inline-block">
+                            <div class="slds-show_inline-block info-icon slds-text-align_center">i</div>
+                            <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-right filter-popover" role="tooltip" id="45">
+                                <div class="slds-popover__body">Enter a keyword to filter within the current set of search results</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-p-right_small held-cart-table">
+                        <table class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-left_x-large slds-p-vertical_medium" role="grid" aria-label="Held Carts">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th aria-sort="ascending" class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode" scope="col" style="width: 3%;">
+                                        <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" style="justify-content: space-between;">
+                                                <span class="slds-assistive-text">Cart Radio button</span>
+                                                <div class="thBorder"></div>
+                                            </div>
+                                        </a>
+                                    </th>
+                                    <th aria-sort="ascending" class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode" scope="col" style="width: 13%;">
+                                        <a class="slds-th__action slds-text-link_reset .view-held-cart-name button" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" style="justify-content: space-between;">
+                                                <span>Cart Name</span>
+                                                <div class="thBorder"></div>
+                                            </div>
+                                        </a>
+                                    </th>
+                                    <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 34%;">
+                                        <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" style="justify-content: space-between;">
+                                                <span>Ship to Name</span>
+                                                <div class="thBorder"></div>
+                                            </div>
+                                        </a>
+                                    </th>
+                                    <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 12%;">
+                                        <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" style="justify-content: space-between;">
+                                                <span>Creation Date</span>
+                                                <div class="thBorder"></div>
+                                            </div>
+                                        </a>
+                                    </th>
+                                    <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 14%;">
+                                        <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" style="justify-content: space-between;">
+                                                <span>Last Modified Date</span>
+                                                <div class="thBorder"></div>
+                                            </div>
+                                        </a>
+                                    </th>
+                                    <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 10%;">
+                                        <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" style="justify-content: space-between;">
+                                                <span># of items</span>
+                                                <div class="thBorder"></div>
+                                            </div>
+                                        </a>
+                                    </th>
+                                    <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 6%;">
+                                        <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span class="slds-assistive-text">Delete Cart</span>
+                                            </div>
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={heldCartData} for:item="cart">
+                                    <tr key={cart.Id}>
+                                        <td data-label="radio">
+                                            <input type="radio" class="quantity-field slds-m-around_small" data-row-id={cart.Id} onclick={handleRadioChange} accesskey={cart.id} value={value} name="cartItem" />
+
+                                        </td>
+                                        <td data-label="Cart Name">
+
+                                            <lightning-button variant="base" data-field-name="openReviewCartPage" max="9999-12-31" style="word-break: break-word;" label={cart.StdCartNameOrCustomCartName__c} data-row-id={cart.Id} onclick={openReviewCartPage} class="view-held-cart-name">
+                                            </lightning-button>
+
+                                        </td>
+
+                                        <td data-label="Ship to Name">
+                                            <div>{cart.Shipto_name__c}</div>
+                                        </td>
+                                        <td data-label="Creation Date">
+                                            <div>{cart.CreatedDate}</div>
+                                        </td>
+                                        <td data-label="Last Modified Date">
+                                            <div>{cart.LastModifiedDate}</div>
+                                        </td>
+                                        <td data-label="# of items">
+                                            <div class="slds-text-align_center">{cart.TotalProductLineItemCount}</div>
+                                        </td>
+                                        <td class="slds-text-align_center" name="deleteHeldCart">
+                                            <lightning-button-icon icon-name="utility:delete" variant="brand" data-field-name="deleteHeldCart" data-row-id={cart.Id} onclick={handleRowAction} class="slds-m-left_xx-small deletebtn" aria-label="Delete"></lightning-button-icon>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <template if:true={openDeleteModel}>
+
+            <div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog">
+                <div class="slds-modal__container">
+
+                    <div class="slds-modal__header">
+
+                        <button class="slds-modal__close closebtnOnFocus clearCartCloseBtn" onclick={closeModal} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+                        <h2>Delete cart</h2>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium slds-text-align_center">
+                        <template if:true={showLoading}>
+                            <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+                        </template>
+                        <p>Are you sure you want to delete this cart?</p>
+                        <div class="slds-show_inline-block note-icon slds-m-right_xx-small">!</div><span role="alert">This action cannot be undone</span>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button clear-cart-modal-button" onclick={handleRemoveItem} data-index="0">Delete Cart</button>
+                        <button class="slds-button cancel-modal-button" onclick={handleCancelDelete} onfocusout={focusOutButton} tabindex="0">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </template>
+    </template>
+    <template if:true={reviewCartPage}>
+        <c-scc_review-cart-page cart-page={parentValue} cart-page-id={cartItemId}> </c-scc_review-cart-page>
+    </template>
+</template>

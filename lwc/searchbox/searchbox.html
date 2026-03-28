@@ -1,0 +1,17 @@
+<template>
+    <div style="background-color:#2150A3;" class="slds-align_absolute-center">
+        <form class="example" action="/support/s/global-search" onsubmit={gotoSearchResults}>
+            <div class="slds-text-heading_large slds-align_absolute-center slds-m-vertical_medium" style="color:white;">
+                <b>Search support</b>
+            </div>
+            <div style="display:inline-flex;align-items:flex-end;">
+                <input name="searchString" type="text" placeholder="How do I reset my password?" size="30"
+                    style="margin-right:-4px;font-size:20px;" onchange={handleSearchValue}>
+                <button type="submit" style="background-color:#D73A59;color:white;font-size:21px;" value="Search">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+            <br><br>
+        </form>
+    </div>
+</template>

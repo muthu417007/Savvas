@@ -1,0 +1,14 @@
+<template>
+<div style="text-align: center; margin-bottom: 10px;">
+            Not a K12 School, District, or a Dealer
+        </div>
+
+        <!-- Links -->
+        <template if:true={isHeaders}>
+            <div>
+                <a href="#" onclick={handleClick} id="homeschoolerLink">HomeSchooler</a> |
+                <a href="#" onclick={handleClick} id="privateStudentLink">Private/Parochial Student or Parent</a> |
+                <a href="#" onclick={handleClick} id="otherStudentLink">Other Student/Parent/Individual</a>
+            </div>
+        </template>
+</template>

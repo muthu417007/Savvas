@@ -1,0 +1,29 @@
+<template>
+    <article class="slds-card slds-m-top_x-small">
+        <c-ensxtx-app-settings-input-header setting={setting}></c-ensxtx-app-settings-input-header>
+        <div class="slds-card__body slds-card__body_inner">
+            <template for:each={values} for:item="value">
+                <div key={value.key} class="slds-box slds-m-bottom_small">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <template for:each={value.fields} for:item="field">
+                            <div key={field.name} class="slds-col slds-size_1-of-1 slds-small-size_1-of-2 slds-text-align_left">
+                                <c-ensxtx-app-settings-input
+                                    setting={field}
+                                    array-key={value.key}
+                                    oninputchange={handleSettingsChange}
+                                    is-child-input="true"></c-ensxtx-app-settings-input>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="slds-m-top_x-small">
+                        <button class="slds-button slds-button_icon deleteButtonIcon" title="Delete" name={value.key} onclick={handleDeleteValue}>
+                            <lightning-icon icon-name="utility:delete" alternative-text="Delete" size="xx-small" name={value.key} variant="inverse"></lightning-icon>
+                        </button>
+                    </div>
+                </div>
+            </template>
+            <lightning-button-icon icon-name="utility:add" title="Add" variant="brand"
+                alternative-text="Add" onclick={handleAddValue}></lightning-button-icon>
+        </div>
+    </article>
+</template>

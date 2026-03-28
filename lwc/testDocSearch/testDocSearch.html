@@ -1,0 +1,677 @@
+<template>
+    <div class="spinner-wrapper slds-spinner_container" if:true={isLoading1}>
+        <div class="slds-backdrop slds-backdrop_open">
+            <lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+        </div>
+    </div>
+
+    <template if:false={showDeliveryDetails}>
+    <div class="slds-grid slds-wrap slds-grid_vertical slds-gutters slds-p-around_large order-status-BG slds-is-relative">
+        <template if:false={orderDetailsSect}>
+        <template if:false={isGuest}>
+            <template if:false={isInternal}>    
+            <div class="slds-col">
+                <nav role="navigation" aria-label="Breadcrumbs">
+                    <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                        <li class="slds-breadcrumb__item">
+                            <a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+                        </li>
+                        <li class="slds-breadcrumb__item">
+                            <a href="#" class="slds-m-horizontal_small breadcrumb-label">Documents</a>
+                        </li>
+                        <template if:true={confirmAddress}>
+                            <li class="slds-breadcrumb__item">
+                                <a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Confirm Addresses</a>
+                            </li>
+                        </template>
+
+                        <template if:false={confirmAddress}>
+                            <li class="slds-breadcrumb__item">
+                                <a href="#" class="slds-m-horizontal_small breadcrumb-label">Confirm Addresses</a>
+                            </li>
+                            <li class="slds-breadcrumb__item">
+                                <a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Document Search</a>
+                            </li>
+                        </template>
+                    </ol>
+                </nav>
+            </div>
+            </template>
+        </template>  
+        <template if:true={confirmAddress}>
+                <template if:true={showMultiAddressPage}>  
+                 <div class="slds-col slds-size_3-of-3">
+                                <div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+                                    <h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">Select Billing Address</span></h2>
+                                    <div class="slds-p-right_large slds-m-bottom_medium slds-float_right confirm-address-filter">
+                                        <label class="slds-form-element__label slds-p-right_none slds-m-left_x-small" for="filter-search-input">Filter Results</label>
+                                        <div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+                                            <div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+                                            <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+                                                <div class="slds-popover__body">Filter by name or zip / Postal Code</div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-is-relative">
+                                            <input type="text" id="filter-search-input" class="slds-input filter-search-input" value={searchTerm} onchange={handleUserInputs} onkeyup={handleUserInputs} />
+                                            <a href="#" class="slds-button filter-clear" onclick={clearFilterInputBill} >x</a>
+                                        </div>
+                                        <div class="slds-form-element__label item-count">{totalBillToRecords} of {totalBillToRecords} Items</div>
+                                        <div class="slds-is-relative slds-show_inline-block">
+                      
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid slds-wrap slds-gutters_x-small slds-p-vertical_medium slds-p-left_x-large slds-p-right_small card-container">
+                                        <template for:each={filteredresult} for:item="sAddress">
+                                            <div class="slds-col slds-size_3-of-12" key={sAddress.AccId}>
+                                                <div class="slds-visual-picker slds-visual-picker_medium slds-m-bottom_small">
+                                                    <input type="radio" id={sAddress.AccId} value={sAddress.AccId} name="BillingAddresss"   onclick={handleRowClick}     data-record-id={sAddress.AccId}   />
+                                                    <label for={sAddress.AccId}>
+                                                        <div class="card-size"      onclick={handleRowClick}     data-record-id={sAddress.AccId}  >
+                                                            <span class="slds-visual-picker__figure slds-visual-picker__text card-size slds-p-around_medium card-padding">
+                                                                <span>
+                                                                    <h6>{sAddress.name} {sAddress.AccountName}</h6>
+                                                                    {sAddress.BillinStreet}<br/>
+                                                                    {sAddress.BillingCity} {sAddress.State}{sAddress.ZipCode}<br/>
+                                                                    {sAddress.BillingCountry}
+                                                                </span>
+                                                            </span>
+                                                            <span class="slds-icon_container slds-visual-picker__text-check">
+                                                                <svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true"></svg>
+                                                            </span>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_3-of-3">
+                                <div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+                                    <h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">Select Shipping Address (Optional)</h2>
+                                    <div class="slds-p-right_large slds-m-bottom_medium slds-float_right confirm-address-filter">
+                                        <label class="slds-form-element__label slds-p-right_none slds-m-left_x-small" for="filter-search-input1">Filter Results</label>
+                                        <div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+                                            <div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+                                            <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+                                                <div class="slds-popover__body">Filter by name or zip / Postal Code</div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-is-relative">
+                                            <input type="text" id="filter-search-input1" class="slds-input filter-search-input" value={searchTermShip} onchange={handleUserInputsShip} onkeyup={handleUserInputsShip} />
+                                            <a href="#" class="slds-button filter-clear" onclick={clearFilterInputShip} >x</a>
+                                        </div>
+                                        <div class="slds-form-element__label item-count">{totalShipToRecords} of {totalShipToRecords} Items</div>
+                                        <div class="slds-is-relative slds-show_inline-block">
+                                       
+                                        </div>
+                                    </div>
+                                   <div class="slds-p-horizontal_x-large allow-drop-ship">
+                                            <lightning-input type="checkbox" label="Return documents for any associated Shipping Address" checked={isChecked} onchange={handlecheckboxChange} id="allow-drop-ship"></lightning-input>
+                                   </div>
+                                    <div class="slds-grid slds-wrap slds-gutters_x-small slds-p-vertical_medium slds-p-left_x-large slds-p-right_small ship-address-container">
+                                      
+                                            <template for:each={filteredresultt} for:item="shippaddr">
+                                                <div class="slds-col slds-size_3-of-12" key={shippaddr.AccShipId}>
+                                                    <div class="slds-visual-picker slds-visual-picker_medium slds-m-bottom_small">
+                                                        <input type="radio" id={shippaddr.AccShipId} value={shippaddr.AccShipId} name="shipping-address" 
+                                                        onclick={handleShipRowClick} data-record-id={shippaddr.AccShipId}/>
+                                                        <label for={shippaddr.AccShipId}>
+                                                            <div class="card-size" >
+                                                                <span class="slds-visual-picker__figure slds-visual-picker__text card-size slds-p-around_medium card-padding">
+                                                                    <span style="text-align: left;">
+                                                                        <h6>{shippaddr.SAccountName}</h6>
+                                                                        {shippaddr.ShipStreet} <br />
+                                                                        {shippaddr.ShippingCity} {shippaddr.Provionce} {shippaddr.PostalCode}<br/>
+                                                                        {shippaddr.ShippingCountry}
+                                                                    </span>
+                                                                </span>
+                                                                <span class="slds-icon_container slds-visual-picker__text-check">
+                                                                    <svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true"></svg>
+                                                                </span>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                </template>
+                <template if:true={showSingleAddressPage}>
+                            <div class="slds-col slds-size_3-of-3">
+                                <div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+                                    <h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">Review Addresses
+                                    </h2>
+                                    <div class="slds-p-right_large slds-m-bottom_medium slds-float_right confirm-address-filter">
+                                        <button class="search-pdts-button" onclick={returnProductDetailpageOnclick}>Search for Documents</button>
+                                    </div>
+                            
+                                    <div class="slds-grid slds-wrap slds-gutters slds-p-bottom_x-large slds-p-left_x-large slds-p-right_small review-address-container"
+                                        key={Billaddr.id}>
+                                        <div class="slds-col slds-size_5-of-12">
+                                            <div class="slds-grid slds-wrap slds-gutters">
+                                                <div class="slds-col slds-size_4-of-12">
+                                                    <p class="address-label">Billing Account</p>
+                                                </div>
+                                                <div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+                                                    <p class="address-value">{selectedBilling.BillToNumber}<br>{selectedBilling.AccountName}</p>
+                                                </div>
+                                                <div class="slds-col slds-size_4-of-12">
+                                                    <p class="address-label">Billing Address</p>
+                                                </div>
+                                                <div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+                                                    <p class="address-value">
+                                                        {selectedBilling.BillinStreet}<br>{selectedBilling.BillingCity} {selectedBilling.State}{selectedBilling.ZipCode}<br>{selectedBilling.BillingCountry}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_6-of-12">
+                            
+                                            <template if:false={showShipAddressEmptyPage}>
+                                                <div class="slds-grid slds-wrap slds-gutters" key={Shipaddr.id}>
+                                                    <div class="slds-col slds-size_4-of-12">
+                                                        <p class="address-label">Shipping Account</p>
+                                                    </div>
+                                                    <div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+                                                        <p class="address-value">
+                                                            {selectedShipping.ShipToNumber}<br>{selectedShipping.SAccountName}</p>
+                                                    </div>
+                                                    <div class="slds-col slds-size_4-of-12">
+                                                        <p class="address-label">Shipping Address</p>
+                                                    </div>
+                                                    <div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+                                                        <p class="address-value">
+                                                            {selectedShipping.ShipStreet}<br>{selectedShipping.ShippingCity}{selectedShipping.Provionce} {selectedShipping.PostalCode}<br>{selectedShipping.ShippingCountry}</p>
+                                                    </div>
+                                                </div>
+                                            </template>
+                            
+                                            <template if:true={showShipAddressEmptyPage}>
+                                                <div class="slds-grid slds-wrap slds-gutters">
+                                                    <div class="slds-col slds-size_11-of-12">
+                                                        <p class="address-label">Return documents for any associated Shipping Address </p>
+                                                    </div>
+                                                    <div class="slds-col slds-size_8-of-12">
+                                                        <p class="address-value"></p>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+            </template>
+        <template if:false={confirmAddress}>    
+            <div class="slds-col slds-size_3-of-3 max-width-container slds-p-around_none">
+                <template if:false={isInternal}>
+                <div class="slds-tabs_default slds-tabs_medium slds-m-top_xx-large">
+                    <ul class="slds-tabs_default__nav" role="tablist">
+                        <li class="slds-tabs_default__item slds-is-active" role="presentation" data-id="tab-default-1__item">
+                        <a class="slds-tabs_default__link" href="#null" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" data-id="tab-default-1__item" data-value="Order" onclick={handleActive}>Quick</a>
+                        </li>
+                        <li class="slds-tabs_default__item" role="presentation" data-id="tab-default-2__item">
+                        <a class="slds-tabs_default__link" href="#null" role="tab" aria-selected="false" aria-controls="tab-default-2" data-id="tab-default-2__item" data-value="Shipment" onclick={handleActive}>Advanced</a>
+                        </li>
+                    </ul>
+                </div>  
+            </template>
+            <!-- <iframe id="paymetric-iframe" class="payment-metric-iframe" src={iFrameUrl}> </iframe> -->
+                <lightning-card class="search-result-cards">
+                    <h1 class="slds-text-heading_medium slds-m-around_small slds-p-horizontal_large search-criteria-title order-detail-table-header">
+                        Request Document
+                        <!-- <div class="chevron-circle" onclick={toggleSearchFields}><lightning-icon icon-name='utility:chevronup' alternative-text='chevronup' size='large' ></lightning-icon></div> -->
+                    </h1>
+                    <div class="slds-form slds-p-top_large slds-p-horizontal_x-large slds-p-bottom_x-large search-fields-group slds-show">
+                        <div class="slds-grid slds-wrap">
+
+                            <div class="slds-col slds-size_1-of-3">
+                                <div class="slds-form-element">
+                                    <lightning-combobox class="statuscombobox" label="Request" placeholder="Select option" value={SearchByvalue} options={SearchByOptions} onchange={handleSearchOptionChange}></lightning-combobox>
+                                </div>
+                                <template if:true={isAdvanced}>
+                                    <div class="pod-note slds-m-bottom_small slds-assistive-text">Note: Proof of Delivery is only available for UPS & FedEx Shipments</div>
+                                </template>
+                            </div>
+                            <template if:true={InvoiceSelect}>
+                                <template if:false={isAdvanced}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-invoice">Order/Invoice #*</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-invoice" placeholder="Order/Invoice #" class="slds-input" onkeyup={handleInvoNumChange} onchange={handleInvoNumChange} value={InvoNum} />
+                                        </div>
+                                    </div>
+                                </div>
+                                </template>
+                                <template if:true={isAdvanced}>
+                                    <div class="slds-col slds-size_1-of-3">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="by-invoice4678">Order/Invoice #</label>
+                                            <div class="slds-form-element__control">
+                                                <input type="text" id="by-invoice4678" placeholder="Order/Invoice #" class="slds-input" onkeyup={handleInvoNumChange} onchange={handleInvoNumChange} value={InvoNum} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element slds-size_1-of-3">
+                                        <lightning-combobox class="statuscombobox" label='Invoice Status' value={InvoiceStatusValue} options={InvoiceStatusOptions} onchange={handleInvoiceStatusOptionChange}></lightning-combobox>
+                                    </div>
+                                    <div class="slds-col slds-form-element slds-size_1-of-3">
+                                        <label class="slds-form-element__label" for="by-PO">PO #</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-PO" placeholder="PO #" class="slds-input" onkeyup={handlePONumChange} onchange={handlePONumChange} value={PONum} />
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-3">
+                                        <div class="slds-grid">
+                                            <div class="slds-col slds-size_1-of-2 slds-p-left_none">
+                                                <div class="slds-form-element">
+                                                    <label class="slds-form-element__label order-date-label" for="order-from-date12">{labels.scc_home_Order_Date}  <span class="label-sub-text">(From)</span></label>
+                                                    <div class="slds-form-element__control slds-is-relative">
+                                                        <input type="date" id="order-from-date12" placeholder={labels.scc_home_From} class="slds-input" value={startDate} onkeyup={handleStartDateChange} onchange={handleStartDateChange} min={minimumDate} />
+                                                        <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                    </div>
+                                                </div>
+                                                <div class="date-note">Note: Upto 24 months</div>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2 slds-p-right_none">
+                                                <div class="slds-form-element">
+                                                    <label class="slds-form-element__label order-date-label" for="order-to-date12">{labels.scc_home_Order_Date}  <span class="label-sub-text">(To)</span></label>
+                                                    <div class="slds-form-element__control slds-is-relative">
+                                                        <input type="date" id="order-to-date12" placeholder={labels.scc_home_To} class="slds-input" value={endDate} onkeyup={handleEndDateChange} onchange={handleEndDateChange} min={minimumDate}/>
+                                                        <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
+
+                            <template if:true={DebitMemoSelect}>
+                                <template if:false={isAdvanced}>
+                                    <div class="slds-col slds-size_1-of-3">
+                                        <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-invoice2">Order/Invoice #*</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-invoice2" placeholder="Order/Invoice #" class="slds-input" onkeyup={handleInvoNumChange} onchange={handleInvoNumChange} value={InvoNum} />
+                                        </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template if:true={isAdvanced}>
+                                    <div class="slds-col slds-size_1-of-3">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="by-invoice46789">Order/Invoice #</label>
+                                            <div class="slds-form-element__control">
+                                                <input type="text" id="by-invoice46789" placeholder="Order/Invoice #" class="slds-input" onkeyup={handleInvoNumChange} onchange={handleInvoNumChange} value={InvoNum} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="slds-col slds-form-element slds-size_1-of-3">
+                                    <label class="slds-form-element__label" for="by-PO1">PO #</label>
+                                    <div class="slds-form-element__control">
+                                        <input type="text" id="by-PO1" placeholder="PO #" class="slds-input" onkeyup={handlePONumChange} onchange={handlePONumChange} value={PONum} />
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-size_1-of-2 slds-p-left_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label order-date-label" for="order-from-date12">{labels.scc_home_Order_Date}  <span class="label-sub-text">(From)</span></label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="order-from-date123" placeholder={labels.scc_home_From} class="slds-input" value={startDate} onkeyup={handleStartDateChange} onchange={handleStartDateChange} min={minimumDate} />
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                            <div class="date-note">Note: Upto 24 months</div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2 slds-p-right_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label order-date-label" for="order-to-date12">{labels.scc_home_Order_Date}  <span class="label-sub-text">(To)</span></label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="order-to-date123" placeholder={labels.scc_home_To} class="slds-input" value={endDate} onkeyup={handleEndDateChange} onchange={handleEndDateChange} min={minimumDate}/>
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            </template>
+
+                            <template if:true={CreditMemoSelect}>
+                                <template if:false={isAdvanced}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-invoice3">Order/Invoice #*</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-invoice3" placeholder="Order/Invoice #" class="slds-input" onkeyup={handleInvoNumChange} onchange={handleInvoNumChange} value={InvoNum} />
+                                        </div>
+                                    </div>
+                                </div>
+                                </template>
+                                <template if:true={isAdvanced}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-invoice09">Order/Invoice #</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-invoice09" placeholder="Order/Invoice #" class="slds-input" onkeyup={handleInvoNumChange} onchange={handleInvoNumChange} value={InvoNum} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-form-element slds-size_1-of-3">
+                                    <label class="slds-form-element__label" for="by-PO2">PO #</label>
+                                    <div class="slds-form-element__control">
+                                        <input type="text" id="by-PO2" placeholder="PO #" class="slds-input" onkeyup={handlePONumChange} onchange={handlePONumChange} value={PONum} />
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-size_1-of-2 slds-p-left_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label order-date-label" for="order-from-date125">{labels.scc_home_Order_Date}  <span class="label-sub-text">(From)</span></label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="order-from-date125" placeholder={labels.scc_home_From} class="slds-input" value={startDate} onkeyup={handleStartDateChange} onchange={handleStartDateChange} min={minimumDate}/>
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                            <div class="date-note">Note: Upto 24 months</div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2 slds-p-right_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label order-date-label" for="order-to-date124">{labels.scc_home_Order_Date} <span class="label-sub-text">(To)</span></label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="order-to-date124" placeholder={labels.scc_home_To} class="slds-input" value={endDate} onkeyup={handleEndDateChange} onchange={handleEndDateChange} min={minimumDate} />
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            </template>
+
+                            <template if:true={StatementSelect}>
+                                <div class="slds-col slds-size_2-of-3">
+                                    <div class="slds-grid slds-wrap">
+                                        <template if:true={isInternal}>
+                                            <div class="slds-col slds-size_1-of-3 slds-m-left_none">
+                                                <div class="slds-form-element" style="margin-right: 50px; margin-top: -16px;">
+                                                    <lightning-input type="text" 
+                                                                     label="Billing Account #" 
+                                                                     value={billingAccountNumber}
+                                                                     onchange={handleBillingAccountChange}>
+                                                    </lightning-input>
+                                                </div>
+                                            </div>
+                                        </template>
+                                        <div class="slds-col slds-size_1-of-3 slds-m-left_none">
+                                            <div class="slds-form-element">
+                                                <lightning-combobox class="statuscombobox month-year-options" label="Month*" value={monthValue} options={monthOptions} onchange={handleMonthOptionChange}></lightning-combobox>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-3 slds-m-left_none">
+                                            <div class="slds-form-element">
+                                                <lightning-combobox class="statuscombobox month-year-options" label="Year*" value={yearValue} options={yearOptions} onchange={handleYearOptionChange}></lightning-combobox>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>  
+                                </div>
+                            </template>
+                            <div class="slds-col slds-size_3-of-3">
+                                    <div class="slds-form-element radio-labels slds-m-vertical_medium">
+                                        <div class="slds-show_inline-block slds-m-right_medium">
+                                            <span class="slds-m-right_xx-small delivery-preference">Delivery Preference:</span>
+                                            <input class="payment-option-radio payment-options slds-m-right_xx-small" type="radio" onchange={handleDocPrefChange} checked={isViewScChecked} name="View on Screen"><div class="slds-show_inline-block slds-m-right_small">View on Screen</div>
+                                            <input class="payment-option-radio slds-m-left_large slds-m-right_xx-small" type="radio" onchange={handleDocPrefChange} checked={isEmailChecked} name="Email"><div class="slds-show_inline-block">Email</div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="slds-col slds-size_3-of-3">
+                                <div class="slds-form-element__control slds-m-top_x-small">
+                                    <button class="slds-button search-button slds-m-right_medium" onclick={handleSearch} aria-disabled={SearchDisabled}>
+                                        <lightning-icon class="search-icon slds-m-right_x-small" icon-name='utility:search' alternative-text='search' size='x-small'></lightning-icon>
+                                        {labels.scc_home_Search}
+                                    </button>
+                                    <button class="slds-button clear-button" onclick={handleClearClick}  aria-disabled={SearchDisabled}>
+                                        {labels.scc_OrderStatus_Clear}
+                                    </button>
+                                    <!--temprorary                               
+                                            <button class="search-pdts-button slds-p-right_large slds-m-bottom_medium slds-float_right email-button" onclick={showEmailDoc} >
+                                                <img class="slds-m-right_x-small email-icon-white" src={labels.scc_email_icon_white} alt="email icon" />
+                                                <img class="slds-m-right_x-small email-icon-blue" src={labels.scc_email_icon_blue} alt="email icon" />
+                                                Email Selected Documents   
+                                            </button>                                
+                                    end-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-card>
+            </div>
+            <template if:true={showStatementEmailMessage}>
+                                <div class="slds-text-heading_medium slds-m-around_small slds-align_absolute-center thank-you-order-confirmation-message">
+				                {labels.scc_emailDocumentSuccess}
+			                    </div>
+            </template>
+            <template if:false={isLoading1}>
+                <template if:true={showSearchResults}>
+                    <div class="slds-m-top_large max-width-container">
+                        <lightning-card class="search-result-cards">
+                            <div class="slds-grid slds-wrap slds-p-horizontal_medium">
+                                <div class="slds-col slds-size_3-of-3 order-detail-table-header">
+                                    <div class="search-criteria-title">Documents
+                                        <span>
+                                            <button class="search-pdts-button slds-p-right_large slds-m-bottom_medium slds-float_right email-button searchButton" onclick={showEmailDoc} aria-disabled={sendEmail}>
+                                                <img class="slds-m-right_x-small email-icon-white" src={labels.scc_email_icon_white} alt="email icon" />
+                                                <img class="slds-m-right_x-small email-icon-blue" src={labels.scc_email_icon_blue} alt="email icon" />
+                                                Email Selected Documents
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <template if:true={showEmailMessage}>
+                                <div class="slds-text-heading_medium slds-m-around_small slds-align_absolute-center thank-you-order-confirmation-message">
+				                {labels.scc_emailDocumentSuccess}
+			                    </div>
+                                </template>
+                                <template if:true={noRecordsToDisplay}>
+                                        <div class="slds-col slds-size_12-of-12">
+                                            <div class="slds-m-horizontal_large slds-p-around_x-large slds-m-bottom_large no-result-container">
+                                                <img alt="no results image" src={labels.scc_noResults} />
+                                                <div class="no-result-title slds-m-bottom_small">No Results</div>
+                                                <div>There are no Documents that match your search criteria</div>
+                                            </div>
+                                        </div>
+                                </template>
+                                <template if:false={noRecordsToDisplay}>
+                                <table class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-horizontal_small" role="grid" aria-label="Example advanced table of Opportunities in actionable mode with ascending column sorting">
+                                    <thead>
+                                        <tr class="slds-line-height_reset">
+                                            <template if:true={showCheckBox}>
+                                                <th style="width: 8%;">
+                                                    <div class="slds-checkbox slds-p-left_x-small slds-align_absolute-center">
+                                                        <input type="checkbox" name="options" onchange={handlecheck} id="checkbox-02" value="checkbox-02" tabindex="0" aria-labelledby="check-button-label-02 column-group-header" />
+                                                        <label class="slds-checkbox__label" for="checkbox-02" id="check-button-label-02">
+                                                        <span class="slds-checkbox_faux"></span>
+                                                        <span class="slds-form-element__label slds-assistive-text">Select item 2</span>
+                                                        </label>
+                                                    </div>
+                                                </th>
+                                            </template>
+                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 12%;">
+                                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span>Invoice #</span>
+                                                </div>
+                                                </a>
+                                            </th>
+                                        
+                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 14%;">
+                                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span>Proof of Delivery?</span>
+                                                </div>
+                                                </a>
+                                            </th>
+
+                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span>Date</span>
+                                                </div>
+                                                </a>
+                                            </th>
+
+                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span>Amount</span>
+                                                </div>
+                                                </a>
+                                            </th>
+
+                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 18%;">
+                                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span >PO#</span>
+                                                </div>
+                                                </a>
+                                            </th>
+
+                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span>Order #</span>
+                                                </div>
+                                                </a>
+                                            </th>
+                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                <a class="slds-th__action slds-text-link_reset" role="button" tabindex="0">
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                <span>Pay Status</span>
+                                                </div>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <template for:each={recordsToDisplay} for:item='line' for:index="index">
+                                            <tr aria-selected="false" class="slds-hint-parent" key={line.index}>
+                                                <template if:true={showCheckBox}>
+                                                    <td style="width: 8%;">
+                                                        <div class="slds-checkbox slds-align_absolute-center">
+                                                            <input type="checkbox" name="options" id={line.invoice} class="invoicecheckbox" onchange={handlecheckbox}  value={line.invoice} tabindex="0" aria-labelledby="check-button-label-02 column-group-header" />
+                                                            <label class="slds-checkbox__label" for={line.invoice} id="check-button-label-03">
+                                                            <span class="slds-checkbox_faux"></span>
+                                                            <span class="slds-form-element__label slds-assistive-text">Select item 2</span>
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </template>
+                                                <td class="slds-cell_action-mode" scope="row">
+                                                    <div title={line.invoice}><a onclick={handleInvoice} data-invoice-number={line.invoice}>{line.invoice}</a></div>
+                                                </td>
+                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                    <div title={line.deliveryProof}>{line.deliveryProof}</div>
+                                                </td>
+                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                    <div title={line.invoiceDate}>{line.invoiceDate}</div>
+                                                </td>
+                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                    <div title={line.PO}>${line.invoiceAmount}</div>
+                                                </td>
+                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                    <div title={line.PO}>{line.PO}</div>
+                                                </td>
+                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                    <div title={line.SAP_Document_Number}>{line.SAP_Document_Number}</div>
+                                                </td>
+                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                    <div title={line.payStatus}>{line.payStatus}</div>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </template>
+                            </div>
+                        
+                        </lightning-card>
+                    </div>
+                </template>
+                </template>
+            </template>
+        </template>
+    </div>
+</template>
+<template if:true={showInvoiceEmail}>
+    <div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog">
+        <div class="slds-modal__container">
+
+            <div class="slds-modal__header">
+                <button class="slds-modal__close guestOrderStatusClose" onclick={closeModal} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+                <h3>Email Document(s)</h3>
+
+            </div>
+
+            <div class="slds-modal__content slds-p-around_medium">
+                <div class="form-container">
+
+
+                    <div class="slds-col slds-size_3-of-3 slds-m-top_medium">
+                        <div class="slds-form-element__label">Email(s) *</div>
+
+                        <div class="slds-p-around_none">
+                            <p>Separate multiple email addresses with commas</p>
+
+                            <input class="slds-input fixed-width-input"  data-id="Email" id="emailAddresses" label=" "
+                            value={valEmail} name="email" onchange={handleDocEmailChange}  type="text" data-index="0" />
+
+                        </div>
+
+                    </div>
+
+                    <div class="slds-col slds-size_3-of-3 slds-m-top_medium">
+                        <div class="slds-form-element__label">Delivery Preference *</div>
+                        <div class="slds-form-element slds-p-around_none">
+                            <div class="slds-form-element__control slds-p-around_none">
+                                <div style="display:flex; align-items: center;">
+                                <input class="payment-option-radio payment-options slds-m-right_xx-small" type="radio" onchange={handleDocEmailChange} checked={isAllChecked} name="all" data-index="0" >
+                                <div class=" slds-m-right_small emailcontent">All documents in one attachment
+                                </div></div>
+                            <div style="display:flex; align-items: center;"><input class="payment-option-radio payment-options slds-m-right_xx-small" name="each" type="radio" onchange={handleDocEmailChange} checked={isEachChecked} data-index="0">
+                                <div class="emailcontent">Each document as their own attachment(up to 5)
+                                </div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <div class="slds-modal__footer">
+                    <!-- <button tabindex="0" class="slds-button slds-align_absolute-center siop-modal-button" onclick={showSendDoc} onfocusout={focusOutButton}  aria-disabled={disableDocEmail}>  -->
+                        <button class="slds-button slds-align_absolute-center siop-modal-button" onclick={showSendDoc} aria-disabled={disableDocEmail} data-index="0">   
+                         <!-- <img class="slds-m-right_x-small email-icon-white-popup" src={labels.scc_email_icon_white} alt="email icon" />
+                                                <img class="slds-m-right_x-small email-icon-blue-popup" src={labels.scc_email_icon_blue} alt="email icon" />  -->
+                                                Email Document</button>
+
+                    <button tabindex="0" class="slds-align_absolute-center slds-button cancel-modal-button" style="margin-top: 3%;margin-left: 45%; font-size: 120%" onclick={closeModal} onfocusout={focusOutButton} > 
+                       
+                                                Cancel</button>
+
+                </div>
+
+            </div>
+        </div>
+    
+    
+
+
+</template>
+</template>

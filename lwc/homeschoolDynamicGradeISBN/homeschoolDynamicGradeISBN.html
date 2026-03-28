@@ -1,0 +1,36 @@
+<template>
+    
+    <lightning-checkbox-group name="Grade Selection"
+                              label="Grade Level(s) of Purchased Program(s)"
+                              options={gradeOptions}
+                              value={selectedGrades}
+                              onchange={handleGradeChange}
+                              message-when-value-missing="">
+    </lightning-checkbox-group>
+
+    <!--<lightning-checkbox-group name="test"
+                            label="test"
+                            options={gradeOptions2}
+                            value={selectedGrades}
+                            onchange={handleGradeChange}
+                            message-when-value-missing="">
+    </lightning-checkbox-group>-->
+
+
+    <template for:each={gradeISBNData} for:item="grade">     
+    <div class="slds-form-element;slds-text-body_small" key={grade.key}>
+            <!--<p style="color: #ff0000;">Selected Values are: <strong>{grade.key}th Grade Product(s) Purchased</strong></p>
+            <p style="color: #ff0000;">Selected Values are: <strong>{grade.value}</strong></p>-->
+            <lightning-checkbox-group name="ISBN Selection"
+                                    label= {grade.value2} 
+                                    options={grade.value1}
+                                    value={gradeISBNValue}
+                                    onchange={handleISBNChange}                                                                       
+                                    message-when-value-missing="">
+            </lightning-checkbox-group>    
+          
+     </div> 
+    </template>
+
+    <!--<p style="color: #ff0000;">Selected Values are: <strong>{selectedGrades}</strong></p>  -->
+</template>

@@ -1,0 +1,259 @@
+<template>
+	<template if:true={showEditPage}>
+	<div
+		class="slds-grid slds-wrap slds-grid_vertical slds-gutters slds-p-around_large order-status-BG slds-is-relative">
+		<div class="slds-col">
+			<nav role="navigation" aria-label="Breadcrumbs">
+				<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+					<li class="slds-breadcrumb__item">
+						<a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+					</li>
+					<li class="slds-breadcrumb__item">
+						<a href="#" class="slds-m-right_small breadcrumb-label">Reports</a>
+					</li>
+
+					<li class="slds-breadcrumb__item">
+						<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">ViewSample</a>
+					</li>
+
+					<li class="slds-breadcrumb__item">
+						<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Report Detail</a>
+					</li>
+
+				</ol>
+			</nav>
+		</div>
+	</div>
+	  	<div class="slds-col slds-size_3-of-3 title-page-content">                    
+			<div class="slds-text-align_right slds-m-bottom_large shopping-buttons">            
+				<button class="slds-button  close" onclick={handleClose} disabled={closeDisabled}>Close</button>
+				<!-- <button class="slds-button  delete-report" onclick={deletereporthander} disabled={deletereportDisabled}>Delete Report</button> -->
+				<!-- <button class="slds-button  edit-criteria" onclick={editCriteriaHander} disabled={editcriteriaDisabled}>Edit Criteria</button> -->
+				<button class="slds-button  run-report" onclick={handleRunReport} disabled={runreportDisabled}>Run Report</button>
+			</div>
+		</div>
+	<div class="slds-col slds-m-top_medium max-width-container">
+		<lightning-card class="search-result-cards">
+
+			<div class="slds-grid slds-wrap review-address-container">
+				<div class="slds-col slds-size_12-of-12">
+					<div class="slds-grid slds-wrap slds-gutters">
+						<div class="slds-col slds-size_2-of-12">
+							<p class="address-label">Report</p>
+						</div>
+						<div class="slds-col slds-size_10-of-12 slds-m-bottom_small">
+							<p class="address-value">{editedreport} </p>
+						</div>
+						<div class="slds-col slds-size_2-of-12">
+							<p class="address-label">Report Description</p>
+						</div>
+						<div class="slds-col slds-size_10-of-12 slds-m-bottom_small">
+							<p class="address-value">{labels.scc_OrderStatusReportSummary}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</lightning-card>
+	</div>
+	<!-- secin -->
+
+	<!--  -->
+
+
+
+	<div class="slds-col slds-m-top_large catalog-panel-list-wrapper">
+		<lightning-card class="search-result-cards">
+
+			<div class="slds-text-heading_medium slds-m-around_small slds-p-horizontal_large search-criteria-title order-detail-table-header">Reports</div>
+			<div class="slds-p-top_medium slds-p-horizontal_x-large slds-p-bottom_x-small report-detail-grid">
+			<div class="slds-grid" style="gap: 10px;">
+				<!-- ISBN Input -->
+				<div class="slds-col slds-size_4-of-12">
+					<div class="slds-form-element">
+						<div class="slds-grid slds-grid_vertical-align-left">
+							<label class="slds-form-element__label" for="text-input-id-56">ISBN(s)</label>
+						</div>
+						<div class="allow-drop-ship">
+							<lightning-input type="checkbox" label="Include all ISBNs" checked={includeAllISBNs}
+								onchange={handleCheckboxChange} data-id="include-all-isbns"></lightning-input>
+						</div>
+						<div class="text-area-input-change">
+							<textarea class="arvicon-input" rows="10" cols="50" oninput={handleSpecificISBNsChange} disabled={includeAllISBNs}></textarea>
+							<div class="MultiISBNText">To report on specific ISBNs, type/paste one ISBN per line. ISBN must be complete: 10 or 13 digits.</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- PO Input -->
+				<div class="slds-col slds-size_4-of-12">
+					<div class="slds-form-element">
+						<div class="slds-grid slds-grid_vertical-align-left">
+							<label class="slds-form-element__label" for="text-input-id-57">PO#(s)</label>
+						</div>
+						<div class="allow-drop-ship">
+							<lightning-input type="checkbox" label="Include all POs" checked={includeAllPOs}
+								onchange={handleCheckboxChange} data-id="include-all-pos"></lightning-input>
+						</div>
+						<div class="text-area-input-change">
+							<textarea class="arvicon-input" rows="10" cols="50" oninput={handleSpecificPOsChange} disabled={includeAllPOs}></textarea>
+							<div class="MultiPOText">To report on specific PO#s, type/paste one PO# per line.</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Radio Button, Order Date, and Order Status Section -->
+		
+
+			<div class="slds-col slds-size_1-of-3 slds-text-align_right slds-p-top_medium ">
+				<label class="slds-form-element__label" for="PO-num">Order Date</label>
+			</div>
+			
+			<div class="slds-col slds-size_12-of-12">
+			
+				<div
+					class="slds-form search-fields-group slds-show slds-grid slds-wrap">
+					<!-- <div>
+						<lightning-input type="radio" name="customerAccount" value="BillTo" onchange={handleRadioChange} checked>
+						</lightning-input>
+					</div> -->
+					<div class="slds-col slds-size_2-of-12">
+						<div class="slds-form-element">
+							
+							<div style="display:flex; height:35px">
+								<div class="slds-form-element__control">
+									<span class="slds-radio">
+									<input type="radio" id="radio-61" value="BillTo" name="customerAccount" checked="" />
+									<label class="slds-radio__label" for="radio-61">
+										<span class="slds-radio_faux"></span>
+										<span class="slds-form-element__label label-sub-text">From</span>
+									</label>
+									</span>
+								</div>
+								<!-- <lightning-input type="radio" name="customerAccount" value="BillTo" onchange={handleRadioChange} checked>
+								</lightning-input> -->
+								<!-- <label class="slds-form-element__label order-date-label" for="order-from-date12"><span class="label-sub-text">From</span></label> -->
+							</div>
+							<div class="slds-form-element__control slds-is-relative">
+								<input type="date" id="order-from-date12" placeholder={labels.scc_home_From} class="slds-input" value={startDate} onkeyup={handleStartDateChange} onchange={handleStartDateChange} />
+								<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+			     		</div>
+							</div>
+						</div>
+			
+						<div class="slds-col slds-size_2-of-12">
+							<div class="slds-form-element" style="margin-top: 3px;">
+								<label class="slds-form-element__label order-date-label" for="order-to-date12"><span class="label-sub-text">To</span></label>
+								<div class="slds-form-element__control slds-is-relative" style="margin-top: 10px;">
+									<input type="date" id="order-to-date12" placeholder={labels.scc_home_To} class="slds-input" value={endDate} onkeyup={handleEndDateChange} onchange={handleEndDateChange} />
+									<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+			                                                </div>
+								</div>
+							</div>
+			
+			
+							<div class="slds-col slds-size_4-of-12" style="padding-left: 10px; margin-top: 5px;">
+								<div class="slds-form-element">
+								
+									<div class="slds-form-element__control slds-is-relative">
+										<lightning-combobox class="statuscombobox" label="order status" value={OrderStatusValue}  style="margin-top: 6px; width: 430px; height: 55px;"
+											options={OrderStatusOptions} onchange={handleOrderStatusOptionChange}>
+										</lightning-combobox>
+									</div>
+								</div>
+							</div>
+			
+						</div>
+			
+					</div>
+				
+			
+			
+					<div
+					class="slds-form report-search-fields-group slds-show slds-grid slds-wrap">
+					<div class="slds-col slds-size_3-of-12 ">
+						<div class="slds-form-element">
+							<div class="slds-form-element__control" style="margin-bottom: 8px;">
+									<span class="slds-radio">
+									<input type="radio" id="radio-62" value="BillTo" name="customerAccount"/>
+									<label class="slds-radio__label" for="radio-62">
+										<span class="slds-radio_faux"></span>
+										<span class="slds-form-element__label label-sub-text">Order Entry Period</span>
+									</label>
+									</span>
+								</div>
+							<lightning-combobox id="order-from-date22" class="statuscombobox" placeholder="Select option" style="width: 430px;"
+								value={orderEntryPeriod} options={OrderEntryOptions} onchange={handleOrderEntrOptionChange}>
+							</lightning-combobox>
+				
+						</div>
+					</div>
+				</div>
+			</div>
+				</lightning-card>
+				</div>
+				
+	
+<!-- sort order  -->
+	<div class="slds-col slds-size_12-of-12 slds-m-vertical_large">
+		<div class="max-width-container">
+			<lightning-card class="search-result-cards">
+				<div
+					class="slds-text-heading_medium slds-m-around_small slds-p-horizontal_large search-criteria-title order-detail-table-header">
+					Sort order
+				</div>
+				<div 
+					class="slds-form slds-p-top_medium slds-p-horizontal_x-large slds-p-bottom_x-small sort-order slds-show slds-grid slds-wrap">
+					<div class="slds-col slds-size_4-of-12" style="width:430px;">
+						<div class="slds-form-element">
+							<lightning-combobox class="statuscombobox" label=Reports placeholder="Select option"
+								value={SortOrder1} options={SortOrderOptions1} onchange={handleSearchOptionChange1}>
+							</lightning-combobox>
+	
+						</div>
+					</div>
+					<div class="slds-col slds-size_4-of-12" style="width:430px;">
+						<div class="slds-form-element">
+							<lightning-combobox class="statuscombobox" label=Reports placeholder="Select option"
+								value={SortOrder2} options={SortOrderOptions2} onchange={handleSearchOptionChange2}>
+							</lightning-combobox>	
+						</div>
+					</div>
+					<div class="slds-col slds-size_4-of-12" style="width:430px;">
+						<div class="slds-form-element">
+							<lightning-combobox class="statuscombobox" label="Sort by" placeholder="Select option"
+								value={SortOrder3} options={SortOrderOptions3} onchange={handleSearchOptionChange3}>
+							</lightning-combobox>
+						</div>
+					</div>
+				</div>
+			</lightning-card>
+
+	
+	<template if:true={showclosewindow}>
+               <div class="slds-modal slds-fade-in-open slds-backdrop">
+				<div class="slds-modal__container">
+					<!------HEADER Section-->
+					<div class="slds-modal__header">
+						<button class="slds-modal__close" onclick={closeModal}>x</button>
+						<h3>Pending Changes</h3>
+					</div>
+					<!------Body Section-->
+					<div class="slds-modal__content slds-p-around_medium">
+				<div class="slds-form_horizontal slds-text-align_left">
+							<p> Pending report changes will be lost. Select Select Cancel and then run report if you would like to apply these changes, or select Close Edit Criteria to discard the changes.</p>
+							<!-- <div class="slds-show_inline-block note-icon slds-m-right_xx-small">!</div><span>This action cannot be undone</span> -->
+						</div>
+					</div>
+					<!------Footer Section-->
+					<div class="slds-modal__footer slds-p-bottom_medium">
+						<button class="slds-button clear-cart-modal-button" onclick={handleOpen}>Close Edit Criteria</button>
+						<button class="slds-button cancel-modal-button" onclick={handleCancel}>Cancel</button>
+					</div>
+				</div>
+			</div>
+                </template>
+				</div>
+						</div>
+	</template>
+</template>

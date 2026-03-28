@@ -1,0 +1,95 @@
+.catalogue-wrapper{
+    background-color: #fff;
+    border: 1px solid #AFC3D8;
+    border-radius: 10px;
+}
+.catalogue-title{    /*title style*/
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: left;
+    color: #0C1E3D;
+}
+.catalogue-title::before{
+    content: "";
+    width: 8px;
+    height: 20px;
+    border-radius: 0 5px 5px 0;
+    background-color: #9ECA47;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 5px;
+  }
+.slds-breadcrumb li a{  /*breadcrumb links text style*/
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18.2px;
+    text-align: left;
+    color: #173770;
+}
+.slds-breadcrumb li:first-child{
+    padding-left: 0 !important;
+}
+.slds-breadcrumb li:last-child a{
+    font-weight: 600;
+}
+.slds-breadcrumb .slds-breadcrumb__item:before{
+    color: #33BDCD;
+    top: -3px;
+    font-weight: 600;
+}
+.catalog-panel{
+    border: 1px solid #AFC3D8;
+    background-color: #F2F9FF;
+}
+.catalog-panel ul li[aria-level=1] span{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.2px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    color: #173770;
+}
+.catalog-panel ul li[aria-level=2] span, .catalog-panel ul li[aria-level=3] span{
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    color: #173770;
+}
+.catalog-panel ul li[aria-level=4] span, .catalog-panel ul li[aria-level=5] span{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    color: #173770;
+}
+
+
+/*----------------------------*/
+.menu {
+    position:relative;
+    top:30; 
+    left: 0 !important; 
+    width : 460px!important; 
+    height : 85vh!important;
+    z-index:10;
+}
+.menu.hidden {
+   /* width: 1%; Show the menu */
+   left: -438px !important;
+}
+/* CSS Class for changing the text color of a button to black and adjusting line height */
+.neutral-button-text-color {
+    --slds-c-button-text-color-neutral: black !important; /* Changing button text color to black */
+    --slds-c-button-line-height: 1.5rem !important; /* Adjusting button line height */
+}
+
+ .wrapword{ 
+     white-space: -moz-pre-wrap !important; /*Mozilla, since 1999*/
+     white-space: -webkit-pre-wrap;
+     word-wrap: break-word;
+ }

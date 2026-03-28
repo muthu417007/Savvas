@@ -1,0 +1,24 @@
+<template>
+  <div class="slds-modal slds-fade-in-open slds-backdrop">
+      <div class="slds-modal__container">
+          <!------HEADER Section-->
+          <div class="slds-modal__header">
+              <button class="slds-modal__close" onclick={closeModal}>x</button>
+              <h3>Resend Access Codes</h3>
+          </div>
+          <!------Body Section-->
+          <div class="slds-modal__content slds-p-horizontal_medium slds-p-top_medium">
+              <div class="slds-form_horizontal">
+                  <label class="slds-form-element__label" for="emailAddresses">Email(s) *</label>
+                  <lightning-input class="email-cart-popup-input slds-p-around_none" id="emailAddresses" label=" " value={emailAddresses} onchange={handleEmailChange} type="text" required></lightning-input>
+                  <p class="slds-m-top_xx-small">Separate multiple email addresses with commas</p>
+              </div>
+          </div>
+          <!------Footer Section-->
+          <div class="slds-modal__footer">
+              <button class="slds-button clear-cart-modal-button" onclick={handleEmailSend}>Resend Access Codes</button>
+              <button class="slds-button cancel-modal-button" onclick={closeModal}>Cancel</button>
+          </div>
+      </div>
+  </div>
+</template>

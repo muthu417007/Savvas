@@ -1,0 +1,125 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 08-06-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <lightning-card>
+        <div class="slds-grid slds-wrap slds-align-middle slds-align_absolute-center">
+            <div class="slds-col">
+                <!-- added by sudha W-15025 -->
+
+                <template if:true={isInternal}>
+                    <h4 class="slds-text-heading_medium slds-m-around_small recent-order">Recently Viewed Orders</h4>
+                </template>
+                <template if:false={isInternal}>
+                    <h4 class="slds-text-heading_medium slds-m-around_small recent-order">
+                        {labels.scc_home_Recent_Orders}</h4>
+                </template>
+                <!-- Ended by Sudha  -->
+            </div>
+            <div class="slds-col slds-text-align_right slds-m-right_medium view-all-mobile">
+            <p class="view-all-link">{getRecentOrderCount} Items</p>
+            <span class="slds-p-horizontal_small">|</span>
+            <template if:true={isInternal}>
+                <template if:false={isShowingCredits}>
+                    <a href="#" class="view-all-link" onclick={showRecentCredits}>
+                        View Recent Credits
+                        <div class="chevron-circle">
+                            <lightning-icon class="chevron-icon" icon-name='utility:chevronright'
+                                alternative-text='chevronright' size='xx-small'></lightning-icon>
+                        </div>
+                    </a>
+                </template>
+                <template if:true={isShowingCredits}>
+                    <a href="#" class="view-all-link" onclick={showRecentOrders}>
+                        View Recent Orders
+                        <div class="chevron-circle">
+                            <lightning-icon class="chevron-icon" icon-name='utility:chevronright'
+                                alternative-text='chevronright' size='xx-small'></lightning-icon>
+                        </div>
+                    </a>
+                </template>
+            </template>
+            <template if:false={isInternal}>
+                <a href="#" class="view-all-link" onclick={viewAll}>
+                    {labels.scc_home_ViewAll}
+                    <div class="chevron-circle">
+                        <lightning-icon class="chevron-icon" icon-name='utility:chevronright'
+                            alternative-text='chevronright' size='xx-small' title='chevronright'></lightning-icon>
+                    </div>
+                </a>
+            </template>
+        </div>
+        </div>
+        <div class="slds-m-around_medium">
+            <template lwc:if={hasRecentOrder}>
+                <template for:each={getOrderData} for:item="order">
+                    <div key={order.OrderNumber} class="slds-box slds-m-bottom_medium">
+                        <div class="slds-grid slds-wrap dropdown-container-mobile">
+                            <div class="slds-col slds-size_1-of-2 slds-large-size_1-of-5">
+                                <p class="order-label">{labels.scc_home_PO}</p>
+                                <p class="order-value">{order.PoNumber}</p>
+                            </div>
+                            <div
+                                class="slds-col slds-size_1-of-2 slds-large-size_1-of-5 slds-text-align_left slds-is-relative">
+                                <p class="order-label">{labels.scc_home_Document_Control}</p>
+                                <p class="order-link"><a href="#" data-id={order.SAP_Document_Number}
+                                        onclick={orderrecorddetail}>{order.SAP_Document_Number}</a></p>
+                                <div class="chevron-circle-dropdown" onclick={toggleResultFields}>
+                                    <lightning-icon class="chevron-icon" icon-name='utility:chevrondown'
+                                        alternative-text='chevrondown' size='xx-small'></lightning-icon>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <template if:true={isInternal}>
+                                <div
+                                    class="slds-col slds-size_1-of-1 slds-large-size_1-of-5 slds-text-align_left full-width-in-mobile">
+                                    <p class="order-label">{labels.scc_home_Bill_To_Name}</p>
+                                    <p class="order-value">{order.BillingName}</p>
+                                </div>
+                            </template>
+                            <!--  -->
+
+                            <div
+                                class="slds-col slds-size_1-of-1 slds-large-size_1-of-5 slds-text-align_left full-width-in-mobile">
+                                <p class="order-label">{labels.scc_home_Ship_To_Name}</p>
+                                <p class="order-value">{order.ShipToName}</p>
+                            </div>
+                            <div
+                                class="slds-col slds-size_1-of-1 slds-large-size_1-of-5 slds-text-align_left full-width-in-mobile">
+                                <p class="order-label">{labels.scc_home_Order_Date}</p>
+                                <p class="order-value">{order.EffectiveDate}</p>
+                            </div>
+                            <template if:false={isInternal}>
+                                <div
+                                    class="slds-col slds-size_1-of-1 slds-large-size_1-of-5 slds-text-align_left full-width-in-mobile">
+                                    <p class="order-label">{labels.scc_home_Status}</p>
+                                    <p class="order-value">{order.Status}</p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+            <template lwc:else>
+                <template if:false={hasRecentOrder}>
+                    <div class="slds-box no-recent-order-box">
+                        <div class=" slds-align_absolute-center">
+                            <img src={noRecentOrderImage}><br>
+                        </div><span></span>
+                        <h5 class="slds-align_absolute-center no-recent-order-text">No Recent Orders</h5>
+                        <p>A brief description can go here</p>
+                    </div>
+                </template>
+            </template>
+            <template if:true={error}>
+                <!--- Handle error condition -->
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

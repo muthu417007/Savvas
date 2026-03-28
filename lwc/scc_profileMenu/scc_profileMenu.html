@@ -1,0 +1,63 @@
+<!--*********************************************************
+  Component Name       : scc_profileMenu
+  Created Date         : 06/09/2024  
+  Author               : Cognizant
+  Description          : This component used in Home page to render the profile details and Logout of login user.
+  
+  Modifications Log
+  06/09/2024      Monami             Initial Version
+*********************************************************/-->
+
+<template>
+	<div class="slds-form-element">
+		<div class="slds-grid slds-grid_align-end">
+			<div class="slds-col cartstyle">
+				<div class="slds-form-element__control">
+				<button onclick={reviewcart} class="add-to-cart" aria-disabled={isCartEmpty} aria-label={ariaLabel}>
+							<img src={carticon} alt="cart" style="width: 24.58px;height: 24.58px;">
+							<template if:false={showBadge}>
+							<span class="quantity-badge" if:true={hasItems}>{quantity}</span>
+							</template>
+							<template if:true={showBadge}>
+							<span class="show-badge" if:true={hasItems}>{quantity}</span>
+							</template>							 
+							<div class="slds-popover slds-popover_tooltip slds-nubbin_top" role="tooltip">
+											<div class="slds-popover__body">{labels.scc_cartIconHover}</div>
+										</div>
+							</button>       
+                                        
+			</div>
+			</div>
+			<div class="slds-col">
+				<div class="slds-form-element__control">
+					<div class="profile-dropdown" id="dropdown">
+						<button class="slds-button slds-button_neutral button-size" aria-haspopup="true" aria-expanded={isOpen} onclick={toggleDropdown} onmouseleave={hideDropdown} 
+						aria-label={profileMenuAriaLabel} role="menu">
+                            <img class="slds-m-right_x-small" src={labels.scc_profile_avatar} alt=""></img>
+                            <span class="user-name">Hi,{userName}</span>
+                            <lightning-icon icon-name='utility:chevrondown' alternative-text='chevrondown profile' size='x-small' title='chevrondown' class="slds-button__icon_right dropdown-icon" ></lightning-icon>
+                        </button>
+						<div class="slds-dropdown slds-dropdown_center" onmouseover={showDropdown} onmouseout={hideDropdown}>
+							<ul class="slds-dropdown__list" role="menu" aria-label="Profile Menu">
+								<li class="slds-m-around_small" role="presentation">
+									<a href="#" role="menuitem" onkeydown={handleUpDownClick} onclick={handleProfilePage} tabindex="0">
+										<span class="slds-truncate" >									
+									<span class="option-text"> Profile </span>
+										</span>
+									</a>
+								</li>
+								<li class="slds-m-around_small" role="presentation">
+									<a href="#" tabindex="-1" role="menuitem" onkeydown={handleUpDownClick} onclick={handleSignOut}>
+										<span class="slds-truncate" >									
+									<span class="option-text"> Sign Out </span>
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

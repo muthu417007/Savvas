@@ -1,0 +1,111 @@
+<template>
+	<div class="slds-grid slds-wrap">
+		<div class="slds-col slds-col-size_3-of-3">
+			<div class="catalogue-wrapper slds-m-right_large slds-p-top_large">
+				<h2 class="slds-p-horizontal_x-large slds-is-relative catalogue-title">Catalog Search</h2>
+				<nav role="navigation" aria-label="Breadcrumbs">
+					<div class="slds-breadcrumb slds-list_horizontal slds-wrap slds-p-horizontal_x-large">
+						<template for:each={breadcrumbs} for:item="breadcrumb" for:index="index">
+							<a key={breadcrumb.url} href={breadcrumb.url} data-index={index}
+								onclick={handleBreadcrumbClick}>{breadcrumb.label}</a>
+						</template>
+					</div>
+				</nav>
+				<template if:true={noData}>
+					<div class="slds-grid slds-wrap slds-grid_align-end">
+						<div class="slds-col">
+							<div class="filter-details slds-p-around_large">
+								<label class="slds-form-element__label slds-p-right_none" for="filter-search-input">Filter Results &nbsp; <span class="slds-assistive-text">Enter a keyword to filter within the current set of search results. Showing 0 of 0 Items. Use panel on the left to navigate through the catalog</span></label>
+								<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+									<div
+										class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+										i</div>
+									<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip"
+										id="4">
+										<div class="slds-popover__body">Enter a keyword to filter within the current set
+											of search results</div>
+									</div>
+								</div>
+								<div class="slds-is-relative">
+									<input type="text" id="filter-search-input" class="slds-input filter-search-input pNacatalogFilter" value={filterSearchValue}  oninput={handleFilter} />
+									<button class="slds-button filter-clear" onclick={clearFilterInput} aria-label="close">x</button>
+								</div>
+								<div class="slds-form-element__label item-count" role="alert">0 of 0 Items</div>
+								<div class="slds-is-relative slds-show_inline-block slds-m-left_large">
+									<div class="slds-show_inline-block info-icon slds-text-align_center">i</div>
+									<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-right"
+										role="tooltip" id="5">
+										<div class="slds-popover__body">Use panel on the left to navigate through the
+											catalog</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</template>
+				<template lwc:if={displayProductCategoryData}>
+					<div class={menuClass}>
+						<div class="slds-grid slds-wrap slds-p-left_x-large slds-p-right_none slds-p-vertical_medium">
+							<div class="slds-col slds-size_11-of-12 ">
+								<div>
+									<h2 class="slds-show_inline-block">Catalog</h2>
+									<button class="slds-button slds-float_right slds-m-right_x-large" onclick={resetSelection} data-id="Catalog" >Reset</button>
+								</div>
+								<div class="catalog-panel-list-wrapper">
+									<div class="catalog-panel-list">
+										<lightning-tree items={searchMenuData} selected-item={selectedItem}
+											onselect={handleOnSelect}></lightning-tree>
+									</div>
+								</div>
+							</div>
+							<div class="slds-col slds-size_1-of-12 slds-align-middle catalog-expand-collapse-btn">
+								<template if:true={showSideMenu}>
+									<div class="toggle-panel-button">
+										<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+											<lightning-icon icon-name='utility:chevronleft'
+												alternative-text='chevronleft, Click to collapse Panel' size='large'
+												onclick={toggleMenu} tabindex="0" role="button"
+												onkeydown={handleKeyPress}></lightning-icon>
+											<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+												role="tooltip" id="12">
+												<div class="slds-popover__body">Click to collapse Panel</div>
+											</div>
+										</div>
+									</div>
+								</template>
+								<template if:false={showSideMenu}>
+									<div class="toggle-panel-button">
+										<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+											<lightning-icon icon-name='utility:chevronright'
+												alternative-text='chevronright, Click to expand Panel' size='large'
+												onclick={toggleMenu} tabindex="0" role="button"
+												onkeydown={handleKeyPress}></lightning-icon>
+											<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left"
+												role="tooltip" id="11">
+												<div class="slds-popover__body">Click to expand Panel</div>
+											</div>
+										</div>
+									</div>
+								</template>
+							</div>
+						</div>
+					</div>
+				</template>
+				<template if:false={noData}>
+					<c-scc_product-catalog-table columns={columns} raw-parent-table-data={productData}
+						onshowproducttitlepage={openChildTitlePage} filter={filterCriteria}
+						ontransformeddatalength={handleTransformedDataLength}
+						onsearchresultsavailable={handleSearchResultsAvailable}>
+					</c-scc_product-catalog-table>
+				</template>
+			</div>
+		</div>
+	</div>
+	<template if:true={isLoading}>
+		<div class="spinner-wrapper slds-spinner_container" style="height: 200px; position:absolute;">
+			<div class="slds-backdrop slds-backdrop_open">
+				<lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+			</div>
+		</div>
+	</template>
+</template>

@@ -1,0 +1,293 @@
+/*generic style - for figma screens*/
+
+.slds-form-element{
+    margin-bottom: 10px;
+}
+.slds-form-element .slds-input{
+    width: 100%;
+}
+.signin-page{   
+    background-color: #ffffff;
+    /* background-image: url('/resource/scc_landingpage_bgimage'); */
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    padding: 100px 0 31px;
+}
+.signin-form{
+    width: 612px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin: 0 auto; 
+}
+.signin-form form{
+    padding: 50px 70px 0;
+}
+.signin-form .slds-input{
+    margin-bottom: 10px;
+}
+.no-signin-label{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    text-align: left;
+    color: #0C1E3D;
+    padding-bottom: 10px;
+}
+.no-signin-reqd-links{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    color: #2150A3;
+    display: inline-block;
+    padding: 0 5px;
+}
+.no-signin-reqd-links button{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+}
+.no-signin-reqd-links button::after{
+    content: none !important;
+}
+.signin-form .no-signin-reqd-links:first-of-type{
+    padding-left: 0;
+}
+.signin-form .no-signin-reqd-links:not(:last-of-type)::after, .signin-form lightning-button.no-signin-reqd-links::after{
+    content: "";
+    width: 1px;
+    height: 9px;
+    background-color: #2150A3;
+    display: inline-block;
+    margin-left: 6px;
+}
+.signin-form .no-signin-reqd-links.guestInvoiceLink::after{
+    content: none;
+}
+.sign-in-title{
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 38.5px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #173770;
+    padding: 20px 0 30px;
+}
+.login-button {
+    background-color: #AFC3D8;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding: 10px 30px;
+    border-radius: 90px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19.8px;
+    color: #ffffff;
+    margin: 10px 0;
+    height: 55px;
+}
+.login-button:not([aria-disabled=true]) {
+    background-color: #9ECA47;
+    color: #0C1E3D;
+}
+.forgot-password-text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #2150A3 !important;
+    text-decoration: underline !important;
+}
+.forgot-password {
+    display: flex;
+    justify-content: space-between;
+}
+.register-text-link-wrapper{
+    text-align: center;
+    margin-top: 10px;
+}
+.register-text {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #173770 !important;
+    display: inline-block;
+}
+.chevron-circle{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #679608;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.error {
+    text-align: left; 
+    word-break: break-word;
+    /* max-width: 20rem; */
+    color: #fd0808;
+}
+.not-a-dealer-container{
+    border-top: 1px solid rgba(23, 55, 112, 0.2);
+    padding: 40px 0;
+    margin-top: 40px;
+}
+.not-a-dealer-title{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    text-align: left;
+    color: #0C1E3D;
+}
+.not-a-dealer-links a{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #173770;
+    text-decoration: none !important;
+    margin-top: 10px;
+    display: inline-block;
+}
+.signin-footer-copyright-text{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.2px;
+    text-align: left;
+    color: #ffffff;
+    display: inline-block;
+    text-align: center;
+}
+.signin-blue-footer{
+    background-color: #173770;
+    text-align: center;
+    padding: 20px 66px;
+    border-radius: 0 0 20px 20px;
+}
+.signin-footer-links{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    display: inline-block;
+}
+lightning-button[data-id='guestOrderStatusLink']:focus{
+    box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #0B5CAB;
+}
+.mobile-only{
+    display: none;
+    background-color: #fff;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+    padding: 20px;
+    z-index: 2;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1100px){
+    .signin-page{
+        background-size: cover;
+        height: 100vh;
+        padding-top: 140px;
+    }
+}
+@media only screen and (max-width: 767px){
+    .mobile-only{
+        display: block;
+    }
+    .signin-page{
+        background-image: var(--landing-page-bgimage-mobile-path);
+        padding: 28px 15px;
+    }
+    .signin-form{
+        margin-top: 64px;
+        width: auto;
+    }
+    .signin-form form{
+        padding: 25px 25px 0;
+    }
+    .no-signin-label{
+        font-size: 14px;
+        line-height: 19.6px;
+    }
+    .sign-in-title{
+        font-size: 26px;
+        line-height: 28.6px;
+    }
+    .login-button{
+        font-size: 16px;
+        line-height: 17.6px;
+        height: 50px;
+    }
+    .register-text-link-wrapper{
+        margin-top: 20px;
+    }
+    .register-text{
+        font-size: 15px;
+        line-height: 22.5px;
+        text-align: left;
+    }
+    .not-a-dealer-container{
+        padding: 30px 0 36px;
+        margin-top: 22px;
+    }
+    .not-a-dealer-title{
+        font-size: 14px;
+        line-height: 19.6px;
+    }
+    .not-a-dealer-links a{
+        font-size: 14px;
+        line-height: 21px;
+        margin-top: 15px;
+    }
+    .chevron-circle{
+        width: 18px;
+        height: 18px;
+        text-align: center;
+    }
+    .signin-blue-footer{
+        padding: 20px;
+    }
+    .signin-footer-copyright-text{
+        font-size: 12px;
+        line-height: 16.8px;
+        margin-bottom: 10px;
+    }
+    .signin-footer-links{
+        font-size: 13px;
+        line-height: 19.5px;
+    }
+    .signin-blue-footer .signin-footer-links:last-of-type{
+        margin-left: 20px;
+    }
+    
+    .forgot-password{
+        flex-direction: column;
+    }
+}
+@media only screen and (max-width: 400px){
+    .signin-form .no-signin-reqd-links:nth-of-type(2){
+        margin-right: 20px;
+    }
+    .signin-form .no-signin-reqd-links:nth-of-type(2)::after{
+        content: none;
+    }
+    .signin-form .no-signin-reqd-links:nth-of-type(3){
+        padding-left: 0;
+    }
+}

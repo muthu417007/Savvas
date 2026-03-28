@@ -1,0 +1,65 @@
+<template>
+    <template if:true={inputSetting.inputField}>
+        <lightning-input
+            name={inputSetting.name}
+            label={label}
+            type={inputSetting.inputType}
+            value={value}
+            onfocus={handleOnFocusInput}
+            onblur={handleOnBlurInput}
+            required={inputSetting.required}
+            field-level-help={description}>
+        </lightning-input>
+    </template>
+    <template if:true={inputSetting.inputCheckbox}>
+        <lightning-input
+            name={inputSetting.name}
+            label={label}
+            type={inputSetting.inputType}
+            checked={value}
+            onchange={handleCheckboxChange}
+            field-level-help={description}>
+        </lightning-input>
+    </template>
+    <template if:true={inputSetting.inputSelect}>
+        <lightning-combobox
+            name={inputSetting.name}
+            label={label}
+            value={value}
+            placeholder="Select Value"
+            options={inputSetting.selectOptions}
+            onchange={handleSelectChange}
+            required={inputSetting.required}
+            field-level-help={description}>
+        </lightning-combobox>
+    </template>
+
+    <template if:true={inputSetting.inputObject}>
+        <c-ensxtx-app-settings-input-object
+            setting={inputSetting}
+            is-child-input={isChildInput}
+            onchildinputmultiplechange={handleInputMultipleChange}>
+        </c-ensxtx-app-settings-input-object>
+    </template>
+
+    <template if:true={inputSetting.inputMultipleObject}>
+        <c-ensxtx-app-settings-input-multiple
+            setting={inputSetting}
+            is-child-input={isChildInput}
+            onchildinputmultiplechange={handleInputMultipleChange}>
+        </c-ensxtx-app-settings-input-multiple>
+    </template>
+
+    <template if:true={inputSetting.inputArray}>
+        <c-ensxtx-app-settings-input-array
+            setting={inputSetting}
+            show-header={showHeader}
+            is-child-input={isChildInput}
+            onchildinputmultiplechange={handleInputMultipleChange}>
+        </c-ensxtx-app-settings-input-array>
+    </template>
+
+    <template if:true={inputSetting.inputTable}>
+        <c-ensxtx-app-settings-input-table setting={inputSetting}></c-ensxtx-app-settings-input-table>
+    </template>
+</template>

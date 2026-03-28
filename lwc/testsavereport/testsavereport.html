@@ -1,0 +1,86 @@
+<template>
+    <div class="slds-modal slds-fade-in-open slds-backdrop">
+        <div class="slds-modal__container">
+
+            <div class="slds-modal__header">
+                <button class="slds-modal__close" onclick={closeModal}>x</button>
+
+            </div>
+
+            <div class="slds-modal__content slds-p-around_medium">
+
+                <div class="slds-col slds-size_12-of-12">
+
+                    <div class="slds-form search-fields-group slds-show slds-grid slds-wrap">
+
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-form-element">
+
+                                <div style="display:flex; height:35px">
+                                    <div class="slds-form-element__control">
+                                        <span class="slds-radio">
+                                                        <input type="radio" id="radio-61" value="" name="customerAccount"
+                                                            checked="" />
+                                                        <label class="slds-radio__label" for="radio-61">
+                                                            <span class="slds-radio_faux"></span>
+                                        <span class="slds-form-element__label label-sub-text">
+                                                                Override Existin Report
+                                                            </span>
+                                        </label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-area-input-change">
+                                        <textarea class="arvicon-input" rows="10" cols="50" oninput={handleSpecificISBNsChange} disabled={includeAllISBNs}></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_12-of-12">
+
+                    <div class="slds-form search-fields-group slds-show slds-grid slds-wrap">
+
+                        <div class="slds-col slds-size_6-of-12">
+                            <div class="slds-form-element">
+
+                                <div style="display:flex; height:35px">
+                                    <div class="slds-form-element__control">
+                                        <span class="slds-radio">
+                                                    <input type="radio" id="radio-62" value="" name="customerAccount"
+                                                        checked="" />
+                                                    <label class="slds-radio__label" for="radio-62">
+                                                        <span class="slds-radio_faux"></span>
+                                        <span class="slds-form-element__label label-sub-text">Save as
+                                                        </span>
+                                        </label>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="order-from-date12"  class="slds-input"  onkeyup={handleStartDateChange} onchange={handleStartDateChange} />
+                                </div>
+                                <div class="text-area-input-change">
+                                    <textarea class="arvicon-input" rows="10" cols="50" oninput={handleSpecificISBNsChange} disabled={includeAllISBNs}></textarea>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!------Footer Section-->
+            <div class="slds-modal__footer slds-p-bottom_medium">
+                <button class="slds-button clear-cart-modal-button" onclick={handleOpen}>Close Edit Criteria</button>
+                <button class="slds-button cancel-modal-button" onclick={handleCancel}>Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</template>

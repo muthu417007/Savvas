@@ -1,0 +1,58 @@
+<template>
+	<div class="slds-grid slds-grid_vertical">
+		<!-- Total Records Badge -->
+		<div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread" style="padding-top: 0.5em;">
+			<div class="slds-clearfix">
+				<div class="slds-float_right">
+					<!-- <span class="slds-badge"> {totalRecords} items </span> -->
+				</div>
+			</div>
+			<!-- Page Navigation Buttons -->
+			<div class="slds-align_absolute-center" style="height:5rem">
+				<lightning-button disabled={bDisableFirst} icon-name="utility:jump_to_left" label="First"
+					class="slds-p-horizontal_x-small" alternative-text="first page" onclick={firstPage}>
+				</lightning-button>
+				<lightning-button disabled={bDisableFirst} icon-name="utility:chevronleft" label="Previous"
+					alternative-text="Previous" onclick={previousPage}>
+				</lightning-button>
+				&nbsp;
+				<span class="slds-badge">Showing {pageNumber} &nbsp;of&nbsp; {totalPages} &nbsp;&nbsp;Page(s)</span>
+				&nbsp;
+				<lightning-button disabled={bDisableLast} icon-name="utility:chevronright" label="Next"
+					alternative-text="Next" onclick={nextPage} class="slds-p-horizontal_x-small" icon-position="right">
+				</lightning-button>
+				<lightning-button disabled={bDisableLast} icon-name="utility:jump_to_right" label="Last"
+					alternative-text="last page" onclick={lastPage} icon-position="right"></lightning-button>
+			</div>
+			<div class="slds-col slds-size_2-of-12 ">
+				<div class="slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+					{displayedRecords} of {totalRecords} Items &nbsp;
+					<button class="slds-button slds-button_icon" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+					<div class={taskTypeHelpTextClass} role="tooltip" id="help"
+						style="position:absolute;top:194px;right:43px;width:250px;background-color:#504c6e!important;">
+						<div class="slds-popover_body">
+							<ul class="slds-list_dotted slds-has-dividers_around-space "
+								style="color:white !important;padding-top:5px !important;">
+								{message}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Data Table -->
+		<div class="slds-col">
+			<div class="slds-scrollable" style="height: 300px;">
+				<div class="slds-m-around_small">
+					<lightning-datatable data-id="datatable" data={transformedChildTableData} columns={columns1}
+						hide-checkbox-column="true" key-field="productId" onrowaction={handleRowAction}
+						default-sort-direction={defaultSortDirection} sorted-direction={sortDirection}
+						sorted-by={sortedBy} onsort={onHandleSort}>
+					</lightning-datatable>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

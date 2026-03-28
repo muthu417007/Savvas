@@ -1,0 +1,267 @@
+<template>
+	 <div class="spinner-wrapper slds-spinner_container" if:true={isLoading1}>
+        <div class="slds-backdrop slds-backdrop_open">
+            <lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+        </div>
+    </div> 
+	<template if:true={showProfileDetail}>
+		<div class="slds-grid slds-wrap slds-grid_vertical slds-p-around_large slds-is-relative mobile-view-container">
+			<div class="slds-col slds-size_3-of-3">
+				<div class="slds-grid slds-wrap" style="font-size: 12px;">
+					<div class="slds-col slds-size_12-of-12" style="float: left;font-size: 16px; padding-left: 0px;">
+						<nav role="navigation" aria-label="Breadcrumbs">
+							<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+								<li class="slds-breadcrumb__item">
+									<a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+								</li>
+								<template if:false={requestDetails}>
+								<li class="slds-breadcrumb__item">
+									<div class="slds-m-horizontal_medium" style="margin-top: -3px"> <a href="#"
+											class="breadcrumb-label slds-text-title_bold" style="text-decoration: none">Profile
+										</a>
+									</div>
+								</li>
+								</template>
+									<template if:true={requestDetails}>
+									<li class="slds-breadcrumb__item">
+									<div class="slds-m-horizontal_medium" style="margin-top: -3px"> <a href="#"
+											class="breadcrumb-label " style="text-decoration: none">Profile
+										</a>
+									</div>
+								</li>
+								<li class="slds-breadcrumb__item">
+									<div class="slds-m-horizontal_medium" style="margin-top: -3px"> <a href="#"
+											class="breadcrumb-label slds-text-title_bold" style="text-decoration: none">Request Update
+										</a>
+									</div>
+								</li>
+									</template>
+
+							</ol>
+						</nav>
+						<!-- <span>Order Detail </span><span><a onclick={closeShowDeliveryDetails} style="text-decoration:none;">&nbsp;{orderNumber}</a></span><span style="font-weight:bold"> > Shipment Detail</span><span>&nbsp;(Invoice &nbsp;{invoiceInfo.invoiceNumber})</span> -->
+					</div>
+					<template if:true={showprofilepage}>
+					<div class="slds-size_12-of-12 close-button-shipment-wrapper">
+						<button class="viewProfile" onclick={showRequestDetails}>Request Update</button>
+					</div>
+					</template>
+					<template if:true={requestDetails}>
+					<div class="slds-size_12-of-12 close-button-shipment-wrapper">
+						<button class="viewsubmit" onclick={showSubmitDetails}  aria-disabled={isSubmitDisabled} >Submit</button>
+					</div>
+					</template>
+				</div>
+			</div>
+		
+<template if:true={showprofilepage}>
+		<template if:true={showUpdated}>
+			<div class="slds-text-heading_medium slds-m-around_small slds-align_absolute-center thank-you-order-confirmation-message" role="alert">
+				{labelsVal.scc_profileUpdateSuccess}
+			</div>
+		</template>
+		<div class="content" role="alert">
+			{labelsVal.scc_profilePageContent}
+		</div>
+	
+		<div class="CheckOut">
+			<div class="slds-grid">
+				<div class="ReviewA1 slds-p-around_large">
+
+					<h2 class="Checkout-title">About You</h2>
+					<div class="slds-col-slds-size_2-of-12">
+						<div class="Heading">Name</div>
+						<div class="result1">{userDetail.Name}</div>
+					</div>
+					<div class="slds-col-slds-size_2-of-12">
+						<div class="Heading">Account Type</div>
+						<div class="result1">{userDetail.AccountType}</div>
+					</div>
+					<div class="slds-col-slds-size_2-of-12">
+						<div class="Heading">Email</div>
+						<div class="result1">{userDetail.Email}</div>
+					</div>
+					<div class="slds-col-slds-size_2-of-12">
+						<div class="Heading">Account Actions</div>
+						<div class="result1">
+							
+							<div class="slds-form-element">
+								<div class="slds-form-element__control">
+									<div class="slds-checkbox align">
+										<input type="checkbox" name="options" id="checkbox-unique-id-80" class="custom-checkbox" value="checkbox-unique-id-80" checked={placeOrders} disabled />
+										<label class="slds-checkbox__label" for="checkbox-unique-id-80">
+																<span class="slds-checkbox_faux"></span>
+																<span class="slds-form-element__label">Place Orders</span>
+																</label>
+									</div>
+									<div class="slds-checkbox align">
+										<input type="checkbox" name="options" id="checkbox-unique-id-81" class="custom-checkbox" value="checkbox-unique-id-81" checked={checkOrderStatus} disabled />
+										<label class="slds-checkbox__label" for="checkbox-unique-id-81">
+																<span class="slds-checkbox_faux"></span>
+																<span class="slds-form-element__label">Check Order Status and Price & Availability</span>
+																</label>
+									</div>
+									<div class="slds-checkbox align">
+										<input type="checkbox" name="options" id="checkbox-unique-id-82" class="custom-checkbox" value="checkbox-unique-id-80" checked={requestOneTimeShipping} disabled />
+										<label class="slds-checkbox__label" for="checkbox-unique-id-80">
+																<span class="slds-checkbox_faux"></span>
+																<span class="slds-form-element__label">Request One-Time Shipping Address</span>
+																</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="ReviewA2 slds-p-around_large">
+					<div class="Section1">
+						<h2 class="Checkout-title">Associated Account</h2>
+
+						<div class="slds-col-slds-size_2-of-12">
+							<div class="Heading">District / School Name</div>
+							<div class="result1">{userDetail.School_District}</div>
+						</div>
+
+
+						<div class="slds-col-slds-size_2-of-12">
+							<div class="Heading">
+								Account
+							</div>
+
+							<div class="result1">{userDetail.AccountId}</div>
+						</div>
+
+						<div class="slds-col-slds-size_2-of-12">
+							<div class="Heading">Address</div>
+							<div class="result1">
+								{userDetail.street}<br/>{userDetail.city},&nbsp;{userDetail.state}&nbsp;{userDetail.code}<br/>{userDetail.country}</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- Confirm address -->
+			<template if:true={showMultiAddressPage}>
+				<div class="slds-col slds-size_3-of-3">
+					<div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+						<h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">
+							Available Billing Addresses</h2>
+						<!-- <div class="slds-p-horizontal_x-large allow-drop-ship">
+							<div class="Heading">Select Billing Address to view Associated Shipping Addresses</div>
+						</div> -->
+						<div
+							class="slds-grid slds-wrap slds-gutters_x-small slds-p-vertical_medium slds-p-left_x-large slds-p-right_small card-container">
+							<template for:each={filteredresult} for:item="sAddress">
+								<div class="slds-col slds-size_3-of-12" key={sAddress.AccId}>
+									<div class="slds-m-bottom_small">
+							
+										<label for={sAddress.AccId}>
+                                            <div class="card-size">
+                                                <span class="slds-visual-picker__figure slds-visual-picker__text card-size slds-p-around_medium card-padding">
+                                                    <span>
+                                                        <p>{sAddress.name} {sAddress.AccountName}</p>
+                                                        {sAddress.BillinStreet}<br/>
+                                                        {sAddress.BillingCity} {sAddress.State}{sAddress.ZipCode}<br/>
+                                                        {sAddress.BillingCountry}
+                                                    </span>
+                                                </span>
+                                                <span class="slds-icon_container slds-visual-picker__text-check">
+                                                    <svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true"></svg>
+                                                </span>
+                                            </div>
+                                        </label>
+									</div>
+								</div>
+							</template>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col slds-size_3-of-3 margin-align">
+					<div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+						<h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">
+							Available Shipping Addresses</h2>
+
+						<!-- <div class="slds-p-horizontal_x-large allow-drop-ship">
+							<lightning-input type="checkbox"
+								label="Include reports for any associated shipping address." checked={isCheckedReport}
+								id="allow-drop-ship"></lightning-input>
+
+						</div> -->
+
+						<div
+							class="slds-grid slds-wrap slds-gutters_x-small slds-p-vertical_medium slds-p-left_x-large slds-p-right_small ship-address-container">
+							<template if:true={showAvailableShipping}>
+								<template for:each={filteredresultt} for:item="shippaddr">
+									<div class="slds-col slds-size_3-of-12" key={shippaddr.AccShipId}>
+										<div class=" slds-m-bottom_small">
+											
+											<label for={shippaddr.AccShipId}>
+                                                <div class="card-size">
+                                                    <span class="slds-visual-picker__figure slds-visual-picker__text card-size slds-p-around_medium card-padding">
+                                                         <span style="text-align: left;">
+                                                            <p>{shippaddr.SAccountName}</p>
+                                                            {shippaddr.ShipStreet} <br />
+                                                            {shippaddr.ShippingCity} {shippaddr.Provionce} {shippaddr.PostalCode}<br/>
+                                                            {shippaddr.ShippingCountry}
+                                                        </span>
+                                                    </span>
+                                                    <span class="slds-icon_container slds-visual-picker__text-check">
+                                                        <svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true"></svg>
+                                                    </span>
+                                                </div>
+                                            </label>
+										</div>
+									</div>
+								</template>
+							</template>
+						</div>
+					</div>
+				</div>
+			</template>
+		</template>
+		
+		<template if:true={requestDetails}>
+			
+			<div class="request-content" role="alert">
+			{labelsVal.scc_profileRequestDetails}
+		</div>
+			<div class="slds-col slds-size_3-of-3">
+				<div class="slds-m-top_large slds-p-top_large request-detail-container">
+					<h2 class="slds-p-horizontal_x-large slds-is-relative confirm-address-title ">
+						Request Details</h2>
+					<div class="slds-p-around_large">
+		
+						<div class="slds-col-slds-size_2-of-12">
+							<div class="Heading">Name</div>
+							<div class="result1">{userDetail.Name}</div>
+						</div>
+						
+						<div class="slds-col-slds-size_2-of-12">
+							<div class="Heading">Email</div>
+							<div class="result1">{userDetail.Email}</div>
+						</div>
+						<div class="slds-col-slds-size_2-of-12">
+							<div class="Heading">Type</div>
+							<div class="result1">Profile Change Request</div>
+						</div>
+						<div class="slds-col-slds-size_2-of-12">
+							<div class="Heading">Details *</div>
+							<div class="slds-form-element">
+							<div class="slds-form-element__control">
+										<textarea class="slds-input arvicon-input" rows="10" cols="50" aria-label="Details required" oninput={handleInputChange}></textarea>
+							</div>
+							</div>
+						</div>
+					</div>
+		
+		
+				</div>
+			</div>
+		</template>
+
+	</div>
+	</template>
+</template>

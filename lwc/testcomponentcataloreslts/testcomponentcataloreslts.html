@@ -1,0 +1,141 @@
+<template>
+	<div class="slds-grid slds-wrap">
+		<!-- Total Records Badge -->
+		<!-- <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread" style="padding-top: 0.5em;">
+			<div class="slds-clearfix">
+				<div class="slds-float_right">
+					<span class="slds-badge"> {totalRecords} items </span>
+				</div>
+			</div>
+		</div> -->
+		<!-- Data Table -->
+		
+			<div class="slds-col slds-size_3-of-3 slds-grid_align-end">
+				<div class="filter-details slds-p-around_large">
+					<label class="slds-form-element__label slds-p-right_none" for="filter-search-input">Filter Results<span class="slds-assistive-text">Enter a keyword to filter within the current set of search results. Showing {displayedRecords} of {totalCount} Items.Use panel on the left to navigte through the catalog</span></label>
+					<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+						<div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+						<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left" role="tooltip" id="4">
+							<div class="slds-popover__body">Enter a keyword to filter within the current set of search results</div>
+						</div>
+					</div>
+					<div class="slds-is-relative">
+						<input type="text" id="filter-search-input" class="slds-input filter-search-input" value={filterSearchValue}  oninput={handleFilter}  />
+						<button class="slds-button filter-clear" onclick={clearFilterInput} aria-label="Close">x</button>
+					</div>
+					<div class="slds-form-element__label item-count">{displayedRecords} of {totalCount} Items</div>
+					<div class="slds-is-relative slds-show_inline-block slds-m-left_large">
+						<div class="slds-show_inline-block info-icon slds-text-align_center">i</div>
+						<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-right" role="tooltip" id="5">
+							<div class="slds-popover__body">Use panel on the left to navigte through the catalog</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		<div class="slds-col slds-size_3-of-3 result-table">
+			<table class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-left_x-large slds-p-right_small slds-p-vertical_medium" role="grid" aria-label="Search Results">
+				<thead>
+					<tr class="slds-line-height_reset">
+						<th aria-sort="ascending" class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode" scope="col"  style="width: 13%;">
+							<a class="slds-th__action slds-text-link_reset" tabindex="0">
+								<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+									<span>ISBN</span>
+								</div>
+							</a>
+						</th>
+						<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 40%;">
+							<a class="slds-th__action slds-text-link_reset" tabindex="0">
+								<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+									<span>Title Description</span>
+								</div>
+							</a>
+						</th>
+						<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 18%;">
+							<a class="slds-th__action slds-text-link_reset" tabindex="0">
+								<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+									<span title="Type">Type</span>
+								</div>
+							</a>
+						</th>
+						<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+							<a class="slds-th__action slds-text-link_reset" tabindex="0">
+								<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+									<span title="Grade">Grade</span>
+								</div>
+							</a>
+						</th>
+						<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 6%;">
+							<a class="slds-th__action slds-text-link_reset" tabindex="0">
+								<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+									<span title="&#169;">&#169;</span>
+								</div>
+							</a>
+						</th>
+						<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+							<a class="slds-th__action slds-text-link_reset" tabindex="0">
+								<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+									<span title="Status">Status</span>
+								</div>
+							</a>
+						</th>
+						<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+							<a class="slds-th__action slds-text-link_reset" tabindex="0">
+								<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+									<span title="Price">Price</span>
+								</div>
+							</a>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<template for:each={transformedChildTableData} for:item='line'>
+						<tr aria-selected="false" class="slds-hint-parent" key={line.productId}>
+							<th class="slds-cell_action-mode" scope="row">
+								<div>
+									
+								<a href="#" 
+								tabindex="0"
+							data-row-id={line.productId}							
+							title={line.ISBN} 
+							onclick={handleRowAction}> {line.ISBN}</a>
+								</div>
+							</th>
+							<td class="slds-cell_action-mode" role="gridcell">
+								<div>{line.Title_Description}</div>
+							</td>
+							<td class="slds-cell_action-mode" role="gridcell" >
+								<div title={line.Type}>{line.Type}</div>
+							</td>
+							<td class="slds-cell_action-mode" role="gridcell">
+								<div title={line.Grade_Level}>{line.Grade_Level}</div>
+							</td>
+							<td class="slds-cell_action-mode" role="gridcell">
+								<div title={line.Copyright}>{line.Copyright}</div>
+							</td>
+							<td class="slds-cell_action-mode" role="gridcell">
+								<div title={line.Status}>{line.Status}</div>
+							</td>
+							<td class="slds-cell_action-mode" role="gridcell">
+								<div title={line.Price}>
+									<template if:true={priceLoaded}>
+										${line.Price}
+									</template>
+									<template if:false={priceLoaded}>
+									 <div class="loader"></div>
+									 </template>
+								</div>
+							</td>
+						</tr>
+					</template>
+				</tbody>
+			</table>
+
+		</div>
+		<template if:true={showLoadNextButton}>
+			<div class="slds-p-around_medium load-more-button slds-text-align_center">
+				<button onclick={handleLoadNextClick}>Load Next 15 Rows</button> 
+			</div>
+		</template>
+	</div>
+</template>

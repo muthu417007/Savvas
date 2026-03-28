@@ -1,0 +1,1069 @@
+<template>
+	<template if:false={isContactSupport}>
+		<template if:false={openReviewCartPage}>
+			
+			<template if:true={showSIOP}>
+				<c-scc_register-s-i-o-p-participant-l-w-c order-number={orderId} onclosepopup={closeSIOPPopup}>
+				</c-scc_register-s-i-o-p-participant-l-w-c>
+			</template>
+
+		<template if:true={showLoader}>
+			<!-- <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner> -->
+				<div class="spinner-wrapper slds-spinner_container" style="height: 200px; position:absolute;">
+			<div class=" slds-backdrop slds-backdrop_open">
+				<lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+			</div>
+		</div>
+		</template>
+
+			<div class="slds-p-vertical_none slds-p-horizontal_x-large" style="min-width: 1200px;background-color: #E5F1FD;">
+				<div class="spinner-wrapper slds-spinner_container" if:true={isLoading3}>
+					<div class="slds-backdrop slds-backdrop_open">
+						<lightning-spinner class="spins" size="medium" variant="brand" alternative-text="Loading" role="alert">
+							{labels.scc_Please_Wait_While_Your_Order_Is_Placed}</lightning-spinner>
+					</div>
+				</div>
+				<div class="slds-grid slds-wrap slds-p-bottom_medium">
+					<div class="slds-col slds-size_12-of-12">
+						<template if:false={isGuest}>
+							<nav role="navigation" aria-label="Breadcrumbs">
+								<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+									<li class="slds-breadcrumb__item">
+										<a href="#"  class="slds-m-right_small breadcrumb-label home-link">Home</a>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<a href="#" class="slds-m-horizontal_small breadcrumb-label">Place Order</a>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<a href="#" class="slds-m-horizontal_small breadcrumb-label">Product Search</a>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<a href="#" class="slds-m-horizontal_small breadcrumb-label">Review Cart</a>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<a class="slds-m-horizontal_small breadcrumb-label">Checkout</a>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<a class="slds-m-horizontal_small breadcrumb-label">Review Order</a>
+									</li>
+									<template if:true={orderConfirm}>
+										<li class="slds-breadcrumb__item">
+											<a class="slds-m-left_small breadcrumb-label">Order Confirmation</a>
+										</li>
+									</template>
+								</ol>
+							</nav>
+
+						</template>
+						<template if:true={isGuest}>
+							<template if:false={orderConfirm}>
+								<nav role="navigation" aria-label="Breadcrumbs">
+									<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+										<li class="slds-breadcrumb__item">
+											<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Review
+												Order</a>
+										</li>
+									</ol>
+								</nav>
+							</template>
+							<template if:true={orderConfirm}>
+								<nav role="navigation" aria-label="Breadcrumbs">
+									<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+										<li class="slds-breadcrumb__item">
+											<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Order
+												Confirmation</a>
+										</li>
+									</ol>
+								</nav>
+							</template>
+
+						</template>
+					</div>
+					<template if:false={orderConfirm}>
+						<div class="slds-col slds-size_12-of-12 slds-m-top_medium top-buttons">
+							<template if:false={isGuest}>
+								<button class="Cart-button1" onclick={closeShowDeliveryDetails} >Return to Cart</button>
+							</template>
+							<button class="Cart-button2" onclick={handleSubmitOrder}>
+								<img class="slds-m-right_xx-small cart-blue" src={labels.scc_checkout_cart} alt="cart icon" />
+								<img class="slds-m-right_xx-small cart-white" src={labels.scc_checkout_cart_white} alt="cart icon" />
+								Submit Order
+							</button>
+						</div>
+					</template>
+					<template if:true={orderConfirm}>
+						<div class="slds-col slds-size_12-of-12 slds-m-top_medium top-buttons">
+							<button class="Cart-button1" onclick={handlePrint} aria-label="Open in new window Print">
+								<img class="slds-m-right_xx-small" src={labels.scc_print_icon} alt="cart icon" />
+								Print
+							</button>
+							<template if:false={isGuest}>
+								<button class="Cart-button1 clonebtn" onclick={handleCloneClick} aria-label="Cloning this order will create a new Cart for the same Bill To with the same products that can be shipped to a different location, Clone Order">
+									Clone Order
+									<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+										<div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+										<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+											<div class="slds-popover__body">Cloning this order will create a new Cart for the same Bill To with the same products that can be shipped to a different location</div>
+										</div>
+									</div>
+								</button>
+								<button class="Cart-button3" onclick={returnHome} >Return Home</button>
+							</template>
+						</div>
+						<template if:false={isGuest}>
+							<div
+								class="slds-text-heading_medium slds-m-around_small slds-align_absolute-center thank-you-order-confirmation-message" role="alert">
+								{labels.scc_Thank_You_For_Order_Confirmation_Text}
+							</div>
+						</template>
+						<template if:true={isGuest}>
+							<div class="order-success-message" role="alert">
+								{labels.scc_Guest_Order_Success_Message}
+							</div>
+						</template>
+					</template>
+
+				</div>
+				<template if:true={displayError}>
+					<div class="order-error-message" role="alert">
+						{errorMessage} <template if:true={contactSupport}>Please <a href="javascript:void(0);"
+								onclick={handleSupportClick}>contact support</a> for assistance</template>
+					</div>
+				</template>
+				<template if:true={caseSubmitted}>
+					<div class="case-success-message" role="alert">
+						{labels.scc_Order_Case_Submitted}
+					</div>
+				</template>
+
+				<div class="CheckOut">
+					<div class="slds-grid">
+						<div class="ReviewA1 slds-p-around_large">
+							<div class="Section1">
+								<h2 class="Checkout-title">{labels.scc_checkOut_ContactInfo_Text}</h2>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading">Contact</div>
+									<div class="result1">{contactName}</div>
+								</div>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading">Phone</div>
+									<div class="result1">{phone}</div>
+								</div>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading">Order Confirmation Email</div>
+									<div class="result1">{orderConfirmationEmail}</div>
+								</div>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading">Shipment Confirmation Email</div>
+									<div class="result1">{shipmentConfirmationEmail}</div>
+								</div>
+							</div>
+							<div class="Section2">
+								<h2 class="Checkout-title">Billing Information</h2>
+								<template if:false={isGuest}>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading">Bill to Attention</div>
+										<div class="result1">{billToAttention}</div>
+									</div>
+								</template>
+								<template if:false={isPurchaseOrder}>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading">Paid with Credit Card</div>
+									</div>
+								</template>
+								<template if:true={isPurchaseOrder}>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading">Paid with Purchase Order</div>
+										<div class="Heading">PO#</div>
+										<div class="result1">{PurchaseOrderNum}</div>
+									</div>
+								</template>
+							</div>
+						</div>
+						<div class="ReviewA2 slds-p-around_large">
+							<div class="Section1">
+								<h2 class="Checkout-title">Order Information</h2>
+								<template if:true={orderConfirm}>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading">Order #</div>
+										<div class="orderNumber">{orderNum}</div>
+									</div>
+								</template>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading">
+										Requested Ship Date
+										<div
+											class="slds-is-relative slds-show_inline-block slds-p-around_none slds-m-left_xx-small">
+											<div
+												class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+												i</div>
+											<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+												role="tooltip">
+												<div class="slds-popover__body">{labels.scc_Requested_Ship_Date}</div>
+											</div>
+										</div>
+									</div>
+									<div class="result1">{requestedDeliveryDate}</div>
+
+								</div>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading">Promo Code</div>
+									<div class="result1">{pCode}</div>
+								</div>
+							</div>
+							<div class="Section2">
+								<h2 class="Checkout-title">Shipping Information</h2>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading">Ship to Attention</div>
+									<div class="result1">{shipToAttention}</div>
+								</div>
+							
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading">
+										Shipping Service Level
+										<div
+											class="slds-is-relative slds-show_inline-block slds-p-around_none slds-m-left_xx-small">
+											<div
+												class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+												i</div>
+											<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+												role="tooltip">
+												<div class="slds-popover__body">Next day and 2nd Day delivery service
+													will have additional charges. Shipping charges have been applied as
+													applicable</div>
+											</div>
+										</div>
+									</div>
+									<div class="result1">{shippingServiceLevel}</div>
+								</div>
+								<template if:false={isGuest}>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading">Warehouse Instruction</div>
+										<div class="result1">{warehouse}</div>
+									</div>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading">Shipping/Delivery Instruction</div>
+										<div class="result1">{shippingInstruction}</div>
+
+									</div>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading">Delivery Phone</div>
+										<div class="result1">{deliveryPhone}</div>
+
+									</div>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading">Delivery Email</div>
+										<div class="result1">{deliveryEmail}</div>
+									</div>
+								</template>
+							</div>
+						</div>
+
+						<div class="slds-col slds-size_4-of-12 slds-p-horizontal_large slds-p-top_large summaryBg" role="alert">
+							<h2 class="slds-m-bottom_medium">
+								Summary
+								<div
+									class="slds-is-relative slds-show_inline-block slds-p-around_none slds-m-left_xx-small">
+									<div
+										class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+										i</div>
+									<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+										<div class="slds-popover__body">{labels.scc_reviewCartPage_SummaryHelpText}
+										</div>
+									</div>
+								</div>
+							</h2>
+							<div class="slds-p-vertical_small summary-details">
+								<span>Subtotal</span>
+								<span>
+									<template if:true={isGuest}>{guestCartSubtotal}</template>
+									<template if:false={isGuest}>{totalPrice}</template>
+								</span>
+							</div>
+							<div class="slds-p-vertical_small summary-details">
+								<span>Promo Discount<p>{promoCode}</p></span>
+								<span>
+									<template if:true={isGuest}>{guestCartDiscount}</template>
+									<template if:false={isGuest}>{discountValue}</template>
+								</span>
+							</div>
+							<div class="slds-p-vertical_small summary-details">
+								<span>Shipping</span>
+								<span>
+									<template if:false={isGuest}>{shippingCharges}</template>
+									<template if:true={isGuest}>{guestCartShipping}</template>
+								</span>
+							</div>
+							<div class="slds-p-vertical_small summary-details">
+								<span>Tax</span>
+								<span>
+									<template if:false={isGuest}>{tax}</template>
+									<template if:true={isGuest}>{guestCartTax}</template>
+								</span>
+							</div>
+							<div class="slds-p-vertical_small summary-details summary-total">
+								<span>Total</span>
+								<span>
+									<template if:false={isGuest}>{finalPrice}</template>
+									<template if:true={isGuest}>{guestCartTotal}</template>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="Address">
+					<div class="slds-grid slds-wrap">
+						<h2 class="slds-col slds-size_1-of-1 Checkout-title">Addresses</h2>
+
+						<!-- Billing Address Section -->
+						<div class="slds-col slds-size_1-of-3 ReviewB1">
+							<div>
+								<div class="Heading">Billing Account#</div>
+								<template if:false={isGuest}>
+									<div class="result1">{sapBillTo}</div>
+									<div class="result1">
+										<p>{billName}</p>
+										<p>{BillingStreet1}</p>
+										<p>{BillingCity1}, {BillingState1} {BillingPostalCode1}</p>
+										<p>{BillingCountry1}</p>
+									</div>
+								</template>
+								<template if:true={isGuest}>
+									<div class="result1">N/A</div>
+									<div class="result1">
+										<p>{billName}</p>
+										<p>{BillingStreet1}</p>
+										<p>{BillingCity1}, {BillingState1} {BillingPostalCode1}</p>
+										<p>{BillingCountry1}</p>
+									</div>
+								</template>
+							</div>
+						</div>
+
+						<!-- Shipping Address Section and License To Account Section -->
+						<div class="slds-col slds-size_1-of-3 ReviewB1">
+							<div>
+								<div class="Heading">Shipping Account#</div>
+								<template if:false={isGuest}>
+									<template if:false={oneTimeShipping}>
+									<div class="result1">{sapShipTo}</div>
+									</template>
+									<template if:true={oneTimeShipping}>
+									<div class="result1"> <img src={alertIcon} alt="warning" class="slds-show_inline-block note-icon slds-m-right_xx-small slds-text-align_center" style="width: 26px;">
+                                            <span style="word-break: break-word;">One-Time Shipping Address is set for this order only</span>
+                                     </div>
+									</template>
+									<div class="result1">
+										<p>{shipName}</p>
+										<p>{shippingStreet1}</p>
+										<p>{ShippingCity1}, {ShippingState1} {ShippingPostalCode1}</p>
+										<p>{ShippingCountry1}</p>
+									</div>
+								</template>
+								<template if:true={isGuest}>
+									<div class="result1">N/A</div>
+									<div class="result1">
+										<p>{shipName}</p>
+										<p>{shippingStreet1}</p>
+										<p>{ShippingCity1}, {ShippingState1} {ShippingPostalCode1}</p>
+										<p>{ShippingCountry1}</p>
+									</div>
+								</template>
+							</div>
+						</div>
+
+						<!-- License To Account Section -->
+						<div class="slds-col slds-size_1-of-3 ReviewB1" style="padding-left: 55px;">
+							<div>
+								<template if:true ={showLicense} >
+								<template if:false={isGuest}>
+									<div class="Heading">License To Account#</div>
+									<div class="result1">{sapLicenceTo}</div>
+									<div class="result1">
+										 <p>{LicenseName}</p> 
+										<p>{LicenceToStreet}</p>
+										<p>{LicenseToCity}, {LicenseToState} {LicenseToPostalCode}</p>
+										<p>{LicenseToCountry}</p>
+									</div>	
+								</template>
+								</template>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="slds-p-vertical_medium slds-p-horizontal_x-large orderItem" style="min-width: 1200px;background-color: #E5F1FD;">
+				<div class="slds-col slds-size_3-of-3 slds-m-top_large max-width-container">
+					<lightning-card class="search-result-cards">
+						<h2
+							class="slds-text-heading_medium slds-m-around_small slds-p-horizontal_x-small search-criteria-title order-detail-table-header">
+							Order Line Detail </h2>
+
+						<div class="slds-grid slds-wrap slds-m-horizontal_x-small">
+							<div class="slds-col slds-size_3-of-3">
+								<div
+									class="slds-grid slds-wrap slds-p-horizontal_small slds-p-bottom_xx-small slds-m-bottom_x-large">
+									<div class="slds-col slds-size_7-of-12 slds-p-right_none">
+										<div class="slds-form-element__control">
+											<button class="slds-button table-control-button" disabled={bDisableFirst} onclick={firstPage}>&#60;&#60; First</button>
+											<button class="slds-button table-control-button" disabled={bDisableFirst} onclick={previousPage}>&#60; Previous</button>
+											<p class="page-count-shown slds-m-horizontal_x-small" role="alert">Showing {pageNumber}
+												of {totalPages} Pages</p>
+											<button class="slds-button table-control-button" disabled={bDisableLast} onclick={nextPage}>Next &#62;</button>
+											<button class="slds-button table-control-button" disabled={bDisableLast} onclick={lastPage}>Last &#62;&#62;</button>
+										</div>
+									</div>
+									<div
+										class="slds-col slds-size_5-of-12 table-row-count slds-text-align_right slds-p-horizontal_none">
+										<select class="slds-select" id="row-count" onchange={handleRecordsPerPage}>
+													<template for:each={pageSizeOptions} for:item="option">
+														<option style="font-size:12px;" key={option} value={option}>{option}<span class="slds-assistive-text"></span></option>
+													</template>
+												</select>
+										<label class="slds-form-element__label" for="row-count"># of Rows<span class="slds-assistive-text">Showing {totalRecords} Items</span></label>
+										<span>{totalRecords} &nbsp; {labels.scc_Order_Status_items}</span>
+									</div>
+								</div>
+
+							</div>
+							<table
+								class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-horizontal_small"
+								role="grid"
+								aria-label="Order Line Detail">
+								<thead>
+									<tr class="slds-line-height_reset">
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 12%;">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" >
+													<span>ISBN</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" >
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" >
+													<span>Title Description</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 10%;">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" >
+													<span>Status</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 10%;">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" >
+													<span>Price</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 12%;">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" >
+													<span>Discount</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 8%;">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate" >
+													<span>Qty</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 10%;">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Ext.Price</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 12%;">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Stock Availability</span>
+												</div>
+											</a>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<template for:each={recordsToDisplay} for:item='line'>
+										<tr aria-selected="false" class="slds-hint-parent" key={line.id}>
+											<th class="slds-cell_action-mode" scope="row">
+												<div>{line.ISBN}</div>
+											</th>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<div>{line.Name}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												 <div>{line.SAP_Order_Item_status}</div> 
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<div>{line.ListPrice}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												 <div>{line.Discount}</div> 
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<div>{line.Quantity}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<div>{line.UnitPrice}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<div>{line.Availability}</div>
+											</td>
+										</tr>
+									</template>
+								</tbody>
+							</table>
+							<!-- </template> -->
+						</div>
+					</lightning-card>
+				</div>
+			</div>
+			
+			<!--  Survey Modal  -->
+			 <template if:true={surveyModal}>
+				<div class="slds-modal slds-fade-in-open slds-backdrop survey-width-modal" role="dialog">
+					<div class="slds-modal__container">
+						<div class="slds-modal__header">
+							<button class="slds-modal__close closebtnOnFocus clearCartCloseBtn" onclick={handleCloseSurveyModalClick} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+						</div>
+						
+						<div class="slds-modal__content slds-p-around_medium">
+							<div class="slds-form_horizontal slds-text-align_center">
+								<p>Please take a few moments to answer our survey</p>
+							</div>
+						</div>
+						
+						<div class="slds-modal__footer">
+							<button class="slds-button clear-cart-modal-button"  onclick={handleTakeSurveyClick} data-index="0">Take Survey</button>
+							<button class="slds-button cancel-modal-button"  onclick={handleCloseSurveyModalClick} onfocusout={focusOutButton} tabindex="0">Close</button>
+						</div>
+					</div>
+				</div>
+			</template>
+			<!-- Clone Order -->
+			<template if:true={openCloneModal}>
+				<div class="slds-modal slds-fade-in-open slds-backdrop-clone change-modal" role="dialog">
+					<div class="slds-modal__container">
+						<!------HEADER Section-->
+						<div class="slds-modal__header modal-header">
+							<div class="slds-p-horizontal_large change-modal-title">
+								<button class="slds-modal__close closebtnOnFocus cloneOrderCloseBtn" onclick={closeModal1} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+								<h2>Clone Order</h2>
+							</div>
+							<template if:false={lockMessage}>
+								<div class="slds-p-horizontal_large slds-p-vertical_medium ship-address" role="alert">
+									{labels.scc_cloneOrder_message}</div>
+							</template>
+							<template if:true={lockMessage}>
+								<div class="slds-p-horizontal_large slds-p-vertical_medium ship-address" role="alert">
+									<img src={lockIconUrl} alt="Lock Icon" style="max-width: 20px; height: 20px; margin-bottom: 5px; margin-right: 5px;"/><span>{labels.scc_cloneOrder_restricted_message}</span>
+								</div>
+							</template>
+							<div class="slds-p-horizontal_large slds-float_left change-modal-filter">
+								<template if:true={allowDropShip}>
+									<div class="slds-p-top_x-small ship-address slds-col_bump-right">
+										<div class="ship-address">
+											<lightning-input style="margin-right:auto;" type="checkbox"
+												label="Specify One-Time Shipping Address at Checkout"
+												checked={isChecked} onchange={handlecheckboxChange} data-index="0"></lightning-input>
+										</div>
+									</div>
+								</template>
+							</div>
+							<div class="slds-p-right_medium slds-float_right change-modal-filter">
+								<label class="slds-form-element__label slds-p-right_none slds-m-left_x-small" for="filter-search-input">Filter Results &nbsp; <span class="slds-assistive-text">Filter by Name or Zip / Postal Code. Showing {totalShipToRecords} of {totalShipToRecords} Items. Filter by Name or Zip / Postal Code</span></label>
+								<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+									<div
+										class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+										i</div>
+									<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+										<div class="slds-popover__body">Filter by Name or Zip / Postal Code</div>
+									</div>
+								</div>
+								<div class="slds-is-relative">
+									<input type="text" id="filter-search-input" class="slds-input slds-m-right_xx-small filter-search-input" value={searchTermShip} onkeyup={handleUserInputsShip} data-index="0"/>
+									<a href="#" class="slds-button filter-clear" onclick={clearFilterInput} aria-label="close" data-index="0">x</a>
+								</div>
+								<div class="slds-form-element__label item-count" role="alert">{totalShipToRecords} of
+									{totalShipToRecords} Items</div>
+								 <div class="slds-is-relative slds-show_inline-block">
+								</div>
+							</div>
+
+						</div>
+						<!------Body Section-->
+						<template if:true={showAvailableShipping}>
+							<div class="slds-modal__content slds-p-around_medium">
+								<div class="slds-form_horizontal">
+									<div class="slds-grid slds-gutters slds-wrap">
+										<template for:each={filteredresultt} for:item="shippaddr">
+											<div class="slds-col slds-size_4-of-12" key={shippaddr.AccShipId}>
+												<div class="slds-visual-picker slds-visual-picker_large"
+													key={shippaddr.AccShipId}>
+													<input type="radio" id={shippaddr.AccShipId} value={shippaddr.AccShipId} name="shipping-address"  onclick={handleShipRowClick} data-record-id={shippaddr.AccShipId}
+													 data-address-name={shippaddr.SAccountName} data-address-city={shippaddr.ShippingCity} data-address-street={shippaddr.ShipStreet} data-address-provionce={shippaddr.Provionce}
+													data-address-postal-code={shippaddr.PostalCode} data-address-country={shippaddr.ShippingCountry}  data-address-ship-to-number={shippaddr.ShipToNumber} data-index="0"/>
+													<label for={shippaddr.AccShipId}>
+														<div class="card-size">
+															<span class="slds-visual-picker__figure slds-visual-picker__text card-padding slds-p-around_medium">
+																<span>
+																		{shippaddr.SAccountName} <br/> {shippaddr.ShipStreet}
+																		<br/>{shippaddr.ShippingCity} {shippaddr.Provionce} {shippaddr.PostalCode}
+																		<br/>{shippaddr.ShippingCountry}
+																</span>
+															</span>
+															<span class="slds-icon_container slds-visual-picker__text-check">
+																<svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true">
+																</svg>
+															</span>
+														</div>
+													</label>
+												</div>
+											</div>
+										</template>
+									</div>
+								</div>
+							</div>
+						</template>
+						<!------Footer Section-->
+						<div class="slds-modal__footer slds-text-align_right">
+							<button class="Cancel slds-m-right_medium" onclick={closeModal1} data-index="0">Cancel</button>
+							<button class="Change-Address"  aria-disabled={addressNotSelected} onclick={handleUpdateCloneOrder} type="submit" onfocusout={focusOutButton} tabindex="0">Clone Order</button>
+						</div>
+					</div>
+				</div>
+			</template>
+
+			<!--- Print Start -->
+
+			<div class="print-only" style="display:none;">
+				<img src={labels.scc_brand_logo_mobile} alt="cart icon" style="margin-bottom: 20px;" />
+				<table>
+					<tr style="height: 30px;">
+						<td>&nbsp;</td>
+					</tr>
+				</table>
+				<div class="CheckOut" style="width: 1000px;">
+					<div class="slds-grid">
+						<div class="ReviewA1" style="padding: 10px; padding-left:20px;">
+							<div class="Section1">
+								<h2 class="Checkout-title">{labels.scc_checkOut_ContactInfo_Text}</h2>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading" style="font-weight:400;">Contact&nbsp;:</div>
+									<div class="result1">{contactName}</div>
+								</div>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading" style="font-weight:400;">Phone&nbsp;:</div>
+									<div class="result1">{phone}</div>
+								</div>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading" style="font-weight:400;">Order Confirmation Email&nbsp;:</div>
+									<div class="result1">{orderConfirmationEmail}</div>
+								</div>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading" style="font-weight:400;">Shipment Confirmation Email&nbsp;:
+									</div>
+									<div class="result1">{shipmentConfirmationEmail}</div>
+								</div>
+							</div>
+							<div class="Section2">
+								<h2 class="Checkout-title">Billing Information</h2>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading" style="font-weight:400;">Bill to Attention&nbsp;:</div>
+									<div class="result1">{billToAttention}</div>
+								</div>
+								<template if:false={isPurchaseOrder}>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading" style="font-weight:400;">Paid with Credit Card&nbsp;:</div>
+									</div>
+								</template>
+								<template if:false={isGuest}>
+									<template if:true={isPurchaseOrder}>
+										<div class="slds-col-slds-size_2-of-12">
+											<div class="Heading" style="font-weight:400;">Paid with Purchase
+												Order&nbsp;:</div>
+											<div class="Heading" style="font-weight:400;">PO#&nbsp;:</div>
+											<div class="result1">{PurchaseOrderNum}</div>
+										</div>
+									</template>
+								</template>
+							</div>
+						</div>
+						<div class="ReviewA2" style="padding: 10px; padding-left:20px;">
+							<div class="Section1">
+								<h2 class="Checkout-title">Order Information</h2>
+								<template if:true={orderConfirm}>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading" style="font-weight:400;">Order #&nbsp;:</div>
+										<div class="result1">{orderNum}</div>
+									</div>
+								</template>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading" style="font-weight:400;">Cancel Back Order Date&nbsp;:</div>
+									<div class="result1">{cancelBackOrderDate}</div>
+								</div>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading" style="font-weight:400;">Requested Ship Date&nbsp;:</div>
+									<div class="result1">{requestedDeliveryDate}</div>
+
+								</div>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading" style="font-weight:400;">Promo Code&nbsp;:</div>
+									<div class="result1">{pCode}</div>
+								</div>
+							</div>
+							<div class="Section2">
+								<h2 class="Checkout-title">Shipping Information</h2>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading" style="font-weight:400;">Ship to Attention&nbsp;:</div>
+									<div class="result1">{shipToAttention}</div>
+								</div>
+								<template if:true={isGuest}>
+									<template if:true={displayInstitution}>
+										<div class="slds-col-slds-size_2-of-12">
+											<div class="Heading">{labels.scc_Institution_Name}</div>
+											<div class="result1">{institutionName}</div>
+										</div>
+										<div class="slds-col-slds-size_2-of-12">
+											<div class="Heading">{labels.scc_Institution_Type}</div>
+											<div class="result1">{institutionType}</div>
+										</div>
+										<div class="slds-col-slds-size_2-of-12">
+											<div class="Heading">{labels.scc_Instution_Iam}</div>
+											<div class="result1">{iAm}</div>
+										</div>
+									</template>
+								</template>
+								<div class="slds-col-slds-size_2-of-12">
+									<div class="Heading" style="font-weight:400;">Shipping Service Level&nbsp;:</div>
+									<div class="result1">{shippingServiceLevel}</div>
+								</div>
+								<template if:false={isGuest}>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading" style="font-weight:400;">Warehouse Instruction&nbsp;:</div>
+										<div class="result1">{warehouse}</div>
+									</div>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading" style="font-weight:400;">Shipping/Delivery
+											Instruction&nbsp;:</div>
+										<div class="result1">{shippingInstruction}</div>
+
+									</div>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading" style="font-weight:400;">Delivery Phone&nbsp;:</div>
+										<div class="result1">{deliveryPhone}</div>
+
+									</div>
+									<div class="slds-col-slds-size_2-of-12">
+										<div class="Heading" style="font-weight:400;">Delivery Email&nbsp;:</div>
+										<div class="result1">{deliveryEmail}</div>
+									</div>
+								</template>
+							</div>
+						</div>
+						<div class="slds-col slds-size_4-of-12 Summary" style="background-color:#F2F9FF;">
+
+							<div><b>Summary</b> &nbsp;&nbsp;
+
+								<lightning-helptext class="" content={labels.scc_reviewCartPage_SummaryHelpText}>
+								</lightning-helptext>
+							</div>
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_7-of-12 heading-color slds-form-element__label">
+									SubTotal</div>
+								<template if:true={isGuest}>
+									<div class="slds-col slds-size_5-of-12" style="text-align:centre!important">
+										{guestCartSubtotal}</div>
+								</template>
+								<template if:false={isGuest}>
+									<div class="slds-col slds-size_5-of-12" style="text-align:centre!important">
+										{totalPrice}</div>
+								</template>
+
+							</div>
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_7-of-12 heading-color slds-form-element__label">
+									Promo Discount <p>{promoCode}</p>
+								</div>
+								<template if:true={isGuest}>
+									<div class="slds-col slds-size_5-of-12 errormsg"
+										style="text-align:centre!important; color:red;">
+										{guestCartDiscount}
+									</div>
+								</template>
+								<template if:false={isGuest}>
+									<div class="slds-col slds-size_5-of-12 errormsg"
+										style="text-align:centre!important; color:red;">
+										{discountValue}
+									</div>
+								</template>
+							</div>
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_7-of-12 heading-color slds-form-element__label">
+									Shipping</div>
+								<template if:false={isGuest}>
+									<div class="slds-col slds-size_5-of-12" style="text-align:centre!important">
+										{shippingCharges}
+									</div>
+								</template>
+								<template if:true={isGuest}>
+									<div class="slds-col slds-size_5-of-12" style="text-align:centre!important">
+										{guestCartShipping}
+									</div>
+								</template>
+							</div>
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_7-of-12 heading-color slds-form-element__label">
+									Tax</div>
+								<template if:false={isGuest}>
+									<div class="slds-col slds-size_5-of-12" style="text-align:centre!important">
+										{tax}
+									</div>
+								</template>
+								<template if:true={isGuest}>
+									<div class="slds-col slds-size_5-of-12" style="text-align:centre!important">
+										{guestCartTax}
+									</div>
+								</template>
+							</div>
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_7-of-12 slds-form-element__label">
+									Total</div>
+								<template if:false={isGuest}>
+									<div class="slds-col slds-size_5-of-12" style="text-align:centre!important">
+										<b> {finalPrice}</b>
+									</div>
+								</template>
+								<template if:true={isGuest}>
+									<div class="slds-col slds-size_5-of-12" style="text-align:centre!important">
+										<b> {guestCartTotal}</b>
+									</div>
+								</template>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="Address" style="width: 1000px;">
+					<div class="slds-grid slds-wrap">
+						<h2 class="slds-col slds-size_3-of-3 Checkout-title checkouttitleprint">Addresses</h2>
+						<div class="slds-col slds-size_1-of-3 ReviewB1">
+							<div>
+								<div class="Heading" style="font-weight: 400;">Billing Account#</div>
+								<template if:false={isGuest}>
+									<div class="result1">{sapBillTo}</div>
+									<div class="result1">{BillingStreet1} {BillingCity1}
+										{BillingState1} {BillingCountry1}{BillingPostalCode1}
+									</div>
+								</template>
+								<template if:true={isGuest}>
+									<div class="result1">N/A</div><br/>
+									<div class="result1">{billName}<br/>{BillingStreet1}<br/>{BillingCity1}, {BillingState1} {BillingPostalCode1}
+										<br/>{BillingCountry1}
+									</div>
+								</template>
+							</div>
+						</div>
+						<div class="slds-col slds-size_1-of-3 ReviewB1">
+							<div>
+								<div class="Heading" style="font-weight: 400;">Shipping Account#</div>
+								<template if:false={isGuest}>
+									<div class="result1">{sapShipTo}</div>
+									<div class="result1">{shippingStreet1} {ShippingCity1}
+										{ShippingState1} {ShippingCountry1}{ShippingPostalCode1}
+									</div>
+								</template>
+								<template if:true={isGuest}>
+									<div class="result1">N/A</div><br/>
+									<div class="result1">{shipName}<br/>{shippingStreet1}<br/>{ShippingCity1}, {ShippingState1} {ShippingPostalCode1}
+										<br/>{ShippingCountry1}
+									</div>
+								</template>
+
+							</div>
+						</div>
+						<template if:false={isGuest}>
+							<div class="slds-col slds-size_1-of-3 ReviewB1">
+								<div>
+									<div class="Heading" style="font-weight: 400;">License Account#</div>
+									<div class="result1">{sapLicenceTo}</div>
+									<div class="result1">{LicenceToStreet} {LicenseToCity}
+										{LicenseToPostalCode}
+									</div>
+								</div>
+							</div>
+						</template>
+					</div>
+				</div>
+				<div class="orderItem" style="width: 1000px;">
+					<div class="slds-col slds-size_3-of-3 slds-m-top_large max-width-container">
+						<div class="search-result-cards"
+							style="border: 1px solid #AFC3D8; border-radius:10px;padding: 24px;">
+							<h2
+								class="slds-text-heading_medium slds-m-vertical_small search-criteria-title Checkout-title checkouttitleprint">
+								Order Line Detail</h2>
+
+							<div class="slds-grid slds-wrap">
+
+								<table class="slds-table slds-table_bordered slds-table_fixed-layout" role="grid"
+									aria-label="Example advanced table of Opportunities in actionable mode with ascending column sorting"
+									style="border: 1px solid black;">
+									<thead>
+										<tr class="slds-line-height_reset">
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 18%;border: 1px solid black;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>ISBN</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 20%;border: 1px solid black;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Title Description</span>
+
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="border: 1px solid black;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Status</span>
+
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="border: 1px solid black;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Price</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 12%;border: 1px solid black;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Discount</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 6%;border: 1px solid black;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Qty</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 10%;border: 1px solid black;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Ext.Price</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 16%;border: 1px solid black;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Stock Availability</span>
+													</div>
+												</a>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<template for:each={records} for:item='line'>
+											<tr aria-selected="false" class="slds-hint-parent" key={line.id}>
+												<td class="slds-cell_action-mode" scope="row"
+													style="border: 1px solid black;">
+													<div>{line.ISBN}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell"
+													style="border: 1px solid black;">
+													<div>{line.Name}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell"
+													style="border: 1px solid black;">
+													 <div>{line.SAP_Order_Item_status}</div> 
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell"
+													style="border: 1px solid black;">
+													<div>{line.ListPrice}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell"
+													style="border: 1px solid black;">
+													 <div>{line.Discount}</div> 
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell"
+													style="border: 1px solid black;">
+													<div>{line.Quantity}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell"
+													style="border: 1px solid black;">
+													<div>{line.UnitPrice}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell"
+													style="border: 1px solid black;">
+													<div>{line.Availability}</div>
+												</td>
+											</tr>
+										</template>
+									</tbody>
+								</table>
+								<!-- </template> -->
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!--- Print end -->
+		</template>
+		<template if:true={openReviewCartPage}>
+			<c-scc_review-cart-page> </c-scc_review-cart-page>
+		</template>
+	</template>
+
+	<template if:true={isContactSupport}>
+		<c-scc_error-contact-support onsubmit={hanldeSupportSubmit} cartid={cartId}> </c-scc_error-contact-support>
+	</template>
+</template>

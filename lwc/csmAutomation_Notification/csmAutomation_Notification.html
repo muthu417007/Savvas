@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Custom Notifications" icon-name="custom:custom63">
+        <template if:true={data}>
+            <lightning-datatable
+                key-field="Name"
+                data={data}
+                columns={columns}>
+            </lightning-datatable>
+        </template>
+        <template if:true={error}>
+            <p class="slds-text-color_error">Error: {error.body.message}</p>
+        </template>
+    </lightning-card>
+</template>

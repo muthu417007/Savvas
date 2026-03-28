@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Mass Sample/Free" class="aboveborder-style">
+        <lightning-button class="slds-align_absolute-center" label="Launch Mass Sample/Free Request" onclick={handleLaunchMass}></lightning-button>
+        <p slot="footer">
+            <lightning-layout>
+                <lightning-layout-item size="6" padding="around-small">
+                    <b><lightning-formatted-text value="Name"></lightning-formatted-text></b>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <lightning-formatted-text value={sampleReqCreatedBy}></lightning-formatted-text>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small">
+                    <b><lightning-formatted-text value="Created Date"></lightning-formatted-text></b>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <lightning-formatted-text value={sampleRegCreatedDate}></lightning-formatted-text>
+                </lightning-layout-item>
+            </lightning-layout>
+        </p>
+    </lightning-card>
+   <c-mass-sample-free-contact 
+            parent-sample-id ={sampleId} 
+            mass-sample-name={sampleReqName}>
+   </c-mass-sample-free-contact>
+   <c-mass-sample-generic-contact 
+            parent-sample-id ={sampleId} >
+   </c-mass-sample-generic-contact>
+</template>

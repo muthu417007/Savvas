@@ -1,0 +1,217 @@
+.mainbg {
+	background: var(--e-5-f-1-fd, #e5f1fd);
+	min-height: 500px;
+  }
+  .allProgramComponent .ptb50 {
+	padding-top: 50px;
+	padding-bottom: 20px;
+  }
+  .allProgramComponent .AllprogramTitle {
+	color: var(--173770, #173770);
+	/* H2 */
+	font-family: Poppins;
+	font-size: 3.125rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 120%; /* 3.75rem */
+	letter-spacing: -0.125rem;
+  }
+  
+  .allProgramComponent .subhead {
+	color: var(--173770, #173770);
+	font-family: Poppins;
+	font-size: 1.25rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 150%; /* 1.875rem */
+  }
+  
+  .allProgramComponent .whitebg {
+	border-radius: 0.625rem;
+	border: 1px solid #afc3d8;
+	background: var(--ffffff, #fff);
+	box-shadow: 0px 4px 10px 0px rgba(33, 80, 163, 0.1);
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+  }
+  .allProgramComponent .greybg {
+	border-radius: 10px;
+	border: 1px solid #afc3d8;
+	background: var(--ffffff, #fff);
+	box-shadow: 0px 4px 10px 0px rgba(33, 80, 163, 0.1);
+  }
+  .allProgramComponent .proListExp {
+	color: var(--6-f-777-b, #6f777b);
+  
+	/* P20 b */
+	font-family: Poppins;
+	font-size: 1.18rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%; /* 30px */
+  }
+  
+  .allProgramComponent .proListExp1 {
+	color: var(--6-f-777-b, #6f777b);
+  
+	/* P20 */
+	font-family: Poppins;
+	font-size: 1.18rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 160%; /* 32px */
+  }
+
+  
+  .allProgramComponent .proList {
+	color: var(--173770, #173770);
+  
+	/* P20 b */
+	font-family: Poppins;
+	font-size: 1.25rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%; /* 1.875rem */
+  }
+  .allProgramComponent .proList1 {
+	color: var(--173770, #173770);
+  
+	/* P20 */
+	font-family: Poppins;
+	font-size: 1.18rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 160%; /* 32px */
+  }
+  
+  .allProgramComponent .p1 {
+	padding: 1rem;
+  }
+  
+  .allProgramComponent .listhead {
+	color: var(--173770, #173770);
+  
+	/* P20 b */
+	font-family: Poppins;
+	font-size: 1.25rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%; /* 1.875rem */
+  }
+  
+  .allProgramComponent .ptb3rem {
+	padding-top: 3rem;
+	padding-bottom: 3rem;
+  }
+  .allProgramComponent .ptb375rem {
+	padding-top: 3.75rem;
+	padding-bottom: 3.75rem;
+  }
+  .allProgramComponent .ptb2rem {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+  }
+  .allProgramComponent .pl1rem {
+	padding-left: 0.3rem;
+  }
+  .allProgramComponent .bulletstyle {
+	position: absolute;
+	border-radius: 0rem 0.3125rem 0.3125rem 0rem;
+	background: #0072ee;
+	width: 0.5rem;
+	height: 1.8125rem;
+	flex-shrink: 0;
+	left: -16px;
+  }
+  .allProgramComponent .bulletstylered {
+	position: absolute;
+	border-radius: 0rem 0.3125rem 0.3125rem 0rem;
+	background: var(--d-73-a-59, #d73a59);
+	width: 0.5rem;
+	height: 1.8125rem;
+	flex-shrink: 0;
+	left: -16px;
+  }
+  
+  .allProgramComponent .pos-rel {
+	position: relative;
+  }
+  .allProgramComponent .ml20 {
+	margin-left: 13px;
+  }
+  .allProgramComponent .programNavigation {
+	padding: 15px;
+  }
+  
+  @media (max-width: 1280px) {
+	.allProgramComponent .proListExp1 {
+	  font-size: 1.06rem;
+	}
+	.allProgramComponent .proList1 {
+	  font-size: 1.06rem;
+	}
+	
+  }
+  @media (max-width: 1423px) {
+	.allProgramComponent .proListExp1 {
+	  font-size: 1.06rem;
+	}
+	.allProgramComponent .proList1 {
+	  font-size: 1.06rem;
+	}
+  }
+  @media(max-width: 320px){ 
+	.allProgramComponent .m-text-center {
+	  text-align: center;
+	}
+	.allProgramComponent .m-padding-left{
+		padding-left:0.8rem;
+		padding-top: 0.3rem;
+	}
+	.allProgramComponent .mhide{
+		display: none;
+	}
+  	.allProgramComponent .ptb2rem {
+		padding-top: 2rem;
+		padding-bottom: 2rem;
+ 	}
+	.allProgramComponent .AllprogramTitle {
+		font-size: 42px;
+	}
+  }
+   @media (min-width:320px) and (max-width: 767px) {
+	.allProgramComponent .m-text-center {
+	  text-align: center;
+	}
+	.allProgramComponent .m-padding-left{
+		padding-left:0.8rem;
+		padding-top: 0.3rem;
+	}
+	.allProgramComponent .mhide{
+		display: none;
+	}
+	.allProgramComponent .AllprogramTitle {
+		font-size: 42px;
+	}
+	.allProgramComponent .ptb2rem {
+		padding-top: 2rem;
+		padding-bottom: 2rem;
+		padding-left: 2.5rem;
+    	padding-right: 2.5rem;
+ 	}
+	 .allProgramComponent .subhead {
+	font-size: 1.15rem;
+  }
+  }
+  @media (min-width:767px) and (max-width:1000px) {
+	.allProgramComponent .m-text-center {
+	  text-align: center;
+	}
+	.allProgramComponent .m-padding-left{
+		padding-left:0.8rem;
+		padding-top: 0.3rem;
+	}
+	.allProgramComponent .mhide{
+		display: none;
+	}
+  }

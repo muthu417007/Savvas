@@ -1,0 +1,92 @@
+<template>
+    <lightning-button variant="base" label="clone" title="titleName" onclick={handleCloneClick}></lightning-button>
+	<template if:true={openCloneModal}>
+		<div class="slds-modal slds-fade-in-open slds-backdrop eighty-percent-width-modal">
+			<div class="slds-modal__container modal-page">
+				<!------HEADER Section-->
+				<div class="slds-modal__header modal-header">
+					<!-- <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+               variant="bare-inverse" onclick={closeModal} class="slds-modal__close">  
+             </lightning-button-icon>   -->
+					<div>
+						<lightning-icon class="checkout-cancel" icon-name='action:close' alternative-text='close'
+							onclick={closeModal1} size='small' title='close'></lightning-icon>
+						<div class="Checkout-title">Clone Order</div>
+					</div>
+					<template if:false={addressNotSelected}>
+					<div class="ship-address">Select Shipping Address that should be used on the clone order</div>
+					</template>
+					<template if:true={addressNotSelected}>
+					<div class="ship-address"><img src={lockIconUrl} alt="Lock Icon" style="max-width: 27px; height: 27px"/>Cart contains items that can only be shipped to a School or District</div>
+					</template>
+					<br>
+					     <div class="" >  
+					<div class="slds-grid slds-p-top_medium   ">
+						<div class="slds-col_bump-right"> <template if:true={allowDropShip}>
+                    <div class=" ship-address slds-col_bump-right" >
+						<div class="ship-address">
+                        <lightning-input style="margin-right:auto;" type="checkbox" label="Specify One-Time Shipping Address at Checkout"
+                            checked={isChecked} onchange={handlecheckboxChange}></lightning-input></div>
+                    </div>
+                    </template></div>
+					 <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right Filter-By" style ="display: flex; ">
+                                    <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Clear">
+                                        <img src={crossIconUrl} alt="cross" style="width: 11.88px; height: 11.88px; margin-left: -0.5px; margin-bottom: 3px;" onclick={clearFilterInput} />
+                                        <span class="slds-assistive-text">Clear</span>
+                                    </button>
+                           <div class="filter-text">Filter Results &nbsp; </div>
+						<div class="filter-box">
+							<input value={searchTermShip} onkeyup={handleUserInputsShip}>
+						</div>
+                                </div>
+						
+							<div class="filter-result Filter-By">
+								<div class="filter-result-text " style="margin-left:auto;"> &nbsp;{totalShipToRecords} of {totalShipToRecords}
+									shown
+								</div>
+							</div>
+						</div>
+					     </div>
+					</div>
+					<!------Body Section-->
+					<template if:true={showAvailableShipping}>
+					<div class="slds-modal__content slds-p-around_medium">
+						<div class="slds-form_horizontal " >
+							<div class="slds-form-element__control visual-picker-flex"
+								>
+								<template for:each={filteredresultt} for:item="shippaddr">
+									<div class="slds-visual-picker slds-visual-picker_large" key={shippaddr.AccShipId}>
+										<input type="radio" id={shippaddr.AccShipId} value={shippaddr.AccShipId} name="shipping-address"  onclick={handleShipRowClick} data-record-id={shippaddr.AccShipId}
+										 data-address-name={shippaddr.SAccountName} data-address-city={shippaddr.ShippingCity} data-address-street={shippaddr.ShipStreet} data-address-provionce={shippaddr.Provionce}
+										data-address-postal-code={shippaddr.PostalCode} data-address-country={shippaddr.ShippingCountry}  data-address-ship-to-number={shippaddr.ShipToNumber} />
+										<label for={shippaddr.AccShipId}>
+                                      <div class="card-size">
+                                          <span class="slds-visual-picker__figure slds-visual-picker__text card-padding " style="word-break: break-word;">
+                                              <span style="text-align: left;">
+                                                    <span class="slds-text-heading_small" style="padding-bottom: 8px;"></span>
+                                                    {shippaddr.SAccountName}<br>{shippaddr.ShipStreet}
+                                                    <p>{shippaddr.ShippingCity}{shippaddr.Provionce}{shippaddr.PostalCode}</p>
+                                                    <span>{shippaddr.ShippingCountry} </span>
+                                               </span>
+                                           </span>
+                                           <span class="slds-icon_container slds-visual-picker__text-check">
+                                              <svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true">
+                                              </svg>
+                                            </span>
+                                       </div>
+                                   </label>
+									</div>
+								</template>
+							</div>
+						</div>
+					</div>
+					</template>
+					<!------Footer Section-->
+					<div class="slds-modal__footer">
+						<button class="Cancel" onclick={closeModal1}>Cancel</button>
+						<button class="Change-Address"  disabled={addressNotSelected} onclick={handleUpdateCloneOrder} type="submit"> Clone Order</button>
+					</div>
+				</div>
+			</div>
+	</template>
+</template>

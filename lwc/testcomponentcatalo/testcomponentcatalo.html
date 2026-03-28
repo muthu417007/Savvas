@@ -1,0 +1,119 @@
+<template>
+	<div class="slds-grid slds-grid_vertical">
+		<!-- <p>{addSelectedToCart}</p> -->
+		<!-- Page Navigation Buttons -->
+		
+
+
+		<!-- Data Table -->
+		<div class="slds-grid slds-grid_vertical">
+			<div class="slds-col">
+				<div class="slds-scrollable" style="height: 300px;">
+					<div class="slds-m-around_small">
+						<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+							<thead>
+								<tr class="slds-line-height_reset">
+								<!--	<th scope="col">
+										<div class="slds-truncate" title=""></div>
+									</th> -->
+									<th scope="col" width="10px">
+										<div class="slds-truncate" title="Quantity">Quantity</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="ISBN">ISBN</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Title Description">Title
+											Description</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Type">Type</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Grade Level">Grade Level</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Copyright">Copyright</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Status">Status</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Price">Price</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Iterate over productData to populate table	  oninput={validateInput}  rows -->
+								<template for:each={transformedChildTableData} for:item="product">
+									<tr key={product.productDetails.Id}>									
+										<!-- Quantity Column -->
+										<td data-label="Quantity">
+											<input type="number" class="input-style" data-row-id={product.productDetails.productId}
+															data-attribute-name={product.productDetails.ISBN}
+															data-attribute-price={product.productDetails.Copyright}
+                                                            value={product.quantity} onchange={tableRowAction}
+                                                             data-field-name="quantityCount" id="quantity" name="quantity" min="0"
+														 />
+
+                                                            <div id="error-message" style="color: red; display: none;">Please enter numbers only</div>
+										
+														</td>
+										<td data-label="ISBN">
+											<div class="slds-truncate">
+												<lightning-button variant="base" data-field-name="isbnId"
+													label={product.productDetails.ISBN}
+													data-row-id={product.productDetails.productId}
+													title={product.productDetails.ISBN} onclick={tableRowAction}>
+												</lightning-button>
+											</div>
+										</td>
+										<td data-label="Title Description">
+											<div class="slds-truncate" title={product.productDetails.Title_Description}>
+												{product.productDetails.Title_Description}</div>
+										</td>
+										<td data-label="Type">
+											<div class="slds-truncate" title={product.productDetails.Type}>
+												{product.productDetails.Type}</div>
+										</td>
+										<td data-label="Grade Level">
+											<div class="slds-truncate" title={product.productDetails.Grade_Level}>
+												{product.productDetails.Grade_Level}</div>
+										</td>
+										<td data-label="Copyright">
+											<div class="slds-truncate" title={product.productDetails.Copyright}>
+												{product.productDetails.Copyright}</div>
+										</td>
+										<td data-label="Status">
+											<div class="slds-truncate" title={product.productDetails.Status}>
+												{product.productDetails.Status}</div>
+										</td>
+										<td data-label="Price">
+											<lightning-button-icon data-product-id={product.productDetails.Id}
+												icon-name="utility:hourglass" variant="border-filled"
+												alternative-text="Info" size="small" onclick={handlePriceInfo}>
+											</lightning-button-icon>
+										</td>
+									</tr>
+								</template>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+        <template if:true={showLoadNextButton}>
+			<lightning-button stretch label="Load Next 15 Rows" onclick={handleLoadNextClick}
+				class="slds-m-top_medium "></lightning-button>
+		</template>
+	</div>
+		<!-- <template if:true={callAddItemToCart}>
+		  <c-scc_add-items-to-cart message={itemsList} onreveiewcartcount={handleReviewCartCount}> </c-scc_add-items-to-cart>
+		</template>
+		<template if:true={reviewCartPage}>
+	  	  <c-scc_review-cart-page> </c-scc_review-cart-page>
+		</template>	
+		<template if:true={clearCartItems}>
+		  <c-scc_delete-items-from-cart onrefreshevent={handlerefreshevent}>  </c-scc_delete-items-from-cart> 
+		</template> -->
+</template>

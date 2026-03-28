@@ -1,0 +1,95 @@
+.lightning-button{
+ text-align: center;
+}
+.slds-modal__container{
+   width: 550px;
+   border-radius: 20px;
+   padding: 0;
+}
+.slds-modal__header{
+   border-radius: 20px 20px 0 0;
+   border: none;
+   padding: 0;
+   padding-top: 46px;
+}
+.slds-modal__footer{
+   border-radius: 0 0 20px 20px;
+   border: none;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   padding: 0 55px 50px;
+}
+.siop-modal-button{
+   padding: 14px 20px;
+   font-family: Poppins;
+   font-size: 16px;
+   font-weight: 600;
+   line-height: 17.6px;
+   text-align: left;
+   color: #fff;
+   display: inline-block;
+   border-radius: 90px;
+   background-color: #AFC3D8;
+   cursor: no-drop;
+}
+.siop-modal-button:not([aria-disabled=true]){
+   background-color: #9ECA47;
+   color: #0C1E3D;
+   cursor: pointer;
+}
+.siop-modal-button:focus, .guestOrderStatusClose:focus{
+   box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px #0B5CAB;
+}
+.slds-modal__header .slds-modal__close{
+   top: 10px;
+   right: 10px;
+   background-color: #0C1E3D;
+   border-radius: 50%;
+   width: 50px;
+   height: 50px;
+   font-family: sans-serif !important;
+   font-size: 24px;
+   color: #fff;
+   border: none;
+}
+.slds-modal__header h3{
+   font-size: 35px;
+   font-weight: 700;
+   line-height: 38.5px;
+   letter-spacing: -0.02em;
+   text-align: center;
+   color: #173770;
+}
+.slds-modal__content p{
+   font-size: 14px;
+   font-weight: 500;
+   line-height: 24px;
+   color: #0C1E3D;
+   margin-bottom: 10px;
+}
+.slds-modal__content .form-container{
+   width: 85%;
+   margin: 0 auto;
+}
+.slds-backdrop{
+   background-color: rgb(23 55 112 / 80%);
+}
+@media only screen and (max-width: 767px){
+   .slds-modal__container{
+      width: 92%;
+      margin: 0 auto;
+   }
+   .slds-modal__content .form-container{
+      width: 100%;
+   }
+   .slds-modal__footer{
+      padding: 0 20px 30px;
+   }
+   .slds-modal__header .slds-modal__close{
+      width: 34px;
+      height: 34px;
+      line-height: 24px;
+      padding: 0;
+   }
+}

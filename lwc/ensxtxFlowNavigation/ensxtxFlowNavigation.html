@@ -1,0 +1,18 @@
+<template>
+    <lightning-card>
+        <lightning-button
+            if:true={showPrevious}
+            class="slds-m-horizontal_small"
+            label={label.ensxapp__Pager_Previous}
+            alternative-text={label.ensxapp__Pager_Previous}
+            onclick={handlePrevious}>
+        </lightning-button>
+        <lightning-button
+            if:true={showNext}
+            class="slds-m-horizontal_small"
+            label={label.ensxapp__Pager_Next}
+            alternative-text={label.ensxapp__Pager_Next}
+            onclick={handleNext}>
+        </lightning-button>
+    </lightning-card>
+</template>

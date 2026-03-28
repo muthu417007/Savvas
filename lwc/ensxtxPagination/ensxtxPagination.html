@@ -1,0 +1,47 @@
+<template>
+    <div class="slds-list_horizontal">
+        <div class="slds-align_absolute-center slds-float_left slds-p-bottom-small">
+            <lightning-combobox class="page-size-selector" name="pageSize" value={page_size} options={pageSizes}
+                onchange={handlePageSizeChange} variant="label-hidden">
+            </lightning-combobox>
+        </div>
+
+        <div class="slds-align_absolute-center">
+            <lightning-button
+                disabled={previous_disabled}
+                icon-name="utility:jump_to_left"
+                alternative-text={label.ensxapp__Pager_FirstPage}
+                onclick={handleFirstSelect}>
+            </lightning-button>
+            <lightning-button
+                disabled={previous_disabled}
+                icon-name="utility:chevronleft"
+                label={label.ensxapp__Pager_Previous}
+                class="slds-m-horizontal_small"
+                alternative-text={label.ensxapp__Pager_Previous}
+                onclick={handlePreviousSelect}>
+            </lightning-button>
+            <span class="slds-badge">{pagingOptions.pageNumber} of {pages} Page(s)</span>
+            <lightning-button
+                disabled={next_disabled}
+                icon-name="utility:chevronright"
+                label={label.ensxapp__Pager_Next}
+                class="slds-m-horizontal_small"
+                alternative-text={label.ensxapp__Pager_Next}
+                onclick={handleNextSelect}
+                icon-position="right">
+            </lightning-button>
+            <lightning-button
+                disabled={next_disabled}
+                icon-name="utility:jump_to_right"
+                alternative-text={label.ensxapp__Pager_LastPage}
+                onclick={handleLastSelect}
+                icon-position="right">
+            </lightning-button>
+        </div>
+
+        <div class="slds-float_right slds-align_absolute-center">
+            <span class="slds-badge "> {label.ensxapp__Pager_Total_Records} {pagingOptions.totalRecords}</span>
+        </div>
+    </div>
+</template>

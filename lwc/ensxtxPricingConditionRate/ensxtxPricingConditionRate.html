@@ -1,0 +1,15 @@
+<template>
+    <template if:true={isPercent}>
+        <lightning-formatted-number
+            format-style="percent"
+            value={asPercentDecimal}>
+        </lightning-formatted-number>   
+    </template>
+    <template if:false={isPercent}>
+        <lightning-formatted-number
+            currency-code={condition.CurrencyKey}
+            format-style="currency"
+            value={condition.Rate}>
+        </lightning-formatted-number>
+    </template>
+</template>

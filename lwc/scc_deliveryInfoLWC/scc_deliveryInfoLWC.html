@@ -1,0 +1,1015 @@
+<template>
+	<template if:false={showFedexTrackingInfo}>
+		<template if:false={showPacakegeDetails}>
+			<div
+				class="slds-grid slds-wrap slds-grid_vertical slds-p-around_large slds-is-relative mobile-view-container">
+				<div class="slds-col slds-size_3-of-3">
+					<div class="slds-grid slds-wrap" style="font-size: 12px;">
+						<div class="slds-col slds-size_12-of-12"
+							style="float: left;font-size: 16px; padding-left: 0px;">
+							<nav role="navigation" aria-label="Breadcrumbs">
+								<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+									<li class="slds-breadcrumb__item">
+										<a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<div class="slds-m-horizontal_medium" style="margin-top: -3px"> <a href="#"
+												class="breadcrumb-label" style="text-decoration: none">Order
+												Detail</a><a onclick={closeShowDeliveryDetails}
+												class="breadcrumb-label slds-text-title_bold">&nbsp;{orderNumber}</a>
+										</div>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<a
+											class="slds-m-left_small slds-text-title_bold breadcrumb-label"><span>Shipment Detail</span><span>&nbsp;(Invoice &nbsp;{invoiceInfo.invoiceNumber})</span></a>
+									</li>
+								</ol>
+							</nav>
+							<!--page title as h1 for accessibility-->
+							<h1 class="slds-assistive-text">Order Status</h1>
+							<!-- <span>Order Detail </span><span><a onclick={closeShowDeliveryDetails} style="text-decoration:none;">&nbsp;{orderNumber}</a></span><span style="font-weight:bold"> > Shipment Detail</span><span>&nbsp;(Invoice &nbsp;{invoiceInfo.invoiceNumber})</span> -->
+						</div>
+						<div class="slds-size_12-of-12 close-button-shipment-wrapper">
+							<button class="close-button-shipment" onclick={closeShowDeliveryDetails} >Close</button>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col">
+					<div class="spinner-wrapper slds-spinner_container" if:true={isLoading2}
+						style="height: 200px; position:absolute;">
+						<div class="slds-backdrop slds-backdrop_open">
+							<lightning-spinner size="medium" variant="brand" alternative-text="Loading">
+							</lightning-spinner>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col slds-col slds-size_3-of-3">
+					<div class="slds-p-around_large slds-m-top_large slds-var-m-around_small shipmentContainer">
+						<!-- Delivery Information Page Header Datatable -->
+						<table class="slds-var-p-around_small" style="width: 80%">
+							<tr>
+								<td class="shipment-detail-label">
+									{labels.scc_OrderStatus_Ship_To_Account}&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td class="shipment-detail-value">
+									{ShipToAccount}
+								</td>
+								<td class="shipment-detail-label">
+									{labels.scc_home_Order_Date}&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td class="shipment-detail-value">
+									{CustomerPurchaseOrderDate}
+								</td>
+							</tr>
+							<tr>
+								<td class="shipment-detail-label">
+									{labels.scc_OrderDetail_Ship_To} &nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td class="shipment-detail-value">
+									<div>
+										{shipToAccName1}
+									</div>
+									<div>
+										{shippingStreet}
+									</div>
+									<div>
+										{shippingCity}{shippingState}{shippingPostalCode}
+									</div>
+								</td>
+								<td class="shipment-detail-label">
+									<span>{labels.scc_OrderStatus_Requested_Shipment_Date} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+								</td>
+								<td class="shipment-detail-value" style="display: flex;">
+									{RequestedDeliveryDate}
+
+									<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+										<div
+											class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+											i</div>
+										<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip"
+											id="2">
+											<div class="slds-popover__body">
+												{labels.scc_OrderDetail_Requested_Shipment_Date_tooltip}</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td class="shipment-detail-label">
+									{labels.scc_home_PO}&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td class="shipment-detail-value">
+									{CustomerPurchaseOrderNumber}
+								</td>
+								<td class="shipment-detail-label">
+									{labels.scc_home_Status}&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td class="shipment-detail-value">
+									{OverallStatusDescription}
+								</td>
+							</tr>
+							<tr>
+								<td class="shipment-detail-label">
+									{labels.scc_home_Document_Control}&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td class="shipment-detail-value">
+									{orderNumber}
+								</td>
+								<td class="shipment-detail-label">
+									{labels.scc_orderDetail_shippingMethod}&nbsp;&nbsp;&nbsp;&nbsp;
+								</td>
+								<td class="shipment-detail-value">
+									{shippingMethod}
+								</td>
+							</tr>
+							<tr>
+							</tr>
+						</table>
+						<div
+							class="slds-m-vertical_medium slds-p-horizontal_xx-large slds-p-vertical_medium alert-note slds-text-align_center">
+							<div class="slds-show_inline-block slds-m-right_xx-small"><img src={alertIcon} alt="warning" style="max-width: 27px; height: 27px"/>
+							</div>
+							<b>Please note:</b> {labels.scc_OrderDetail_Filfilment_Progress_Note}
+						</div>
+					</div>
+				</div>
+				<div class="slds-col slds-size_3-of-3">
+					<div class="slds-var-p-top_medium invoiceContainer">
+						<div style="display:flex; padding-right: 30px;">
+							<div class="greenBox"></div>
+							<div class="invoiceDetailTitle" role="heading" aria-level="2"><b>Invoice Detail</b></div>
+							<button class="viewInvoice" onclick={handleInvoice}>View Invoice<div class="slds-assistive-text">opens in new tab</div></button>
+						</div>
+						<template if:true={docNotFound}>
+							<div class="doc-not-found-error-message">
+								{labels.scc_document_not_found_errormsg}
+							</div>
+						</template>
+						<div class="result-table">
+							<table class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-vertical_medium"
+								aria-label="Invoice Detail">
+								<thead class="invoice-table-head">
+									<tr class="slds-line-height_reset">
+										<th aria-sort="ascending"
+											class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode"
+											scope="col" style="width: 14%">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Invoice #</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 14%">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Shipment Date</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 9%">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Cartons</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 8%">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Weight</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 12%">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Shipped Lines</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 13%">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Shipped Units</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 20%">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Invoice Total</span>
+												</div>
+											</a>
+										</th>
+									</tr>
+								</thead>
+								<tbody class="invoice-table-body">
+									<tr aria-selected="false" class="slds-hint-parent" key={line.productId}>
+										<td class="slds-cell_action-mode" scope="row" valign="top">
+											<div>{invoiceInfo.invoiceNumber}</div>
+										</td>
+										<td class="slds-cell_action-mode" role="gridcell" valign="top">
+											<div>{invoiceInfo.shipDate}</div>
+										</td>
+										<td class="slds-cell_action-mode" role="gridcell" valign="top">
+											<div style="text-align:center">{invoiceInfo.cartons}</div>
+										</td>
+										<td class="slds-cell_action-mode" role="gridcell" valign="top">
+											<div style="text-align:center">{invoiceInfo.weight}</div>
+										</td>
+										<td class="slds-cell_action-mode" role="gridcell" valign="top">
+											<div style="text-align:center">{invoiceInfo.shippedlines}</div>
+										</td>
+										<td class="slds-cell_action-mode" role="gridcell" valign="top">
+											<div style="text-align:center">{invoiceInfo.shippedunits}</div>
+										</td>
+										<td class="slds-cell_action-mode invoice-total" role="gridcell" valign="top"
+											style="width: 20%">
+											<div class="slds-grid  slds-grid_vertical" style="padding-top: 10px;">
+												<div class="slds-col slds-size_2-of-2">
+													<div class="slds-grid">
+														<div class="slds-col slds-size_1-of-2 invoice-grid-label">Net
+															Product</div>
+														<div class="slds-col slds-size_1-of-2 invoice-grid-value">
+															${invoiceInfo.netProduct}</div>
+													</div>
+												</div>
+												<div class="slds-col slds-size_2-of-2">
+													<div class="slds-grid">
+														<div class="slds-col slds-size_1-of-2 invoice-grid-label">Tax
+														</div>
+														<div class="slds-col slds-size_1-of-2 invoice-grid-value">
+															${invoiceInfo.tax}</div>
+													</div>
+												</div>
+												<div class="slds-col slds-size_2-of-2">
+													<div class="slds-grid">
+														<div class="slds-col slds-size_1-of-2 invoice-grid-label">
+															Transportation</div>
+														<div class="slds-col slds-size_1-of-2 invoice-grid-value">
+															${invoiceInfo.tranportation}</div>
+													</div>
+												</div>
+												<div class="slds-col slds-size_2-of-2">
+													<div class="slds-grid">
+														<div class="slds-col slds-size_1-of-2 invoice-grid-label">
+															Invoice Total</div>
+														<div class="slds-col slds-size_1-of-2 invoice-grid-value">
+															${invoiceInfo.grossamount}</div>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col slds-size_3-of-3">
+					<div class="slds-m-top_large slds-tabs_default slds-tabs_medium">
+						<ul class="slds-tabs_default__nav" role="tablist">
+							<li class="slds-tabs_default__item slds-is-active" role="presentation"
+								data-id="tab-default-1__item">
+								<a class="slds-tabs_default__link" href="#null" role="tab" tabindex="0"
+									aria-selected="true" aria-controls="tab-default-1" data-id="tab-default-1__item"
+									data-value="Titles" onclick={handleActive}>Titles</a>
+							</li>
+							<li class="slds-tabs_default__item" role="presentation" data-id="tab-default-2__item">
+								<a class="slds-tabs_default__link" href="#null" role="tab" tabindex="0"
+									aria-selected="false" aria-controls="tab-default-2" data-id="tab-default-2__item"
+									data-value="Delivery" onclick={handleActive}>Delivery</a>
+							</li>
+						</ul>
+						<div id="tab-default-1" class="slds-tabs_default__content slds-p-around_none slds-show"
+							role="tabpanel" aria-labelledby="tab-default-1__item" data-id="tab-default-1__item"
+							data-name="tabpanel">
+							<div class="searchCard">
+								<div style="display: flex;">
+									<div class="tab-green-box" style="margin-left: -20px"></div>
+									<div class="tab-content-title" role="heading" aria-level="2">
+										<b>Title Information</b>
+									</div>
+								</div>
+								<div class="slds-grid slds-wrap slds-p-bottom_xx-small slds-m-vertical_large"
+									style="padding-left: 20px; padding-right: 20px;">
+									<div class="slds-col slds-size_7-of-12 slds-p-horizontal_none">
+										<div class="slds-form-element__control" style="display:flex">
+											<button class="slds-button table-control-button" onclick={firstPage} disabled={bDisableFirst}>&#60;&#60; First</button>
+											<button class="slds-button table-control-button" onclick={previousPage} disabled={bDisableFirst}>&#60; Previous</button>
+											<p
+												class="page-count-shown slds-m-horizontal_x-small  slds-m-vertical_small">
+												Showing {pageNumber} of {totalPages} Pages</p>
+											<button class="slds-button table-control-button" onclick={nextPage} disabled={bDisableLast}>Next &#62;</button>
+											<button class="slds-button table-control-button" onclick={lastPage} disabled={bDisableLast}>Last &#62;&#62;</button>
+										</div>
+									</div>
+									<div class="slds-col slds-size_5-of-12 table-row-count slds-text-align_right slds-p-horizontal_none"
+										style="display:flex; justify-content:flex-end">
+										<a href="#" onclick={handleSortClick}>
+											<img src={sortIcon} alt="SortIcon" style="max-width: 17px; height: 17px; margin-left:10px; margin-right:10px; margin-top: 15px; margin-bottom: auto;"/>
+										</a>
+										<label class="sort-label">Sort</label>
+										<select class="slds-select" id="sort-by" onchange={handleSortFieldChange} aria-label="sort">
+            								<option value="">Select field</option>
+            									<template for:each={sortOptions} for:item="option">
+                								<option key={option.value} value={option.value}>{option.label}</option>
+            									</template>
+        								</select>
+										<select class="slds-select" id="row-count-1" style="width:auto; margin-right:10px" onchange={handleRecordsPerPage}>
+                                                    <template for:each={pageSizeOptions} for:item="option">
+                                                        <option style="font-size:12px;" key={option} value={option}>{option}</option>
+                                                    </template>
+                                                </select>
+										<label class="slds-form-element__label" for="row-count-1"># of Rows<span class="slds-assistive-text">Showing {totalRecords} Items</span></label>
+										<span>{totalRecords} Items</span>
+
+									</div>
+								</div>
+								<table
+									class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-horizontal_medium slds-p-vertical_medium tab-table"
+									role="grid" aria-label="Title Information">
+									<thead>
+										<tr class="slds-line-height_reset">
+											<th aria-sort="ascending"
+												class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode"
+												scope="col" style="width: 12%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>ISBN</span>
+													</div>
+												</a>
+												<span class="slds-assistive-text" aria-live="polite" aria-atomic="true">Sorted ascending</span>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 20%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Title</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 12%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>PO#</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 8%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Price</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 15%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Pricing Method</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 10%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Discount</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 12%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Qty Ordered</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 12%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>Qty Shipped</span>
+													</div>
+												</a>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!-- <template for:each={titles1} for:item='line'> -->
+										<template for:each={recordsToDisplay1} for:item='line'>
+											<tr aria-selected="false" class="slds-hint-parent" key={line.index}>
+												<td class="slds-cell_action-mode" scope="row">
+													<div>
+														{line.ISBN}
+													</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div>{line.Title}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div>{CustomerPurchaseOrderNumber}
+													</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div class="slds-align_absolute-center">${line.Price}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div class="slds-align_absolute-center">{line.PricingMethod}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div class="slds-align_absolute-center">{line.Discount}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div class="slds-align_absolute-center">{line.QtyOrdered}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div class="slds-align_absolute-center">
+														<a href="#" tabindex="0" onclick={handleShipQtyClick}>
+															<div class="slds-assistive-text">Quantity shipped</div>
+															{line.QtyShipped}
+														</a>
+													</div>
+												</td>
+											</tr>
+										</template>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+						<div id="tab-default-2" class="slds-tabs_default__content slds-p-around_none slds-hide"
+							role="tabpanel" aria-labelledby="tab-default-2__item" data-id="tab-default-2__item"
+							data-name="tabpanel">
+							<div class="searchCard">
+								<div style="display: flex;">
+									<div class="tab-green-box" style="margin-left: -20px"></div>
+									<div class="tab-content-title" role="heading" aria-level="2">
+										<b>Delivery Information</b>
+									</div>
+								</div>
+								<table
+									class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-horizontal_medium slds-p-vertical_medium tab-table"
+									role="grid" aria-label="Delivery Information">
+									<thead>
+										<tr class="slds-line-height_reset">
+											<th aria-sort="ascending"
+												class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode"
+												scope="col" style="width: 12%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>{labels.scc_delivery_Tracking_Number}</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 8%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>{labels.scc_delivery_Parcel_ID}</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 10%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>{labels.scc_delivery_Signature}</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 12%">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>{labels.scc_delivery_Parcel_Weight}</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 10%;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>{labels.scc_delivery_Parcel_Qty}</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 10%;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>{labels.scc_delivery_Status}</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 10%;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>{labels.scc_delivery_Delivery_Date}</span>
+													</div>
+												</a>
+											</th>
+											<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode"
+												scope="col" style="width: 10%;">
+												<a class="slds-th__action slds-text-link_reset" tabindex="0">
+													<div
+														class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+														<span>{labels.scc_delivery_Carrier_Name}</span>
+													</div>
+												</a>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<template if:true={displayDeliveryRecords}>
+											<template for:each={displayDeliveryRecords} for:item='line'>
+												<tr aria-selected="false" class="slds-hint-parent" key={line.index}>
+													<td class="slds-cell_action-mode" scope="row">
+														<template if:false={showthirdParty}>
+														<template if:true={showFedEx}>
+															<div>
+																<a href="#" tabindex="0" title={line.ExtHUID} onclick={handleShipDetails} data-name={line.ExtHUID}
+																	class="fedexTrackNum">
+																	<div class="slds-assistive-text">Tracking Number
+																	</div>{line.ExtHUID}
+																</a>
+															</div>
+														</template>
+														<template if:true={displayNonFedEx}>
+															<div>
+																<template if:true={gotShipLink}>
+																	<a href='#' tabindex="0" title={line.ExtHUID} onclick={handleShipNonFedEx} data-name={line.ExtHUID}
+																		class="fedexTrackNum">
+																		<div class="slds-assistive-text">Tracking Number
+																		</div>{line.ExtHUID}
+																	</a>
+																</template>
+																<template if:false={gotShipLink}>
+																		<div class="slds-assistive-text">Tracking Number
+																		</div>{line.ExtHUID}
+																</template>
+															</div>
+														</template>
+														</template>
+														<template if:true={showthirdParty}>
+															<div>
+																<template if:true={line.showFedExThirdParty}>
+																	<a href="#" tabindex="0" title={line.ExtHUID} onclick={handletrackdetails1} data-name={line.ExtHUID}
+																		data-showfedex={line.showFedExThirdParty} data-shownonfedex={line.displayNonFedExThirdParty}
+																		data-thirdparty1={line.trackList} data-link={line.gotThirdShipLink} data-shipperlink={line.shipperLink}
+																		class="fedexTrackNum">Tracking Numbers
+																	</a>
+																</template>
+																<template if:true={line.displayNonFedExThirdParty}>
+																	<a href="#" tabindex="0" title={line.ExtHUID} onclick={handletrackdetails2} data-name={line.ExtHUID}
+																		data-showfedex={line.showFedExThirdParty} data-shownonfedex={line.displayNonFedExThirdParty}
+																		data-thirdparty1={line.trackList} data-link={line.gotThirdShipLink} data-shipperlink={line.shipperLink}
+																		class="fedexTrackNum">Tracking Numbers
+																	</a>
+																</template>
+															</div>
+														</template>
+													</td>
+													<td class="slds-cell_action-mode" role="gridcell">
+														<template if:false={showthirdParty}>
+															<div>
+																<a href="#" tabindex="0" title={line.ParcelID} onclick={handleParcelDetails} data-parcel={line.ParcelID} data-link ={line.gotThirdShipLink}
+																	data-status={line.Status} data-tracking={line.ExtHUID} data-inthunumber={line.IntHUNumber}>
+																	<div class="slds-assistive-text">Parcel ID</div>
+																	{line.ParcelID}
+																</a>
+															</div>
+														</template>
+														<template if:true={showthirdParty}>
+															<div>{line.ParcelID}</div>
+														</template>
+													</td>
+													<td class="slds-cell_action-mode" role="gridcell">
+														<div>{line.Signature}</div>
+													</td>
+													<td class="slds-cell_action-mode" role="gridcell">
+														<div class="slds-align_absolute-center">{line.GrossWeight}</div>
+													</td>
+													<td class="slds-cell_action-mode" role="gridcell">
+														<div class="slds-align_absolute-center">{line.ParcelQty}</div>
+													</td>
+													<td class="slds-cell_action-mode" role="gridcell">
+														<div>{line.Status}</div>
+													</td>
+													<td class="slds-cell_action-mode" role="gridcell">
+														<div>{line.DeliveryDate}</div>
+													</td>
+													<td class="slds-cell_action-mode" role="gridcell">
+														<div>{line.carrierName}</div>
+													</td>
+												</tr>
+											</template>
+										</template>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+		<template if:true={showPacakegeDetails}>
+			<div class="slds-grid slds-wrap slds-grid_vertical slds-p-around_large slds-is-relative order-status-BG">
+				<div class="slds-col slds-size_3-of-3">
+					<div class="slds-grid" style="font-size: 12px;">
+						<div class="slds-col slds-size_10-of-12"
+							style="float: left;font-size: 16px; padding-left: 0px;">
+							<nav role="navigation" aria-label="Breadcrumbs">
+								<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+									<li class="slds-breadcrumb__item">
+										<a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<div class="slds-m-horizontal_medium" style="margin-top: -3px"> <a href="#"
+												class="breadcrumb-label" style="text-decoration: none">Order
+												Detail</a><a onclick={closeShowDeliveryDetails}
+												class="breadcrumb-label slds-text-title_bold">&nbsp;{orderNumber}</a>
+										</div>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<a
+											class="slds-m-horizontal_medium breadcrumb-label"><span>Shipment Detail</span><span>&nbsp;(Invoice &nbsp;{invoiceInfo.invoiceNumber})</span></a>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Package
+											Details (Parcel {parcel})</a>
+									</li>
+								</ol>
+							</nav>
+						</div>
+						<div class="slds-size_2-of-12" style="display: flex; justify-content: flex-end;">
+							<button class="close-button-shipment" onclick={closeParcelDetails} >Close</button>
+						</div>
+					</div>
+				</div>
+				<div class="slds-col slds-col slds-size_3-of-3 ">
+					<div class="slds-p-around_large slds-m-top_large slds-var-m-around_small shipmentContainer">
+						<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_3-of-12 package-detail-label">Invoice#</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-value">
+								<span>&nbsp;&nbsp;{invoiceInfo.invoiceNumber}</span>
+							</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-label">Shipped Lines</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-value">
+								<span>&nbsp;{displayPackageContent.length}</span>
+							</div>
+							<div class="slds-col"></div>
+						</div>
+						<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_3-of-12 package-detail-label">Shipment Date</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-value">
+								<span>&nbsp;&nbsp;{invoiceInfo.shipDate}</span>
+							</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-label">Shipped Units</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-value">
+								<span>&nbsp;&nbsp;{totalShippedUnits}</span>
+							</div>
+							<div class="slds-col"></div>
+						</div>
+						<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_3-of-12 package-detail-label">PO#</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-value">
+								<span>&nbsp;&nbsp;{CustomerPurchaseOrderNumber}</span>
+							</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-label">Invoice Total</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-value">
+								<span>&nbsp;&nbsp;${invoiceInfo.grossamount}</span>
+							</div>
+							<div class="slds-col"></div>
+						</div>
+						<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_3-of-12 package-detail-label">Cartons</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-value">
+								<span>&nbsp;&nbsp;1</span>
+							</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-label">Status</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-value">
+								<span>&nbsp;&nbsp;{parcelStatus}</span>
+							</div>
+							<div class="slds-col"></div>
+						</div>
+						<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_3-of-12 package-detail-label">Weight</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-value">
+								<span>&nbsp;&nbsp;
+									<lightning-formatted-number value={totalParcelWeight} format-style="decimal" minimum-fraction-digits="2" maximum-fraction-digits="2"></lightning-formatted-number>									
+								</span>
+							</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-label">Tracking #/Pro #</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-value">
+								<!-- <span>&nbsp;&nbsp;<a href="#" onclick={handleTrackingPro}>{tracking}</a></span>    -->
+
+								<template if:true={showFedEx}>
+									<div>
+										<a href="#" tabindex="0" onclick={handleShipDetails}
+											data-name={tracking}>{tracking}
+										</a>
+									</div>
+								</template>
+								<template if:true={displayNonFedEx}>
+									<div>
+										<a href='#' tabindex="0" onclick={handleShipNonFedEx}
+											data-name={tracking}>{tracking}
+										</a>
+									</div>
+								</template>
+								<template if:true={showthirdParty}>
+									<div>
+										<a href="#" tabindex="0" onclick={handletrackdetails}
+											data-name={tracking}>Tracking Numbers
+										</a>
+									</div>
+								</template>
+							</div>
+							<div class="slds-col"></div>
+						</div>
+						<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_3-of-12 package-detail-label">Carrier</div>
+							<div class="slds-col slds-size_3-of-12 package-detail-value">
+								<span>&nbsp;&nbsp;{carrierName}</span>
+							</div>
+							<div class="slds-col slds-size_3-of-12"></div>
+							<div class="slds-col slds-size_3-of-12">
+							</div>
+							<div class="slds-col"></div>
+						</div>
+					</div>
+				</div>
+				<div class=" slds-col slds-size_3-of-3 slds-m-top_large ">
+					<div class="invoiceContainer">
+						<div class="slds-m-top_large" style="display: flex;">
+							<div class="tab-green-box"></div>
+							<div class="tab-content-title" role="heading" aria-level="2"><b>Package Contents</b>
+								<p class="parcel-title">&nbsp;(Parcel# {parcel})</p>
+							</div>
+						</div>
+						<div
+							class="slds-col slds-size_3-of-3 slds-form slds-p-horizontal_large slds-p-vertical_x-small">
+							<div class="slds-grid slds-wrap slds-p-bottom_xx-small slds-m-vertical_large"
+								style="padding-left: 28px; padding-right: 28px;">
+								<div class="slds-col slds-size_7-of-12 slds-p-horizontal_none">
+									<div class="slds-form-element__control" style="display:flex">
+										<button class="slds-button table-control-button" disabled={bDisableFirst} onclick={firstPage}>&#60;&#60; First</button>
+										<button class="slds-button table-control-button" disabled={bDisableFirst} onclick={previousPage}>&#60; Previous</button>
+										<p class="page-count-shown slds-m-horizontal_x-small  slds-m-vertical_small">
+											Showing {pageNumber} of {totalPages} Pages</p>
+										<button class="slds-button table-control-button" disabled={bDisableLast} onclick={nextPage}>Next &#62;</button>
+										<button class="slds-button table-control-button" disabled={bDisableLast} onclick={lastPage}>Last &#62;&#62;</button>
+									</div>
+								</div>
+								<div
+									class="slds-col slds-size_5-of-12 table-row-count slds-text-align_right slds-p-horizontal_none">
+									<select class="slds-select" id="row-count" style="width:auto; margin-right:10px" onchange={handleRecordsPerPage}>
+                                                    <template for:each={pageSizeOptions} for:item="option">
+                                                        <option style="font-size:12px;" key={option} value={option}>{option}</option>
+                                                    </template>
+                                                </select>
+									<label class="slds-form-element__label" for="row-count"># of Rows<span class="slds-assistive-text">Showing {totalRecords} Items</span></label>
+									<span>{totalRecords} Items</span>
+
+								</div>
+							</div>
+							<table
+								class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-horizontal_x-large slds-p-vertical_medium tab-table"
+								role="grid" aria-label="Package Contents">
+								<thead>
+									<tr class="slds-line-height_reset">
+										<th aria-sort="ascending"
+											class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode"
+											scope="col" style="width: 9%">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>ISBN</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 17%">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Title</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 9%">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Unit Weight</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 9%">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Order Qty</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 9%;">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Invoice Qty</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 9%;">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Parcel Qty</span>
+												</div>
+											</a>
+										</th>
+										<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+											style="width: 9%;">
+											<a class="slds-th__action slds-text-link_reset" tabindex="0">
+												<div
+													class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+													<span>Ext Weight</span>
+												</div>
+											</a>
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<template if:true={displayPackageContent1}>
+										<template for:each={displayPackageContent1} for:item='line'>
+											<tr aria-selected="false" class="slds-hint-parent" key={line.index}>
+												<td class="slds-cell_action-mode" scope="row">
+													<div>{line.ISBN}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div>
+														{line.Title}
+													</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div class="slds-align_absolute-center">{line.GrossWeight}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div class="slds-align_absolute-center">{line.OrderQuantity}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div class="slds-align_absolute-center">{line.InvoiceQty}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div class="slds-align_absolute-center">{line.ParcelQty}</div>
+												</td>
+												<td class="slds-cell_action-mode" role="gridcell">
+													<div class="slds-align_absolute-center">{line.ExtWeight}</div>
+												</td>
+											</tr>
+										</template>
+									</template>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+	</template>
+
+	<template if:true={displayNonFedExThirdParty}>
+		<div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog">
+			<div class="slds-modal__container">
+				<div class="slds-modal__header">
+					<button class="slds-modal__close guestOrderStatusClose" onclick={closeModal} onfocusout={focusOutClose}
+						aria-label="close">x</button>
+					<h2>Tracking Numbers</h2>
+				</div>
+				<div class="slds-modal__content slds-p-around_medium">
+					<div class="form-container">
+						<template for:each={tracklist} for:item="trackingnum">
+							<div key={trackingnum}>
+								<a class="fedextrackingNum" href='#' tabindex="0" title={trackingnum}
+									onclick={handleShipNonFedEx} data-name={trackingnum} onfocusout={focusOutButton}
+									aria-label="Tracking Number">{trackingnum}
+								</a>
+							</div>
+						</template>
+					</div>
+				</div>
+				<div class="slds-modal__footer">
+				</div>
+			</div>
+		</div>
+	</template>
+
+	<template if:true={showFedExThirdParty}>
+		<template if:true={showFedExThirdParty}>
+			<div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog">
+				<div class="slds-modal__container">
+					<div class="slds-modal__header">
+						<button class="slds-modal__close guestOrderStatusClose" onclick={closeModal}
+							onfocusout={focusOutClose} aria-label="close">x</button>
+						<h2>Tracking Numbers</h2>
+					</div>
+					<div class="slds-modal__content slds-p-around_medium">
+						<div class="form-container">
+							<template for:each={tracklist} for:item="trackingnum">
+								<div key={trackingnum}>
+									<a class="fedextrackingNum" href="#" tabindex="0" title={trackingnum}
+										onclick={handleShipDetails} data-name={trackingnum} onfocusout={focusOutButton}
+										aria-label="Tracking Number">{trackingnum}
+									</a>
+								</div>
+							</template>
+						</div>
+					</div>
+					<div class="slds-modal__footer">
+					</div>
+				</div>
+			</div>
+		</template>
+	</template>
+
+
+	<template if:true={showFedexTrackingInfo}>
+		<div class="card-wrapper">
+			<div
+				class="slds-grid slds-wrap slds-grid_vertical slds-p-horizontal_x-large slds-p-vertical_medium order-status-BG slds-is-relative">
+				<div class="slds-col slds-size_3-of-3">
+					<div class="slds-grid slds-wrap" style="font-size: 12px;">
+						<div class="slds-col slds-size_12-of-12"
+							style="float: left;font-size: 16px; padding-left: 0px;">
+							<nav role="navigation" aria-label="Breadcrumbs">
+								<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+									<li class="slds-breadcrumb__item">
+										<a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<div class="slds-m-horizontal_medium" style="margin-top: -3px"> <a href="#"
+												class="breadcrumb-label" style="text-decoration: none">Order
+												Detail</a><a onclick={closeShowDeliveryDetails}
+												class="breadcrumb-label slds-text-title_bold">&nbsp;{orderNumber}</a>
+										</div>
+									</li>
+									<li class="slds-breadcrumb__item">
+										<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">FedEx
+											Tracking
+											Information</a>
+									</li>
+								</ol>
+							</nav>
+						</div>
+						<div class="slds-size_12-of-12 close-button-shipment-wrapper">
+							<button type='button' class="close-button fedexDetailPageCloseBtn" onclick={closeFedexTrackingInfo} >
+	                                     <div class="slds-assistive-text">Fedex Tracking Information</div>   Close
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<c-scc_fed-ex-track-info tracking={trackingId}></c-scc_fed-ex-track-info>
+		</div>
+	</template>
+</template>

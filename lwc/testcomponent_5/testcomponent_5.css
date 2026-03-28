@@ -1,0 +1,88 @@
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+  
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+{
+  opacity: 1;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+.table-container {
+    overflow-x: auto;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    border: 1px solid black; /* Add border to table headers only */
+    padding: 8px;
+    text-align: left;
+    background-color: #f2f2f2;
+    
+
+}
+
+td {
+    border-top: none; /* Remove top border for table cells */
+    border-bottom: 1px solid black; /* Add bottom border for table cells */
+   /* border-left: 1px solid black;  Add left border for table cells */
+    padding: 8px;
+}
+
+.header-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divider {
+    border-right: 1px solid black;
+    margin: 0 5px;
+}
+
+.arrow-icon {
+    margin-left: 5px;
+}
+
+.arrow-icon:hover {
+    cursor: pointer;
+}
+
+.btton-spacing{
+  padding-top: 10px;  
+  padding-bottom: 10px;
+}
+
+    .info-text {
+        margin-top: 5px;
+        font-size: 14px;
+        color: #666;
+    }
+  .arvicon-input {
+    border: 1px solid #76716b;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+   /* // margin-bottom: 1rem; */
+    overflow-y: scroll;
+}

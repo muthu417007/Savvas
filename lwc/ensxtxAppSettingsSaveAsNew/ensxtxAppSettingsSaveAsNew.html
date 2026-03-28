@@ -1,0 +1,24 @@
+<template>
+    <lightning-modal-header label="Save as New"></lightning-modal-header>
+    <lightning-modal-body>
+        <lightning-input
+            label="App Setting Name"
+            type="text"
+            value={value}
+            required="true"
+            field-level-help="Name of the new app setting. No spaces"
+            onblur={handleOnBlur}>
+        </lightning-input>
+        <template if:true={showErrorMessage}>
+            <div class="slds-text-color_error slds-text-heading_small slds-m-top_xx-small">
+                {errorMessage}
+            </div>
+        </template>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <div class="footer">
+            <lightning-button label="Cancel" onclick={handleCancel}></lightning-button>
+            <lightning-button variant="brand" label="Save" onclick={handleSave} disabled={disabledSave}></lightning-button>
+        </div>
+    </lightning-modal-footer>
+</template>

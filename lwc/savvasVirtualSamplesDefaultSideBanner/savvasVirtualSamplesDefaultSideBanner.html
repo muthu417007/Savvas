@@ -1,0 +1,37 @@
+<template>
+	<template if:false={isLoading}>
+		<lightning-spinner alternative-text="Loading" variant="brand" size="large">
+		</lightning-spinner>
+	</template>
+	<div class="slds-grid ptb50 sideBannerComponent">
+		<div class="slds-col slds-size_12-of-12 pl10 sideBannerBox">
+			<div class="slds-grid">
+				<div class="slds-col slds-size_12-of-12 pos-rel wrapperHelp">
+					<div class="needhelp pos-abs">
+						<p class="needfurthertext">{detailsCMS.needFurther}</p>
+						<p class="help">{detailsCMS.help}</p>
+					</div>
+					<img src={detailsCMS.topImage} class="imgrotate helpimgsize" />
+				</div>
+			</div>
+			<lightning-button variant="success" label="Contact My Sales Rep" title="Open URL"
+				onclick={navigateToSalesRepURL} class="mb10 ml10 salesRepBtn">
+			</lightning-button>
+			<div class="sideBannerBg p30 mt20 mobsidepadding">
+				<div class="slds-grid mb20 moblogoimgpadding">
+					<div class="slds-col slds-size_7-of-12">
+						<img src={detailsCMS.logo}/ class="pt6">
+					</div>
+					<div class="slds-col slds-size_5-of-12 pl0">
+							<img src={detailsCMS.laptop} />
+					</div>
+				</div>
+				<p class="sideBannerText mb20">{detailsCMS.curriculum}</p>
+				<p class="sideBannerText1 mb20">{detailsCMS.gain}</p>
+				<p class="mb20">
+				<lightning-formatted-rich-text class="sideBannerText2 mb20" value={detailsCMS.savvasRealize}></lightning-formatted-rich-text>
+				</p>
+			</div>
+		</div>
+	</div>
+</template>

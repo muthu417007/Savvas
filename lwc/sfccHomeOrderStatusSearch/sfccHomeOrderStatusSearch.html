@@ -1,0 +1,234 @@
+<!-- /*********************************************************
+  Component Name       : sfccHomeOrderStatusSearch
+  Created Date         : 06/10/2024  
+  Author               : Cognizant 
+  Description          : This component used in Home page and functionality related to 
+                         search Order Status and redirecting to Order Status Page.
+
+  Modifications Log
+  06/10/2024     Zubiya           Initial Version
+*********************************************************/ -->
+
+
+<template>
+	<lightning-card>
+		<div class="slds-m-top_large">
+			<h4 class="slds-text-heading_medium slds-m-around_small recent-order form-title">Order Status</h4>
+		</div>
+		<div class="slds-form">
+			<!--Order Search-->
+			<div class="slds-form-element slds-m-around_small">
+				<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_Search_By}
+                </label>
+				<div class="slds-form-element__control">
+					<select class="slds-select input-wrapper" name = "optionSelect" onchange={handleSearchByChange} >
+                        <template for:each={SearchByOptions} for:item="option">
+                            <option  key={option.value} value={option.value}>{option.label}</option>
+                        </template>
+                    </select>
+				</div>
+			</div>
+
+			<!--PN Number Search - Start-->
+			<template if:true={PONumSelect}>
+				<div class="slds-form-element slds-m-around_small">
+					<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_PO}  *
+                </label>
+					<div class="slds-form-element__control">
+						<input  type="text" name="PONum" value={PONum} data-id="PoNum" data-name="PoNum" placeholder="PO #" class="slds-input input-wrapper " onchange={handleNumChange} onkeyup={handleNumChange} required />
+                </div>
+					</div>
+					<div class="slds-form-element slds-m-around_small">
+						<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_ISBN}
+                </label>
+						<div class="slds-form-element__control">
+							<input type="text" data-id="ISBnNum" data-name="ISBnNum" placeholder="ISBN" class="slds-input input-wrapper " value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} required />
+                </div>
+						</div>
+						<div class="slds-grid ">
+							<div class="slds-col slds-size_1-of-2  ">
+								<div class="slds-form-element slds-p-left_small slds-p-right_x-small">
+									<label class="slds-form-element__label  form-label" for="date-input">Order Date</label>
+									<div class="slds-form-element__control ">
+										<input  type="date" class="slds-input input-wrapper" value={startDate} onkeyup={handleNumChange} onchange={handleNumChange} name="startDate" />
+										<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                        </div>
+									</div>
+								</div>
+								<div class="slds-col slds-size_1-of-2 ">
+									<div class="slds-form-element slds-p-right_small slds-p-left_x-small">
+										<label class="slds-form-element__label  form-label" for="date-input" style="visibility: hidden;">{labels.scc_home_To}</label>
+										<div class="slds-form-element__control">
+											<input  type="date"  class="slds-input input-wrapper" value={endDate} onkeyup={handleNumChange} onchange={handleNumChange} name="endDate" />
+											<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                        </div>
+										</div>
+									</div>
+								</div>
+								<!-- <div class="slds-form-element slds-m-left_small slds-m-right_small">
+				<label for="FieldSelect" class="slds-form-element__label  form-label">
+					Order Status
+				</label>    
+				<div class="slds-form-element__control">
+					<select class="slds-select input-wrapper" name = "OrderStatus" onchange={handleOrderStatusChange} >
+						<template for:each={OrderStatusValue} for:item="OrderStatusValue">
+							<option key={OrderStatusValue.value} value={OrderStatusValue.value}>{OrderStatusValue.label}</option>
+						</template>
+					</select>
+				</div>
+			</div> -->
+								<div class="slds-form-element slds-m-horizontal_small">
+									<lightning-combobox placeholder="Order Status" class="statuscombobox" label={labels.scc_home_Order_Status}
+										value={OrderStatusValue} options={OrderStatusOptions}
+										onchange={handleOrderStatusChange}></lightning-combobox>
+								</div>
+			</template>
+			<!--PN Number Search - END-->
+			<!--Invoice Number Search - Start-->
+			<template if:true={InvoiceSelect}>
+				<div class="slds-form-element slds-m-around_small">
+					<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_OrderStatus_Invoice_Number} *
+                </label>
+					<div class="slds-form-element__control">
+						<input style="padding-left: 17px;" type="text" data-id="InvoNum" data-name="InvoNum" placeholder="Invoice Number" class="slds-input input-wrapper " value={InvoNum} onkeyup={handleNumChange} name="InvoNum" onchange={handleNumChange} required />
+                </div>
+					</div>
+			</template>
+			<!--Invoice Number Search - End-->
+			<!--Containing ISBN -  Start-->
+			<template if:true={ISBNselect}>
+				<div class="slds-form-element slds-m-around_small">
+					<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_ISBN} *
+                </label>
+					<div class="slds-form-element__control">
+						<input style="padding-left: 17px;" type="text" data-id="ISBnNum" data-name="ISBnNum" placeholder="ISBN Number" class="slds-input input-wrapper " value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} required />
+                </div>
+					</div>
+					<div class="slds-form-element slds-m-around_small">
+						<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_PO}
+                </label>
+						<div class="slds-form-element__control">
+							<input style="padding-left: 17px;" type="text" data-id="PONum" data-name="PONum" placeholder="PO #" class="slds-input input-wrapper " onkeyup={handleNumChange} onchange={handleNumChange} name="PONum" value={PONum} required />
+                </div>
+						</div>
+						<div class="slds-grid ">
+							<div class="slds-col slds-size_1-of-2  ">
+								<div class="slds-form-element slds-m-around_x-small">
+									<label class="slds-form-element__label  form-label" for="date-input">Order Date</label>
+									<div class="slds-form-element__control">
+										<input style="padding-left: 10px;" type="date" class="slds-input input-wrapper" value={startDate} onkeyup={handleNumChange} onchange={handleNumChange} name="startDate" />
+										<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                        </div>
+									</div>
+								</div>
+								<div class="slds-col slds-size_1-of-2">
+									<div class="slds-form-element slds-m-around_x-small">
+										<label class="slds-form-element__label  form-label" for="date-input" style="visibility: hidden;">{labels.scc_home_To}</label>
+										<div class="slds-form-element__control">
+											<input style="padding-left: 10px;" type="date"  class="slds-input input-wrapper" value={endDate} onkeyup={handleNumChange} onchange={handleNumChange} name="endDate" />
+											<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                        </div>
+										</div>
+									</div>
+								</div>
+								<div class="slds-form-element slds-m-left_small slds-m-right_small">
+									<label for="FieldSelect" class="slds-form-element__label  form-label">
+					{labels.scc_OrderStatus_Country}
+				</label>
+									<div class="slds-form-element__control">
+										<select style="padding-left: 7px;" class="slds-select input-wrapper" name = "optionSelect" onchange={handleCountryOptionChange} >
+						<template for:each={CountryOptions} for:item="CountryOptions">
+							<option key={CountryOptions.value} value={CountryOptions.value}>{CountryOptions.label}</option>
+						</template>
+					</select>
+									</div>
+								</div>
+
+								<div class="slds-form-element slds-m-around_small">
+									<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_OrderStatus_State_Province}
+                </label>
+									<div class="slds-form-element__control">
+										<input style="padding-left: 17px;" type="text" data-id="StateNum" data-name="StateNum" placeholder="StateNum" class="slds-input input-wrapper " onkeyup={handleNumChange} onchange={handleNumChange} name="StateNum" value={StateNum} required />
+                </div>
+									</div>
+
+									<div class="slds-form-element slds-m-around_small">
+										<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_OrderStatus_Zip_Postal_Code}
+                </label>
+										<div class="slds-form-element__control">
+											<input style="padding-left: 17px;" type="text" data-id="ZipNum" data-name="ZipNum" placeholder="ZipNum" class="slds-input input-wrapper " onkeyup={handleNumChange} onchange={handleNumChange} name="ZipNum" value={ZipNum} required />
+                </div>
+										</div>
+
+										<div class="slds-form-element slds-m-around_small">
+											<lightning-combobox class="statuscombobox"
+												label={labels.scc_home_Order_Status} placeholder="Order Status" value={OrderStatusValue}
+												options={OrderStatusOptions} onchange={handleOrderStatusChange}>
+											</lightning-combobox>
+										</div>
+			</template>
+			<!--Containing ISBN -  END-->
+
+
+			<!--#Order - Start-->
+			<template if:true={DocumentNumSelect}>
+
+				<div class="slds-form-element slds-m-around_small">
+					<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_Document_Control} *
+                </label>
+					<div class="slds-form-element__control">
+						<input style="padding-left: 17px;" type="text" data-id="DocContrNum" data-name="DocContrNum"  placeholder= "Order #" class="slds-input input-wrapper " value={DocContrNum} onkeyup={handleNumChange} name='DocContrNum' onchange={handleNumChange} required />
+                </div>
+					</div>
+
+					<div class="slds-form-element slds-m-around_small">
+						<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_ISBN}
+                </label>
+						<div class="slds-form-element__control">
+							<input style="padding-left: 17px;" type="text" data-id="ISBnNum" data-name="ISBnNum" placeholder="ISBN Number" class="slds-input input-wrapper " value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} required />
+                </div>
+						</div>
+
+
+						<!-- <div class="slds-col slds-size_1-of-3">
+							<div class="slds-form-element">
+								<lightning-combobox class="statuscombobox" label={labels.scc_home_Order_Status}
+									value={OrderStatusValue} options={OrderStatusOptions}
+									onchange={handleOrderStatusOptionChange}></lightning-combobox>
+							</div>
+						</div> -->
+						<div class="slds-form-element slds-m-horizontal_small">
+									<lightning-combobox class="statuscombobox" placeholder="Order Status" label={labels.scc_home_Order_Status}
+										value={OrderStatusValue} options={OrderStatusOptions}
+										onchange={handleOrderStatusChange}></lightning-combobox>
+								</div>
+			</template>
+			<!--#Order - End-->
+			<!-- <div class="slds-form-element__control slds-m-around_small">
+				<button class="slds-button slds-button_icon slds-button_icon-brand btn" title="Search" onclick={handleSearch} >
+                    <div>
+                        <lightning-icon class="chevron-icon" icon-name="utility:search" size="small" alternative-text="Search"  aria-hidden="true"></lightning-icon>
+                    </div>
+                    <span>Search</span> 
+                </button>
+			</div> -->
+		<div class="slds-form-element__control">
+                        <button class="slds-button search-button slds-m-right_medium" onclick={handleSearch} disabled={SearchDisabled}>
+                            <lightning-icon class="chevron-icon slds-m-right_x-small" icon-name='utility:search' alternative-text='search' size='small' title='search'></lightning-icon>
+                             Search
+                        </button>
+                    
+                    </div>
+		</div>
+	</lightning-card>
+</template>

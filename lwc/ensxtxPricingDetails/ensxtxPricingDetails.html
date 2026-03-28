@@ -1,0 +1,35 @@
+<template>
+    <template if:true={displayPrice}>
+        <span if:false={hasPrice} class="slds-p-top_x-small">{label.ensxtx_CartPDP_Message_NetPriceUnavailable}</span>
+        <span if:true={hasPrice} class="slds-p-top_x-small">{label.ensxtx_CartPDP_Field_NetPrice}&nbsp;
+            <lightning-formatted-number
+                currency-code={currencyIsoCode}
+                format-style="currency"
+                value={price}>
+            </lightning-formatted-number>
+        </span>
+        <br />
+    </template>
+    <template if:true={displayTax}>
+        <span if:false={hasTax} class="slds-p-top_x-small">{label.ensxtx_CartPDP_Message_TaxAmountUnavailable}</span>
+        <span if:true={hasTax} class="slds-p-top_x-small">{label.ensxtx_CartPDP_Field_TaxAmount}&nbsp;
+            <lightning-formatted-number
+                currency-code={currencyIsoCode}
+                format-style="currency"
+                value={tax}>
+            </lightning-formatted-number>
+        </span>
+        <br />
+    </template>
+    <template if:true={displayTiers}>
+        <c-ensxtx-product-pricing-tiers
+            pricing-tiers={pricingTiers}>
+        </c-ensxtx-product-pricing-tiers>
+    </template>
+    <template if:true={displayConditions}>
+        <c-ensxtx-pricing-conditions
+            conditions={conditions}
+            display-values={displayConditionsValues}>
+        </c-ensxtx-pricing-conditions>
+    </template>
+</template>

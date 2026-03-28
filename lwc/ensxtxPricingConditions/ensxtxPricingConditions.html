@@ -1,0 +1,37 @@
+<template>
+    <template if:true={hasConditions}> <!-- conditional not allowed on root template -->
+        <div class="slds-p-vertical_small">
+            <table class="enosix-product-table">
+                <caption></caption>
+                <tbody>
+                    <tr>
+                        <th class="slds-p-around_x-small enosix-product-cell slds-border_right">{label.ensxtx_CartPDP_Table_Condition}</th>
+                        <th class="slds-p-around_x-small enosix-product-cell">{label.ensxtx_CartPDP_Table_Rate}</th>
+                        <template if:true={displayValues}>
+                            <th class="slds-p-around_x-small enosix-product-cell">{label.ensxtx_CartPDP_Table_Value}</th>
+                        </template>
+                    </tr>
+                    <template for:each={conditions} for:item="condition">
+                        <tr key={condition.stepNumber} aria-live="assertive" aria-atomic="true">
+                            <td class="slds-text-heading_small slds-p-around_x-small enosix-product-cell slds-border_right">{condition.ConditionTypeName}</td>
+                            <td class="slds-text-heading_small slds-p-around_x-small enosix-product-cell">    
+                                <c-ensxtx-pricing-condition-rate
+                                    condition={condition}>
+                                </c-ensxtx-pricing-condition-rate>                       
+                            </td>
+                            <template if:true={displayValues}>
+                                <td class="slds-text-heading_small slds-p-around_x-small enosix-product-cell">
+                                    <lightning-formatted-number
+                                        currency-code={condition.CurrencyKey}
+                                        format-style="currency"
+                                        value={condition.ConditionValue}>
+                                    </lightning-formatted-number>
+                                </td>
+                            </template>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </template>
+</template>

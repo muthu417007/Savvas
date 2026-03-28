@@ -1,0 +1,37 @@
+<!--
+*********************************************************
+Component Name       : cpqToast
+Created Date         : 5/02/2024 
+Author               : Frank Berni - Cognizant
+Description          : A custom Toast created to overcome standard toast not supported issue in lightning:outApp.
+
+Modifications Log
+<Date>       <Author>            <Modification>
+5/02/2024    Frank Berni          Initial Version 
+*********************************************************
+-->
+<template>
+    <template if:true={showToastBar}>
+        <div class={containerClass}>
+            <div class={outerClass} role="status">
+                <span class="slds-assistive-text">{type}</span>
+                <span class={innerClass} title={message}>
+                    <!-- Icon logic to match typical Toast look -->
+                    <lightning-icon icon-name={getIconName} alternative-text="icon" class="slds-icon slds-icon_small" variant="inverse" size="small"></lightning-icon>
+                </span>
+                <!-- Notification logic -->
+                <div class="slds-notify__content">
+                    <h2 class="slds-text-heading_medium">{title}</h2>
+                    <h2 class="slds-text-heading_small slds-truncate_container_85">{message}</h2>
+                </div>
+                <div class="slds-notify__close">
+                    <!-- White X close button -->
+                    <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" onclick={closeToast}>
+                        <lightning-icon icon-name="utility:close" size="small" variant="inverse"> </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>    
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,364 @@
+<template>
+	<div class="slds-grid slds-wrap">
+		<div class="slds-col slds-col-size_3-of-3">
+			<div class="catalogue-wrapper slds-m-horizontal_large slds-p-vertical_large">
+				<h2 class="slds-p-horizontal_large slds-is-relative catalogue-title">Catalog Search</h2>
+				<nav role="navigation" aria-label="Breadcrumbs">
+					<ol class="slds-breadcrumb slds-list_horizontal slds-wrap slds-p-horizontal_large">
+						<template for:each={breadcrumbs} for:item="breadcrumb">
+							<li class="slds-breadcrumb__item slds-p-horizontal_x-small" key={index}>
+								<a key={breadcrumb.url} href={breadcrumb.url} data-index={index}
+									onclick={handleBreadcrumbClick}>{breadcrumb.label}</a>
+							</li>
+						</template>
+					</ol>
+				</nav>
+				<div class="slds-tree_container slds-m-top_large slds-p-horizontal_large slds-p-vertical_medium catalog-panel">
+					<h4 class="slds-tree__group-header" id="treeheading">Catalog</h4>
+					<ul aria-labelledby="treeheading" class="slds-tree" role="tree">
+						<li aria-level="1" role="treeitem">
+							<div class="slds-tree__item">
+								<button class="slds-button slds-button_icon slds-m-right_x-small slds-hidden" aria-hidden="true" tabindex="-1" title="Expand Tree Item">
+									<svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+										<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+									</svg>
+									<span class="slds-assistive-text">Expand Tree Item</span>
+								</button>
+								<span class="slds-has-flexi-truncate">
+									<span class="slds-tree__item-label slds-truncate" title="Tree Item">Career & Technology</span>
+								</span>
+							</div>
+						</li>
+						<li aria-expanded="true" aria-label="Tree Branch" aria-level="1" role="treeitem">
+							<div class="slds-tree__item">
+								<button class="slds-button slds-button_icon slds-m-right_x-small" aria-hidden="true" tabindex="-1" title="Expand Tree Branch">
+									<svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+									<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+									</svg>
+									<span class="slds-assistive-text">Expand Tree Branch</span>
+								</button>
+								<span class="slds-has-flexi-truncate">
+									<span class="slds-tree__item-label slds-truncate" title="Tree Branch">Educator Services</span>
+								</span>
+							</div>
+							<ul role="group">
+								<li aria-level="2" aria-selected="true" role="treeitem" tabindex="0">
+									<div class="slds-tree__item">
+										<button class="slds-button slds-button_icon slds-m-right_x-small slds-hidden" aria-hidden="true" tabindex="-1" title="Expand Tree Item">
+											<svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+												<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+											</svg>
+											<span class="slds-assistive-text">Expand Tree Item</span>
+										</button>
+										<span class="slds-has-flexi-truncate">
+											<span class="slds-tree__item-label slds-truncate" title="Tree Item">Advanced Placement, Honors & Electives Science</span>
+										</span>
+									</div>
+								</li>
+							</ul>
+						</li>
+						<li aria-expanded="false" aria-label="Tree Branch" aria-level="1" role="treeitem">
+							<div class="slds-tree__item">
+								<button class="slds-button slds-button_icon slds-m-right_x-small" aria-hidden="true" tabindex="-1" title="Expand Tree Branch">
+									<svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+										<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+									</svg>
+									<span class="slds-assistive-text">Expand Tree Branch</span>
+								</button>
+								<span class="slds-has-flexi-truncate">
+									<span class="slds-tree__item-label slds-truncate" title="Tree Branch">Science</span>
+								</span>
+							</div>
+							<ul role="group">
+								<li aria-level="2" role="treeitem">
+									<div class="slds-tree__item">
+										<button class="slds-button slds-button_icon slds-m-right_x-small slds-hidden" aria-hidden="true" tabindex="-1" title="Expand Tree Item">
+											<svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+												<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+											</svg>
+											<span class="slds-assistive-text">Expand Tree Item</span>
+										</button>
+										<span class="slds-has-flexi-truncate">
+											<span class="slds-tree__item-label slds-truncate" title="Tree Item">Administrative Products</span>
+										</span>
+									</div>
+								</li>
+							</ul>
+						</li>
+						<li aria-level="1" role="treeitem">
+							<div class="slds-tree__item">
+								<button class="slds-button slds-button_icon slds-m-right_x-small slds-hidden" aria-hidden="true" tabindex="-1" title="Expand Tree Item with a Really Really Long Name That Should Truncate">
+									<svg class="slds-button__icon slds-button__icon_small" aria-hidden="true">
+										<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chevronright"></use>
+									</svg>
+									<span class="slds-assistive-text">Expand Tree Item with a Really Really Long Name That Should Truncate</span>
+								</button>
+								<span class="slds-has-flexi-truncate">
+									<span class="slds-tree__item-label slds-truncate" title="Advanced Placement, Honors & Electives Science">Advanced Placement, Honors & Electives Science</span>
+								</span>
+							</div>
+						</li>
+					</ul>	
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Layout Design  -->
+		
+					<!-- /**********added by sudha********** -->
+					
+							
+					<template for:each={breadcrumbs} for:item="breadcrumb" for:index="index">
+						<a key={breadcrumb.url} href={breadcrumb.url} data-index={index}
+							onclick={handleBreadcrumbClick}>{breadcrumb.label}</a>
+						<template if:false={breadcrumb.isLastNode}>
+							&gt;
+						</template>
+					</template>
+					<!-- /**********added by sudha********** -->
+			
+
+			
+		<!-- <div class="slds-col slds-size_3-of-12 ">
+			<div class="slds-grid slds-grid_align-end">
+				<div class="slds-align-top">
+					<div style="padding-top:4px !important;"> Filter Results &nbsp; </div>
+					<div class="slds-col slds-size_2-of-12 ">
+						<div class="slds-grid slds-grid_align-end slds-grid_vertical-align-end">
+
+							<button class="slds-button slds-button_icon" onmouseover={togglePasswordHintfilter} onmouseout={togglePasswordHintfilter}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+							<div class={taskTypeHelpTextClassfilter} role="tooltip" id="help3"
+								style="position:absolute;top:194px;right:43px;width:250px;background-color:#504c6e!important;">
+								<div class="slds-popover_body">
+									<ul class="slds-list_dotted slds-has-dividers_around-space "
+										style="color:white !important;padding-top:5px !important;">
+										Enter a keyword to filter within the current set of search results
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<lightning-input type="search" variant="label-hidden" name="searchFilter"
+						placeholder="Search To Filter" onchange={handleFilter}>
+					</lightning-input>
+				</div>
+			</div>
+		</div>
+		<div class="slds-col slds-size_2-of-12 ">
+			<div class="slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+				{transformedDataLength} of {totalCount} Items &nbsp;
+				<button class="slds-button slds-button_icon" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+				<div class={taskTypeHelpTextClass} role="tooltip" id="help"
+					style="position:absolute;top:194px;right:43px;width:250px;background-color:#504c6e!important;">
+					<div class="slds-popover_body">
+						<ul class="slds-list_dotted slds-has-dividers_around-space "
+							style="color:white !important;padding-top:5px !important;">
+							Use panel on the left to navigate through the catalog
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div> -->
+
+<div class="slds-grid ">
+	<div class="slds-col slds-size_7-of-12 "></div>
+	<div class="slds-col slds-size_3-of-12 ">
+							<div class="slds-grid slds-grid_align-end">
+								<div class="slds-align-top">
+									<div style="padding-top:4px !important;"> Filter Results &nbsp; </div>
+								</div>
+								<div class="slds-col slds-size_2-of-12 ">
+							<div class="slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+							
+								<button class="slds-button slds-button_icon" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+								<div class={taskTypeHelpTextClass} role="tooltip" id="help"
+									style="position:absolute;top:100px;right:543px;width:250px;background-color:#504c6e!important;">
+									<div class="slds-popover_body">
+										<ul class="slds-list_dotted slds-has-dividers_around-space "
+											style="color:white !important;padding-top:5px !important;">
+											Enter a keyword to filter within the current set of search results
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div> 
+								<div>
+									<lightning-input type="search" variant="label-hidden" name="searchFilter" 
+										onchange={handleFilter}>
+									</lightning-input>
+								</div>
+							</div>
+						</div>
+							 <div class="slds-col slds-size_2-of-12 ">
+							<div class="slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+								{transformedDataLength} of {totalCount} Items &nbsp;
+								<button class="slds-button slds-button_icon" onmouseover={togglePasswordHintfilter} onmouseout={togglePasswordHintfilter}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+								<div class={taskTypeHelpTextClassfilter} role="tooltip" id="help1"
+									style="position:absolute;top:100px;right:43px;width:250px;background-color:#504c6e!important;">
+									<div class="slds-popover_body">
+										<ul class="slds-list_dotted slds-has-dividers_around-space "
+											style="color:white !important;padding-top:5px !important;">
+											<!-- Search by <b>ISBN, Keyword</b> -->
+											Use panel on the left to navigate through the catalog
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div> 
+						</div>
+	<template if:true={isLoading}>
+		<!-- Show loading spinner -->
+		<div class="spinner-wrapper slds-spinner_container" style="height: 200px; position:absolute;">
+        <div class="slds-backdrop slds-backdrop_open">
+            <lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+        </div>
+    </div> 
+		
+	</template>
+	<div class="search-result-value">
+				<div
+					class="slds-box slds-theme_shade slds-p-vertical_xx-small slds-m-vertical_xx-small slds-p-horizontal_none">
+					<div class="slds-grid slds-grid_vertical-align-center">
+						<lightning-icon size="xx-small" icon-name="utility:chevrondown" alternative-text="chevrondown">
+						</lightning-icon>
+						<div>&nbsp;&nbsp;Catalog Search</div>
+					</div>
+				</div>
+
+			</div>
+	<template lwc:if={displayProductCategoryData}>
+		<div class={menuClass}>
+			<div class="slds-grid" style="background:white !important;">
+
+				<div class="slds-col slds-size_11-of-12 ">
+					<div class="slds-grid slds-grid_vertical">
+						<div>
+							<article class="slds-card">
+								<div class="slds-card__header slds-grid" style="padding: 5px 5px;margin-bottom: 2px;">
+									<header class="slds-media slds-media_center slds-has-flexi-truncate">
+										<div class="slds-media__body">
+											<h2 class="slds-card__header-title">
+												<a class="slds-card__header-link slds-truncate" title="Catalog Search">
+													<span>Catalog</span>
+												</a>
+											</h2>
+										</div>
+										<div class="slds-no-flex">
+											<button class="slds-button "  onclick={resetSelection}>Reset</button>
+										</div>
+									</header>
+								</div>
+							</article>
+						</div>
+						<div style="height: 92vh!important; padding:5px !important;overflow : scroll;" class="wrapword">
+							<lightning-tree items={searchMenuData} selected-item={selectedItem}
+								onselect={handleOnSelect}></lightning-tree>
+							{selectedItemValue}
+						</div>
+					</div>
+				</div>
+				<!-- <div class="slds-col slds-size_1-of-12 slds-align-middle">
+					<template lwc:if={showSideMenu}>
+						<lightning-icon icon-name="utility:left" onclick={toggleMenu} alternative-text="Hide Side Menu">
+						</lightning-icon>
+					</template>
+					<template lwc:else>
+						<lightning-icon icon-name="utility:right" onclick={toggleMenu}
+							alternative-text="Hide Side Menu"></lightning-icon>
+					</template>
+				</div> -->
+				 <!-- <div class="slds-col slds-size_6-of-12 slds-align-middle">
+				
+					<template if:true={showSideMenu}>
+						<lightning-icon icon-name="utility:left" onclick={toggleMenu} alternative-text="Hide Side Menu" onmouseover={togglePasswordHintcatalog1} onmouseout={togglePasswordHintcatalog1}>
+						</lightning-icon>
+						
+						<div class={taskTypeHelpTextClasscatalog1} role="tooltip" id="help4"
+									style="position:absolute;top:410px;right:-90px;width:250px;background-color:#504c6e!important;">
+									<div class="slds-popover_body">
+										<ul class="slds-list_dotted slds-has-dividers_around-space "
+											style="color:white !important;padding-top:5px !important;">
+										Click to collapse Panel
+										</ul>
+									</div>
+								</div>
+					</template>
+					<template if :false ={showSideMenu}>
+						<lightning-icon icon-name="utility:right" onclick={toggleMenu}
+							alternative-text="Hide Side Menu" onmouseover={togglePasswordHintcatalog} 
+							onmouseout={togglePasswordHintcatalog}>
+							</lightning-icon>
+				</template>			
+					 <div class={taskTypeHelpTextClasscatalog} role="tooltip" id="help5"
+									style="position:absolute;top:410px;right:-229px;width:250px;background-color:#504c6e!important;">
+									<div class="slds-popover_body">
+										<ul class="slds-list_dotted slds-has-dividers_around-space "
+											style="color:white !important;padding-top:5px !important;">
+											Click to expand Panel
+										</ul>
+									</div>
+								</div> -->
+							<div class="slds-col slds-size_1-of-12 slds-align-middle">
+								<template if:true={showSideMenu}>
+									<lightning-icon icon-name="utility:left" onclick={toggleMenu} alternative-text="Hide Side Menu"
+										onmouseover={togglePasswordHintcatalog1} onmouseout={togglePasswordHintcatalog1}>
+									</lightning-icon>
+									<div class={taskTypeHelpTextClasscatalog1} role="tooltip" id="help4"
+										style="position:absolute;top:410px;right:-90px;width:250px;background-color:#504c6e!important;">
+										<div class="slds-popover_body">
+											<ul class="slds-list_dotted slds-has-dividers_around-space"
+												style="color:white !important;padding-top:5px !important;">
+												Click to collapse Panel
+											</ul>
+										</div>
+									</div>
+								</template>
+								<template if:false={showSideMenu}>
+									<lightning-icon icon-name="utility:right" onclick={toggleMenu} alternative-text="Show Side Menu"
+										onmouseover={togglePasswordHintcatalog} onmouseout={togglePasswordHintcatalog}>
+									</lightning-icon>
+									<div class={taskTypeHelpTextClasscatalog} role="tooltip" id="help5"
+										style="position:absolute;top:410px;right:-229px;width:250px;background-color:#504c6e!important;">
+										<div class="slds-popover_body">
+											<ul class="slds-list_dotted slds-has-dividers_around-space"
+												style="color:white !important;padding-top:5px !important;">
+												Click to expand Panel
+											</ul>
+										</div>
+									</div>
+								</template>
+							</div>
+							</div>
+							</div>
+							</template>
+			
+			<div style="position:absolute; top:207px;  height : 92vh!important; width :100%!important;">
+				<!-- /**********modified  by sudha ********** -->
+				<template if:false={noData}>
+					<c-scc_product-catalog-table columns={columns} raw-parent-table-data={productData}
+						onshowproducttitlepage={openChildTitlePage} filter={filterCriteria}
+						ontransformeddatalength={handleTransformedDataLength}
+						onsearchresultsavailable={handleSearchResultsAvailable}>
+			
+					</c-scc_product-catalog-table>
+				</template>
+			</div>
+	<!-- <template lwc:else>
+		<div class="slds-align_absolute-center" style="height:5rem">
+			<lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+		</div>
+	</template> -->
+	<!-- Ends -->
+</template>

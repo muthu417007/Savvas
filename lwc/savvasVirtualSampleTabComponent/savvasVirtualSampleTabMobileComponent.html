@@ -1,0 +1,17 @@
+<template>
+    <div class="slds-grid- mobilegradebox">
+        <div class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 ">
+             <div class="mb2r">
+                          <lightning-combobox name="myLightningComboBox"
+                    value={value}
+                    onchange={handleChange} 
+                    options={mobileTabs}>
+                    </lightning-combobox>
+             </div>
+         <template if:true={displayAssets}>
+                    <c-savvas-virtual-sample-asset-display asset-data={assetDetails} tab={tabSelected}>
+                    </c-savvas-virtual-sample-asset-display>
+                </template>
+        </div>
+    </div>
+</template>

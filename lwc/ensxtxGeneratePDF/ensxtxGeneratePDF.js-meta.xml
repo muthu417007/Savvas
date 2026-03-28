@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>
+        enosix Sales Document PDF(LWC)
+    </masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="documentNumber" type="String" label="Document Number" description="Document Number"></property>
+            <property name="outputApplication" type="String" label="Output Application" description="SalesDoc = V1; Delivery = V2; Invoice = V3; Default to V1 if empty"></property>
+            <property name="displayLanguage" type="Boolean" label="Display Language" description="Display Language"></property>
+            <property name="displayConditionType" type="Boolean" label="Display Message Type" description="Display Message Type"></property>
+            <property name="displayConditionTypeDescription" type="Boolean" label="Display Message Type Description" description="Display Message Type Description"></property>
+            <property name="displayPreview" type="Boolean" label="Display Preview Button" description="Display Preview Button"></property>
+            <property name="displayDownload" type="Boolean" label="Display Download Button" description="Display Download Button"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

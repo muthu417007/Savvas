@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Enosix Cart Partner</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="appSettingsName" type="String" required="true" default="ensxtx_SR_enosixCartPartnerAppSettings"
+                label="App Settings Name" description="Specifiy the name of the static resource file."/>
+            <property name="partnerFunction" type="String" default="SH" label="Partner Function (SH/BP)"
+                description="Specify the SAP Partner Function value"/>
+            <property name="partnerFunctionInternal" type="String" default="WE" label="Partner Function Internal (WE/BP)"
+                description="Specify the SAP Partner Function Internal value"/>
+            <property name="componentType" type="String" default="PartnerSearch" label="Componet Type (PartnerSearch/CustomerSearch)"
+                description="Select 'PartnerSearch' to search for the related partners. Select 'CustomerSearch' for a wide open search (PartnerSearch/CustomerSearch)"/>
+            <property name="searchType" type="String" default="Partner" label="Search Type (Partner/Contact/Vendor/Personnel)"
+                description="The type of partner to search"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,379 @@
+/*generic style - for figma screens*/
+
+.slds-form-element{
+    margin-bottom: 10px;
+}
+.slds-form-element .slds-input{
+    width: 100%;
+}
+.signin-page{   
+    background-color: #ffffff;
+    background-image: var(--landing-page-bgimage-path);
+    background-size: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    padding: 100px 0 31px;
+}
+.signin-form{
+    width: 612px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin: 0 auto; 
+}
+.signin-form form{
+    padding: 50px 70px 0;
+}
+.signin-form .slds-input{
+    margin-bottom: 10px;
+}
+.no-signin-label{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    text-align: left;
+    color: #0C1E3D;
+    padding-bottom: 10px;
+}
+.no-signin-reqd-links{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    color: #2150A3;
+    display: inline-block;
+    padding: 0 5px;
+}
+.no-signin-reqd-links button{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+}
+.signin-form .no-signin-reqd-links:first-of-type{
+    padding-left: 0;
+}
+.signin-form .no-signin-reqd-links:not(:last-of-type)::after, .signin-form lightning-button.no-signin-reqd-links::after{
+    content: "";
+    width: 1px;
+    height: 9px;
+    background-color: #2150A3;
+    display: inline-block;
+    margin-left: 6px;
+}
+.sign-in-title{
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 38.5px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #173770;
+    padding: 20px 0 30px;
+}
+.login-button {
+    background-color: #AFC3D8;
+    text-align: center;
+    width: 100%;
+    display: block;
+    padding: 10px 30px;
+    border-radius: 90px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19.8px;
+    color: #ffffff;
+    margin: 10px 0;
+    height: 55px;
+}
+.login-button:not([disabled]) {
+    background-color: #9ECA47;
+    color: #0C1E3D;
+}
+.forgot-password-text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #2150A3 !important;
+    text-decoration: underline !important;
+}
+.forgot-password {
+    display: flex;
+    justify-content: space-between;
+}
+.register-text-link-wrapper{
+    text-align: center;
+    margin-top: 10px;
+}
+.register-text {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #173770 !important;
+    display: inline-block;
+}
+.chevron-circle{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #679608;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.error {
+    text-align: center;
+    word-break: break-word;
+    max-width: 20rem;
+    color: #fd0808;
+}
+.not-a-dealer-container{
+    border-top: 1px solid rgba(23, 55, 112, 0.2);
+    padding: 40px 0;
+    margin-top: 40px;
+}
+.not-a-dealer-title{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    text-align: left;
+    color: #0C1E3D;
+}
+.not-a-dealer-links a{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #173770;
+    text-decoration: none !important;
+    margin-top: 10px;
+    display: inline-block;
+}
+.signin-footer-copyright-text{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18.2px;
+    text-align: left;
+    color: #ffffff;
+    display: inline-block;
+    text-align: center;
+}
+.signin-blue-footer{
+    background-color: #173770;
+    text-align: center;
+    padding: 20px 66px;
+    border-radius: 0 0 20px 20px;
+}
+.signin-footer-links{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    display: inline-block;
+}
+
+.backdrop{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #173770;
+    opacity: 80%;
+    z-index: 990;
+}
+
+.slds-modal{
+    top: 50%;
+    transform: translateY(-50%);
+    outline: none;
+}
+
+.slds-modal__container {
+    background-color: #ffffff;
+    width: 625px;
+    min-width: auto;
+    padding: 0;
+    height: auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.slds-modal__header {
+    padding: 50px 55px 10px;
+    border: none;
+    margin-bottom: 10px;
+}
+.slds-modal__header h2{
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 38.5px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #173770;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.slds-button.slds-button_icon.slds-modal__close{
+    top: 10px;
+    right: 10px;
+    font-size: 9px;
+    width: 50px;
+    height: 50px;
+    border-radius: 90px;
+    background-color: #0C1E3D;
+}
+
+.slds-button {
+    justify-content: center;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    line-height: 21px;
+    color: #2150A3;
+}
+
+.slds-modal__content{
+    padding: 0 77px;
+}
+
+.slds-modal__content p{
+    font-size: 15.9px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: center;
+    color: #173770;
+}
+
+.slds-modal__footer {
+    border: none;
+    padding: 30px 77px 40px;
+    text-align: left;
+}
+
+.modal-confirm-button-disabled{
+    height: 45px;
+    padding: 10px 20px 10px 20px;
+    gap: 5px;
+    border-radius: 90px;
+    opacity: 0px;
+    background: #AFC3D8;
+    color: #FFFFFF;
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 17.6px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.modal-confirm-button{
+    background: #9ECA47;
+    color: #0C1E3D;
+    height: 45px;
+    padding: 10px 20px 10px 20px;
+    gap: 5px;
+    border-radius: 90px;
+    opacity: 0px;
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 17.6px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.accessCodeLabel{
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.4px;
+    text-align: left;
+    color: #0C1E3D;
+    margin-top: 15px;
+}
+.fixed-width-input{
+
+    width: 438px;
+    height: 55px;
+    border-radius: 5px;
+    opacity: 0px;
+    background: #FFFFFF;
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    text-align: left;
+    color: #173770;
+    border: 1px solid #AFC3D8;
+    box-shadow: 0px 4px 8px 0px #2150A31A;
+    padding: 1.3rem;
+    background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+    background-position: 5px 5px, 0, 100% 0;
+    background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+    margin-top: 5px;
+
+}
+
+.fixed-width-input:focus-visible{
+    outline: none;
+}
+
+.accessCodeExample{
+    font-family: 'Poppins';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19.6px;
+    text-align: left;
+    color: #0C1E3D;
+    margin-top: 15px;
+}
+
+@media only screen and (max-width: 767px){
+    .slds-modal__container{
+        width: 92%;
+        margin: 0 auto;
+    }
+    .slds-modal__header{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .slds-modal__content{
+        padding: 0 20px;
+    }
+    .slds-modal__header h2{
+        font-size: 26px;
+        line-height: 28.6px;
+    }
+    .slds-modal__content p{
+        font-size: 14px;
+        line-height: 21px;
+    }
+    .modal-confirm-button button{
+        height: 50px;
+        font-size: 16px;
+        line-height: 17.6px;
+    }
+    .fixed-width-input{
+        width: 100%;
+    }
+    .accessCodeExample{
+        font-size: 13px;
+        line-height: 18.2px;
+    }
+    .modal-confirm-button-disabled, .modal-confirm-button{
+        height: 50px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+}

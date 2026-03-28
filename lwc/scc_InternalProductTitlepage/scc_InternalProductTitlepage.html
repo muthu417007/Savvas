@@ -1,0 +1,125 @@
+<template>
+	<!-- Detail Page Design -->
+	<template if:true={displaypage}>
+		<div
+			class="slds-grid slds-wrap slds-grid_vertical slds-p-horizontal_x-large slds-p-vertical_medium related-pdt-BG slds-is-relative">
+			<div class="slds-col">
+				<nav role="navigation" aria-label="Breadcrumbs">
+					<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+						<li class="slds-breadcrumb__item">
+							<a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+						</li>
+						<li class="slds-breadcrumb__item">
+							<a href="#" class="slds-m-horizontal_small breadcrumb-label">Price & Availability</a>
+						</li>
+						<li class="slds-breadcrumb__item">
+							<a href="#" class="slds-m-horizontal_small breadcrumb-label">Product Search</a>
+						</li>
+						<li class="slds-breadcrumb__item">
+							<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Product Title</a>
+						</li>
+					</ol>
+				</nav>
+			</div>
+			<div class="slds-col slds-size_3-of-3 title-page-content">
+				<div class="slds-text-align_right slds-m-bottom_large shopping-buttons">
+					<button class="slds-button back-button" onclick={returnProductSearchOnclick}>
+						Return to Product Search
+					</button>
+				</div>
+				<h1>{currentSelectedProductRecord.Title_Description}</h1>
+				<div class="slds-p-vertical_large slds-m-bottom_medium product-desc">
+					<img class="slds-m-right_medium" src={coverImage} alt="Product image" />
+					<div class="product-details">
+						<div class="slds-grid slds-wrap slds-gutters">
+							<div class="slds-col slds-size_5-of-12">
+								<div class="slds-grid slds-wrap slds-gutters">									
+										<template if:true={InternationalDivision}>
+											<div class="slds-col slds-size_3-of-12 item-label">ISBN</div>
+											<div class="slds-col slds-size_9-of-12 item-value"><a href={constructedUrl}
+													target="_blank">{currentSelectedProductRecord.ISBN}</a></div>
+										</template>									
+										<template if:true={USDivision}>
+											<div class="slds-col slds-size_3-of-12 item-label">ISBN</div>
+											<div class="slds-col slds-size_9-of-12 item-value"><a href={constructedUrl}
+													target="_blank">{currentSelectedProductRecord.ISBN}</a></div>										
+									</template>
+						<template if:true={hasAccountid}>
+											<div class="slds-col slds-size_3-of-12 item-label">ISBN</div>
+											<div class="slds-col slds-size_9-of-12 item-value"><a href={constructedUrl}
+													target="_blank">{currentSelectedProductRecord.ISBN}</a></div>										
+									</template>
+									<div class="slds-col slds-size_3-of-12 item-label">Type</div>
+									<div class="slds-col slds-size_9-of-12 item-value">
+										{currentSelectedProductRecord.Type}</div>
+									<div class="slds-col slds-size_3-of-12 item-label">Status</div>
+									<div class="slds-col slds-size_9-of-12 item-value">
+										{currentSelectedProductRecord.Status}</div>
+									<div class="slds-col slds-size_3-of-12 item-label">Restriction</div>
+									<div class="slds-col slds-size_9-of-12 item-value">{restrictionValue}</div>
+									<div class="slds-col slds-size_3-of-12 item-label">Copyright</div>
+									<div class="slds-col slds-size_9-of-12 item-value">
+										{currentSelectedProductRecord.Copyright}</div>
+									<div class="slds-col slds-size_3-of-12 item-label">Grade</div>
+									<div class="slds-col slds-size_9-of-12 item-value">
+										{currentSelectedProductRecord.Grade_Level}</div>
+								</div>
+							</div>
+							<div class="slds-col slds-size_7-of-12">
+								<div class="slds-grid slds-wrap slds-gutters">
+
+										<template if:true={InternationalDivision}>
+										
+											<div class="slds-col slds-size_4-of-12 item-label">Price</div>
+											<div class="slds-col slds-size_8-of-12 item-value">
+												${formattedListPrice}</div>
+											<div class="slds-col slds-size_4-of-12 item-label">Discount</div>
+											<div class="slds-col slds-size_8-of-12 item-value">Net</div>
+								
+									</template>
+									
+										<template if:true={USDivision}>
+										
+											<div class="slds-col slds-size_4-of-12 item-label">Price</div>
+											<div class="slds-col slds-size_8-of-12 item-value">
+												${formattedNetPrice}</div>
+											<div class="slds-col slds-size_4-of-12 item-label">Discount</div>
+											<div class="slds-col slds-size_8-of-12 item-value">Net</div>
+										
+									</template>
+									
+											<template if:true={hasAccountid}>
+												<div class="slds-col slds-size_4-of-12 item-label">Price</div>
+												<div class="slds-col slds-size_8-of-12 item-value">
+												<template if:true={isPriceLoading}>
+													<div class="loader"></div>
+												</template>
+												<template if:false={isPriceLoading}>
+													${formattedEnosixPrice}
+												</template>
+											
+											
+												</div>
+											<div class="slds-col slds-size_4-of-12 item-label">Discount</div>
+											<div class="slds-col slds-size_8-of-12 item-value">{DiscountType}</div>
+											</template>
+										
+									<div class="slds-col slds-size_4-of-12 item-label">Carton Quantity</div>
+									<div class="slds-col slds-size_8-of-12 item-value">{batchQuantity}</div>
+									<div class="slds-col slds-size_4-of-12 item-label">Stock Availability</div>
+									<div class="slds-col slds-size_8-of-12 item-value">{stockAvailability}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
+				<template if:true={loadchild}>
+					<div class="title-page-content">
+						<c-scc_internal-related-products  message={Recordidval} onclosetitlepage={closePage} countrycodeiso={countryCodeISO}
+						sapaccountid={accountId}	onopentitlepage={openpage} onselectedproduct={onselected}></c-scc_internal-related-products>
+					</div>
+				</template>			
+		</div>
+	</template>
+</template>

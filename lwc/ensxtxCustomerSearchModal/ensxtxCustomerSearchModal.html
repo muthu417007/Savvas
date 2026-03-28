@@ -1,0 +1,132 @@
+<template>
+    <lightning-modal-header label={title}></lightning-modal-header>
+    <lightning-modal-body>
+        <lightning-card class="slds-card slds-m-around_xsmall slds-is-relative wideBox">
+            <div class="slds-form">
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text={customLabel.ensxtx_Common_Loading} size="medium" variant="brand"></lightning-spinner>
+                </template>
+                <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_x-small">
+                    <template if:true={isContactOrPersonnel}>
+                        <!-- Contact Search -->
+                        <template if:true={fieldSettings.FromNumberSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="businessPartnerFrom" type="text" label={customLabel.ensxtx_CustomerSearch_Field_FromPartnerNumber} value={businessPartnerFrom}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.ToNumberSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="businessPartnerTo" type="text" label={customLabel.ensxtx_CustomerSearch_Field_ToPartnerNumber} value={businessPartnerTo}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.NameSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="firstName" type="text" label={customLabel.ensxtx_CustomerSearch_Field_FirstName} value={firstName}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.Name2Search.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="lastName" type="text" label={customLabel.ensxtx_CustomerSearch_Field_LastName} value={lastName}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.CustomerNumberSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="customerNumber" type="text" label={customLabel.ensxtx_CustomerSearch_Field_CustomerNumber} value={customerNumber}></lightning-input>
+                            </div>
+                        </template>
+                    </template>
+                    <template if:true={isVendor}>
+                        <!-- Vendor Search -->
+                        <template if:true={fieldSettings.FromNumberSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="fromVendor" type="text" label={customLabel.ensxtx_CustomerSearch_Field_FromVendorNumber} value={customerNumberFrom}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.ToNumberSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="toVendor" type="text" label={customLabel.ensxtx_CustomerSearch_Field_ToVendorNumber} value={customerNumberTo}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.NameSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="name" type="text" label={customLabel.ensxtx_CustomerSearch_Field_VendorName} value={customerName}></lightning-input>
+                            </div>
+                        </template>
+                    </template>
+                    <template if:true={isPartner}>
+                        <!-- Customer Search -->
+                        <template if:true={fieldSettings.FromNumberSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="customerNumberFrom" type="text" label={customLabel.ensxtx_CustomerSearch_Field_FromCustomerNumber} value={customerNumberFrom}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.ToNumberSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="customerNumberTo" type="text" label={customLabel.ensxtx_CustomerSearch_Field_ToCustomerNumber} value={customerNumberTo}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.NameSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="customerName" type="text" label={customLabel.ensxtx_CustomerSearch_Field_CustomerName} value={customerName}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.CitySearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="city" type="text" label={customLabel.ensxtx_CustomerSearch_Field_City} value={city}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.RegionSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="region" type="text" label={customLabel.ensxtx_CustomerSearch_Field_Region} value={region}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.PostalCodeSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="postalCode" type="text" label={customLabel.ensxtx_CustomerSearch_Field_PostalCode} value={postalCode}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.CountrySearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="Country" type="text" label={customLabel.ensxtx_CustomerSearch_Field_Country} value={country}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.TelephoneSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="telephoneNumber" type="text" label={customLabel.ensxtx_CustomerSearch_Field_Telephone} value={telephoneNumber}></lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={fieldSettings.EmailSearch.display}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                                <lightning-input name="eMailAddress" type="text" label={customLabel.ensxtx_CustomerSearch_Field_EmailAddress} value={eMailAddress}></lightning-input>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+                <button class="slds-button slds-button_brand" onclick={onSearch}>{customLabel.ensxtx_CustomerSearch_Button_Search}</button>
+                <template if:true={messages.length}>
+                    <div class="slds-m-top_small">
+                        <template for:each={messages} for:item="message">
+                            <c-ensxtx-message message={message} key={message.key}></c-ensxtx-message>
+                        </template>
+                    </div>
+                </template>
+                <div style="max-height:350px; overflow-y: auto;" class="slds-m-top_small">
+                    <lightning-datatable 
+                        key-field="key" 
+                        data={searchResult} 
+                        columns={columns}
+                        onrowselection={onRowSelect}>
+                    </lightning-datatable>
+                </div>
+                <template if:true={displayPagging}>
+                    <div class="slds-m-top_medium">
+                        <c-ensxtx-pagination paging-options={pagingOptions} onpagingchange={onPagingOptionsChange}></c-ensxtx-pagination>
+                    </div>
+                </template>
+            </div>
+        </lightning-card>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <button class="slds-button slds-button_brand" onclick={onCancel}>{customLabel.ensxtx_CustomerSearch_Button_Cancel}</button>
+    </lightning-modal-footer>
+</template>
