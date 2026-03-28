@@ -1,0 +1,12 @@
+<!--customNextZoom.html-->
+<template>
+    <div class="zoom-image-box" aria-label={ariaText} >
+            <div class="zoom-image" style={imageUrlStyle} onclick={handleGoNext}></div>
+            <div class="zoom-image-meta" onclick={handleGoNext} style="cursor: pointer;">
+                <div style={fontLargeStyle} onclick={handleGoNext}><p>{componentTextLarge}</p></div>
+                <div></div>
+                <div style={fontSmallStyle} onclick={handleGoNext}><p>{componentTextSmall}</p></div>
+        </div>
+
+    </div>   
+</template>

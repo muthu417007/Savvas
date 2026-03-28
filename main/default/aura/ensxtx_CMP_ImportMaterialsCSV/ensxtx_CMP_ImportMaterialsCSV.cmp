@@ -1,0 +1,74 @@
+<aura:component >
+
+    <aura:handler name="init" action="{!c.onInit}" value="{!this}" />
+    <aura:attribute name="messages" type="List" />
+    <aura:attribute name="displaySpinner" type="boolean" default="true"/>
+    <aura:attribute name="isValidFile" type="boolean" default="true"/>
+
+    <aura:attribute name="appSettings" type="Map"/>
+    <aura:attribute name="appSettingsName" type="String" default="ensxtx_SR_ImportMaterialsAppSettings"/>
+    <aura:attribute name="appSettingsKey" type="String" default="DefaultImportMaterialsCSV"/>
+
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="csvColumns" type="List"/>
+    <aura:attribute name="displayResults" type="Map"/>
+    <aura:attribute name="selectedRows" type="List" />
+
+    <aura:registerEvent name="selectMaterialsEvent" type="c:ensxtx_EVT_SelectMaterials"/>
+
+    <lightning:overlayLibrary aura:id="overlayLibImport"/>
+
+    <lightning:card class="slds-card slds-is-relative">
+        <aura:if isTrue="{!v.displaySpinner}">
+            <lightning:spinner aura:id="displaySpinner" class="slds-spinner_brand" />
+        </aura:if>
+        <c:ensxtx_CMP_Messages messages="{!v.messages}"/>
+        <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_x-small">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4">
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col slds-size_1-of-1">
+                        <span class="slds-form-element__label" id="file-selector-primary-label">{!$Label.c.ensxtx_ImportMaterial_Label_ImportMaterials}</span>
+                        <div class="slds-form-element__control">
+                            <div class="slds-file-selector slds-file-selector_files" >
+                                <div class="slds-file-selector__dropzone" aura:id="dropDiv" ondragover="{!c.onDragOver}" ondragleave="{!c.onDragLeave}" ondrop="{!c.onDrop}">
+                                    <input type="file" class="slds-file-selector__input slds-assistive-text" accept=".csv" id="file-upload-input-01"
+                                        aria-labelledby="file-selector-primary-label file-selector-secondary-label" onchange="{!c.onInputFileChange}" />
+                                    <label class="slds-file-selector__body" for="file-upload-input-01" id="file-selector-secondary-label">
+                                    <span class="slds-file-selector__button slds-button slds-button_neutral">
+                                        <lightning:icon iconName="utility:upload" alternativeText="Upload" title="Upload" size="xx-small" class="slds-m-right_x-small"/>
+                                        {!$Label.c.ensxtx_ImportMaterial_Label_UploadFile}</span>
+                                    <span class="slds-file-selector__text slds-medium-show">{!$Label.c.ensxtx_ImportMaterial_Label_DropFile}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <aura:if isTrue="{!!v.isValidFile}">
+                            <div class="slds-form-element__help slds-text-color_error">{!$Label.c.ensxtx_ImportMaterial_Message_UnsupportedFileType}</div>
+                        </aura:if>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-m-top_small">
+                        <lightning:button label="Download Template" onclick="{!c.onDownloadTemplate}"/>
+                        <lightning:button label="{!$Label.c.ensxtx_SalesDoc_Button_Cancel}" variant="neutral" onclick="{!c.onClickCancel}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-4">
+                <aura:if isTrue="{!!empty(v.displayResults)}">
+                    <div style="height:350px">
+                        <lightning:datatable
+                            aura:id="importTable"
+                            keyField="Id"
+                            columns="{!v.columns}"
+                            data="{!v.displayResults}"
+                            selectedRows="{! v.selectedRows }"
+                            suppressBottomBar="true"
+                        />
+                    </div>
+                    <div class="slds-m-around_x-small">
+                        <lightning:button variant="brand" label="{!$Label.c.ensxtx_SalesDoc_Button_Add}" onclick="{!c.addMaterials}"/>
+                    </div>
+                </aura:if>
+            </div>
+        </div>
+    </lightning:card>
+</aura:component>

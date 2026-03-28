@@ -1,0 +1,25 @@
+<apex:component allowDML="true" layout="none">
+<apex:attribute name="catNum" type="Integer" required="true" description="value that corresponds to the custom settings category group being displayed" />
+<apex:attribute name="catGroup" type="String" required="true" description="category group name" />
+<apex:attribute name="catGroupLabel" type="String" required="true" description="category group label" />
+<apex:attribute name="rootCat" type="String" required="true" description="root category name" />
+
+  <apex:variable var="one" value="&nbsp;" />
+  <apex:variable var="two" value="&nbsp;&nbsp;" />
+  <apex:variable var="three" value="&nbsp;&nbsp;&nbsp;" />
+  <apex:variable var="four" value="&nbsp;&nbsp;&nbsp;&nbsp;" />
+
+    <span><apex:outputText value="{!catGroupLabel}" /></span><br/>
+
+    <div class="btn-group new-select category" id="categorySelect2{!catNum}">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <div class="text">--{!$Label.PKB2_No_Filter}--</div><span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#" value="" onclick="setCategory2(this);return false;">--{!$Label.PKB2_No_Filter}--</a></li>
+          <knowledge:categoryList categoryVar="c" categoryGroup="{!catGroup}" rootCategory="{!rootCat}" level="-1">
+            <li class="delpth-{!c.depth}"><a href="#" value="{!catGroup}:{!c.Name}" onclick="setCategory2(this);return false;"><apex:outputText escape="false" value="{!c.Label}"/></a></li>
+          </knowledge:categoryList>
+      </ul>
+    </div>
+</apex:component>

@@ -1,0 +1,47 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+    <lightning:card title="Customer Care" iconName="standard:call">
+	    <blockquote><a href="https://savvas.forms-db.com/view.php?id=23851" target="_blank">Customer Care Internal Support Form</a><br></br>
+        			Customer Service: (800) 848-9500<br></br>
+            		Technical Support: (800) 234-5832
+        </blockquote>
+    </lightning:card>
+    <lightning:card title="Sales Support" iconName="standard:contact">
+       <blockquote>Post a message to our Chatter Group or contact the Help Desk at 800-846-4925<br></br>
+           <a href="https://sites.google.com/savvas.com/salesforcetraining" target="_blank">Salesforce Training Link</a>
+        </blockquote>
+    </lightning:card> 
+    <lightning:card title="Product Support" iconName="standard:pricebook">
+       <blockquote>Click to see Product Availability<br></br>
+        		   <a href="https://docs.google.com/forms/d/12tOHAiDtNwpABXBLjghqONRkYV3Q39_X61NCOB5Q82M/viewform?edit" target="_blank">Intervention Pilot Request Form</a><br></br>
+            	   Quick Reads Inventory Request Forecast Form<br></br>
+            	   Quick Reads (PRE_K) Inventory Request Forecast Form<br></br>
+        </blockquote>
+    </lightning:card>
+    <lightning:card title="Professional Services Support" iconName="standard:resource_skill">
+       <!--<blockquote><b>Request Forms</b><br></br>-->
+				   &nbsp;&nbsp;-<a href="https://support.savvas.com/support/s/systems-integration-services" target="_blank">Schedule Integration &#38; Rostering Services</a><br></br>
+                   <!-- W-013154 : 06/12/2023 Commenting Non-Opportunity Request Link -->
+        		   <!-- &nbsp;&nbsp;-<a href="/flow/runtime.apexp?flowDevName=Request_for_Non_Opportunity_Assignment" target="_blank">Non-Opportunity Request</a><br></br>-->
+        		   <!--&nbsp;&nbsp;-<a href="https://savvas.my.salesforce.com/flow/Services_Exception_Approval_Request" target="_blank">Exception Approval Request</a><br></br>
+            	   &nbsp;&nbsp;-<a href="https://savvas.my.salesforce.com/flow/Services_Exception_Approval_Request" target="_blank">National Specialist Request</a><br></br>
+            	   &nbsp;&nbsp;-Inside Sales Webinar Request<br></br>
+           		   &nbsp;&nbsp;-<a href="https://mysavvastraining.com/" target="_blank">Program Activation Webinar Request (MPT)</a><br></br>-->
+           		   &nbsp;&nbsp;-<a href="https://docs.google.com/forms/d/e/1FAIpQLSexK0LYC-XzGMe2KgbSoHhsFQByTEuOperW3AtF6gV8oYha-Q/viewform" target="_blank">Report Request</a><br></br>
+           		   &nbsp;&nbsp;-<a href="https://drive.google.com/file/d/1UK8Eep3G2Uf3xne2UguQjr1wuIyoBKPg/view?usp=sharing" target="_blank">Recording Permission Agreement</a><br></br>
+           		   <!--<b>Support Resources</b><br></br>-->
+                   &nbsp;&nbsp;-<a href="https://app.smartsheet.com/b/form/03d1959ddcbb49258d202c11f53925f9" target="_blank">Services Exception Request</a><br></br>
+           	       &nbsp;&nbsp;-<a href="https://savvas.my.salesforce.com/_ui/core/chatter/groups/GroupProfilePage?g=0F90W000001LxeY" target="_blank">Kimble Support</a><br></br>
+        		   <!--&nbsp;&nbsp;-<a href="https://sites.google.com/savvas.com/professionalservices/services-central-home" target="_blank">Savvas Professional Services</a><br></br>-->
+            	   &nbsp;&nbsp;-<a href="https://savvas.my.salesforce.com/_ui/core/chatter/groups/GroupProfilePage?g=0F90W000001ciEk" target="_blank">Customer Success Desk</a>
+            	   
+        <!--</blockquote>-->
+    </lightning:card>
+    <lightning:card title="Sales and Marketing" iconName="standard:announcement">
+	    <blockquote>
+            <a href="https://my.insideview.com/" target="_blank">InsideView</a><br></br>
+            <b>Conference and Exhibits</b><br></br>
+            		&nbsp;&nbsp;-<a href="https://forms.gle/eyLBykgE4wKqZSgRA" target="_blank">Conference Registration Request Form</a><br></br>
+        			&nbsp;&nbsp;-SM Mascot Rental Form
+        </blockquote>
+    </lightning:card>
+</aura:component>

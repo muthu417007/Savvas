@@ -1,0 +1,96 @@
+<apex:page >
+<!--apex:page cache="false" standardStylesheets="false" sidebar="false" showheader="false" standardController="KnowledgeArticle" extensions="pkb_ICOM_Controller,pkb_Controller" language="{!pkbCon.selectedLanguage}" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+
+    <apex:composition template="CommunitiesNapiliCustom" >
+    <apex:define name="head">  
+        <title>{!pagetitle}</title>
+
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=.5, minimum-scale=.5, maximum-scale=.5" />
+        <meta name="viewport" content="target-densitydpi=device-dpi" />
+
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <!--script src="{!$Resource.pkb_jquery_1_6_2}" type="text/javascript" />
+        <!--script src="{!$Resource.pkb_jquery_simplemodal_1_4_1}" type="text/javascript" />
+
+        <apex:outputText rendered="{!viewingArticle}">
+            <apex:variable var="typeName" value="{!SUBSTITUTE(pkbCon.theKad.articleTypeName, pkbCon.kavExtension, '')}" />
+            <apex:variable var="articleURL" value="{!pkbCon.currentSiteUrl}articles{!pkbCon.selectedLanguageURL}{!typeName}/{!pkbCon.theKad.urlName}" />
+            <meta property="og:title" content="{!pkbCon.theKad.title}" />
+            <meta property="og:type" content="article" />
+            <meta property="og:url" content="{!articleURL}" />
+            <meta property="og:site_name" content="Community Connection" />
+            <meta property="og:description" content="{!pkbCon.theKad.summary}" />
+            <meta property="description" content="{!pkbCon.theKad.summary}" />
+            <meta name="google-site-verification" content="2g_Bq5GzTKn-fJEk5R6TZzj9TTONp6ulerrlI6_6gnA" />
+            <link rel="canonical" href="{!articleURL}" />
+        </apex:outputText>
+
+        <c:pkb_css />
+        <link href="{!URLFOR($Resource.CocoResponsive, 'css/customPKB.css')}" rel="stylesheet" />
+
+        <c:pkb_js pkbCon="{!pkbCon}" /> 
+        <c:pkb_ICOM_js pkbCon="{!pkbCon}" pkbIcomCon="{!pkbIcomCon}" printableView="{!printableView}" id="pkb_ICOM_js" />
+        <style type="text/css">
+
+
+        </style>
+    </apex:define>
+    
+    <apex:define name="mainbody">
+ 
+        <div id="pagewrapper">
+
+            <div id="body">
+                  <apex:outputPanel > 
+                        <div id="rightHeader">
+
+                            <br/>
+
+    
+                        </div>
+                    </apex:outputPanel>
+                    
+                    <div id="right_content">
+
+                        <apex:outputText rendered="{!NOT(displayContactUs)}">
+                        
+                          <apex:outputPanel layout="block" styleClass="container-fluid" rendered="{!NOT(viewingArticle) && NOT(printableView)}">
+                                <div class="col-sm-8 col-xs-12">
+                                    <c:pkb_ICOM_popular pkbCon="{!pkbCon}" pkbIcomCon="{!pkbIcomCon}" rendered="{!NOT(searchExecuted)}" />
+                                    <c:pkb_ICOM_results pkbCon="{!pkbCon}" pkbIcomCon="{!pkbIcomCon}" rendered="{!searchExecuted}" showHeaderInfo="true" />
+                                </div>
+                                <div class="col-sm-4 hidden-xs">
+                                    <c:pkb_featured pkbCon="{!pkbCon}" />
+                                </div>
+
+                            </apex:outputPanel>
+
+                            <apex:outputText rendered="{!viewingArticle}">
+                                <div id="articleView">
+                                     <c:pkb_ICOM_ArticleView pkbIcomCon="{!pkbIcomCon}" pkbCon="{!pkbCon}" showFeedbackYesNo="false" 
+                                                             showBackLinks="false" printableView="{!printableView}" />
+                                                      
+                                 </div>
+                            </apex:outputText>
+
+                            
+                        </apex:outputText>
+
+                        <apex:outputText rendered="{!displayContactUs}">
+ 
+                            <c:pkb_ICOM_results pkbCon="{!pkbCon}" pkbIcomCon="{!pkbIcomCon}" rendered="{!searchExecuted}" showHeaderInfo="true" />
+                            <c:pkb_contactus_buttons_article pkbCon="{!pkbCon}" />
+                        </apex:outputText>
+
+                    </div>
+            </div>
+
+
+        </div>
+        <site:googleAnalyticsTracking />
+    </apex:define>
+    </apex:composition>
+    <site:previewAsAdmin />
+</apex:page-->
+</apex:page>

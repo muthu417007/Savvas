@@ -1,0 +1,27 @@
+<apex:component layout="none">
+  <apex:attribute name="data" type="CaseArticle[]" required="true" description="Page URL"/>  
+                       <apex:pageBlockSection columns="1">
+
+                        <apex:facet name="header">This article has been linked to {!data.size} Case(s)</apex:facet>
+                        <apex:outputText value="{!$Label.ICOM_KM_ARTICLE_NO_CASES}" rendered="{!IF(data.empty,true,false)}" />
+    
+    <apex:dataTable value="{!data}" var="a" cellPadding="0" border="0" width="100%" rendered="{!IF(data.empty,false,true)}">
+                            <apex:column width="20%">
+                                <apex:facet name="header"><b>{!$ObjectType.CaseArticle.Fields['CaseId'].label}</b>
+                                </apex:facet>
+                                <apex:outputField value="{!a.CaseId}" />
+                            </apex:column>
+                            <apex:column width="60%">
+                                <apex:facet name="header"><b>{!$ObjectType.Case.Fields['Subject'].label}</b>
+                                </apex:facet>
+                                <apex:outputText value="{!a.Case.Subject}" />
+                            </apex:column>
+                            <apex:column width="20%">
+                                <apex:facet name="header"><b>{!$ObjectType.Case.Fields['OwnerId'].label}</b>
+                                </apex:facet>
+                                <apex:outputField value="{!a.Case.OwnerId}" />
+                            </apex:column>
+                        </apex:dataTable>
+                                               </apex:pageBlockSection>
+
+</apex:component>

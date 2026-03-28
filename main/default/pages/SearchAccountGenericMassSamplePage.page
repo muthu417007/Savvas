@@ -1,0 +1,86 @@
+<apex:page controller="SearchAccountGenericMassSampleController">
+<apex:pageMessages id="errors" />  
+  <apex:form id="pageForm">
+      <apex:actionFunction name="updateSelected" action="{!runSelectedQuery}"/>
+      <apex:actionFunction name="selectAll" action="{!toggleSelectAll}" rerender="AccntTable"/>
+      	<apex:pageBlock >     
+			<b>Generic Contact: </b>   
+      	 	<div class = "requiredInput" >            
+      			<div class = "requiredBlock"></div>       
+          		<apex:inputtext value="{!genericContact}" id="genericContactInput"/> 
+                <!--<div>
+      			<apex:outputText value="Please enter an Generic Contact" id="promptMsg" rendered="{!requireContact}" style="color:red;"/>
+           		</div>-->
+      		</div>            
+      		<b>Available List Views for Account:</b>
+            <br/>
+       		<apex:selectList value="{!AccFilterId}" size="1" id="filterMenu">
+            	<apex:selectOptions value="{!AccountExistingViews}"></apex:selectOptions>
+            	<apex:actionSupport event="onchange"  action="{!resetFilter}" rerender="AccntTable,pagPanel" status="ajaxStatus"/>
+       		</apex:selectList>
+    	</apex:pageBlock>
+       	<apex:actionStatus id="ajaxStatus" startText="Loading..."  stopText=""/>
+     	<apex:pageBlock title="Accounts">
+            <apex:inputCheckbox id="selectedAll" onclick="selectAll()"/> <b>Select All:</b>
+            <!--<apex:actionFunction name="afadd" action="{!Add}" rerender="jspanel"/>-->
+        	<apex:pageBlockButtons >
+                <apex:commandButton action="{!Add}" value="Add Selected Account" rendered="{!$User.UITheme == 'Theme3'}"/>
+                <!--<apex:commandButton onclick="afadd();" value="Add Selected Account" oncomplete="callLWC()" rendered="{!$User.UITheme != 'Theme3'}"/>-->
+                <apex:commandButton action="{!Add}" value="Add Selected Accounts" oncomplete="callLWC()" rendered="{!$User.UITheme != 'Theme3'}" rerender="jspanel"/>
+                <apex:commandButton action="{!cancel}" value="Cancel" rendered="{!$User.UITheme == 'Theme3'}"/>
+                <apex:commandButton action="{!cancel}" value="Cancel" oncomplete="cancelLWC()" rendered="{!$User.UITheme != 'Theme3'}" rerender="jspanel"/>
+            </apex:pageBlockButtons>
+         	     <apex:outputPanel id="jspanel"> 
+                    <script>     
+                    function callLWC(){
+                        var hasContact = '{!contactFilled}';
+                        var belowLimit = '{!withinLimit}';
+                        if(document.referrer.indexOf(".lightning.force.com") > 0 && hasContact == 'Yes'){
+                            if(belowLimit == 'Yes'){
+                                var compDefinition = { 
+                                    "componentDef" : "c:massSampleComponent", 
+                                    "attributes" :{ 
+                                        "sampleId" : "{!passSampleId}",
+                                    } 
+                                };
+                                var encodedCompDef = btoa(JSON.stringify(compDefinition));
+                                window.parent.location = "/one/one.app#"+encodedCompDef;
+                            }
+                            else{
+                                alert ('Maximum number of Account is 20');
+                            }
+                         }
+                        else if(document.referrer.indexOf(".lightning.force.com") > 0 && hasContact == 'No'){
+                            //alert (requireContact);
+                            alert ('Please enter an Generic Contact');
+                        }
+                    }
+                    function cancelLWC(){
+                         var compDefinition = { 
+                                    "componentDef" : "c:massSampleComponent", 
+                                    "attributes" :{ 
+                                        "sampleId" : "{!passSampleId}",
+                                    } 
+                                };
+                                var encodedCompDef = btoa(JSON.stringify(compDefinition));
+                                window.parent.location = "/one/one.app#"+encodedCompDef;
+                    }
+                    </script>
+  			</apex:outputPanel>
+         	<apex:pageBlockTable value="{!Accounts}" var="a" id="AccntTable">
+            	<apex:column headerValue="Select">
+                    <apex:inputCheckbox value="{!a.isSelected}" id="selected" onclick="updateSelected()"/>
+                </apex:column>
+                <apex:repeat value="{!$ObjectType.Account.FieldSets.GenericMassSampleAccountField}" var="field">
+                   	<apex:column value="{!a.acc[field]}"/>
+    			</apex:repeat>
+         	</apex:pageBlockTable>
+            <apex:panelGrid columns="4" id="pagPanel">
+            	<apex:commandLink action="{!firstPage}" rendered="{!hasPrevious}">First</apex:commandLink>
+            	<apex:commandLink action="{!prev}" rendered="{!hasPrevious}">Previous</apex:commandLink>
+            	<apex:commandLink action="{!next}" rendered="{!hasNext}">Next</apex:commandLink>
+            	<apex:commandLink action="{!lastPage}" rendered="{!hasNext}">Last</apex:commandLink>
+    	</apex:panelGrid>
+     	</apex:pageBlock>
+	</apex:form>
+</apex:page>

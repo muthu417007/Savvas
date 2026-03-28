@@ -1,0 +1,3 @@
+<apex:page standardController="SampleRequest__c" extensions="SingleMassSampleController" showheader="false" action="{!redirect}" tabstyle="Sample__tab" >
+  Redirecting to {!URL} 
+</apex:page>

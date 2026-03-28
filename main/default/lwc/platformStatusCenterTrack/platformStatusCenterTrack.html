@@ -1,0 +1,120 @@
+<template >
+		  <div style="background-color:#173770;height: 100%; width: 100%; display: inline-block;" >
+					
+					<!-- SLDS Grid starts here for Platform Status Track section -->
+					<div class="slds-grid slds-wrap 											 											
+											slds-p-top_medium slds-p-bottom_medium
+											slds-grid_align-center 
+											slds-container_x-large slds-container_center">
+								
+					 <!-- Grid Column Platform Status Center Label starts here -->
+<div class="slds-col slds-small-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_7-of-12
+						slds-p-around_x-small slds-p-top_xx-small slds-p-bottom_xx-small">
+   <span > <p class= "slds-p-around_x-small slds-p-left_none
+			                slds-p-top_xx-small slds-p-bottom_xx-small" 
+								 style="font-size:28px!important;
+                  		  font-family:Poppins-bold;
+										   	color:white;font-style: normal;
+												font-weight: 700;
+												line-height: 110%; /* 33px */
+												letter-spacing: -0.3px;">
+         Platform Status Center</p>
+   </span>
+</div>
+							
+			<!-- Grid Column for Buttons section starts here -->
+<div class="slds-col slds-small-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_5-of-12 
+						slds-p-top_xx-small slds-p-bottom_xx-small slds-p-right_none">
+      <span>
+					<!-- Nested SLDS Grid starts here for Buttons section -->
+				   <div class="slds-grid slds-wrap slds-p-right_none">
+			   	<div class="slds-grid slds-wrap  
+											slds-grid_align-center " >	
+							
+						<!-- Grid Column for Check Platform Status Button starts here -->	
+							<div class="slds-col slds-small-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 
+						slds-p-around_small slds-p-left_none ">
+      <span>
+	   	<lightning-button variant="brand" label="&nbsp;Check Platform Status&nbsp;" 
+			  	 class={buttonClassName}  
+			  	style=" --slds-c-button-radius-border: 55px;
+		             font-family:Poppins-Regular;
+		             color: var(--0-c-1-e-3-d, #0C1E3D);
+								 font-size: 18px;
+								 font-style: normal;
+							   font-weight: 600;
+								 line-height: 110%;
+								 width:365px!important;
+								 height: 44.723px!important;
+								 z-index:0; position:relative;"
+		    	onclick={handleOpenModal}>
+				 </lightning-button>			
+		</span>
+</div>
+							
+				<!-- Grid Column for Subscribe To Updates Button starts here -->
+				<div class="slds-col slds-small-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12 
+						slds-p-around_small slds-p-left_none ">
+<span > 
+		<lightning-button variant="brand" label="&nbsp;Subscribe To Updates&nbsp;" 
+				  class="green slds-p-right_none " 
+					style="--slds-c-button-radius-border: 55px;
+					       font-family:Poppins-Regular;
+		            color: var(--0-c-1-e-3-d, #0C1E3D);
+								font-size: 18px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: 110%;" 
+					onclick={OpenStatusPage}></lightning-button></span>
+          </div>
+				 </div>
+		    </div>		
+		</span>
+</div>
+								 <!-- SLDS Modal body code satrts here for the Platform Status Pop Up -->		
+							
+							<c-modal lwc:if={openModal} modal-class="slds-modal slds-fade-in-open slds-modal_small">
+        <span slot="headercontent">
+          						  <lightning-button-icon class="slds-modal__close slds-float_right " title="Close" icon-name="utility:close"
+                icon-class="slds-button_icon-inverse" onclick={handleCloseModal}>
+            </lightning-button-icon>
+						<div> 							
+						</div>						
+        </span>
+									
+        <span slot="bodycontent">
+            <!-- HTML table to fetch the Platform Status values from the endpoint-->
+						<template lwc:if={repos}>
+          <table style="margin: 10px 15px;">
+            <tr style="border-bottom:grey">
+              <th class="slds-p-around_x-small" style="font-size:20px!important;
+                   font-family:Poppins-regular;
+												color:white;font-weight:400;line-height:1.304;">Platform</th>
+              <th class="slds-p-around_xx-small" style="font-size:20px!important;
+                   font-family:Poppins-regular;
+												color:white;font-weight:400;line-height:1.304;">&nbsp;&nbsp;&nbsp;Status</th>
+            </tr>
+            <template for:each={repos} for:item="repo">
+              <tr key={repo.name}>
+                <td class="slds-p-around_x-small" style="font-size:14px!important;
+                   font-family:Poppins-regular;
+												color:white;font-weight:400;line-height:1.304;" >{repo.name}</td>
+                <td class="slds-p-around_x-small" style="font-size:14px!important;
+                   font-family:Poppins-regular;
+												color:#9ECA47!important;font-weight:400;line-height:1.304;">
+										<a class="slds-p-around_x-small" href="https://status.savvas.com"
+											 style="font-size:14px!important;
+                              font-family:Poppins-regular;
+												   color:#9ECA47!important;font-weight:400;line-height:1.304;">
+												{repo.status}
+										</a></td>
+              </tr>
+            </template>
+          </table>
+        </template>
+        </span>
+    </c-modal>					
+</div>
+								
+</div>
+</template>

@@ -1,0 +1,57 @@
+<apex:page controller="QueryAssetsFromParentAccountController" >
+    <!-- Show error message when the Visualforce Page wasn't called from a Sampling Record -->
+    <apex:pageMessages id="errors"/>
+    <style type="text/css">
+  		.assetPagination{
+    	position: absolute;
+    	left:50%;
+    	}
+	</style>
+	<apex:form >
+        <apex:pageblock Title="Filter Product" id="Filter">
+            Product Name: 
+             <apex:inputtext Label="Filter Product" value="{!filterProdSearch}">
+                <apex:actionSupport event="onkeyup" rerender="results" action="{!resetFilter}"  />  
+            </apex:inputtext>
+        </apex:pageblock>
+		<apex:pageblock Title="Assets" id="results">      
+            <apex:pageBlockTable value="{!AccountAssets}" var="a">
+            	<apex:column headerValue="Asset Name">
+                <apex:commandLink value="{!a.Name}">
+                	<apex:param name="oId" value="{!a.id}"/>
+                	</apex:commandLink>
+            	</apex:column>
+                <apex:column value="{!a.accountId}"/>
+            	<apex:column value="{!a.Product2Id}"/>
+            	<apex:column value="{!a.Product2.Name}"/>
+                <apex:column value="{!a.status}"/>
+             	<apex:column value="{!a.InstallDate}"/>
+                <apex:column value="{!a.District_Wide__c}"/>
+        	</apex:pageBlockTable>	
+        
+         <!-- Pagination -->
+		<table style="width: 100%"><tr>
+    		<td>
+      			Page: <apex:outputText value=" {!PageNumber} of {! CEILING(ResultSize / ResultPageSize) }"/>
+    		</td>            
+    		<td align="center">
+                <apex:commandLink action="{!first}" rendered="{!hasPrevious}" value="First"/>
+                &nbsp;&nbsp;  
+            	<apex:commandLink action="{!previous}" rendered="{!hasPrevious}" value="Previous"/>
+         		&nbsp;&nbsp;  
+                <apex:commandLink action="{!next}" rendered="{!hasNext}" value="Next"/>
+     			&nbsp;&nbsp;  
+                <apex:commandLink action="{!last}" rendered="{!hasNext}" value="Last"/>
+    		</td>   
+    		<td align="right">
+        	<!-- Records per page -->
+                Total Records: <apex:outputText value=" {!ResultSize}"/>
+    		</td>
+		</tr>
+        </table>
+         </apex:pageblock>
+  	</apex:form>
+ 	<apex:pageBlock >
+        <apex:detail subject="{!$CurrentPage.parameters.oId}" relatedList="False"/>
+    </apex:pageBlock> 
+</apex:page>

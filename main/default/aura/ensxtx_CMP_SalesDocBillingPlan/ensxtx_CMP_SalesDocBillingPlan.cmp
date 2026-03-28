@@ -1,0 +1,98 @@
+<aura:component access="global">
+
+    <aura:attribute name="fieldSettings" type="Map"/>
+    <aura:attribute name="billingPlans" type="List"/>
+    <aura:attribute name="billingPlan" type="Map"/>
+    <aura:attribute name="billingPlanDates" type="List"/>
+    <aura:attribute name="isReadOnly" type="Boolean" default="false"/>
+    <aura:attribute name="optionValuesToInclude" type="Map"/>
+
+    <lightning:card class="slds-card slds-m-around_xsmall slds-is-relative">
+        <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_x-small">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-large-size_2-of-8">
+                <lightning:input type="text" label="{!$Label.c.ensxtx_SalesDoc_Field_BillingPlanType}" value="{!v.billingPlan.BillingPlanType}" readonly="true"/>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-large-size_2-of-8">
+                <lightning:input type="date" label="{!$Label.c.ensxtx_SalesDoc_Field_StartDate}" value="{!v.billingPlan.BillingPlanStartDate}" readonly="{!v.isReadOnly}"/>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-large-size_2-of-8">
+                <lightning:input type="date" label="{!$Label.c.ensxtx_SalesDoc_Field_EndDate}" value="{!v.billingPlan.BillingPlanEndDate}" readonly="{!v.isReadOnly}"/>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-large-size_2-of-8">
+                <c:ensxtx_CMP_InputSelect
+                    label="{!$Label.c.ensxtx_SalesDoc_Field_RuleNextBillingDate}" value="{!v.billingPlan.RuleForNextBillingDateOrigin}"
+                    disabled="{!v.isReadOnly}" name="RuleForNextBillingDateOrigin"
+                    optionValues="{!v.billingPlans}" optionValueField="PERIO" optionDescriptionField="BEZEICH"
+                    optionValuesToInclude="{!v.optionValuesToInclude.RuleForNextBillingDateOrigin}"/>
+            </div>
+        </div>
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer table-fixed-layout">
+            <caption></caption>
+            <thead>
+                <tr class="table-head slds-grid--vertical-stretch">
+                    <aura:if isTrue="{!v.fieldSettings.DeadlineSettlementDate.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_DeadlineSettlementDate}</th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.Usage.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_Usage}</th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.PercentageOfValueToBeInvoiced.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_ValueInvoiced}</th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.ValueToBeBilled.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_ValueBilled}</th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.BillingBlockForBillingPlan.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_BillingBlock}</th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.RuleInBillingPlan.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_Rule}</th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.BillingStatusForBillingPlan.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_BillingStatus}</th>         
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.DateCategory.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_DateCategory}</th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.ProposedBillingType.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_ProposedBillingType}</th>
+                    </aura:if>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.billingPlanDates}" var="billingPlanDate">
+                    <tr>                                    
+                        <aura:if isTrue="{!v.fieldSettings.DeadlineSettlementDate.display}">
+                            <td><lightning:formattedDateTime value="{!billingPlanDate.DeadlineSettlementDate}"/></td>
+                        </aura:if>
+                        <aura:if isTrue="{!v.fieldSettings.Usage.display}">
+                            <td><lightning:formattedText value="{!billingPlanDate.Usage}"/></td>
+                        </aura:if>
+                        <aura:if isTrue="{!v.fieldSettings.PercentageOfValueToBeInvoiced.display}">
+                            <td><lightning:formattedNumber style="decimal" minimumFractionDigits="2" value="{!billingPlanDate.PercentageOfValueToBeInvoiced}"/></td>
+                        </aura:if>
+                        <aura:if isTrue="{!v.fieldSettings.ValueToBeBilled.display}">
+                            <td><lightning:formattedNumber style="decimal" minimumFractionDigits="2" value="{!billingPlanDate.ValueToBeBilled}"/></td>
+                        </aura:if>
+                        <aura:if isTrue="{!v.fieldSettings.BillingBlockForBillingPlan.display}">
+                            <td><lightning:formattedText value="{!billingPlanDate.BillingBlockForBillingPlan}"/></td>
+                        </aura:if>
+                        <aura:if isTrue="{!v.fieldSettings.RuleInBillingPlan.display}">
+                            <td><lightning:formattedText value="{!billingPlanDate.RuleInBillingPlan}"/></td>
+                        </aura:if>
+                        <aura:if isTrue="{!v.fieldSettings.BillingStatusForBillingPlan.display}">
+                            <td><lightning:formattedText value="{!billingPlanDate.BillingStatusForBillingPlan}"/></td>
+                        </aura:if>
+                        <aura:if isTrue="{!v.fieldSettings.DateCategory.display}">
+                            <td><lightning:formattedText value="{!billingPlanDate.DateCategory}"/></td>
+                        </aura:if>
+                        <aura:if isTrue="{!v.fieldSettings.ProposedBillingType.display}">
+                            <td><lightning:formattedText value="{!billingPlanDate.ProposedBillingType}"/></td>
+                        </aura:if>
+                    </tr>                                    
+                </aura:iteration>
+            </tbody>
+        </table>
+    </lightning:card>
+
+</aura:component>

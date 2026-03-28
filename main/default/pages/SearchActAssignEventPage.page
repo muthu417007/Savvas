@@ -1,0 +1,51 @@
+<apex:page standardStylesheets="false" Controller="SearchActivityAssignmentEventController" showheader="false" sidebar="false">
+<style> body { font-family: "Open Sans", "Arial", "Helvetica", sans-serif; } </style>
+    
+    <div align="center" draggable="false" >
+    <apex:pageMessages />
+        <apex:pageBlock mode="edit">
+        <apex:pageBlockSection rendered="{!showInput}">
+            <apex:form >  
+                <div align="center" draggable="false" >
+                    
+                    <apex:outputText styleClass="boldText" value="Please enter your 6-digit workshop ID"/><br/>
+                    <apex:outputText styleClass="boldText" value="(your Consultant will provide this information)"/><br/>
+                    <apex:outputText styleClass="boldText" value="(Ex:435308)"/>
+                    <apex:panelGrid columns="2">
+                        <apex:inputText value="{!eventId}" label="Input"/> 
+                        <apex:commandButton value="NEXT" action="{!getActAssignment}"/>
+                    </apex:panelGrid>           
+                </div>
+            </apex:form> 
+        </apex:pageBlockSection>                                                   
+        <apex:pageBlockSection rendered="{!showEventInfo}">
+            <apex:outputtext label="Consultant:"  value="{!resource}"/>
+            <br/>
+            <apex:outputtext label="Workshop Name:"  value="{!workshopName}"/>
+            <br/>
+            <apex:outputtext label="Event Date:"  value="{0, date, MMMM d','  yyyy}">
+                <apex:param value="{!eventDate}" /> 
+            </apex:outputText>
+            <br/>
+            <apex:outputtext label="Service Type:"  value="{!svcType}"/>
+            <br/>
+            <apex:outputtext label="Account Name:"  value="{!accName}"/>
+            <br/>
+            <apex:outputtext label="City:"  value="{!accCity}"/>
+            <br/>
+            <apex:outputtext label="State:"  value="{!accState}"/>
+            <br/>
+            <apex:form target="_top">
+                <div align="center" draggable="false">
+                    <apex:commandButton value="Yes, this is my session" action="{!redirect}"/>
+                </div>
+            </apex:form>
+            <apex:form >
+                <div align="center" draggable="false">
+                    <apex:commandButton value="No, this is not my session" action="{!clear}"/>
+                </div>
+            </apex:form>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    </div> 
+</apex:page>

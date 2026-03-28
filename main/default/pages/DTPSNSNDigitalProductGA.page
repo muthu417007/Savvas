@@ -1,0 +1,28 @@
+<apex:page sidebar="false" standardStylesheets="false">
+ <apex:includeScript value="/support/console/20.0/integration.js" />
+ <script type="text/javascript">     
+  function setTabTitle() {
+   sforce.console.setTabTitle('Guided Assistance for SAP Digital Order’s and Product Information');
+   }      
+  var previousOnload = window.onload;       
+  window.onload = function() {
+   if (previousOnload) {
+    previousOnload();
+    }               
+   setTimeout('setTabTitle()', '500');
+   }
+ </script>
+ 
+ <style type="text/css">
+  .resolution {float:left;}
+  .choice {border-bottom-style:solid; border-color:#ff77cc; border-bottom-width:1px;}
+  .resolution ul {list-style-type:decimal;width:100%;display:block;}
+  .detailList {border-spacing: 5px;}
+  .resources {display:block;clear:both;}
+  .note {margin-left:50px;}
+  .labelCol {text-align:left!important;}
+ </style>
+ <apex:outputLabel > <h1>Guided Assistance for SAP Digital Order’s and Product Information</h1> </apex:outputLabel>
+ <flow:interview name="How_to_Identify_a_Digital_Product" buttonStyle="color:#050; background-color:#fed; border:1px solid;" />
+ <apex:pageBlock ><apex:outputLink value="{!$Page.HIDP_HTMLPage}" target="_blank">How to Identify a Digital Product</apex:outputLink> </apex:pageBlock>
+</apex:page>

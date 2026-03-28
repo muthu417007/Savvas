@@ -1,0 +1,221 @@
+<template>
+<!-- Quick Search Component starts -->
+
+<!-- search and clear buttons -->
+	<div class="slds-grid slds-grid_align-end">
+		<div class="slds-col">
+			<lightning-button label="Clear Search" onclick={handleClear}
+				class="slds-m-left_x-small neutral-button-text-color small-button"></lightning-button>
+		</div>
+
+		<div class="slds-col">
+			<lightning-button variant="brand" label="Search" disabled={isSearchDisabled} onclick={handleSearch}
+				class="slds-m-left_x-small small-button"></lightning-button>
+		</div>
+	</div>
+     <!-- multi ISBN Input Search area -->
+    <div>
+	<div class="slds-box slds-theme_shade slds-p-vertical_xx-small slds-m-vertical_xx-small slds-p-horizontal_none">
+		<div class="slds-grid slds-grid_vertical-align-center">
+			<lightning-icon size="xx-small" icon-name="utility:chevrondown" alternative-text="chevrondown">
+			</lightning-icon>
+			<div>&nbsp;&nbsp;Multi ISBN</div>
+		</div>
+	</div>
+	<div class="ISBN-Name">
+		<h4>ISBN(s) &nbsp;&nbsp; Desired Qunatity </h4>
+
+	</div>
+	<div class="text-area-inputchange">
+		<textarea class="arvicon-input" rows="10" cols="50"  oninput={handleInputChange}></textarea>
+		<div>To search for multiple titles at once, paste list of ISBNs follow each ISBN with a space and the desired
+			quantity</div>
+	</div>
+    </div>
+    <!-- Search result starts  -->
+	<div class="search-result-value">
+		<div class="slds-box slds-theme_shade slds-p-vertical_xx-small slds-m-vertical_xx-small slds-p-horizontal_none">
+			<div class="slds-grid slds-grid_vertical-align-center">
+				<lightning-icon size="xx-small" icon-name="utility:chevrondown" alternative-text="chevrondown">
+				</lightning-icon>
+				<div>&nbsp;&nbsp;Search Result</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- b3 buttons Add to cart  clear cart Review cart  -->
+
+	<div class="slds-grid">
+		<div class="slds-col slds-size_6-of-12 slds-grid_align-end">
+			<lightning-button label={AddtoCart} data-target-number={selectedItemCount} variant="brand"
+				onclick={addseletedisbnhandler} disabled={iscartDisabled} class="slds-m-left_x-small small-button">
+			</lightning-button>
+		
+			<lightning-button label="Clear Cart" onclick={cartclearhandler}
+				class="slds-m-left_x-small neutral-button-text-color small-button"></lightning-button>
+			
+			<lightning-button variant="brand" label="Review Cart" disabled={isReviewCart} onclick={handleSearch}
+				class="slds-m-left_x-small small-button"></lightning-button>
+			
+		</div>
+
+
+		<div class="slds-col slds-size_4-of-12 ">
+			<div class="slds-grid slds-grid_align-end">
+				<div class="slds-align-top">
+					
+					<div style="padding-top:4px !important;"> Filter Results &nbsp; </div>
+				</div>
+				<div>
+					
+					<!-- /*<lightning-input type="search" variant="label-hidden" name="searchFilter"
+						placeholder="Search To Filter"></lightning-input> -->
+						<div>
+		<c-testfilterresults onsearch={handleFilterSearch}></c-testfilterresults>
+	</div>
+					
+				</div>
+			</div>
+            </div>
+            <div class="slds-col slds-size_2-of-12 ">
+             <span class="slds-m-left_x-small"> {recordIds.length} of {searchResultsToShow.length} items</span>
+
+       
+       <lightning-icon icon-name='utility:info_alt' alternative-text='info' size="xx-small" role="tooltip" id="help" title='info' 
+       onmouseover={handleMouseOver} onmouseleave={handleMouseLeave} variant=bare></lightning-icon>
+       <div class="info-text " style="position:absolute;top:300px;right:43px;width:250px;background-color:#504c6e!important;">
+									<div class="slds-popover_body">
+										
+      <div class="slds-list_dotted slds-has-dividers_around-space "
+		
+        	style="color:white !important;padding-top:5px !important;"
+            
+            if:true={displayText}>{infoText}
+            </div>
+		
+	</div>
+</div>
+</div>
+</div>
+	<template if:true={showsearchresult}>
+		<div class="table-container">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							<div class="header-cell">
+								<span> </span>
+								<div class="divider"></div>
+								<i class="arrow down"></i>
+							</div>
+						</th>
+						<th>
+							<div class="header-cell">
+								<span>Quantity</span>
+								<div class="divider"></div>
+								<i class="arrow down"></i>
+							</div>
+						</th>
+						<th>
+							<div class="header-cell">
+								<span>ISBN</span>
+								<div class="divider"></div>
+								<i class="arrow down"></i>
+							</div>
+						</th>
+						<th>
+							<div class="header-cell">
+								<span>Title Description</span>
+								<div class="divider"></div>
+								<i class="arrow down"></i>
+							</div>
+						</th>
+						<th>
+							<div class="header-cell">
+								<span>Type</span>
+								<div class="divider"></div>
+								<i class="arrow down"></i>
+							</div>
+						</th>
+						<th>
+							<div class="header-cell">
+								<span>Grade Level</span>
+								<div class="divider"></div>
+								<i class="arrow down"></i>
+							</div>
+						</th>
+						<th>
+							<div class="header-cell">
+								<span>Copyright</span>
+								<div class="divider"></div>
+								<i class="arrow down"></i>
+							</div>
+						</th>
+						<th>
+							<div class="header-cell">
+								<span>Status</span>
+								<div class="divider"></div>
+								<i class="arrow down"></i>
+							</div>
+						</th>
+						<th>
+							<div class="header-cell">
+								<span>Price</span>
+								<div class="divider"></div>
+								<i class="arrow down"></i>
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<template for:each={searchResultsToShow} for:item="item" for:index="index">
+						<tr key={item.id}>
+							<!-- <td>{item.checkbox}</td> -->
+							<td>
+								<input type="checkbox" data-index={index}
+                            onchange={handleCheckboxChange}
+                         disabled={item.disableCheckbox} >
+
+                        </td>
+
+							<td>
+								<div class="quantity-field">
+									<input type="number" value={item.quantity} min="0"  step="1"
+                       onchange={handleChange} data-index={index}>
+            </div>
+							</td>
+
+							<td> <a href="#" onclick={handleISBNClick} 
+							data-isbn={item.isbnToDisplay}>{item.isbnToDisplay} 
+							
+							</a></td>
+							<td>{item.description}</td>
+							<td>{item.ProductSubType}</td>
+							<td>{item.gradeLevel}</td>
+							<td>{item.Copyrightyear}</td>
+							<td>{item.ProductStatus}</td>
+							<td>
+								<div class="slds-p-around_medium lgc-bg">
+									<lightning-button-icon icon-name="utility:hourglass" variant=border-filled
+										onclick={handleIconClick} alternative-text="Settings" title="Settings">
+									</lightning-button-icon>
+									{item.price}
+								</div>
+							</td>
+
+						</tr>
+					</template>
+				</tbody>
+			</table>
+		</div>
+	</template>
+	
+
+	<template if:true={moreRecordsAvailable}>
+		<div class="slds-grid slds-grid_align-center">
+			<div class="slds-col">
+				<lightning-button label="Load Next 15 Rows" onclick={handleLoadMore} variant="brand"></lightning-button>
+			</div>
+		</div>
+	</template>
+</template>

@@ -1,0 +1,33 @@
+<apex:page showHeader="false" sidebar="false" controller="CDSupportFlowController"
+    standardStylesheets="false">
+ <head>
+
+
+<style type="text/css">
+
+</style>
+
+
+
+<apex:outputPanel id="myScript">
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setCookiePath', '{!$Site.Prefix}']);
+            _gaq.push(['_setAccount', '{!$Site.AnalyticsTrackingCode}']);
+    </script>
+</apex:outputPanel>
+ <!--<apex:stylesheet value="{!$Resource.PKBFlowCss}" />-->
+    <link href="{!URLFOR($Resource.CocoResponsive, 'css/flowCustomCSS.css')}" rel="stylesheet" />
+</head>
+<flow:interview name="CD_Support" interview="{!myFlow}" rerender="flowEvents"/>
+    <apex:outputPanel id="flowEvents"> 
+        <script type="text/javascript">
+        _gaq.push(['_trackPageview', '{!$Site.Prefix}/{!$CurrentPage.Name}#{!screenName}']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src=('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+        </script>
+    </apex:outputPanel>
+</apex:page>

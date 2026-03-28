@@ -1,0 +1,99 @@
+<!--
+*********************************************************
+Component Name       : cpqProductCart
+Created Date         : 4/24/2024  
+Author               : Frank Berni - Cognizant
+Description          : Displays all existing SBQQ__QuoteLine__c records on the existing SBQQ__Quote__c
+
+Modifications Log
+<Date>       <Author>            <Modification>
+4/24/2024     Frank Berni        Initial Version: : Ticket W-014433  
+5/08/2024     Frank Berni        Built cart out displaying existing Quote Lines in Cart
+5/22/2024     Frank Berni        Updated spinner logic to handle large data loads and Cart now refreshes itself in case user returns to add more Products
+6/17/2024     Frank Berni        Updated List Price to use proper currency format
+6/26/2024     Frank Berni        Added pagination to the quote lines boost performance - W-015198
+8/09/2024     Frank Berni        Moved Quote Line Total to top of table
+8/12/2024     Frank Berni        Fixed special character issue with SBQQ__Description__c
+*********************************************************
+-->
+<template>
+    <!-- Toast Messages -->
+    <c-cpq-toast auto-close-time="6000" top-style=true></c-cpq-toast>
+
+    <!-- spinner for ProductList-->
+    <template if:false={isLoaded}>
+        <div class="demo-only demo-only_viewport" style="height:6rem;position:relative">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+            </div>
+            </div>
+    </template>
+
+    <template if:true={isLoaded}>
+        <template if:true={quoteLinesReady}>
+            <!--Stores table for Quote Lines-->
+            <lightning-card title="Current Cart">
+
+                <!-- Displaying total quote lines-->
+                <div class="slds-clearfix">
+                    <div class="slds-float_right" style="padding-right: 4px">
+                        <span class="slds-badge"> Total Quote Line Items: {totalLineItems}</span>
+                    </div>
+                </div>
+
+                <div class="table-container" style="width: 100%; border-collapse: collapse">
+                    <lightning-layout-item size="6" padding="around-small">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                            <thead>
+                                <tr>
+                                    <th class="slds-text-title_caps">ISBN</th>
+                                    <th class="slds-text-title_caps">Description</th>
+                                    <th class="slds-text-title_caps">Audience</th>
+                                    <th class="slds-text-title_caps">Category</th>
+                                    <th class="slds-text-title_caps">List Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Looping through returned CategoryProducts and displaying them in rows -->
+                                <!-- changed to paginatedLineItems -->
+                                    <template for:each={paginatedLineItems} for:item="ql">
+                                    <tr key={ql.Id}>
+                                        <td data-label="ISBN13">{ql.ISBN13__c}</td>
+                                        <!-- NEW now refers to Product__r.Description instead of SBQQ__Description__c -->
+                                        <td data-label="Description" style="word-wrap: break-word; white-space: normal">{ql.SBQQ__Product__r.Description}</td>
+                                        <td data-label="Audience">{ql.Audience__c}</td>
+                                        <td data-label="Category">{ql.Category__c}</td>
+                                        <!-- NEW changing listPrice reference -->
+                                        <td data-label="List Price">{ql.listPrice}</td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                        <!--RECORDS PER PAGE-->
+                        <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread" style="padding-top: 0.5em;">
+                            <!-- dropdown to control number of displayed quote lines -->
+                            <div class="slds-col">
+                                <div class="slds-list_inline slds-p-bottom_xx-small">
+                                    <label class="slds-text-color_weak slds-p-horizontal_x-small" for="recordsPerPage">Page Size:</label>
+                                    <!-- converting to lightning combobox so it properly defaults as 50 in dropdown -->
+                                    <lightning-combobox value={pageSize} options={pageSizeOptions} placeholder={pageSize} onchange={handleRecordsPerPage}></lightning-combobox>
+                                </div>
+                            </div>
+                            <!-- buttons next and previous-->
+                            <div class="slds-align_absolute-center" style="height:5rem">
+                                <lightning-button disabled={disablePrevious} icon-name="utility:chevronleft" label="Previous" alternative-text="Previous" onclick={handlePreviousPage}></lightning-button>
+                                &nbsp;
+                                <span class="slds-badge">Showing {currentPage} &nbsp;of&nbsp; {totalPages} &nbsp;&nbsp;Page(s)</span>
+                                &nbsp;
+                                <lightning-button disabled={disableNext} icon-name="utility:chevronright" label="Next" alternative-text="Next" onclick={handleNextPage} class="slds-p-horizontal_x-small" icon-position="right"></lightning-button>
+                            </div>
+                            
+                        </div>
+                    </lightning-layout-item>
+                </div>
+            </lightning-card>
+        </template>
+    </template>
+</template>

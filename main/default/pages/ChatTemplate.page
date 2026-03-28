@@ -1,0 +1,61 @@
+<!-- 
+* ─────────────────────────────────────────────────────────────────────────────────────────────────┐
+* Visualforce page that format's the Pearson branding
+*
+* Visualforce page that format's the Pearson branding
+* 
+* ──────────────────────────────────────────────────────────────────────────────────────────────────
+* @author         Romer Pasag   	<Romer.Pasag@pearson.com>
+* @modifiedBy     Romer Pasag   	<Romer.Pasag@pearson.com>
+* @maintainedBy   Romer Pasag   	<Romer.Pasag@pearson.com>
+* @version        1.0
+* @created        2018-01-02
+* @modified       
+* ──────────────────────────────────────────────────────────────────────────────────────────────────
+* @changes
+* v1.0        	  Romer.Pasag@pearson.com
+* 
+* ─────────────────────────────────────────────────────────────────────────────────────────────────┘
+-->
+
+<apex:page showHeader="false" sidebar="false" id="CommunitiesTemplate" applyBodyTag="false" applyHtmlTag="false" docType="html-5.0" standardStylesheets="false">
+<html>
+    <head lang="en">
+        <meta charset="utf-8" />
+      <apex:insert name="head" />
+        <title>Chat at Pearson</title>
+        <link href="{!URLFOR($Resource.ChatWindowTemplate, 'css/customtemplate.css')}" rel="stylesheet" />
+    <!-- HTML5 for IE6-8 support of HTML elements -->
+
+    </head>
+
+    <body>
+ <div class="mainContainer">
+    <div>      <!-- HEADER -->
+         <header>
+         <div class="header"> 
+            <div class="header-image" />
+            <h2  id="header-text" />
+        </div>
+        </header>
+    </div>
+
+                    <!-- CONTENT -->
+            <div class="container paddingBottom15">
+       
+                <apex:insert name="mainbody" />
+            </div>
+            <!-- //CONTENT -->
+
+            <!-- FOOTER -->
+           <div id="footer"> </div>
+                
+                <!-- //FOOTER -->
+
+            </div><!--//.container -->
+
+
+
+    </body>
+</html>
+</apex:page>

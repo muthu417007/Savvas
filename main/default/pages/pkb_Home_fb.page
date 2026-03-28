@@ -1,0 +1,15 @@
+<apex:page >
+    
+    <!--cache="false"
+  standardStylesheets="false"
+  showHeader="false"
+  sidebar="false"
+  controller="pkb_Controller"
+  language="{!$CurrentPage.parameters.l}">
+
+
+<apex:composition template="pkb_Template_fb">
+  <apex:define name="body"></apex:define>
+</apex:composition-->
+
+</apex:page>

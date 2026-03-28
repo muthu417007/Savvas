@@ -1,0 +1,245 @@
+<template>
+    <!-- Conditional rendering based on showTabset variable -->
+    <div lwc:if={showTabset} class="productCriteriaBg">
+        <div class="slds-grid slds-wrap slds-grid_vertical slds-gutters slds-p-around_large slds-is-relative">
+            <div class="slds-tabs_default slds-col slds-size_3-of-3">
+                <!-- Tab 1: ISBN/Title -->
+                <ul class="slds-tabs_default__nav" role="tablist">
+                    <li class="slds-tabs_default__item slds-is-active" role="presentation"
+                        data-id="tab-default-1__item">
+                        <a class="slds-tabs_default__link" href="#" role="tab" tabindex="0" aria-selected="true"
+                            aria-controls="tab-default-1" data-id="tab-default-1__item" data-value="ISBN"
+                            onclick={handleActive}>ISBN/Title</a>
+                    </li>
+                    <li class="slds-tabs_default__item border-line" role="presentation" data-id="tab-default-2__item">
+                        <a class="slds-tabs_default__link" href="#" role="tab" tabindex="-1" aria-selected="false"
+                            aria-controls="tab-default-2" data-id="tab-default-2__item" data-value="multiISBN"
+                            onclick={handleActive}>Multi ISBN</a>
+                    </li>
+                    <li class="slds-tabs_default__item" role="presentation" data-id="tab-default-3__item">
+                        <a class="slds-tabs_default__link" href="#" role="tab" tabindex="-1" aria-selected="false"
+                            aria-controls="tab-default-3" data-id="tab-default-3__item" data-value="Catalog"
+                            onclick={handleActive}>Catalog</a>
+                    </li>
+                </ul>
+                <div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel"
+                    aria-labelledby="tab-default-1__item" data-id="tab-default-1__item" data-name="tabpanel">
+                    <template if:false={showProductTitlePage}>
+                        <div class="searchCard">
+
+                            <!-- Accordion for Search Criteria -->
+
+                            <div class="slds-grid slds-grid_vertical-align-center" style="align-items: baseline;">
+                                <div class="slds-col slds-size_2-of-3">
+                                    <div class="greenBox"></div>
+                                    <div class="searchCriteriaTitle" style="margin-bottom: -5px;">Search Criteria</div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <label class="slds-form-element__label" for="checkbox-unique-id-80">Active Products Only</label>
+                                    <div class="slds-form-element__control">
+                                        <lightning-input type="checkbox" name="options" id="checkbox-unique-id-80"
+                                            value="checkbox-unique-id-80" checked={activeProducts}
+                                            onclick={handleActiveProductsChange}></lightning-input>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Criteria Section -->
+                            <div class="slds-grid slds-gutters slds-p-horizontal_small"
+                                style="margin-left: -6px; margin-top: 20px;">
+                                <!-- ISBN Input -->
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <div class="slds-grid slds-grid_vertical-align-left">
+                                            <label class="slds-form-element__label" for="text-input-id-56">ISBN</label>
+                                            <div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+                                                <img src={infoIconUrl} class="slds-show_inline-block info-icon">
+                                                <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom isbnTooltip"
+                                                    role="tooltip">
+                                                    <div class="slds-popover__body">ISBNs must be complete: 10 or 13
+                                                        digits</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="text-input-id-56" maxlength="13" placeholder="Enter ISBN" class="slds-input" value={isbnValue} oninput={handleTextInputChange} onkeypress={handleEnter} data-id="ISBN"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Title Keyword Input -->
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <div class="slds-grid slds-grid_vertical-align-left">
+                                            <label class="slds-form-element__label" for="text-input-id-56">Title Keyword(s)</label>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="text-input-id-57" placeholder="Enter Keywords" class="slds-input" value={titlekeyword} oninput={handleTextInputChange} onkeypress={handleEnter}/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <div class="slds-grid slds-grid_vertical-align-left">
+                                            <label class="slds-form-element__label">Include</label>
+                                        </div>
+                                        <div class="slds-form-element__control slds-m-bottom_none">
+                                            <fieldset class="slds-form-element__group">
+                                                <div class="slds-form-element__row">
+                                                    <span class="slds-radio slds-m-bottom_xx-small">
+                            <input type="radio" id="account1" name= "Only US Sales Org" value="Only US Sales Org" onchange={handleRadioChange} checked={isUSSelected}/>
+                            <label class="slds-radio__label" for="account1">
+                              
+                                <span class="slds-radio_faux"></span>
+                                                    <span class="slds-form-element__label">Only US Sales Org</span>
+                                                    </label>
+                                                    </span>
+                                                    <span class="slds-radio slds-m-bottom_xx-small">
+                            <input type="radio" id="account2" name="Only Canadian Sales Org" value= "Only Canadian Sales Org" onchange={handleRadioChange} checked={isCanadaSelected} />
+                            <label class="slds-radio__label" for="account2">
+                                <span class="slds-radio_faux"></span>
+                                                    <span class="slds-form-element__label CAD">Only Canadian Sales Org </span>
+                                                    </label>
+                                                    </span>
+                                                    <span class="slds-radio">
+                            <input type="radio" id="account3" name="Both" value="Both" onchange={handleRadioChange} checked={isBothSelected}  />
+                            <label class="slds-radio__label" for="account3">
+                                <span class="slds-radio_faux"></span>
+                                                    <span class="slds-form-element__label">Both</span>
+                                                    </label>
+                                                    </span>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <div class="slds-grid slds-grid_vertical-align-left">
+                                            <label class="slds-form-element__label" for="text-input-id-56">Account # </label>
+                                            <div class="slds-is-relative slds-show_inline-block">
+                                                <img src={infoIconUrl} class="slds-show_inline-block info-icon">
+                                                <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+                                                    role="tooltip">
+                                                    <div class="slds-popover__body">{labels.scc_accountHoverMessage}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="text-input-id-59" maxlength="13" placeholder=" " class="slds-input" value={accountId} oninput={handleAccountInputChange} onkeypress={handleEnter} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Search Buttons -->
+                            <div class="slds-grid slds-grid_vertical-align-left">
+                                <!-- Clear Search Button -->
+
+                                <div class="slds-col" style="padding-left:20px; gap:20px; display: flex;">
+                                    <!-- Search Button -->
+                                    <button class={searchButtonCSS} onclick={handleSearch} disabled={manualSearchBtnDisabled}><span><img src={searchIconUrl} alt="search" style="max-width: 24px; height: 24px; gap: 0px; opacity: 0px; padding: padding: 1px 2px 1px 1px; margin-top: -2px;"/></span> Search</button>
+                                    <!-- clear Button -->
+                                    <button class={clearButtonCSS} onclick={handleClear} disabled={disableClearButton}>Clear</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- Accordion for Search Results -->
+                        <div class="searchCard slds-m-top_x-large">
+                            <div style="display: flex;justify-content: space-between;">
+                                <div>
+                                    <div class="searchResultTitle">Search Results</div>
+                                </div>
+                                <template lwc:if={showSearchFilter}>
+                                    <div style="display: flex; align-items: center;">
+                                        <div class="filterSearch"> Filter Results &nbsp; </div>
+                                        <div class="slds-is-relative slds-show_inline-block slds-m-right_xx-small">
+                                            <img src={infoIconUrl} class="slds-show_inline-block info-icon">
+                                            <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom isbnTooltip"
+                                                role="tooltip">
+                                                <div class="slds-popover__body">Enter a keyword to filter within the
+                                                    current set of search results</div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element" style="margin-top: 3px;">
+                                            <div
+                                                class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                                                <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right">
+                                            <img src={crossIconUrl} alt="cross" style="width: 11.88px; height: 11.88px; margin-left: -0.5px; margin-bottom: 2px;" onclick={clearFilterInput} />
+                                            <span class="slds-assistive-text">Clear</span>
+                                        </button>
+                                                <input type="search" id="text-input-id-58" class="filterInput" value={filterSearchValue}  onchange={handleFilter}/>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex;">
+                                            <div class="countItems">{transformedDataLength} of {totalCount} Items &nbsp;
+                                            </div>
+                                            <div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+                                                <img src={infoIconUrl} class="slds-show_inline-block info-icon">
+                                                <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom filterTooltip"
+                                                    role="tooltip">
+                                                    <div class="slds-popover__body">Search by ISBN, Keyword</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </template>
+                            </div>
+
+                            <!-- Lightning Data Table to display search results -->
+                            <template if:true={showResults}>
+                                <!-- Data Table -->
+                                <c-scc_internal-product-table accvalue={accSAPId} countrystatus={country}
+                                    filter={filterCriteria} raw-parent-table-data={productData}
+                                    onshowproducttitlepage={openChildTitlePage}
+                                    ontransformeddatalength={handleTransformedDataLength}>
+                                </c-scc_internal-product-table>
+                            </template>
+                            <!-- Search Result Error Message -->
+                            <template if:true={showSearchResultErrorMessage}>
+                                <div class="noResultBg">
+                                    <img src={noResult} alt="No Result" class="noResultImage"/>
+                                    <h5 class="noResultText">No Results</h5>
+                                    <p class="noResultMessage">No ISBN found to match your search criteria</p>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+
+
+                <!-- Tab 2: Multi ISBN -->
+                <div id="tab-default-2" class="slds-tabs_default__content slds-hide" role="tabpanel"
+                    aria-labelledby="tab-default-2__item" data-id="tab-default-2__item" data-name="tabpanel">
+
+                    <c-scc_internal-quick-search parent-selected-product-record={selectedProductRecord}
+                        onshowproducttitlepage={handleShowProductTitlePage}>
+                    </c-scc_internal-quick-search>
+                </div>
+                <!-- <template if:true={viewForCatalogSection}> -->
+                <div id="tab-default-3" class="slds-tabs_default__content slds-hide" role="tabpanel"
+                    aria-labelledby="tab-default-3__item" data-id="tab-default-3__item" data-name="tabpanel">
+                    <!-- Custom LWC component for Catalog search -->
+                    <c-scc_catalog-l-w-c parent-selected-product-record={selectedProductRecord}
+                        onshowproducttitlepage={handleShowProductTitlePage}>
+                    </c-scc_catalog-l-w-c>
+                </div>
+                <!-- </template> -->
+            </div>
+        </div>
+    </div>
+    <template if:true={showProductTitlePage}>
+        <c-scc_-internal-product-titlepage parent-selected-product-record={selectedProductRecord}
+            onclosetitlepage={closeChildTitlePage} tab-value={getactiveTabValue}></c-scc_-internal-product-titlepage>
+    </template>
+    <!-- Placeholder template -->
+    <template if:true={variable}>
+        <!-- Add content here if needed -->
+    </template>
+</template>

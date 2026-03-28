@@ -1,0 +1,43 @@
+<template>
+    <template if:true={homePage}>
+        <c-scc_home-l-w-c onhmsearchclk={handleData} tabselection={tabselection} ></c-scc_home-l-w-c>
+    </template>    
+
+    <template if:true={OrderStatusPage}>
+        <c-scc_order-status-l-w-c getdatafrmhm={sendDataToOrderStatus}></c-scc_order-Status-l-w-c>
+    </template>
+
+    <template if:true={CheckPriceAvailabilityPage}>
+        <c-scc_product-criteria-search-l-w-c></c-scc_product-criteria-search-l-w-c>
+    </template>
+
+    <template if:true={PlaceOrderPage}>
+        <c-scc_confirm-address-l-w-c>  </c-scc_confirm-address-l-w-c>
+         
+       </template>
+
+    <template if:true={FileClaimPage}>
+      I am on Generate File claim Page
+    </template>
+
+    <template if:true={viewAllHeldCartsPage}>
+        <c-scc_view-all-held-carts-l-w-c></c-scc_view-all-held-carts-l-w-c>
+    </template>
+
+    <template if:true={openReviewHeldCarts}>
+        <c-scc_review-cart-page></c-scc_review-cart-page>
+    </template>
+
+    <template if:true={GenerateRequestsPage}>
+        I am on Generate Reports Page
+    </template>
+
+    <template if:true={RequestDocumentsPage}>
+        I am on Request Documents Page
+    </template>
+
+    <template if:true={CheckAccessCodePage}>
+        I am on Check Access Code Page
+    </template>
+
+</template>

@@ -1,0 +1,48 @@
+<template>
+	<template if:false={isLoading}>
+		<div class="slds-grid ptb50 bgcolorblue ">
+			<div class="slds-col slds-size_12-of-12 footerComponent">
+				<div>
+					<ul class="footerLink">
+						<template for:each={topMetadataRecords} for:item="index">
+							<li class="option" key={index.Top_Sequence__c}><a tabindex="0" href={index.Footer_Link__c}
+									target="_blank">{index.Label}</a></li>
+						</template>
+						<li class="dropdown option mr0"><a tabindex="-1" href="javascript:void(0)">{stateprogramsKey}
+							<template if:true={displayDropDown}>
+								<span><img src={caret} alt="caret" class="caret_dropdown"> </span>
+							</template>
+							</a>
+							<div class="dropdown-content">
+								<template if:true={childLinks}>
+									<template for:each={childLinks} for:item="link">
+										<a tabindex="-1" href={link.value} key={link.key} target="_blank">{link.key}</a>
+									</template>
+								</template>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="text-center">
+					<hr class="mt15">
+				</div>
+				<div>
+					<p class="copyrighttext text-center">
+						{copyRightInformationValue}
+					</p>
+				</div>
+				<div class="text-center">
+					<hr class="mt15">
+				</div>
+				<div class="extraLink text-center">
+					<ul class="footerLink">
+						<template for:each={bottomMetadataRecords} for:item="index">
+							<li class="option" key={index.Bottom_Sequence__c}><a tabindex="0" href={index.Footer_Link__c}
+									target="_blank">{index.Label}</a></li>
+						</template>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</template>
+</template>

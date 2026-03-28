@@ -1,0 +1,9 @@
+.THIS .homeBG{
+    background-color: #E5F1FD;
+}
+.THIS .home-content-section{
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px !important;
+}

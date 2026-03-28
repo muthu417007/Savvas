@@ -1,0 +1,97 @@
+/* .accordion {    
+--slds-c-accordion-summary-color-background:grey !important;
+
+--slds-c-accordion-heading-font-size: 0.25rem !important;
+} */
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+
+label,input {
+    display:block;
+}
+
+
+.searchButton {
+  background-color: #EFEFEF;
+}
+
+.searchButton:not([disabled]) {
+  background-color: blue;
+  color: white;
+}
+
+button:not([disabled]) {
+  background-color: blue;
+  color: white;
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button 
+{
+  opacity: 1;
+}
+
+input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button 
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+
+
+.custom-button {
+  font-size: 12px;
+}
+
+
+
+
+.tooltip {
+  position: absolute;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color:#fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.statuscombobox .slds-dropdown-trigger_click .slds-dropdown {
+  width: 15%;
+}
+
+
+.helptext {
+  position: relative;
+  background-color: #251F4C;
+}

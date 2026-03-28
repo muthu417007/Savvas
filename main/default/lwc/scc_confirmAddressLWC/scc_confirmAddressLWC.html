@@ -1,0 +1,209 @@
+<template>
+    <template if:true={showConfirmAddressPage}>
+        <div class="slds-grid slds-wrap slds-grid_vertical slds-p-around_large confirm-Address-BG slds-is-relative">
+            <h1 class="slds-assistive-text">Place order</h1>
+            <template if:false={isGuest}>
+                <div class="slds-col">
+                    <nav role="navigation" aria-label="Breadcrumbs">
+                        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                            
+                            <li class="slds-breadcrumb__item">
+                                <a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+                            </li>
+                            <li class="slds-breadcrumb__item">
+                                <a href="#" class="slds-m-horizontal_small breadcrumb-label">Place Order</a>
+                            </li>
+                            <li class="slds-breadcrumb__item">
+                                <a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Confirm Addresses</a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>          
+            </template>
+            
+        
+            <template if:true={showMultiAddressPage}>
+                <div class="slds-col slds-size_3-of-3">
+                    <div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+                        <h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">Select Billing Address <template if:false={isGuest}><span>(Associated Shipping Addresses will show)</span></template></h2>
+                        <div class="slds-p-right_large slds-m-bottom_medium slds-float_right confirm-address-filter">
+                            <label class="slds-form-element__label slds-p-right_none slds-m-left_x-small" for="filter-search-input">Filter Results<span class="slds-assistive-text">Filter by name or zip / Postal Code. Showing {totalBillToRecords} of {totalBillToRecords} Items.</span></label>
+                            <div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+                                <div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+                                <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+                                    <div class="slds-popover__body">Filter by name or zip / Postal Code</div>
+                                </div>
+                            </div>
+                            <div class="slds-is-relative">
+                                <input type="text" id="filter-search-input" class="slds-input filter-search-input" value={searchTerm} onchange={handleUserInputs} onkeyup={handleUserInputs} />
+                                <a href="#" class="slds-button filter-clear" onclick={clearFilterInputBill} aria-label="close" role="button">x</a>
+                            </div>
+                            <div class="slds-form-element__label item-count" role="alert">{totalBillToRecords} of {totalBillToRecords} Items</div>
+                        </div>
+                        <div class="slds-grid slds-wrap slds-gutters_x-small slds-p-vertical_medium slds-p-left_x-large slds-p-right_small card-container">
+                            <template for:each={filteredresult} for:item="sAddress">
+                                <div class="slds-col slds-size_3-of-12" key={sAddress.AccId}>
+                                    <div class="slds-visual-picker slds-visual-picker_medium slds-m-bottom_small">
+                                        <input type="radio" id={sAddress.AccId} value={sAddress.AccId} name="BillingAddresss" 
+                                        onchange={handleAddressPick} onclick={handleRowClick} data-record-id={sAddress.AccId}/>
+                                        <label for={sAddress.AccId}>
+                                            <div class="card-size">
+                                                <span class="slds-visual-picker__figure slds-visual-picker__text card-size slds-p-around_medium card-padding">
+                                                    <span>
+                                                        <p>{sAddress.name} {sAddress.AccountName}</p>
+                                                        {sAddress.BillinStreet}<br/>
+                                                        {sAddress.BillingCity} {sAddress.State}{sAddress.ZipCode}<br/>
+                                                        {sAddress.BillingCountry}
+                                                    </span>
+                                                </span>
+                                                <span class="slds-icon_container slds-visual-picker__text-check">
+                                                    <svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true"></svg>
+                                                </span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_3-of-3">
+                    <div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+                        <template if:true={isGuest}>
+                            <h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">Select Shipping Address</h2>
+                        </template>
+                        <template if:false={isGuest}>
+                            <h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">{selectShippingAddress}</h2>
+                        </template>
+                        <div class="slds-p-right_large slds-m-bottom_medium slds-float_right confirm-address-filter">
+                            <label class="slds-form-element__label slds-p-right_none slds-m-left_x-small" for="filter-search-input1">Filter Results<span class="slds-assistive-text">Filter by name or zip / Postal Code. Showing {totalShipToRecords} of {totalShipToRecords} Items.</span></label>
+                            <div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+                                <div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+                                <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+                                    <div class="slds-popover__body">Filter by name or zip / Postal Code</div>
+                                </div>
+                            </div>
+                            <div class="slds-is-relative">
+                                <input type="text" id="filter-search-input1" class="slds-input filter-search-input" value={searchTermShip} onchange={handleUserInputsShip} onkeyup={handleUserInputsShip} />
+                                <a href="#" class="slds-button filter-clear" onclick={clearFilterInputShip} aria-label="close" role="button">x</a>
+                            </div>
+                            <div class="slds-form-element__label item-count" role="alert">{totalShipToRecords} of {totalShipToRecords} Items</div>
+                        </div>
+                        <template if:true={allowDropShip}>
+                            <div class="slds-p-horizontal_x-large allow-drop-ship">
+                                <lightning-input type="checkbox" label="Specify One-Time Shipping Address at Checkout" checked={isChecked} onchange={handlecheckboxChange} id="allow-drop-ship"></lightning-input>
+                                
+                            </div>
+                        </template>
+                        <div class="slds-grid slds-wrap slds-gutters_x-small slds-p-vertical_medium slds-p-left_x-large slds-p-right_small ship-address-container">
+                            <template if:true={showAvailableShipping}>
+                                <template for:each={filteredresultt} for:item="shippaddr">
+                                    <div class="slds-col slds-size_3-of-12" key={shippaddr.AccShipId}>
+                                        <div class="slds-visual-picker slds-visual-picker_medium slds-m-bottom_small">
+                                            <input type="radio" id={shippaddr.AccShipId} value={shippaddr.AccShipId} name="shipping-address" 
+                                            onclick={handleShipRowClick} data-record-id={shippaddr.AccShipId}/>
+                                            <label for={shippaddr.AccShipId}>
+                                                <div class="card-size">
+                                                    <span class="slds-visual-picker__figure slds-visual-picker__text card-size slds-p-around_medium card-padding">
+                                                        <span style="text-align: left;">
+                                                            <p>{shippaddr.SAccountName}</p>
+                                                            {shippaddr.ShipStreet} <br />
+                                                            {shippaddr.ShippingCity} {shippaddr.Provionce} {shippaddr.PostalCode}<br/>
+                                                            {shippaddr.ShippingCountry}
+                                                        </span>
+                                                    </span>
+                                                    <span class="slds-icon_container slds-visual-picker__text-check">
+                                                        <svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true"></svg>
+                                                    </span>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <!-- Single Address Page -->
+            <template if:true={showSingleAddressPage}>
+                <div class="slds-col slds-size_3-of-3">
+                    <div class="slds-m-top_large slds-p-top_large confirm-address-cards">
+                        <h2 class="slds-p-horizontal_x-large slds-float_left slds-is-relative confirm-address-title">Review Addresses</h2>
+                        <div class="slds-p-right_large slds-m-bottom_medium slds-float_right confirm-address-filter">
+                           <template if:true={showCheckout}>
+                           	<button class="slds-button checkout-button slds-m-right_small " onclick={handleCheckout}>
+								<img src={checkuoutCartIcon} alt="cart icon" />
+								Proceed to Checkout
+							</button>
+                           </template>
+                            <button class="search-pdts-button" onclick={returnProductDetailpageOnclick}>Search for Products</button>
+                        </div>
+                    
+                            <div class="slds-grid slds-wrap slds-gutters slds-p-bottom_x-large slds-p-left_x-large slds-p-right_small review-address-container" key={Billaddr.id}>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <div class="slds-grid slds-wrap slds-gutters">
+                                        <div class="slds-col slds-size_4-of-12">
+                                            <p class="address-label">Billing Account</p>
+                                        </div>
+                                        <div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+                                            <p class="address-value">{selectedBilling.BillToNumber}<br>{selectedBilling.AccountName}</p>
+                                        </div>
+                                        <div class="slds-col slds-size_4-of-12">
+                                            <p class="address-label">Billing Address</p>
+                                        </div>
+                                        <div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+                                            <p class="address-value">{selectedBilling.BillinStreet}<br>{selectedBilling.BillingCity} {selectedBilling.State}{selectedBilling.ZipCode}<br>{selectedBilling.BillingCountry}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_6-of-12">
+                                    <template if:true={showShipAddressPage}>
+                                      
+                                            <div class="slds-grid slds-wrap slds-gutters" key={Shipaddr.id}>
+                                                <div class="slds-col slds-size_4-of-12">
+                                                    <p class="address-label">Shipping Account</p>
+                                                </div>
+                                                <div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+                                                    <p class="address-value">{selectedShipping.ShipToNumber}<br>{selectedShipping.SAccountName}</p>
+                                                </div>
+                                                <div class="slds-col slds-size_4-of-12">
+                                                    <p class="address-label">Shipping Address</p>
+                                                </div>
+                                                <div class="slds-col slds-size_8-of-12 slds-m-bottom_small">
+                                                    <p class="address-value">{selectedShipping.ShipStreet}<br>{selectedShipping.ShippingCity}{selectedShipping.Provionce} {selectedShipping.PostalCode}<br>{selectedShipping.ShippingCountry}</p>
+                                                </div>
+                                            </div>
+                                      
+                                    </template>
+                                    <template if:true={showShipAddressEmptyPage}>
+                                        <div class="slds-grid slds-wrap slds-gutters">
+                                            <div class="slds-col slds-size_4-of-12">
+                                                <p class="address-label">Shipping Address</p>
+                                            </div>
+                                            <div class="slds-col slds-size_8-of-12">
+                                                <p class="address-value">Specify One-Time Shipping Address at Checkout</p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                      
+                    </div>
+                </div>
+            </template>
+        </div>
+    </template>
+    <template if:true={showChildComponent}>
+        <c-scc_place-order-criteria-search-l-w-c userselection={userInputs}></c-scc_place-order-criteria-search-l-w-c>
+    </template>
+    <template if:true={viewallheldcart}>
+          <c-scc_view-all-held-carts-l-w-c></c-scc_view-all-held-carts-l-w-c>
+    </template>
+   <template if:true={reviewCartPage}>
+          <c-scc_review-cart-page>  </c-scc_review-cart-page>
+    </template>
+  	<template if:true={redirectCheckout}>
+		<c-scc_check-out-l-w-c > </c-scc_check-out-l-w-c>
+	</template>
+</template>

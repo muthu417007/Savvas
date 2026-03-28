@@ -1,0 +1,261 @@
+div#body
+{
+  width:100%!important;
+}
+
+div#footer
+{
+  width:100%!important;
+}
+
+div#rightHeader {
+height:160px!important;
+}
+
+div#right_column {
+width:80%!important;
+border:0px!important;
+}
+
+div.searchDrill{
+float:left;
+margin-right:15px;
+}
+
+div.narrowSearch select {
+min-width:240px;
+}
+
+/* PKB Fixes */
+#right_content {
+    clear: both;
+}
+
+div#body {
+    border: 0 none transparent;
+    background: transparent;
+}
+
+/* PKB remove border radius */
+.action, a.action:hover, #searchAskContainer, .answer_input input, .notice, .feedcontainer .singlefeeditemheader .thisupdatespan, .publishercontainer div.publishertextareaerror, .feedcontainer div.feeditemcommentnew div.newcommenttextareaerror, .publishercontainer .publishererrorcontainer, .feedcontainer .newcommenterrorcontainer, .feedcontainer .feeditemcommentplaceholder input, .feedcontainer .feeditemcommentnew .foobar, .publishercontainer .publishertextarea, .sub_action, .filter .current, .filter a, .signin, .leftContent li a, #searchAskInputContainer, #searchAskForm, .waitingHolder, .csAlert, .csInfo, .prompt, #searchAskContainer .current, .sectionHeader, .popUpContent {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+#searchAskForm {
+    width: auto;
+    max-width: 600px;
+}
+#searchAskForm .form-group {
+    margin-left: 0;
+}
+#searchAskForm .searchInput{
+    border: 1px solid #bababa;
+}
+
+#searchAskButton {
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+#searchAskInput {
+    padding: 0 30px 0 10px;
+    color: #000000;
+    width: 100%;
+    height: 50px;
+}
+
+#searchAskInput.default {
+    color: #bababa;
+}
+span.glyphicon.searchIcon {
+    top: 18px;
+    right: 10px;
+    color: #808080;
+}
+#searchAskForm .btn-primary,
+#searchAskForm .btn-primary:hover,
+#searchAskForm .btn-primary:focus,
+#searchAskForm .btn-primary:active,
+#searchAskForm .btn-primary.active,
+#searchAskForm .open .dropdown-toggle.btn-primary {
+    border-radius: 0;
+    height: 52px;
+    background-color: #007fa3;
+    background-image: none;
+    border-color: #007fa3;
+    font-size: 18px;
+    margin: 0;
+}
+
+/* PKB narrow search*/
+div.searchDrill {
+    margin-right: 0;
+    padding: 0;
+}
+
+div.searchDrill select {
+    min-width: initial;
+    width: 95%;
+}
+
+.narrowSearch {
+    background: #007fa1;
+    color: #ffffff;
+    float: left;
+    width: 100%;
+    padding: 5px 15px; 
+}
+
+.narrowSearch h2.section {
+        background: #007fa3;
+    color: #ffffff;
+    border-bottom: 0 none transparent; 
+    font-size: 16px;
+}
+div#rightHeader {
+    height: auto!important;
+}
+
+/* narrow search dropdown */
+.btn-group.new-select {
+    width: 96%;
+}
+
+.btn-group.new-select button.btn{
+    width: 100%;
+    text-align: left;
+    padding-right: 16px;
+    border-radius: 0;
+    margin: 0;
+}
+
+.btn-group.new-select button.btn .text{
+    width: 100%;
+    overflow: hidden;    
+}
+
+.btn-group.new-select button.btn .caret {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+}
+
+.btn-group.new-select ul {
+    min-width: 100%;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.btn-group.new-select ul li {
+    white-space: nowrap;
+}
+/* category level indentation */
+.dropdown-menu > span > li.delpth-1 > a {
+    padding-left:30px;
+    font-weight: bold;
+}
+.dropdown-menu > span > li.delpth-2 > a {
+    padding-left:40px;
+}
+.dropdown-menu > span > li.delpth-3 > a {
+    padding-left:50px;
+}
+.dropdown-menu > span > li.delpth-4 > a {
+    padding-left:60px;
+}
+
+/* fix dropdown issue caused by span added by knowledge:articleTypeList tag */
+.dropdown-menu > span > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #333333;
+    white-space: nowrap;
+}
+.dropdown-menu > span > li > a:hover, .dropdown-menu > li > a:focus {
+    color: #fff;
+    text-decoration: none;
+    background-color: #364395;
+}
+/* //narrow search dropdown */
+
+/* Popular/featured/search result */
+h2.section {
+    font-size: 19px;
+    color: #222222;
+}
+#results h3 {
+    font-size: 16px;
+}
+div.article a {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+div.article div.data, div.article div.content {
+    padding-left:20px;
+    font-size: 14px;
+}
+
+div.article div.data {
+    color: #000000;
+}
+
+/* Article view */
+.articleTitle {
+    border-bottom: 1px solid #bababa;
+}
+
+.articleContent h4 {
+    font-weight: bold;
+    color: #000000;
+    font-size: 16px;
+}
+
+#articleContainer {
+    overflow: hidden;
+}
+
+.articleContent {
+    margin-bottom: 30px;
+}
+
+.additionalInformation {
+    margin-top: 30px;
+}
+
+.additionalInformation .info-label {
+  color: #005A70;
+}
+
+.additionalInformation .info-value {
+  margin-left: 20px;
+}
+
+.attachments a {
+    clear: both;
+    float: left;
+    margin-left: 30px;
+}
+
+.attachments h4 img {
+    margin-right: 10px;
+}
+
+.attachments p {
+    margin-left: 15px;
+}
+
+/*fix article content*/
+.sfdc_richtext ul, .sfdc_richtext ol {
+    padding-left: 40px;
+}
+.sfdc_richtext img {
+    height: auto;
+    max-width: 100%;    
+}
+

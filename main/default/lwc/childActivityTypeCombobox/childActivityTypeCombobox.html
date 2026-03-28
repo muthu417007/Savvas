@@ -1,0 +1,16 @@
+<template>
+    <lightning-combobox 
+        if:true={showThis}
+        name="Activitytype" 
+        placeholder="-ActivityType-" 
+        value={thisValue}
+        disabled={disabled}
+        class="minwidth-200"
+        options={options} 
+        onchange={handleChange} 
+        data-id={thisDataId}
+        required
+        variant="label-hidden"
+        message-when-value-missing="Missing Value">
+    </lightning-combobox>
+</template>

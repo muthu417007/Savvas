@@ -1,0 +1,27 @@
+.chart-container {
+    position: relative;
+    height: 300px; 
+    width: 100%;
+    background-color: white;
+    overflow-x: hidden; 
+    overflow-y: hidden;
+    box-sizing: border-box;
+    border: 1px solid #d8dde6;
+    padding: 16px;
+    margin: 16px 0;
+    border-radius: 4px; 
+}
+
+.chart-note {
+    position: absolute;
+    bottom: 8px;
+    left: 8px; 
+    font-size: 8px;
+    font-family: Arial, sans-serif;
+    color: #666;
+    text-align:left;
+}
+
+.picklist-container {
+    margin-top: 20px;
+}

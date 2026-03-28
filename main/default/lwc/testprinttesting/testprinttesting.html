@@ -1,0 +1,389 @@
+<template>
+        <lightning-card title="Print Example">
+     
+            <p>This is the content you want to print.</p>
+             
+             <div class ="print-only" style = "display:none;">   
+                 	<img src={labels.scc_brand_logo_mobile} alt="cart icon" />
+                     <table>
+                         <tr>    <td>
+            <h1> show print is set </h1>
+            <div> show print is seted </div>
+              <p>Line 6: Print only</p>
+        <p>Line 7: Print only</p>
+        <p>Line 8: Print only</p>
+        <p>Line 9: Print only</p>
+        <p>Line 10: Print only</p> </td>
+           
+      <td>
+       
+        <p	style="text-align:centre!important; color:red;">Line 1: Display on screen</p>
+        <p>Line 2: Display on screen</p>
+        <p>Line 3: Display on screen</p>
+        <p>Line 4: Display on screen</p>
+        <p>Line 5: Display on screen</p> </td> </tr> </table>
+        <div class="">
+		<div class="slds-grid">
+			<div class="">
+				<div class="Section1">
+			        <h1 class="Checkout-title">{labels.scc_checkOut_ContactInfo_Text}</h1>
+				    <div class="slds-col-slds-size_2-of-12">
+					    <div style=" color:red;">Contact</div>
+						<div style="text-align:centre!important; color:red;">{contactName}</div>
+				    </div>
+				    <div class="slds-col-slds-size_2-of-12">
+					   <div class="Heading">Phone</div>
+					   <div class="result1">{phone}</div>
+				    </div>
+				    <div class="slds-col-slds-size_2-of-12">
+					   <div class="Heading">Order Confirmation Email</div>
+					   <div class="result1">{orderConfirmationEmail}</div>
+				    </div>
+				    <div class="slds-col-slds-size_2-of-12">
+					   <div class="Heading">Shipment Confirmation Email</div>
+					   <div class="result1">{shipmentConfirmationEmail}</div>
+				    </div>
+				</div>
+				<div class="Section2">
+					<h1 class="Checkout-title">Billing Information</h1>
+				    <div class="slds-col-slds-size_2-of-12">
+					    <div class="Heading">Bill to Attention</div>
+					    <div class="result1">{billToAttention}</div>
+				    </div>
+					<template if:false={isPurchaseOrder}>
+						<div class="slds-col-slds-size_2-of-12">
+							<div class="Heading">Paid with Credit Card</div>
+						</div>
+					</template>
+					<template if:true={isPurchaseOrder}>
+						<div class="slds-col-slds-size_2-of-12">
+							<div class="Heading">Paid with Purchase Order</div>
+							<div class="Heading">PO#</div>
+							<div class="result1">{PurchaseOrderNum}</div>
+						</div>
+					</template>
+				</div>
+		    </div>
+			<div class="ReviewA2">
+                <div class="Section1">
+			        <h1 class="Checkout-title">Order Information</h1>
+					<template if:true={orderConfirm}>
+						<div class="slds-col-slds-size_2-of-12">
+							<div class="Heading">Order #</div>
+							<div class="result1">{orderNum}</div>
+						</div>
+					</template>
+				    <div class="slds-col-slds-size_2-of-12">
+					    <div class="Heading">Cancel Back Order Date</div>
+					    <div class="result1">{cancelBackOrderDate}</div>
+				    </div>
+				    <div class="slds-col-slds-size_2-of-12">
+					   <div class="Heading">Requested Ship Date</div>
+					   <div class="result1">{requestedDeliveryDate}</div>
+					
+				    </div>
+				    <div class="slds-col-slds-size_2-of-12">
+					   <div class="Heading">Promo Code</div>
+					   <div class="result1">{pCode}</div>
+				    </div>
+				</div>
+				<div class="Section2">
+					<h1 class="Checkout-title">Shipping Information</h1>
+				    <div class="slds-col-slds-size_2-of-12">
+					    <div class="Heading">Ship to Attention</div>
+					    <div class="result1">{shipToAttention}</div>
+				    </div>
+					<div class="slds-col-slds-size_2-of-12">
+						<div class="Heading">Shipping Service Level</div>
+					    <div class="result1">{shippingServiceLevel}</div>
+					</div>
+					<div class="slds-col-slds-size_2-of-12">
+						<div class="Heading">Warehouse Instruction</div>
+					    <div class="result1">{warehouse}</div>
+					</div>
+					<div class="slds-col-slds-size_2-of-12">
+						<div class="Heading">Shipping/Delivery Instruction</div>
+						<div class="result1">{shippingInstruction}</div>
+					 
+					</div>
+					<div class="slds-col-slds-size_2-of-12">
+						<div class="Heading">Delivery Phone</div>
+						<div class="result1">{deliveryPhone}</div>
+					 
+					</div>
+					<div class="slds-col-slds-size_2-of-12">
+						<div class="Heading">Delivery Email</div>
+					    <div class="result1">{deliveryEmail}</div>
+					</div>
+				</div>
+			</div>
+			<div class="slds-col slds-size_4-of-12 Summary">
+				
+				<div><b>Summary</b> &nbsp;&nbsp;
+
+					<lightning-helptext class=""
+						content={labels.scc_reviewCartPage_SummaryHelpText}>
+					</lightning-helptext>
+				</div>
+				<div
+					class="slds-grid slds-gutters slds-p-top_small">
+					<div
+						class="slds-col slds-size_9-of-12 heading-color slds-form-element__label">
+						SubTotal</div>
+					<div class="slds-col slds-size_2-of-12"
+						style="text-align:centre!important">
+						${formattedTotalprice}</div>
+				</div>
+				<div
+					class="slds-grid slds-gutters slds-p-top_small">
+					<div
+						class="slds-col slds-size_9-of-12 heading-color slds-form-element__label">
+						Promo Discount <p>{promoCode}</p>
+					</div>
+
+					<div class="slds-col slds-size_2-of-12 errormsg"
+						style="text-align:centre!important; color:red;">
+						$
+						{formattedDiscount}
+					</div>
+
+
+				</div>
+				<div
+					class="slds-grid slds-gutters slds-p-top_small">
+					<div
+						class="slds-col slds-size_9-of-12 heading-color slds-form-element__label">
+						Shipping</div>
+					<div class="slds-col slds-size_2-of-12"
+						style="text-align:centre!important">
+						{formattedShippingCharges}
+					</div>
+				</div>
+				<div
+					class="slds-grid slds-gutters slds-p-top_small">
+					<div
+						class="slds-col slds-size_9-of-12 heading-color slds-form-element__label">
+						Tax</div>
+					<div class="slds-col slds-size_2-of-12"
+						style="text-align:centre!important">
+						{formattedTax}
+					</div>
+				</div>
+				<div
+					class="slds-grid slds-gutters slds-p-top_small">
+					<div
+						class="slds-col slds-size_9-of-12 slds-form-element__label">
+						Total</div>
+					<div class="slds-col slds-size_2-of-12"
+						style="text-align:centre!important">
+						<b> ${formattedFinalprice}</b></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="Address">
+	    <div class="slds-grid slds-wrap">
+			<h1 class="slds-col slds-size_3-of-3 Checkout-title">Addresses</h1>
+			<div class="slds-col slds-size_1-of-3 ReviewB1">
+                <div>
+					<div class="Heading">Billing Account#</div>
+					<div class="result1">{sapBillTo}</div>
+					<div class="result1">{BillingStreet1} {BillingCity1} 
+						{BillingState1} {BillingCountry1}{BillingPostalCode1}
+					</div>
+				</div>
+			</div>
+			<div class="slds-col slds-size_1-of-3 ReviewB1">
+                <div>
+					<div class="Heading">Shipping Account#</div>
+					<div class="result1">{sapShipTo}</div>
+					<div class="result1">{shippingStreet1} {ShippingCity1} 
+						{ShippingState1} {ShippingCountry1}{ShippingPostalCode1}
+					</div>
+				</div>
+			</div>
+			<div class="slds-col slds-size_1-of-3 ReviewB1">
+                <div>
+					<div class="Heading">License Account#</div>
+					<div class="result1">{sapLicenceTo}</div>
+					<div class="result1">{LicenceToStreet} {LicenseToCity} 
+						{LicenseToPostalCode}
+					</div>
+				</div>
+			</div>
+
+		</div>	
+	</div>
+	<div class="orderItem">
+		<div class="slds-col slds-size_3-of-3 slds-m-top_large max-width-container">
+			<lightning-card class="search-result-cards">
+				<h1 class="slds-text-heading_medium slds-m-around_small slds-p-horizontal_large search-criteria-title order-detail-table-header">Order Line Detail</h1>
+				
+				<div class="slds-grid slds-wrap">
+					<!-- <template if:true={noRecordsToDisplay}>
+						<div class="slds-col slds-size_12-of-12">
+							<div class="slds-m-horizontal_large slds-p-around_x-large slds-m-bottom_large no-result-container">
+								<img alt="no results image" src={labels.scc_noResults} />
+								<div class="no-result-title slds-m-bottom_small">No Results</div>
+								<div>There are no order line item for this order</div>
+							</div>
+						</div>
+					</template> -->
+					<!-- <template if:false={noRecordsToDisplay}> -->
+						<div class="slds-col slds-size_3-of-3">
+							<div class="slds-grid slds-wrap slds-p-horizontal_small slds-p-bottom_xx-small slds-m-bottom_x-large">
+								<div class="slds-col slds-size_7-of-12 slds-p-right_none">
+									<div class="slds-form-element__control">
+										<button class="slds-button table-control-button" disabled={bDisableFirst} onclick={firstPage}>First</button>
+										<button class="slds-button table-control-button" disabled={bDisableFirst} onclick={previousPage}>Previous</button>
+										<p class="page-count-shown slds-m-horizontal_x-small">Showing {pageNumber} of {totalPages} Page(s)</p>
+										<button class="slds-button table-control-button" disabled={bDisableLast} onclick={nextPage}>Next</button>
+										<button class="slds-button table-control-button" disabled={bDisableLast} onclick={lastPage}>Last</button>
+									</div>
+								</div>
+								<div class="slds-col slds-size_5-of-12 table-row-count slds-text-align_right slds-p-horizontal_none">
+									<select class="slds-select" id="row-count1" onchange={handleRecordsPerPage}>
+										<template for:each={pageSizeOptions} for:item="option">
+											<option style="font-size:12px;" key={option} value={option}>{option}</option>
+										</template>
+									</select>        
+									<label class="slds-form-element__label" for="row-count"># of Rows</label>
+									<span>{totalRecords} {labels.scc_Order_Status_items}</span>
+									<!-- <label class="slds-form-element__label sort-by-label" for="sort-by"><lightning-icon icon-name='utility:sort' alternative-text='sort' size='x-small' title='sort'></lightning-icon>Sort by:</label>
+									<select class="slds-select" id="sort-by">
+										<option>PO#</option>
+									</select>  -->
+								</div>
+							</div>
+							
+						</div>
+						<table class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-horizontal_small" role="grid" aria-label="Example advanced table of Opportunities in actionable mode with ascending column sorting" >
+							<thead>
+								<tr class="slds-line-height_reset">
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 12%;">
+										<a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+										<span class="slds-assistive-text">Sort by: </span>
+										<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+										<span title="Account Name">ISBN</span>
+										<lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+										</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 22%;">
+										<a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+										<span class="slds-assistive-text">Sort by: </span>
+										<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+										<span title="Close Date">Title Description</span>
+										<lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+										</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+										<a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+										<span class="slds-assistive-text">Sort by: </span>
+										<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+										<span title="Stage">Status</span>
+										<lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+										</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+										<a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+										<span class="slds-assistive-text">Sort by: </span>
+										<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+										<span title="Confidence">Price</span>
+										<lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+										</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+										<a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+										<span class="slds-assistive-text">Sort by: </span>
+										<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+										<span title="Amount">Discount</span>
+										<lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+										</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+										<a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+										<span class="slds-assistive-text">Sort by: </span>
+										<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+										<span title="Contact">Qty</span>
+										<lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+										</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+										<a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+										<span class="slds-assistive-text">Sort by: </span>
+										<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+										<span title="Contact">Ext.Price</span>
+										<lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+										</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+										<a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+										<span class="slds-assistive-text">Sort by: </span>
+										<div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+										<span title="Contact">Stock Availability</span>
+										<lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+										</div>
+										</a>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<template for:each={recordsToDisplay} for:item='line'>
+									<tr aria-selected="false" class="slds-hint-parent" key={line.id}>
+										<th class="slds-cell_action-mode" scope="row">
+											<div title={line.ISBN}>{line.ISBN}</div>
+										</th>
+										<td class="slds-cell_action-mode" role="gridcell">
+											<div title={line.Name}>{line.Name}</div>
+										</td>
+										<td class="slds-cell_action-mode" role="gridcell">
+											<!-- <div title={line.ItemDescription}>{line.ItemDescription}</div> -->
+										</td>
+										<td class="slds-cell_action-mode" role="gridcell">
+											<div title={line.ListPrice}>{line.ListPrice}</div>
+										</td>
+										<td class="slds-cell_action-mode" role="gridcell">
+											<!-- <div title={line.MaterialPricingGroupDescription}>{line.MaterialPricingGroupDescription}</div> -->
+										</td>
+										<td class="slds-cell_action-mode" role="gridcell">
+											<div title={line.Quantity}>{line.Quantity}</div>
+										</td>
+										<td class="slds-cell_action-mode" role="gridcell">
+											<div title={line.UnitPrice}>{line.UnitPrice}</div>
+										</td>
+										<td class="slds-cell_action-mode" role="gridcell">
+											<!-- <div title={line.QtyClosed}><a onclick={handleShipDetails} tabindex="0">{line.QtyClosed}</a></div> -->
+										</td>
+									</tr>
+								</template>
+							</tbody>
+						</table>
+					<!-- </template> -->
+				</div>
+			</lightning-card>
+		</div>
+	</div>
+
+   
+  </div>
+
+    <!-- Content that is print-only -->
+ 
+
+
+        <lightning-button label="Printtest" onclick={handlePrint}></lightning-button>
+    </lightning-card>
+
+
+          <div class="slds-m-around_medium">
+            <lightning-button label="Print" onclick={handlePrint2}></lightning-button>
+        </div>
+
+</template>

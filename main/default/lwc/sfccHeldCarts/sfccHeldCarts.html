@@ -1,0 +1,72 @@
+<!-- /*********************************************************
+  Component Name       : sfccHeldCarts
+  Created Date         : 06/10/2024  
+  Author               : Cognizant (@⁠Ponraj,Jaba Raj )
+  Description          : This component used in Home page and functionality related to 
+                         display HeldCart record and page redirection.
+  
+  Modifications Log
+  06/10/2024     Zubiya           Initial Version
+*********************************************************/ -->
+
+<template>
+    
+     <lightning-card>
+        <div class="slds-grid slds-wrap slds-align-middle slds-align_absolute-center">
+            <div class="slds-col">
+                <h4 class="slds-text-heading_medium slds-m-around_small held-carts-heading">{labels.scc_home_Held_Carts}</h4>
+            </div>
+            <!-- <template lwc:if={hasRecentheldCarts}> -->
+                 <div class="slds-col slds-text-align_right slds-m-right_medium">
+                    <p class="view-all-link">{getRecentHeldCartsCount} Items</p> 
+                        <span class="slds-p-horizontal_small">|</span>
+                         <a href="#" class="view-all-link" onclick={handleViewAllHeldCarts}>
+                           {labels.scc_home_ViewAll}
+                            <div class="chevron-circle" >
+                            <lightning-icon class="chevron-icon " icon-name='utility:chevronright' alternative-text='chevronright' size='xx-small' title='chevronright'></lightning-icon>
+                            </div>  
+                            </a>
+                 </div>
+           
+        </div>
+      <div class="slds-m-around_medium">
+            <template lwc:if={hasRecentheldCarts}>
+                <template for:each={heldCartData} for:item="heldCarts">
+                    <div key={heldCarts.Id} class="slds-box slds-m-bottom_medium">
+                         <div class="slds-grid slds-wrap">
+                            <div class="slds-size_1-of-3">
+                                    <p class="cart-label">{labels.scc_home_Cart_Name}</p>
+                                     <a onclick={openReviewHeldCarts} data-id={heldCarts.Id}>{heldCarts.Name}</a>
+                                </div>
+                                <div class="slds-size_1-of-3 slds-text-align_left">
+                                    <p class="cart-label">{labels.scc_home_Date}</p>
+                                    <p class="cart-value">{heldCarts.CreatedDate}</p>
+                                </div>
+                                <div class="slds-size_1-of-3 slds-text-align_left">
+                                    <p class="cart-label">{labels.scc_home_Items}</p>
+                                    <p class="cart-value">{heldCarts.TotalProductLineItemCount}</p>
+                                </div>
+                            </div>
+                    </div>
+                </template>
+            </template> 
+            <template lwc:else>
+                 <template if:false={hasRecentheldCarts}>
+                <div class="slds-box no-recent-held-carts-box">
+                    <div class=" slds-align_absolute-center"> 
+                        <img src={noRecentHeldCartsImage}><br>
+                    </div><span></span>
+                    <h5 class="slds-align_absolute-center no-recent-held-carts-text">No Held Carts</h5>
+                </div>
+                </template>
+            </template>
+            <template if:true={error}>
+                 <!--- Handle error condition -->
+            </template>
+
+            <!-- <lightning-input-rich-text value={richtext} onchange={handleChange}></lightning-input-rich-text> -->
+    
+
+       </div>
+    </lightning-card>
+</template>

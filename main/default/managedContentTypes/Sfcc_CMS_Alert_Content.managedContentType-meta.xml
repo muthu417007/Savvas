@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ManagedContentType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Sfcc CMS Alert Content</description>
+    <developerName>Sfcc_CMS_Alert_Content</developerName>
+    <managedContentNodeTypes>
+        <helpText>Alert Heading</helpText>
+        <isLocalizable>true</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Alert Heading</nodeLabel>
+        <nodeName>AlertHeading</nodeName>
+        <nodeType>NAMEFIELD</nodeType>
+        <placeholderText>Enter ALert Heading</placeholderText>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Alert Content</helpText>
+        <isLocalizable>true</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Alert Content</nodeLabel>
+        <nodeName>AlertContent</nodeName>
+        <nodeType>RTE</nodeType>
+        <placeholderText>Enter Alert Content</placeholderText>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Enter the start date from when you want show possible shipment delay alert message</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Start Date</nodeLabel>
+        <nodeName>startdate</nodeName>
+        <nodeType>DATE</nodeType>
+        <placeholderText>Enter Start Date for Alert</placeholderText>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Enter the end date until when you want show the possible shipment delay alert message</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>End Date</nodeLabel>
+        <nodeName>EndDate</nodeName>
+        <nodeType>DATE</nodeType>
+        <placeholderText>Enter Start Date for Alert</placeholderText>
+    </managedContentNodeTypes>
+    <masterLabel>Sfcc CMS Alert Content</masterLabel>
+</ManagedContentType>

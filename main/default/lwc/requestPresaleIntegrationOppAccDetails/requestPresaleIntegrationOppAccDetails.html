@@ -1,0 +1,118 @@
+<template>
+    <table border="1">
+        <tr>
+            <td>
+                <b>Opportunity Name</b>
+            </td>
+            <td>
+                <i>{OppName}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Opportunity Owner</b>
+            </td>
+            <td>
+                <i>{OppOwner}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Opportunity Leader</b>
+            </td>
+            <td>
+                <i>{OppLeader}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Opportunity Stage</b>
+            </td>
+            <td>
+                <i>{OppStage}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Opportunity Amount $</b>
+            </td>
+            <td>
+                <i>{OppAmount}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Account Owner</b>
+            </td>
+            <td>
+                <i>{OppActOwner}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Account Owner Role</b>
+            </td>
+            <td>
+                <i>{OppActType}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Account Name</b>
+            </td>
+            <td>
+                <i>{OppActName}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Account State</b>
+            </td>
+            <td>
+                <i>{OppActState}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>RUMBA Org ID </b>
+            </td>
+            <td>
+                <i>{RUMBA_Org_id}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>EasyBridge Type</b>
+            </td>
+            <td>
+                <i>{OppActEasyBridge}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Pilot Status</b>
+            </td>
+            <td>
+                <i>{PilotStatus}</i>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Products/Programs</b>
+            </td>
+            <td>
+                <i>{ProductName}</i>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 50%;">
+                <b>Please provide a brief description of your pre-sale<br/>
+                needs. Include the date & time, if you already have a<br/>
+                meeting scheduled with this customer.</b>
+            </td>
+            <td>
+                <lightning-textarea name="input" value={reqTextArea} onchange={handleChange} placeholder="" label="" message-when-value-missing="An empty tweet cannot be posted." ></lightning-textarea>
+            </td>
+        </tr>
+    </table>
+</template>

@@ -1,0 +1,30 @@
+<aura:component implements="forceCommunity:layout" access="global" description="My Layout">
+    <aura:attribute name="Column1" type="Aura.Component[]"/>
+    <aura:attribute name="Column2" type="Aura.Component[]"/>
+    <aura:attribute name="Column3" type="Aura.Component[]"/>
+    <aura:attribute name="Column4" type="Aura.Component[]"/>
+    <aura:attribute name="Column5" type="Aura.Component[]"/>
+    <aura:attribute name="Column6" type="Aura.Component[]"/>
+<div class="demo-only demo-only--sizing slds-grid slds-wrap">
+
+  <div class="slds-size_2-of-3">
+    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">{!v.Column1}</div>
+  </div>
+  <div class="slds-size_1-of-3">
+    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">{!v.Column2}</div>
+  </div>
+  <div class="slds-size_3-of-3">
+    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">{!v.Column3}</div>
+  </div>
+      <div class="slds-size_1-of-3">
+    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">{!v.Column4}</div>
+  </div>
+    <div class="slds-size_1-of-3">
+    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">{!v.Column5}</div>
+  </div>
+  <div class="slds-size_1-of-3">
+    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">{!v.Column6}</div>
+  </div>
+</div>
+	
+</aura:component>

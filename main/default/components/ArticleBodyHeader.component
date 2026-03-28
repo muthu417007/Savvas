@@ -1,0 +1,23 @@
+<apex:component >
+<apex:attribute name="title" type="String" required="true" description="Article Title"/>
+<apex:attribute name="articleId" type="String" required="true" description="ArticleId"/>
+<apex:attribute name="kaID" type="String" required="true" description="KnowledgeArticleId"/>
+<apex:attribute name="caseID" type="String" required="false" description="Case ID"/>
+<apex:attribute name="printURL" type="String" required="false" description="Printer Friendly URL"/>    
+    
+                <knowledge:articleCaseToolbar articleId="{!kaID}" caseId="{!caseID}" rendered="{!IF(caseID != null, true, false)}"></knowledge:articleCaseToolbar>
+
+            <apex:outputPanel layout="block" style="font-family=Verdana;" styleClass="articleRendererHeader" rendered="{!printURL !=''}">
+                <apex:sectionHeader title="{!title}" printUrl="{!printURL}" />
+                <br />
+            </apex:outputPanel>
+
+            <knowledge:articleRendererToolbar articleId="{!articleId}" showChatter="true" canVote="true" />
+
+            <apex:outputPanel layout="block" styleClass="bPageTitle">
+                <apex:outputPanel layout="block" styleClass="ptBreadcrumb">
+                    &laquo;&nbsp;
+                    <apex:outputLink value="javascript:history.back()">Back</apex:outputLink>
+                </apex:outputPanel>
+            </apex:outputPanel>
+</apex:component>

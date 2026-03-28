@@ -1,0 +1,26 @@
+<apex:page standardController="Case" extensions="CommunitiesCaseController" showHeader="false" sidebar="false" standardStylesheets="false">
+	<script>
+	    // redirect standard users to std page layout
+		if ({!TEXT($User.UserType) =='Standard'})
+			window.location.href="{!$Label.CommunityBaseUrl}/coco/{!case.id}";
+	</script>
+    <apex:composition template="{!$Site.Template}">
+        <apex:define name="mainbody">  
+            <style type="text/css">
+                .ptBreadcrumb {
+                    display: none;
+                }
+            </style>
+            <a class="relatedLink" href="{!$Page.CommunitiesCaseList}?filterId={!filterId}">&lt; Back</a>
+            <apex:detail inlineEdit="true" showChatter="false" relatedList="true" subject="{!Case}" />
+        </apex:define>
+        <apex:define name="JS">  
+            <script type="text/javascript">
+                 $(document).ready(function() {
+                    $("input[value='Add Comment'], input[value='Find Articles']").hide(); 
+                    $(".backToTop a").attr("href","#");    // fix Back To Top Link
+                });
+            </script>
+        </apex:define>
+    </apex:composition>    
+</apex:page>

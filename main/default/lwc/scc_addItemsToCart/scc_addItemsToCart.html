@@ -1,0 +1,51 @@
+<template>
+    <!-- Duplicate title Message Box -->
+    <template if:true={isCartModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog">
+            <div class="slds-modal__container">
+                <!-- HEADER Section -->
+                <div class="slds-modal__header">
+                    <button class="slds-modal__close closebtnOnFocus clearCartCloseBtn" onclick={closeCartModal} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+                    <h2>Title(s) Already in Cart</h2>
+                </div>
+                <!-- Body Section -->
+                <div class="slds-modal__content slds-p-horizontal_xx-large slds-p-top_large" role="alert">
+                    <div class="slds-form_horizontal">
+                        <p>Note that the following titles are already in the cart. Select Cancel to adjust quantities, or Add Anyway to add the duplicate titles.</p>
+                    </div>
+                    <!-- Duplicate Item list -->
+                    <template for:each={duplicateItemsList} for:item="order">
+                        <div key={order.Id} class="slds-grid slds-wrap">
+                            <div class="slds-size_3-of-12" data-index="0">
+                                <p class="order-Id">{order.Name}</p>
+                            </div>
+                            <div class="slds-size_9-of-12" data-index="0">
+                                <p class="order-Id">{order.TitleDescription}</p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <!-- Footer Section -->
+                <div class="slds-modal__footer">
+                    <div class="slds-col slds-align-middle slds-p-top_small">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <div class="slds-checkbox">
+                                    <input type="checkbox" name="options" id="checkbox-unique-id-81" checked={activecheckbox} onchange={handleActiveProductsChange} aria-label="Don’t show this message again" data-index="0"/>
+                                    <label class="slds-checkbox__label" for="checkbox-unique-id-81">
+                                        <span class="slds-checkbox_faux"></span>
+                                        <span class="slds-form-element__label">Don’t show this message again</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="slds-button clear-cart-modal-button" onclick={handleAddAnyway} data-index="0">Add Anyway</button>
+                    <button class="slds-button cancel-modal-button" onclick={handleCancelBtn} onfocusout={focusOutButton} tabindex="0">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- End duplicate title Message Box -->
+</template>

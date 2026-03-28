@@ -1,0 +1,4 @@
+<apex:page controller="SelfSamplingController" sidebar="false" tabstyle="Sample__tab" >
+<apex:pageMessage severity="ERROR" strength="3" rendered="{!ISNULL($User.SAP_Account__c)}" detail="{!$Label.User_Missing_Self_Sample_Account}"/>
+    <apex:iframe rendered="{!NOT(ISNULL($User.SAP_Account__c))}" src="https://opsweb1.lsk12.com/SOSv2/setParam.cfm?siteID={!IF($User.Country == 'Canada','2','1')}&user={!$User.Email}&self=Y&pid1={!$User.SAP_Account__c}&fn1={!$User.FirstName}&ln1={!$User.LastName}&e1={!$User.Email}&mgr={!IF(ISNULL(altMgrEmail) , mgrEmail,altMgrEmail)}" scrolling="true" id="theIframe"/>
+</apex:page>

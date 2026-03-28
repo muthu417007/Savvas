@@ -1,0 +1,115 @@
+<!--apex:page standardController="Documentation__kav" sidebar="false" showHeader="{!!isPopup}" extensions="ArticleExtensionDocumentation" standardStylesheets="true"-->
+    
+    <apex:page sidebar="false" standardStylesheets="true">
+<!--
+    <head>
+        <c:ArticleHeader title="{!Documentation__kav.title}" />
+        <style>
+        .knowledgeTab .tertiaryPalette, .individualPalette .knowledgeBlock .tertiaryPalette, .layoutEdit .individualPalette .knowledgeBlock .tertiaryPalette {
+        background-color: #364395 !important;
+        border-color: #364395 !important;
+        }
+        .knowledgeTab .listViewport .subNav .linkBar, .knowledgeTab .mComponent .cHeader, .knowledgeTab .genericTable, .knowledgeTab .bSubBlock, .knowledgeTab .bPageBlock {
+        border-top: 3px solid #364395 !important;
+        }
+        </style>
+    </head>
+
+    <body>
+        <apex:outputField value="{!Documentation__kav.PublishStatus}" rendered="false" />
+        <apex:outputField value="{!Documentation__kav.KnowledgeArticleId}" rendered="false" />
+        <apex:outputField value="{!Documentation__kav.CreatedBy}" rendered="false" />
+        <apex:outputField value="{!Documentation__kav.Summary}" rendered="false" />
+        <apex:outputField value="{!Documentation__kav.Language}" rendered="false" />
+
+        <div class="hasMotif knowledgeTab popup tabArticleRenderer">
+            <c:ArticleBodyHeader title="{!Documentation__kav.title}" kaID="{!kaID}" articleId="{!id}" caseID="{!caseID}" printURL="/articles/Documentation/{!Documentation__kav.URLName}/p"></c:ArticleBodyHeader>
+
+            <div style="width:73%; float:left;">
+                <apex:pageBlock title="Information">
+                    <apex:outputPanel styleClass="sectionblock" layout="block">
+                        <apex:pageBlockSection columns="1">
+                            <apex:facet name="header">Article Content</apex:facet>
+                            <apex:outputField value="{!Documentation__kav.Details__c}" />
+                        </apex:pageBlockSection>
+                    </apex:outputPanel>
+
+                    <apex:pageBlockSection columns="1">
+
+                        <apex:facet name="header">Internal Information</apex:facet>
+                        <apex:outputField value="{!Documentation__kav.Internal_Comments__c}" />
+                        <apex:outputField value="{!Documentation__kav.Advanced_Internal_Information__c}" />
+
+                    </apex:pageBlockSection>
+                    
+                    <c:ArticleAttachments attachment1_name="{!attachment1Name}" attachment1_link="{!URLFOR($Action.Documentation__kav.FileFieldDownload, Documentation__kav.id,['field'=$ObjectType.Documentation__kav.fields.Attachment_1__Body__s.name])}" attachment2_name="{!attachment2Name}" attachment2_link="{!URLFOR($Action.Documentation__kav.FileFieldDownload, Documentation__kav.id,['field'=$ObjectType.Documentation__kav.fields.Attachment_2__Body__s.name])}" attachment3_name="{!attachment3Name}" attachment3_link="{!URLFOR($Action.Documentation__kav.FileFieldDownload, Documentation__kav.id,['field'=$ObjectType.Documentation__kav.fields.Attachment_3__Body__s.name])}" />
+                    <c:CaseArticles data="{!casesAttached}" />
+                </apex:pageBlock>
+            </div>
+
+            <div style="width:25%; float:right;">
+                <apex:pageBlock title="Information">
+                    <apex:PageBlockSection columns="1">
+
+                        <apex:facet name="header">Verification By</apex:facet>
+                        <apex:outputField value="{!Documentation__kav.SME_Group__c}" />
+
+                    </apex:PageBlockSection>
+
+                    <apex:pageBlockSection columns="1">
+
+                        <apex:facet name="header">Similar Articles</apex:facet>
+                        <apex:outputText ><b>{!$ObjectType.Documentation__kav.Fields['Author_Recommended_Articles__c'].label}</b>
+                        </apex:outputText>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputField value="{!Documentation__kav.Author_Recommended_Articles__c}" />
+                        </apex:pageBlockSectionItem>
+
+                    <c:SimilarArticles title="{!Documentation__kav.title}" summary="{!Documentation__kav.summary}"/>
+
+                    </apex:pageBlockSection>
+
+                    <apex:pageBlockSection columns="1">
+
+                        <apex:facet name="header">Article Profile</apex:facet>
+                        <apex:outputField value="{!Documentation__kav.CreatedById}" />
+                         <apex:outputField value="{!Documentation__kav.ArticleType}" />
+                        <apex:outputField value="{!Documentation__kav.Specific_Product__c}" />
+                        
+                        <apex:outputField label="Article Created from Case" value="{!Documentation__kav.SourceId}" />
+                        <table class="detailList">
+                            <tr>
+                                <td class="labelCol">
+                                    {!Documentation__kav.CreatedBy.FirstName} authored
+                                </td>
+                                <td class="data2Col">
+                                    {!numOfCreatedArticleByAuthor} article(s)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="labelCol">
+                                    Article linked to
+                                </td>
+                                <td class="data2Col">
+                                    {!casesAttached.size} case(s)
+                                </td>
+                            </tr>
+                        </table>
+                        <c:ArticleContributors data="{!articleHistory}"></c:ArticleContributors>
+
+                        <apex:outputText >
+                            <hr></hr><b>Legacy Information</b>
+                        </apex:outputText>
+                        <apex:outputField value="{!Documentation__kav.Original_Author__c}" />
+                        <apex:outputField value="{!Documentation__kav.Originally_Published_On__c}" />
+                        <apex:outputField value="{!Documentation__kav.Legacy_ID__c}" />
+                      
+
+                    </apex:pageBlockSection>
+
+                </apex:pageBlock>
+            </div>
+        </div>
+    </body>
+-->
+</apex:page>

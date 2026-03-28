@@ -1,0 +1,44 @@
+<!--
+  *********************************************************
+  Component Name       : ImportQuoteLines
+  Created Date         : 8/27/2024  
+  Author               : Brent Mac/Frank Berni - Cognizant
+  Description          : VF page tied to Import Lines Button on Quote
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>    
+  8/27/2024    Brent Mac           Ticket W-015964: Initial Creation
+  9/04/2024    Frank Berni         Ticket W-015964: Added dynamic URL and quoteId passed through iframe. Added extra height for iframe window
+  *********************************************************
+-->
+<apex:page lightningStylesheets="true" standardController="SBQQ__Quote__c"  title="ImportQuotesLinesInstructions">
+   <apex:pageBlock title="Bulk Import ISBNs" id="ImportLinesInstructions">
+      Below are the steps to bulk import Quote Lines to this Quote.
+     <ol> 
+ <li> Create a New Excel Sheet </li>
+ <li>  In A1, Enter "ISBN" </li>
+ <li> In A2, Enter "Paid Qty"  </li>
+ <li> In A3, Enter "Free Qty" </li>
+ <li> Add ISBN's in Column A underneath "ISBN" </li>
+ <li> Add corresponding Quantity Values for each ISBN </li>
+ <li> If your ISBN column now looks like "9.7013E+12", highlight this column, right click, format cells </li>
+ <li> Move to Custom on left hand side, and choose the "0" option. </li>
+ <li> Validate that your full ISBN is showing. (No need to close the document for the next step) </li>
+ <li> Highlight all cells, and Left Justify all values on the sheet. </li>
+ <li> Navigate to a Quote record in the system, click Import Lines. </li>
+ <li> For "Choose CSV File Format", click the dropdown and select Savvas Standard ISBN Upload </li>
+ <li> Click Choose File, find the file. Then click Import. </li>
+     </ol>
+      <!-- Uses id created from script tag -->
+      <iframe id="importLinesFrame" width="100%" height="800px"> </iframe>
+   </apex:pageBlock>
+
+   <script>
+      var quoteId = '{!SBQQ__Quote__c.Id}';
+      // Dynamically constructs URL so it can belong to any environment. URL.getSalesforceBaseURL() grabs domain of existing org. 
+      // We use SBQQ__ImportLines since it belongs to the CPQ package
+      var iframeSrc = '{URL.getSalesforceBaseUrl()}' + '/apex/SBQQ__ImportLines?id=' + quoteId;
+      // Setting the importLinesFrame id to the constructed url iframe
+      document.getElementById('importLinesFrame').src = iframeSrc;
+   </script>
+</apex:page>

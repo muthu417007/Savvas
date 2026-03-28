@@ -1,0 +1,170 @@
+<template>
+	<!-- Detail Page Design -->
+	<template if:true={showProductSearchTitlePage}>
+	<template if:true={displaypage}>
+		<!-- Breadcrumbs -->
+		<nav role="navigation" aria-label="Breadcrumbs">
+			<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+				<li class="slds-breadcrumb__item slds-p-horizontal_x-small">
+					Place Order
+				</li>
+				<li class="slds-breadcrumb__item slds-p-horizontal_x-small">
+					Product Search
+				</li>
+				<li class="slds-breadcrumb__item slds-p-horizontal_x-small" style="font-weight: bold;">
+					Title Detail
+				</li>
+			</ol>
+		</nav>
+
+		<!-- Product Information -->
+		<div class="slds-grid slds-p-top_medium">
+			<div class="slds-col_bump-right">
+				<!-- Product Title -->
+				<div class="slds-grid slds-grid_vertical">
+					<div><b><u>{currentSelectedProductRecord.Title_Description}</u></b></div>
+				</div>
+			</div>
+			<!-- Buttons-->
+			<div class="slds-col slds-size_9-of-12 ">
+				<div class="slds-grid slds-grid_align-end">
+				 <div class="" style=" display: flex;" onmouseover={handleMouseOver} 
+        	    onmouseout={handleMouseOut} >
+         		<template if:true={isTooltipVisible}>
+            	<div  title="set quantity" >
+                Please set quantity first
+            	</div>
+				</template>
+					<lightning-button variant="brand" label="Add title to Cart" disabled={disableAddToCart} onclick={addTitleToCart}
+					  data-row-id={currentSelectedProductRecord.productId}
+					  class="slds-m-left_x-small small-button">
+					</lightning-button>
+				 </div>
+					
+					<lightning-button variant="brand" class="slds-p-horizontal_xx-small"
+						label={clearCartButtonLabel}
+						title={displayProductSearchBtnSectionConfig.clearCartBtnLabel} onclick={clearCartHandleClick}
+						disabled={clearCartBtnDisabled}>
+					</lightning-button>
+					<lightning-button variant="brand" class="slds-p-horizontal_x-small" icon-name="utility:cart"
+						label={reviewCartButtonLabel}
+						title={displayProductSearchBtnSectionConfig.reviewCartLabel} onclick={reviewCartHandleClick}
+						disabled={reviewCartDisabled}>
+					</lightning-button>
+					<!-- Return Button -->
+					<div>
+						<lightning-button variant="brand-outline" label="Return to Product Search" title="titleName"
+							class="slds-m-left_x-small small-button" onclick={returnProductSearchOnclick}>
+						</lightning-button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Product Details -->
+		<div class="slds-grid slds-p-vertical_medium">
+			<div class="slds-col slds-size_1-of-12 placeholder-text  border-coverimage slds-align_absolute-center"
+				style="margin:0 !important;">
+				<!-- Cover Image -->
+				Cover Image
+			</div>
+			<div class="slds-col slds-size_10-of-12 slds-p-horizontal_medium ">
+				<div class="slds-grid">
+					<!-- Product Attributes -->
+					<div class="slds-col  slds-size_5-of-12 slds-p-horizontal_medium ">
+						<!-- ISBN -->
+						<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">
+								ISBN</div>
+							<div class="slds-col slds-size_9-of-12">{currentSelectedProductRecord.ISBN}</div>
+						</div>
+						<!-- Type -->
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">
+								Type</div>
+							<div class="slds-col slds-size_9-of-12">{currentSelectedProductRecord.Type}</div>
+						</div>
+						<!-- Status -->
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">
+								Status</div>
+							<div class="slds-col slds-size_9-of-12">{currentSelectedProductRecord.Status}</div>
+						</div>
+						<!-- Restriction -->
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">
+								Restriction</div>
+							<div class="slds-col slds-size_9-of-12">{restrictionValue}</div>
+						</div>
+					</div>
+					<div class="slds-col  slds-size_4-of-12 slds-p-horizontal_medium ">
+						<!-- Price -->
+						<div class="slds-grid slds-gutters">
+							<div class="slds-col  slds-size_1-of-2  heading-color" style="text-align:right!important;">
+								Price</div>
+							<div class="slds-col  slds-size_1-of-2">${formattedPrice}</div>
+						</div>
+						<!-- Discount -->
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_1-of-2  heading-color" style="text-align:right!important;">
+								Discount</div>
+							<div class="slds-col slds-size_1-of-2 ">Net</div>
+						</div>
+						<!-- Carton Quantity -->
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_1-of-2 heading-color" style="text-align:right!important;">
+								Carton Quantity</div>
+							<div class="slds-col slds-size_1-of-2">{batchQuantity}</div>
+						</div>
+						<!-- Stock Availability -->
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_1-of-2 heading-color" style="text-align:right!important;">
+								Stock Availability</div>
+							<div class="slds-col slds-size_1-of-2 ">{stockAvailability}</div>
+						</div>
+					</div>
+					<div class="slds-col   slds-size_3-of-12 slds-p-horizontal_medium ">
+						<!-- Quantity -->
+						<div class="slds-grid slds-gutters ">
+							<div class="slds-col slds-size_1-of-2 heading-color" style="text-align:right!important;">
+								Quantity</div>
+							<div class="input-group">
+								<input type="button" value="-" class="button-minus" onclick={decrementQuantity} data-field="quantity">
+								<input type="number" step="1" max="" min="1" name="quantity" value={quantity} onchange={changeQuantity} onkeyup={changeQuantity} onkeypress={handlekeyPress} class="quantity-field">
+								<input type="button" value="+" class="button-plus" onclick={incrementQuantity} data-field="quantity">
+                            </div>
+							</div>
+							<!-- Copyright -->
+							<div class="slds-grid slds-gutters ">
+								<div class="slds-col slds-size_1-of-2 heading-color"
+									style="text-align:right!important;">Copyright</div>
+								<div class="slds-col slds-size_1-of-2">{currentSelectedProductRecord.Copyright}</div>
+							</div>
+							<!-- Grade -->
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_1-of-2  heading-color"
+									style="text-align:right!important;">Grade</div>
+								<div class="slds-col slds-size_1-of-2 ">{currentSelectedProductRecord.Grade_Level}</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	</template>
+	<!-- Load Child Component -->
+	<template if:true={loadchild}>
+		<c-test_related-page message={Recordidval} onclosetitlepage={closePage} onopentitlepage={openpage} onselectedproduct={onselected}></c-test_related-page>
+	</template>
+	</template>
+
+	<template if:true={clearCartItems}>
+	  <c-scc_delete-items-from-cart onrefreshevent={handlerefreshevent}>  </c-scc_delete-items-from-cart> 
+	</template>
+	<template if:true={callAddItemToCart}>
+	<c-scc_add-items-to-cart message={itemsList} onreveiewcartcount={handleReviewCartCount}> </c-scc_add-items-to-cart>
+	</template>
+	<template if:true={reviewCartPage}>
+	  <c-scc_review-cart-page> </c-scc_review-cart-page>
+	</template>
+	
+</template>

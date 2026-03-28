@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title="Date Picker">
+        <div class="slds-p-around_medium">
+            <lightning-input type="date" label="Pick a date" placeholder="MM/DD/YYYY" value={selectedDate} onchange={handleDateChange}></lightning-input>
+            <p>Selected Date: {formattedDate}</p>
+             <input type="date" placeholder="MM/DD/YYYY" />
+        </div>
+        the data is{data}
+    </lightning-card>
+</template>

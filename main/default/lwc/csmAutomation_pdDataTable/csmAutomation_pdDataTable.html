@@ -1,0 +1,92 @@
+<template>
+	<div class="customborder">
+	<lightning-card >
+		<div class="slds-grid slds-gutters slds-wrap">
+			<div class="slds-col slds-size_1-of-6">
+				<span>
+					<lightning-combobox name="progress" value={selectedField} placeholder="Select Filters"
+						options={fieldOptions} onchange={handleChange}>
+					</lightning-combobox>
+					</span>
+			</div>
+			
+			<template if:true={isPicklistField}>
+				<div class="slds-col slds-size_1-of-3">
+				<lightning-dual-listbox 
+					name="languages"
+					field-level-help="This is a dual listbox"
+					options={picklistOptions}
+					onchange={handlePicklistChange}
+					value={selectedPicklistValues}>
+				</lightning-dual-listbox >
+				</div>
+					<div class="search-button">
+						<lightning-button
+						label="Search"
+						onclick={handleSearch}
+						class="search-button-container">
+						</lightning-button>
+			</div>
+			</template>
+			<template if:false={hideSearchInput}>
+				<div class="slds-col slds-size_1-of-6">
+					<span>
+				<lightning-input type="search" placeholder="Search" value={searchTerm}
+				onchange={handleSearchChange}>
+				</lightning-input>
+					</span>
+				</div>
+			</template>
+			<template if:true={isDateField}>
+				<div class="slds-col slds-size_1-of-8">
+					<span>
+						<lightning-input
+						type="date"
+						data-id="schedDate"
+						value={searchValue}
+						class="date-format-hide"
+						onchange={handleDateChange}>
+						</lightning-input>
+					</span>
+				</div>
+				<div class="slds-col slds-size_1-of-3 slds-align-bottom">
+					<lightning-button
+						label="Search"
+						onclick={handleSearch}
+						class="search-button-container">
+						</lightning-button>
+				</div>
+			</template>
+
+			<div class={selectedClass}>
+				<span>
+					<lightning-button label="Export" class="slds-button_neutral" onclick={exportToCSV}></lightning-button>
+					</span>
+			</div>
+		</div>
+				
+		<div class="slds-m-top_medium">
+			<lightning-datatable key-field="id" data={data} columns={columns} onsort={handleSort} sorted-by={sortBy}
+				sorted-direction={sortDirection} hide-checkbox-column class="custom-datatable">
+			</lightning-datatable>
+			<template if:true={isLoading}>
+				<lightning-spinner alternative-text="Loading" variant="brand" size="medium">
+				</lightning-spinner>
+			</template>
+				<template if:true={hasData}>
+					<div class="no-records">
+							<p>
+								<span>No Records Found. {message}</span>
+							</p>
+					</div>
+				</template>
+		</div>
+	<div class="slds-m-around_medium pagination-container">
+		<template if:true={totalRecordCount}>
+	 <c-csm-automation_pagination totalrecords={totalRecordCount} page-size={pageSize} onpagination={handlePaginationPage}>
+	 </c-csm-automation_pagination>
+		</template>
+	</div>
+	</lightning-card>
+	</div>
+</template>

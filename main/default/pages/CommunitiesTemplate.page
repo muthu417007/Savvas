@@ -1,0 +1,193 @@
+<apex:page controller="CommunitiesTemplateController" showHeader="false" sidebar="false" id="CommunitiesTemplate" applyBodyTag="false" applyHtmlTag="false" docType="html-5.0" standardStylesheets="false">
+<html>
+    <head lang="en">
+        <meta charset="utf-8" />
+      <apex:insert name="head" />
+        <title>Community Connection</title>
+       <meta name="google-site-verification" content="2g_Bq5GzTKn-fJEk5R6TZzj9TTONp6ulerrlI6_6gnA" />
+        <meta name="description" content="Pearson North American Customer Support" />
+        <meta name="keywords" content="Support, technical help, service, knowledge" />
+        <meta name="author" content="Pearson North American Customer Support" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <link href="{!URLFOR($Resource.CocoResponsive, 'css/bootstrap.css')}" rel="stylesheet" />
+        <link href="{!URLFOR($Resource.CocoResponsive, 'css/custom.css')}" rel="stylesheet" />
+        <link href="{!URLFOR($Resource.CocoResponsive, 'css/customVF.css')}" rel="stylesheet" />
+
+        <!-- HTML5 for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+        <script src="{!URLFOR($Resource.CocoResponsive, 'js/html5.js')}"></script>
+        <![endif]-->
+<style type="text/css">
+    a.feedbackright {
+        background: url("{!URLFOR($Resource.CocoResponsive, '/images/feedback.png')}") no-repeat scroll 50% 50% ;
+        border: 2px solid #a1a1a1;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+        display:block;
+        height:100px;
+        line-height:0;
+        padding:5px;
+        position:fixed;
+        right:0;
+        top:10%;
+        width:24px;
+        }
+    a.feedbackright:hover {
+        border: 2px solid #000000;
+    }
+
+</style>
+
+    </head>
+
+    <body>
+        <div class="container shadowBorder noPadding mainContainer">
+
+            <!-- HEADER -->
+            <div class="container noPadding">
+                <header class="navbar navbar-inverse" role="navigation">
+                    <div class="container-fluid">
+                        <div class="header">
+                            <a href="/"><div class="logo"></div></a>
+                            <div class="loginContainer">
+                                <form role="form">
+                                    <apex:outputPanel layout="none" rendered="{!TEXT($User.UserType) == 'Guest'}">
+                                        <a href="/coco/login">login</a>
+                                        &nbsp;/&nbsp;
+                                        <a href="{!$Label.SitecomBaseUrl + '/coco/s/Request'}">request access</a >
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!TEXT($User.UserType) != 'Guest'}">
+                                        <a href="{!$Page.MyProfilePage}">{!$User.FirstName+' '+$User.LastName}</a>
+                                        &nbsp;/&nbsp;
+                                        <a href="{!$Site.Prefix}/secur/logout.jsp">logout</a>
+                                    </apex:outputPanel>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="navbar-strap">
+                       <div>
+<div class="col-sm-10 col-xs-12"><span class="sitename">Community Connection</span>&nbsp;<span class="sitedescription">K-12 and Clinical Support</span> </div>
+<div class="col-sm-2 col-xs-12"><span class="ordernow">  <a href="/Pearson-Order-Form" target="" style="color:#000000;"><img src="{!URLFOR($Resource.CocoResponsive, 'images/smallcart.png')}" style="padding-right:8px"  />Order Now</a></span></div>                        </div>
+                        </div>
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="navbar-collapse collapse" id="menu2">
+                        </div>
+                    </div><!--//.container-fluid -->
+                </header>
+            </div><!--//.container -->
+            <!-- //HEADER -->
+
+            <!-- CONTENT -->
+            <div class="container paddingBottom15">
+                <a href="/coco/CommunitiesFeedback" class="feedbackright"></a>
+                <apex:insert name="mainbody" />
+            </div>
+            <!-- //CONTENT -->
+
+            <!-- FOOTER -->
+            <div class="container noPadding">   
+             
+                <div>
+                    <hr style="text-align: center;" />
+                    <h4 style="text-align: center;">Contact Pearson Customer Support. Use one of the methods below.</h4>
+                    <p>
+                        <br />
+                    </p>
+                </div>             
+      
+                <div class="row preFooter">
+                    <div class="col-sm-offset-3 col-xs-4 col-sm-2 text-center emailBox" data-href="{!$Label.SitecomBaseUrl}/coco/s/Contact_Us#email" target="_blank">
+                        <img src="{!URLFOR($Resource.CocoResponsive, 'images/iconEmail.png')}" height="60" width="70" />
+                        <h5>Send us a message</h5>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 text-center phoneBox" data-href="{!$Label.SitecomBaseUrl}/coco/s/Contact_Us#phone" target="_blank">
+                        <img src="{!URLFOR($Resource.CocoResponsive, 'images/iconPhone.png')}" height="60" width="68" />
+                        <h5>Give us a call</h5>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 text-center chatBox" data-href="{!$Label.SitecomBaseUrl}/coco/s/Contact_Us#Chat" target="_blank">
+                        <img src="{!URLFOR($Resource.CocoResponsive, 'images/iconChat.png')}" height="60" width="70" />
+                        <h5>Start a live chat</h5>
+                    </div>
+                </div>
+                <copyright>
+                    <div class="row">
+                        <div class="col-xs-12 text-center" style="padding:2px;">
+                            Copyright &copy;2014 Pearson Education  &amp; its Affiliates. All Rights Reserved.
+                        </div>
+                    </div>
+                </copyright>
+                <div class="container footerLinks">
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <a href="/Terms_of_Use" target="">Terms Of Use</a>
+                            <a href="/Privacy_Policy" target="">Privacy Policy</a>
+                            <a href="#">Site Map</a>
+                        </div>
+                    </div>
+                </div>
+                <!--<footer class="footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3 col-xs-6 footerLeft">
+                            </div>
+                            <div class="col-md-3 col-xs-6 pull-right footerRight">
+                                <img class="img-responsive pull-right" src="{!URLFOR($Resource.CocoResponsive, 'images/footer_pearson_logo.png')}" />
+                            </div>
+                        </div>
+                    </div>
+
+                </footer>-->
+                <!-- //FOOTER -->
+
+            </div><!--//.container -->
+
+        </div><!--//.container -->
+
+        <!-- Load javascript... -->
+        <script type="text/javascript" src="{!URLFOR($Resource.CocoResponsive, 'js/jquery-1.11.1.min.js')}"> </script>
+        <script type="text/javascript" src="{!URLFOR($Resource.CocoResponsive, 'js/bootstrap.min.js')}"> </script>
+        <script type="text/javascript" src="{!URLFOR($Resource.CocoResponsive, 'js/custom.js')}"> </script>
+        <script type="text/javascript">
+            var menu = {!menuJSon};
+            if (menu) {
+                createMenu(menu);
+            }
+            $(".preFooter div").click(function(){
+              window.location = $(this).attr("data-href");
+              return false;
+             });
+             
+             
+            // Google Analytics Tracking
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', '{!$Label.CommunityAnalyticsTrackingCode}']);
+            _gaq.push(['_trackPageview',$(location).attr('pathname')]);
+            
+            
+            (function () { 
+            
+                 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                 ga.src=('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                console.log('GA Variables');
+                console.log(ga.src);
+                console.log(_gaq);
+             })();    
+                 
+        </script>
+        <c:CommunitiesSidebar rendered="{!TEXT($User.UserType) != 'Guest'}"/>
+        <apex:insert name="JS" />
+    </body>
+</html>
+</apex:page>

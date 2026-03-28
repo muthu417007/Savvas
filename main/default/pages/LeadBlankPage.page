@@ -1,0 +1,4 @@
+<apex:page standardController="lead">
+  <!-- This is a blank Visualforce Page to resolve problem with adding visualforce page on a managed VF Page -->
+  <!-- An example is the DialSource VF Page -->
+</apex:page>

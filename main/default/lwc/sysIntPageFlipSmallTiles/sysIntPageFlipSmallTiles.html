@@ -1,0 +1,21 @@
+<template>
+
+    <div class="flipcontent" >
+        <a class="flipcard" >
+            <div class="flipfront" style={CardStyle} aria-label={ariaText} onclick={handleGoNext}>
+								<div style={imageUrlStyle}>
+										  <p class="fliptext-front" style={fontLargeStyle}>
+                   <br> {componentTextLarge}
+                </p>
+								</div>
+		
+            </div>
+            <div class="flipback" style={imageUrlStyleback} onclick={handleGoNext} >
+                <div style={imageUrlStyleback} >
+                    <p class="fliptext-back" style={fontSmallStyle}>{componentTextSmall}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+</template>

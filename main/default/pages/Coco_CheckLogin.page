@@ -1,0 +1,15 @@
+<!-- This page is called from the coco landing page to
+         determine if the user is logged in -->
+
+
+<apex:page sidebar="false" 
+           standardStylesheets="false"
+           showHeader="false"
+           contentType="application/json">
+           
+    
+           {"userName" : "{!$User.Username}",
+    		"fullName" : "{!$User.FirstName+' '+$User.LastName}",
+            "userType" : "{!TEXT($User.UserType)}"}
+    
+</apex:page>

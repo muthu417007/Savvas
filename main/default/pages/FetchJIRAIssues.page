@@ -1,0 +1,37 @@
+<apex:page standardController="Case" extensions="JIRAFetchIssuesController" >
+    <!-- Uncomment next line if you want to render the returned JSON object -->
+    <!-- {!IssuesJSON}-->
+  
+     <apex:pageblock title="" rendered="{!Issues.size > 0}" mode ="maindetail">
+    <!-- Create table for JIRA issues. With  -->
+         <apex:pageBlockTable value="{!Issues}" var="issue">
+            <!-- Issue Key column -->
+            <apex:column headerValue="Issue Link">
+                <!-- Make it link to JIRA Issue -->
+                <apex:outputLink value="{!issue.url}" target="_blank">{!issue.key}</apex:outputLink>
+            </apex:column>
+            <!-- Issue Resolution column --> 
+<!--             <apex:column headerValue="Resolution" value="{!issue.resolution}"/> -->
+            <!-- Issue Status column -->
+<!--             <apex:column headerValue="Status" value="{!issue.status}" />   -->
+            <!-- Issue Assignee column -->
+<!--             <apex:column headerValue="Assignee" value="{!issue.assignee}" />   -->
+            <!-- Issue Priority -->
+<!--             <apex:column headerValue="Priority" value="{!issue.priority}" />   -->
+             <!-- Issue Last Updated-->
+
+<!--              <apex:column headerValue="Updated" value="{!issue.updated}" /> -->
+<!--            <apex:column headerValue="Updated">
+                   <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                         <apex:param value="{!issue.updated}" />
+                    </apex:outputText>
+            </apex:column>
+ -->
+         </apex:pageBlockTable>
+    </apex:pageblock>
+  
+  <apex:pageblock title="" rendered="{!Issues.size == 0}" mode="maindetail">
+        <apex:outputLabel >No JIRA Issue associated with this Case</apex:outputLabel>
+    </apex:pageblock>
+  
+</apex:page>

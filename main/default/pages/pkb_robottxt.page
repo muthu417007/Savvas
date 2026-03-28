@@ -1,0 +1,7 @@
+<apex:page > 
+<!--apex:page contentType="text/plain">
+User-agent: *
+Disallow:
+Sitemap: https://pearsonnacommunity.force.com/coco/pkb_siteMapIndex
+</apex:page-->
+</apex:page>

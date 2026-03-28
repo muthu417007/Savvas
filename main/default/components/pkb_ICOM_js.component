@@ -1,0 +1,167 @@
+<apex:component allowDML="true">
+<apex:attribute name="pkbCon" type="pkb_Controller" required="true" description="handle to the pkb ICOM controller" />
+<apex:attribute name="pkbIcomCon" type="pkb_ICOM_Controller" required="true" description="handle to the pkb ICOM controller" />
+<apex:attribute name="printableView" type="Boolean" required="true" description="flag to indicate if pkb headers should be shown" />
+
+<script type="text/javascript">
+var articleType = '{!pkbIcomCon.articleType}';
+
+/* WOJTEK CHANGES*/
+function changeArticleType2(elem) {
+  if (!elem) {
+    return false;
+  }
+  articleType = elem.getAttribute('value');
+  jQuery(jQuery(elem).parents('.btn-group')[0]).find('button.btn .text').html(elem.innerHTML);
+  buildSearchHref();
+  doSearch();
+}
+
+function setArticleType2()
+{
+    jQuery('#ArticleTypeSelect2 ul li a').each(function(idx, el) {
+        if (el.getAttribute('value') == articleType || (articleType=='' && el.getAttribute('value')===null)) {
+            jQuery('#ArticleTypeSelect2 button.btn .text').html(el.innerHTML);
+            return false;
+        }
+    });
+}
+
+function setCategory2(e) {
+  var i;
+  var o;
+  var selects = jQuery('.btn-group.new-select.category');
+  jQuery(e).parents('.btn-group.new-select.category').attr('value', e.getAttribute('value'))
+  selectedCategories = new Array();
+
+  // check all of the select lists in the narrow search section and pull out the selected values
+  selects.each(function(idx, el) {
+    var v = el.getAttribute('value');
+    if (v) {
+        selectedCategories.push(v);
+    }
+  });
+  buildSearchHref();
+  doSearch();
+}
+
+function setCurrCategories2() {
+  var i, j, selects, catObjs;
+
+  if (currCategories != null && currCategories != '') {
+    selectedCategories = currCategories.split(',');
+
+    // build a hash of the categories for easy searching later
+    catObjs = new Object();
+    for (i = 0; i < selectedCategories.length; i++) {
+      catObjs[selectedCategories[i]] = true;
+    }
+
+    // go through each option in each select and select the option if it is in the hash
+    selects = jQuery('.btn-group.new-select.category');
+    for (i = 0; i < selects.length; i++) {
+      jQuery(selects[i]).find('li a').each(function(idx, el) {
+        if (catObjs[el.getAttribute('value')]) {
+          jQuery(selects[i]).find('button.btn .text').html(el.innerHTML);
+          selects[i].setAttribute('value', el.getAttribute('value'));
+          return false;
+        }
+      });
+    }  
+  }
+}
+
+// restores the search prompt if the search box is empty, otherwise copies the search query to the global var
+function restorePrompt2(e) {
+  if (e.value == "" || e.value == null) {
+    e.value = searchPrompt;
+    currSearch = searchPrompt;
+    e.className = "form-control default";
+  } else {
+    currSearch = jQuery.trim(e.value);
+  }
+}
+// clears the search box of the prompt text when a user clicks on it unless the prompt is being displayed
+function clearPrompt2(e) {
+  if (e.value == searchPrompt) {
+    e.value = "";
+    e.className = "form-control";
+  }
+}
+/* //WOJTEK CHANGES*/
+
+
+
+function setArticleType()
+{
+    var articleTypeElem = document.getElementById('ArticleTypeSelect');
+    for (var i = 0; i < articleTypeElem.options.length; i++) {
+          if (articleType == articleTypeElem.options[i].value) {
+            articleTypeElem.selectedIndex = i;
+          }
+    }  
+}
+// called from the onchange handler in each of the article type select picklists, 
+    // this will rebuild the search href,  and then call doSearch()
+function changeArticleType(elem) {
+  if(!elem) return;
+  articleType = elem.options[elem.selectedIndex].value;
+  buildSearchHref();
+  doSearch();
+}
+
+// grabs all of the relevant search details (query, category selections) and uses those to build the href of the search link
+// continuously updating the href property of the search link this way allows the "right-click and open in new tab/window..."
+// options to always work
+
+
+
+function buildSearchHref() {
+  var e = document.getElementById(SEARCH_LINK_ID);
+  if (!e) e = document.getElementById(ASK_LINK_ID);
+
+//  var url = baseURL + '?';
+  var url = pkbHome + '?';
+
+  var params = new Array();
+
+  if (validSearchQuery()) params.push("{!pkbCon.queryParam}=" +encodeURIComponent(currSearch)); 
+  params.push("{!pkbCon.languageParam}=" +encodeURIComponent(currLanguage));
+  if (selectedCategories.length) params.push("{!pkbCon.categoryParam}=" +encodeURIComponent(selectedCategories.join(',')));
+  if (articleType) params.push("{!pkbIcomCon.articleTypeParam}=" +encodeURIComponent(articleType));
+  if (contactUs) params.push("{!pkbCon.contactUsParam}={!pkbCon.contactUsValue}");
+
+  url += params.join('&');
+
+  e.href = url;
+}
+
+
+// jhicks 8/22/14
+var $$ = jQuery.noConflict();
+
+$$(document).ready(function(){ 
+      if ({!printableView}){
+         $$("#linkmenu,#topRight,#footerContent,#tabContainer,#rightHeader,#backbutton").css("display","none");
+         window.print();
+
+      }
+});
+// jhicks 8/22/14 end
+
+// wmigas 9/02/14
+function copyCommentsICOM() {
+    copyComments();
+    var o = $$('[id$=' + FEEDBACK_COMMENTS_ID + ']');
+    if (o.length && (o[0].value === null || o[0].value === undefined || $$.trim(o[0].value) === '')) {
+        var b = $$('#' + FEEDBACK_TEXT_ID);
+        if (b.parent().find('span.error').length == 0) {
+            $$('<span class="error" style="color:red;">Please enter some feedback</span>').insertBefore(b)
+        }
+        return false;
+    }
+    return true;
+}
+//wmigas 9/02/14 end
+</script>
+</apex:component>

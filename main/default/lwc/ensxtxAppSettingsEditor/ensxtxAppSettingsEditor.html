@@ -1,0 +1,36 @@
+<template>
+    <lightning-spinner if:true={loading} alternative-text="Loading" size="large"></lightning-spinner>
+    <article class="slds-card header">
+        <div class="slds-card__body slds-card__body_inner">
+            <div class="headerSection">
+                <div style="flex-grow: 1;">
+                    <lightning-combobox name="appSetting" label="App Settings" value={selectedAppSetting}
+                        placeholder="Select App Setting" options={options} onchange={onOptionChange}></lightning-combobox>
+                </div>
+                <lightning-button label="Download" title="Download" onclick={handleDownload} disabled={disabledButton}>
+                </lightning-button>
+                <lightning-button label="Copy to Clipboard" title="Copy to Clipboard" onclick={handleCopy} disabled={disabledButton}>
+                </lightning-button>
+                <lightning-button variant="brand" label="Save as New" title="Save as New" onclick={openSaveAsNewModal} disabled={disabledButton}>
+                </lightning-button>
+                <lightning-button variant="brand" label="Save App Setting" title="Save App Setting" onclick={handleSaveClick} disabled={disabledButton}>
+                </lightning-button>
+            </div>
+            <div class="slds-m-top_x-small">
+                <lightning-spinner if:true={saving} alternative-text="Loading" size="small"></lightning-spinner>
+                <div if:true={displayMessage}>
+                    <template for:each={messages} for:item="message">
+                        <c-ensxtx-message message={message} key={message.key}></c-ensxtx-message>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </article>
+    <div class="slds-card appSettingsEditor" if:true={showAppSettingEditor}>
+        <div class="slds-card__body slds-card__body_inner">
+            <template for:each={appSettingsValues} for:item="appSettings">
+                <c-ensxtx-app-settings-main key={appSettings.id} app-settings={appSettings}></c-ensxtx-app-settings-main>
+            </template>
+        </div>
+    </div>
+</template>

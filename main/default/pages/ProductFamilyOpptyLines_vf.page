@@ -1,0 +1,35 @@
+<!--
+  *********************************************************
+  Component Name       : ProductFamilyOpptyLines_vf
+  Created Date         : 7/05/2024  
+  Author               : Brent Mac/ Frank Berni - Cognizant
+  Description          : VF page tied to Add Products button on Opportunity Products related list
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>
+  7/05/2024    Brent Mac           Initial Creation
+  7/08/2024    Frank Berni         Removed ref to AddOpptyProductsControllerExtension
+  *********************************************************
+-->
+<apex:page standardController="Opportunity"  tabStyle="Opportunity">
+    <!-- <apex:pageBlock title="opportunity product related list">
+    <apex:pageBlockTable value="{!opptyList}" var="div">  
+ 
+          <apex:column >
+                    <apex:pageBlockTable value="{!div.OpportunityLineItems}"  var="custom">
+
+                        <apex:column value="{!custom.Quantity}"/>
+
+                        <apex:column value="{!custom.UnitPrice}"/>
+    
+                        <apex:column value="{!custom.TotalPrice}"/>
+
+                        <apex:column value="{!custom.PricebookEntry.Name}"/>
+
+                        <apex:column value="{!custom.PricebookEntry.Product2.Family}"/>
+
+                    </apex:pageBlockTable>
+        </apex:column>
+       </apex:pageBlockTable>
+</apex:pageBlock>   -->
+</apex:page>

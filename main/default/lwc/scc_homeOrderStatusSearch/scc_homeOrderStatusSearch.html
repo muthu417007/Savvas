@@ -1,0 +1,278 @@
+<!-- /*********************************************************
+  Component Name       : scc_homeOrderStatusSearch
+  Created Date         : 06/10/2024  
+  Author               : Cognizant 
+  Description          : This component used in Home page and functionality related to 
+                         search Order Status and redirecting to Order Status Page.
+
+  Modifications Log
+  06/10/2024     Zubiya           Initial Version
+*********************************************************/ -->
+
+
+<template>
+	<lightning-card>
+		<div class="slds-m-top_large">
+			<h2 class="slds-text-heading_medium slds-m-around_small recent-order form-title">Order Status</h2>
+		</div>
+		<div class="slds-form">
+			<!--Order Search-->
+
+			<div class="slds-form-element slds-m-horizontal_small">
+				<lightning-combobox class="statuscombobox" label={labels.scc_home_Search_By}
+					value={selectedSearchByOption} options={SearchByOptions} onchange={handleSearchByChange}
+					placeholder={SearchByvalue}>
+				</lightning-combobox>
+			</div>
+
+
+			<!--PN Number Search - Start-->
+			<template if:true={PONumSelect}>
+				<div class="slds-form-element slds-m-around_small">
+					<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_PO}  *
+                </label>
+					<div class="slds-form-element__control">
+						<input  type="text" name="PONum" value={PONum} data-id="PoNum" data-name="PoNum" placeholder="PO #" class="slds-input input-wrapper " onchange={handleNumChange} onkeyup={handleNumChange} required />
+					</div>
+				</div>
+				<template if:false={isInternal}>
+					<div class="slds-form-element slds-m-around_small">
+						<label for="FieldSelect" class="slds-form-element__label form-label">
+					                    {labels.scc_home_ISBN}
+					                </label>
+						<div class="slds-form-element__control">
+							<input type="text" data-id="ISBnNum" data-name="ISBnNum" placeholder="ISBN" class="slds-input input-wrapper " value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} />
+						</div>
+					</div>
+				</template>
+				<template if:true={isInternal}>
+					<div class="slds-form-element slds-m-around_small">
+						<label for="FieldSelect" class="slds-form-element__label form-label">
+					                    Containing ISBN 
+					                </label>
+						<div class="slds-form-element__control">
+							<input type="text" data-id="ISBnNum" data-name="ISBnNum" placeholder="ISBN" class="slds-input input-wrapper " value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} required />
+						</div>
+					</div>
+				</template>
+				<div class="slds-grid ">
+					<div class="slds-col slds-size_1-of-2  ">
+						<div class="slds-form-element slds-p-left_small slds-p-right_x-small">
+							<label class="slds-form-element__label  form-label" for="date-input">Order Date <span class="label-sub-text">(From)</span></label>
+							<div class="slds-form-element__control ">
+
+								<input  type="date" class="slds-input input-wrapper" value={startDate} aria-label="Order Date(From)" max="9999-12-31" onkeyup={handleNumChange} onchange={handleNumChange} name="startDate" />
+								<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+							</div>
+						</div>
+					</div>
+					<div class="slds-col slds-size_1-of-2 ">
+						<div class="slds-form-element slds-p-right_small slds-p-left_x-small">
+							<label class="slds-form-element__label  form-label" for="date-input">Order Date <span class="label-sub-text">(To)</span></label>
+							<div class="slds-form-element__control">
+								<input  type="date"  class="slds-input input-wrapper" value={endDate} aria-label="Order Date(To)" max="9999-12-31" onkeyup={handleNumChange} onchange={handleNumChange} name="endDate" />
+								<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="slds-form-element slds-m-horizontal_small">
+					<lightning-combobox placeholder="Order Status" class="statuscombobox"
+						label={labels.scc_home_Order_Status} value={OrderStatusValue} options={OrderStatusOptions}
+						onchange={handleOrderStatusChange}></lightning-combobox>
+				</div>
+			</template>
+			<!--PN Number Search - END-->
+			<!--Invoice Number Search - Start-->
+			<template if:true={InvoiceSelect}>
+				<div class="slds-form-element slds-m-around_small">
+					<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_OrderStatus_Invoice_Number} *
+                </label>
+					<div class="slds-form-element__control">
+						<input style="padding-left: 17px;" type="text" data-id="InvoNum" data-name="InvoNum" placeholder="Invoice Number" class="slds-input input-wrapper " value={InvoNum} onkeyup={handleNumChange} name="InvoNum" onchange={handleNumChange} required />
+					</div>
+				</div>
+				<!-- Internal site -->
+				<template if:true={isInternal}>
+					<div class="slds-form-element slds-m-around_small">
+						<label for="FieldSelect" class="slds-form-element__label form-label">
+									                    Containing ISBN 
+									                </label>
+						<div class="slds-form-element__control">
+							<input type="text" data-id="ISBnNum" data-name="ISBnNum" placeholder="ISBN" class="slds-input input-wrapper " value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} required />
+						</div>
+					</div>
+					<div class="slds-grid ">
+						<div class="slds-col slds-size_1-of-2  ">
+							<div class="slds-form-element slds-p-left_small slds-p-right_x-small">
+								<label class="slds-form-element__label  form-label" for="date-input">Order Date <span class="label-sub-text">(From)</span></label>
+								<div class="slds-form-element__control ">
+									<input  type="date" class="slds-input input-wrapper" max="9999-12-31" value={startDate} onkeyup={handleNumChange} onchange={handleNumChange} name="startDate" />
+									<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+								</div>
+							</div>
+						</div>
+						<div class="slds-col slds-size_1-of-2 ">
+							<div class="slds-form-element slds-p-right_small slds-p-left_x-small">
+								<label class="slds-form-element__label  form-label" for="date-input">Order Date <span class="label-sub-text">(To)</span></label>
+								<div class="slds-form-element__control">
+									<input  type="date"  class="slds-input input-wrapper" value={endDate} max="9999-12-31" onkeyup={handleNumChange} onchange={handleNumChange} name="endDate" />
+									<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="slds-form-element slds-m-horizontal_small">
+						<lightning-combobox placeholder="Order Status" class="statuscombobox"
+							label={labels.scc_home_Order_Status} value={OrderStatusValue} options={OrderStatusOptions}
+							onchange={handleOrderStatusChange}></lightning-combobox>
+					</div>
+				</template>
+				<!-- End internal site -->
+			</template>
+			<!--Invoice Number Search - End-->
+			<!--Containing ISBN -  Start-->
+			<template if:true={ISBNselect}>
+				<div class="slds-form-element slds-m-around_small">
+					<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_ISBN} *
+                </label>
+					<div class="slds-form-element__control">
+						<input style="padding-left: 17px;" type="text" data-id="ISBnNum" data-name="ISBnNum" placeholder="ISBN Number" class="slds-input input-wrapper " value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} required />
+					</div>
+				</div>
+				<div class="slds-form-element slds-m-around_small">
+					<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_PO}
+                </label>
+					<div class="slds-form-element__control">
+						<input style="padding-left: 17px;" type="text" data-id="PONum" data-name="PONum" placeholder="PO #" class="slds-input input-wrapper " onkeyup={handleNumChange} onchange={handleNumChange} name="PONum" value={PONum} />
+					</div>
+				</div>
+				<div class="slds-grid ">
+					<div class="slds-col slds-size_1-of-2  ">
+						<div class="slds-form-element slds-m-around_x-small">
+							<label class="slds-form-element__label  form-label" for="date-input">Order Date <span class="label-sub-text">(From)</span></label>
+							<div class="slds-form-element__control">
+								<input style="padding-left: 10px;" type="date" class="slds-input input-wrapper" value={startDate} max="9999-12-31" onkeyup={handleNumChange} onchange={handleNumChange} name="startDate" />
+								<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+							</div>
+						</div>
+					</div>
+					<div class="slds-col slds-size_1-of-2">
+						<div class="slds-form-element slds-m-around_x-small">
+							<label class="slds-form-element__label  form-label" for="date-input">Order Date <span class="label-sub-text">(To)</span></label>
+							<div class="slds-form-element__control">
+								<input style="padding-left: 10px;" type="date"  class="slds-input input-wrapper" max="9999-12-31" value={endDate} onkeyup={handleNumChange} onchange={handleNumChange} name="endDate" />
+								<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="slds-form-element slds-m-around_small">
+					<lightning-combobox class="statuscombobox" placeholder={labels.scc_OrderStatus_Country}
+						label={labels.scc_OrderStatus_Country} value={CountryValue} options={CountryOptions}
+						onchange={handleCountryOptionChange}>
+					</lightning-combobox>
+				</div>
+				<div class="slds-form-element slds-m-around_small">
+					<lightning-combobox class="statuscombobox" placeholder={labels.scc_OrderStatus_State_Province}
+						label={stateLabel} value={StateNum} options={stateOptions} onchange={handleStateNumChange}>
+					</lightning-combobox>
+				</div>
+				<!-- </div> -->
+
+				<div class="slds-form-element slds-m-around_small">
+					<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_OrderStatus_Zip_Postal_Code}
+                </label>
+					<div class="slds-form-element__control">
+						<input style="padding-left: 17px;" type="text" data-id="ZipNum" data-name="ZipNum" placeholder="ZipNum" class="slds-input input-wrapper " onkeyup={handleNumChange} onchange={handleNumChange} name="ZipNum" value={ZipNum} />
+					</div>
+				</div>
+
+				<div class="slds-form-element slds-m-around_small">
+					<lightning-combobox class="statuscombobox" label={labels.scc_home_Order_Status}
+						placeholder="Order Status" value={OrderStatusValue} options={OrderStatusOptions}
+						onchange={handleOrderStatusChange}>
+					</lightning-combobox>
+				</div>
+			</template>
+			<!--Containing ISBN -  END-->
+
+
+			<!--#Order - Start-->
+			<template if:true={DocumentNumSelect}>
+
+				<div class="slds-form-element slds-m-around_small">
+					<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_Document_Control} *
+                </label>
+					<div class="slds-form-element__control">
+						<input style="padding-left: 17px;" type="text" data-id="DocContrNum" data-name="DocContrNum"  placeholder= "Order #" class="slds-input input-wrapper " value={DocContrNum} onkeyup={handleNumChange} name='DocContrNum' onchange={handleNumChange} required />
+					</div>
+				</div>
+				<template if:false={isInternal}>
+					<div class="slds-form-element slds-m-around_small">
+						<label for="FieldSelect" class="slds-form-element__label form-label">
+                    {labels.scc_home_ISBN}
+                </label>
+						<div class="slds-form-element__control">
+							<input style="padding-left: 17px;" type="text" data-id="ISBnNum" data-name="ISBnNum" placeholder="ISBN Number" class="slds-input input-wrapper " value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} />
+						</div>
+					</div>
+				</template>
+				<!-- For Internal site -->
+				<template if:true={isInternal}>
+					<div class="slds-form-element slds-m-around_small">
+						<label for="FieldSelect" class="slds-form-element__label form-label">
+                           Containing ISBN 
+                </label>
+						<div class="slds-form-element__control">
+							<input style="padding-left: 17px;" type="text" data-id="ISBnNum" data-name="ISBnNum" placeholder="ISBN Number" class="slds-input input-wrapper " value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} required />
+						</div>
+					</div>
+					<div class="slds-grid ">
+						<div class="slds-col slds-size_1-of-2  ">
+							<div class="slds-form-element slds-p-left_small slds-p-right_x-small">
+								<label class="slds-form-element__label  form-label" for="date-input">Order Date <span class="label-sub-text">(From)</span></label>
+								<div class="slds-form-element__control ">
+									<input  type="date" class="slds-input input-wrapper" value={startDate} max ="9999-12-31" onkeyup={handleNumChange} onchange={handleNumChange} name="startDate" />
+									<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+								</div>
+							</div>
+						</div>
+						<div class="slds-col slds-size_1-of-2 ">
+							<div class="slds-form-element slds-p-right_small slds-p-left_x-small">
+								<label class="slds-form-element__label  form-label" for="date-input">Order Date <span class="label-sub-text">(To)</span></label>
+								<div class="slds-form-element__control">
+									<input  type="date"  class="slds-input input-wrapper" value={endDate}  max ="9999-12-31" onkeyup={handleNumChange} onchange={handleNumChange} name="endDate" />
+									<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+								</div>
+							</div>
+						</div>
+					</div>
+				</template>
+				<!-- End Internal site -->
+
+				<div class="slds-form-element slds-m-horizontal_small">
+					<lightning-combobox class="statuscombobox" placeholder="Order Status"
+						label={labels.scc_home_Order_Status} value={OrderStatusValue} options={OrderStatusOptions}
+						onchange={handleOrderStatusChange}></lightning-combobox>
+				</div>
+			</template>
+			<!--#Order - End-->
+
+			<div class="slds-form-element__control">
+				<button class="slds-button search-button slds-m-right_medium slds-m-top_small" onclick={handleSearch} aria-disabled={SearchDisabled}>
+                            <lightning-icon class="chevron-icon slds-m-right_x-small" icon-name='utility:search' size='small'></lightning-icon>
+                             Search
+                        </button>
+			</div>
+		</div>
+	</lightning-card>
+</template>

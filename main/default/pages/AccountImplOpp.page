@@ -1,0 +1,23 @@
+<apex:page standardController="Account" extensions="AccountImplOppController" showheader="false">
+<!-- This page is for displaying Legacy A&I/K12Tech Cases for a given Account in ICOM -->
+<apex:pageblock >
+<!-- <apex:pageblocksection columns="1" title="Implementation Opportunities in Legacy SFDC Instance"> -->
+<apex:pageblocktable value="{!records}" var="r">
+<apex:column value="{!r.Name}"/>
+<apex:column value="{!r.RecordTypeName__c}"/>
+<apex:column value="{!r.Type__c}"/>
+<apex:column value="{!r.OwnerName__c}"/>
+<apex:column value="{!r.ImplementationFees__c}"/>
+<apex:column value="{!r.Project_Management_Fees__c}"/>
+<apex:column value="{!r.Oracle_Project_Number__c}"/>
+<apex:column value="{!r.StageName__c}"/>
+<apex:column value="{!r.Booking_Start_Date__c}"/>
+<apex:column value="{!r.Kick_off_Call_Completed_Date__c}"/>
+<apex:column value="{!r.Support_Target_Date__c}"/>
+<apex:column value="{!r.IMP_Project_Status__c}"/>
+<apex:column value="{!r.Imp_Current_Status_Overview__c}"/>
+<apex:column value="{!r.IPP_Project_Link__c}"/>
+</apex:pageblocktable>
+<!-- </apex:pageblocksection> -->
+</apex:pageblock>
+</apex:page>

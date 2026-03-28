@@ -1,0 +1,42 @@
+.dummyClass{color:black;}
+
+.extra {
+  display: none;
+}
+p {
+  font-family: "Poppins-Regular;";
+  line-height: ;
+  display: inline;
+}
+input[type="checkbox"] {
+  height: 2em;
+  display: block;
+		color:  #173770;
+  appearance: none;
+}
+label {
+  font-family: "Poppins-Regular";
+  font-size: 18px;
+  font-weight: 600;
+  position: relative;
+  padding: 1px;
+  background-color: #ffffff;
+  color: #9ECA47;
+  cursor: pointer;
+  border-radius: 0.5em;
+		z-index: 0 !important;
+}
+label:before {
+  content: "Continue reading +";
+		z-index: 0 !important;
+}
+input[type="checkbox"]:checked ~ label:before {
+  content: "Read Less";
+}
+.dots:has(~ input[type="checkbox"]:checked) {
+  display: none;
+}
+.extra:has(~ input[type="checkbox"]:checked) {
+  display: inline;
+		
+}

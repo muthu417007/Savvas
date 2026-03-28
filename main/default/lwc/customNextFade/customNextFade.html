@@ -1,0 +1,15 @@
+<!--customNextFade.html-->
+<template>
+    
+    <div class="fade-image-box" aria-label={ariaText}>   
+        <div class="fade-image" style={imageUrlStyle} onclick={handleGoNext}></div>
+        
+            <div class="fade-image-meta" onclick={handleGoNext} style="cursor: pointer;">
+                <div class="text-meta" style={fontLargeStyle} onclick={handleGoNext}>{componentTextLarge}</div>
+                <div></div>
+                <div class="text-meta" style={fontSmallStyle} onclick={handleGoNext}>{componentTextSmall}</div>
+            </div>
+         
+    </div>
+      
+</template>

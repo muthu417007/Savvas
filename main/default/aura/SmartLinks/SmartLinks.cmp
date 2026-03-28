@@ -1,0 +1,6 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes">
+<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+        <ltng:require scripts="/resource/1461197699000/Jquery"  /> 
+
+	
+</aura:component>

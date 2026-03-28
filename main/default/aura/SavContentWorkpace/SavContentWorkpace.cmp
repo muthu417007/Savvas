@@ -1,0 +1,62 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global"
+                controller="SAVLibraryCmpController">
+    <!--aura doInit handler--> 
+    <aura:handler name="init" value="{!this}"  action="{!c.doInit}"/>
+    
+    <!--aura attributes-->  
+    <aura:attribute name="libraryName" type="string"/>
+    <aura:attribute name="selectedDocumentId" type="string"/>
+    <aura:attribute name="contentDocs" type="List"/>
+    <aura:attribute name="hasModalOpen" type="boolean" default="false"/>
+    
+    <!-- Custom DataTable to Display List Of Available ContentDocuments Start-->  
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Title">Title</div>
+                </th>
+                <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="File Type">File Type</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.contentDocs}" var="doc">
+                <tr>
+                    <th scope="row">
+                        <div class="slds-truncate" title="{!doc.Title}">
+                            <!--store contentDocument Id in data-Id attribute-->
+                            <a onclick="{!c.getSelected}" data-Id="{!doc.Id}">{!doc.Title}</a>
+                        </div>
+                    </th>
+                    <th scope="row">
+                        <div class="slds-truncate" title="{!doc.FileType}">{!doc.FileType}</div>
+                    </th>
+                </tr>  
+            </aura:iteration>
+        </tbody>
+    </table>
+    <!-- Custom DataTable to Display List Of Available ContentDocuments End-->  
+    <!--###### FILE PREVIEW MODAL BOX START ######--> 
+    <aura:if isTrue="{!v.hasModalOpen}">
+        <section onclick="{!c.closeModel}"
+                 role="dialog"
+                 aria-modal="true"
+                 class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="slds-modal__content slds-p-around_medium slds-text-align_center"
+                     style="background: transparent;">
+                    <div style="width: 50%; margin: 0 auto; text-align: left">
+                        <!--<lightning:fileCard> to preview file using content document Id -->
+                        <lightning:fileCard fileId="{!v.selectedDocumentId}"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <!--###### FILE PREVIEW MODAL BOX END ######-->
+    
+</aura:component>

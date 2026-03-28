@@ -1,0 +1,504 @@
+<template>
+   
+    <div class="selfRegister-form">
+        <div class="mobile-only">
+            <img src={labels.scc_brand_logo_mobile} alt="logo for mobile" />
+        </div>
+        <div class="mainPage slds-align_absolute-center">
+            <lightning-card class="RegisterNewUser">
+                <h1 class="Register"> {registerMsg}</h1>
+                <div class="text-value-changed">
+                    <div class="firstpageheading">
+                        <template if:true={firstPageheading}>
+                            <p>{firstPageHeading}</p>
+                         
+                        </template>
+                    </div>
+
+                    <template if:true={isregistereduser}>
+                        <!-- <div class="registered-user-message"> -->
+                        <div class="registration-text already-registered-signInlink" role="alert"
+                            aria-label="This user is already registered.Return to sign in or reset your password">
+                            <span aria-hidden="true">{isRegisteredUser}&nbsp;</span><a href="/login" aria-hidden="true"
+                                onclick={handleSignInClick} class="blue-link alreadyReg-newSignIn"
+                                aria-label="sign in">{signInPage}</a><span aria-hidden="true">, or </span><a
+                                href="/login" aria-hidden="true" onclick={handleresetYourPassword} class="blue-link"
+                                aria-label="reset your password">{resetYourPassword}</a>.
+                            <!--<p>{isRegisteredUser}< onclick={handleCaseSubmission} class="blue-link">{signInPage}</a>, or <a href="#" onclick={handleCaseSubmission} class="blue-link">{resetYourPassword}</a></p>-->
+                        </div>
+                    </template>
+
+                    <template if:true={isnotvalidcontact}>
+                        <div class="registration-text">
+                            <!-- <p>{isNotValidContact}</p> -->
+                            <p>{isNotValidContact}&nbsp;<a href="#" onclick={handleCaseSubmission}
+                                    class="blue-link not-a-valid-contact-submit-case"
+                                    aria-label="Registration eligibility could not be confirmed. If you are authorized to have an account, submit a request for Savvas to confirm your eligibility">{submitACase}</a>&nbsp;{isNotValidContact2}
+                            </p>
+                        </div>
+                    </template>
+                    <template if:true={IsAccountTypeValid}>
+                        <div class="registration-text">
+                            <p>
+                                {inValidAccount} &nbsp;
+                                <a href="#" onclick={handleCaseSubmission}
+                                    class="blue-link not-a-valid-contact-submit-case">{submitACase}</a>&nbsp;
+                                for assistance.
+                            </p>
+                        </div>
+                    </template>
+
+
+                    <template if:true={isNouser}>
+                        <div class="registration-details" role="region" aria-label={isNoUser3} aria-live="polite">
+                            <p class="registration-heading">{nouser}&nbsp;{isNoUser3}</p>
+                            <!-- <p class="registration-heading">{isNoUser3}</p> -->
+                        </div>
+                        <div class="registration-info">
+                            <!-- <div class="registration-row">
+                         <p class="registration-label">{scc_isNouser4}User </p>
+                         <p class="registration-value">{firstName} {lastName}</p>
+                      </div> -->
+                            <div class="slds-col-slds-size_2-of-12 registration-row">
+                                <div class="info">
+                                    <p class="registration-label">{userID}</p>
+                                </div>
+                                <div class="info">
+                                    <p class="registration-value">{schoolEmail}</p>
+                                </div>
+                            </div>
+                            <div class="slds-col-slds-size_2-of-12 registration-schoolname">
+                                <div class="info">
+                                    <p class="registration-label">{companyName}</p>
+                                </div>
+                                <div class="info">
+                                    <p class="registration-value">{companySchoolName}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template if:true={showCreateCaseforMoreThanOneEmail}>
+                        <div class="slds-modal__container1 submit-case-popup">
+                            <!-- Modal/Popup Box LWC starts here -->
+                            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                <div class="slds-modal__container">
+                                    <!-- Modal/Popup Box LWC header here -->
+                                    <header class="slds-modal__header">
+                                        <button class="slds-modal__close morethanoneemail-submitcase-popup-close" onclick={closeModalMoreThanOneEmail} aria-label="Close" onfocusout={focusOutMoreThanOneEmailClose} >x</button>
+                                        <h3>Submit a Request</h3>
+
+                                    </header>
+                                    <!-- Modal/Popup Box LWC body starts here -->
+                                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                                        <template if:true={showCreateCaseforMoreThanOneEmailLabel}>
+                                            <div class="slds-text-color_error " role="alert">
+                                                <!-- <div class="slds-text-heading_medium slds-m-around_small slds-align_absolute-center confirmation-message" role="alert"> -->
+                                                {CreateCaseforMoreThanOneEmailMessage}
+                                            </div>
+                                        </template>
+                                        <p class="slds-m-bottom_medium">{populateRequiredFieldMessage}</p>
+                                        <div class="slds-show slds-m-bottom_small">
+                                            <div class="case-detail-label long">Name</div>
+                                            <lightning-formatted-name class="case-detail-value" first-name={firstName}
+                                                last-name={lastName}></lightning-formatted-name>
+                                        </div>
+                                        <div class="slds-show slds-m-bottom_small">
+                                            <div class="case-detail-label long">Email </div>
+                                            <div class="case-detail-value">{schoolEmail}</div>
+                                        </div>
+                                        <div class="slds-show slds-m-bottom_small">
+                                            <div class="case-detail-label long">Type</div>
+                                            <div class="case-detail-value">Email address issue</div>
+                                        </div>
+                                        <div class="slds-show slds-m-bottom_small">
+                                            <div class="case-detail-label long">School Name</div>
+                                            <div class="case-detail-value">{companySchoolName}</div>
+                                        </div>
+                                        <div class="slds-show">
+                                            <div class="case-detail-label long">School Address</div>
+                                            <div class="case-detail-value">
+                                                <div class="slds-col-slds-size_2-of-12 address-container">
+                                                    <div class="info">
+                                                        <span class="detail">
+                                                <lightning-formatted-address aria-hidden="true" street={street} city={city} country={country} province={state} postal-code={postalCode}></lightning-formatted-address>
+                                           </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-inline">
+                                            <lightning-textarea class="details-textarea" placeholder="Details"
+                                                name="moreThanOneSchoolDescription" label="Details"
+                                                onchange={handleMoreThanOneEmailDescChange} data-index="0">
+                                            </lightning-textarea>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- Modal/Popup Box LWC footer starts here -->
+                                    <footer class="slds-modal__footer slds-text-align_left">
+                                        <!-- <button disabled={disableButton} onclick={handleSendEmailtoCaseForMoreThanOneContact}>Submit</button> -->
+                                        <lightning-button class="moreThanOneEmailPopupSubmitBtn"
+                                            disabled={disableButton}
+                                            onclick={handleSendEmailtoCaseForMoreThanOneContact}
+                                            onfocusout={focusOutMoreThanOneEmailButton} label="Submit">
+                                        </lightning-button>
+                                    </footer>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                    </template>
+
+                    <template if:true={showCreateCaseforSchoolNotFound}>
+                        <div class="slds-modal__container1 submit-case-popup">
+                            <!-- Modal/Popup Box LWC starts here -->
+                            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                <div class="slds-modal__container">
+                                    <!-- Modal/Popup Box LWC header here -->
+                                    <header class="slds-modal__header">
+                                        <button class="slds-modal__close schoolnotfound-submitcase-popup-close" onclick={closeModalSchoolNotFound} onfocusout={focusOutSchoolNotFoundClose} aria-label="close">x</button>
+                                        <h3>Submit a Request</h3>
+
+                                    </header>
+                                    <!-- Modal/Popup Box LWC body starts here -->
+                                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                                        <template if:true={showCreateCaseforSchoolNotFoundLabel}>
+                                            <!-- <div class="slds-text-color_error" role="alert"> -->
+                                            <div class="slds-text-heading_medium slds-m-around_small slds-align_absolute-center confirmation-message"
+                                                role="alert">
+                                                {CreateCaseforSchoolNotFound}
+                                            </div>
+
+
+                                        </template>
+                                        <p class="slds-m-bottom_medium">{populateRequiredFieldMessage}</p>
+                                        <div class="slds-show slds-m-bottom_small">
+                                            <div class="case-detail-label">Name</div>
+                                            <!-- <lightning-formatted-name class="case-detail-value" first-name={firstName} last-name={lastName}></lightning-formatted-name> -->
+                                            <div class="case-detail-value">{firstName} {lastName}</div>
+                                        </div>
+                                        <div class="slds-show slds-m-bottom_small">
+                                            <div class="case-detail-label">Email </div>
+                                            <div class="case-detail-value">{schoolEmail}</div>
+                                        </div>
+                                        <div class="slds-show">
+                                            <div class="case-detail-label">Type</div>
+                                            <div class="case-detail-value">Add an Account</div>
+                                        </div>
+
+                                        <div class="form-group form-inline">
+                                            <lightning-input placeholder="Enter School/Account name"
+                                                message-when-value-missing="Complete school name field" data-index="0"
+                                                name="companySchoolName" type="text" label="School/Account Name *" required
+                                                onchange={handleSchoolNameChange}></lightning-input>
+                                        </div>
+                                        <div class="form-group form-inline">
+                                            <lightning-textarea placeholder="Enter School/Account Address"
+                                                message-when-value-missing="Complete school address field"
+                                                data-index="0" class="addressTextArea" name="address"
+                                                label="School/Account Address *" required onchange={handleAddressChange}>
+                                            </lightning-textarea>
+                                        </div>
+                                        <div class="form-group form-inline">
+                                            <lightning-textarea placeholder="Enter Details"
+                                                message-when-value-missing="Complete details field" data-index="0"
+                                                class="descriptionTextArea" name="noSchoolFoundDescription"
+                                                label="Details *" required onchange={handleNoSchoolFoundDescChange}>
+                                            </lightning-textarea>
+                                        </div>
+
+
+                                    </div>
+
+                                    <!-- Modal/Popup Box LWC footer starts here -->
+                                    <footer class="slds-modal__footer slds-text-align_left">
+                                        <lightning-button class="schoolNotFoundPopupSubmitBtn"
+                                            aria-disabled={disableButton}
+                                            onclick={handleSendEmailtoCaseForNoSchoolFound}
+                                            onfocusout={focusOutSchoolNotFoundButton} label="Submit"></lightning-button>
+                                        <!-- <button disabled={disableButton} onclick={handleSendEmailtoCaseForNoSchoolFound}>Submit</button> -->
+                                    </footer>
+
+                                </div>
+                            </section>
+                        </div>
+                        <div class="slds-backdrop slds-backdrop_open"></div>
+                    </template>
+
+                    <template if:true={registredsuccessfull}>
+                        <div class="backdrop"></div>
+                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                            aria-describedby="modal-content-id-1"
+                            class="slds-modal slds-fade-in-open slds-modal_large good-news-modal">
+                            <div class="slds-modal__container">
+                                <!-- Modal Header -->
+                                <header class="slds-modal__header">
+                                    <h2 id="modal-heading-04" class="slds-text-heading_medium slds-hyphenate">
+                                        {goodNewsRegistered}</h2>
+
+                                    <button class="slds-button slds-button_icon slds-modal__close register-modal-close good-news-success-close-btn" title="Close" onclick={handleSignInClick} onkeypress={handleCloseKeyPress} onfocusout={focusOutGoodNewsClose}>
+                                <!-- <button class="slds-button slds-button_icon slds-modal__close register-modal-close good-news-success-close-btn" title="Close" onclick={handleClose} onkeypress={handleCloseKeyPress} onfocusout={focusOutGoodNewsClose}> -->
+                                    <lightning-icon icon-name="utility:close" alternative-text="Close"></lightning-icon>
+                                </button>
+                                </header>
+                                <!-- Modal Content -->
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-01">
+                                    <template if:true={IsExistedUser}>
+                                        <p>You are registered. Use your current Savvas password to sign in. </p>
+                                    </template>
+                                    <template if:false={IsExistedUser}>
+                                        <p>{registeredSuccessfully}</p>
+                                    </template>
+                                </div>
+                                <div class="slds-modal__content slds-p-around_medium">
+
+                                    <div class="info" style="margin-top:10px">
+                                        <p class="registration-label">{userID}</p>
+                                    </div>
+                                    <div class="info">
+                                        <p class="registration-value">{schoolEmail}</p>
+                                    </div>
+
+
+                                    <div class="info" style="margin-top:10px">
+                                        <p class="registration-label">{companyName}</p>
+                                    </div>
+                                    <div class="info">
+                                        <p class="registration-value">{companySchoolName}</p>
+                                    </div>
+
+                                </div>
+                                <!-- Modal Footer -->
+                                <footer class="slds-modal__footer">
+                                    <lightning-button class="modal-confirm-button good-news-success-gotosignIn-btn"
+                                        label="Go To Sign In" onclick={handleSignInClick} variant="brand"
+                                        onfocusout={focusOutGoodNewsButton}></lightning-button>
+                                </footer>
+                            </div>
+                        </section>
+                    </template>
+
+
+                    <div>
+
+                        <template if:true={isAccesstype}>
+                            <div class="access-type-wrapper">
+                                <div>
+
+                                    <div class="access-type">
+                                        <span>{selectAccessType}</span>
+                                    </div>
+                                </div>
+
+                                <!-- <template if:true={showCheckboxes}>  -->
+                                <div style="display: inline-flex; align-items: center;">
+                                    <!-- <div class="slds-m-bottom_small">{accountWillBeUsedTo}</div> -->
+                                    <lightning-checkbox-group class="access-type-checkbox-group" name="accessType"
+                                        role="alert" options={checkboxOptions} value={selectedcheckboxs}
+                                        onchange={handleCheckboxChange}></lightning-checkbox-group>
+                                </div>
+                                <!-- </template> -->
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="slds-grid mobile-layout" style="margin-top:20px">
+                        <div class="slds-col-slds-size_2-of-12">
+                            <template if:true={showFirstNameLastName}>
+                                <div class="slds-form-element__label">{labels.scc_register_FirstName_Text}</div>
+                                <input placeholder="Enter your first name" aria-label="First Name Required" type="text" value={firstName} disabled={isFirstNameDisabled} oninput = {handleFirstNameInputChange}  onchange={handleFirstNameInputChange} class="fixed-width-input slds-input"/>
+                                <!-- <lightning-input label="Last Name" value={lastName} disabled={isLastNameDisabled} required onchange={handleLastNameInputChange} class="fixed-width-input"></lightning-input> -->
+                                <template if:true={showFirstNameError}>
+                                    <div class="slds-text-color_error" role="alert">{firstNameError}</div>
+                                </template>
+                            </template>
+                        </div>
+                        <div class="slds-col-slds-size_2-of-12 lastname-container">
+                            <template if:true={showFirstNameLastName}>
+                                <div class="slds-form-element__label">{labels.scc_register_LastName_Text}</div>
+                                <!-- <lightning-input label="First Name" value={firstName} disabled={isFirstNameDisabled} required onchange={handleFirstNameInputChange} class="fixed-width-input"></lightning-input> -->
+                                <input placeholder="Enter your last name" aria-label="Last Name Required" type="text" value={lastName} disabled={isLastNameDisabled}  onchange={handleLastNameInputChange} oninput = {handleLastNameInputChange} class="fixed-width-input slds-input"/>
+                                <template if:true={showLastNameError}>
+                                    <div class="slds-text-color_error" role="alert">{LastNameError}</div>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+
+
+                    <div class="slds-grid mobile-layout">
+                        <template if:true={showemailzipcode}>
+                            <div class="slds-col-slds-size_2-of-12">
+                                <div class="slds-form-element__label">{labels.scc_register_SchoolEmail_Text}</div>
+                                <input type="text" placeholder="Enter your email" aria-label="School Email Required" value={schoolEmail} disabled={isEmailDisabled}   onchange={handleEmailInputChange} class="fixed-width-input slds-input"/>
+                                <template if:true={showEmailError}>
+                                    <div class="slds-text-color_error" role="alert">{emailError}</div>
+                                </template>
+                            </div>
+
+                            <div class="slds-col-slds-size_2-of-12 schoolzip-container">
+                                <div class="slds-form-element__label">{labels.scc_register_SchoolZip_Text}</div>
+                                <input data-id="schoolZipCode" aria-label="School Postal/Zip Required" type="text" value={selectedZipCode} placeholder="Enter your postal/ zip" disabled={isZipCodeDisabled} onfocusout={handlezipfocus} oninput={handleZipCodeChange}  onchange={handleZipCodeChange}  class="fixed-width-input slds-input" />
+                                <template if:true={showSchoolOptions}>
+                                    <template if:false={hideSelectSchool}>
+                                        <!-- <div class="dropdown"> -->
+                                        <div class="dropdown">
+                                            <ul class="dropdown-list">
+                                                <template for:each={schoolOptions} for:item="school">
+                                                    <li key={school.value} class="dropdown-item"
+                                                        data-value={school.value} onclick={handleSchoolSelect}
+                                                        onkeyup={handleSchoolSelectkeypress} tabindex="0">
+                                                        {school.label}</li>
+                                                </template>
+                                            </ul>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={showZipCodeError}>
+                                    <div class="slds-text-color_error zip-code-error" role="alert">{zipCodeError}</div>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                    <template if:true={showSchoolDetails}>
+                        <div class="slds-col-slds-size_2-of-12 company-name">
+                            <div class="info">
+                                <span class="label" >{companyName} </span>
+                            </div>
+                            <div class="info">
+                                <span class="detail" role="alert"><div class="slds-assistive-text">{companyName}</div>{companySchoolName}</span>
+                            </div>
+                        </div>
+                        <div class="slds-col-slds-size_2-of-12 address-container">
+                            <div class="info">
+                                <span class="label">{address}</span>
+                            </div>
+                            <div class="info">
+                                <span class="detail" role="alert"><div class="slds-assistive-text">{address}</div>
+                            <b>{street}</b>, {city}, {postalCode}<br/>
+                            {state}<br/>
+                            <b>{country}</b>
+                          </span>
+                            </div>
+                        </div>
+                    </template>
+                    <!-- Company/school name colour should be black not red class="slds-text-color_error"-->
+                    <div class="school-not-found" if:true={showSchoolNotFoundError}>
+                        <div>
+                            <p>{companySchoolNameNotFoundPlease} <a href="#" class="school-not-found-submit-case-link"
+                                    onclick={showModalForSchoolNotFound}
+                                    aria-label="School not found. Please submit a request to get your school added">{submitACase}</a> {toGetYourSchoolAdded}</p>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <div class="centered-buttons">
+                            <template if:true={isalways}>
+
+                                <div class="register-button">
+                                    <button type="submit" class="verifyBtnClass" onclick={handleVerify} aria-disabled={disableVerify}>Verify</button>
+                                </div>
+
+                            </template>
+                            <template if:true={isalways}>
+                                <div class="slds-text-align_center">
+                                    <button class="slds-button" onclick={handleCancel}>Cancel</button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div>
+
+                        <template if:true={isregiter}>
+                            <div class="slds-text-align_center">
+                                <button class="slds-registerbutton" onclick={registerVerify} disabled={isRegistrationEnabled}>Register</button>
+                            </div>
+                            <div class="slds-text-align_center">
+                                <button class="slds-button" onclick={RegisterCancel}>Cancel</button>
+                            </div>
+                        </template>
+                    </div>
+                    <template if:true={showPopup}>
+                        <div class="backdrop"></div>
+                        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+                            <div class="slds-modal__container">
+                                <!-- Modal Header -->
+                                <header class="slds-modal__header">
+                                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">
+                                        {placeOrderConfirmation}</h2>
+                                    <button class="slds-button slds-button_icon slds-modal__close register-modal-close confirm-purchase-auth-close-btn" title="Close" onclick={PopupCancel} onkeypress={handlePopupCancelKeyPress} onfocusout={focusOutClose}>
+                                    <lightning-icon icon-name="utility:close" alternative-text="Close"></lightning-icon>
+                                </button>
+                                </header>
+                                <!-- Modal Content -->
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    <p>{pleaseConfirmAuthorization}</p>
+                                </div>
+                                <!-- Modal Footer -->
+                                <footer class="slds-modal__footer">
+                                    <lightning-button class="modal-confirm-button" label="Confirm" data-index="0"
+                                        onclick={PlaceorderConfirm} variant="brand"></lightning-button>
+                                    <lightning-button class="modal-cancel-button confirm-purchase-auth-cancel-btn"
+                                        label="Cancel" onclick={PopupCancel} variant="neutral"
+                                        onfocusout={focusOutButton}></lightning-button>
+                                </footer>
+                            </div>
+                        </section>
+                    </template>
+                </div>
+                <template if:false={isNouser}>
+                    <div class="slds-col not-a-dealer-container">
+                        <div class="not-a-dealer-title">{labels.scc_signIn_Dealer_Title}</div>
+                        <div class="not-a-dealer-links">
+                            <a href="https://homeschool.savvas.com/">
+                                {labels.scc_signIn_Homeschool_Text}
+                                <div class="chevron-circle">
+                                    <lightning-icon icon-name='utility:chevronright' alternative-text='chevronright'
+                                        size='large' title='chevronright'></lightning-icon>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="not-a-dealer-links">
+                            <a href="https://savvas.com/privateschools">
+                                {labels.scc_signIn_Private_Student_Text}
+                                <div class="chevron-circle">
+                                    <lightning-icon icon-name='utility:chevronright' alternative-text='chevronright'
+                                        size='large' title='chevronright'></lightning-icon>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="not-a-dealer-links">
+                            <a href="https://www.savvas.com">
+                                {labels.scc_signIn_Other_Student_Text}
+                                <div class="chevron-circle">
+                                    <lightning-icon icon-name='utility:chevronright' alternative-text='chevronright'
+                                        size='large' title='chevronright'></lightning-icon>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </template>
+                <div class="slds-grid slds-grid_vertical">
+                    <div class="slds-col register-blue-footer">
+                        <div class="register-footer-copyright-text">{labels.scc_signIn_Footer_Text}</div>
+                        <div class="footer-links">
+                            <a href="/MySavvasOrders/CreateCase" target="_blank"
+                                class="register-footer-links">{labels.scc_signIn_Footer_Savvas_Support}</a>
+                            <a href={dynamicurl} class="register-footer-links"> {labels.scc_signIn_Footer_Terms_Text}
+                            </a>
+                            <!-- <a href={dynamicprivacy} class="register-footer-links"> {labels.scc_signIn_Footer_Terms_Text} </a> -->
+                            <a href={dynamicprivacy}
+                                class="register-footer-links">{labels.scc_signIn_Footer_Privacy_Text}</a>
+                        </div>
+                    </div>
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+
+</template>

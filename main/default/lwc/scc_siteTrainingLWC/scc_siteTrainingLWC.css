@@ -1,0 +1,149 @@
+.link-button {
+    background: none;
+    border: none;
+    color: #0070d2;
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+    text-align: left;
+}
+
+.link-button:hover {
+    text-decoration: underline;
+}
+
+.link-button:focus {
+    outline: none;
+}
+
+img {
+    max-width: 17px;
+    height: 17px;
+    margin-top: 2.5px;
+    margin-left: -5px;
+}
+
+.filterInput {
+    width: 184px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #D1D7E2;
+    box-shadow: 0px 4px 10px 0px #2150A31A;
+    margin-top: 6px;
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22.5px;
+    text-align: left;
+    color: #173770;
+    padding-left: 10px;
+}
+
+.filterInput:focus-visible {
+    outline: none;
+}
+
+.filterSearch {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    color: #173770;
+    margin-bottom: 8px;
+}
+
+.countItems {
+    height: 25px;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    color: #173770;
+    margin-top: 6px;
+    margin-left: 15px;
+    padding-left: 15px;
+    padding-right: 10px;
+    border-left: 1px solid rgba(12, 30, 61, 0.2);
+}
+
+.tableDiv {
+    max-height: 650px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+table {
+    background-color: #FFFFFF;
+    color: #173770;
+    width: 100%;
+}
+
+.tableDiv::-webkit-scrollbar {
+    background-color: #FFFFFF;
+    width: 8px;
+}
+
+.tableDiv::-webkit-scrollbar-thumb {
+    background-color: #AFC3D8;
+    border-radius: 10px;
+}
+
+.table-head {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: left;
+    color: #0C1E3D;
+    background-color: #FFFFFF; /* Ensure white background */
+}
+
+.table-body {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+    color: #173770;
+}
+
+td {
+    padding: 4px;
+}
+
+.table-body tr:nth-child(odd) { 
+    background: #E5F1FD;
+}
+
+.table-body tr:nth-child(even) { 
+    background: #FFFFFF;
+}
+
+thead > tr > td {
+    max-height: 30px;
+    padding: 10px 4px; /* Add some padding to the header cells */
+}
+
+.thBorder {
+    width: 2px;
+    height: 17px;
+    /* Border removed */
+}
+
+.productCriteriaBg {
+    background-color: #E5F1FD;
+    margin: 0;
+    min-width: 1200px;
+}
+
+.searchCard {
+    background-color: #FFFFFF;
+    border: 1px solid #AFC3D8;
+    border-radius: 10px;
+    padding: 30px 20px 30px 20px;
+}

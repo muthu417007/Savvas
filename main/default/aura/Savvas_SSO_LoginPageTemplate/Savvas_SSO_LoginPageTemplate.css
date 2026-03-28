@@ -1,0 +1,233 @@
+.THIS.logoContainerBg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: inherit;
+    width: 100vw;
+    height: 100vh;
+    /*overflow-y:scroll;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.THIS{
+    font-family: 'Poppins', sans-serif;
+}
+.THIS .loginPage {
+    /*font-family: Poppins;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: -0.04em;
+    text-align: left;
+    color: #173770;*/
+}
+.THIS .terms{
+    text-align : center;
+    font-family: Poppins;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: -0.04em;
+    color: #173770;
+    clear:both;
+}
+.THIS .loginContainer{
+    /*max-width: 396px;*/
+    width: 435px;
+    margin: 0 60px;
+    max-height: 100%;
+}
+.THIS .loginPage{
+    background: rgba(255,255,255);
+    border-radius: 20px 20px 0px 0px;
+    padding: 27px 30px;
+}
+.THIS .container{
+    position :relative;
+}
+
+.THIS .titleClass{
+    font-family: 'Poppins'!important;
+	font-size: 35px;
+	font-weight: 700;
+	line-height: 38.5px;
+	letter-spacing: -2%;
+	margin-left: 0px;
+    color: #173770;
+}
+.THIS .forgotpwd{
+    /*font-family: 'Poppins'!important;
+    font-size: 13px;
+    font-weight: 500; 
+    letter-spacing: -0.02em; 
+    /*height: 242px;
+    overflow-y:scroll;
+    color: #173770;;*/
+}
+.THIS .copyright{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10.5px;
+    line-height: 18.2px;
+    text-align: center;
+    color: #FFFFFF;
+    
+    background-color: rgba(23, 55, 112, 1);
+    padding-top: 18px;
+    padding-bottom: 5px;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.THIS .footerLink{
+	font-family: 'Poppins', sans-serif; 
+    font-size: 10.5px; 
+    font-weight: 500; 
+    line-height: 5px; 
+    letter-spacing: 0.01em; 
+    text-decoration:none;  
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.THIS #sfdc_password_container + div{
+    float:left
+}
+.THIS #sfdc_password_container + div+div{
+    /*float:right*/
+    display: flex;
+    justify-content: flex-end;
+}
+.THIS .salesforceIdentityForgotPassword2 .inputContainer{
+    margin-bottom:27px;
+    margin-top:16px;
+    background: #FFFFFF;
+    border: 1px solid #AFC3D8;
+    box-shadow: 0px 4px 8px rgba(33, 80, 163, 0.1);
+    border-radius: 5px;
+    background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+    background-position: 5px 5px, 0, 100% 0;
+    background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+   /* width: 360px;
+    margin-left: 30px;*/
+    width: 430px;
+    margin-left: -5px;
+}
+.THIS .salesforceIdentityForgotPassword2 .slds-col--padded {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.THIS .salesforceIdentityForgotPassword2 input[type=text] {
+    width: 90%;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.4px;
+    text-align: left;
+    color: #173770;
+}
+.THIS #sfdc_username_container {
+    margin-bottom:27px;
+    margin-top:16px;
+    background: #FFFFFF;
+    border: 1px solid #AFC3D8;
+    box-shadow: 0px 4px 8px rgba(33, 80, 163, 0.1);
+    border-radius: 5px;
+    background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+    background-position: 5px 5px, 0, 100% 0;
+    background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+}
+.THIS #sfdc_username_container input[type="text"]{
+    width:100%;
+}
+.THIS #sfdc_password_container input[type="password"]{
+    width:100%;
+}
+.THIS #sfdc_password_container {
+    margin-bottom:46px;
+    background: #FFFFFF;
+    border: 1px solid #AFC3D8;
+    box-shadow: 0px 4px 8px rgba(33, 80, 163, 0.1);
+    border-radius: 5px;
+    background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+    background-position: 5px 5px, 0, 100% 0;
+    background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+}
+.THIS .inputContainer .inputIcon{
+    display: none;
+}
+.THIS #sfdc_password_container + div .slds-button{
+    width: 271px;
+    height: 45px;
+    border-radius: 90px;
+    font-size: 18px;
+    color: #0C1E3D;
+    font-family: 'arial';
+}
+.THIS #sfdc_password_container + div + div a,
+
+.THIS #sfdc_password_container + div + div a:hover{
+    /*font-size: 16px;
+    color: #679608;*/
+    font-size: 14px;
+    color: rgb(1, 68, 134);
+}
+.THIS .loginButton{
+    font-family: 'Poppins';
+    font-weight:300;
+    font-size: 14px;
+    margin-top: 10px
+}
+.THIS .forceCommunityRichTextInline .inverseTextColor {
+	font-family: Poppins;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	
+    justify-content: flex-start;
+    color: #173770;
+}
+.THIS .forceCommunityRichText a {
+    text-decoration: none;
+    color: #2150A3;
+    font-family: Poppins;
+	font-size: 11px;
+	font-weight: 500;
+	line-height: 21px;
+	letter-spacing: 0.01em;
+	text-align: center;
+    margin-bottom: 0px;
+}
+.THIS .salesforceIdentityForgotPassword2 .uiButton{
+    height: 55px;
+    border-radius: 90px;
+    /*padding-top: 2.5rem;*/
+    /*width: 360px;
+    margin-left: 30px;*/
+    width: 430px;
+    margin-left: -5px;
+
+}
+.THIS .salesforceIdentityForgotPassword2 .uiButton .label {
+    font-size: 18px;
+    color: var(--lighter-text, #173770);
+    font-family: 'Poppins';
+    font-weight: 600;
+	line-height: 19.8px;  
+}        
+.THIS .salesforceIdentityForgotPassword2 input[type=text] {
+    width: 100%;
+}
+.THIS .salesforceIdentityForgotPassword2 + div+div{
+    float:right
+}
+.THIS .salesforceIdentityForgotPassword2 + div{
+    float:left
+}
+.THIS .salesforceIdentityLoginForm2 .selfRegister {
+    float: none;
+}

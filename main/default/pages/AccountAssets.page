@@ -1,0 +1,16 @@
+<apex:page standardController="Account" extensions="AccountAssetsController" showheader="false">
+<!-- This page is for displaying Legacy A&I/K12Tech Cases for a given Account in ICOM -->
+<apex:pageblock >
+<!-- <apex:pageblocksection columns="1" title="Implementation Opportunities in Legacy SFDC Instance"> -->
+<apex:pageblocktable value="{!records}" var="r">
+<apex:column value="{!r.Name}"/>
+<apex:column value="{!r.Product2Name__c}"/>
+<apex:column value="{!r.SerialNumber__c}"/>
+<apex:column value="{!r.InstallDate__c}"/>
+<apex:column value="{!r.Quantity__c}"/>
+<apex:column value="{!r.ContactName__c}"/>
+<apex:column value="{!r.Status__c}"/>
+</apex:pageblocktable>
+<!-- </apex:pageblocksection> -->
+</apex:pageblock>
+</apex:page>

@@ -1,0 +1,58 @@
+.neutral-button-text-color{
+	--slds-c-button-text-color-neutral : black!important;
+	--slds-c-button-line-height: 1.5rem !important;
+}
+
+/* .custom-tabset .slds-tabs_default__nav .slds-tabs_default__item .slds-tabs_default__link {
+    color: black !important;
+} */
+
+
+
+/* .custom-tabset .slds-tabs_default__link{
+    color: black !important;
+} */
+
+/* :host {
+    --slds-c-tabs-item-color-border-active: red;
+    --slds-c-tabs-item-color-border-hover: red;
+    --slds-c-tabs-list-color-border: black;
+     --slds-c-tabs-item-text-color: #ea2cb1;
+     --slds-c-tabs-item-text-color-active: #1dd45a;
+
+}
+
+.tab-active {
+    --lwc-colorBackground: #545164;
+    --lwc-colorBackgroundAlt: #545164;
+    --lwc-colorBackgroundPathIncompleteHover: #545164;
+    --lwc-colorBorder: #545164;
+    --lwc-colorTextActionLabel: white;
+    --lwc-brandTextLink: white;
+} */
+
+/* .slds-tabs_default__item.slds-is-active {
+    background: greenyellow !important;
+} */
+/* .slds-tabs_default__item.slds-is-active > a {
+  color: red;
+  font-weight: bold;
+} */
+/* .slds-tabs_default__link{
+	color: black !important;
+} */
+/* :host .propertyChaneg{
+    --lwc-tableColorBackgroundHeader : ⌗greenyellow!important;
+		--slds-c-tabs-item-text-color : black !important;
+	--slds-c-tabs-item-text-color-active : black !important;
+} */
+/* :host .small-button {
+    --slds-c-button-line-height: 1rem!important;
+} */
+/* .custom-hea
+der-color {
+	color: black;
+} */
+/* span.slds-truncate {
+    color: black;
+} */

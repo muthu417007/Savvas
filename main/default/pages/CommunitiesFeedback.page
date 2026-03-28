@@ -1,0 +1,146 @@
+<apex:page standardController="Community_Feedback__c" extensions="CommunityFeedbackController" standardStylesheets="false" showHeader="false" sidebar="false">
+    <apex:composition template="{!$Site.Template}">
+        <apex:define name="mainbody">
+            <style type="text/css">
+            .ptBreadcrumb {
+                display: none;
+            }
+            .labelColumn {
+                text-align: right;
+                width: 40%;
+                padding-right: 10px;
+            }
+            </style>
+            <!---- PAGE ----->
+            <apex:form >
+
+                <form class="form-horizontal" role="form">
+
+                    <apex:outputPanel id="content" style="width:100%">
+                        <apex:outputPanel style="width:100%" rendered="{!!recordSaved}">
+                            <h1>
+                                  Feedback
+                            </h1>
+  	                            <div class="form-group">
+	                                <div class="row">
+									   <label class="col-sm-6 control-label text-right text-danger">
+									   			{!errorMsg}
+									   </label>
+									</div>
+							    </div>
+                            <hr/>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-6 control-label text-right">Describe your role with Pearson:</label>
+                                    <div class="col-sm-2">
+                                        <apex:inputField value="{!fbInfo.Role__c}" styleclass="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-6 control-label text-right">Do you have a Communities account?</label>
+                                    <div class="col-sm-2">
+                                        <apex:inputField value="{!fbInfo.Communities_Account__c}" styleclass="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-6 control-label text-right">How many times have you used Pearson Support (any type of support) in the last 6 months?</label>
+                                    <div class="col-sm-2">
+                                        <apex:inputField value="{!fbInfo.Used_Support_Number__c}" styleclass="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-6 control-label text-right">Did you search for an article today?</label>
+                                    <div class="col-sm-2">
+                                        <apex:inputField value="{!fbInfo.Article_Search__c}" styleclass="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-6 control-label text-right">Did you find helpful information?</label>
+                                    <div class="col-sm-2">
+                                        <apex:inputField value="{!fbInfo.Helpful_Information__c}" styleclass="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-6 control-label text-right">What suggestions would you have to make your experience more successful?</label>
+                                    <div class="col-sm-4">
+                                        <apex:inputTextarea value="{!fbInfo.Suggestions__c}" rows="6" cols="30" styleclass="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-sm-6 control-label text-right">Enter text as shown in the image</label>
+                                    <div class="col-sm-4">
+     
+                                    <script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k={!captchaPublicKey}">
+                                    </script>
+                                    <noscript>
+                                        <iframe src="https://www.google.com/recaptcha/api/noscript?k={!captchaPublicKey}" height="300" width="500" frameborder="0"></iframe>
+                                        <br/>
+                                        <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+                                        <input type="hidden" name="recaptcha_response_field" value="manual_challenge" />
+                                    </noscript>
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-offset-7">
+                                <apex:commandButton value="Submit" action="{!save}"  styleClass="btn btn-primary"  />&nbsp;
+                                <button type="button" class="btn btn-default" onclick="history.go(-1);return false;">Cancel</button>
+                    
+
+                            </div>
+                            <hr/>
+                        </apex:outputPanel>
+
+                        <apex:outputPanel rendered="{!recordSaved}">
+                            <h1>
+                                Your Feedback Is Important
+                            </h1>
+                            <br/>
+                            <br/>
+                            <p>We appreciate your comments. We thank you for taking the time to share your opinion with us so that we can make improvements to your experience in the near future.
+                            </p>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                </form>
+            </apex:form>
+
+        </apex:define>
+        <apex:define name="JS">
+            <script type="text/javascript">
+            $(document).ready(function() {
+                $("a.feedbackright").hide();
+            });
+            
+            function showRecaptcha() {
+                 setTimeout(showRecaptcha2,3000);
+                 }
+            function showRecaptcha2() {
+                       	Recaptcha.reload();
+            	}
+            </script>
+        </apex:define>
+    </apex:composition>
+</apex:page>

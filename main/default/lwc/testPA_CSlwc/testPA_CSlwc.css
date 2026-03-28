@@ -1,0 +1,35 @@
+.quantity-selector-container {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-selector {
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    padding: 0px 14px;
+    margin-right: 8px;
+}
+
+.quantity-value {
+    font-weight: bold;
+}
+
+.quantity-arrows {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.quantity-btn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    padding-left: 30px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+    
+    -webkit-appearance: "Always Show Up/Down Arrows";
+    
+}

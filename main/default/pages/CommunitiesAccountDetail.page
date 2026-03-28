@@ -1,0 +1,19 @@
+<apex:page standardController="Account" showHeader="false" sidebar="false" standardStylesheets="false">
+    <apex:composition template="{!$Site.Template}">
+        <apex:define name="mainbody">  
+            <style type="text/css">
+                .ptBreadcrumb {
+                    display: none;
+                }
+            </style>
+            <apex:detail inlineEdit="true" showChatter="false" relatedList="false" subject="{!Account.Id}" />
+        </apex:define>
+        <apex:define name="JS">  
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $( "a:contains('[View Hierarchy]')" ).hide(); 
+                });
+             </script>
+        </apex:define>
+    </apex:composition>    
+</apex:page>

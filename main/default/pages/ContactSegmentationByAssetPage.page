@@ -1,0 +1,235 @@
+<apex:page controller="ContactSegmentationByAssetController" docType="html-5.0">
+    
+    <c:LoadingBox />
+    <style type="text/css">
+    .col1 {width:37.5%; text-align:Left;}
+    .col2 {width:25%; text-align:Left;}
+    </style>
+    <apex:form >
+                    <apex:pageblock mode="edit" title="Filters">
+                            <apex:pageBlockSection columns="1" Title="Asset Filters"> 
+                                <apex:panelGrid columns="3" width="100%" columnClasses="col1, col1, col2" > 
+                                <apex:panelGroup >        
+                                     <b>MASTER PROGRAM:</b>       
+                                        <apex:panelGrid columns="3" id="MPResult" border="2"> 
+                                            <apex:selectList title="Master Program" id="sel1" value="{!MPleftselected}" multiselect="true" style="width:200px" size="5">
+                                                <apex:selectOptions value="{!MPunselectedvalues}" />
+                                            </apex:selectList>          
+                                            <apex:panelGroup >
+                                                <apex:commandButton action="{!MPselectclick}" value=">>" reRender="MPResult"></apex:commandButton>
+                                                <br/>
+                                                <br/>
+                                                <apex:commandButton action="{!MPunselectclick}" value="<<" reRender="MPResult"></apex:commandButton>
+                                            </apex:panelGroup>
+                                            <apex:selectList id="sel2" value="{!MPrightselected}" multiselect="true" style="width:200px" size="5">
+                                                <apex:selectOptions value="{!MPSelectedValues}" />
+                                            </apex:selectList>    
+                                        </apex:panelGrid>
+                                </apex:panelGroup>
+                                <apex:panelgroup >
+                                    <b>ISBN13:</b>
+                                    <apex:panelgrid columns="3" id="ISBNResult" border="2">
+                                        <apex:input type="text" label="ISBN13" value="{!ISBN13}"/> 
+                                        <apex:panelgroup >
+                                            <apex:commandButton action="{!ISBNselectclick}" value=">>" reRender="ISBNResult"></apex:commandButton>
+                                            <br/>
+                                            <br/>
+                                            <apex:commandButton action="{!ISBNunselectclick}" value="<<" reRender="ISBNResult"></apex:commandButton>
+                                        </apex:panelgroup>
+                                        <apex:selectList id="ISBNSel" value="{!ISBNrightselected}" multiselect="true" style="width:200px" size="5">
+                                            <apex:selectOptions value="{!ISBNSelectedValues}" />
+                                        </apex:selectList>
+                                    </apex:panelgrid>
+                                </apex:panelgroup> 
+                                <apex:panelgroup >
+                                   <b>Installation Date Range:</b>
+                                   <apex:panelgrid columns="4" id="installDate" border="2"> 
+                                    From:
+                                    <apex:input label="Start" type="date" value="{!installStartDate}" style="width: 125px;"/>
+                                    To:
+                                    <apex:input label="End" type="date" value="{!installEndDate}" style="width: 125px;"/> 
+                                    </apex:panelgrid>
+                                    <br/>
+                                   <b>Expiration Date Range:</b>
+                                   <apex:panelgrid columns="4" id="expireDate" border="2"> 
+                                    From:
+                                    <apex:input label="Start" type="date" value="{!expireStartDate}" style="width: 125px;"/>
+                                    To:
+                                    <apex:input label="End" type="date" value="{!expireEndDate}" style="width: 125px;"/> 
+                                    </apex:panelgrid>
+                                </apex:panelgroup>
+                                </apex:panelGrid>
+                             </apex:pageBlockSection>                       
+                        <apex:pageblockSection columns="1" title="Account Filters"> 
+                            <apex:panelGrid columns="4" width="100%" columnClasses="col2,col2,col2,col2"> 
+                                <apex:panelgroup >
+                                    <b>Account State:</b>
+                                    <apex:panelGrid columns="3" id="AccState" border="2">
+                                            <apex:selectList title="Account State" id="sel1" value="{!AccStateLeftSelected}" multiselect="true" style="width:120px" size="5">
+                                                <apex:selectOptions value="{!AccStateunSelectedValues}" />
+                                            </apex:selectList>          
+                                            <apex:panelGroup >
+                                                <apex:commandButton action="{!AccStateselectclick}" value=">>" reRender="AccState"></apex:commandButton>
+                                                <br/>
+                                                <br/>
+                                                <apex:commandButton action="{!AccStateunselectclick}" value="<<" reRender="AccState"></apex:commandButton>
+                                            </apex:panelGroup>
+                                            <apex:selectList id="sel2" value="{!AccStateRightSelected}" multiselect="true" style="width:120px" size="5">
+                                                <apex:selectOptions value="{!AccStateSelectedValues}" />
+                                            </apex:selectList>    
+                                        </apex:panelGrid>
+                                    	<br/>
+                                        <b>Account Owner:</b>
+                                    	<apex:panelgrid columns="1" id="AccOwner" border="2">
+                                            <apex:inputfield value="{!acc.ownerid}" required="false"/>
+                                		</apex:panelgrid>
+                                    </apex:panelgroup>
+                                 <apex:panelgroup >
+                                    <b>Additional Account Filters:</b>
+                                	<apex:panelgrid columns="4" id="AccAddFilters" frame="border">
+                   						Enrollment from:
+                                        <apex:input type="number" label="Enrollment Start Range" value="{!EnrollStartRange}" style="width: 60px;"/>
+                                        to:
+                                        <apex:input type="number" label="Enrollment End Range" value="{!EnrollEndRange}" style="width: 60px;"/>
+                                        AIM Per Pupil from:
+                                        <apex:input type="number" label="AIM Start Range" value="{!AIMStartRange}" style="width: 60px;"/>
+                                        to:
+                                        <apex:input type="number" label="AIM End Range" value="{!AIMEndRange}" style="width: 60px;"/>
+                                        Title1 Amount from:
+                                        <apex:input type="number" label="Title1 Start Range" value="{!Title1StartRange}" style="width: 60px;"/>
+                                        to:
+                                        <apex:input type="number" label="Title1 End Range" value="{!Title1EndRange}" style="width: 60px;"/>
+                                        ELL % from:
+                                        <apex:input type="number" label="ELL Start Range" value="{!ELLStartRange}" style="width: 60px;"/>
+                                        to:
+                                        <apex:input type="number" label="Ell End Range" value="{!ELLEndRange}" style="width: 60px;"/>
+                                        My Team's Accounts
+                                        <apex:inputCheckbox value="{!myTeamsAccounts}">  
+                                            <apex:actionsupport event="onchange" rerender="AccountsFilters"/>
+                                        </apex:inputCheckbox>                                   
+                                     </apex:panelgrid>
+                                 </apex:panelgroup>
+                                 <apex:panelGroup >                             
+                                        <b>Ethnicity Filters:</b>
+                                        <apex:panelgrid columns="4" id="AccEthnicFilters" frame="border">
+                                        African Am % From:
+                                        <apex:input type="number" label="African Am Start Range" value="{!AfricanAmStartRange}" style="width: 50px;"/>
+                                        to:
+                                        <apex:input type="number" label="African Am End Range" value="{!AfricanAmEndRange}" style="width: 50px;"/>
+                                        Asian % From:
+                                        <apex:input type="number" label="Asian Start Range" value="{!AsianStartRange}" style="width: 50px;"/>
+                                        to:
+                                        <apex:input type="number" label="Asian End Range" value="{!AsianEndRange}" style="width: 50px;"/>
+                                        Caucasian % From:
+                                        <apex:input type="number" label="Caucasian Start Range" value="{!CaucasianStartRange}" style="width: 50px;"/>
+                                        to:
+                                        <apex:input type="number" label="Caucasian End Range" value="{!CaucasianEndRange}" style="width: 50px;"/>
+                                        Hispanic % From:
+                                        <apex:input type="number" label="Hispanic Start Range" value="{!HispanicStartRange}" style="width: 50px;"/>
+                                        to:
+                                        <apex:input type="number" label="Hispanic End Range" value="{!HispanicEndRange}" style="width: 50px;"/>
+                                        Native Am % From:
+                                        <apex:input type="number" label="Native Am Start Range" value="{!NativeAmStartRange}" style="width: 50px;"/>
+                                        to:
+                                        <apex:input type="number" label="Native Am End Range" value="{!NativeAmEndRange}" style="width: 50px;"/>
+                                     </apex:panelgrid>                                         
+                                </apex:panelGroup>
+                                <apex:panelGroup >                             
+                                        <b>Test Scores Filters:</b>
+                                        <apex:panelgrid columns="4" id="TestScoresFilters" frame="border"> 
+                                        Math Grade 4 From:
+                                        <apex:input type="number" label="Math Grade 4 Start Range" value="{!MathGrade4StartRange}" style="width: 50px;"/>
+                                        to:
+                                        <apex:input type="number" label="Math Grade 4 End Range" value="{!MathGrade4EndRange}" style="width: 50px;"/>
+                                        Math Grade 8 From:
+                                        <apex:input type="number" label="Math Grade 8 Start Range" value="{!MathGrade8StartRange}" style="width: 50px;"/>
+                                        to:
+                                        <apex:input type="number" label="Math Grade 8 End Range" value="{!MathGrade8EndRange}" style="width: 50px;"/>
+                                        Reading Grade 4 From:
+                                        <apex:input type="number" label="Reading Grade 4 Start Range" value="{!ReadingGrade4StartRange}" style="width: 50px;"/>
+                                        to:
+                                        <apex:input type="number" label="Reading Grade 4 End Range" value="{!ReadingGrade4EndRange}" style="width: 50px;"/>
+                                        Reading Grade 8 From:
+                                        <apex:input type="number" label="Reading Grade 8 Start Range" value="{!ReadingGrade8StartRange}" style="width: 50px;"/>
+                                        to:
+                                        <apex:input type="number" label="Reading Grade 8 End Range" value="{!ReadingGrade8EndRange}" style="width: 50px;"/>
+                                        </apex:panelgrid>                                         
+                                </apex:panelGroup>
+                             </apex:panelGrid>
+                         </apex:pageblockSection>
+                        
+                        <apex:pageblockSection columns="1" title="Contact Filters"> 
+                            <apex:panelGrid columns="2" width="100%" columnClasses="col1, col1"> 
+                                    <apex:panelgroup >
+                                    <apex:selectList value="{!SelectedContactTitle}" multiselect="false" size="1">
+                                        <apex:selectOption itemValue="MDR Job Codes" itemLabel="MDR Job Codes"></apex:selectOption>
+                                        <apex:selectOption itemValue="Title" itemLabel="Title"></apex:selectOption> 
+                                    </apex:selectList>
+                                    <apex:panelgrid columns="3" id="TitleSearch" border="2">
+                                        <apex:input type="text" label="Titles" value="{!Titles}"/> 
+                                        <apex:panelgroup >
+                                            <apex:commandButton action="{!TitlesSelectclick}" value=">>" reRender="TitleSearch"></apex:commandButton>
+                                            <br/>
+                                            <br/>
+                                            <apex:commandButton action="{!TitlesUnselectclick}" value="<<" reRender="TitleSearch"></apex:commandButton>
+                                        </apex:panelgroup>
+                                        <apex:selectList id="TitleSel" value="{!Titlesrightselected}" multiselect="true" style="width:200px" size="5">
+                                            <apex:selectOptions value="{!TitlesSelectedValues}" />
+                                        </apex:selectList>
+                                    </apex:panelgrid>
+                                </apex:panelgroup> 
+                                 <apex:panelGroup >                             
+                                        <b>Additional Contact Filters:</b>
+                                        <apex:panelgrid columns="2" id="Misc" border="2"> 
+                                        Include Contacts with No Email
+                                        <apex:inputCheckbox value="{!noEmail}">  
+                                            <apex:actionsupport event="onchange" rerender="AccountsFilters"/>
+                                        </apex:inputCheckbox>
+                                        </apex:panelgrid>                                         
+                                </apex:panelGroup>
+                             </apex:panelGrid>
+                         </apex:pageblockSection>
+                        
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton action="{!queryContacts}" value="Get Contacts" reRender="results" status="loadStatus"></apex:commandButton>
+                    </apex:pageBlockButtons>
+                    </apex:pageblock>
+        <apex:pageblock id="results">
+            <apex:pageMessages id="errors"/>
+            <apex:pageblock mode="maindetail" rendered="{!resultPageBlock}">
+                <apex:pageblockTable value="{!ContactsQuery}" var="c" id="conTable" rendered="{!resultPageBlock}">
+                    <apex:column headervalue="Name">
+                        <apex:outputLink value="/{!c}" target="_blank">{!c.name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column value="{!c.account.name}"/>
+                    <apex:column value="{!c.phone}"/>
+                    <apex:column value="{!c.email}"/>
+                </apex:pageblockTable>
+            <!-- Pagination -->
+            <table style="width: 100%">
+                <tr>
+                <td>
+                    Page: <apex:outputText value=" {!PageNumber} of {! CEILING(ResultSize/ ResultPageSize) }"/>
+                </td>            
+                <td align="center">
+                    <apex:commandLink action="{!firstPage}" rendered="{!hasPrevious}" value="First" />
+                    &nbsp;&nbsp;  
+                    <apex:commandLink action="{!prev}" rendered="{!hasPrevious}" value="Previous"/>
+                    &nbsp;&nbsp;  
+                    <apex:commandLink action="{!next}" rendered="{!hasNext}" value="Next" rerender="results"/>
+                    &nbsp;&nbsp;  
+                    <apex:commandLink action="{!lastPage}" rendered="{!hasNext}" value="Last"/>
+                </td>   
+                <td align="right">
+                <!-- Records per page -->
+                Total Records: <apex:outputText value="{!ResultSize}"/>
+                </td>
+            </tr>
+            </table>
+            <apex:pageblockbuttons >
+            	<apex:commandButton action="{!addToCampaign}" value="Add to Campaign" status="loadStatus" rendered="{!hasCampaignId}" reRender="results"></apex:commandButton>
+            </apex:pageblockbuttons>
+        </apex:pageblock>
+     </apex:pageblock>
+</apex:form>
+</apex:page>

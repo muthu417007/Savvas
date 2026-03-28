@@ -1,0 +1,3 @@
+<design:component label="SAP Material Search">
+    <design:attribute name="fieldSettingsJson" label="Table field settings"/>
+</design:component>

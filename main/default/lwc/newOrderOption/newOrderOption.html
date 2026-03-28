@@ -1,0 +1,30 @@
+<template>
+    <div class="slds-text-heading_medium slds-text-align_left"><b><u>New Order Options</u></b></div>
+    <div class="slds-text-align_center slds-var-p-top_x-large slds-text-heading_medium"><b>Choose the option that's right for you</b></div>
+    <div class="slds-grid slds-wrap slds-var-p-top_xx-large slds-var-p-left_xx-large">
+        <div class="slds-size_1-of-2">
+            <div class="slds-text-align_left">
+                <div class="slds-text-heading_medium slds-text-align_left"><b>OASIS</b></div>
+                <div>Log in to place your order anytime 24/7, plus track it and find invoice copies. <lightning-formatted-url value="https://oasis.savvas.com/ordering/OasisExternalRegistration.aspx" label='New users, click here to register for OASIS' target="_blank"></lightning-formatted-url>. <lightning-formatted-url value="https://player.vimeo.com/video/568934613" label='Click here for a tutorial' target="_blank"></lightning-formatted-url>.
+                </div>
+            </div>
+        </div>
+        <!--<div class="slds-size_1-of-2 slds-text-align_right slds-var-p-top_large">
+            <a href="https://oasis.savvas.com/" class="slds-button slds-button_brand" label="Order on OASIS" target="_blank"></a>
+        </div>-->
+        <div class="slds-size_1-of-2 slds-text-align_right slds-var-p-top_large">
+            <lightning-button variant="brand" label="Order on OASIS" onclick={navigateToWebPage}></lightning-button>
+        </div>
+    </div>
+    <div class="slds-grid slds-wrap slds-var-p-top_xx-large slds-var-p-left_xx-large">
+        <div class="slds-size_1-of-2">
+            <div class="slds-text-align_left">
+                <div class="slds-text-heading_medium slds-text-align_left"><b>Order with Customer Care</b></div>
+                <div>Submit your order, including attachments, for processing by our Customer Care team.</div>
+            </div>
+        </div>
+        <div class="slds-size_1-of-2 slds-text-align_right slds-var-p-top_large">
+            <lightning-button variant="brand" label="Customer Care" onclick={handleNext}></lightning-button>
+        </div>
+    </div>
+</template>

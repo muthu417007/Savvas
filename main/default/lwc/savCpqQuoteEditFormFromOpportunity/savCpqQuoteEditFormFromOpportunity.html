@@ -1,0 +1,64 @@
+<!--
+  *********************************************************
+  Component Name       : savCpqQuoteEditFormFromOpportunity
+  Created Date         : 6/25/2024  
+  Author               : Frank Berni - Cognizant
+  Description          : UI for new CPQ Quote creation called from CreateCpqQuoteFromOpportunity - contains validation for Contact Role
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>
+  6/25/2024     Frank Berni        Initial Version: Ticket W-015045
+  6/26/2024     Frank Berni        Removed refs to getQuotesOnOpp and validation to prevent Quote creation when one already exists on Opp
+  6/27/2024     Frank Berni        Added validation for Opportunity Owner Profile being ICOM Sales Rep or Mgr
+  7/01/2024     Frank Berni        Added System Administrator to validation profiles
+  7/02/2024     Frank Berni        Added Quote Pricebook to be defaulted to new Quotes
+  7/18/2024     Frank Berni        Sprint 6 feedback: Removed Future Ship Date and Payment Terms fields, Added Quote Name field, CPQ_Future_Pricing_Date__c is now assigned today's date
+                                   > Primary is defaulted to true
+  8/26/2024     Frank Berni         W-015883 - Adding ICOM Sales Data Manager and ICOM PROS Admin to valid profiles
+  8/28/2024     Frank Berni         W-015883 - Updating profile to ICOM Sales Data Mgr to match exactly to the name in org
+  9/04/2024     Frank Berni         Updated Opportunity field to be required
+  *********************************************************
+-->
+<template>
+    <!-- conditionally show spinner when button is clicked and quote is being created -->
+    <template if:true={formSubmitting}>
+        <div class="demo-only demo--inverse" style="height:6rem;position:relative">
+            <div class="slds-spinner_container">
+                <div class="slds-backdrop slds-backdrop_open">
+                    <div role="status" class="slds-spinner slds-spinner_large">
+                        <span class="slds-assistive-text">Loading</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="utility:connected_apps" size="small"></lightning-icon>
+            Create Quote
+        </h3>
+        <lightning-record-edit-form object-api-name="SBQQ__Quote__c" onsuccess={handleSuccess} onerror={handleError} onsubmit={handleSubmit}>
+            <lightning-messages></lightning-messages>
+            <div class="slds-m-around_medium">
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <!-- Added Quote_Name__c field -->
+                        <lightning-input-field field-name="Quote_Name__c" required="true"></lightning-input-field>
+                        <lightning-input-field field-name='SBQQ__Account__c' value={account}></lightning-input-field>
+                        <!-- NEW added required to Opportunity -->
+                        <lightning-input-field field-name='SBQQ__Opportunity2__c' required="true"></lightning-input-field>
+                        <lightning-input-field field-name='SBQQ__Primary__c'></lightning-input-field>
+                        <!-- consolidated all fields into one column, CPQ Future Pricing Date is assigned a value but hidden  -->
+                        <lightning-input-field field-name='CPQ_Future_Pricing_Date__c' style="display: none;"></lightning-input-field>
+                        <lightning-input-field field-name='SBQQ__PriceBook__c' style="display: none;"></lightning-input-field>
+                    </div>                    
+                </div>
+                <div class="slds-m-top_medium">
+                    <lightning-button id="submitBtn" variant="brand" type="submit" name="save" label="Create Quote"></lightning-button>
+                </div>
+            </div>
+        </lightning-record-edit-form>
+    </lightning-card>
+</template>

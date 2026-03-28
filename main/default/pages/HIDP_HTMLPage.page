@@ -1,0 +1,103 @@
+<apex:page sidebar="false" standardStylesheets="false">
+ <apex:includeScript value="/support/console/20.0/integration.js" />
+ <script type="text/javascript">     
+  function setTabTitle() {
+   sforce.console.setTabTitle('Guided Assistance for SAP Digital Order’s and Product Information');
+   }      
+  var previousOnload = window.onload;       
+  window.onload = function() {
+   if (previousOnload) {
+    previousOnload();
+    }               
+   setTimeout('setTabTitle()', '500');
+   }
+ </script>
+ 
+ <style type="text/css">
+  .resolution {float:left;}
+  .choice {border-bottom-style:solid; border-color:#ff77cc; border-bottom-width:1px;}
+  .resolution ul {list-style-type:decimal;width:100%;display:block;}
+  .detailList {border-spacing: 5px;}
+  .resources {display:block;clear:both;}
+  .note {margin-left:50px;}
+  .labelCol {text-align:left!important;}
+ </style>
+ <apex:outputLabel > <h1> Guided Assistance for SAP Digital Order’s and Product Information </h1> </apex:outputLabel>
+ <apex:outputText > <p> Customer calling regarding Successnet, Successnetplus or Realize digital product. </p> </apex:outputText>
+ <apex:outputText > 
+  <p> How to identify the product. </p>
+  <ul>
+   <li> Most products will have a note in product inquiry notating the platform </li>
+   <li> They will also note digital access in the title </li>
+   <li> The below title is the parent and the billing ISBN- </li>
+   <ul>
+    <li> It will not show stock </li>
+    <li> The Cat. Grp is ZTPW (3rd party item) this does not mean an outside vendor </li>
+    <li> You can BOM some of these ISBN’s in Prod Inquiry (If not then see next step) </li>
+   </ul>
+  </ul>
+ </apex:outputText>
+
+ <apex:outputText > <blockquote> <apex:image url="{!$Resource.HIDP1}" /> </blockquote> <p> &nbsp; </p> <hr width="75%" align="left" /> </apex:outputText>
+
+ <apex:outputText > 
+  <p> To find the components you would have to key an order </p>
+ </apex:outputText> 
+
+ <apex:outputText > <blockquote> <apex:image url="{!$Resource.HIDP2}" /> </blockquote> <p> &nbsp; </p> <hr width="75%" align="left" /> </apex:outputText>
+
+ <apex:outputText > 
+  <p> In the Order Status screen the components will show at $0 when keyed this way. </p>
+ </apex:outputText> 
+
+ <apex:outputText > <blockquote> <apex:image url="{!$Resource.HIDP3}" /> </blockquote> <p> &nbsp; </p> <hr width="75%" align="left" /> </apex:outputText>
+
+ <apex:outputText > 
+  <p> This ISBN does not have a note but does state 6-yr license in the title </p>
+  <p> This title is the parent/billing; ships the book; the BOM is the license </p>
+  <ul>
+   <li> You will see stock </li>
+   <li> Cat Grp is  ZSTW standard item (because it is the book ISBN) </li>
+   <li> You cannot BOM this in Prod Inquiry either </li>
+  </ul>
+ </apex:outputText> 
+
+ <apex:outputText > <blockquote> <apex:image url="{!$Resource.HIDP4}" /> </blockquote> <p> &nbsp; </p> <hr width="75%" align="left" /> </apex:outputText>
+
+ <apex:outputText > 
+  <p> To find the components you would have to key an order </p>
+  <ul>
+   <li> The Item category also is an indicator </li>
+   <li> Y1SW- Standard item (book that ships) with a “Ship With” the license </li>
+   <li> Y1TF – 3rd party item (digital license in this case) </li>
+  </ul>
+ </apex:outputText> 
+
+ <apex:outputText > <blockquote> <apex:image url="{!$Resource.HIDP5}" /> </blockquote> <p> &nbsp; </p> <hr width="75%" align="left" /> </apex:outputText>
+
+ <apex:outputText > 
+  <p> The BOM does not have a price </p>
+ </apex:outputText> 
+
+ <apex:outputText > <blockquote> <apex:image url="{!$Resource.HIDP6}" /> </blockquote> <p> &nbsp; </p> <hr width="75%" align="left" /> </apex:outputText>
+
+ <apex:outputText > 
+  <p> There are ISBN’s that are online access only-nothing ships </p>
+  <ul>
+   <li> Item category is ZTP “ 3rd Party Item (this does not mean an outside vendor) </li>
+   <li> The “Type” field is OLS (Online Service) </li>
+   <li> You will not see stock </li>
+   <li> Nothing to BOM </li>
+  </ul>
+ </apex:outputText> 
+
+ <apex:outputText > <blockquote> <apex:image url="{!$Resource.HIDP7}" /> </blockquote> <p> &nbsp; </p> <hr width="75%" align="left" /> </apex:outputText>
+
+ <apex:outputText > 
+  <p> You will not see an invoice in the Order status screen on SB-AP (Ship/billed-applied) </p>
+  <p> To find the invoice, click on the item on the header screen and click doc flow. </p>
+ </apex:outputText> 
+
+ <apex:outputText > <blockquote> <apex:image url="{!$Resource.HIDP8}" /> </blockquote> </apex:outputText>
+
+</apex:page>

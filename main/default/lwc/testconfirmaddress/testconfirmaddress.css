@@ -1,0 +1,316 @@
+.order-error-message{
+    width: 70%;
+    padding: 13px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+    color: #B40000;
+    background-color: #FFF4F4;
+    border: 1px solid #FFCDCD;
+    margin-bottom: 15px;
+    margin-top: 15px
+}
+
+
+.button-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip {
+    visibility: visible;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%; /* Position the tooltip above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* Arrow below the tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+
+
+
+.slds-box {
+    text-align: center;
+    padding: 2rem;
+}
+
+
+.slds-text-heading_large {
+    color: #ff4081;
+    font-size: 80px ;
+}
+
+
+.slds-text-heading_medium {
+    color: #3f51b5;
+     font-size: 55px ;
+}
+
+
+.slds-text-heading_small {
+    color: #4caf50;
+}
+
+.birthday-container {
+    text-align: center;
+    background: linear-gradient(to right, #ffecd2 0%, #f6f3f2 100%);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+.balloons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+
+.balloon {
+    width: 50px;
+    height: 70px;
+    background-color: #ff6f61;
+    border-radius: 50% 50% 0 0;
+    position: relative;
+    margin: 0 10px;
+}
+
+
+.balloon::after {
+    content: '';
+    width: 2px;
+    height: 20px;
+    background: #000;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.message h1 {
+    font-size: 2em;
+    color: #fff;
+}
+
+
+.message p {
+    font-size: 1.2em;
+    color: #fff;
+}
+
+
+.stars {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+.star {
+    width: 20px;
+    height: 20px;
+    background-color: #ffd700;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    margin: 0 5px;
+}
+
+.message {
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 3rem;
+}
+
+
+.balloon-container, .star-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+
+.balloon, .star {
+    position: absolute;
+    animation: floatUp 10s infinite;
+}
+
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh);
+    }
+    100% {
+        transform: translateY(-100vh);
+    }
+}
+
+
+.balloon {
+    width: 50px;
+    height: 70px;
+    background-color: red;
+    border-radius: 50% 50% 50% 50%;
+    transform-origin: bottom center;
+    animation: floatUp 6s ease-in-out infinite;
+}
+
+
+.star {
+    width: 20px;
+    height: 20px;
+    background-color: yellow;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    animation: floatUp 5s linear infinite;
+}
+
+
+
+
+
+
+.button-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip {
+    visibility: visible;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%; /* Position the tooltip above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* Arrow below the tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+
+
+
+.slds-box {
+    text-align: center;
+    padding: 2rem;
+     background: linear-gradient(to right, #f809c0 0%, #25e1fa 100%);
+}
+
+
+.slds-text-heading_large {
+    color: #ff4081;
+}
+
+
+.slds-text-heading_medium {
+    color: #3f51b5;
+}
+
+
+.slds-text-heading_small {
+    color: #4caf50;
+}
+
+.birthday-containerr {
+    text-align: center;
+    background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+.balloons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+
+.balloon1 {
+    width: 70px;
+    height: 90px;
+    background-color: #ff6f61;
+    border-radius: 90% 90% 0 0;
+    position: relative;
+    margin: 0 30px;
+}
+
+
+.balloon1::after {
+    content: '';
+    width: 2px;
+    height: 20px;
+    background: #000;
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.message h1 {
+    font-size: 2em;
+    color: #2bd3f0;
+}
+
+
+.message p {
+    font-size: 1.2em;
+    color: #46f31b;
+}
+
+
+.stars1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+.star1 {
+    width: 70px;
+    height: 70px;
+    background-color: #ffd700;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    margin: 0 5px;
+}

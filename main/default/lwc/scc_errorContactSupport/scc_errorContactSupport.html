@@ -1,0 +1,60 @@
+<template>
+    <div class="slds-p-around_medium">
+        <div class="slds-grid slds-wrap slds-p-bottom_medium">
+            <div class="slds-col slds-size_12-of-12">
+                <nav role="navigation" aria-label="Breadcrumbs">
+                    <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                        <li class="slds-breadcrumb__item">
+                            <a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+                        </li>
+                        <li class="slds-breadcrumb__item">
+                            <a href="#" class="slds-m-horizontal_small breadcrumb-label">Profile</a>
+                        </li>
+                        <li class="slds-breadcrumb__item">
+                            <a class="slds-m-horizontal_small breadcrumb-label">Request Update</a>
+                        </li>
+                    </ol>
+                </nav>				
+            </div>
+
+            <div class="slds-col slds-size_12-of-12 top-buttons">
+                <button class="Cart-button1" onclick={handleSubmit} disabled={isSubmitDisabled1}>
+                    Submit
+                </button>
+            </div>
+            <div class="page-info">
+                <p>{labels.scc_ContactSupport}</p>
+            </div>
+
+            <div class="CheckOut">
+                <div class="slds-grid">
+                    <div class="slds-p-around_large">
+                        <div class="Section1">
+                            <h1 class="Checkout-title">Request Details</h1>
+                            <div class="slds-col-slds-size_2-of-12">
+                                <div class="Heading">Name</div>
+                                <div class="result1">{userName}</div>
+                            </div>
+                            <div class="slds-col-slds-size_2-of-12">
+                                <div class="Heading">Email</div>
+                                <div class="result1">{userEmail}</div>
+                            </div>
+                            <div class="slds-col-slds-size_2-of-12">
+                                <div class="Heading">Type</div>
+                                <div class="result1">{labels.scc_Order_Submission_Error}</div>
+                            </div>
+                            <div class="slds-col-slds-size_2-of-12">
+                                <div class="Heading">Reference #</div>
+                                <div class="result1">{cartid}</div>
+                            </div>
+                            <div class="slds-col-slds-size_2-of-12">
+                                <div class="Heading">Details*</div>
+                                <textarea id="slds-input" placeholder="Type Here" oninput={handleInputChange} onkeyup={handleInputChange} class="slds-input details" value={input} required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,58 @@
+<template>
+    <lightning-card title={title}>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text={label.ensxtx_Common_Loading} size="medium" variant="brand"></lightning-spinner>
+        </template>
+        <template if:true={messages.length}>
+            <div class="slds-m-top_small">
+                <template for:each={messages} for:item="message">
+                    <c-ensxtx-message message={message} key={message.key}></c-ensxtx-message>
+                </template>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <template if:true={isSameAsShipping}>
+                <lightning-input type="checkbox" label={label.ensxtx_CartPartner_Message_PartnerSearch} name="sameAsShipping" checked={isSameAsShipping} onchange={onSameAsShipping}></lightning-input>
+            </template>
+            <template if:false={isSameAsShipping}>
+                <template if:true={isNotShipping}>
+                    <lightning-input type="checkbox" label={label.ensxtx_CartPartner_Message_PartnerSearch} name="sameAsShipping" checked={isSameAsShipping} onchange={onSameAsShipping}></lightning-input>
+                </template>
+                <div class="slds-grid slds-wrap slds-gutters slds-m-bottom_x-small slds-p-horizontal_small">
+                    <div class='slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-m-bottom_small'>
+                        <lightning-input type="text" name="PartnerName" label={label.ensxtx_OverrideAddress_Field_PartnerName} disabled value={PartnerName}></lightning-input>
+                    </div>
+                    <div class='slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-m-bottom_small'>
+                        <lightning-input type="text" name="PartnerName2" label={label.ensxtx_OverrideAddress_Field_PartnerName2} disabled value={PartnerName2}></lightning-input>
+                    </div>
+                    <div class='slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-m-bottom_small'>
+                        <lightning-input type="text" name="HouseNumber" label={label.ensxtx_OverrideAddress_Field_HouseNumber} disabled value={HouseNumber}></lightning-input>
+                    </div>
+                    <div class='slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-m-bottom_small'>
+                        <lightning-input type="text" name="Street" label={label.ensxtx_OverrideAddress_Field_Street} disabled value={Street}></lightning-input>
+                    </div>
+                    <div class='slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-m-bottom_small'>
+                        <lightning-input type="text" name="City" label={label.ensxtx_OverrideAddress_Field_City} disabled value={City}></lightning-input>
+                    </div>
+                    <div class='slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-m-bottom_small'>
+                        <lightning-combobox name="Country" label={label.ensxtx_OverrideAddress_Field_Country} disabled options={countryOptions} value={Country}></lightning-combobox>
+                    </div>
+                    <div class='slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-m-bottom_small'>
+                        <lightning-combobox name="Region" label={label.ensxtx_OverrideAddress_Field_Region} disabled options={regionOptions} value={Region}></lightning-combobox>
+                    </div>
+                    <div class='slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-m-bottom_small'>
+                        <lightning-input type="text" name="PostalCode" label={label.ensxtx_OverrideAddress_Field_PostalCode} disabled value={PostalCode}></lightning-input>
+                    </div>
+                </div>
+                <template if:true={isEditMode}>
+                    <div class="slds-m-around_x-small">
+                        <button class="slds-button slds-button_brand" onclick={onSearch}>{label.ensxtx_CartPartner_Button_PartnerSearch}</button>
+                        <template if:true={allowAddressOverride}>
+                            <button class="slds-button slds-button_brand" onclick={onOverrideAddress}>{label.ensxtx_CartPartner_Button_OverrideAddress}</button>
+                        </template>
+                    </div>
+                </template>
+            </template>
+        </template>
+    </lightning-card>
+</template>

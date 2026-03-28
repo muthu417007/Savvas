@@ -1,0 +1,22 @@
+<!-- /*********************************************************
+  Component Name       : scc_showHeldCartMessage
+  Created Date         : 06/10/2024  
+  Author               : Cognizant 
+  Description          : This component used in Home page and functionality related to 
+                         display Held Carts message.
+  
+  Modifications Log
+  06/10/2024     Zubiya           Initial Version
+*********************************************************/ -->
+
+<template>
+    <template if:true={showHeldCartMsg}>
+        <div class="slds-grid slds-grid_align-center slds-m-top_medium">
+            <div class="slds-col slds-size_9-of-12"> 
+              <div class="slds-p-around_small held-cart-message">
+                    <div class="slds-text-align_center" role="alert">{heldCartMessage}</div>
+              </div>
+            </div>
+        </div>
+    </template>  
+</template>

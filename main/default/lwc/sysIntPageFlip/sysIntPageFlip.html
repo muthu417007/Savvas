@@ -1,0 +1,46 @@
+<!--iandRSFlip.html -->
+<!--
+
+<template>
+
+    <div class="flipcontent" >
+        <a class="flipcard" >
+            <div class="flipfront" style={CardStyle} aria-label={ariaText} onclick={handleGoNext}>
+								<div style={imageUrlStyle}>
+                <pre class="fliptext-front" style={fontLargeStyle}>
+                   <br> {componentTextLarge}
+                </pre>
+			</div>
+            </div>
+            <div class="flipback" style={CardStyle} onclick={handleGoNext} >
+                <div style={imageUrlStyleback} >
+                    <pre class="fliptext-back" style={fontSmallStyle}>{componentTextSmall}</pre>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+</template>
+-->
+
+<template>
+
+    <div class="flipcontent" >
+        <a class="flipcard" >
+            <div class="flipfront" style={CardStyle} aria-label={ariaText} onclick={handleGoNext}>
+								<div style={imageUrlStyle}>
+										  <p class="fliptext-front" style={fontLargeStyle}>
+                   <br> {componentTextLarge}
+                </p>
+								</div>
+		
+            </div>
+            <div class="flipback" style={imageUrlStyleback} onclick={handleGoNext} >
+                <div style={imageUrlStyleback} >
+                    <p class="fliptext-back" style={fontSmallStyle}>{componentTextSmall}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+</template>

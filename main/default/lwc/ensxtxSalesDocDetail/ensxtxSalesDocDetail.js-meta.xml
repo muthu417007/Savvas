@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>
+        enosix Document Detail (LWC)
+    </masterLabel>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="documentNumber" type="String" label="Document Number" description="Sales Doc Number"></property>
+            <property name="documentType" type="String" label="Document Type (Deprecated)" description="Sales, Invoice, or Delivery"></property>
+            <property name="section" type="String" label="Section" description="Section"></property>
+            <property name="selectedSAPDocumentItemModel" type="String" label="Selected Line Item Data" description="Selected Line Item Data"></property>
+            <property name="sapDocumentItemId" type="String" label="Selected Line Item Number" description="Selected Line Item Number"></property>
+            <property name="selectedDocFlowLevel" type="String" label="Doc Flow Level" description="Doc Flow Level"></property>
+            <property name="appsettingName" type="String" label="AppsettingName" description="Appsettings Name"></property>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Enosix Product Details Page</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__AppPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="pdpAppSettingsName" type="String" required="true" default="ensxtx_SR_enosixCartPDPAppSettings"
+                label="PDP App Settings Name" description="Specifiy the name of the static resource file."/>
+            <property name="appSettingsName" type="String" required="true" default="ensxtx_SR_enosixProductB2BAppSettings"
+                label="App Settings Name" description="Specifiy the name of the static resource file."/>
+            <property name="recordId" type="String" required="true" label="Record Id" 
+                description="The category ID of the results being displayed" default="{!recordId}"/>
+            <property name="customDisplayFields" type="String" label="Custom Display Fields (comma-separated and case-sensitive)"
+                description="The comma-separated fields to display on the product detail page"/>
+            <property name="displayPrice" type="Boolean" label="Display Price"
+                description="Should the price be displayed?" default="true"/>
+            <property name="displayTax" type="Boolean" label="Display Tax"
+                description="Should the tax value be displayed?" default="false"/>
+            <property name="displayTiers" type="Boolean" label="Display Pricing Tiers"
+                description="Should pricing tiers retrieved from SAP be displayed if available?" default="false"/>
+            <property name="displayConditions" type="Boolean" label="Display Conditions" 
+                description="Should pricing conditions retrieved from SAP be displayed?" default="false"/>
+            <property name="displayConditionsValues" type="Boolean" label="Display Conditions' Value"
+                description="Should pricing conditions' value retrieved from SAP be displayed?" default="false"/>
+            <property name="conditionsToDisplay" type="String" label="Conditions"
+                description="The comma-separated condition types to display on the product detail page" default="PR00"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

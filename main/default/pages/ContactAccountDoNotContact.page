@@ -1,0 +1,14 @@
+<apex:page standardController="Contact">
+
+    <apex:outputText value="{!if(Contact.Account.In_Red_Status__c, 'Red Account Program Status', '')}" style="color:red;font-size:200%;"/>
+      <br/>
+      <apex:outputText value="{!if(Contact.Account.In_Red_Status__c, 'For additional information contact ', '')}" style="color:red;"/>
+      <apex:outputLink value="https://savvas.my.salesforce.com/_ui/core/chatter/groups/GroupProfilePage?g=0F90W000001LxWj" id="RAPLink" target="_blank"><apex:outputText value="{!if(Contact.Account.In_Red_Status__c, '@[Red Account Program]', '')}" style="color:red;"/></apex:outputLink>
+      <apex:outputText value="{!if(Contact.Account.In_Red_Status__c, ' via Chatter.', '')}" style="color:red;"/>
+    <br/>
+    <apex:outputText value="{!if(Contact.Account.Do_Not_Contact__c,'DO NOT CONTACT','')}" style="color:red;font-size:200%;"/>
+    <br/>
+    <apex:outputText value="{!if(Contact.Account.Do_Not_Contact__c,'until '+Text(Contact.Account.Do_Not_Contact_End_Date__c)+'. ','')}" style="color:red;"/>
+    <apex:outputText value="{!if(Contact.Account.Do_Not_Contact__c,'Reason: '+Contact.Account.Do_Not_Contact_Reason__c,'')}" style="color:red;"/>
+     
+</apex:page>

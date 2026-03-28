@@ -1,0 +1,36 @@
+<apex:page showHeader="false" sidebar="false"
+ standardStylesheets="false">
+<!--apex:page standardController="Troubleshooting__kav" showHeader="false" sidebar="false"
+ extensions="ArticleExtensionTroubleshooting" title="{!Troubleshooting__kav.title}"
+ standardStylesheets="false">
+    <apex:composition template="pkb_ICOM_WebTemplate">
+        <apex:define name="body">
+        
+            <apex:outputField value="{!Troubleshooting__kav.PublishStatus}"  rendered="false" /> 
+            <apex:outputField value="{!Troubleshooting__kav.KnowledgeArticleId}"  rendered="false"/>
+            <apex:outputField value="{!Troubleshooting__kav.CreatedBy}"  rendered="false" />  
+            <apex:outputField value="{!Troubleshooting__kav.Summary}"  rendered="false" />    
+            <apex:outputField value="{!Troubleshooting__kav.Language}"  rendered="false" />  
+            
+            <div class="col-xs-12 col-sm-12 articleTitle">
+                <h1><apex:outputText escape="false" value="{!Troubleshooting__kav.title}" /></h1>
+            </div>
+            <div class="col-xs-12 col-sm-12 articleContent">
+                <h2>{!$ObjectType.Troubleshooting__kav.fields.Symptoms__c.Label}</h2>
+                <div><apex:outputField value="{!Troubleshooting__kav.Symptoms__c}" /></div>
+                <h2>{!$ObjectType.Troubleshooting__kav.fields.Resolution__c.Label}</h2>
+                <div><apex:outputField value="{!Troubleshooting__kav.Resolution__c}" /></div>
+
+                <c:ArticleAttachmentsPublic attachment1_name="{!attachment1Name}" 
+                    attachment1_link="{!URLFOR($Action.Troubleshooting__kav.FileFieldDownload, Troubleshooting__kav.id,['field'=$ObjectType.Troubleshooting__kav.fields.Attachment_1__Body__s.name])}" 
+                    attachment2_name="{!attachment2Name}" 
+                    attachment2_link="{!URLFOR($Action.Troubleshooting__kav.FileFieldDownload, Troubleshooting__kav.id,['field'=$ObjectType.Troubleshooting__kav.fields.Attachment_2__Body__s.name])}" 
+                    attachment3_name="{!attachment3Name}" 
+                    attachment3_link="{!URLFOR($Action.Troubleshooting__kav.FileFieldDownload, Troubleshooting__kav.id,['field'=$ObjectType.Troubleshooting__kav.fields.Attachment_3__Body__s.name])}"/>
+            </div>
+           
+
+        </apex:define>
+    </apex:composition>
+-->
+</apex:page>

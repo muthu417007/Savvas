@@ -1,0 +1,146 @@
+<apex:page Controller="SupportNoteController" 
+           showHeader="true" sidebar="true" docType="html-5.0" standardStylesheets="true">
+     <apex:includeScript value="/support/console/31.0/integration.js"/>
+    <script type="text/javascript">     
+        function setTabTitle() {
+            sforce.console.setTabTitle('Create Support Note');
+        }      
+        var previousOnload = window.onload;       
+        window.onload = function() {
+            setTabTitle();
+            if (previousOnload) {
+                previousOnload();
+            }               
+       }
+   </script>    
+         
+  <style>
+      .divLeft {
+      		height: 400px;
+      		width: 48%;
+      		overflow-y:scroll;
+      		float: left;
+      		margin-right: 15px;
+       }
+       
+       
+      .divRight {
+      		height: 400px;
+      		overflow-y:scroll;
+      		float: right;
+      		width: 48%;
+       }
+       .divContainer {
+       		width: 100%;
+       }
+  
+  </style>
+    <apex:form >   
+  
+  		<div class="divContainer">
+		    <apex:outputPanel id="page">  
+  	   	    <apex:pageBlock title="{!pageTitle}">
+  	   	    	<apex:pageMessages />
+			    <apex:commandButton value="Return" action="{!continueOn}" rendered="{!recordsSaved}"/>  	   	    	
+  	   	    </apex:pageBlock>
+   			 <apex:pageBlock >
+   			     <div >
+		   			 <apex:outputText value="Name:"/> &nbsp;
+		   	 		 <apex:inputText value="{!nameCriteria}"  onkeydown="return fnIsEnterKey(btnSearch);"  style="width:500px" title="Enter one or more partial Account Names separated by commas. May be left blank. A list of up to 200 names will be retrieved."/> &nbsp;
+		   			 <apex:outputText value="City"/> &nbsp;
+		   	 		 <apex:inputText value="{!cityCriteria}"  onkeydown="return fnIsEnterKey(btnSearch);"  style="width:100px" title="City Name for which the search should be conducted.  One city name may be entered and must be an exact match. May be left blank. A list of up to 200 names will be retrieved."/> &nbsp;
+		   			 <apex:outputText value="State"/> &nbsp;
+		   	 		 <apex:inputText value="{!stateCriteria}"  onkeydown="return fnIsEnterKey(btnSearch);"  style="width:20px" title="2 character State abbreviation for which the search should be conducted.  One State may be entered and must be an exact match.  May be left blank.  A list of up to 200 names will be retrieved."/> &nbsp;
+		   			 <apex:outputText value="Zip"/> &nbsp;
+		   	 		 <apex:inputText value="{!zipCriteria}"  onkeydown="return fnIsEnterKey(btnSearch);"  style="width:50px"  title="Zip Code for which the search should be conducted.  One Zip may be entered and must match left-most characters.  May be left blank. A list of up to 200 names will be retrieved."/> 
+
+		   			 <apex:commandButton id="btnSearch" value="Search" action="{!search}" reRender="page" style="width:75px; margin-left:50px"/>
+	   			 </div>
+  			  </apex:pageBlock>  
+  		  
+  		
+		     <div class="divLeft">
+		       <apex:pageBlock title="{!queriedTitle}">
+		       	<apex:pageBlockButtons location="both">
+		          <apex:commandButton value="Add Selected" action="{!addSelected}" reRender="page"/> &nbsp;
+		          <apex:commandButton value="Select All" action="{!addAll}" reRender="page"/>
+		        </apex:pageBlockButtons>
+		          <apex:pageBlockTable value="{!queriedItems}" var="q"  >
+		            
+		    			<apex:column headerValue=""  >
+		                    <apex:inputCheckbox value="{!q.selected}"/>
+		                </apex:column>
+		                
+		    			<apex:column headerValue="Name"  >
+		                    <apex:outputText value="{!q.Name}"/>
+		                </apex:column>
+		                        
+		    			<apex:column headerValue="Location" >
+		                    <apex:outputText value="{!q.Location}"/>
+		               </apex:column>
+		              
+		          </apex:pageBlockTable>
+		          </apex:pageBlock>
+	           </div>
+	           
+	 	   <div class="divRight">			 
+				<apex:pageBlock title="{!selectedTitle}">
+				<apex:pageBlockButtons location="both">
+		          <apex:commandButton value="Remove Selected" action="{!removeSelected}" reRender="page"/> &nbsp;
+		          <apex:commandButton value="Remove All" action="{!removeAll}" reRender="page"/>	
+		         </apex:pageBlockButtons> 
+		          <apex:pageBlockTable value="{!selectedItems}" var="s">
+		    			<apex:column headerValue=""  >
+		                    <apex:inputCheckbox value="{!s.selected}"/>
+		                </apex:column>
+		                
+		    			<apex:column headerValue="Name"  >
+		                    <apex:outputText value="{!s.Name}"/>
+		                </apex:column>
+		                        
+		    			<apex:column headerValue="Location" >
+		                    <apex:outputText value="{!s.Location}"/>
+		               </apex:column>
+		              
+		          </apex:pageBlockTable>
+		       </apex:pageBlock>
+		   </div>    
+		   
+		   <br/>      
+	      
+		   <div style="margin-top:20px">
+		   <apex:pageBlock title="Note Detail">
+			     <apex:pageBlockButtons location="top">
+			        <apex:commandButton value="Create Notes" action="{!save}" reRender="page"/>
+			        <apex:commandButton value="Cancel Note Creation" action="{!continueOn}"/>
+	 		     </apex:pageBlockButtons>
+		   		<apex:pageBlockSection >
+		   			<apex:inputField value="{!note.Name}"/>
+		   			<apex:inputField value="{!note.StartDate__c}"/>
+		   			<apex:inputTextArea value="{!note.Message__c}" cols="30" rows="6"/>
+		   			<apex:inputField value="{!note.ExpirationDate__c}"/>
+		   		</apex:pageBlockSection>
+		   		</apex:pageBlock>
+		 </div>
+		  
+         </apex:outputPanel>    
+		 </div>           
+    </apex:form>
+    <script type="text/javascript">
+    
+  
+  function fnIsEnterKey(me)
+
+	/* This function clicks the Search button
+	 * if the Enter key is pressed on the search criteria field */
+	
+	{
+	    if (event.keyCode == 13) 
+	    {
+	        me.click();
+	        return false;
+	    }
+	}s
+	
+    </script>
+</apex:page>

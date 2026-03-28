@@ -1,0 +1,32 @@
+<template>
+  <div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog">
+    <div class="slds-modal__container">
+      <!------HEADER Section-->
+      <div class="slds-modal__header">
+        <button class="slds-modal__close closebtnOnFocus emailRprtCloseBtn" onclick={closeModal}
+          onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+        <h2>Email Cart</h2>
+      </div>
+      <!------Body Section-->
+      <div class="slds-modal__content slds-p-horizontal_medium slds-p-top_medium slds-p-bottom_medium">
+        <div class="slds-form_horizontal slds-text-align_center">
+          <label class="slds-form-element__label" for="emailAddresses">Email(s) *</label>
+          <p>Separate multiple email addresses with commas</p>
+          <input class="slds-input fixed-width-input email-cart-popup-input" data-id="Email" id="emailAddresses"
+            aria-label="Email(s) Required, Separate multiple email addresses with commas" value={emailAddresses}
+            onchange={handleEmailChange} onkeyup={handleEmailChange} type="email" data-index="0" />
+
+          <template if:true={showErrorMessage}>
+            <div class="slds-text-color_error" style="padding-top: 5px;" role="alert">{errorMessage}</div>
+          </template>
+        </div>
+      </div>
+      <!------Footer Section-->
+      <div class="slds-modal__footer">
+        <button class="slds-button clear-cart-modal-button" data-index="0" onclick={handleEmailSend}>Email Cart</button>
+        <button class="slds-button cancel-modal-button" onclick={closeModal} tabindex="0"
+          onfocusout={focusOutButton}>Cancel</button>
+      </div>
+    </div>
+  </div>
+</template>

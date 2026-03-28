@@ -1,0 +1,97 @@
+<apex:page standardController="Case"  extensions="CommunitiesCaseListController" recordSetVar="Case" sidebar="false" showHeader="false" standardStylesheets="false">
+   <!--  <apex:composition template="CommunitiesTemplate">-->
+  <apex:composition template="{!$Site.Template}">
+        <apex:define name="mainbody">  
+            <apex:form >
+                <div>
+                    <div class="pbHeader">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <td class="pbTitle">
+                                        <h2 class="mainTitle">Cases</h2>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <tr><td colspan="2"><p>To see all of your cases, select "All Cases" from the menu below. If you do not see your cases as expected, contact <a href="https://pearsonnacommunity.force.com/coco/s/Community_Connection_Support" target="_blank">Community Connection support</a>.</p></td></tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                      <apex:outputLabel value="View:"/>
+                      <apex:selectList value="{!filterId}" size="1" id="selectList" >
+                        <apex:actionSupport event="onchange" action="{!list}" rerender="cases_table"/>
+                        <apex:selectOptions value="{!listviewoptions}"/>
+                      </apex:selectList>
+                    <apex:pageBlock id="cases_table">
+                        <apex:pageBlockTable value="{!case}" var="c" rows="50"  >
+                                <apex:column >
+                                        <a href="{!$Page.CommunitiesCaseDetail}?id={!c.id}&filterId={!filterId}">{!c.CaseNumber}</a>
+                                        <apex:facet name="header">Case Number</apex:facet>
+                                </apex:column>
+                            <apex:column value="{!c.RecordType.Name}" >
+                                <apex:facet name="header">Type</apex:facet>
+                            </apex:column>
+                            <apex:column value="{!c.ContactId}" />
+                            <apex:column value="{!c.Subject}" />
+                            <apex:column value="{!c.Status}" />
+                            <apex:column value="{!c.CreatedDate}" />
+                        </apex:pageBlockTable>
+                        <apex:variable var="pageCount" value="{!CEILING(ResultSize/PageSize)}" />
+                        <apex:outputPanel layout="block" styleClass="paginator" rendered="{!pageCount>1}">
+                            <div class="right">
+                                <apex:inputText value="{!PageNumber}" styleClass="pageInput" maxlength="4">
+                                    <apex:actionSupport event="onchange" rerender="cases_table"/>
+                                </apex:inputText>
+                                of {!pageCount}
+                            </div>
+                            <div class="prevNextLinks">
+                                <apex:outputPanel layout="none" rendered="{!hasPrevious}">
+                                    <span class="prevNext">
+                                        <apex:commandLink action="{!first}" reRender="cases_table">
+                                            <img src="/s.gif" title="First Page" class="first" />
+                                        </apex:commandLink>
+                                    </span>
+                                    <span class="prevNext">
+                                        <apex:commandLink action="{!previous}" reRender="cases_table">
+                                            <img src="/s.gif" title="Previous" class="prev" />Previous
+                                        </apex:commandLink>                            
+                                    </span>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!!hasPrevious}">
+                                    <span class="prevNext">
+                                        <img src="/s.gif" title="First Page" class="firstoff" />
+                                    </span>
+                                    <span class="prevNext">
+                                        <img src="/s.gif" title="Previous" class="prevoff" />Previous
+                                    </span>
+                                </apex:outputPanel>
+
+
+                                <apex:outputPanel layout="none" rendered="{!hasNext}">
+                                    <span class="prevNext">
+                                        <apex:commandLink action="{!next}" reRender="cases_table">
+                                            Next<img src="/s.gif" title="Next" class="next" />
+                                        </apex:commandLink>                            
+                                    </span>
+                                    <span class="prevNext">
+                                        <apex:commandLink action="{!last}" reRender="cases_table">
+                                            <img src="/s.gif" title="Last Page" class="last" />
+                                        </apex:commandLink>
+                                    </span>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!!hasNext}">
+                                    <span class="prevNext">
+                                        Next<img src="/s.gif" title="Next" class="nextoff" />
+                                    </span>
+                                    <span class="prevNext">
+                                        <img src="/s.gif" title="Last Page" class="lastoff" />
+                                    </span>
+                                </apex:outputPanel>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:pageBlock>
+                </div>
+            </apex:form>
+        </apex:define>
+    </apex:composition>
+</apex:page>

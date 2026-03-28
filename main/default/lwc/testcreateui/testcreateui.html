@@ -1,0 +1,165 @@
+<template>
+    
+      <div class="slds-grid slds-wrap">
+        <!-- Breadcrumbs Area
+        <template if:true={showbreadcumbs}>
+        <div class="slds-col slds-size_6-of-12">
+            <div>Breadcrumbs Area:
+                <div class="slds-grid">
+                Breadcrumbs
+                    <template for:each={breadcrumbs} for:item="breadcrumb" for:index="index">
+                        <a key={breadcrumb.url} href={breadcrumb.url} data-index={index} onclick={handleBreadcrumbClick}>{breadcrumb.label}</a>
+                        <template if:false={breadcrumb.isLastNode}>
+                            &gt;
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </div> -->
+        <!-- Filter Results Area -->
+        <!-- <div class="slds-col slds-size_2-of-12 slds-text-align_right">
+            <div class="slds-align-top">
+                <div style="padding-top:4px !important;"> Filter Results &nbsp; </div>
+                <div class="slds-grid slds-grid_align-end slds-grid_vertical-align-end">
+                    <button class="slds-button slds-button_icon" onmouseover={togglePasswordHintfilter} onmouseout={togglePasswordHintfilter}>
+                        <lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+                    </button>
+                    <div class={taskTypeHelpTextClassfilter} role="tooltip" id="help3" style="position:absolute;top:194px;right:43px;width:250px;background-color:#504c6e!important;">
+                        <div class="slds-popover_body">
+                            <ul class="slds-list_dotted slds-has-dividers_around-space" style="color:white !important;padding-top:5px !important;">
+                                Enter a keyword to filter within the current set of search results
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <lightning-input type="search" variant="label-hidden" name="searchFilter" placeholder="Search To Filter" onchange={handleFilter}></lightning-input>
+            </div>
+        </div>
+
+        
+         
+   
+<div class="slds-col slds-size_2-of-12 slds-text-align_right">
+        <div class="slds-grid slds-grid_align-end slds-grid_vertical-align-center">
+                {transformedDataLength} of {totalCount} Items &nbsp;
+                <button class="slds-button slds-button_icon" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}>
+                    <lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+                </button>
+                <div class={taskTypeHelpTextClass} role="tooltip" id="help" style="position:absolute;top:194px;right:43px;width:250px;background-color:#504c6e!important;">
+                    <div class="slds-popover_body">
+                        <ul class="slds-list_dotted slds-has-dividers_around-space" style="color:white !important;padding-top:5px !important;">
+                            Use panel on the left to navigate through the catalog
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+          </template>
+    </div> -->
+     <template if:true={showbreadcumbs}>
+        <div class="slds-col slds-size_6-of-12">
+            <div>Breadcrumbs Area:
+                <div class="slds-grid">
+                    <!-- Breadcrumbs -->
+                    <template for:each={breadcrumbs} for:item="breadcrumb" for:index="index">
+                        <a key={breadcrumb.url} href={breadcrumb.url} data-index={index} onclick={handleBreadcrumbClick}>{breadcrumb.label}</a>
+                        <template if:false={breadcrumb.isLastNode}>
+                            &gt;
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </template>
+    <!-- Filter Results Area -->
+    <div class="slds-col slds-size_6-of-12 slds-text-align_center">
+        <div class="slds-grid slds-grid_align-end slds-grid_vertical-align-center">
+            <div style="display: flex; align-items: center;">
+                <div style="padding-top:4px !important;"> Filter Results &nbsp; </div>
+                <button class="slds-button slds-button_icon" onmouseover={togglePasswordHintfilter} onmouseout={togglePasswordHintfilter}>
+                    <lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+                </button>
+                <div class={taskTypeHelpTextClassfilter} role="tooltip" id="help3" style="position:absolute;top:100px;right:100px;width:250px;background-color:#504c6e!important;">
+                    <div class="slds-popover_body">
+                        <ul class="slds-list_dotted slds-has-dividers_around-space" style="color:white !important;padding-top:5px !important;">
+                            Enter a keyword to filter within the current set of search results
+                        </ul>
+                    </div>
+                </div>
+                <lightning-input type="search" variant="label-hidden" name="searchFilter" placeholder="Search To Filter" onchange={handleFilter}></lightning-input>
+            </div>
+            <div style="margin-left: 10px;">
+                {transformedDataLength} of {totalCount} Items &nbsp;
+                <button class="slds-button slds-button_icon" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}>
+                    <lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+                </button>
+                <div class={taskTypeHelpTextClass} role="tooltip" id="help" style="position:absolute;top:100px;right:100px;width:250px;background-color:#504c6e!important;">
+                    <div class="slds-popover_body">
+                        <ul class="slds-list_dotted slds-has-dividers_around-space" style="color:white !important;padding-top:5px !important;">
+                            Use panel on the left to navigate through the catalog
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></div>
+    <template if:true={isLoading}>
+        <!-- Show loading spinner -->
+        
+        <div class="slds-align_absolute-center" style="height:5rem">
+            <lightning-spinner class="custom-spinner"  alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+    <template lwc:if={displayProductCategoryData}>
+        <div class={menuClass}>
+            <div class="slds-grid" style="background:white !important;">
+                <div class="slds-col slds-size_3-of-12">
+                    <div class="slds-grid slds-grid_vertical">
+                        <div>
+                            <article class="slds-card">
+                                <div class="slds-card__header slds-grid" style="padding: 5px 5px;margin-bottom: 2px;">
+                                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                        <div class="slds-media__body">
+                                            <h2 class="slds-card__header-title">
+                                                <a class="slds-card__header-link slds-truncate" title="Catalog Search">
+                                                    <span>Catalog Search</span>
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div class="slds-no-flex">
+                                            <button class="slds-button" onclick={resetSelection}>Reset</button>
+                                        </div>
+                                    </header>
+                                </div>
+                            </article>
+                        </div>
+                        <div style="height: 92vh!important; padding:5px !important;overflow: scroll;" class="wrapword">
+                            <lightning-tree items={searchMenuData} selected-item={selectedItem} onselect={handleOnSelect}></lightning-tree>
+                            {selectedItemValue}
+                        </div>
+                        <div class="slds-col slds-size_1-of-12 slds-align-middle">
+                    <template lwc:if={showSideMenu}>
+                        <lightning-icon icon-name="utility:left" onclick={toggleMenu} alternative-text="Hide Side Menu"></lightning-icon>
+                    </template>
+                    <template lwc:else>
+                        <lightning-icon icon-name="utility:right" onclick={toggleMenu} alternative-text="Show Side Menu"></lightning-icon>
+                    </template>
+                </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_9-of-12">
+                    <template if:false={noData}>
+                        
+                        <!-- <c-scc_product-catalog-table columns={columns} raw-parent-table-data={productData} onshowproducttitlepage={openChildTitlePage} filter={filterCriteria} ontransformeddatalength={handleTransformedDataLength}></c-scc_product-catalog-table> -->
+                    <c-scc_product-catalog-table columns={columns} raw-parent-table-data={productData}
+				onshowproducttitlepage={openChildTitlePage} filter={filterCriteria}
+				ontransformeddatalength={handleTransformedDataLength}>
+ </c-scc_product-catalog-table>
+                    </template>
+                </div>
+               
+            </div>
+        </div>
+    </template>
+    
+</template>

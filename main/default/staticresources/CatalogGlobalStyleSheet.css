@@ -1,0 +1,6 @@
+.myTreeGrid table>thead {
+  display:none;
+}
+.myTreeGrid .slds-table_header-fixed_container{
+	displau:none;
+}

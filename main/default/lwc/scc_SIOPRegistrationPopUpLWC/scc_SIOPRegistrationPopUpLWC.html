@@ -1,0 +1,27 @@
+<template>    
+    <!-- <lightning-button  variant="base" label="SIOP Registration" onclick={showModal}> </lightning-button>  -->
+   <template if:true={openModal}>  
+     <div class="slds-modal slds-fade-in-open slds-backdrop">  
+       <div class="slds-modal__container">  
+         <!------HEADER Section-->  
+          <div class="slds-modal__header">  
+            <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+              variant="bare-inverse" onclick={closeModal} class="slds-modal__close">  
+            </lightning-button-icon>  
+                <b><h3>SIOP Registration</h3></b>
+          </div>  
+         <!------Body Section-->  
+          <div class="slds-modal__content slds-p-around_medium" >  
+             <div class="slds-form_horizontal " style="width:95%" >
+                SIOP Registration
+              </div>
+          </div>
+         <!------Footer Section-->  
+         <div class="slds-modal__footer">  
+           <lightning-button  label="Check Order Status" variant="brand"  onclick={handleGo} disabled={inputsCheck}>  
+           </lightning-button>  
+         </div>  
+       </div>  
+     </div>  
+   </template>  
+</template>

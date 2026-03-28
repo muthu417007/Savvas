@@ -1,0 +1,95 @@
+<apex:page Controller="ResourceManagementUserSearchController">
+ <apex:form >
+    <apex:pageblock mode="edit" title="Competencies">
+        <apex:actionRegion >
+        <apex:pageblockSection columns="2">           
+             <apex:inputfield value="{!Workshops.Product_Skill__c}">
+                   <apex:actionSupport event="onchange" rerender="WorkshopTitle,results" action="{!resetFilter}" />         
+            </apex:inputfield>
+            <br/>
+            <br/>
+              <apex:pageblocksectionitem >
+                <apex:outputLabel value="Workshop " for="WorkshopTitle"/>           
+                <apex:selectList id="WorkshopTitle" value="{!workshopTitle}" size="1" multiselect="false">
+                    <apex:selectOptions value="{!WorkshopTitleList}"/>
+                    <apex:actionSupport event="onchange" rerender="results" action="{!resetFilter}" />
+                </apex:selectList>
+              </apex:pageblocksectionitem>
+              <apex:inputtext Label="Filter Workshop" value="{!filterWorkshopTitle}">
+                <apex:actionSupport event="onchange" rerender="WorkshopTitle" action="{!resetFilter}"  />  
+            </apex:inputtext>
+               
+            <apex:inputfield value="{!competencies.Qualifications__c}">
+                <apex:actionSupport event="onchange" rerender="results" action="{!resetFilter}"  />  
+            </apex:inputfield>
+
+        </apex:pageblockSection>
+        </apex:actionRegion>  
+    </apex:pageblock>
+    <apex:pageblock title="Attributes" mode="edit">
+        <apex:pageblockSection >
+            <apex:inputfield value="{!att.Type__c}">
+                    <apex:actionSupport event="onchange" rerender="results" action="{!resetFilter}"  />
+            </apex:inputfield>
+            <apex:inputfield value="{!att.Detail__c}">
+                    <apex:actionSupport event="onchange" rerender="results" action="{!resetFilter}"  />
+            </apex:inputfield>
+        </apex:pageblockSection>
+    </apex:pageblock>
+    <apex:pageblock title="User Information" mode="edit">
+            <apex:pageblockSection columns="1">
+                <apex:inputfield value="{!cont.Nearest_Major_City__c}">
+                    <apex:actionSupport event="onchange" rerender="results" action="{!resetFilter}"  />
+                </apex:inputfield> 
+               <apex:inputfield value="{!cont.Resource_Type__c}">
+                    <apex:actionSupport event="onchange" rerender="results" action="{!resetFilter}"  />
+                </apex:inputfield> 
+                <apex:inputfield value="{!cont.Status__c}">
+                    <apex:actionSupport event="onchange" rerender="results" action="{!resetFilter}"  />  
+                </apex:inputfield>
+            </apex:pageblockSection>
+    </apex:pageblock>
+     <apex:pageblock id="results">
+        <apex:pageblockTable value="{!Consultants}" var="c" id="constTable">
+            <apex:column headervalue="Name">
+                <apex:outputLink value="/{!c.Contact__c}" target="_blank">{!c.contact__r.name}</apex:outputLink>
+            </apex:column>
+            <apex:column value="{!c.contact__r.email}"/>
+            <apex:column value="{!c.contact__r.phone}"/>
+            <apex:column value="{!c.contact__r.mobilephone}"/>
+            <apex:column value="{!c.contact__r.mailingCity}"/>
+            <apex:column value="{!c.contact__r.mailingState}"/>
+            <apex:column value="{!c.contact__r.Resource_Type__c}"/>
+            <apex:column value="{!c.Qualifications__c}"/> 
+            <apex:column value="{!c.workshop__r.Product_Skill__c}"/> 
+            <apex:column value="{!c.workshop__r.Title__c}"/>  
+            <apex:column value="{!c.contact__r.description}"/> 
+        </apex:pageblockTable>  
+        
+         <!-- Pagination -->
+        <table style="width: 100%"><tr>
+            <td>
+                Page: <apex:outputText value=" {!PageNumber} of {! CEILING(ResultSize / ResultPageSize) }"/>
+            </td>            
+            <td align="center">
+                <apex:commandLink action="{!firstPage}" rendered="{!hasPrevious}" value="First"/>
+                &nbsp;&nbsp;  
+                <apex:commandLink action="{!prev}" rendered="{!hasPrevious}" value="Previous"/>
+                &nbsp;&nbsp;  
+                <apex:commandLink action="{!next}" rendered="{!hasNext}" value="Next"/>
+                &nbsp;&nbsp;  
+                <apex:commandLink action="{!lastPage}" rendered="{!hasNext}" value="Last"/>
+            </td>   
+            <td align="right">
+            <!-- Records per page -->
+                Total Records: <apex:outputText value=" {!ResultSize}"/>
+            </td>
+        </tr>
+        </table>
+
+        <apex:pageBlockButtons > 
+            <apex:commandButton action="{!exportToExcel}" value="Export"/>
+        </apex:pageBlockButtons>
+        </apex:pageblock>
+  </apex:form>
+</apex:page>

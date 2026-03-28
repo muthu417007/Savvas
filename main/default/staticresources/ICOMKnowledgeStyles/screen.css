@@ -1,0 +1,12 @@
+articleTitle {
+  font-family: 'Arial', 'Helvetica', 'sans-serif';
+  font-size: 24px;
+  color: #008000;
+}
+
+.pbSubheader{
+    color:#ffffff;
+    background-color:#c00000;
+}
+
+newLink { color: #008000; font-weight: bold; }

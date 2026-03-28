@@ -1,0 +1,119 @@
+<template>
+    <lightning-card>
+        <template if:true={loading}>
+            <lightning-spinner alternative-text={label.ensxtx_Common_Loading} size="medium" variant="brand"></lightning-spinner>
+        </template>
+        <h3 slot="title" if:true={appSettings.DisplayHeader}>
+            <lightning-icon icon-name={appSettings.HeaderIcon} size="small"></lightning-icon>
+            <span class="slds-m-left_small">{appSettings.HeaderTitle}</span>
+        </h3>
+        <div if:true={searchParams.Display} class="slds-grid slds-wrap slds-gutters slds-m-bottom_x-small slds-p-horizontal_small">
+            <template for:each={searchParams.Fields} for:item="field">
+                <div class={searchParamColumnCss} key={field.Name}>
+                    <template if:true={field.Display}>
+                        <template if:true={field.InputField}>
+                            <lightning-input
+                                type={field.InputType}
+                                name={field.Name}
+                                label={field.Label}
+                                value={field.value}
+                                onblur={onInputBlur}>
+                            </lightning-input>
+                        </template>
+                        <template if:true={field.InputPicklist}>
+                            <lightning-combobox
+                                label={field.Label}
+                                name={field.Name}
+                                options={field.options}
+                                onchange={onInputChange}>
+                            </lightning-combobox>
+                        </template>
+                        <template if:true={field.InputSearch}>
+                            Placeholder Input search
+                        </template>
+                        <template if:true={field.InputCheckboxGroup}>
+                            <label class="slds-form-element__label">{field.Label}</label>
+                            <template for:each={field.options} for:item="cb">
+                                <div class="slds-form-element" key={cb.key}>
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-checkbox">
+                                            <input type="checkbox" name={cb.value} id={cb.key} onchange={onCheckboxChange}/>
+                                            <label class="slds-checkbox__label" for={cb.key}>
+                                                <span class="slds-checkbox_faux"></span>
+                                                <span class="slds-form-element__label">{cb.label}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                    </template>
+                </div>
+            </template>
+        </div>
+        <div if:true={appSettings.DisplaySearchButton} class="slds-align_absolute-center">
+            <button class="slds-button slds-button_brand" onclick={onSearch}>{appSettings.SearchButtonLabel}</button>
+        </div>
+    </lightning-card>
+    <lightning-card if:true={displayResults}>
+        <template if:true={loading}>
+            <lightning-spinner alternative-text={label.ensxtx_Common_Loading} size="medium" variant="brand"></lightning-spinner>
+        </template>
+        <h3 slot="title" if:true={appSettings.DisplaySearchResultHeader}>
+            <lightning-icon icon-name={appSettings.SearchResultIcon} size="small"></lightning-icon>
+            <span class="slds-m-left_small">{appSettings.SearchResultTitle}</span>
+        </h3>
+        <lightning-button-icon
+            if:true={appSettings.DisplayRefreshButton} slot="actions" icon-name="utility:refresh"
+            alternative-text={label.ensxapp__ComponentSearch_Refresh} title={label.ensxapp__ComponentSearch_Refresh} onclick={onRefresh}>
+        </lightning-button-icon>
+        <template if:true={messages.length}>
+            <div class="slds-m-top_medium">
+                <template for:each={messages} for:item="message">
+                    <c-ensxtx-message message={message} key={message.key}></c-ensxtx-message>
+                </template>
+            </div>
+        </template>
+        <template if:true={displaySearchResults}>
+            <div class="slds-scrollable">
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer"
+                    aria-labelledby="element-with-table-label other-element-with-table-label">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <template for:each={columns} for:item="column">
+                                <th key={column.key} scope="col">
+                                    <div class="slds-truncate" title={column.Label}>{column.Label}</div>
+                                </th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={searchResults} for:item="row">
+                            <tr key={row.key}>
+                                <template for:each={row.data} for:item="col">
+                                    <td key={col.key}>
+                                        <div if:true={col.isDetailLink} class="slds-truncate">
+                                            <a onclick={onDetailClick} data-document-id={col.Value}>
+                                                {appSettings.DetailLinkText}
+                                            </a>
+                                        </div>
+                                        <div if:true={col.isString} class="slds-truncate" title={col.Value}>
+                                            {col.Value}</div>
+                                        <div if:true={col.isDate} class="slds-truncate" title={col.Value}>
+                                            <lightning-formatted-date-time value={col.Value} time-zone="UTC">
+                                            </lightning-formatted-date-time>
+                                        </div>
+                                    </td>
+                                </template>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+            <div class="slds-m-top_medium">
+                <c-ensxtx-pagination paging-options={pagingOptions}
+                    onpagingchange={handlePagingOptionsChange}></c-ensxtx-pagination>
+            </div>
+        </template>
+    </lightning-card>
+</template>

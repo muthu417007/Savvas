@@ -1,0 +1,32 @@
+<apex:page id="communitiesWebSupport" showHeader="false"  title="Communities User Support" standardStylesheets="false">
+  <!-- <apex:composition template="{!$Site.Template}">-->
+    <apex:composition template="CommunitiesNapiliCustom">
+        <apex:define name="mainbody">  
+            <style type="text/css">
+                .ptBreadcrumb {
+                    display: none;
+                }
+                td {height:30px;padding:10px;}
+            </style>
+<h1>Communities Web Support</h1>
+            <div class="infocontainer">
+                
+         
+<p>
+Please use this form only for issues with K12 Curriculum and Assessment Support registration or case access from K12 Curriculum and Assessment Support community. If you have <strong>already registered</strong>, you do not need to register again. If you need <strong>help with any of our products</strong>, please visit the <a href="/support/s/contact-us/">Contact Us</a> page.</p>
+<ul>
+<li>For support and service with <strong>Curriculum or Clinical</strong> products, please contact support via the options on our <a href="https://support.pearson.com/getsupport/s/ClinicalProductSupportForm" target="">Contact Us</a> page.</li>
+<li>All fields are required (*)</li>
+<li> <strong>Schoolnet Customers:</strong> Please enter all information, Name, Email at your institution/organization, enter in Details - activate Schoolnet account. For now, we will activate Schoolnet administrator contacts only.</li>
+</ul>
+<p>
+Pearson Employees: We are not allowed to provide access to this website, you must use your Salesforce access via MyCloud.</p></div>
+            
+<hr/>   
+<apex:iframe src="https://pearsonnacommunity.force.com/support/s/Website-Support" scrolling="true" id="theIframe"/>
+      
+        
+    </apex:define>
+    </apex:composition>
+
+</apex:page>

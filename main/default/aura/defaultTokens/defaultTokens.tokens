@@ -1,0 +1,6 @@
+<aura:tokens extends="forceCommunity:base">
+    <aura:token name="brandLogoImage" 
+               	value=""/>
+    <aura:token name="boxBorder" value="#00cab3" />
+    <aura:token name="whiteClr" value="#fff" />
+</aura:tokens>

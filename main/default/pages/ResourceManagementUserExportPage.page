@@ -1,0 +1,59 @@
+<apex:page Controller="ResourceManagementUserSearchController" showheader="false" contenttype="application/vnd.ms-excel#Consultants.xls" standardStylesheets="false" cache="true">
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Mobile</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Resource Type</th>
+    <th>Qualification Level</th>
+    <th>Discipline</th>
+    <th>Product Skills</th>
+    <th>Title</th>
+    <th>Description</th>
+  </tr>
+
+  <apex:repeat value="{!exportAllConsultants}" var="c">
+    <tr>
+      <td>
+        <span>{!c.contact__r.name}</span>
+      </td>
+      <td>
+        <span>{!c.contact__r.email}</span>
+      </td>
+      <td>
+        <span>{!c.contact__r.phone}</span>
+      </td>
+      <td>
+        <span>{!c.contact__r.mobilephone}</span>
+      </td>
+      <td>
+        <span>{!c.contact__r.mailingCity}</span>
+      </td>
+      <td>
+        <span>{!c.contact__r.mailingState}</span>
+      </td>
+      <td>
+        <span>{!c.contact__r.Resource_Type__c}</span>
+      </td>
+      <td>
+        <span>{!c.Qualifications__c}</span>
+      </td>
+      <td>
+        <span>{!c.workshop__r.Discipline__c}</span>
+      </td>
+      <td>
+          <span>{!c.workshop__r.Product_Skill__c}</span>
+      </td>
+      <td>
+        <span>{!c.workshop__r.Title__c}</span>
+      </td>
+      <td>
+        <span>{!c.contact__r.description}</span>
+      </td>
+    </tr>
+  </apex:repeat>
+</table>
+</apex:page>

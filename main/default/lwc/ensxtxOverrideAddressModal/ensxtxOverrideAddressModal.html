@@ -1,0 +1,49 @@
+<template>
+    <lightning-modal-header label={title}></lightning-modal-header>
+    <lightning-modal-body>
+        <lightning-card>
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text={customLabel.ensxtx_Common_Loading} size="medium" variant="brand"></lightning-spinner>
+            </template>
+            <template if:true={messages.length}>
+                <div class="slds-m-top_small">
+                    <template for:each={messages} for:item="message">
+                        <c-ensxtx-message message={message} key={message.key}></c-ensxtx-message>
+                    </template>
+                </div>
+            </template>
+            <div class="slds-form">
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                        <lightning-input name="PartnerName" type="text" label={customLabel.ensxtx_OverrideAddress_Field_PartnerName} value={PartnerName}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                        <lightning-input name="PartnerName2" type="text" label={customLabel.ensxtx_OverrideAddress_Field_PartnerName2} value={PartnerName2}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                        <lightning-input name="HouseNumber" type="text" label={customLabel.ensxtx_OverrideAddress_Field_HouseNumber} value={HouseNumber}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                        <lightning-input name="Street" type="text" label={customLabel.ensxtx_OverrideAddress_Field_Street} value={Street}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-4">
+                        <lightning-input name="City" type="text" label={customLabel.ensxtx_OverrideAddress_Field_City} value={City}></lightning-input>
+                    </div>
+                    <div class='slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-m-bottom_small'>
+                        <lightning-combobox name="Country" label={customLabel.ensxtx_OverrideAddress_Field_Country} options={countryOptions} value={Country} onchange={onChange}></lightning-combobox>
+                    </div>
+                    <div class='slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-m-bottom_small'>
+                        <lightning-combobox name="Region" label={customLabel.ensxtx_OverrideAddress_Field_Region} options={regionOptions} value={Region}></lightning-combobox>
+                    </div>
+                    <div class='slds-col slds-size_1-of-1 slds-medium-size_2-of-4 slds-m-bottom_small'>
+                        <lightning-input type="text" name="PostalCode" label={customLabel.ensxtx_OverrideAddress_Field_PostalCode} value={PostalCode}></lightning-input>
+                    </div>
+                </div>
+            </div>
+        </lightning-card>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <button class="slds-button slds-button_brand" onclick={onCancel}>{customLabel.ensxtx_OverrideAddress_Button_Cancel}</button>
+        <button class="slds-button slds-button_brand" onclick={onSave}>{customLabel.ensxtx_OverrideAddress_Button_Save}</button>
+    </lightning-modal-footer>
+</template>

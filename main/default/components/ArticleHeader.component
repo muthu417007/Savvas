@@ -1,0 +1,34 @@
+<apex:component layout="none">
+<apex:attribute name="title" type="String" required="true" description="Page URL"/>
+  <apex:includeScript value="/support/console/20.0/integration.js" />
+  <script type="text/javascript">
+    function setTabTitle() {
+        if (sforce.console) {
+            sforce.console.setTabTitle('{!JSENCODE(title)}');
+        }
+    }
+    var previousOnload = window.onload;
+    window.onload = function() {
+        if (previousOnload) {
+            previousOnload();
+        }
+        setTimeout('setTabTitle()', '100');
+    }
+   </script>
+   <apex:stylesheet value="{!URLFOR($Resource.ICOMKnowledgeStyles, 'screen.css')}"/>
+   <apex:stylesheet html-media="print" value="{!URLFOR($Resource.ICOMKnowledgeStyles, 'print.css')}"/>
+
+
+    <style>
+    body {
+        font-family:Verdana;
+        font-size:12px;
+        background: #fff url(/img/alohaSkin/lookup_bg.png) repeat-x;
+    }
+    body .bPageBlock .pbBody .sectionblock .pbSubheader {
+        background-color:#364395;
+        min-height: 20px;
+        font-size: 13px;
+    }
+    </style> 
+</apex:component>

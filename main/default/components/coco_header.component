@@ -1,0 +1,66 @@
+<apex:component >
+    <div id="pkbheader">
+    <span style="margin-left: 5px;">
+       <apex:outputLink value="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/"> <!-- changed from pkbCon.currentSiteUrl -->
+        <apex:image value="{!$Resource.pkb_coco_header}" />
+             </apex:outputLink>
+      </span>
+      <apex:pageBlock >
+   <div style="display:block;"><nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+            <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products">Platforms</a>
+        <ul>
+                 <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/platforms/Dash-platforms">Dash</a></li>
+                             <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/platforms/gradpoint">GradPoint</a></li>
+                                         <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/platforms/novanet-courseware/">NovaNet Courseware</a></li>
+                    <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/platforms/online-learning-exchange/">Online Learning Exchange</a></li>
+                                <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/platforms/pearson-realize/">Pearson Realize</a></li>
+            <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/platforms/pearson-successnet/">Pearson SuccessNet</a></li>
+            <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/platforms/successnet-plus">SuccessNet Plus</a></li>
+                     <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/platforms/">All Platforms</a></li>
+        </ul>
+      </li>
+      <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products">Products</a>
+        <ul>
+                    <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/cd-products/">CD/DVD Products</a></li>
+                <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/cmp3/">Connected Mathematics 3</a></li>
+          <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/digits/">digits</a></li>
+           <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/dra2plus/">DRA2+</a></li>
+            <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/envisionmath/">enVisionMATH</a></li>
+      <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/etext-information/">eText</a></li>
+                  <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/ilit/">iLit</a></li>
+                          <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/mathnav2012/">Math Navigator</a></li>
+    <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/successmaker/">SuccessMaker</a></li>
+    <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/successmaker-enterprise/">SM Enterprise</a></li>
+    <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/waterford/">Waterford</a></li>
+                <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/products/">All Products</a></li>
+          
+        </ul>
+      </li>
+
+      <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/users-groups/">Users/Groups</a>
+        <ul>
+         <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/users-groups/administrator-information">Administrators</a></li>
+                <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/users-groups/home-school-information">Homeschool</a></li>
+                      <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/users-groups/parent-information">Parents</a></li>
+        <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/users-groups/student-information">Students</a></li>
+                <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/users-groups/one-to-one">One to One Clients</a></li>
+                <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/users-groups/">All Users/Groups</a></li>
+        </ul>
+      </li>          
+
+      <li><a href="/contact">Support</a>
+        <ul>
+           <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/support/administrator-requests">Admin Requests</a></li>
+             <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/support/system-requirements">System Requirements</a></li>
+              <li><a href="{!$Setup.ExternalSystemURLS__c.CocoURL__c}/index.cfm/support/training">Training</a></li>
+        </ul>
+      </li>
+            <li>&nbsp;</li>
+                  <li><a href="https://pearsonnacommunity.force.com/support/s/">Knowledge Base</a></li>
+    </ul>
+</nav></div>
+      </apex:pageBlock>
+  </div>
+</apex:component>

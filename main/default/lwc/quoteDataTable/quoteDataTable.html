@@ -1,0 +1,21 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-card title="Orders">
+        <div class="slds-m-around_medium">
+            <template if:true={data}>
+                <lightning-datatable
+                    data={data}
+                    columns={columns}
+                    key-field="quoteLink"
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+            <template if:true={noData}>
+                {noData}
+            </template>
+            <template if:true={error}>
+                {error}
+            </template>
+        </div>
+    </lightning-card>
+</template>

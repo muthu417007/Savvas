@@ -1,0 +1,39 @@
+<apex:page standardcontroller="Case" extensions="UpdateCaseOwnerExtension" showHeader="false">
+<script type='text/javascript' src='/canvas/sdk/js/publisher.js'/> 
+    <style>
+        .requiredInput .requiredBlock, .requiredBlock {background-color: white;} 
+        .custompubblock div {display: inline-block;} 
+        .custompublabel {width:54px;} 
+    	.bottomBar {background: #f5f6f6; min-height:30px; width:100%; position:fixed;bottom:0px;}
+    	.right{float:right}
+    </style>
+    <script> 
+        function refreshFeed() { 
+            Sfdc.canvas.publisher.publish({name : 'publisher.refresh', payload : {feed:true}}); 
+        }
+    </script>   
+    <div> 
+        <h3>Change Case Owner</h3>
+        <br/><br/>
+        <apex:form > 
+            <apex:actionFunction action="{!updateCaseOwner}" name="updateCaseOwner" rerender="out" 
+            oncomplete="refreshFeed();"/> 
+            <apex:outputPanel id="out" > 
+                    <apex:inputfield id="owner" value="{!Case.OwnerId}"/>
+                <br/>
+                 <apex:OutputLabel value="{!case.Owner.email}" id="caseOwner" rendered="false"/>
+                <apex:inputCheckbox value="{!sendEmail}">Send Notification Email</apex:inputCheckbox>
+            </apex:outputPanel>
+        </apex:form>
+        <br/>
+        <div class="bottomBar">
+           <div class="right">
+        <button type="button" onclick="updateCaseOwner();" 
+        style=" 
+        font-size:13px; font-weight:bold; line-height: 
+        18px;background-color:#0271BF;background-image:-moz-linear-gradient(#2DADDC, #0271BF);background-repeat:repeat-x;border-color:#096EB3;" 
+        id="updateCaseOwnerbutton">Update</button> 
+        </div>
+        </div>
+    </div>  
+</apex:page>

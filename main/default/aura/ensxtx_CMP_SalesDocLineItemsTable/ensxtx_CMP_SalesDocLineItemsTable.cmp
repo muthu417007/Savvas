@@ -1,0 +1,91 @@
+<aura:component >
+    <aura:registerEvent name="sortItemsEvent" type="c:ensxtx_EVT_SortItems"/>
+
+    <aura:attribute name="items" type="List"/>
+    <aura:attribute name="isAccepted" type="Boolean"/>
+    <aura:attribute name="isSortMode" type="Boolean"/>
+    <aura:attribute name="needToSimulate" type="Boolean"/>
+    <aura:attribute name="showIncompletionLogs" type="Boolean"/>
+    <aura:attribute name="enableConfiguration" type="Boolean"/>
+    <aura:attribute name="enableBoMItemEdit" type="Boolean"/>
+    <aura:attribute name="fieldSettings" type="Map"/>
+
+    <lightning:overlayLibrary aura:id="overlayLibItemSort"/>
+
+    <div>
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer table-fixed-layout">
+            <caption></caption>
+            <thead>
+                <tr class="table-head slds-grid--vertical-stretch">
+                    <aura:if isTrue="{! and(v.fieldSettings.ItemActions.display, !v.isSortMode)}">
+                        <th scope="col"><div class="slds-wrap"></div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.isSortMode}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_SortOrder}</div></th>
+                    </aura:if>
+                    <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_ItemNumber}</div></th>
+                    <aura:if isTrue="{!v.fieldSettings.Incomplete.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_Incomplete}</div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.Material.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_Material}</div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.MaterialEntered.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_MaterialEntered}</div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.ItemDescription.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_ItemDescription}</div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.Quantity.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_Quantity}</div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.SalesUnit.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_SalesUnit}</div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.BaseUnitOfMeasure.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_BaseUnitOfMeasure}</div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.RequestedDate.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_RequestedDate}</div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.NetItemPrice.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_NetItemPrice}</div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.NetOrderValue.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_NetOrderValue}</div></th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.Plant.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_Plant}</div></th>
+                    </aura:if>  
+                    <aura:if isTrue="{!v.fieldSettings.ItemCategory.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_ItemCategory}</div></th>
+                    </aura:if>                    
+                    <aura:if isTrue="{!v.fieldSettings.BillingBlockStatus.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_BillingBlockStatus}</div></th>
+                    </aura:if>                    
+                    <aura:if isTrue="{!v.fieldSettings.DeliveryBlockStatus.display}">
+                        <th scope="col"><div class="slds-wrap">{!$Label.c.ensxtx_SalesDoc_Table_DeliveryBlockStatus}</div></th>
+                    </aura:if>                    
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.items}" var="lineItem" indexVar="lineItemIndex">
+                    <c:ensxtx_CMP_SalesDocLineItem 
+                        lineItem="{!lineItem}" 
+                        isAccepted="{!v.isAccepted}" 
+                        isSortMode="{!v.isSortMode}"
+                        needToSimulate="{!v.needToSimulate}"
+                        showIncompletionLogs="{!v.showIncompletionLogs}"
+                        enableConfiguration="{!v.enableConfiguration}"
+                        enableBoMItemEdit="{!v.enableBoMItemEdit}"
+                        fieldSettings="{!v.fieldSettings}"/>
+                </aura:iteration>
+            </tbody>
+        </table>
+        <aura:if isTrue="{!v.isSortMode}">
+            <lightning:button label="{!$Label.c.ensxtx_SalesDoc_Button_Sort}" variant="brand" onclick="{!c.onSortClick}"/>
+            <lightning:button label="{!$Label.c.ensxtx_SalesDoc_Button_Cancel}" variant="neutral" onclick="{!c.onClickCancel}"/>
+        </aura:if>
+    </div>
+
+</aura:component>

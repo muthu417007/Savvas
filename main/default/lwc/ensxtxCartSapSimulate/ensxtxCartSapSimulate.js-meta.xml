@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>58.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Enosix Cart SAP Simulate</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="appSettingsName" type="String" required="true" default="ensxtx_SR_enosixWebCartB2BAppSettings"
+                label="App Settings Name" description="Specifiy the name of the static resource file."/>
+            <property label="Button Label" name="sapButtonLabel" type="String" default="Get Price"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

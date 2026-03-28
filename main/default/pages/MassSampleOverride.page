@@ -1,0 +1,17 @@
+<apex:page StandardController="SampleRequest__c" extensions="MassSampleOverRideController" tabstyle="Sample__tab" >
+    <apex:form >
+    <apex:pageMessages />
+        <apex:pageblock title="{!$ObjectType.SampleRequest__c.Label}">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton action="{!launchMassSample}" value="Launch Mass Sample/Free Request"/>
+            </apex:pageBlockButtons>
+            <apex:pageblocksection columns="2">
+                    <apex:outputField id="CreatedBy" value="{!SampleRequest__c.CreatedBy.Name}" />
+                    <apex:outputField value="{!SampleRequest__c.CreatedDate}" id="CreatedDate" />
+            </apex:pageblocksection>
+        </apex:pageblock>   
+    </apex:form>
+    <apex:relatedList list="Sample_Request_Contacts__r"/> 
+    <apex:relatedList list="Mass_Sample_Generic_Contacts__r"/>
+    <apex:outputText style="color:red;" value=" Note: 20 contact limit per mass sample/free request"></apex:outputText>
+</apex:page>

@@ -1,0 +1,55 @@
+<apex:page id="communitiesSelfRegPage" showHeader="false" controller="CommunitiesSelfRegController" title="{!$Label.site.user_registration}" standardStylesheets="false">
+  <!-- <apex:composition template="{!$Site.Template}">-->
+    <apex:composition template="CommunitiesNapiliCustom">
+        <apex:define name="mainbody">  
+            <style type="text/css">
+                .ptBreadcrumb {
+                    display: none;
+                }
+                td {height:30px;padding:10px;}
+            </style>
+<h1>Savvas Customer Care Community Registration</h1>
+            <div class="infocontainer">
+                
+         
+<p>
+Welcome to our support community Registration Page. You can register for this website if you have received a "Case Open or Resolved" email from Savvas Customer Care. By registering for this website, you represent that you will not transmit information that is confidential in nature or that includes any personally identifiable information. If you have <strong>already registered</strong>, you do not need to register again. If you need <strong>help with any of our products</strong>, please visit the <a href="/support/s/contactsupport/">Contact Us</a> page.</p>
+<ul>
+<li>All fields are required (*)</li>
+<li>Enter your name as it is within the email.</li>
+<li>Enter the email address in your case email.</li>
+<!--<li>Create a new password in the Password/Confirm Password fields. Passwords must consist of letters and numbers.</li>-->
+<li>Enter the Case number found in your email in the Case Number field below.</li>
+</ul>
+</div>
+            
+<hr/>   
+<apex:form id="theForm" forceSSL="true">
+                    <apex:pageMessages id="error" escape="false"/>
+                    <apex:panelGrid columns="3" style="margin-top:1em;">
+                      <label for="firstName">First Name<sup>*</sup></label>
+                      <apex:inputText required="true" id="firstName" value="{!firstName}" label="First Name"/>
+                      <apex:outputText >&nbsp; </apex:outputText>
+                      <label for="lastName">Last Name<sup>*</sup></label>
+                    <apex:inputText required="true" id="lastName" value="{!lastName}" label="Last Name"/>
+                      <apex:outputText >&nbsp;</apex:outputText>
+                      <label for="email">{!$Label.site.email}<sup>*</sup></label>
+                      <apex:inputText required="true" id="email" value="{!email}" label="{!$Label.site.email}"/>
+                           <apex:outputText >&nbsp;</apex:outputText>
+                      <!--W-014716: Password and confirmPassword fields are removed as part of SSO App access management-->
+                      <label for="casenumber">Case Number<sup>*</sup></label>
+                       <apex:inputText required="true" id="casenumber" value="{!casenumber}" label="Case Number"/>
+                           <apex:outputText ><small>A case number from your support interaction email.</small></apex:outputText>
+                      <apex:outputText value=""/>
+                      <apex:commandButton action="{!registerUser}" value="{!$Label.site.submit}" id="submit"/>
+                    </apex:panelGrid> 
+                  <br/>
+        </apex:form>
+<p>
+If you need assistance completing registration for this support website, please use contact <a href="/support/s/k12-curriculum-support-form">the Technical Support webform</a>. 
+</p>        
+        
+    </apex:define>
+    </apex:composition>
+
+</apex:page>

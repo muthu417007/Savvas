@@ -1,0 +1,71 @@
+<!-- /*********************************************************
+  Component Name       : scc_heldCarts
+  Created Date         : 06/10/2024  
+  Author               : Cognizant (@⁠Ponraj,Jaba Raj )
+  Description          : This component used in Home page and functionality related to 
+                         display HeldCart record and page redirection.
+  
+  Modifications Log
+  06/10/2024     Zubiya           Initial Version
+*********************************************************/ -->
+
+<template>
+    
+     <lightning-card>
+        <div class="slds-grid slds-wrap slds-align-middle slds-align_absolute-center">
+            <div class="slds-col">
+                <h2 class="slds-text-heading_medium slds-m-around_small held-carts-heading">{labels.scc_home_Held_Carts}</h2>
+            </div>           
+                 <div class="slds-col slds-text-align_right slds-m-right_medium view-all-mobile">
+                    <p class="view-all-link" id="indicates-Items"><span class="slds-assistive-text">Held Cart</span>{getRecentHeldCartsCount} Items<span class="slds-assistive-text">View All</span></p> 
+                        <span class="slds-p-horizontal_small">|</span>
+                         <a href="#" class="view-all-link" onclick={handleViewAllHeldCarts} aria-labelledby="indicates-Items">
+                           {labels.scc_home_ViewAll}
+                            <div class="chevron-circle" >
+                            <lightning-icon class="chevron-icon " icon-name='utility:chevronright' alternative-text='chevronright' size='xx-small' title='chevronright'></lightning-icon>
+                            </div>  
+                            </a>
+                 </div>           
+        </div>
+      <div class="slds-m-around_medium">
+            <template lwc:if={hasRecentheldCarts}>
+                <template for:each={heldCartData} for:item="heldCarts">
+                    <div key={heldCarts.Id} class="slds-box slds-m-bottom_medium">
+                        <div class="slds-grid slds-wrap dropdown-container-mobile">
+                            <div class="slds-col slds-size_1-of-2 slds-large-size_2-of-5">
+                                <p class="cart-label">{labels.scc_home_Cart_Name}</p>
+                                <a class="cart-value" onclick={openReviewHeldCarts} data-id={heldCarts.Id}>{heldCarts.StdCartNameOrCustomCartName__c}</a>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-large-size_2-of-5 slds-is-relative">
+                                
+                                <p class="cart-label">{labels.scc_home_Date}</p>
+                                <p class="cart-value">{heldCarts.LastModifiedDate}</p>
+                                <div class="chevron-circle-dropdown" onclick={toggleResultFields}>
+                                    <lightning-icon class="chevron-icon" icon-name='utility:chevrondown' alternative-text='chevrondown' size='xx-small'></lightning-icon>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-5 full-width-in-mobile">
+                                
+                                <p class="cart-label">{labels.scc_home_Items}</p>
+                                <p class="cart-value">{heldCarts.TotalProductLineItemCount}</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </template> 
+            <template lwc:else>
+                 <template if:false={hasRecentheldCarts}>
+                <div class="slds-box no-recent-held-carts-box">
+                    <div class=" slds-align_absolute-center"> 
+                        <img alt="" src={noRecentHeldCartsImage}><br>
+                    </div><span></span>
+                    <h5 class="slds-align_absolute-center no-recent-held-carts-text" aria-level="3">No Held Carts</h5>
+                </div>
+                </template>
+            </template>
+            <template if:true={error}>                 
+            </template>
+       </div>
+    </lightning-card>
+</template>

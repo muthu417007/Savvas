@@ -1,0 +1,40 @@
+<aura:component implements="forceCommunity:themeLayout" access="global" description="Custom Theme Layout">
+    <aura:attribute name="profileMenu" type="Aura.Component[]" required="false"/>
+    <aura:attribute name="isMobile" type="Boolean" required="false"/>
+    <aura:attribute name="bannerImageURL" type="String" default=""/>
+    <aura:attribute name="mobileBannerImageURL" type="String" default=""/>
+    <!-- <aura:attribute name="themeHero" type="Aura.Component[]" required="false"/> -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <div class="pageContent">
+        <div role="banner" class="slds-p-horizontal_small">
+            <div class="slds-grid slds-wrap slds-gutters slds-p-top_small slds-p-bottom_xxx-small headerContent slds-no-print">
+                <div class="slds-col slds-size_1-of-2 slds-large-size_2-of-12 slds-p-horizontal_medium">
+                    <div class="logoContainer" tabindex="0" onkeypress ="{!c.redirectToHome}" onclick="{!c.redirectToHome}"></div>
+                </div>
+                <!-- <div class="navigation slds-col slds-size_1-of-1 slds-medium-size_4-of-12"> {!v.navBar} </div> -->
+                <div class="slds-col_bump-left slds-col slds-size_1-of-2 slds-large-size_2-of-12">
+                    <div class="profileMenuRegion slds-m-top_xx-small slds-p-top_x-small">
+                        <div class="slds-float_right">{!v.profileMenu}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <aura:if isTrue="{!v.isMobile}">
+                <div class="mobilebanner" style="{!'background-image: url('+v.mobileBannerImageURL+'); '}">
+                </div>
+                <aura:set attribute="else">
+                    <div class="heroBanner" style="{!'background-image: url('+v.bannerImageURL+'); '}">
+                    </div> 
+                </aura:set>
+            </aura:if>
+        </div>
+        <div class="slds-grid slds-scrollable">
+            <div class="slds-col slds-size_1-of-1">
+                <div class="midContent auraContainer">
+                    {!v.body}
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

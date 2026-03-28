@@ -1,0 +1,25 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+	<aura:attribute name="recordId" type="Id" />
+	<aura:attribute name="fieldName" type="String" default="Name" />
+	<aura:attribute name="record" type="Object" />
+	<aura:attribute name="simpleRecord" type="Object" />
+	<aura:attribute name="recordError" type="String" />
+	<force:recordData 
+                    aura:id="recordLoader"
+					targetFields="{!v.simpleRecord}"
+					targetError="{!v.recordError}"
+                      recordUpdated="{!c.handleRecordUpdated}"/>
+
+    <lightning:listView aura:id="listViewQuotes"
+    objectApiName="SBQQ__Quote__c"
+    listName="SBQQ__All"
+    rows="5"
+    showSearchBar="true"
+    showActionBar="false"
+    enableInlineEdit="true"
+    showRowLevelActions="false"
+/>
+   
+</aura:component>

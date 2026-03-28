@@ -1,0 +1,16 @@
+<template>
+    <lightning-combobox
+        if:true={showThis}
+        name="State" 
+        placeholder="-State-"
+        class="minwidth-200"
+        value={thisValue}
+        disabled={disabled}
+        options={options}
+        onchange={handleChange} 
+        data-id={thisDataId}
+        required
+        variant="label-hidden"
+        message-when-value-missing="Missing Value">
+    </lightning-combobox>
+</template>

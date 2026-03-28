@@ -1,0 +1,8 @@
+<apex:page standardController="Opportunity" extensions="newQuoteProxyControllerExtension" action="{!getNewQuotePage}">
+    <br/>
+    <div style="text-align: center; color: red; font-weight:bold;">
+        <apex:outputLink value="{!errorURL}" id="theLink" style="text-align: center; color: red; font-weight:bold;">
+            <apex:outputtext value="{!errortext}"/>
+        </apex:outputLink>
+    </div>
+</apex:page>

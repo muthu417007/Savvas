@@ -1,0 +1,123 @@
+.container{
+    background: linear-gradient(#0FB7FF, #C8EBFB);
+    /* height: 100%;
+    width: 100%;
+    padding: 16px; */
+    /* overflow: auto; */
+    height:100%;
+}
+.subTotal-bg{
+    background-color:#eee;
+}
+.h-100vh{
+    height:90vh;
+}
+/* .savs_timentry-labl{
+    margin-top: 3%;
+    margin-left: 50px;
+    font-size: 26px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    color: #073D6F;
+} */
+/* .savs_container{
+    margin: 50px 7% 50px;
+} */
+
+.savs_top-header{
+    background: linear-gradient(180deg, #1DACEA 2.6%, rgba(14, 132, 183, 0.86) 100%);
+    height: 60px;
+}
+.savs_workordr-header{
+    height: 40px;
+    background: linear-gradient(#1DACEA, #1284B5);;
+    margin-top: 10px;
+}
+.savs_workodrd-header-lbl{
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    color: #FFFFFF;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+.savs_username{
+    font-weight: 500;
+    font-size: 23px;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+.day_wrapper{
+    margin: 10px 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+}
+.savs_sa-item{
+    height: 50px;
+    background: #fff;
+    border: 1px solid #1DACEA;
+    margin: 10px 10px;
+}
+.cellcls{
+    height: 29px;
+    width: 50px;
+    margin: 5px 10px;
+    text-align: center;
+}
+.custom-combo{
+    height: 28px;
+    margin-top: 10px;
+    border-color: #1DACEA;
+    width: 135px;
+}
+.sa-name{
+    font-size: 11px;
+    font-weight: 600;
+    margin: 14px 10px;
+    line-height: 1;
+}
+.btncontainer{
+    margin: auto;
+    padding: 25px;
+    text-align: center;
+    margin-left: 5%;
+   }
+  
+.btn{
+    background: linear-gradient(#1DACEA, #1284B5);
+    border: none;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 20px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    width: 150px;
+    border-radius: 25px;
+    font-weight: 400;
+}
+.totaltimehrs-box{
+    border: 1px solid #1ca3de;
+}
+.padfv{
+    padding-left: 5px;
+}
+.TableErrorMessage{
+position: absolute;
+z-index: 1;
+background-color: #fff;
+padding: 10px 20px;
+width: 100%;
+left: 0;
+ top: 0;
+}
+.p-relative{
+position:relative;
+}

@@ -1,0 +1,16 @@
+/* .chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+} */
+
+.chart-container {
+    position: relative;
+    height: 300px; 
+    width: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid #d8dde6;
+    padding: 10px 10px 10px 10px;
+    border-radius: 4px;
+}

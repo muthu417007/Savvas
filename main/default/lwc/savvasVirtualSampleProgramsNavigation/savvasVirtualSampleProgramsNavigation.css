@@ -1,0 +1,75 @@
+.slds-container_savvas {
+	width: 90rem;
+	
+  }
+  .programs {
+	color: #173770;
+	font-size: 14px;
+	font-family: Poppins;
+	font-weight: 400;
+	line-height: 19.6px;
+	word-wrap: break-word;
+	padding-right: 1vw;
+	padding-left: 1.5vw;
+  }
+  
+  .programs_2 {
+	color: #173770;
+	font-size: 14px;
+	font-family: Poppins;
+	font-weight: 400;
+	line-height: 19.6px;
+	word-wrap: break-word;
+	padding-right: 1vw;
+	padding-left: 10px;
+  }
+  
+  .sampling {
+	color: #173770;
+	font-size: 14px;
+	font-family: Poppins;
+	font-weight: 700;
+	line-height: 19.6px;
+	word-wrap: break-word;
+	padding-right: 1vw;
+  }
+  
+  .iconImage {
+	border: 1px;
+	padding-right: 1vw;
+  }
+  p {
+	display: inline-block;
+  }
+  .mobcenter {
+	text-align: left;
+  }
+  
+  @media (max-width: 768px) {
+	.mobcenter {
+	  text-align: center;
+	}
+	.programs_2 {
+	  padding-right: 15px;
+	  }
+	  .programs {
+	   padding-right: 15px;
+	  }
+	  .sampling {
+	padding-left: 15px;
+  }
+  }
+  @media (min-width:767px) and (max-width:1000px){
+	  .mobcenter {
+	  text-align: center;
+	}
+	.programs_2 {
+	  padding-right: 15px;
+	  }
+	  .programs {
+	   padding-right: 15px;
+	  }
+	  .sampling {
+	padding-left: 15px;
+  }
+  }

@@ -1,0 +1,62 @@
+<template>
+      <div class="payment-method-container slds-p-horizontal_medium"> 
+         <h2 class="slds-m-bottom_small payment-title">Payment Method</h2>
+         <div class="slds-col slds-size_1-of-2 payment-method">
+            <div class="slds-form-element radio-labels">
+                <div class="slds-show_inline-block slds-m-right_medium"><input class="payment-option-radio payment-options slds-m-right_xx-small" type="radio" name ="paymentMethods" value="creditCard" checked={isCreditCardSelected} onchange={handlePaymentChange}>{labels.scc_Credit_Card}</div>
+                <input class="payment-option-radio slds-m-left_large slds-m-right_xx-small" type="radio" name ="paymentMethods" value="poMethod" checked={isPoSelected} onchange={handlePaymentChange}>{labels.scc_Checkout_PO}
+            </div>
+        </div>
+         
+         <template if:true={isCreditCardSelected}>
+            <template if:true={displayiFrame}>
+               <div class="credit-card-details slds-p-around_large"> 
+                  <div id="iframewrapper">
+                     <iframe id="paymetric-iframe" class="payment-metric-iframe" src={iFrameUrl}  name="dieCommFrame" onload={IFrame_OnLoad}></iframe>
+                  </div>
+                  <lightning-input type="checkbox" label="My Credit Card address is different from my Billing Address"
+                     onchange={handleCardAddressCheckbox} checked={isAddressDifferent}></lightning-input>
+
+                  <template if:true={isAddressDifferent}>
+                     <div class="address-details-container">
+                        <div>
+                           <lightning-input class="address-container" label={labels.scc_Checkout_Name}  vaue={billingName} onchange={handleCardAddressChange} name="billingName"></lightning-input>
+                           <lightning-input class="address-container" label={labels.scc_Checkout_Street} value={billingStreet} onchange={handleCardAddressChange} name="billingStreet"></lightning-input>
+                           <div class="slds-grid slds-gutters">
+                              <div class="slds-col slds-size_1-of-2">
+                                 <lightning-input label={labels.scc_Checkout_Floor} value={billingApt} onchange={handleCardAddressChange} name="billingApt"></lightning-input>
+                              </div>
+                              <div class="slds-col slds-size_1-of-2">
+                                 <lightning-input label={labels.scc_Checkout_City} value={billingCity} onchange={handleCardAddressChange} name="billingCity"></lightning-input>
+                              </div>
+                           </div>
+                           <div class="slds-grid slds-gutters">
+                              <div class="slds-col slds-size_1-of-2">
+                                 <lightning-combobox class="statuscombobox slds-p-top_medium" label={labels.scc_Checkout_State} value={stateValue} options={stateOptions} onchange={handleStateOptionChange}></lightning-combobox>
+                              </div>
+                              <div class="slds-col slds-size_1-of-2">
+                                 <lightning-input label={labels.scc_Checkout_Zip} value={billingZip} onchange={handleCardAddressChange} name="billingZip"></lightning-input>
+                              </div>
+                           </div>
+                           <lightning-combobox class="statuscombobox address-container" label={labels.scc_Checkout_Country} value={CountryValue} options={CountryOptions} onchange={handleCountryOptionChange}></lightning-combobox>
+                        </div>                     
+                     </div>
+                  </template>
+               </div>
+            </template>
+         </template>
+         <template if:true={isPoSelected}>
+            <div class="slds-grid slds-p-around_large credit-card-details credit-card-details-po" style="width:583px;">
+               <div class="slds-col slds-size_12-of-12">
+                   <div class="slds-form-element__label">{labels.scc_Checkout_PONumber}
+                       <lightning-helptext class="help-text" content={labels.scc_PO_Info_Text}></lightning-helptext>
+                    </div>
+                    <input placeholder="PO #" type="Text" required class="fixed-width-input slds-input"/>
+                </div>
+            </div>
+         </template> 
+         <div>
+            <button onclick={submitform} class="IFrameButton">submit payment</button>
+        </div>       
+    </div>
+</template>

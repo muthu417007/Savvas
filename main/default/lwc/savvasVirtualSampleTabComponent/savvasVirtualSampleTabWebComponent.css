@@ -1,0 +1,143 @@
+.tabptb50{
+	padding-top:6rem;
+	padding-bottom:20px;
+}
+.tab {
+}
+.tabcomponent .tab-container{
+	width:100%;
+}
+.tabcomponent .tabs{
+	display: flex;
+}
+.tab, .more-tab{
+	height: 5.875rem;
+	padding: 1.8rem 0.6rem;
+	border-radius: 5px 5px 0px 0px;
+	background: #009AF4;
+	box-shadow: 0px 5px 10px 0px rgba(33, 80, 163, 0.30);
+	color:#ffffff;
+	border: none;
+	border-bottom: 6px solid #1C84C0;
+	font-size: 1.25rem!important;
+	font-weight: 600;
+	letter-spacing: -0.025rem;
+	font-family: 'Poppins';
+	width:12.5%!important;
+	text-align:center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	border-right: 0.1px solid #84C1FF;
+}
+.tab.active{
+	height: 5.875rem;
+	padding: 1.8rem 0.6rem;
+	border-radius: 5px 5px 0px 0px;
+	border-bottom: 6px solid #FFF!important;
+	background: linear-gradient(45deg, #173770 0%, #2150A3 100%)!important;
+	box-shadow: 0px 15px 30px 0px rgba(33, 80, 163, 0.30)!important;
+	color:#ffffff;
+	font-size: 1.25rem!important;
+	letter-spacing: -0.025rem;
+	font-family: 'Poppins';
+	width:12.5%!important;
+	text-align:center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.more-tab{
+	position: relative;
+}
+.dropdown{
+	display: none;
+	position: absolute;
+	background-color:#ffffff;
+	border:1px solid #ccc;
+	top:100%;
+	right: 0px;
+	z-index: 9;
+}
+.dropdown.active{
+	display: block;
+}
+.content{
+	padding:20px;
+	border: 1px solid #ccc;
+   ;
+}
+.displaynone{
+	display: none;
+}
+.tab1 {
+	font-size: 1.25rem;
+	
+	padding: 1.8rem 0.6rem;
+	border-bottom: 1px solid gainsboro;
+	text-align:center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 7rem;
+}
+.tab1.tab.active {
+    width: 8rem!important;
+	height: 5.875rem;
+}
+.tab1.tab {
+	width:8rem!important;
+	height: 5.875rem;
+}
+.down {
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+}
+.arrow {
+	border: solid #FFFFFF;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+	padding: 3px;
+    top: 36px;
+    position: absolute;
+    left: 96px;
+}
+@media (min-width: 992px) and (max-width: 1400px) {
+}
+@media (max-width: 1366px){
+	.tabcomponent .tab-container{
+   }
+   .tab, .more-tab{
+	   font-size: 1.1rem!important;
+   }
+   .tab.active
+	{
+		font-size: 1.1rem!important;
+	}
+	.arrow {
+		    top: 36px;
+    position: absolute;
+    left: 81px;
+	}
+}
+@media (max-width: 1423px){
+	.arrow {
+    top: 38px;
+    left: 86px;
+	}
+	  .tab, .more-tab{
+	   font-size: 1.1rem!important;
+   }
+   .tab.active
+	{
+		font-size: 1.1rem!important;
+	}
+	.tab1.tab {
+	width:7rem!important;
+	height: 5.875rem;
+	}
+	.tab1.tab.active {
+    width: 7rem!important;
+	height: 5.875rem;
+}
+}

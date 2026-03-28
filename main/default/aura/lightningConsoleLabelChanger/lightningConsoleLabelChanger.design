@@ -1,0 +1,10 @@
+<design:component>
+
+	<design:attribute
+		name="fieldName"
+		label="Field"
+		description="The name of the field to use for the label"
+		required="true"
+	/>
+
+</design:component>

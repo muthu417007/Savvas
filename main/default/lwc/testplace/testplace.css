@@ -1,0 +1,5 @@
+/* CSS Class for changing the text color of a button to black and adjusting line height */
+.neutral-button-text-color {
+    --slds-c-button-text-color-neutral: black !important; /* Changing button text color to black */
+    --slds-c-button-line-height: 1.5rem !important; /* Adjusting button line height */
+}

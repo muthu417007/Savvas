@@ -1,0 +1,36 @@
+<apex:page showHeader="false" sidebar="false"
+ standardStylesheets="false">
+
+<!--apex:page standardController="Media_Presentation__kav" showHeader="false" sidebar="false"
+ extensions="ArticleExtensionMediaPresentation" title="{!Media_Presentation__kav.title}"
+ standardStylesheets="false">
+    <apex:composition template="pkb_ICOM_WebTemplate">
+        <apex:define name="body">
+        
+            <apex:outputField value="{!Media_Presentation__kav.PublishStatus}"  rendered="false" /> 
+            <apex:outputField value="{!Media_Presentation__kav.KnowledgeArticleId}"  rendered="false"/>
+            <apex:outputField value="{!Media_Presentation__kav.CreatedBy}"  rendered="false" />  
+            <apex:outputField value="{!Media_Presentation__kav.Summary}"  rendered="false" />    
+            <apex:outputField value="{!Media_Presentation__kav.Language}"  rendered="false" />  
+            
+            <div class="col-xs-12 col-sm-12 articleTitle">
+                <h1><apex:outputText escape="false" value="{!Media_Presentation__kav.title}" /></h1>
+            </div>
+            <div class="col-xs-12 col-sm-12 articleContent">
+                <h2>Details</h2>
+                <div><apex:outputField value="{!Media_Presentation__kav.Details__c}" /></div>
+                <div><apex:outputField value="{!Media_Presentation__kav.Video__c}" /></div>
+
+                <c:ArticleAttachmentsPublic attachment1_name="{!attachment1Name}" 
+                    attachment1_link="{!URLFOR($Action.Media_Presentation__kav.FileFieldDownload, Media_Presentation__kav.id,['field'=$ObjectType.Media_Presentation__kav.fields.Attachment_1__Body__s.name])}" 
+                    attachment2_name="{!attachment2Name}" 
+                    attachment2_link="{!URLFOR($Action.Media_Presentation__kav.FileFieldDownload, Media_Presentation__kav.id,['field'=$ObjectType.Media_Presentation__kav.fields.Attachment_2__Body__s.name])}" 
+                    attachment3_name="{!attachment3Name}" 
+                    attachment3_link="{!URLFOR($Action.Media_Presentation__kav.FileFieldDownload, Media_Presentation__kav.id,['field'=$ObjectType.Media_Presentation__kav.fields.Attachment_3__Body__s.name])}"/>
+            </div>
+            
+       
+        </apex:define>
+    </apex:composition>
+-->
+</apex:page>

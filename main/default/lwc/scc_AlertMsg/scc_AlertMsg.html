@@ -1,0 +1,22 @@
+<template>
+     <template if:true={showPopup}>
+        <div class="slds-grid slds-grid_align-center">
+            <div class="slds-col slds-size_9-of-12"> 
+    
+                <div class="slds-grid slds-wrap slds-align-middle slds-align_absolute-center">
+                    <div class="slds-notify   slds-theme_warning slds-grid slds-grid_align-spread slds-p-around_small popup-container">
+                        <div class="slds-col">
+                            <h4 class="slds-text-heading_medium slds-m-bottom_medium recent-order1">{alertHeading}</h4>
+                            <div class="order-label1">{alertContent}</div>
+                        </div>
+                        <div class="slds-col slds-text-align_right">
+                            <button class="slds-button slds-button_icon slds-button_icon-small slds-float_right close-button" title="Close" onclick={closePopup}>
+                            X                                
+                            </button>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </template>
+</template>

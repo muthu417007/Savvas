@@ -1,0 +1,32 @@
+:host {
+    --spinner-dot-color: blue;
+}
+
+.custom-spinner .slds-spinner__dot-a, 
+.custom-spinner .slds-spinner__dot-b {
+    background-color: var(--spinner-dot-color);
+}
+:host {
+    --custom-tree-item-background: #f4f6f9;
+    --custom-tree-item-color :red ;
+    --custom-tree-item-hover-background: #e1e5ea;
+    --custom-tree-item-selected-background: #d4dae3;
+    --custom-tree-item-padding: 10px;
+    --custom-tree-item-border-radius: 5px;
+}
+
+.slds-tree__item {
+    background-color: var(--custom-tree-item-background);
+    color: var(--custom-tree-item-color);
+    padding: var(--custom-tree-item-padding);
+    border-radius: var(--custom-tree-item-border-radius);
+}
+
+.slds-tree__item:hover {
+    background-color: var(--custom-tree-item-hover-background);
+}
+
+.slds-is-selected .slds-tree__item {
+    background-color: var(--custom-tree-item-selected-background);
+    font-weight: bold;
+}

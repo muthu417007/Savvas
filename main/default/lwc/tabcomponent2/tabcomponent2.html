@@ -1,0 +1,119 @@
+<template>
+    
+        <!--  Quick Search component content here -->
+    
+
+<template if:true ={isquickSearch}>
+        <div class="search-container">
+
+            <div class="slds-grid slds-m-bottom_medium align-buttons">
+            <div class="slds-col slds-size_8-of-12"></div>
+            <div class="slds-col slds-size_1-of-12 slds-float_right">
+            </div>
+            <div class="slds-grid slds-grid_align-end ">
+							<div class="slds-col">
+								<lightning-button label="Clear Search" onclick={handleClear}
+									class="slds-m-left_x-small neutral-button-text-color"></lightning-button>
+							</div>
+                            &nbsp;&nbsp;
+							<div class="slds-col">
+								<lightning-button variant="brand" label="Search" disabled={isSearchDisabled}
+									onclick={handleSearch} class="slds-m-left_x-small"></lightning-button>
+							</div>
+						</div>
+       
+           
+        </div>
+            
+        
+					<div	class="slds-box slds-theme_shade slds-p-vertical_xx-small slds-m-vertical_xx-small slds-p-horizontal_none">
+						<div class="slds-grid slds-grid_vertical-align-center">
+							<lightning-icon size="xx-small" icon-name="utility:chevrondown"
+								alternative-text="chevrondown">
+							</lightning-icon>
+							<div>&nbsp;&nbsp;Qucik Search</div>
+						</div>
+					</div>
+         
+        <div class="ISBN-Name"> <h4>ISBN(s)</h4></div>
+        <div class="text-area-inputchange">
+        <textarea class="arvicon-input" rows="10" cols="50" placeholder="Enter your search query" oninput={handleInputChange}></textarea>
+       <div>To search  for multiple titles at once, paste list of ISBNs </div>
+        </div>
+       
+
+   
+       
+    </div> 
+    <div class="search-result-value" >
+<div	class="slds-box slds-theme_shade slds-p-vertical_xx-small slds-m-vertical_xx-small slds-p-horizontal_none">
+						<div class="slds-grid slds-grid_vertical-align-center">
+							<lightning-icon size="xx-small" icon-name="utility:chevrondown"
+								alternative-text="chevrondown">
+							</lightning-icon>
+							<div>&nbsp;&nbsp;Search Result</div>
+						</div>
+					</div>
+
+</div>
+
+  <div class="search-results">
+    <div class="pagination">
+        <div class="count-container">
+            <div class="total-count">
+                Total Items: {totalCount}
+            </div>
+            <div class="selected-rows">
+                <div class="row-count-label">
+                    # of Rows 
+                </div>
+                <select onchange={handleChangeRowsPerPage}>
+                    <option value="15">15</option>
+                    <option value="20">30</option>
+                    <option value="50">50</option>
+                    <option value="50">75</option>
+                    <option value="50">100</option>
+                </select>
+            </div>
+        </div>
+
+      
+        <div class="pagination-buttons">
+    <button class={firstButtonClass} disabled={isFirstPage} onclick={navigateToFirstPage}>&lt;&lt; First</button>
+    <span style="margin: 0 10px;"> 
+        <button class={previousButtonClass} disabled={isFirstPage} onclick={navigateToPreviousPage}>&lt; Previous</button>
+    </span>
+    <span class="slds-badge">Showing {currentPage} &nbsp;of&nbsp; {totalPages} &nbsp;&nbsp;Page(s)</span>
+    <!-- <span class="page-info"> Showing {currentPage} of {totalPages} page(s) </span>  -->
+    <span style="margin: 0 10px;"> 
+        <button class={nextButtonClass} disabled={isLastPage} onclick={navigateToNextPage}>Next &gt;</button>
+    </span>
+    <button class={lastButtonClass} disabled={isLastPage} onclick={navigateToLastPage}> Last &gt;&gt; </button>
+    </div>
+
+    </div>
+       
+         <lightning-datatable
+    key-field="Id"
+    data={searchResults}
+    columns={columns}
+    hide-checkbox-column="true"
+    sorted-by={sortBy}
+    sorted-direction={sortDirection}
+    onsort={handleSort}
+    onrowaction={handleRowAction}>
+
+</lightning-datatable>
+ 
+ </div>
+
+</template>
+
+<template if:true={isselectedProductRecord}>
+    
+          <c-scc_product-title-page parent-selected-product-record={selectedProductRecord}
+			onclosetitlepage={closeChildTitlePage}></c-scc_product-title-page>
+</template>
+      
+      
+</template>

@@ -1,0 +1,29 @@
+<aura:component>
+    <aura:handler name="init" action="{!c.onInit}" value="{!this}"/>
+
+    <aura:attribute name="label" type="String"/>
+    <aura:attribute name="value" type="String"/>
+    <aura:attribute name="name" type="String"/>
+    <aura:attribute name="disabled" type="boolean"/>
+    <aura:attribute name="required" type="boolean"/>
+    <aura:attribute name="optionValues" type="List"/>
+    <aura:attribute name="optionValueField" type="String"/>
+    <aura:attribute name="optionInternalValueField" type="String"/>
+    <aura:attribute name="optionDescriptionField" type="String"/>
+    <aura:attribute name="displayOptionValues" type="String"/>
+    <aura:attribute name="optionValuesToInclude" type="List"/>
+
+    <aura:registerEvent name="inputSelectChangeEvent" type="c:ensxtx_EVT_InputSelectChange"/>
+
+    <aura:handler name="change" value="{!v.optionValues}" action="{!c.onChangeOptionValues}"/>
+
+    <lightning:select label="{!v.label}" value="{!v.value}" name="{!v.name}"
+        disabled="{!v.disabled}" required="{!v.required}" onchange="{!c.onOptionChange}">
+        <option value="">{!$Label.c.ensxtx_Common_Option_SelectOne}</option>
+        <aura:iteration items="{!v.displayOptionValues}" var="option">
+            <option value="{!option.value}" selected="{!v.value == option.value}">
+                {!option.description}
+            </option>
+        </aura:iteration>
+    </lightning:select>
+</aura:component>

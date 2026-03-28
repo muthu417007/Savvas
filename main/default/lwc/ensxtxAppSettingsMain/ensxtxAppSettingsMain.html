@@ -1,0 +1,32 @@
+<template>
+    <div class="slds-text-heading_medium slds-m-bottom_medium">{appSettings.id}</div>
+    <div class="slds-grid slds-gutters">
+        <div class={cssClass}>
+            <div class="slds-grid slds-wrap slds-gutters">
+                <template for:each={appSettings.generalSettings} for:item="setting">
+                    <div key={setting.name} class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                        <c-ensxtx-app-settings-input setting={setting}></c-ensxtx-app-settings-input>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <template if:true={appSettings.hasFieldSettings}>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                <div class="slds-text-heading_small">Field Settings</div>
+                <lightning-tabset>
+                    <template for:each={appSettings.fieldSettings} for:item="fieldSetting">
+                        <lightning-tab key={fieldSetting.name} label={fieldSetting.name}>
+                            <div class="slds-grid slds-wrap slds-gutters">
+                                <template for:each={fieldSetting.objectSettings} for:item="setting">
+                                    <div key={setting.name} class="slds-col slds-size_1-of-1 slds-m-top_x-small">
+                                        <c-ensxtx-app-settings-input setting={setting}></c-ensxtx-app-settings-input>
+                                    </div>
+                                </template>
+                            </div>
+                        </lightning-tab>
+                    </template>
+                </lightning-tabset>
+            </div>
+        </template>
+    </div>
+</template>

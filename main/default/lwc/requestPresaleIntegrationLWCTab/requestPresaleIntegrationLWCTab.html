@@ -1,0 +1,15 @@
+<template>
+    <template if:true={isOpen}>
+        <section class="slds-modal slds-fade-in-open slds-modal_large slds-scrollable srf-modal">
+            <div class="slds-modal__container ">
+            <lightning-button-icon icon-position="right" icon-name="utility:close"  alternative-text="Close" title="Close" onclick={handleClose} variant="border-filled"></lightning-button-icon>
+
+    <lightning-flow
+            flow-api-name={flowApiName}
+            flow-input-variables={flowInputVariables}
+            onstatuschange={handleFlowStatusChange}
+        ></lightning-flow></div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

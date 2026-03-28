@@ -1,0 +1,59 @@
+<apex:page id="communitiesSelfRegPage" showHeader="false" controller="CommunitiesSelfRegController" title="{!$Label.site.user_registration}" standardStylesheets="false">
+   <apex:composition template="{!$Site.Template}">
+   <!-- <apex:composition template="CommunitiesTemplate">-->
+        <apex:define name="mainbody">  
+            <style type="text/css">
+                .ptBreadcrumb {
+                    display: none;
+                }
+                td {height:30px;padding:10px;}
+            </style>
+<h3>Community Connection Registration Information</h3>
+<p>
+Welcome to Community Connection Registration page. You can register for this website if you have received a "Case Open or Resolved" email from Pearson Customer Support. If you have <strong>already registered</strong>, you do not need to register again. If you need <strong>help with any of our products</strong>, please use the <strong>Contact Us</strong> links at the bottom of this page.
+</p>
+<ul>
+<li>All fields are required (*)</li>
+<li>Enter your name as it is within the email.</li>
+<li>Enter the email address in your case email.</li>
+<li>Create a new password in the Password/Confirm Password fields. Passwords must consist of letters and numbers.</li>
+<li>Enter the Case number found in your email in the Case Number field below.</li>
+</ul>
+<p>
+Pearson Employees: If you submitted a case on behalf of your customer, and your email address is attached to the case email, you must enter through your Salesforce account. If you do not have a Salesforce account, follow <a href="https://pearsonnacommunity.force.com/coco/articles/Informational/Communities-Login-for-Pearson-Employees/" target="_blank">these directions</a>.   
+</p>
+<hr/>   
+<apex:form id="theForm" forceSSL="true">
+                    <apex:pageMessages id="error" escape="false"/>
+                    <apex:panelGrid columns="3" style="margin-top:1em;">
+                      <label for="firstName">First Name<sup>*</sup></label>
+                      <apex:inputText required="true" id="firstName" value="{!firstName}" label="First Name"/>
+                      <apex:outputText >&nbsp; </apex:outputText>
+                      <label for="lastName">Last Name<sup>*</sup></label>
+                    <apex:inputText required="true" id="lastName" value="{!lastName}" label="Last Name"/>
+                      <apex:outputText >&nbsp;</apex:outputText>
+                      <label for="email">{!$Label.site.email}<sup>*</sup></label>
+                      <apex:inputText required="true" id="email" value="{!email}" label="{!$Label.site.email}"/>
+                           <apex:outputText >&nbsp;</apex:outputText>
+                      <label for="password">{!$Label.site.password}<sup>*</sup></label>
+                      <apex:inputSecret required="true" id="password" value="{!password}" label="Password"/>
+                          <apex:outputText ><small>Must be a mix of letters and numbers.</small></apex:outputText>
+                      <label for="confirmPassword">{!$Label.site.confirm_password}<sup>*</sup></label>
+                       <apex:inputSecret required="true" id="confirmPassword" value="{!confirmPassword}" label="Password Confirmation"/>
+                       <apex:outputText >&nbsp;</apex:outputText>
+                      <label for="casenumber">Case Number<sup>*</sup></label>
+                       <apex:inputText required="true" id="casenumber" value="{!casenumber}" label="Case Number"/>
+                       <apex:outputText >&nbsp;</apex:outputText>
+                      <apex:outputText value=""/>
+                      <apex:commandButton action="{!registerUser}" value="{!$Label.site.submit}" id="submit"/>
+                    </apex:panelGrid> 
+                  <br/>
+        </apex:form>
+<p>
+If you need assistance completing registration for Community Connection, please use contact <a href="https://pearsonnacommunity.force.com/coco/s/Community-Connection-Support">Community Connection Support</a>. If you need help with any of our products, please use the Contact Us links at the bottom of this page.
+</p>        
+        
+    </apex:define>
+    </apex:composition>
+
+</apex:page>

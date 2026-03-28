@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Message Channel to pass data</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>This is the field to pass data</description>
+        <fieldName>lmsData</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>This is the field to pass order status data</description>
+        <fieldName>orderStatusData</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>This is the field to pass view held carts data</description>
+        <fieldName>viewHeldCarts</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>This is the field to pass view held carts data</description>
+        <fieldName>reviewHeldCarts</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>This is the field to pass cart count data</description>
+        <fieldName>cartCount</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>This is the field to pass  to view Details of the report</description>
+        <fieldName>reportData</fieldName>
+    </lightningMessageFields>
+    <masterLabel>SampleMessageChannel</masterLabel>
+</LightningMessageChannel>

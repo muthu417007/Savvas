@@ -1,0 +1,186 @@
+<!--
+  @description       : Lightning Web Component for product title page and cart management
+  @author            : Cognizant
+  @group             : 
+  @last modified on  : 10-24-2024
+  @last modified by  : 
+-->
+<template>
+	<template if:true={showProductSearchTitlePage}>
+		<div class="slds-grid slds-wrap slds-grid_vertical slds-p-horizontal_x-large slds-p-vertical_medium related-pdt-BG slds-is-relative">
+			<template if:true={displaypage}>
+				<div class="slds-col">
+					<nav role="navigation" aria-label="Breadcrumbs">
+						<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+							<template if:false={isGuest}>
+								<li class="slds-breadcrumb__item">
+									<a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+								</li>
+								<li class="slds-breadcrumb__item">
+									<a href="#" class="slds-m-horizontal_small breadcrumb-label">Place Order</a>
+								</li>
+								<li class="slds-breadcrumb__item">
+									<a href="#" class="slds-m-horizontal_small breadcrumb-label">Product Search</a>
+								</li>
+							</template>
+							<li class="slds-breadcrumb__item">
+								<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Product Title</a>
+							</li>
+						</ol>
+					</nav>
+				</div>
+				<div class="slds-col slds-size_3-of-3 title-page-content">
+					<div class="slds-text-align_right slds-m-bottom_large shopping-buttons">
+						<button class="slds-button slds-is-relative add-title-to-cart" aria-disabled={disableAddToCart}
+							onclick={addTitleToCart} data-row-id={currentSelectedProductRecord.productId}
+							data-attribute-price={formattedPrice}>
+							Add to Cart
+							<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip" id="1">
+								<div class="slds-popover__body">Please set quantity first</div>
+							</div>
+						</button>
+						<button class="slds-button clear-cart" onclick={clearCartHandleClick} aria-disabled={clearCartBtnDisabled}>{clearCartButtonLabel}</button>
+						<button class="slds-button review-cart" onclick={reviewCartHandleClick} aria-disabled={reviewCartDisabled}>
+							<img class="slds-m-right_xx-small cart-blue" src={labels.scc_checkout_cart} alt="cart icon" />
+							<img class="slds-m-right_xx-small cart-white" src={labels.scc_checkout_cart_white} alt="cart icon" />
+							{reviewCartButtonLabel}
+						</button>
+						<button class="slds-button slds-button_brand back-button" onclick={returnProductSearchOnclick}>
+							Return to Search Results
+						</button>
+					</div>
+					<h2>{currentSelectedProductRecord.Title_Description}</h2>
+					<div class="slds-p-vertical_large slds-m-bottom_medium product-desc">
+						<img class="slds-m-right_medium" src={coverImage} alt="null" />
+						<div class="product-details">
+							<div class="slds-grid slds-wrap slds-gutters">
+								<div class="slds-col slds-size_5-of-12">
+									<div class="slds-grid slds-wrap slds-gutters">
+										<div class="slds-col slds-size_3-of-12 item-label">ISBN</div>
+										<div class="slds-col slds-size_9-of-12 item-value">{currentSelectedProductRecord.ISBN}</div>
+										<div class="slds-col slds-size_3-of-12 item-label">Type</div>
+										<div class="slds-col slds-size_9-of-12 item-value">{currentSelectedProductRecord.Type}</div>
+										<div class="slds-col slds-size_3-of-12 item-label">Status</div>
+										<div class="slds-col slds-size_9-of-12 item-value">{currentSelectedProductRecord.Status}</div>
+										<div class="slds-col slds-size_3-of-12 item-label">Restriction</div>
+										<div class="slds-col slds-size_9-of-12 item-value">{restrictionValue}</div>
+										<div class="slds-col slds-size_3-of-12 item-label">Copyright</div>
+										<div class="slds-col slds-size_9-of-12 item-value">{currentSelectedProductRecord.Copyright}</div>
+										<div class="slds-col slds-size_3-of-12 item-label">Grade</div>
+										<div class="slds-col slds-size_9-of-12 item-value">{currentSelectedProductRecord.Grade_Level}</div>
+									</div>
+								</div>
+								<div class="slds-col slds-size_7-of-12">
+									<div class="slds-grid slds-wrap slds-gutters">
+									<template if:true={userIsInternational}>
+											<div class="slds-col slds-size_4-of-12 item-label">List Price</div>
+											<div class="slds-col slds-size_8-of-12 item-value">${listPrice}</div>
+											<div class="slds-col slds-size_4-of-12 item-label">Discount</div>
+											<div class="slds-col slds-size_8-of-12 item-value">
+												<template if:false={isPriceLoading}>
+													{discount}%
+												</template>
+											</div>
+											<div class="slds-col slds-size_4-of-12 item-label">Net Price</div>
+											<div class="slds-col slds-size_8-of-12 item-value">
+												<template if:true={isPriceLoading}>
+													<div class="loader"></div>
+												</template>
+												<template if:false={isPriceLoading}>
+													${formattedPrice}
+												</template>
+											</div>
+										</template>
+										<template if:false={userIsInternational}>
+											<!-- //<template if:true={externalUser}> -->
+												<div class="slds-col slds-size_4-of-12 item-label">Price</div>
+												<div class="slds-col slds-size_8-of-12 item-value">
+													<template if:true={isPriceLoading}>
+														<div class="loader"></div>
+													</template>
+													<template if:false={isPriceLoading}>
+														${formattedPrice}
+													</template>
+												</div>
+											<div class="slds-col slds-size_4-of-12 item-label">Discount</div>
+											<div class="slds-col slds-size_8-of-12 item-value">{DiscountType}</div>
+										<!-- </template> -->
+										</template>
+										<div class="slds-col slds-size_4-of-12 item-label">Carton Quantity</div>
+										<div class="slds-col slds-size_8-of-12 item-value">{batchQuantity}</div>
+										<div class="slds-col slds-size_4-of-12 item-label">Stock Availability</div>
+										<div class="slds-col slds-size_8-of-12 item-value">{stockAvailability}</div>
+										<div class="slds-col slds-size_4-of-12 item-label">Qty</div>
+										<div class="slds-col slds-size_8-of-12">
+											<input type="number" placeholder="0" aria-label="QTY" step="1" max="" min="0" name="quantity" value={quantity} onchange={changeQuantity} onkeyup={changeQuantity} onkeypress={handlekeyPress} disabled={isQuantityDisabled} class="slds-input quantity-field">
+											<template if:true={isQuantityDisabled}>
+											<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small" style="margin-top: auto; margin-bottom: auto; bottom: 5px;">
+										
+													<span class="slds-icon_container slds-icon-utility-lock lock-icon">
+														<svg width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M1.37647 5.44444V4.04444C1.37647 1.81082 3.15686 0 5.35294 0C7.54902 0 9.32941 1.81082 9.32941 4.04444V5.44444H9.63529C10.2267 5.44444 10.7059 5.93177 10.7059 6.53333V12.9111C10.7059 13.5127 10.2267 14 9.63529 14H1.07059C0.479134 14 0 13.5127 0 12.9111V6.53333C0 5.93177 0.479134 5.44444 1.07059 5.44444H1.37647ZM3.21177 4.04444C3.21177 2.84192 4.17063 1.86667 5.35294 1.86667C6.53525 1.86667 7.49412 2.84192 7.49412 4.04444V5.44444H3.21177V4.04444ZM5.88824 9.5242C6.16425 9.34495 6.34706 9.03019 6.34706 8.67228C6.34706 8.11387 5.90197 7.66117 5.35294 7.66117C4.80391 7.66117 4.35882 8.11387 4.35882 8.67228C4.35882 9.03019 4.54163 9.34494 4.81765 9.5242V11.2389C4.81765 11.5397 5.05721 11.7833 5.35294 11.7833C5.64867 11.7833 5.88824 11.5397 5.88824 11.2389V9.5242Z" fill="#0C1E3D"/>
+														</svg>
+														
+													</span>							
+													<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left filter-popup" role="tooltip" id="10">
+														<div class="slds-popover__body schldistrict" style=" white-space: normal !important;">{restrictionMessage}</div>
+													</div>
+												</div>
+											</template>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</template>
+			<!-- Load Child Component -->
+			<template if:true={loadchild}>
+				<div class="title-page-content">
+					<c-scc_place-order-related-products-l-w-c message={Recordidval} onclosetitlepage={closePage}
+						onopentitlepage={openpage} onselectedproduct={onselected} userselection={userInputs}
+						onhideparenttab={handlehideparenttab}>
+					</c-scc_place-order-related-products-l-w-c>
+				</div>
+			</template>
+		</div>
+	</template>
+	<template if:true={clearCartItems}>
+		<c-scc_delete-items-from-cart onrefreshevent={handlerefreshevent}> </c-scc_delete-items-from-cart>
+	</template>
+	<template if:true={callAddItemToCart}>
+		<c-scc_add-items-to-cart message={itemsList} onreveiewcartcount={handleReviewCartCount} onresetaddtocart={handleresetaddtocart}
+			userselection={userInputs} check-active-cart-id={activeCartId}> </c-scc_add-items-to-cart>
+	</template>
+	<template if:true={reviewCartPage}>
+		<c-scc_review-cart-page userselection={userInputs} > </c-scc_review-cart-page>
+	</template>
+	<!-- The Confirmation Modal for Out-of-State Products -->
+    <template if:true={showStateWarningModal}>
+    <!-- Modal/Popup Box LWC starts here -->
+    <div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog">
+        <div class="slds-modal__container">
+            <!-- HEADER Section -->
+            <div class="slds-modal__header">
+                <button class="slds-modal__close closebtnOnFocus" onclick={handleCancelOutOfState} aria-label="close">x</button>
+                <h2>Confirm Your Selection</h2>
+            </div>
+            
+            <!-- Body Section -->
+            <div class="slds-modal__content slds-p-horizontal_xx-large slds-p-top_large" role="alert">
+                <div class="slds-form_horizontal">
+                    <p>You have selected a state specific product that does not match your billing or shipping addresses.
+                	Are you sure that you want to proceed?</p>
+                </div>
+            </div>            
+            <!-- Footer Section -->
+            <div class="slds-modal__footer">
+                <button class="slds-button clear-cart-modal-button" onclick={handleConfirmOutOfState}>I’m Sure</button>
+                <button class="slds-button cancel-modal-button" onclick={handleCancelOutOfState}>No, look at my selection again</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+</template>

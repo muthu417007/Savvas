@@ -1,0 +1,26 @@
+<apex:component layout="none">
+    <apex:attribute name="attachment1_name" type="String" description="Attachment 1 Name" />
+    <apex:attribute name="attachment1_link" type="String" description="Attachment 1 Link" />
+    <apex:attribute name="attachment2_name" type="String" description="Attachment 2 Name" />
+    <apex:attribute name="attachment2_link" type="String" description="Attachment 2 Link" />    
+    <apex:attribute name="attachment3_name" type="String" description="Attachment 3 Name" />
+    <apex:attribute name="attachment3_link" type="String" description="Attachment 3 Link" />    
+    
+
+    <div class="attachments">
+        <h4><apex:image url="{!URLFOR($Resource.CocoResponsive, 'images/paper_clip.png')}" />Attachments:</h4>
+        
+            
+        
+        <apex:outputText rendered="{!attachment1_name =='' && attachment2_name=='' && attachment3_name==''}">
+        <p>
+            {!$Label.ICOM_KM_ARTICLE_NO_ATTACHMENTS}
+            </p>
+        </apex:outputText>
+
+        <apex:outputLink value="{!attachment1_link}" rendered="{!attachment1_name!=''}">{!attachment1_name}</apex:outputLink>
+        <apex:outputLink value="{!attachment2_link}" rendered="{!attachment2_name!=''}">{!attachment2_name}</apex:outputLink>
+        <apex:outputLink value="{!attachment3_link}" rendered="{!attachment3_name!=''}">{!attachment3_name}</apex:outputLink>
+    </div>
+
+</apex:component>

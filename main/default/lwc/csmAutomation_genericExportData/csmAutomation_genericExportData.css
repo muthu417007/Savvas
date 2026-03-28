@@ -1,0 +1,6 @@
+.export-container{
+	display: flex;
+	justify-content: right;
+	align-items: right;
+	padding: 10px;
+}

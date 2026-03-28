@@ -1,0 +1,57 @@
+<apex:component layout="block">
+    <!-- apex:attribute name="data" type="KnowledgeArticleVersion[]" required="true" description="Page URL" /  -->
+    <apex:attribute name="external" type="boolean" required="false" description="Determines if component is rendered on Communities page" />
+    <apex:attribute name="title" type="string" required="true"  description="Keywords for searching"/>
+    <apex:attribute name="summary" type="string" required="true"  description="Keywords for searching"/>
+    
+    <!--apex:outputText value="None" rendered="{!IF(data.empty,true,false)}" / 
+    
+    <ul style="list-style-type: none;">
+        <apex:outputText rendered="{!!external}"><b>System Recommended Articles</b></apex:outputText>
+        <apex:outputText rendered="{!external}"><h4>System Recommended Articles</h4></apex:outputText>
+ 
+        <apex:repeat value="{!data}" var="a">
+          <apex:outputPanel rendered = "{!!external}">
+            <li>
+                <a href='/{!a.KnowledgeArticleId}'>{!a.Title}</a>
+            </li>
+         </apex:outputPanel>
+         
+         
+          <apex:outputPanel rendered ="{!external}">  
+            <li>
+              <a href="{!$Label.CommunityBaseUrl}/coco/articles/{!SUBSTITUTE(a.articleType, '__kav', '')}/{!a.urlName}"> {!a.Title} </a> 
+            </li>
+         </apex:outputPanel>
+        </apex:repeat> 
+      </ul>       
+-->
+        
+<apex:outputPanel layout="block">
+  <ul style="list-style-type: none;">
+  
+        <!--<apex:outputText rendered="{!!external}"><b>Recommended Articles</b></apex:outputText>-->
+        <apex:outputText rendered="{!external}"><h2>Recommended Articles</h2></apex:outputText>
+        
+        <knowledge:articleList articleVar="article"
+            sortBy="mostViewed"
+            pageSize="4"
+            keyWord="{!title+' '+summary}"
+        >
+          <apex:outputPanel rendered="{!!external && article.Title != title}">       
+            <li><a href="{!URLFOR($Action.KnowledgeArticle.View, article.id)}">{!article.title}</a></li>
+          </apex:outputPanel>
+          
+          <apex:outputPanel rendered="{!external && article.Title != title}">       
+            <li> <a href="{!$Label.CommunityBaseUrl}/coco/articles/{!article.articleTypeLabel}/{!article.urlName}"> {!article.Title} </a> </li>
+            <!--!article.articleTypeLabel-->
+          </apex:outputPanel>
+          
+        </knowledge:articleList>
+    </ul>
+</apex:outputPanel>      
+        
+        
+
+    
+</apex:component>

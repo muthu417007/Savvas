@@ -1,0 +1,26 @@
+<apex:component allowDML="true" layout="none">
+<apex:attribute name="pkbCon" type="pkb_Controller" required="true" description="handle to the pkb controller" />
+<apex:attribute name="pkbIcomCon" type="pkb_ICOM_Controller" required="true" description="handle to the pkb ICOM controller" />
+
+<apex:variable var="columnCount" value="{!1}" />
+<apex:variable var="columnCount" value="{!columnCount+1}" rendered="{!pkbCon.displayCategory1}" />
+<apex:variable var="columnCount" value="{!columnCount+1}" rendered="{!pkbCon.displayCategory2}" />
+<apex:variable var="columnCount" value="{!columnCount+1}" rendered="{!pkbCon.displayCategory3}" />
+
+     <apex:outputPanel layout="block" styleClass="searchDrill col-xs-12 col-sm-{!IF(columnCount>=4,12/columnCount,4)} col-md-3">
+	<span><apex:outputText value="Article Type" /></span><br/>
+    <div class="btn-group new-select" id="ArticleTypeSelect2">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <div class="text"><apex:outputText escape="false" value="{!pkbIcomCon.articleType}"/></div><span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#" value="" onclick="changeArticleType2(this);return false;">--{!$Label.PKB2_No_Filter}--</a></li>
+        <knowledge:articleTypeList articleTypeVar="articleType">
+            <li><a href="#" value="{!articleType.name}" onclick="changeArticleType2(this);return false;"><apex:outputText escape="false" value="{!articleType.label}"/></a></li>
+        </knowledge:articleTypeList>        
+      </ul>
+    </div>
+    </apex:outputPanel>
+<script type="text/javascript">setArticleType2();</script>
+
+</apex:component>

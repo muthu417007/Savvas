@@ -1,0 +1,70 @@
+/* Styling for input and textarea */
+input,
+textarea {
+  border: 1px solid #eeeeee; /* Border style */
+  box-sizing: border-box; /* Box model */
+  margin: 0; /* Margin */
+  outline: none; /* Remove default outline */
+  padding: 10px; /* Padding */
+}
+
+/* Styling for input type button */
+input[type="button"] {
+  -webkit-appearance: button; /* Style as button */
+  cursor: pointer; /* Cursor style */
+}
+
+/* Remove default spinner styling for input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Remove default spinner appearance */
+}
+
+/* Styling for input group */
+.input-group {
+  clear: both; /* Clear float */
+  margin: 0px 0; /* Margin */
+  position: relative; /* Positioning */
+}
+
+/* Styling for input group button */
+.input-group input[type='button'] {
+  background-color: #eeeeee; /* Background color */
+  min-width: 38px; /* Minimum width */
+  width: auto; /* Auto width */
+  transition: all 300ms ease; /* Transition effect */
+}
+
+/* Styling for minus and plus buttons */
+.input-group .button-minus,
+.input-group .button-plus {
+  font-weight: bold; /* Font weight */
+  height: 38px; /* Height */
+  padding: 0; /* Padding */
+  width: 30px; /* Width */
+  position: relative; /* Positioning */
+}
+
+/* Styling for quantity field */
+.input-group .quantity-field {
+  position: relative; /* Positioning */
+  height: 38px; /* Height */
+  left: -6px; /* Left position */
+  text-align: center; /* Text alignment */
+  width: 62px; /* Width */
+  display: inline-block; /* Display */
+  font-size: 13px; /* Font size */
+  margin: 0 0 5px; /* Margin */
+  resize: vertical; /* Vertical resizing */
+}
+
+/* Adjustments for plus button position */
+.button-plus {
+  left: -13px; /* Adjusted left position */
+}
+
+/* Styling for input type number */
+input[type="number"] {
+  -moz-appearance: textfield;
+  -webkit-appearance: none; 
+}

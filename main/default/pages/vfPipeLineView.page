@@ -1,0 +1,19 @@
+<apex:page sidebar="false"  showHeader="false"  >
+ <div style="height:1200px;width:1500px;">
+ <wave:dashboard dashboardId="0FK0W000001Q7vyWAC"
+        height="1200px"
+        width="100%"
+          showTitle="false"
+          showHeader="false"
+          showSharing="false"
+          openLinksInNewWindow="false"
+          hideOnError="true">
+     
+ 
+</wave:dashboard>
+</div>
+ 
+      
+  
+   
+</apex:page>

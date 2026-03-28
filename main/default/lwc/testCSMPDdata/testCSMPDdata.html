@@ -1,0 +1,111 @@
+<template>
+	<lightning-card>
+		<div class="slds-grid slds-gutters slds-wrap">
+			<div class="slds-col slds-size_1-of-6">
+				<span>
+					<lightning-combobox name="progress" value={selectedField} placeholder="Select Progress"
+						options={fieldOptions} onchange={handleChange}>
+					</lightning-combobox>
+					</span>
+			</div>
+			<!--<template if:true={isPicklistField}>
+			<c-csm-automation_multi-select-pick-list 
+                if:true={picklistOptions} 
+                options={picklistOptions}
+                onvaluechange={handlePicklistChange} 
+                label="Industry">
+            </c-csm-automation_multi-select-pick-list >
+					<div class="slds-col slds-size_1-of-3 slds-align-bottom">
+					<lightning-button
+						label="Search"
+						onclick={handleSearch}
+						class="search-button-container">
+						</lightning-button>
+					</div>	
+			</template>-->
+			<template if:true={isPicklistField}>
+				<div class="slds-col slds-size_1-of-3">
+				<lightning-dual-listbox 
+					name="languages"
+					field-level-help="This is a dual listbox"
+					options={picklistOptions}
+					onchange={handlePicklistChange}
+					value={selectedPicklistValues}>
+				</lightning-dual-listbox >
+				</div>
+				<div class="slds-col slds-size_1-of-2 slds-align-center">
+						<lightning-button
+						label="Search"
+						onclick={handleSearch}
+						class="search-button-container">
+						</lightning-button>
+			</div>
+			</template>
+			<template if:false={hideSearchInput}>
+				<div class="slds-col slds-size_1-of-6">
+					<span>
+				<lightning-input type="search" value={searchTerm}
+				onchange={handleSearchChange}>
+				</lightning-input>
+					</span>
+
+				</div>
+			</template>
+			<template if:true={isDateField}>
+				
+				<div class="slds-col slds-size_1-of-8">
+					<span>
+						<lightning-input
+						type="date"
+						value={searchValue}
+						onchange={handleDateChange}>
+						</lightning-input>
+						
+					</span>
+				
+				</div>
+					<div class="slds-col slds-size_1-of-3 slds-align-bottom">
+					<lightning-button
+						label="Search"
+						onclick={handleSearch}
+						class="search-button-container">
+						</lightning-button>
+					</div>
+				
+			</template>
+		
+		</div>
+		<div class="slds-m-top_medium">
+			<lightning-datatable key-field="id" data={data} columns={columns} onsort={handleSort} sorted-by={sortBy}
+				sorted-direction={sortDirection} hide-checkbox-column>
+			</lightning-datatable>
+		</div>
+		<!---->
+		<div class="slds-m-around_medium">
+			<p class="slds-m-vertical_medium content">
+				Displaying {startingRecord} - {endingRecord} of {totalRecordCount} records.
+				Page {page} of {totalPage}. </p>
+			<lightning-layout>
+				<lightning-layout-item>
+					<lightning-button label="First Page" icon-name="utility:chevronleft" onclick={FirstPageHandler}
+						disabled={disablePrevious}></lightning-button>
+				</lightning-layout-item>
+				<lightning-layout-item>
+					<lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}
+						disabled={disablePrevious}></lightning-button>
+				</lightning-layout-item>
+				<lightning-layout-item flexibility="grow"></lightning-layout-item>
+				<lightning-layout-item>
+					<lightning-button label="Next" icon-name="utility:chevronright" icon-position="right"
+						onclick={nextHandler} disabled={disableNext}></lightning-button>
+				</lightning-layout-item>
+				<lightning-layout-item>
+					<lightning-button label="Last Page" icon-name="utility:chevronright" icon-position="right"
+						onclick={LastPageHandler} disabled={disableNext}>
+					</lightning-button>
+				</lightning-layout-item>
+			</lightning-layout>
+		</div>
+		<!---->
+	</lightning-card>
+</template>

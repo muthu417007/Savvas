@@ -1,0 +1,68 @@
+<template>
+    <lightning-card variant="Narrow" title={title} icon-name={icon}>
+        <lightning-spinner if:true={loading} alternative-text="Loading"></lightning-spinner>
+
+        <div if:false={loading}>
+            <div class="slds-p-horizontal_small">
+                <div if:true={displayDetail}>
+                    <div class="slds-grid">
+                        <div
+                            class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                            <c-ensxtx-sales-doc-detail-description-list details={detailsColumnOne}>
+                            </c-ensxtx-sales-doc-detail-description-list>
+                        </div>
+                        <div
+                            class="slds-col slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                            <c-ensxtx-sales-doc-detail-description-list details={detailsColumnTwo}>
+                            </c-ensxtx-sales-doc-detail-description-list>
+                        </div>
+                    </div>
+                </div>
+
+                <div if:true={displayList} class="slds-scrollable">
+                    <table
+                        class="slds-table slds-table_bordered slds-table_cell-buffer slds-max-medium-table_stacked-horizontal"
+                        aria-labelledby="element-with-table-label other-element-with-table-label">
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <template for:each={columns} for:item="column">
+                                    <th key={column.key} scope="col">
+                                        <div class="slds-truncate" title={column.Name}>{column.Name}</div>
+                                    </th>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={rows} for:item="row">
+                                <tr key={row.key}>
+                                    <template for:each={row.data} for:item="col">
+                                        <td key={col.key}>
+                                            <div if:true={col.isItemDetailLink} class="slds-truncate">
+                                                <button class="slds-button" style="white-space: nowrap;"
+                                                    onclick={handleClick} data-item-id={col.Value}>
+                                                    {detailLinkText}
+                                                </button>
+                                            </div>
+                                            <div if:true={col.isInvoiceItemDetailLink} class="slds-truncate">
+                                                <button class="slds-button" style="white-space: nowrap;"
+                                                    onclick={handleClick} data-item-id={col.Value}>
+                                                    Invoice Item Details
+                                                </button>
+                                            </div>
+                                            <div if:true={col.isString} class="slds-truncate" title={col.Value}>
+                                                {col.Value}</div>
+                                            <div if:true={col.isDate} class="slds-truncate" title={col.Value}>
+                                                <lightning-formatted-date-time value={col.Value} time-zone="UTC">
+                                                </lightning-formatted-date-time>
+                                            </div>
+                                        </td>
+                                    </template>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

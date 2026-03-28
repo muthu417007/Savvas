@@ -1,0 +1,4 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler action="{!c.doInit}" value="{!this}" name="init"/>
+    <lightning:flow aura:id="nonOppFlow" onstatuschange="{!c.handleStatusChange}"/>
+</aura:component>

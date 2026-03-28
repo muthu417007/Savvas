@@ -1,0 +1,12 @@
+<apex:page cache="false"
+  sidebar="false"
+  standardStylesheets="false"
+  showHeader="false"
+  controller="pkb_Controller"
+  language="{!$CurrentPage.parameters.l}"
+>
+            <apex:composition template="pkb_ICOM_WebTemplate">
+            <apex:define name="body"></apex:define>
+        </apex:composition>
+
+</apex:page>

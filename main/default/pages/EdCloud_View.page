@@ -1,0 +1,28 @@
+<apex:page standardController="Account" extensions="EdCloudController" showHeader="false" sidebar="false" lightningStylesheets="true">
+    <apex:slds />
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="2">
+                <apex:outputText value="{!objEdCloud.of_Errors_within_last_export__c}" label="# of Errors within last export"/>
+                <apex:outputText value="{!objEdCloud.of_Warning_within_last_export__c}" label="# of Warning within last export"/>                
+                <apex:outputText value="{!objEdCloud.District_Edcloud_ID__c}" label="District Edcloud ID"/>
+                <apex:outputText value="{!objEdCloud.District_Name_in_Edcloud_Tenant__c}" label="District Name in Edcloud(Tenant)"/>
+                <apex:outputText value="{!objEdCloud.District_Student_Information_System__c}" label="District Student Information System"/>
+                <apex:outputText value="{!objEdCloud.EasyBridge_Integration_Status__c}" label="EasyBridge Integration Status"/>
+                <apex:outputText value="{!objEdCloud.Edcloud_Last_Successful_Import_Date_Time__c}" label="Edcloud-Last Successful Import Date/Time"/>
+                <apex:outputText value="{!objEdCloud.Integration_Types__c}" label="Integration Types"/>
+                <apex:outputText value="{!objEdCloud.Is_Customer_Integration_Live_Is_API_On__c}" label="Is Customer Integration Live(Is API On?)"/>
+                <apex:outputText value="{!objEdCloud.Is_School_in_Deleted_State__c}" label="Is School in Deleted State?"/>
+                <apex:outputText value="{!objEdCloud.Last_Ingestion_Import_Date__c}" label="Last Ingestion Import Date"/>
+                <apex:outputText value="{!objEdCloud.Matched_Easybridge_District_Rumba_ID__c}" label="Matched Easybridge District Rumba ID"/>
+                <apex:outputText value="{!objEdCloud.Matched_Easybridge_School_Rumba_ID__c}" label="Matched Easybridge School Rumba ID"/>
+                <apex:outputText value="{!objEdCloud.Setup_Has_Teacher_Matching_Started__c}" label="Setup - Has Teacher Matching Started?"/>
+                <apex:outputText value="{!objEdCloud.Setup_Is_Rumba_Pi_Domain_Complete__c}" label="Setup - Is Rumba Pi Domain Complete?"/>
+                <apex:outputText value="{!objEdCloud.Setup_Rumba_District_Matched__c}" label="Setup - Rumba District Matched?"/>
+                <apex:outputText value="{!objEdCloud.Setup_Rumba_School_Matched__c}" label="Setup - Rumba School Matched?"/>
+                <apex:outputText value="{!objEdCloud.Setup_Teacher_Matching_Complete__c}" label="Setup - Teacher Matching Complete?"/>
+                <apex:outputText value="{!objEdCloud.SIS_Administrator_Email_Address__c}" label="SIS Administrator Email Address"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

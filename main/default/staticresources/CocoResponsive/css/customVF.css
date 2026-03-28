@@ -1,0 +1,448 @@
+/**************************************************
+* Top links on detail page - mouse over popup box *
+**************************************************/
+body.rlHoverFrame {
+    background: #ffffff;
+}
+.RLPanelShadow {
+    margin: -3px 0 0 0;
+    z-index: 25;
+    z-index: 18;
+    display: none;
+    position: absolute;
+    height: auto;
+    padding: 0;
+    border: 1px solid #ccc;
+}
+.rls_top, .rls_l, .rls_r {
+    display: none;
+}
+.RLPanel {
+    background: #FFFFFF;
+    border: 0;
+    padding: 0 6px;
+    top: auto;
+    left: auto;
+    z-index: 21;
+    position: relative;
+    height: auto;
+    margin: 0;
+}
+.RLPanel iframe {
+    height: auto;
+    border-width: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.listHoverLinks {
+    margin: 5px 6px 15px;
+}
+
+.listHoverLinks {
+    margin-top: -.9em;
+    margin-right: 0;
+    margin-bottom: 5px;
+    margin-left: 6px;
+    font-size: 90%;
+    text-align: center;
+    display: block;
+    visibility: hidden;
+    line-height: 1.5em;
+}
+
+/*******************************
+* page block and realated list *
+*******************************/
+   
+body .bRelatedList .bPageBlock,
+.detailPage .bRelatedList .bPageBlock,
+.editPage .bRelatedList .bPageBlock,
+body.subjectSelectionPopup div.choicesBox,
+body .bPageBlock .pbBody .pbSubheader,
+.caseTab .secondaryPalette,
+.individualPalette .caseBlock .secondaryPalette {
+    border-top-width: 2px;
+    border-color: #8F8F8F;
+}
+
+body .bRelatedList .pbBody table.list,
+body .apexp .pbBody table.list {
+    border: 1px solid #ccc;
+}
+
+body .bPageBlock,
+#bodyCell .bResource .secondaryPalette,
+body .secondaryPalette.bPageBlock,
+body .individualPalette .secondaryPalette.bPageBlock,
+body .bodyDiv .genericTable,
+body .genericPageBlockTable,
+body .bodyDiv .bSubBlock,
+body .bComponentBlock .bPageBlock,
+body .bMyDashboard .bPageBlock,
+body.rlHoverFrame .bPageBlock,
+body.subjectSelectionPopup div.choicesBox,
+body.lookupTab .secondaryPalette.bPageBlock,
+body.popupTab .secondaryPalette.bPageBlock,
+body.UserTagStatsPage .secondaryPalette.bPageBlock {
+    border-bottom: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-top: 1px solid #8F8F8F;
+    margin-bottom: 10px;
+}
+
+body .bRelatedList .bPageBlock .pbTitle {
+    padding: 0 5px
+}
+
+body .bRelatedList .bPageBlock .pbBody {
+    margin: 6px
+}
+
+.bPageBlock .pbTitle {
+    vertical-align: middle;
+    font-size: 91%;
+    width: 30%;
+    margin: 0;
+    white-space: nowrap;    
+}
+
+body .bRelatedList .pbTitle .relatedListIcon {
+    margin-top: -4px;
+    top: 3px;
+}
+body .bRelatedList .pbTitle .relatedListIcon {
+    margin-top: -1px;
+    margin-left: -1px;
+    float: left;
+}
+.relatedListIcon, .mruIcon {
+    background-repeat: no-repeat;
+}
+.relatedListIcon {
+    display: none;
+    float: left;
+    margin-top: -4px;
+    margin-left: 5px;
+}
+
+.bPageBlock .pbTitle img.minWidth {
+    height: 1px;
+    width: 190px;
+    margin: 0 0 -1px 0;
+    padding: 0;
+    border: 0;
+    visibility: hidden;
+    display: block;
+}
+
+.bPageBlock .list {
+    width: 100%
+}
+
+.list td,
+.list th,
+body.oldForecast .list .last td,
+body.oldForecast .list .last th {
+    padding: 4px 2px 4px 5px;
+    color: #333;
+    border-bottom: 1px solid #e3deb8;
+}
+
+body .pbBody table.list tr th,
+body .pbBody table.list tr td {
+    border: 1px solid #ccc;
+    color: #000;
+}
+
+body .pbBody table.list tr.dataRow th,
+body .pbBody table.list tr.dataRow td {
+    border-width: 0 0 1px 0;
+    vertical-align: middle;
+}
+
+.list tr.even th,
+.list tr.odd th,
+.list tr.even td,
+.list tr.odd td {
+    vertical-align: top;
+}
+
+.list tr.even th,
+.list tr.odd th {
+    font-weight: normal;
+    white-space: normal;
+}
+
+body .pbBody table.list tr.headerRow td,
+body .pbBody table.list tr.headerRow th {
+    background: #006DA4;
+    border-width: 0 0 1px 1px;
+    color: #FFFFFF;
+    font-size: .9em;
+    font-weight: bold;
+    padding: 5px 2px 4px 5px;
+}
+
+body .pbBody table.list,
+body .bRelatedList .bPageBlock .pbBody,
+body .bRelatedList table.list tr.headerRow th.noRowsHeader {
+    background-color: transparent;
+    color: #000;
+}
+
+.fewerMore .backToTop a img {
+    margin-right: 3px;
+}
+
+.fewerMore .backToTop a {
+    font-size: 91%
+}
+
+.backToTop {
+    display: none;
+}
+
+.fewerMore .backToTop {
+    display: inline;
+    float: left;
+    margin-left: 4px;
+}
+
+.fewerMore {
+    text-align: center;
+    font-size: 1em;
+    padding: 3px;
+}
+
+
+
+
+
+/*****************
+* detail section *
+*****************/
+h2 {
+    margin-top: 10px;
+}
+
+body .bDetailBlock.bPageBlock,body .individualPalette .bDetailBlock.bPageBlock {
+    border: 0;
+    background-color: transparent;
+    margin-bottom: 25px
+}
+
+.bEditBlock .pbHeader>table>tbody>tr>td,
+.bPageBlock .pbHeader>table>tbody>tr>td,
+.bLayoutBlock .pbHeader>table>tbody>tr>td,
+.bEditBlock .pbBottomButtons>table>tbody>tr>td,
+.bPageBlock .pbBottomButtons>table>tbody>tr>td,
+.bLayoutBlock .pbBottomButtons>table>tbody>tr>td {
+    padding: 5px 12px;
+}
+
+.bPageBlock .pbError, .editListError {
+    font-weight: bold;
+    color: #c00;
+    text-align: center;
+}
+
+
+.pbSubheader {
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 91%;
+    padding: 2px 2px 2px 5px;
+    margin-top: 15px;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.pbSubheader.first {
+    margin-top: 0;
+}
+
+body .bPageBlock .pbBody .pbSubheader {
+    border-width: 2px 0 0;
+    border-style: solid;
+    color: #27282e;
+    padding: 4px 3px;
+}
+
+body .bPageBlock .pbBody .pbSubheader h3,
+body .bWizardBlock .bPageBlock .pbBody .pbSubheader label {
+    font-size: 1.2em;
+}
+
+.bPageBlock .labelCol {
+    padding-top: 2px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    text-align: right;
+    font-size: 91%;
+    font-weight: bold;
+    color: #333;
+}
+.bPageBlock .detailList {
+    width: 100%;
+}
+
+.bPageBlock .detailList th,
+.bPageBlock .detailList td {
+    vertical-align: top;
+}
+.bPageBlock .detailList tr td,
+.bPageBlock .detailList tr th,
+.hoverDetail .bPageBlock .detailList tr td,
+.hoverDetail .bPageBlock .detailList tr th {
+    border-bottom: 1px solid #cccccc;
+}
+.bPageBlock .detailList .labelCol {
+    width: 18%;
+}
+body .bPageBlock .pbBody .labelCol,
+body .bPageBlock .pbBody .dataCol,
+body .bPageBlock .pbBody .data2Col {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+body .bPageBlock .pbBody .labelCol {
+    color: #4a4a56;
+}
+body .bDetailBlock.bPageBlock .pbBody .labelCol,
+body .bDetailBlock.bPageBlock .pbBody .dataCol,
+body .bDetailBlock.bPageBlock .pbBody .data2Col,
+body .bPageBlock.bEditBlock .pbBody .labelCol,
+body .bPageBlock.bEditBlock .pbBody .dataCol,
+body .bPageBlock.bEditBlock .pbBody .data2Col {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.bPageBlock .dataCol {
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    text-align: left;
+}
+.bPageBlock .detailList .dataCol {
+    width: 32%;
+}
+body .bPageBlock .pbBody .dataCol {
+    border-right-color: transparent;
+}
+body .bDetailBlock.bPageBlock .pbBody .dataCol {
+    border-right-color: transparent;
+}
+body .bDetailBlock.bPageBlock .pbBody .dataCol {
+    border-right-color: #fff;
+}
+
+/* help icon*/
+.helpButton, .helpButtonOn {
+    position: relative;
+}
+
+.helpOrb {
+    background-image: url(/img/help/helpOrbs.gif);
+    background-position: 0 0;
+    width: 20px;
+    height: 15px;
+}
+.detailList .helpOrb {
+    position: absolute;
+    right: -20px;
+}
+.helpButton .helpOrb {
+    background-position: top left;
+}
+
+.helpText {
+    text-decoration: none;
+    position: absolute;
+    display: none;
+    opacity: 0;
+    width: 15em;
+    z-index: 12;
+    background-color: #fefdb9;
+    padding: 2px 5px;
+    border: 1px solid orange;
+    text-align: left;
+    white-space: normal;
+    font-weight: normal;
+    color: #000;
+}
+/**********
+* Sidebar *
+**********/
+.slide-out-div {
+    width: 250px;
+    background: #ffffff;
+    border: 1px solid #29216d;
+    max-height: 400px;
+}
+
+.slide-out-div.open {
+    overflow: hidden;
+}
+
+.slide-out-div a.handle {
+    color: transparent!important;
+    -webkit-background-clip: border-box;
+    -webkit-background-origin: padding-box;
+    -webkit-background-size: auto;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url(../images/spriteArrows.png);
+    background-origin: padding-box;
+    background-size: auto;
+    background-position: 0 30px;
+    border-collapse: separate;
+    color: rgb(51, 52, 53);
+    //cursor: url(/img/cursors/col-expand.cur), pointer;
+    cursor: pointer;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    height: 30px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 30px;
+    z-index: 6;    
+}
+
+.slide-out-div a.handle:hover {
+    background-position: 0 60px;
+}
+
+.slide-out-div.open a.handle {
+    right: 0!important;
+    background-position: 0 90px;
+}
+
+.slide-out-div.open a.handle:hover {
+    background-position: 0 0px;
+}
+
+.slide-out-div h4 {
+    padding-left: 10px;
+}
+.slide-out-div ul {
+    padding: 0;
+    overflow-y: auto;
+}
+
+.slide-out-div ul li {
+    padding: 4px 10px;
+    list-style-type: none;
+}
+
+.slide-out-div ul li:hover{
+    background-color:#eeeeee;
+}
+
