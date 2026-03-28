@@ -1,0 +1,211 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "definitions": {
+        "partnerSearchTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Partner Search Table Fields",
+            "description": "Fields on the partner search component",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsDisplayAndSortableOnly"}
+            }
+        },
+        "customerSearchTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Customer Search Table Fields",
+            "description": "Fields on the customer search component",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            }
+        },
+        "allowAddressOverride": {
+            "type": "array",
+            "title": "Partner Function Allow Address Override",
+            "description": "List of partner functions and allow address override flag",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "PartnerFunction": {
+                        "type": "string",
+                        "title": "Partner Function",
+                        "description": "SAP partner function.",
+                        "enum": [
+                            "SH",
+                            "BP"
+                        ]
+                    },
+                    "allowAddressOverride": {
+                        "type": "boolean",
+                        "title": "Allow Address Override",
+                        "description": "Enable this setting to display a button to override the partner address.",
+                        "default": false
+                    }
+                },
+                "required": [
+                    "PartnerFunction",
+                    "allowAddressOverride"
+                ]
+            }
+        },
+        "searchParamFields": {
+            "type": "array",
+            "title": "Mapping for Search Param Fields",
+            "description": "Mapping for Search Param Fields",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "sapField": {
+                        "type": "string",
+                        "title": "SAP Field",
+                        "description": "SAP Search Param Field.",
+                        "enum": [
+                            "CustomerNumber",
+                            "SalesOrganization",
+                            "DistributionChannel",
+                            "Division"
+                        ]
+                    },
+                    "defaultValue": {
+                        "type": "string",
+                        "title": "Default value",
+                        "description": "Default value to use.",
+                        "examples": ["1000", "10"]
+                    },
+                    "sfObjectType": {
+                        "type": "string",
+                        "title": "Salesforce Object Type",
+                        "description": "Salesforce Object Type to map from.",
+                        "examples": ["Account", "WebCart", "User", "WebStore"]
+                    },
+                    "sfField": {
+                        "type": "string",
+                        "title": "Salesforce Field",
+                        "description": "Salesofrce Field to map from.",
+                        "examples": ["ensxtx_SAP_Sales_Organization__c", "ensxtx_SAP_Distribution_Channel__c"]
+                    }
+                },
+                "required": [
+                    "sapField"
+                ]
+            }
+        },
+        "sortFields": {
+            "type": "array",
+            "title": "Sort Fields",
+            "description": "Default Sort Fields",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "precedence": {
+                        "type": "integer",
+                        "title": "Sort Precedence",
+                        "description": "Sort Precedence"
+                    },
+                    "sortField": {
+                        "type": "string",
+                        "title": "SAP Field",
+                        "description": "SAP Field to Sort On.",
+                        "enum": [
+                            "PARTNER_NUM",
+                            "PARTNER_NAME",
+                            "HOUSE_NUM1",
+                            "STREET",
+                            "CITY1",
+                            "POST_CODE1",
+                            "REGION",
+                            "COUNTRY"
+                        ]
+                    },
+                    "direction": {
+                        "type": "string",
+                        "title": "Direction",
+                        "description": "Sort direction.",
+                        "enum": [
+                            "ASC",
+                            "DESC"
+                        ]
+                    }
+                },
+                "required": [
+                    "precedence",
+                    "sortField",
+                    "direction"
+                ]
+            }
+        },
+        "optionValuesToInclude": {
+            "type": "object",
+            "table": true,
+            "description": "Option values to include for fields. Formatted as the field name and its list of values to filter.",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "title": "Option Value",
+                        "description": "Included option values. Internal value is used if it is present."
+                    }
+                }
+            }
+        },
+        "fieldDefaultSettingsDisplayOnly": {
+            "type": "object",
+            "default": {"display": true},
+            "properties": {
+                "display": {"type": "boolean", "default": true, "title": "Display", "description": "Field display"}
+            },
+            "required": [
+                "display"
+            ]
+        },
+        "fieldDefaultSettingsDisplayAndSortableOnly": {
+            "type": "object",
+            "default": {"display": true, "sortable": true},
+            "properties": {
+                "display": {"type": "boolean", "default": true, "title": "Display", "description": "Field display"},
+                "sortable": {"type": "boolean", "default": true, "title": "Sortable", "description": "Field sortable"}
+            },
+            "required": [
+                "display"
+            ]
+        }
+    },
+    "type": "object",
+    "patternProperties": {
+        "^[A-Za-z_][A-Za-z0-9_]*$": {
+            "type": "object",
+            "description": "Cart Partner App Settings",
+            "properties": {
+                "PartnerSearchTable": {"$ref": "#/definitions/partnerSearchTableFields"},
+                "CustomerSearchTable": {"$ref": "#/definitions/customerSearchTableFields"},
+                "AllowAddressOverride": {"$ref": "#/definitions/allowAddressOverride"},
+                "PageSize": {
+                    "type": "integer",
+                    "title": "Page Size",
+                    "description": "Initial Search Page Size",
+                    "default": 10
+                },
+                "SearchParamFields": {"$ref": "#/definitions/searchParamFields"},
+                "AllowSort": {
+                    "type": "boolean",
+                    "title": "Allow Sort",
+                    "description": "Allow Sort on table",
+                    "default": true
+                },
+                "SortFields": {"$ref": "#/definitions/sortFields"},
+                "optionValuesToInclude": {"$ref": "#/definitions/optionValuesToInclude"}
+            },
+            "required": [
+                "PartnerSearchTable",
+                "CustomerSearchTable",
+                "AllowAddressOverride",
+                "PageSize",
+                "SearchParamFields",
+                "AllowSort",
+                "SortFields",
+                "optionValuesToInclude"
+            ]
+        }
+    }
+}

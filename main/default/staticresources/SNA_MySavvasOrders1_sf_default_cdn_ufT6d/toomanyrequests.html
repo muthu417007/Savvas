@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en_US">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1" />
+        <meta
+            name="lwr-revised"
+            content="236.0" />
+
+        <title></title>
+
+        <style>
+            /* required to give the component width/height and make it visible to test framework */
+            :root {
+                --lwc-borderWidthThin: 1px;
+            }
+            webruntime-app {
+                display: block;
+            }
+        </style>
+        
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">!function(){const e={documentCreateElement:Document.prototype.createElement,elementSetAttribute:Element.prototype.setAttribute,elementAttachShadow:Element.prototype.attachShadow,elementAppendChild:Element.prototype.appendChild,htmlelementAddEventListener:Element.prototype.addEventListener,iframeContentDocumentGet:Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype,"contentDocument").get,iframeContentWindowGet:Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype,"contentWindow").get};Object.freeze(e),Object.defineProperty(window,"originalDomApis",{writable:!1,value:e});const t=window.frames;Object.defineProperty(window,"frames",{get:function(){const e=[];for(let n=0;n<t.length;n++)try{t[n].frameElement.getRootNode().nodeType===Node.DOCUMENT_FRAGMENT_NODE||e.push(t[n])}catch(o){e.push(t[n])}return e.length===t.length?t:e}})}();</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">!function(){"use strict";window.isBrowserSupportedByWebruntime=function(){const n="performance"in window&&"mark"in window.performance,e="customElements"in window;return n&&e}()}();
+</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">globalThis.lwcRuntimeFlags = { ...globalThis.lwcRuntimeFlags, ENABLE_SLOT_FORWARDING_FIX: true };
+globalThis.lwcRuntimeFlags = globalThis.lwcRuntimeFlags || {};
+globalThis.lwcRuntimeFlags.DISABLE_NATIVE_CUSTOM_ELEMENT_LIFECYCLE = true;
+globalThis.LWR = globalThis.LWR || {};
+globalThis.LWR.customInit = (lwr) => {
+
+        LWR.define('@app/apexApiBasePath', [], function() { return "webruntime/api"; });
+        LWR.define('@app/apiBasePath', [], function() { return "webruntime/api"; });
+        LWR.define('@app/basePath', [], function() { return ""; });
+        LWR.define('@app/deployTarget', [], function() { return null; });
+        LWR.define('@app/guestUuidCookieName', [], function() { return null; });
+        LWR.define('@app/isDesignMode', [], function() { return false; });
+        LWR.define('@app/isPreviewMode', [], function() { return false; });
+        LWR.define('@app/routes', [], function() { return [{"label":"Too Many Requests","isPublic":true,"viewId":"7809a2d7-21d6-470b-8f0f-eec30afb504e","hasVanityURL":false,"patternMap":{},"id":"1f025e0f-a251-41e2-9b21-fb0df000a189","path":"/toomanyrequests.html","view":"tooManyRequests","isRoot":true,"isDefault":true,"page":{"type":"comm__namedPage","attributes":{"name":"Too_Many_Requests"}}}]; });
+        LWR.define('@app/templateDevName', [], function() { return "b2b-storefront"; });
+        LWR.define('@app/uiBasePath', [], function() { return ""; });
+        LWR.define('@app/versionKey', [], function() { return "0DBW400000002D7:9211"; });
+        LWR.define('@app/viewToThemeLayoutMap', [], function() { return {"tooManyRequests":"snaThemeLayout"}; });
+        LWR.define('@salesforce/i18n/lang', [], function() { return "en_US"; });
+        LWR.define('@salesforce/site/Id', [], function() { return "0DMW40000000HqUOAU"; });
+        LWR.define('@salesforce/webstore/Id', [], function() { return "0ZEW40000002101OAA"; });
+lwr.define("webruntime/dispatcher", [], function(){ return function o11yDipatcherInit(dispatcher) { typeof lwr !== 'undefined' && lwr.attachDispatcher(dispatcher); };});
+LWR.define('@salesforce/user/Id', ['@app/user'], function(m) { return (m && typeof m === 'object' && 'default' in m ? m.default : m)['id'] });
+LWR.define('@salesforce/user/isGuest', ['@app/user'], function(m) { return (m && typeof m === 'object' && 'default' in m ? m.default : m)['isGuest'] });
+lwr.initializeApp();
+globalThis.process = { env: { NODE_ENV: "dev" } };};</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">globalThis.LWR = globalThis.LWR || {};
+Object.assign(globalThis.LWR, {
+  "bootstrapModule": "@lwrjs/app-service/communities_app/module/amd/v/0_13_10",
+  "autoBoot": false,
+  "rootComponents": [
+    "webruntime/app/v/1"
+  ],
+  "requiredModules": [
+    "lwc/v/7_1_5",
+    "@lwrjs/app-service/communities_app/module/amd/v/0_13_10"
+  ],
+  "importMappings": {
+    "default": "webruntime/component/latest/prod/en_US/",
+    "imports": {
+      "/webruntime/component/latest/prod/en_US/lwc": "webruntime/framework/6a3c3d3354/prod/lwr_lwc",
+      "@app/csrfToken": "webruntime/module/@app/csrfToken",
+      "@app/loginPath": "webruntime/module/@app/loginPath",
+      "@app/user": "webruntime/module/@app/user",
+      "@perm/": "webruntime/perm/",
+      "@salesforce/client/formFactor": "webruntime/module/@salesforce/client/formFactor",
+      "@salesforce/customPermission/": "webruntime/perm/custom/",
+      "@salesforce/featureFlag/": "webruntime/module/@salesforce/featureFlag/",
+      "@salesforce/user/Id": "webruntime/module/@salesforce/user/Id",
+      "@salesforce/user/isGuest": "webruntime/module/@salesforce/user/isGuest",
+      "@salesforce/userPermission/": "webruntime/perm/",
+      "@udd/": "webruntime/module/@udd/",
+      "@view/snaThemeLayout": "webruntime/view/6d47aeb264db7d9186c7fa53bb807791/prod/en_US/snaThemeLayout_view",
+      "@view/tooManyRequests": "webruntime/view/c1eba5a81c8791848099d64cd45b5f17/prod/en_US/tooManyRequests_view",
+      "force/luvioRuntimeWebruntime": "webruntime/component/89aed88bb630f96ff5cde51c8f418dfc/prod/en_US/force/luvioRuntimeWebruntime_cmp",
+      "mobileruntime/hybridAppManager": "webruntime/framework/39b4ba9890/prod/lwr_mobile",
+      "o11y/collectors": "webruntime/component/75a3386fcd3b62a11beb274c29ca0925/prod/en_US/o11y/collectors_cmp",
+      "o11y/simple_collector": "webruntime/component/8afd643882253eddd321233169c9db43/prod/en_US/o11y/simple_collector_cmp"
+    }
+  }
+});</script>
+        <script src="webruntime/framework/f6ea60171e/prod/lwr_loader"></script>
+        <script src="webruntime/framework/3ae27cd198/prod/lwr_bootstrap"></script>
+        <script src="webruntime/framework/294fb30cde/prod/lwr_app_bootstrap_hook"></script>
+        <script src="webruntime/framework/6a3c3d3354/prod/lwr_lwc"></script>
+        <script src="webruntime/framework/ba22f7bedc/prod/lwr_app"></script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('lwc', ['lwc/v/7_1_5'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">
+        LWR.define('@app/authenticationCookieName', [], function() { return "__Secure-has-sid"; });
+        LWR.define('@app/extraRouteParams', [], function() { return {}; });
+        LWR.define('@app/imageOpt', [], function() { return "none"; });
+        LWR.define('@app/isMobileAppMode', [], function() { return false; });
+        LWR.define('@app/user', [], function() { return {"isGuest":true,"id":null,"csrfToken":null}; });
+        LWR.define('@salesforce/user/Id', [], function() { return null; });
+        LWR.define('@salesforce/user/isGuest', [], function() { return true; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/apexApiBasePath/v/1', ['@app/apexApiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/apiBasePath/v/1', ['@app/apiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/authenticationCookieName/v/1', ['@app/authenticationCookieName'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/basePath/v/1', ['@app/basePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/csrfToken/v/1', ['@app/csrfToken'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/deployTarget/v/1', ['@app/deployTarget'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/extraRouteParams/v/1', ['@app/extraRouteParams'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/guestUuidCookieName/v/1', ['@app/guestUuidCookieName'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/imageOpt/v/1', ['@app/imageOpt'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/isDesignMode/v/1', ['@app/isDesignMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/isMobileAppMode/v/1', ['@app/isMobileAppMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/isPreviewMode/v/1', ['@app/isPreviewMode'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/o11yApiEndpoint/v/1', ['@app/o11yApiEndpoint'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/o11yConfiguration/v/1', ['@app/o11yConfiguration'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/o11yFalconEnabled/v/1', ['@app/o11yFalconEnabled'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/o11yGuestToken/v/1', ['@app/o11yGuestToken'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/o11ySamplingRate/v/1', ['@app/o11ySamplingRate'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/routes/v/1', ['@app/routes'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/templateDevName/v/1', ['@app/templateDevName'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/uiBasePath/v/1', ['@app/uiBasePath'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/user/v/1', ['@app/user'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/versionKey/v/1', ['@app/versionKey'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@app/viewToThemeLayoutMap/v/1', ['@app/viewToThemeLayoutMap'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@salesforce/i18n/lang/v/1', ['@salesforce/i18n/lang'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@salesforce/site/Id/v/1', ['@salesforce/site/Id'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('@salesforce/webstore/Id/v/1', ['@salesforce/webstore/Id'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script type="text/javascript" nonce="1a9c34b2-0ab7-4070-a361-d362b003ea7f">LWR.define('webruntime/dispatcher/v/1', ['webruntime/dispatcher'], function(m) { return m && typeof m === 'object' && 'default' in m ? m.default : m; });</script>
+        <script src="webruntime/view/c1eba5a81c8791848099d64cd45b5f17/prod/en_US/tooManyRequests_view"></script>
+        <script src="webruntime/component/89aed88bb630f96ff5cde51c8f418dfc/prod/en_US/force/luvioRuntimeWebruntime_cmp"></script>
+        <script src="webruntime/view/6d47aeb264db7d9186c7fa53bb807791/prod/en_US/snaThemeLayout_view"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900"><style type="text/css" id="webruntime-branding">:root{--dxp-g-brand:#005fb2;--dxp-s-text-heading-medium-letter-spacing:0em;--dxp-s-form-element-text-font-family:"Salesforce Sans";--dxp-s-form-element-spacing-horizontal-start:12px;--dxp-s-text-heading-small-text-decoration:none;--dxp-s-dropdown-text-color:rgb(19, 37, 157);--dxp-s-tertiary-button-text-color:var(--dxp-s-button-color);--dxp-s-form-element-caption-text-font-family:"Salesforce Sans";--dxp-s-form-element-spacing-block-start:0px;--dxp-g-neutral-contrast-3:#fff;--dxp-s-text-heading-medium-text-transform:none;--dxp-g-neutral-contrast-2:#000;--dxp-g-neutral-contrast-1:#000;--dxp-s-button-color-focus-contrast:#ffffff;--dxp-s-tertiary-button-border-color-1:rgba(0,0,0,0);--dxp-s-button-border-color-active:var(--dxp-s-button-border-color-focus);--dxp-s-link-text-color-1:rgb(0, 73, 137);--dxp-s-form-element-label-font-style:normal;--dxp-g-info:#0070d2;--dxp-g-root:#ffffff;--dxp-s-tertiary-button-text-color-focus:rgb(0, 73, 137);--dxp-s-form-element-text-text-decoration:none;--dxp-s-form-element-caption-text-font-weight:400;--dxp-s-body-line-height:1.5;--dxp-s-text-heading-extra-small-font-style:normal;--dxp-s-button-large-padding-block-end:0rem;--dxp-s-body-text-decoration:none;--dxp-s-section-content-spacing-inline-end-mobile:0.75rem;--dxp-s-form-element-text-font-weight:400;--dxp-s-tertiary-button-color-1:rgba(0,0,0,0);--dxp-s-text-heading-medium-font-style:normal;--dxp-s-form-checkbox-color-background-checked:var(--dxp-s-form-checkbox-color-background);--dxp-s-secondary-button-color-focus:var(--dxp-s-secondary-button-color-1);--dxp-s-text-heading-extra-extra-small-line-height:1.25;--dxp-g-warning-2:rgb(145, 111, 15);--dxp-g-warning-3:rgb(34, 26, 3);--dxp-s-form-element-color-border:var(--dxp-g-neutral-3);--dxp-g-warning-1:rgb(219, 167, 22);--dxp-s-header-content-max-width-mobile:none;--dxp-s-secondary-button-color-hover:var(--dxp-s-secondary-button-color-1);--dxp-s-text-heading-large-letter-spacing:0em;--dxp-s-button-padding-inline-end:1rem;--dxp-s-tertiary-button-border-color-hover:var(--dxp-s-tertiary-button-border-color-1);--dxp-s-tertiary-button-border-color-focus:var(--dxp-s-tertiary-button-border-color-1);--dxp-s-body-font-style:normal;--dxp-g-warning-contrast:#000;--dxp-s-form-element-text-text-transform:none;--dxp-s-button-large-padding-inline-start:0.25rem;--dxp-s-text-heading-medium-line-height:1.25;--dxp-s-column-spacer-size:0rem;--dxp-s-text-heading-large-text-transform:none;--dxp-s-secondary-button-border-color:var(--dxp-s-button-color);--dxp-s-text-heading-extra-large-letter-spacing:0em;--dxp-s-text-heading-large-font-size:1.75rem;--dxp-s-secondary-button-text-color:var(--dxp-s-button-color);--dxp-s-form-element-text-font-style:normal;--dxp-s-button-font-family:"Salesforce Sans";--dxp-s-form-element-placeholder-text-color:var(--dxp-g-neutral-3);--dxp-s-form-element-color-background:var(--dxp-g-root);--dxp-s-tertiary-button-border-color-active:var(--dxp-s-tertiary-button-border-color-focus);--dxp-s-button-padding-block-start:0rem;--dxp-s-text-heading-extra-extra-small-font-style:normal;--dxp-s-button-font-weight:400;--dxp-s-body-font-weight:400;--dxp-s-body-small-line-height:1.25;--dxp-g-offline:#444444;--dxp-s-button-small-font-size:1.375rem;--dxp-s-button-radius-border:4px;--dxp-s-button-small-padding-block-end:0rem;--dxp-s-component-wrapper-spacer-size-mobile:1.5rem;--dxp-s-form-element-label-font-size:1rem;--dxp-s-text-heading-extra-small-line-height:1.25;--dxp-s-text-heading-small-line-height:1.25;--dxp-s-section-content-spacing-block-end:1.625rem;--dxp-s-secondary-button-text-color-focus:rgb(0, 73, 137);--dxp-g-success-3:rgb(9, 21, 10);--dxp-g-warning:#eab930;--dxp-g-success-2:rgb(44, 108, 51);--dxp-g-success-1:rgb(68, 166, 78);--dxp-s-button-small-padding-inline-end:0.75rem;--dxp-s-column-spacer-size-mobile:0.75rem;--dxp-s-text-heading-small-font-family:"Poppins";--dxp-s-text-heading-large-font-style:normal;--dxp-g-info-contrast-3:#fff;--dxp-s-form-checkbox-color-border-checked:var(--dxp-s-form-checkbox-color-border);--dxp-s-button-color-active:var(--dxp-s-button-color-focus);--dxp-s-section-content-spacing-inline-start-mobile:0.75rem;--dxp-s-section-content-spacing-block-end-mobile:1rem;--dxp-s-html-font-size:1.0625rem;--dxp-s-body-font-family:"Poppins";--dxp-s-link-text-decoration-focus:underline;--dxp-g-info-contrast-1:#fff;--dxp-s-dropdown-text-color-hover:var(--dxp-g-neutral-contrast);--dxp-g-info-contrast-2:#fff;--dxp-s-text-heading-extra-large-font-family:"Poppins";--dxp-s-text-heading-medium-text-decoration:none;--dxp-s-secondary-button-color-active:var(--dxp-s-secondary-button-color-focus);--dxp-s-form-element-label-line-height:1.5;--dxp-s-text-heading-extra-extra-small-font-family:"Salesforce Sans";--dxp-s-text-heading-small-font-weight:300;--dxp-s-text-heading-large-font-weight:300;--dxp-s-form-element-text-color:var(--dxp-g-root-contrast);--dxp-g-destructive-contrast:#fff;--dxp-s-form-checkbox-radius-border:4px;--dxp-g-destructive-contrast-1:#fff;--dxp-g-destructive-contrast-2:#fff;--dxp-g-root-1:rgb(235, 235, 235);--dxp-g-destructive-contrast-3:#fff;--dxp-g-root-2:rgb(194, 194, 194);--dxp-s-section-content-spacing-inline-start:1.75rem;--dxp-g-root-3:rgb(133, 133, 133);--dxp-s-button-color-1:rgb(0, 73, 137);--dxp-s-form-element-color-background-active:var(--dxp-s-form-element-color-background);--dxp-s-body-text-color:rgb(3, 8, 22);--dxp-s-footer-content-max-width-mobile:none;--dxp-g-brand-contrast:#ffffff;--dxp-s-button-border-color-hover:var(--dxp-s-button-color-hover);--dxp-s-text-heading-extra-small-letter-spacing:0em;--dxp-s-form-element-width-border:1px;--dxp-s-body-small-text-color:rgb(1, 5, 18);--dxp-s-form-checkbox-width-border:1px;--dxp-s-button-color-active-contrast:var(--dxp-s-button-color-focus-contrast);--dxp-s-button-line-height:2;--dxp-s-button-small-padding-inline-start:0.75rem;--dxp-s-site-logo-url:url(sfsites/c/cms/delivery/media/MCFWECQYLSNVEFVBUUJUZYVPNXPA);--dxp-s-text-heading-extra-extra-small-text-transform:none;--dxp-s-form-element-color-border-focus:var(--dxp-g-brand);--dxp-s-button-large-radius-border:0px;--dxp-s-text-heading-extra-extra-small-font-weight:600;--dxp-s-button-border-color:var(--dxp-s-button-color);--dxp-s-secondary-button-color:var(--dxp-g-root);--dxp-s-text-heading-extra-small-text-decoration:none;--dxp-s-text-heading-extra-extra-small-color:var(--dxp-g-root-contrast);--dxp-s-form-element-radius-border:4px;--dxp-s-form-element-text-color-focus:var(--dxp-s-form-element-text-color);--dxp-s-tertiary-button-border-color:rgba(0,0,0,0);--dxp-g-destructive:#c23934;--dxp-s-tertiary-button-color-active:var(--dxp-s-tertiary-button-color-focus);--dxp-s-dropdown-color-border:var(--dxp-g-neutral);--dxp-g-offline-contrast:#fff;--dxp-s-text-heading-large-color:var(--dxp-g-root-contrast);--dxp-s-button-large-padding-block-start:0rem;--dxp-s-link-text-decoration-hover:underline;--dxp-s-button-color-focus:rgb(0, 73, 137);--dxp-s-form-element-text-line-height:1.5;--dxp-s-form-element-caption-text-line-height:1.5;--dxp-s-site-logo-path:sfsites/c/cms/delivery/media/MCFWECQYLSNVEFVBUUJUZYVPNXPA;--dxp-s-body-small-font-family:"Poppins";--dxp-s-body-small-letter-spacing:0em;--dxp-s-text-heading-extra-large-text-transform:none;--dxp-s-form-element-label-text-transform:none;--dxp-g-success:#58bb62;--dxp-s-form-checkbox-color-background:var(--dxp-s-form-element-color-background);--dxp-s-form-element-label-letter-spacing:0;--dxp-s-form-element-label-font-weight:400;--dxp-s-button-text-decoration:none;--dxp-s-text-heading-extra-large-line-height:1.25;--dxp-s-button-border-color-focus:var(--dxp-s-button-color-focus);--dxp-g-warning-contrast-3:#fff;--dxp-s-button-large-font-size:1.25rem;--dxp-s-button-small-radius-border:0px;--dxp-s-body-font-size:1rem;--dxp-s-dropdown-color-background:var(--dxp-g-root);--dxp-s-body-small-text-decoration:none;--dxp-s-secondary-button-text-color-active:var(--dxp-s-secondary-button-text-color-focus);--dxp-s-text-heading-large-line-height:1.25;--dxp-s-button-color-hover:var(--dxp-s-button-color-1);--dxp-s-button-font-size:1rem;--dxp-s-button-letter-spacing:0em;--dxp-g-warning-contrast-2:#fff;--dxp-g-warning-contrast-1:#000;--dxp-s-button-padding-inline-start:1rem;--dxp-g-root-contrast-1:rgb(0, 0, 0);--dxp-g-root-contrast:rgb(1, 6, 20);--dxp-g-root-contrast-2:rgb(0, 0, 0);--dxp-g-root-contrast-3:rgb(0, 0, 0);--dxp-s-header-content-max-width:none;--dxp-s-section-columns-max-width:none;--dxp-s-form-element-spacing-block-end:0px;--dxp-s-button-text-transform:none;--dxp-s-body-text-transform:none;--dxp-s-form-element-label-font-family:"Salesforce Sans";--dxp-s-form-checkbox-color-border:var(--dxp-s-form-element-color-border);--dxp-s-form-element-caption-text-text-transform:none;--dxp-s-body-letter-spacing:0em;--dxp-s-form-element-caption-text-letter-spacing:0;--dxp-s-tertiary-button-color:rgba(0,0,0,0);--dxp-s-body-small-font-style:normal;--dxp-s-text-heading-small-font-style:normal;--dxp-s-text-heading-extra-extra-small-font-size:0.625rem;--dxp-s-text-heading-small-color:var(--dxp-g-root-contrast);--dxp-s-section-content-spacing-block-start:1.625rem;--dxp-s-html-font-size-mobile:1rem;--dxp-s-section-content-spacing-inline-end:1.75rem;--dxp-s-body-small-font-weight:400;--dxp-g-offline-3:rgb(0, 0, 0);--dxp-g-offline-2:rgb(7, 7, 7);--dxp-g-offline-1:rgb(48, 48, 48);--dxp-s-button-color-contrast-1:var(--dxp-g-brand-contrast-1);--dxp-s-secondary-button-border-color-active:var(--dxp-s-secondary-button-border-color-focus);--dxp-s-text-heading-extra-extra-small-letter-spacing:0em;--dxp-s-text-heading-extra-large-text-decoration:none;--dxp-g-success-contrast:#000;--dxp-s-text-heading-small-font-size:1.125rem;--dxp-s-button-font-style:normal;--dxp-s-body-small-text-transform:none;--dxp-g-brand-contrast-1:#ffffff;--dxp-g-brand-contrast-3:#ffffff;--dxp-s-button-color-hover-contrast:#ffffff;--dxp-g-brand-contrast-2:#ffffff;--dxp-g-brand-1:rgb(0, 73, 137);--dxp-g-brand-2:rgb(0, 30, 56);--dxp-g-brand-3:rgb(0, 0, 0);--dxp-s-secondary-button-text-color-1:var(--dxp-s-button-color-1);--dxp-s-link-text-color-hover:var(--dxp-s-link-text-color-1);--dxp-g-offline-contrast-3:#fff;--dxp-g-offline-contrast-2:#fff;--dxp-s-button-small-padding-block-start:0rem;--dxp-s-tertiary-button-color-hover:var(--dxp-s-tertiary-button-color-1);--dxp-s-text-heading-extra-small-font-family:"Salesforce Sans";--dxp-s-form-element-caption-text-text-decoration:none;--dxp-s-body-small-font-size:0.75rem;--dxp-g-destructive-1:rgb(162, 48, 43);--dxp-g-offline-contrast-1:#fff;--dxp-s-text-heading-small-text-transform:none;--dxp-s-tertiary-button-text-color-1:var(--dxp-s-button-color-1);--dxp-g-info-contrast:#fff;--dxp-s-link-text-color:var(--dxp-g-brand);--dxp-s-text-heading-extra-extra-small-text-decoration:none;--dxp-g-neutral:#ecebea;--dxp-g-destructive-2:rgb(97, 29, 26);--dxp-g-destructive-3:rgb(1, 0, 0);--dxp-s-form-element-label-color:rgb(3, 7, 26);--dxp-s-text-heading-extra-large-font-weight:300;--dxp-s-text-heading-large-font-family:"Poppins";--dxp-s-text-heading-extra-large-font-style:normal;--dxp-s-tertiary-button-text-color-active:var(--dxp-s-tertiary-button-text-color-focus);--dxp-s-text-heading-extra-small-text-transform:none;--dxp-s-text-heading-extra-small-font-weight:600;--dxp-s-form-element-text-font-size:1rem;--dxp-s-secondary-button-border-color-hover:var(--dxp-s-secondary-button-border-color-1);--dxp-s-button-large-padding:0.25rem;--dxp-g-info-2:rgb(0, 47, 88);--dxp-g-info-3:rgb(0, 0, 0);--dxp-s-secondary-button-border-color-focus:rgb(0, 73, 137);--dxp-s-text-heading-medium-font-weight:300;--dxp-g-info-1:rgb(0, 90, 169);--dxp-g-neutral-contrast:#000;--dxp-s-dropdown-color-background-hover:var(--dxp-g-neutral);--dxp-s-button-color:var(--dxp-g-brand);--dxp-g-neutral-3:rgb(118, 113, 107);--dxp-g-neutral-2:rgb(178, 174, 170);--dxp-s-text-heading-extra-large-color:rgb(37, 39, 43);--dxp-g-neutral-1:rgb(217, 215, 213);--dxp-s-secondary-button-color-1:var(--dxp-g-root-1);--dxp-g-success-contrast-3:#fff;--dxp-g-success-contrast-2:#fff;--dxp-s-text-heading-extra-large-font-size:3.875rem;--dxp-s-secondary-button-border-color-1:var(--dxp-s-button-color-1);--dxp-s-tertiary-button-color-focus:var(--dxp-s-tertiary-button-color-1);--dxp-s-form-element-caption-text-font-size:0.75rem;--dxp-s-form-element-spacing-horizontal-end:16px;--dxp-g-success-contrast-1:#000;--dxp-s-component-wrapper-spacer-size:0rem;--dxp-s-button-large-padding-inline-end:0.25rem;--dxp-s-text-heading-extra-small-color:var(--dxp-g-root-contrast);--dxp-s-tertiary-button-text-color-hover:var(--dxp-s-tertiary-button-text-color-1);--dxp-s-link-text-decoration:none;--dxp-s-text-heading-medium-font-size:1.25rem;--dxp-s-form-element-label-text-decoration:none;--dxp-s-text-heading-extra-small-font-size:0.8125rem;--dxp-s-button-color-contrast:var(--dxp-g-brand-contrast);--dxp-s-button-padding-block-end:0rem;--dxp-s-section-columns-max-width-mobile:none;--dxp-s-text-heading-medium-color:var(--dxp-g-root-contrast);--dxp-s-button-small-padding:0.75rem;--dxp-s-text-heading-large-text-decoration:none;--dxp-s-form-element-caption-text-font-style:normal;--dxp-s-button-padding:1rem;--dxp-s-secondary-button-text-color-hover:var(--dxp-s-secondary-button-text-color-1);--dxp-s-text-heading-medium-font-family:"Poppins";--dxp-s-footer-content-max-width:none;--dxp-s-text-heading-small-letter-spacing:0em;--dxp-s-form-element-text-letter-spacing:0;--dxp-s-section-content-spacing-block-start-mobile:1rem;--dxp-g-brand-h:208;--dxp-g-brand-s:100%;--dxp-g-brand-l:35%;--dxp-g-brand-a:1.0;--dxp-s-dropdown-text-color-h:232;--dxp-s-dropdown-text-color-s:78%;--dxp-s-dropdown-text-color-l:35%;--dxp-s-dropdown-text-color-a:1.0;--dxp-s-button-color-focus-contrast-h:0;--dxp-s-button-color-focus-contrast-s:0%;--dxp-s-button-color-focus-contrast-l:100%;--dxp-s-button-color-focus-contrast-a:1.0;--dxp-g-info-h:208;--dxp-g-info-s:100%;--dxp-g-info-l:41%;--dxp-g-info-a:1.0;--dxp-g-root-h:0;--dxp-g-root-s:0%;--dxp-g-root-l:100%;--dxp-g-root-a:1.0;--dxp-s-tertiary-button-text-color-focus-h:208;--dxp-s-tertiary-button-text-color-focus-s:100%;--dxp-s-tertiary-button-text-color-focus-l:27%;--dxp-s-tertiary-button-text-color-focus-a:1.0;--dxp-g-warning-contrast-h:0;--dxp-g-warning-contrast-s:0%;--dxp-g-warning-contrast-l:0%;--dxp-g-warning-contrast-a:1.0;--dxp-g-offline-h:0;--dxp-g-offline-s:0%;--dxp-g-offline-l:27%;--dxp-g-offline-a:1.0;--dxp-s-secondary-button-text-color-focus-h:208;--dxp-s-secondary-button-text-color-focus-s:100%;--dxp-s-secondary-button-text-color-focus-l:27%;--dxp-s-secondary-button-text-color-focus-a:1.0;--dxp-g-warning-h:44;--dxp-g-warning-s:82%;--dxp-g-warning-l:55%;--dxp-g-warning-a:1.0;--dxp-g-destructive-contrast-h:0;--dxp-g-destructive-contrast-s:0%;--dxp-g-destructive-contrast-l:100%;--dxp-g-destructive-contrast-a:1.0;--dxp-s-body-text-color-h:224;--dxp-s-body-text-color-s:76%;--dxp-s-body-text-color-l:5%;--dxp-s-body-text-color-a:1.0;--dxp-g-brand-contrast-h:0;--dxp-g-brand-contrast-s:0%;--dxp-g-brand-contrast-l:100%;--dxp-g-brand-contrast-a:1.0;--dxp-s-body-small-text-color-h:226;--dxp-s-body-small-text-color-s:89%;--dxp-s-body-small-text-color-l:4%;--dxp-s-body-small-text-color-a:1.0;--dxp-s-tertiary-button-border-color-h:0;--dxp-s-tertiary-button-border-color-s:0%;--dxp-s-tertiary-button-border-color-l:0%;--dxp-s-tertiary-button-border-color-a:0.0;--dxp-g-destructive-h:2;--dxp-g-destructive-s:58%;--dxp-g-destructive-l:48%;--dxp-g-destructive-a:1.0;--dxp-g-offline-contrast-h:0;--dxp-g-offline-contrast-s:0%;--dxp-g-offline-contrast-l:100%;--dxp-g-offline-contrast-a:1.0;--dxp-s-button-color-focus-h:208;--dxp-s-button-color-focus-s:100%;--dxp-s-button-color-focus-l:27%;--dxp-s-button-color-focus-a:1.0;--dxp-g-success-h:126;--dxp-g-success-s:42%;--dxp-g-success-l:54%;--dxp-g-success-a:1.0;--dxp-g-root-contrast-h:224;--dxp-g-root-contrast-s:90%;--dxp-g-root-contrast-l:4%;--dxp-g-root-contrast-a:1.0;--dxp-s-tertiary-button-color-h:0;--dxp-s-tertiary-button-color-s:0%;--dxp-s-tertiary-button-color-l:0%;--dxp-s-tertiary-button-color-a:0.0;--dxp-g-success-contrast-h:0;--dxp-g-success-contrast-s:0%;--dxp-g-success-contrast-l:0%;--dxp-g-success-contrast-a:1.0;--dxp-s-button-color-hover-contrast-h:0;--dxp-s-button-color-hover-contrast-s:0%;--dxp-s-button-color-hover-contrast-l:100%;--dxp-s-button-color-hover-contrast-a:1.0;--dxp-g-info-contrast-h:0;--dxp-g-info-contrast-s:0%;--dxp-g-info-contrast-l:100%;--dxp-g-info-contrast-a:1.0;--dxp-g-neutral-h:30;--dxp-g-neutral-s:5%;--dxp-g-neutral-l:92%;--dxp-g-neutral-a:1.0;--dxp-s-form-element-label-color-h:230;--dxp-s-form-element-label-color-s:79%;--dxp-s-form-element-label-color-l:6%;--dxp-s-form-element-label-color-a:1.0;--dxp-s-secondary-button-border-color-focus-h:208;--dxp-s-secondary-button-border-color-focus-s:100%;--dxp-s-secondary-button-border-color-focus-l:27%;--dxp-s-secondary-button-border-color-focus-a:1.0;--dxp-g-neutral-contrast-h:0;--dxp-g-neutral-contrast-s:0%;--dxp-g-neutral-contrast-l:0%;--dxp-g-neutral-contrast-a:1.0;--dxp-s-text-heading-extra-large-color-h:220;--dxp-s-text-heading-extra-large-color-s:7%;--dxp-s-text-heading-extra-large-color-l:16%;--dxp-s-text-heading-extra-large-color-a:1.0;}</style> <!-- branding stylesheets -->
+
+<link rel="stylesheet" href="assets/styles/salesforce-lightning-design-system.min.css?95ea8c6d8c" />
+
+<link rel="stylesheet" href="assets/styles/dxp-site-spacing-styling-hooks.min.css?95ea8c6d8c" />
+<link rel="stylesheet" href="assets/styles/dxp-styling-hooks.min.css?95ea8c6d8c" />
+<link rel="stylesheet" href="assets/styles/dxp-slds-extensions.min.css?95ea8c6d8c" />
+
+
+
+
+<!-- branding stylesheets -->
+    
+<!-- General -->
+<!--
+<link rel="shortcut icon" href="assets/favicon.ico?0DBW400000002D7:9211">
+<link rel="stylesheet" href="assets/css/theme.css?0DBW400000002D7:9211">
+<link rel="shortcut icon" href="/resource/1603747136000/support_favicon">
+-->
+<link rel="shortcut icon" href="/resource/support_favicon">
+
+<style>
+    a, button, input{
+        scroll-margin-top: 200px;
+        scroll-snap-align: start;
+    }
+.testBG{
+    background-color:#0D2A7A; /* #173770*/
+    height: 56px;
+}  
+  .logo-header{
+      font-family: 'Poppins', sans-serif;
+	  font-size: 14px;
+      font-weight:600;
+      line-height: 14px;
+      text-align: center;
+      text-transform: uppercase;
+      margin-left: 20px !important;
+    }
+    .mysavvasOrder {
+      font-family: 'Poppins', sans-serif;
+      font-size: 65px;
+      font-weight: 700;
+      line-height: 71.5px;
+    }
+    .bgContent{
+        background: rgba(229, 241, 253, 1);
+    }
+   nav.lwc-59kp5sov61j a {
+    border-bottom: 5px solid transparent;
+    background-color : transparent !important;
+	}
+     nav.lwc-59kp5sov61j a:hover.lwc-59kp5sov61j, nav.lwc-59kp5sov61j a:active.lwc-59kp5sov61j, nav.lwc-59kp5sov61j a:focus.lwc-59kp5sov61j, nav.lwc-59kp5sov61j button:hover.lwc-59kp5sov61j, nav.lwc-59kp5sov61j button:active.lwc-59kp5sov61j, nav.lwc-59kp5sov61j button:focus.lwc-59kp5sov61j {
+    border-bottom: 5px solid var(--dxp-c-navigation-list-hover-background-color-contrast);
+    background-color : transparent !important;
+	}
+    
+:root{
+    --landing-page-bgimage-path: url('/sfsites/c/resource/scc_landingpage_bgimage');
+    --landing-page-bgimage-mobile-path: url('sfsites/c/resource/scc_landingpage_bgimage_mobile');
+    --delete-icon-path: url('sfsites/c/resource/scc_delete_icon');
+    --brand-logo-loggedIn-header-mobile: url('sfsites/c/resource/scc_brand_logo_standalone');
+}
+body, h1, h2, h3, h4, a, li, p , span , button{
+	font-family: Poppins !important;
+}
+    a:focus, button:focus, input:focus, select:focus, .slds-checkbox [type=checkbox]:focus+label .slds-checkbox_faux{
+        box-shadow: 0 0 0 1px #FFFFFF, 0 0 0 2px #0C1E3D !important;
+        text-decoration: none !important;
+		outline: none !important;
+    	border: none !important;
+    }
+    
+.comm-section-container{
+    padding: 0 !important;
+}
+    .columns-content{
+        max-width: none !important;
+    }
+    .content{
+        background-color: #E5F1FD;
+        scroll-snap-type: y mandatory;
+    }
+    .component-wrapper-spacer{
+        margin-bottom: 0 !important;
+    }
+    .forgotpswd-outer-container{
+        background-color: #ffffff;
+        background-image: var(--landing-page-bgimage-path);
+        background-size: 100% !important;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        padding: 253px 0 222px !important;
+    }
+.Forgotpswdcontainer {
+    background-color: #ffffff;
+    padding: 50px 70px 40px;
+    border-radius: 20px;
+    margin: 0 auto !important;
+	width: 612px;
+}
+.Forgotpswdcontainer .comm-forgot-password__container.slds-card{
+	padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: none;
+	text-align: left;
+	box-shadow: none;
+}
+.Forgotpswdcontainer h2.comm-forgot-password__title.slds-text-align_center.slds-text-heading_large.slds-var-p-around_large{
+	font-size: 35px;
+	font-weight: 700;
+	line-height: 38.5px;
+	letter-spacing: -0.02em;
+	text-align: left;
+	color: #173770;
+	padding: 0 0 10px;
+}
+.Forgotpswdcontainer lightning-formatted-text{
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	text-align: left;
+	color: #173770;
+	font-family: Poppins !important;
+}
+.Forgotpswdcontainer .slds-form-element__label{
+	font-family: Poppins;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 22.4px;
+	text-align: left;
+	color: #0C1E3D;
+	padding: 0 !important;
+	padding-top: 18px !important;
+}
+.Forgotpswdcontainer .comm-forgot-password__container.slds-card>div.slds-form-element{
+	margin: 0;
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	max-width: 100%;
+}
+.Forgotpswdcontainer .comm-forgot-password__container.slds-card>div.slds-form-element .comm-forgot-password__submit-button{
+	width: 100%;
+	height: 55px;
+	background-color: #9ECA47;
+	border-radius: 90px;
+	font-family: Poppins !important;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 19.8px;
+	text-align: left;
+	color: #173770;
+	padding: 17.5px;
+	border: none;
+	margin: 0;
+}
+.Forgotpswdcontainer .comm-forgot-password__container.slds-card>div.slds-form-element .comm-forgot-password__cancel-button{
+	width: 100%;
+	font-family: Poppins !important;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 21px;
+	letter-spacing: 0.01em;
+	text-align: center;
+	color: #2150A3;
+	border: none !important;
+	background: none !important;
+	box-shadow: none !important;
+	order: 1;
+    margin-top: 20px;
+}
+.Resetmessage .comm-forgot-password__container{
+    text-align:center;
+    padding-left: inherit;
+    padding-right: inherit; 
+    }
+    
+label.slds-form-element__label.slds-no-flex {
+    display: flex;
+    padding-left: 10px;
+    padding-top: 20px;
+}
+    
+.comm-forgot-password__container.slds-card {
+    border: none;
+    padding-bottom: 0px;
+}
+
+h2.comm-forgot-password__title.slds-text-align_center.slds-text-heading_large.slds-var-p-around_large {
+    font-weight: bold;
+}
+
+.comm-check-email__container.slds-card.slds-card_inner.slds-col.slds-grow.slds-p-around_medium {
+    border: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding: inherit;
+}
+    
+h2.comm-check-email__title.slds-text-heading_large.slds-text-align_center.slds-var-p-around_large {
+    font-weight: bold;
+}
+    .sign-in lightning-icon svg {
+        --slds-c-icon-color-foreground : red !important;
+    }
+  .slds-checkbox_faux{
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 2px !important;
+    box-shadow: none !important
+}
+.slds-checkbox [type=checkbox]:checked+.slds-checkbox__label .slds-checkbox_faux{
+    background-color: #2150A3 !important;
+    border: none !important;
+}
+.slds-checkbox [type=checkbox]:checked+.slds-checkbox__label .slds-checkbox_faux::after{
+    border-color: #ffffff !important;
+}
+    .slds-checkbox .slds-checkbox__label .slds-form-element__label{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19.6px;
+    text-align: left;
+    color: #0C1E3D;
+}
+    .custom-tabset {
+    width: 155px;
+    height: 65px;
+    padding: 10px;
+}
+  .slds-input{
+    height: 55px;
+    border: 1px solid #AFC3D8;
+    border-radius: 5px;
+    color: #173770;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.4px;
+    text-align: left;
+    background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+    background-position: 5px 5px, 0, 100% 0;
+    background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+    padding: 1.5rem;
+}
+    .slds-card{
+        border: 1px solid #AFC3D8;
+  		border-radius: 10px;
+        box-shadow: none;
+    }
+    header.desktop{
+        padding: 0 !important;
+    }
+    .logo-header nav ul li a{
+        padding-bottom: 30px !important;
+		padding-top: 30px !important;
+    }
+    .logo-header nav ul li a{
+        border-bottom: 6px solid transparent !important;
+    }
+    .logo-header nav ul li a:hover{
+        border-bottom: 6px solid #33BDCD !important;
+    }
+::-ms-input-placeholder { /* Edge 12-18 */
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    text-align: left;
+    color: #173770 !important;
+    opacity: 50%;
+}
+
+::placeholder {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    text-align: left;
+    color: #173770 !important;
+    opacity: 50%;
+    }
+.slds-form-element__label{
+    font-size: 16px;
+    font-weight: 600 !important;
+    line-height: 22.4px;
+    text-align: left;
+    color: #0C1E3D;
+    display: block;
+    font-family: Poppins !important;
+}  
+    .chevron-circle svg{
+    width: 10px;
+    height: 15px;
+    display: inline-block;
+    vertical-align: baseline;
+    --slds-c-icon-color-foreground: #fff;
+}
+ 
+    .no-signin-reqd-links button{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+}
+    .no-signin-reqd-links button:hover{
+        text-decoration: underline;
+    }
+    .RegisterNewUser .slds-card{
+    border: none;
+    box-shadow: none;
+}
+.RegisterNewUser .slds-card__body{
+    margin-bottom: 0;
+}
+    .slds-select{
+        border: 1px solid #AFC3D8;
+        height: 50px;
+        padding: 13px;
+        font-family: Poppins !important;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 21px;
+        text-align: left;
+		color: #173770;
+    }
+    .slds-select option{
+        padding: 13px;
+    }
+    .access-type-checkbox-group .slds-checkbox:first-of-type{
+        margin-bottom: 20px;
+    }
+    .modal-confirm-button button, .modal-confirm-button button:hover, .modal-confirm-button button:focus{
+    width: 200px;
+    height: 55px;
+    background-color: #9ECA47;
+    border-radius: 90px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19.8px;
+    text-align: left;
+    color: #0C1E3D;
+    border: none;
+}
+    .modal-cancel-button button, .modal-cancel-button button:hover, .modal-cancel-button button:focus{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #2150A3;
+    border: none;
+    background: none;
+    margin-top: 20px;
+}
+    .slds-button.slds-button_icon.slds-modal__close.register-modal-close svg.slds-icon-text-default{
+    --slds-c-icon-color-foreground: #ffffff;
+    width: 18px;
+    height: 18px;
+}
+.help-link span svg, .other-apps span svg, .account-options svg{
+    --slds-c-icon-color-foreground: #fff;
+    width: 0.7rem;
+    height: auto;
+    margin-left: 10px;
+}
+.mysavvasorder-footer footer{
+	background-color: #E5F1FD !important;
+	border-top: 1px solid rgba(23, 55, 112, 20%);
+    padding: 0 !important;
+    }
+.mysavvasorder-footer .footer{
+	max-width: 1440px !important;
+}
+.mysavvasorder-footer p{
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 15px;
+	text-align: left !important;
+	color: #173770;
+	overflow: hidden;
+    padding: 20px !important;
+}
+.mysavvasorder-footer .copyright-text p{
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 18.2px;
+	text-align: left !important;
+	color: #173770;
+	overflow: hidden;
+}
+.mysavvasorder-footer p a{
+	text-decoration: none !important;
+	margin-right: 35px;
+    color: #173770 !important;
+}
+.mysavvasorder-footer p a:last-of-type{
+	margin-right: 0;
+}
+.mysavvasorder-footer-links p{
+	text-align: right !important;
+}
+.slds-form-element__label.fixed-width{
+    margin-right: 10px;
+    width: 200px;
+    text-align: right;
+}
+    .statuscombobox .slds-combobox__input{
+  height: 55px;
+  border: 1px solid #AFC3D8;
+  border-radius: 5px;
+  color: #173770;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22.4px !important;
+  text-align: left;
+  background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+  background-position: 5px 5px, 0, 100% 0;
+  background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+  padding: 1rem;
+}
+    .statuscombobox .slds-combobox__input[data-value=""] span{
+        color: #173770;
+    	opacity: 50%;
+    }
+    .search-result-cards .slds-card{
+  border: 1px solid #AFC3D8;
+  border-radius: 10px;
+}
+    .order-detail-tab-card .slds-card{
+        border: 1px solid #AFC3D8;
+  		border-radius: 0 10px 10px 10px;
+    }
+    .slds-combobox .slds-input__icon-group{
+        display: none;
+    }
+    .slds-combobox button:after {
+    content: "\203A";
+    font-weight: 500;
+    position: absolute;
+    right: 10px;
+    transform: rotate(90deg);
+	font-size: 26px;
+    font-family: arial;
+}
+    .checkout-combo-input .slds-combobox__input{
+         width: 100%;
+         height: 55px;
+         top: 23px; 
+         border: 1px solid #AFC3D8;/*Adjust the width as needed */
+         border-radius: 5px;
+         color: #173770;
+         font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 22.4px;
+        text-align: left;
+        background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+        background-position: 5px 5px, 0, 100% 0;
+        background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+        background-repeat: no-repeat;
+    }
+    .sort-by-label .slds-icon-text-default{
+	--slds-c-icon-color-foreground: #173770;
+}
+    .table-sort-icon svg{
+	--slds-c-icon-color-foreground: #0C1E3D;
+        width: 15px;
+}
+    .slds-table .slds-checkbox [type=checkbox][disabled]:checked+.slds-checkbox__label .slds-checkbox_faux{
+    background-color: #AFC3D8 !important;
+}
+    .slds-table .slds-checkbox [type=checkbox][disabled]+.slds-checkbox__label .slds-checkbox_faux{
+    background-color: #AFC3D8 !important;
+}
+.slds-table .slds-checkbox [type=checkbox][disabled]:checked+.slds-checkbox__label .slds-checkbox_faux::after{
+    border-color: #0C1E3D !important;
+}
+    .slds-combobox_container .slds-listbox{
+	padding: 10px 0;
+	margin: 0;
+	border: 1px solid #AFC3D8;
+	border-radius: 5px;
+	box-shadow: 0px 4px 8px 0px #2150A31A;
+}
+.slds-combobox_container .slds-listbox .slds-listbox__option-icon{
+	display: none;
+}
+.slds-combobox_container .slds-listbox .slds-media__body span{
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 21px;
+	text-align: left;
+	color: #173770;
+}
+    .review-cart-cards .slds-card__header{
+        display: none;
+    }
+    .review-cart-cards .slds-card__body{
+        margin: 0;
+    }
+    .slds-table td .view-held-cart-name button{
+    padding: 20px 10px;
+    white-space: normal;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    color: #2150A3;
+    text-decoration: underline;
+  }
+    .view-held-cart-delete-icon lightning-primitive-icon{
+        display: none;
+    }
+    .view-held-cart-delete-icon button{
+        background-image: var(--delete-icon-path);
+        background-repeat: no-repeat;
+        background-position: center;
+        border: none;
+    }
+    .place-order-catalog-table button{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: left;
+    color: #2150A3;
+    text-decoration: underline !important;
+    }
+    .Shipping-Method .slds-radio {
+    margin-top: 15px;
+}
+    .Provision-Method .slds-radio {
+    margin-top: 15px;
+}
+    .shipto-address-change-link button{
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 21px;
+	text-align: right;
+	color: #2150A3;
+	text-decoration: underline;
+}
+    .change-licenceto-btn:focus, .change-licenceto-btn:active, .change-licenceto-btn:hover{
+        box-shadow: none !important;
+        outline: none !important;
+        border: none !important;
+    }
+    .change-licenceto-btn button{
+	font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: right;
+    margin-top: 32px;
+	color: #2150A3;
+    text-decoration: underline;
+}
+    .change-licenceto-btn button[disabled]{
+	color: #AFC3D8;
+}
+    .credit-card-details .slds-form-element__label {
+    padding: 0 !important;
+}
+.header-content{
+    max-width: none !important;
+}
+.email-cart-popup-input .slds-form-element__control{
+	padding: 0 !important;
+}
+.email-cart-popup-input label{
+	display: none !important;
+}
+    .submit-case-popup .addressTextArea .slds-textarea, .submit-case-popup .descriptionTextArea .slds-textarea, .submit-case-popup .details-textarea .slds-textarea{
+	height: 100px;
+	min-height: 100px;
+    border: 1px solid #AFC3D8;
+    border-radius: 5px;
+    color: #173770;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.4px;
+    text-align: left;
+    background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+    background-position: 5px 5px, 0, 100% 0;
+    background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+    padding: 1.5rem;
+    resize: none;
+}
+.submit-case-popup label.slds-form-element__label{
+	padding-left: 0;
+}
+.submit-case-popup label.slds-form-element__label .slds-required{
+	display: none;
+}
+    .submit-case-popup .slds-modal__footer button{
+    padding: 14px 20px;
+    border-radius: 90px;
+    background-color: #AFC3D8;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 17.6px;
+    text-align: left;
+    color: #fff;
+    border: none;
+}
+.submit-case-popup .slds-modal__footer lightning-button:not([aria-disabled=true]) button{
+    background-color: #9ECA47;
+    color: #0C1E3D;
+    }
+    lightning-formatted-address a div{
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        text-align: left;
+        color: #0C1E3D;
+    }
+    .accessCodeSearchCard lightning-input .slds-form-element__label{
+        padding-left: 0 !important;
+    }
+    .slds-tabs--default__item:has(:focus-visible), .slds-tabs_default__item:has(:focus-visible){
+        outline: none !important;
+    }
+    
+    .slds-has-error .slds-input{
+        border: 1px solid #D73A59 !important;
+        background-image: linear-gradient(319deg, transparent 50%, #D73A59 50%) !important;
+    }
+    .required-none .slds-required{
+        display:none !important;
+    }
+    
+    .required-none .slds-form-element__label{
+        padding:0px !important;
+    }
+    
+    .required-none .slds-form-element__help{
+       font-family: Poppins;
+       font-size: 14px;
+       font-weight: 600;
+       line-height: 21px;
+       text-align: left;
+       color: #D73A59;
+    }
+    .header{
+        border-bottom: 1px solid rgb(255 255 255 / 20%) !important;
+    	background-color: #2150A3;
+    }
+    .view-held-cart-name [kx-scope=button][kx-type=underline]:focus:after, [kx-scope=button][kx-type=underline]:hover:after{
+        display: none !important;
+    }
+@media only screen and (min-width: 1024px){
+        .header-search, .header-badge-icons{
+        display: none;
+    }
+    .header-navigation{
+        width: calc(100% - 430px);
+    }
+    .layout-header-desktop{
+	padding: 0;
+	display: flex;
+    justify-content: space-between;
+}
+.header-logo{
+	width: auto;
+}
+.header-logo .dxp-content-layout-site-logo{
+	width: 400px !important;
+	height: 50px !important;
+    margin: 5px 0;
+}
+    .header-navigation .logo-header ul li button{
+	padding-top: 20px;
+}
+    .logo-header nav ul{
+        justify-content: flex-end;
+    }
+    .mysavvasOrder p{
+      font-family: 'Poppins', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 35px;
+    }
+    .home-content{
+        max-width: 1440px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 30px !important;
+    }
+    .homepage-banner .main-content{
+        width: 100% !important;
+        max-width: 1440px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .homepage-banner .main-content-container{
+        padding: 0 !important;
+    }
+    .logo-header nav ul li a.active{
+        border-bottom: 6px solid #33BDCD !important;
+    }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px){
+    .header-navigation{
+        width: calc(100% - 280px);
+    }
+    .header-logo .dxp-content-layout-site-logo{
+		width: 230px !important;
+	}
+    .logo-header nav ul li a{
+        padding: 20px 6px !important;
+    }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1600px){
+        .logo-header nav ul li a{
+        padding: 20px 7px !important;
+    }
+    }
+    @media only screen and (min-width: 1601px){
+        .mysavvasOrder p{
+            font-size: 65px;
+          line-height: 71.5px;
+        }
+    }
+    @media only screen and (min-width: 1024px) and (max-width: 1100px){
+        .forgotpswd-outer-container{
+            background-size: cover !important;
+            background-attachment: local;
+            height: 100vh;
+        }
+    }
+@media only screen and (max-width: 767px){
+	.forgotpswd-outer-container{
+		background-image: var(--landing-page-bgimage-mobile-path);
+        padding: 28px 15px !important;
+        background-size: cover !important;
+        min-height: 100vh !important;
+	}
+	.Forgotpswdcontainer{
+		width: auto;
+		padding: 30px 25px 40px;
+	}
+	.Forgotpswdcontainer h2.comm-forgot-password__title.slds-text-align_center.slds-text-heading_large.slds-var-p-around_large{
+		font-size: 26px;
+		line-height: 28.6px;
+	}
+	.Forgotpswdcontainer lightning-formatted-text{
+		font-size: 14px;
+		line-height: 21px;
+	}
+	.Forgotpswdcontainer .slds-form-element__label{
+		padding-top: 13px !important;
+	}
+	.Forgotpswdcontainer .comm-forgot-password__container.slds-card>div.slds-form-element{
+		margin-top: 25px;
+	}
+	.Forgotpswdcontainer .comm-forgot-password__container.slds-card>div.slds-form-element .comm-forgot-password__submit-button{
+		height: 50px;
+		font-size: 16px;
+		line-height: 17.6px;
+	}
+	.Forgotpswdcontainer .comm-forgot-password__container.slds-card>div.slds-form-element .comm-forgot-password__cancel-button{
+		margin-top: 25px;
+	}
+    .mysavvasorder-footer .copyright-text p{
+        text-align: center !important;
+        padding: 12px 12px 0 !important;
+    }
+    .mysavvasorder-footer-links p{
+		text-align: center !important;
+		margin: 10px 0 !important;
+        padding: 0 !important;
+	}
+	.mysavvasorder-footer p a{
+		display: inline-block;
+        margin: 0 10px 10px;
+	}
+    .homepage-banner{
+        display: none !important;
+    }
+    .header .component-wrapper-spacer{
+        padding: 10px 4px;
+    }
+    .header-container{
+        padding: 0 !important;
+    }
+    .header-content{
+        padding: 0 !important;
+    }
+    .header-content .layout-header-mobile{
+        justify-content: space-between;
+    }
+    .header-content .header-navigation{
+        width: auto;
+    	order: 2;
+    }
+    .header-content .header-logo{
+        order: 1;
+        width: 200px;
+        height: 50px;
+        padding: 0;
+    }
+    .header-content .header-logo .dxp-content-layout-site-logo{
+        width: 200px;
+    	height: 50px !important;
+    }
+    div[aria-label="Multilevel Navigation Menu"] span, div[aria-label="Multilevel Navigation Menu"] li, div[aria-label="Multilevel Navigation Menu"] a{
+        background-color: #fff !important;
+    }
+    div[aria-label="Multilevel Navigation Menu"] ul li a{
+        color: rgb(19, 37, 157) !important;
+    }
+    .home-content{
+        max-width: 100vw;
+    }
+    .logo-header ul.slds-list_vertical{
+	background-color: #E5F1FD !important;
+	max-width: 100vw;
+}
+.logo-header nav ul li a{
+	padding: 14px 20px 6px !important;
+	border-bottom: 2px solid rgb(115 114 114 / 10%) !important;
+    font-size: 16px !important;
+}
+.logo-header .close-button{
+	left: 88vw;
+    right: auto !important;
+	background-color: #E5F1FD;
+	padding: 5px;
+	margin: 4px;
+	border-radius: 5px;
+}
+.logo-header .close-button svg{
+	width: 26px;
+	height: 26px;
+	--slds-c-icon-color-foreground: #173770;
+}
+.logo-header nav ul li a:after{
+	content: "\003E";
+    font-size: 26px;
+    height: 21px;
+    display: inline-block;
+    vertical-align: sub;
+    float: right;
+    color: #173770;
+    font-family: monospace;
+    opacity: 70%;
+}
+    .logo-header .close-button-wrapper::before{
+	content: "";
+	background-image: var(--brand-logo-loggedIn-header-mobile);
+    width: 150px;
+    display: inline-block;
+    height: 50px;
+    position: absolute;
+    left: 20px;
+    top: 8px;
+    background-repeat: no-repeat;
+}
+}
+    .contentbgcolor{
+        background-color: #E5F1FD;
+    }
+    .no-signin-reqd-links [kx-scope=button][kx-type=underline]:focus:after, [kx-scope=button][kx-type=underline]:hover:after { 
+content: none !important; 
+}
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        setTimeout(function(){
+        	headerTabActive();
+            /* add id and roles for different regions for accessibility*/
+            if(document.querySelector(".content") != undefined){
+                document.querySelector(".content").setAttribute("id", "body-content");
+                document.querySelector('.content').setAttribute('role', 'main');
+            }
+            if(document.querySelector('.mysavvasorder-footer') != undefined){
+            	document.querySelector('.mysavvasorder-footer').setAttribute('role', 'contentinfo');
+                document.querySelector('.mysavvasorder-footer').setAttribute('aria-label', 'Copyright © 2024 Savvas Learning Company LLC. All Rights Reserved');
+            }
+            var imageRole = document.querySelectorAll('[role=img]');
+            if(imageRole){
+                for(i=0;i<imageRole.length;i++){
+                    imageRole[i].removeAttribute("role");
+                }
+            }
+            if(document.querySelector('.dxp-content-layout-site-logo') != undefined){
+                document.querySelector('.dxp-content-layout-site-logo').setAttribute('aria-label', 'my Savvas Orders logo');
+            }
+            }, 5000);
+    });
+	
+	window.navigation.addEventListener("navigate", (event) => {
+        setTimeout(function(){
+			headerTabActive();
+        }, 500);
+	})
+    
+    function headerTabActive(){
+        var tabArray = document.querySelectorAll(".header-navigation ul li a");
+        for(i=0; i<tabArray.length; i++){
+            tabArray[i].classList.remove('active');
+        }
+        var path = window.location.pathname;
+        var page = path.split("/").pop();
+        if(page == ""){
+            if(document.querySelector(".header-navigation ul li:nth-child(1) a") != undefined){
+                document.querySelector(".header-navigation ul li:nth-child(1) a").classList.add('active');
+            }
+        }else if(page == "order-status"){
+            if(document.querySelector(".header-navigation ul li:nth-child(2) a") != undefined){
+                document.querySelector(".header-navigation ul li:nth-child(2) a").classList.add('active');
+            }
+        }else if(page == "price-and-availability"){
+            if(document.querySelector(".header-navigation ul li:nth-child(3) a") != undefined){
+                document.querySelector(".header-navigation ul li:nth-child(3) a").classList.add('active');
+            }
+        }else if(page == "place-order"){
+            if(document.querySelector(".header-navigation ul li:nth-child(4) a") != undefined && document.querySelector(".header-navigation ul li:nth-child(4) a").innerHTML.toLowerCase() == "place order"){
+                document.querySelector(".header-navigation ul li:nth-child(4) a").classList.add('active');
+            }
+        }else if(page == "reports"){
+            if(document.querySelector(".header-navigation ul li:nth-last-child(3) a") != undefined){
+                document.querySelector(".header-navigation ul li:nth-last-child(3) a").classList.add('active');
+            }
+        }else if(page == "documents"){
+            if(document.querySelector(".header-navigation ul li:nth-last-child(2) a") != undefined){
+                document.querySelector(".header-navigation ul li:nth-last-child(2) a").classList.add('active');
+            }
+        }else if(page == "access-code"){
+            if(document.querySelector(".header-navigation ul li:nth-last-child(1) a") != undefined){
+                document.querySelector(".header-navigation ul li:nth-last-child(1) a").classList.add('active');
+            }
+        }
+    }
+</script>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','UA-59291936-1');</script>
+<!-- End Google Tag Manager -->
+ 
+<!-- Shadow DOM Analytics solution Example-->
+ 
+<script>
+  (function() {
+    // Set to the event you want to track
+      var eventName = 'placeorderdata';
+    //var eventName = 'click',
+    // Set to false if you don't want to use capture phase
+        useCapture = true,
+    // Set to false if you want to track all events and not just those in shadow DOM
+        trackOnlyShadowDom = true;
+ 
+    var callback = function(event) {
+      if ('composed' in event && typeof event.composedPath === 'function') {
+        // Get the path of elements the event climbed through, e.g.
+        // [span, div, div, section, body]
+        var path = event.composedPath();
+          console.log("path ",path);
+        // Fetch reference to the element that was actually clicked
+        var targetElement = path[0];
+        // Check if the element is WITHIN the shadow DOM (ignoring the root)
+        var shadowFound = path.length ? path.filter(function(i) {
+          return !targetElement.shadowRoot && !!i.shadowRoot;
+        }).length > 0 : false;
+        // If only shadow DOM events should be tracked and the element is not within one, return
+        //if (trackOnlyShadowDom && !shadowFound) return;
+        // Push to dataLayer
+        if(shadowFound) {
+            window.dataLayer.push({
+                event: "placeorderdata",
+ 
+                'gtm.element': targetElement,
+                'gtm.elementClasses': targetElement.className || '',
+                'gtm.elementId': targetElement.id || '',
+                'gtm.elementTarget': targetElement.target || '',
+                'gtm.elementUrl': targetElement.href || targetElement.action || '',
+                inShadowDom: shadowFound
+ 
+            });
+        } else {
+            for(let i=0;i< window.dataLayer.length;i++){
+                if(window.dataLayer[i].event==="placeorderdata"){
+                    window.dataLayer.splice(i,1);
+                }
+            }
+            
+            window.dataLayer.push({
+                cart:event.detail.cart,
+                form:event.detail.form,
+                institution:event.detail.institution,
+                page: event.detail.page,
+                pmdb: event.detail.pmdb,
+                products: event.detail.products,
+                program: event.detail.program,
+                site: event.detail.site,
+                event: "placeorderdata",
+                inShadowDom: shadowFound
+            });
+        }
+      }
+    };
+    document.addEventListener(eventName, callback, useCapture);
+  })();
+</script>
+    </head>
+    <body id="main">
+        <webruntime-app></webruntime-app>
+    </body>
+</html>

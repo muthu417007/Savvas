@@ -1,0 +1,204 @@
+{
+  "FieldMaps": {
+    "ensxtx_SBO_SFCIMaterialScales_Search.SEARCHPARAMS": {
+      "SalesOrganization": {
+        "FriendlyName": "SalesOrganization",
+        "TechnicalName": "VKORG",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DistributionChannel": {
+        "FriendlyName": "DistributionChannel",
+        "TechnicalName": "VTWEG",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Division": {
+        "FriendlyName": "Division",
+        "TechnicalName": "SPART",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesDocumentType": {
+        "FriendlyName": "SalesDocumentType",
+        "TechnicalName": "AUART",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Material": {
+        "FriendlyName": "Material",
+        "TechnicalName": "MATNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CustomerNumber": {
+        "FriendlyName": "CustomerNumber",
+        "TechnicalName": "KUNNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ConditionType": {
+        "FriendlyName": "ConditionType",
+        "TechnicalName": "KSCHL",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesUnit": {
+        "FriendlyName": "SalesUnit",
+        "TechnicalName": "VRKME",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "ensxtx_SBO_SFCIMaterialScales_Search.SEARCHRESULT": {
+      "ConditionNumber": {
+        "FriendlyName": "ConditionNumber",
+        "TechnicalName": "KNUMH",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SequenceNumber": {
+        "FriendlyName": "SequenceNumber",
+        "TechnicalName": "KLFN1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "FromValue": {
+        "FriendlyName": "FromValue",
+        "TechnicalName": "FRQTY",
+        "FieldType": "Decimal",
+        "FieldWidth": 1
+      },
+      "ToValue": {
+        "FriendlyName": "ToValue",
+        "TechnicalName": "TOQTY",
+        "FieldType": "Decimal",
+        "FieldWidth": 1
+      },
+      "ConditionUnit": {
+        "FriendlyName": "ConditionUnit",
+        "TechnicalName": "KMEIN",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Rate": {
+        "FriendlyName": "Rate",
+        "TechnicalName": "KBETR",
+        "FieldType": "Decimal",
+        "FieldWidth": 1
+      },
+      "FieldCurrency": {
+        "FriendlyName": "FieldCurrency",
+        "TechnicalName": "KONWA",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    }
+  },
+  "StructMap": {
+    "SEARCHPARAMS": {
+      "Name": "SEARCHPARAMS",
+      "ItemType": "ensxtx_SBO_SFCIMaterialScales_Search.SEARCHPARAMS",
+      "FieldMap": {
+        "SalesOrganization": {
+          "FriendlyName": "SalesOrganization",
+          "TechnicalName": "VKORG",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DistributionChannel": {
+          "FriendlyName": "DistributionChannel",
+          "TechnicalName": "VTWEG",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Division": {
+          "FriendlyName": "Division",
+          "TechnicalName": "SPART",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesDocumentType": {
+          "FriendlyName": "SalesDocumentType",
+          "TechnicalName": "AUART",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Material": {
+          "FriendlyName": "Material",
+          "TechnicalName": "MATNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CustomerNumber": {
+          "FriendlyName": "CustomerNumber",
+          "TechnicalName": "KUNNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ConditionType": {
+          "FriendlyName": "ConditionType",
+          "TechnicalName": "KSCHL",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesUnit": {
+          "FriendlyName": "SalesUnit",
+          "TechnicalName": "VRKME",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  },
+  "CollectionMap": {
+    "SEARCHRESULT": {
+      "Name": "SEARCHRESULT",
+      "ItemType": "ensxtx_SBO_SFCIMaterialScales_Search.SEARCHRESULT",
+      "FieldMap": {
+        "ConditionNumber": {
+          "FriendlyName": "ConditionNumber",
+          "TechnicalName": "KNUMH",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SequenceNumber": {
+          "FriendlyName": "SequenceNumber",
+          "TechnicalName": "KLFN1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "FromValue": {
+          "FriendlyName": "FromValue",
+          "TechnicalName": "FRQTY",
+          "FieldType": "Decimal",
+          "FieldWidth": 1
+        },
+        "ToValue": {
+          "FriendlyName": "ToValue",
+          "TechnicalName": "TOQTY",
+          "FieldType": "Decimal",
+          "FieldWidth": 1
+        },
+        "ConditionUnit": {
+          "FriendlyName": "ConditionUnit",
+          "TechnicalName": "KMEIN",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Rate": {
+          "FriendlyName": "Rate",
+          "TechnicalName": "KBETR",
+          "FieldType": "Decimal",
+          "FieldWidth": 1
+        },
+        "FieldCurrency": {
+          "FriendlyName": "FieldCurrency",
+          "TechnicalName": "KONWA",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  }
+}

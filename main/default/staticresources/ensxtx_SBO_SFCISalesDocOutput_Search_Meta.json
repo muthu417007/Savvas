@@ -1,0 +1,140 @@
+{
+  "FieldMaps": {
+    "SBO_SFCISalesDocOutput_Search.SEARCHPARAMS": {
+      "SalesDocument": {
+        "FriendlyName": "SalesDocument",
+        "TechnicalName": "VBELN",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "OutputApplication": {
+        "FriendlyName": "OutputApplication",
+        "TechnicalName": "KAPPL",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "SBO_SFCISalesDocOutput_Search.OUTPUT_TYPE": {
+      "ConditionType": {
+        "FriendlyName": "ConditionType",
+        "TechnicalName": "KSCHL",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "X_GetPDF": {
+        "FriendlyName": "X_GetPDF",
+        "TechnicalName": "X_GET_PDF",
+        "FieldType": "Boolean",
+        "FieldWidth": 1
+      }
+    },
+    "SBO_SFCISalesDocOutput_Search.SEARCHRESULT": {
+      "SalesDocument": {
+        "FriendlyName": "SalesDocument",
+        "TechnicalName": "VBELN",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ConditionType": {
+        "FriendlyName": "ConditionType",
+        "TechnicalName": "KSCHL",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ConditionTypeDescription": {
+        "FriendlyName": "ConditionTypeDescription",
+        "TechnicalName": "KSCHL_TEXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Language": {
+        "FriendlyName": "Language",
+        "TechnicalName": "SPRAS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "PDF_B64STR": {
+        "FriendlyName": "PDF_B64STR",
+        "TechnicalName": "PDF_B64STR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    }
+  },
+  "StructMap": {
+    "SEARCHPARAMS": {
+      "Name": "SEARCHPARAMS",
+      "ItemType": "SBO_SFCISalesDocOutput_Search.SEARCHPARAMS",
+      "FieldMap": {
+        "SalesDocument": {
+          "FriendlyName": "SalesDocument",
+          "TechnicalName": "VBELN",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "OutputApplication": {
+          "FriendlyName": "OutputApplication",
+          "TechnicalName": "KAPPL",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  },
+  "CollectionMap": {
+    "OUTPUT_TYPE": {
+      "Name": "OUTPUT_TYPE",
+      "ItemType": "SBO_SFCISalesDocOutput_Search.OUTPUT_TYPE",
+      "FieldMap": {
+        "ConditionType": {
+          "FriendlyName": "ConditionType",
+          "TechnicalName": "KSCHL",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "X_GetPDF": {
+          "FriendlyName": "X_GetPDF",
+          "TechnicalName": "X_GET_PDF",
+          "FieldType": "Boolean",
+          "FieldWidth": 1
+        }
+      }
+    },
+    "SEARCHRESULT": {
+      "Name": "SEARCHRESULT",
+      "ItemType": "SBO_SFCISalesDocOutput_Search.SEARCHRESULT",
+      "FieldMap": {
+        "SalesDocument": {
+          "FriendlyName": "SalesDocument",
+          "TechnicalName": "VBELN",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ConditionType": {
+          "FriendlyName": "ConditionType",
+          "TechnicalName": "KSCHL",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ConditionTypeDescription": {
+          "FriendlyName": "ConditionTypeDescription",
+          "TechnicalName": "KSCHL_TEXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Language": {
+          "FriendlyName": "Language",
+          "TechnicalName": "SPRAS",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "PDF_B64STR": {
+          "FriendlyName": "PDF_B64STR",
+          "TechnicalName": "PDF_B64STR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  }
+}

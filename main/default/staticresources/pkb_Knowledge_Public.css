@@ -1,0 +1,243 @@
+body {
+ background-color:#fbf5ea;
+ font-family:Verdana!important;
+ }
+ 
+ body .bPageBlock {
+ margin-bottom:0px!important;
+ }
+
+#pagewrapper {
+ background-color:#fbf5ea;
+ }
+
+.bPageHeader {display:block;}
+
+.bPageTitle .ptBody h1.noSecondHeader{
+font-size:14px!important;
+font-weight:bold!important;
+max-width:760px;
+display:block;
+}
+
+#pkbheader{
+background-color:#34429b;
+background-repeat: repeat-x;
+width:1024px;
+margin-left:auto;
+margin-right:auto;
+}
+
+
+#contentWrapper {
+max-width: 780px;
+position: relative;
+margin-left: auto;
+margin-right: auto;
+}
+.bPageBlock .pbBody .green .pbSubheader{
+            background-color:#008000;
+        }
+      /*  body .bPageTitle .ptBody .content .pageType .noSecondHeader{ 
+            color:#008000!important;*/
+           
+        }
+        h1.pageType .noSecondHeader{
+         font-size:1.5em!important;
+         }
+
+div#rightHeader {
+height:160px!important;
+}
+
+div#right_column {
+width:1000px!important;
+border-right:2px solid #e8e9e9;
+}
+
+div.searchDrill{
+float:left;
+margin-right:15px;
+}
+
+div.narrowSearch select {
+min-width:240px;
+}
+
+nav {
+  background-color:#364395;
+  height:40px;
+  z-index:30;
+  position:relative;
+  border-top:1px solid #ffffff!important;
+}
+ 
+ 
+nav ul {
+  font-family: Verdana;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ 
+nav ul li {
+  display: block;
+  position: relative;
+  float: left;
+ 
+}
+ 
+nav li ul { 
+  display: none; 
+}
+ 
+nav ul li a, nav ul li a:visited {
+  display: block;
+  text-decoration: none;
+  padding: 7px 10px 3px 10px;
+  background: #364395;
+  color: #ffffff!important;  
+  margin-left: 1px;
+  white-space: nowrap;
+  height:30px; /* Width and height of top-level nav items */
+  min-width:100px;
+  text-align:center;
+ 
+}
+ 
+nav ul li a:hover { 
+  background: #364395; 
+  color:#ffffff;
+}
+ 
+nav li:hover ul {
+  display: block;
+  position: absolute;
+  height:30px;
+}
+ 
+nav li:hover li {
+  float: none;
+  font-size: 11px;
+ 
+}
+ 
+nav li:hover a { 
+  background: #364395; 
+    color:#ffffff;
+  height:30px; /* Height of lower-level nav items is shorter than main level */
+}
+ 
+nav li:hover li a:hover { 
+  background: #ffffff; 
+  color:#364395!important; 
+}
+ 
+nav ul li ul li a {
+    text-align:left; /* Top-level items are centered, but nested list items are left-aligned */
+}
+
+.pbBody {
+margin:0px!important;
+}
+
+.knowledgePrintableView .knowledgePrintableViewContent .sectionName {
+background-color:#364395!important; 
+  color:#ffffff;
+}
+
+#pkbfooter {
+margin-top:15px;
+}
+
+.labelCol {
+width:18%!important;
+}
+
+
+#pkbfooter #footerWrapper {
+background-color:#364395;
+text-align:center;
+height:44px;
+}
+
+#footerLeft{
+width:166px;
+height:44px;
+float: left;
+}
+
+#footerContent {
+padding-top:14px;
+width: 650px;
+float:left;
+color: #9bbfe0;
+}
+
+#footerContent a, #footerContent a:visited {
+color: #9bbfe0;
+text-decoration:none;
+}
+
+#footerLogo {
+width:144px;
+height:44px;
+float:right;
+}
+
+#legalStuff {
+text-align:center;
+color:#817e78;
+width:100%;
+clear:both;
+}
+
+
+/*Text readability fix August 2014 */
+body .bPageBlock .pbBody .labelCol {
+font-family: Verdana;
+font-size:12px;
+}
+
+body .bPageBlock .pbBody .dataCol {
+font-family: Verdana;
+font-size:12px;
+}
+
+.sfdc_richtext{
+font-family: Verdana;
+font-size:12px!important;
+}
+.sfdc_richtext a{
+color:#0066ff!important;
+text-decoration:none;
+}
+.sfdc_richtext a:hover{
+color:#0066ff!important;
+text-decoration:underline;
+}
+
+.sfdc_richtext a.visited{
+color:#993333!important;
+text-decoration:none;
+}
+
+.bPageBlock .detailList {
+font-family: Verdana;
+font-size:12px!important;
+}
+
+
+/*articleTitle {
+  font-family: 'Arial', 'Helvetica', 'sans-serif';
+  font-size: 24px;
+  color: #008000;
+}
+
+.pbSubheader{
+    color:#ffffff;
+    background-color:#c00000;
+}
+
+newLink { color: #008000; font-weight: bold; }*/

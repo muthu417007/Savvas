@@ -1,0 +1,204 @@
+{
+  "FieldMaps": {
+    "SBO_SFCISalesDocFlow_Search.SEARCHPARAMS": {
+      "SalesDocument": {
+        "FriendlyName": "SalesDocument",
+        "TechnicalName": "VBELN",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ItemNumber": {
+        "FriendlyName": "ItemNumber",
+        "TechnicalName": "POSNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "SBO_SFCISalesDocFlow_Search.SEARCHRESULT": {
+      "SalesDocument": {
+        "FriendlyName": "SalesDocument",
+        "TechnicalName": "VBELN",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ItemNumber": {
+        "FriendlyName": "ItemNumber",
+        "TechnicalName": "POSNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DocumentCategory": {
+        "FriendlyName": "DocumentCategory",
+        "TechnicalName": "VBTYP",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DocumentCategoryText": {
+        "FriendlyName": "DocumentCategoryText",
+        "TechnicalName": "VBTYP_TEXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "OriginatingDocument": {
+        "FriendlyName": "OriginatingDocument",
+        "TechnicalName": "DOCNUV",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "OriginatingItem": {
+        "FriendlyName": "OriginatingItem",
+        "TechnicalName": "ITEMNUV",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "HierarchyLevel": {
+        "FriendlyName": "HierarchyLevel",
+        "TechnicalName": "HLEVEL",
+        "FieldType": "Int",
+        "FieldWidth": 1
+      },
+      "CustomerNumber": {
+        "FriendlyName": "CustomerNumber",
+        "TechnicalName": "KUNNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CreateDate": {
+        "FriendlyName": "CreateDate",
+        "TechnicalName": "ERDAT",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "CreatedBy": {
+        "FriendlyName": "CreatedBy",
+        "TechnicalName": "ERNAM",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DateChanged": {
+        "FriendlyName": "DateChanged",
+        "TechnicalName": "AEDAT",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "ChangedBy": {
+        "FriendlyName": "ChangedBy",
+        "TechnicalName": "AENAM",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DocumentStatus": {
+        "FriendlyName": "DocumentStatus",
+        "TechnicalName": "STATUS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    }
+  },
+  "StructMap": {
+    "SEARCHPARAMS": {
+      "Name": "SEARCHPARAMS",
+      "ItemType": "SBO_SFCISalesDocFlow_Search.SEARCHPARAMS",
+      "FieldMap": {
+        "SalesDocument": {
+          "FriendlyName": "SalesDocument",
+          "TechnicalName": "VBELN",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ItemNumber": {
+          "FriendlyName": "ItemNumber",
+          "TechnicalName": "POSNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  },
+  "CollectionMap": {
+    "SEARCHRESULT": {
+      "Name": "SEARCHRESULT",
+      "ItemType": "SBO_SFCISalesDocFlow_Search.SEARCHRESULT",
+      "FieldMap": {
+        "SalesDocument": {
+          "FriendlyName": "SalesDocument",
+          "TechnicalName": "VBELN",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ItemNumber": {
+          "FriendlyName": "ItemNumber",
+          "TechnicalName": "POSNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DocumentCategory": {
+          "FriendlyName": "DocumentCategory",
+          "TechnicalName": "VBTYP",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DocumentCategoryText": {
+          "FriendlyName": "DocumentCategoryText",
+          "TechnicalName": "VBTYP_TEXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "OriginatingDocument": {
+          "FriendlyName": "OriginatingDocument",
+          "TechnicalName": "DOCNUV",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "OriginatingItem": {
+          "FriendlyName": "OriginatingItem",
+          "TechnicalName": "ITEMNUV",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "HierarchyLevel": {
+          "FriendlyName": "HierarchyLevel",
+          "TechnicalName": "HLEVEL",
+          "FieldType": "Int",
+          "FieldWidth": 1
+        },
+        "CustomerNumber": {
+          "FriendlyName": "CustomerNumber",
+          "TechnicalName": "KUNNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CreateDate": {
+          "FriendlyName": "CreateDate",
+          "TechnicalName": "ERDAT",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "CreatedBy": {
+          "FriendlyName": "CreatedBy",
+          "TechnicalName": "ERNAM",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DateChanged": {
+          "FriendlyName": "DateChanged",
+          "TechnicalName": "AEDAT",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "ChangedBy": {
+          "FriendlyName": "ChangedBy",
+          "TechnicalName": "AENAM",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DocumentStatus": {
+          "FriendlyName": "DocumentStatus",
+          "TechnicalName": "STATUS",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  }
+}

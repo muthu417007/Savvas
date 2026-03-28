@@ -1,0 +1,1410 @@
+{
+  "FieldMaps": {
+    "SBO_EnosixEquipment_Detail.EnosixEquipment": {
+      "EquipmentNumber": {
+        "FriendlyName": "EquipmentNumber",
+        "TechnicalName": "EQUNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "EquipmentNumberDescription": {
+        "FriendlyName": "EquipmentNumberDescription",
+        "TechnicalName": "EQKTX",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Equipmentcategory": {
+        "FriendlyName": "Equipmentcategory",
+        "TechnicalName": "EQTYP",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "EquipmentcategoryText": {
+        "FriendlyName": "EquipmentcategoryText",
+        "TechnicalName": "TYPTX",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "UserStatus": {
+        "FriendlyName": "UserStatus",
+        "TechnicalName": "ESTAT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "UserStatusText": {
+        "FriendlyName": "UserStatusText",
+        "TechnicalName": "USER_STATUS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ValidFromDate": {
+        "FriendlyName": "ValidFromDate",
+        "TechnicalName": "DATAB",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "ValidToDate": {
+        "FriendlyName": "ValidToDate",
+        "TechnicalName": "DATBI",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "TechnicalObjectType": {
+        "FriendlyName": "TechnicalObjectType",
+        "TechnicalName": "EQART",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "AuthorizationGroup": {
+        "FriendlyName": "AuthorizationGroup",
+        "TechnicalName": "BEGRU",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "GrossWeight": {
+        "FriendlyName": "GrossWeight",
+        "TechnicalName": "BRGEW",
+        "FieldType": "Decimal",
+        "FieldWidth": 1
+      },
+      "WeightUnit": {
+        "FriendlyName": "WeightUnit",
+        "TechnicalName": "GEWEI",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SizeDimensions": {
+        "FriendlyName": "SizeDimensions",
+        "TechnicalName": "GROES",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "InventoryNumber": {
+        "FriendlyName": "InventoryNumber",
+        "TechnicalName": "INVNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "AcquisitionValue": {
+        "FriendlyName": "AcquisitionValue",
+        "TechnicalName": "ANSWT",
+        "FieldType": "Decimal",
+        "FieldWidth": 1
+      },
+      "CurrencyKey": {
+        "FriendlyName": "CurrencyKey",
+        "TechnicalName": "WAERS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "AcquisitionDate": {
+        "FriendlyName": "AcquisitionDate",
+        "TechnicalName": "ANSDT",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "AssetManufacturer": {
+        "FriendlyName": "AssetManufacturer",
+        "TechnicalName": "HERST",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ManufactureCountry": {
+        "FriendlyName": "ManufactureCountry",
+        "TechnicalName": "HERLD",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ManufacturerModelNumber": {
+        "FriendlyName": "ManufacturerModelNumber",
+        "TechnicalName": "TYPBZ",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ConstructionYear": {
+        "FriendlyName": "ConstructionYear",
+        "TechnicalName": "BAUJJ",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ConstructionMonth": {
+        "FriendlyName": "ConstructionMonth",
+        "TechnicalName": "BAUMM",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ManufacturerPartNumber": {
+        "FriendlyName": "ManufacturerPartNumber",
+        "TechnicalName": "MAPAR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ManufacturerSerialNumber": {
+        "FriendlyName": "ManufacturerSerialNumber",
+        "TechnicalName": "SERGE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "LongText": {
+        "FriendlyName": "LongText",
+        "TechnicalName": "LONGTEXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ObjectNumber": {
+        "FriendlyName": "ObjectNumber",
+        "TechnicalName": "OBJNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "SBO_EnosixEquipment_Detail.LOCATION": {
+      "MaintenancePlant": {
+        "FriendlyName": "MaintenancePlant",
+        "TechnicalName": "SWERK",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "MaintenanceObjectLocation": {
+        "FriendlyName": "MaintenanceObjectLocation",
+        "TechnicalName": "STORT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Room": {
+        "FriendlyName": "Room",
+        "TechnicalName": "MSGRP",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "PlantSection": {
+        "FriendlyName": "PlantSection",
+        "TechnicalName": "BEBER",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "WorkCenter": {
+        "FriendlyName": "WorkCenter",
+        "TechnicalName": "ARBPL",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "TechnicalObjectABCindicator": {
+        "FriendlyName": "TechnicalObjectABCindicator",
+        "TechnicalName": "ABCKZ",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SortField": {
+        "FriendlyName": "SortField",
+        "TechnicalName": "EQFNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CustomerName": {
+        "FriendlyName": "CustomerName",
+        "TechnicalName": "NAME1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Name2": {
+        "FriendlyName": "Name2",
+        "TechnicalName": "NAME2",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Street": {
+        "FriendlyName": "Street",
+        "TechnicalName": "STREET",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "PostalCode": {
+        "FriendlyName": "PostalCode",
+        "TechnicalName": "POST_CODE1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "City": {
+        "FriendlyName": "City",
+        "TechnicalName": "CITY1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Country": {
+        "FriendlyName": "Country",
+        "TechnicalName": "COUNTRY",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Region": {
+        "FriendlyName": "Region",
+        "TechnicalName": "REGION",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "TelephoneNumber": {
+        "FriendlyName": "TelephoneNumber",
+        "TechnicalName": "TEL_NUMBER",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "FaxNumber": {
+        "FriendlyName": "FaxNumber",
+        "TechnicalName": "FAX_NUMBER",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "SBO_EnosixEquipment_Detail.ORGANIZATION": {
+      "CompanyCode": {
+        "FriendlyName": "CompanyCode",
+        "TechnicalName": "BUKRS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "BusinessArea": {
+        "FriendlyName": "BusinessArea",
+        "TechnicalName": "GSBER",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "AssetNumber": {
+        "FriendlyName": "AssetNumber",
+        "TechnicalName": "ANLNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "AssetSubnumber": {
+        "FriendlyName": "AssetSubnumber",
+        "TechnicalName": "ANLUN",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CostCenter": {
+        "FriendlyName": "CostCenter",
+        "TechnicalName": "KOSTL",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ControllingArea": {
+        "FriendlyName": "ControllingArea",
+        "TechnicalName": "KOKRS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "WBSElement": {
+        "FriendlyName": "WBSElement",
+        "TechnicalName": "PROID",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "StandingOrderNumber": {
+        "FriendlyName": "StandingOrderNumber",
+        "TechnicalName": "DAUFN",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SettlementOrder": {
+        "FriendlyName": "SettlementOrder",
+        "TechnicalName": "AUFNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "PlanningPlant": {
+        "FriendlyName": "PlanningPlant",
+        "TechnicalName": "IWERK",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "PlannerGroup": {
+        "FriendlyName": "PlannerGroup",
+        "TechnicalName": "INGRP",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "MainWorkCenter": {
+        "FriendlyName": "MainWorkCenter",
+        "TechnicalName": "GEWRK",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "MainWorkCenterPlant": {
+        "FriendlyName": "MainWorkCenterPlant",
+        "TechnicalName": "WERGW",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CatalogProfile": {
+        "FriendlyName": "CatalogProfile",
+        "TechnicalName": "RBNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "SBO_EnosixEquipment_Detail.STRUCTURE": {
+      "FunctionalLocation": {
+        "FriendlyName": "FunctionalLocation",
+        "TechnicalName": "TPLNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "FunctionalLocationDescription": {
+        "FriendlyName": "FunctionalLocationDescription",
+        "TechnicalName": "TXT_TPLNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SuperordEquipment": {
+        "FriendlyName": "SuperordEquipment",
+        "TechnicalName": "HEQUI",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SuperordEquipmentDescription": {
+        "FriendlyName": "SuperordEquipmentDescription",
+        "TechnicalName": "TXT_HEQUI",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "HEQNR": {
+        "FriendlyName": "HEQNR",
+        "TechnicalName": "HEQNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "TechIdentNo": {
+        "FriendlyName": "TechIdentNo",
+        "TechnicalName": "TIDNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ConstType": {
+        "FriendlyName": "ConstType",
+        "TechnicalName": "SUBMT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "SBO_EnosixEquipment_Detail.WARRANTY": {
+      "CustomerWarrantyStartDate": {
+        "FriendlyName": "CustomerWarrantyStartDate",
+        "TechnicalName": "CUSTOMER_GWLDT",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "CustomerWarrantyEndDate": {
+        "FriendlyName": "CustomerWarrantyEndDate",
+        "TechnicalName": "CUSTOMER_GWLEN",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "CustomerMasterWarranty": {
+        "FriendlyName": "CustomerMasterWarranty",
+        "TechnicalName": "CUSTOMER_MGANR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ManufacturerWarrantyStartDate": {
+        "FriendlyName": "ManufacturerWarrantyStartDate",
+        "TechnicalName": "MANUFAC_GWLDT",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "ManufacturerWarrantyEndDate": {
+        "FriendlyName": "ManufacturerWarrantyEndDate",
+        "TechnicalName": "MANUFAC_GWLEN",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "ManufacturerMasterWarranty": {
+        "FriendlyName": "ManufacturerMasterWarranty",
+        "TechnicalName": "MANUFAC_MGANR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "SBO_EnosixEquipment_Detail.SALES": {
+      "SalesOrganization": {
+        "FriendlyName": "SalesOrganization",
+        "TechnicalName": "VKORG",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesOrganizationText": {
+        "FriendlyName": "SalesOrganizationText",
+        "TechnicalName": "VKTXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DistributionChannel": {
+        "FriendlyName": "DistributionChannel",
+        "TechnicalName": "VTWEG",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DistributionChannelText": {
+        "FriendlyName": "DistributionChannelText",
+        "TechnicalName": "VTTXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Division": {
+        "FriendlyName": "Division",
+        "TechnicalName": "SPART",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DivisionText": {
+        "FriendlyName": "DivisionText",
+        "TechnicalName": "SPTXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesOffice": {
+        "FriendlyName": "SalesOffice",
+        "TechnicalName": "VKBUR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesOfficeText": {
+        "FriendlyName": "SalesOfficeText",
+        "TechnicalName": "VKBUR_TXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesGroup": {
+        "FriendlyName": "SalesGroup",
+        "TechnicalName": "VKGRP",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesGroupText": {
+        "FriendlyName": "SalesGroupText",
+        "TechnicalName": "VKGRP_TXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "LicenseNumber": {
+        "FriendlyName": "LicenseNumber",
+        "TechnicalName": "LIZNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldTo": {
+        "FriendlyName": "SoldTo",
+        "TechnicalName": "SOLDTO_PARNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipTo": {
+        "FriendlyName": "ShipTo",
+        "TechnicalName": "SHIPTO_PARNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "SBO_EnosixEquipment_Detail.SERDATA": {
+      "Material": {
+        "FriendlyName": "Material",
+        "TechnicalName": "MATNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "MaterialDescription": {
+        "FriendlyName": "MaterialDescription",
+        "TechnicalName": "MAKTX",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SerialNumber": {
+        "FriendlyName": "SerialNumber",
+        "TechnicalName": "SERNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "LastSerialNo": {
+        "FriendlyName": "LastSerialNo",
+        "TechnicalName": "LSERNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "StockType": {
+        "FriendlyName": "StockType",
+        "TechnicalName": "LBBSA",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Plant": {
+        "FriendlyName": "Plant",
+        "TechnicalName": "B_WERK",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CompanyCode": {
+        "FriendlyName": "CompanyCode",
+        "TechnicalName": "BUKRS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "StorageLocation": {
+        "FriendlyName": "StorageLocation",
+        "TechnicalName": "B_LAGER",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "StockBatch": {
+        "FriendlyName": "StockBatch",
+        "TechnicalName": "B_CHARGE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "MasterBatch": {
+        "FriendlyName": "MasterBatch",
+        "TechnicalName": "CHARGE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SpecialStockInd": {
+        "FriendlyName": "SpecialStockInd",
+        "TechnicalName": "SOBKZ",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "LastGoodsMvtDate": {
+        "FriendlyName": "LastGoodsMvtDate",
+        "TechnicalName": "DATLWB",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "CustomerNumber": {
+        "FriendlyName": "CustomerNumber",
+        "TechnicalName": "KUNNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Vendor": {
+        "FriendlyName": "Vendor",
+        "TechnicalName": "LIFNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesDocument": {
+        "FriendlyName": "SalesDocument",
+        "TechnicalName": "KDAUF",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesDocumentItem": {
+        "FriendlyName": "SalesDocumentItem",
+        "TechnicalName": "KDPOS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "WBSElementInternal": {
+        "FriendlyName": "WBSElementInternal",
+        "TechnicalName": "PS_PSP_PNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipTo": {
+        "FriendlyName": "ShipTo",
+        "TechnicalName": "SHIPTO_PARNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "SBO_EnosixEquipment_Detail.PARTNERS": {
+      "PartnerFunction": {
+        "FriendlyName": "PartnerFunction",
+        "TechnicalName": "PARVW",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "PARVW_IN": {
+        "FriendlyName": "PARVW_IN",
+        "TechnicalName": "PARVW_IN",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "PartnerFunctionDescription": {
+        "FriendlyName": "PartnerFunctionDescription",
+        "TechnicalName": "PARVW_TEXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Counter": {
+        "FriendlyName": "Counter",
+        "TechnicalName": "COUNTER",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CustomerNumber": {
+        "FriendlyName": "CustomerNumber",
+        "TechnicalName": "KUNNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Vendor": {
+        "FriendlyName": "Vendor",
+        "TechnicalName": "LIFNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "PersonnelNumber": {
+        "FriendlyName": "PersonnelNumber",
+        "TechnicalName": "PERNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ContactPersonNumber": {
+        "FriendlyName": "ContactPersonNumber",
+        "TechnicalName": "PARNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CustomerName": {
+        "FriendlyName": "CustomerName",
+        "TechnicalName": "NAME1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "PartnerName2": {
+        "FriendlyName": "PartnerName2",
+        "TechnicalName": "NAME2",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Name3": {
+        "FriendlyName": "Name3",
+        "TechnicalName": "NAME3",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Name4": {
+        "FriendlyName": "Name4",
+        "TechnicalName": "NAME4",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "City": {
+        "FriendlyName": "City",
+        "TechnicalName": "CITY1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "District": {
+        "FriendlyName": "District",
+        "TechnicalName": "CITY2",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "PostalCode": {
+        "FriendlyName": "PostalCode",
+        "TechnicalName": "POST_CODE1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "POBoxPostalCode": {
+        "FriendlyName": "POBoxPostalCode",
+        "TechnicalName": "POST_CODE2",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Country": {
+        "FriendlyName": "Country",
+        "TechnicalName": "COUNTRY",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Region": {
+        "FriendlyName": "Region",
+        "TechnicalName": "REGION",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Street": {
+        "FriendlyName": "Street",
+        "TechnicalName": "STREET",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "POBox": {
+        "FriendlyName": "POBox",
+        "TechnicalName": "PO_BOX",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Language": {
+        "FriendlyName": "Language",
+        "TechnicalName": "LANGU",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "TelephoneNumber": {
+        "FriendlyName": "TelephoneNumber",
+        "TechnicalName": "TEL_NUMBER",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "AddressNotes": {
+        "FriendlyName": "AddressNotes",
+        "TechnicalName": "REMARK",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "HouseNumber": {
+        "FriendlyName": "HouseNumber",
+        "TechnicalName": "HOUSE_NUM1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "EMailAddress": {
+        "FriendlyName": "EMailAddress",
+        "TechnicalName": "SMTP_ADDR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    }
+  },
+  "StructMap": {
+    "LOCATION": {
+      "Name": "LOCATION",
+      "ItemType": "SBO_EnosixEquipment_Detail.LOCATION",
+      "FieldMap": {
+        "MaintenancePlant": {
+          "FriendlyName": "MaintenancePlant",
+          "TechnicalName": "SWERK",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "MaintenanceObjectLocation": {
+          "FriendlyName": "MaintenanceObjectLocation",
+          "TechnicalName": "STORT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Room": {
+          "FriendlyName": "Room",
+          "TechnicalName": "MSGRP",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "PlantSection": {
+          "FriendlyName": "PlantSection",
+          "TechnicalName": "BEBER",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "WorkCenter": {
+          "FriendlyName": "WorkCenter",
+          "TechnicalName": "ARBPL",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "TechnicalObjectABCindicator": {
+          "FriendlyName": "TechnicalObjectABCindicator",
+          "TechnicalName": "ABCKZ",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SortField": {
+          "FriendlyName": "SortField",
+          "TechnicalName": "EQFNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CustomerName": {
+          "FriendlyName": "CustomerName",
+          "TechnicalName": "NAME1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Name2": {
+          "FriendlyName": "Name2",
+          "TechnicalName": "NAME2",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Street": {
+          "FriendlyName": "Street",
+          "TechnicalName": "STREET",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "PostalCode": {
+          "FriendlyName": "PostalCode",
+          "TechnicalName": "POST_CODE1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "City": {
+          "FriendlyName": "City",
+          "TechnicalName": "CITY1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Country": {
+          "FriendlyName": "Country",
+          "TechnicalName": "COUNTRY",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Region": {
+          "FriendlyName": "Region",
+          "TechnicalName": "REGION",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "TelephoneNumber": {
+          "FriendlyName": "TelephoneNumber",
+          "TechnicalName": "TEL_NUMBER",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "FaxNumber": {
+          "FriendlyName": "FaxNumber",
+          "TechnicalName": "FAX_NUMBER",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    },
+    "ORGANIZATION": {
+      "Name": "ORGANIZATION",
+      "ItemType": "SBO_EnosixEquipment_Detail.ORGANIZATION",
+      "FieldMap": {
+        "CompanyCode": {
+          "FriendlyName": "CompanyCode",
+          "TechnicalName": "BUKRS",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "BusinessArea": {
+          "FriendlyName": "BusinessArea",
+          "TechnicalName": "GSBER",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "AssetNumber": {
+          "FriendlyName": "AssetNumber",
+          "TechnicalName": "ANLNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "AssetSubnumber": {
+          "FriendlyName": "AssetSubnumber",
+          "TechnicalName": "ANLUN",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CostCenter": {
+          "FriendlyName": "CostCenter",
+          "TechnicalName": "KOSTL",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ControllingArea": {
+          "FriendlyName": "ControllingArea",
+          "TechnicalName": "KOKRS",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "WBSElement": {
+          "FriendlyName": "WBSElement",
+          "TechnicalName": "PROID",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "StandingOrderNumber": {
+          "FriendlyName": "StandingOrderNumber",
+          "TechnicalName": "DAUFN",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SettlementOrder": {
+          "FriendlyName": "SettlementOrder",
+          "TechnicalName": "AUFNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "PlanningPlant": {
+          "FriendlyName": "PlanningPlant",
+          "TechnicalName": "IWERK",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "PlannerGroup": {
+          "FriendlyName": "PlannerGroup",
+          "TechnicalName": "INGRP",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "MainWorkCenter": {
+          "FriendlyName": "MainWorkCenter",
+          "TechnicalName": "GEWRK",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "MainWorkCenterPlant": {
+          "FriendlyName": "MainWorkCenterPlant",
+          "TechnicalName": "WERGW",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CatalogProfile": {
+          "FriendlyName": "CatalogProfile",
+          "TechnicalName": "RBNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    },
+    "STRUCTURE": {
+      "Name": "STRUCTURE",
+      "ItemType": "SBO_EnosixEquipment_Detail.STRUCTURE",
+      "FieldMap": {
+        "FunctionalLocation": {
+          "FriendlyName": "FunctionalLocation",
+          "TechnicalName": "TPLNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "FunctionalLocationDescription": {
+          "FriendlyName": "FunctionalLocationDescription",
+          "TechnicalName": "TXT_TPLNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SuperordEquipment": {
+          "FriendlyName": "SuperordEquipment",
+          "TechnicalName": "HEQUI",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SuperordEquipmentDescription": {
+          "FriendlyName": "SuperordEquipmentDescription",
+          "TechnicalName": "TXT_HEQUI",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "HEQNR": {
+          "FriendlyName": "HEQNR",
+          "TechnicalName": "HEQNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "TechIdentNo": {
+          "FriendlyName": "TechIdentNo",
+          "TechnicalName": "TIDNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ConstType": {
+          "FriendlyName": "ConstType",
+          "TechnicalName": "SUBMT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    },
+    "WARRANTY": {
+      "Name": "WARRANTY",
+      "ItemType": "SBO_EnosixEquipment_Detail.WARRANTY",
+      "FieldMap": {
+        "CustomerWarrantyStartDate": {
+          "FriendlyName": "CustomerWarrantyStartDate",
+          "TechnicalName": "CUSTOMER_GWLDT",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "CustomerWarrantyEndDate": {
+          "FriendlyName": "CustomerWarrantyEndDate",
+          "TechnicalName": "CUSTOMER_GWLEN",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "CustomerMasterWarranty": {
+          "FriendlyName": "CustomerMasterWarranty",
+          "TechnicalName": "CUSTOMER_MGANR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ManufacturerWarrantyStartDate": {
+          "FriendlyName": "ManufacturerWarrantyStartDate",
+          "TechnicalName": "MANUFAC_GWLDT",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "ManufacturerWarrantyEndDate": {
+          "FriendlyName": "ManufacturerWarrantyEndDate",
+          "TechnicalName": "MANUFAC_GWLEN",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "ManufacturerMasterWarranty": {
+          "FriendlyName": "ManufacturerMasterWarranty",
+          "TechnicalName": "MANUFAC_MGANR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    },
+    "SALES": {
+      "Name": "SALES",
+      "ItemType": "SBO_EnosixEquipment_Detail.SALES",
+      "FieldMap": {
+        "SalesOrganization": {
+          "FriendlyName": "SalesOrganization",
+          "TechnicalName": "VKORG",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesOrganizationText": {
+          "FriendlyName": "SalesOrganizationText",
+          "TechnicalName": "VKTXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DistributionChannel": {
+          "FriendlyName": "DistributionChannel",
+          "TechnicalName": "VTWEG",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DistributionChannelText": {
+          "FriendlyName": "DistributionChannelText",
+          "TechnicalName": "VTTXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Division": {
+          "FriendlyName": "Division",
+          "TechnicalName": "SPART",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DivisionText": {
+          "FriendlyName": "DivisionText",
+          "TechnicalName": "SPTXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesOffice": {
+          "FriendlyName": "SalesOffice",
+          "TechnicalName": "VKBUR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesOfficeText": {
+          "FriendlyName": "SalesOfficeText",
+          "TechnicalName": "VKBUR_TXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesGroup": {
+          "FriendlyName": "SalesGroup",
+          "TechnicalName": "VKGRP",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesGroupText": {
+          "FriendlyName": "SalesGroupText",
+          "TechnicalName": "VKGRP_TXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "LicenseNumber": {
+          "FriendlyName": "LicenseNumber",
+          "TechnicalName": "LIZNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldTo": {
+          "FriendlyName": "SoldTo",
+          "TechnicalName": "SOLDTO_PARNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipTo": {
+          "FriendlyName": "ShipTo",
+          "TechnicalName": "SHIPTO_PARNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    },
+    "SERDATA": {
+      "Name": "SERDATA",
+      "ItemType": "SBO_EnosixEquipment_Detail.SERDATA",
+      "FieldMap": {
+        "Material": {
+          "FriendlyName": "Material",
+          "TechnicalName": "MATNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "MaterialDescription": {
+          "FriendlyName": "MaterialDescription",
+          "TechnicalName": "MAKTX",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SerialNumber": {
+          "FriendlyName": "SerialNumber",
+          "TechnicalName": "SERNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "LastSerialNo": {
+          "FriendlyName": "LastSerialNo",
+          "TechnicalName": "LSERNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "StockType": {
+          "FriendlyName": "StockType",
+          "TechnicalName": "LBBSA",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Plant": {
+          "FriendlyName": "Plant",
+          "TechnicalName": "B_WERK",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CompanyCode": {
+          "FriendlyName": "CompanyCode",
+          "TechnicalName": "BUKRS",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "StorageLocation": {
+          "FriendlyName": "StorageLocation",
+          "TechnicalName": "B_LAGER",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "StockBatch": {
+          "FriendlyName": "StockBatch",
+          "TechnicalName": "B_CHARGE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "MasterBatch": {
+          "FriendlyName": "MasterBatch",
+          "TechnicalName": "CHARGE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SpecialStockInd": {
+          "FriendlyName": "SpecialStockInd",
+          "TechnicalName": "SOBKZ",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "LastGoodsMvtDate": {
+          "FriendlyName": "LastGoodsMvtDate",
+          "TechnicalName": "DATLWB",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "CustomerNumber": {
+          "FriendlyName": "CustomerNumber",
+          "TechnicalName": "KUNNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Vendor": {
+          "FriendlyName": "Vendor",
+          "TechnicalName": "LIFNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesDocument": {
+          "FriendlyName": "SalesDocument",
+          "TechnicalName": "KDAUF",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesDocumentItem": {
+          "FriendlyName": "SalesDocumentItem",
+          "TechnicalName": "KDPOS",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "WBSElementInternal": {
+          "FriendlyName": "WBSElementInternal",
+          "TechnicalName": "PS_PSP_PNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipTo": {
+          "FriendlyName": "ShipTo",
+          "TechnicalName": "SHIPTO_PARNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  },
+  "CollectionMap": {
+    "PARTNERS": {
+      "Name": "PARTNERS",
+      "ItemType": "SBO_EnosixEquipment_Detail.PARTNERS",
+      "FieldMap": {
+        "PartnerFunction": {
+          "FriendlyName": "PartnerFunction",
+          "TechnicalName": "PARVW",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "PARVW_IN": {
+          "FriendlyName": "PARVW_IN",
+          "TechnicalName": "PARVW_IN",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "PartnerFunctionDescription": {
+          "FriendlyName": "PartnerFunctionDescription",
+          "TechnicalName": "PARVW_TEXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Counter": {
+          "FriendlyName": "Counter",
+          "TechnicalName": "COUNTER",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CustomerNumber": {
+          "FriendlyName": "CustomerNumber",
+          "TechnicalName": "KUNNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Vendor": {
+          "FriendlyName": "Vendor",
+          "TechnicalName": "LIFNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "PersonnelNumber": {
+          "FriendlyName": "PersonnelNumber",
+          "TechnicalName": "PERNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ContactPersonNumber": {
+          "FriendlyName": "ContactPersonNumber",
+          "TechnicalName": "PARNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CustomerName": {
+          "FriendlyName": "CustomerName",
+          "TechnicalName": "NAME1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "PartnerName2": {
+          "FriendlyName": "PartnerName2",
+          "TechnicalName": "NAME2",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Name3": {
+          "FriendlyName": "Name3",
+          "TechnicalName": "NAME3",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Name4": {
+          "FriendlyName": "Name4",
+          "TechnicalName": "NAME4",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "City": {
+          "FriendlyName": "City",
+          "TechnicalName": "CITY1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "District": {
+          "FriendlyName": "District",
+          "TechnicalName": "CITY2",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "PostalCode": {
+          "FriendlyName": "PostalCode",
+          "TechnicalName": "POST_CODE1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "POBoxPostalCode": {
+          "FriendlyName": "POBoxPostalCode",
+          "TechnicalName": "POST_CODE2",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Country": {
+          "FriendlyName": "Country",
+          "TechnicalName": "COUNTRY",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Region": {
+          "FriendlyName": "Region",
+          "TechnicalName": "REGION",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Street": {
+          "FriendlyName": "Street",
+          "TechnicalName": "STREET",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "POBox": {
+          "FriendlyName": "POBox",
+          "TechnicalName": "PO_BOX",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Language": {
+          "FriendlyName": "Language",
+          "TechnicalName": "LANGU",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "TelephoneNumber": {
+          "FriendlyName": "TelephoneNumber",
+          "TechnicalName": "TEL_NUMBER",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "AddressNotes": {
+          "FriendlyName": "AddressNotes",
+          "TechnicalName": "REMARK",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "HouseNumber": {
+          "FriendlyName": "HouseNumber",
+          "TechnicalName": "HOUSE_NUM1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "EMailAddress": {
+          "FriendlyName": "EMailAddress",
+          "TechnicalName": "SMTP_ADDR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  }
+}

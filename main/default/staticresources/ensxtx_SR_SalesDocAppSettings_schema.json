@@ -1,0 +1,1001 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "definitions": {
+        "SalesAreas": {
+            "type": "array",
+            "title": "Sales Areas",
+            "description": "List of sales areas to show in the UI.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "SalesOrganization": {
+                        "type": "string",
+                        "title": "Sales Organization"
+                    },
+                    "SalesOrganizationName": {
+                        "type": "string",
+                        "title": "Sales Organization Name"
+                    },
+                    "DistributionChannel": {
+                        "type": "string",
+                        "title": "Distribution Channel"
+                    },
+                    "DistributionChannelName": {
+                        "type": "string",
+                        "title": "Distribution Channel Name"
+                    },
+                    "Division": {
+                        "type": "string",
+                        "title": "Division"
+                    },
+                    "DivisionName": {
+                        "type": "string",
+                        "title": "Division Name"
+                    }
+                },
+                "required": [
+                    "SalesOrganization",
+                    "SalesOrganizationName",
+                    "DistributionChannel",
+                    "DistributionChannelName",
+                    "Division",
+                    "DivisionName"
+                ]
+			}
+        },
+        "optionValuesToIncludeSettings": {
+            "type": "object",
+            "table": true,
+            "description": "Option values to include for header/item fields. Formatted as the field name and its list of values to filter.",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "title": "Option Value",
+                        "description": "Included option values. Internal value is used if it is present."
+                    }
+                }
+            }
+        },
+        "optionValuesToInclude": {
+            "type": "object",
+            "title": "Option Values To Include",
+            "description": "Object for the field and filter list of values to include in a dropdown options.",
+            "properties": {
+                "Header": {"title": "Header Option Fields","$ref": "#/definitions/optionValuesToIncludeSettings"},
+                "Item": {"title": "Item Option Fields", "$ref": "#/definitions/optionValuesToIncludeSettings"}
+            },
+            "required": ["Header", "Item"]
+        },
+        "partnerPickers": {
+            "type": "array",
+            "title": "Partners",
+            "description": "List of partners that will be shown in the Partners tab",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "PartnerFunction": {
+                        "type": "string",
+                        "title": "Partner Function",
+                        "description": "SAP partner function.",
+                        "examples": ["SH"]
+                    },
+                    "PartnerFunctionInternal": {
+                        "type": "string",
+                        "title": "Partner Function Internal Code",
+                        "description": "The internal code of the SAP partner function.",
+                        "examples": ["WE"]
+                    },
+                    "PartnerFunctionName": {
+                        "type": "string",
+                        "title": "Partner Function Name",
+                        "description": "The name of the SAP partner function."
+                    },
+                    "CustomLabel_PartnerFunctionName": {
+                        "type": "string",
+                        "title": "Partner Function Custom Label",
+                        "description": "Override the partner function name with a Salesforce Custom Label (optional).",
+                        "examples": ["ensxtx_SalesDocPartners_Description_ShipTo"]
+                    },
+                    "ComponentType": {
+                        "type": "string",
+                        "title": "Search Type",
+                        "description": "Select 'PartnerSearch' to search for the related partners. Select 'CustomerSearch' for a wide open search.",
+                        "enum": [
+                            "PartnerSearch",
+                            "CustomerSearch"
+                        ]
+                    },
+                    "SearchType": {
+                        "type": "string",
+                        "title": "Partner Type",
+                        "description": "The type of partner to search.",
+                        "enum": [
+                            "Partner",
+                            "Contact",
+                            "Vendor",
+                            "Personnel"
+                        ]
+                    },
+                    "autoSearch": {
+                        "type": "boolean",
+                        "title": "Auto Search",
+                        "description": "Enable this setting to auto search on initial load. If 'Search Type' is set to 'PartnerSearch' this will always auto search.",
+                        "default": true
+                    },
+                    "allowSearch": {
+                        "type": "boolean",
+                        "title": "Allow Search",
+                        "description": "Enable this setting to display a button to search for partners.",
+                        "default": false
+                    },
+                    "allowAddressOverride": {
+                        "type": "boolean",
+                        "title": "Allow Address Override",
+                        "description": "Enable this setting to display a button to override the partner address.",
+                        "default": false
+                    },
+                    "autoPopulateAddressOverrideFromCustomer": {
+                        "type": "boolean",
+                        "title": "Auto Populate Address From SAP Customer",
+                        "description": "Enable this setting to first auto populate the address override from SAP customer.",
+                        "default": false
+                    }
+                },
+                "if": {
+                    "properties": {
+                        "ComponentType": {"const": "PartnerSearch"}
+                    }
+                },
+                "then": {
+                    "properties": {
+                        "autoSearch": {"const": true}
+                    }
+                },
+                "required": [
+                    "PartnerFunction",
+                    "PartnerFunctionInternal",
+                    "PartnerFunctionName",
+                    "ComponentType",
+                    "SearchType",
+                    "autoSearch",
+                    "allowSearch",
+                    "allowAddressOverride",
+                    "autoPopulateAddressOverrideFromCustomer"
+                ]
+            }
+        },
+        "texts": {
+            "type": "array",
+            "title": "Texts",
+            "description": "List of Texts to show",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "Id": {
+                        "type": "string",
+                        "title": "Text Id",
+                        "description": "The SAP text id.",
+                        "examples": ["0001"]
+                    },
+                    "Description": {
+                        "type": "string",
+                        "title": "Text Description",
+                        "description": "The label for the text input field."
+                    },
+                    "Required": {
+                        "type": "boolean",
+                        "title": "Required",
+                        "description": "Determine if this text field is required.",
+                        "default": false
+                    }
+                },
+                "required": [
+                    "Id",
+                    "Description",
+                    "Required"
+                ]
+            }
+        },
+        "headerFields": {
+            "type": "object",
+            "table": true,
+            "title": "Header Fields",
+            "description": "Fields on the header tab",
+            "properties": {
+                "DocumentNumber": {"title": "DocumentNumber", "$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"},
+                "CreateDate": {"title": "CreateDate", "$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"},
+                "NetOrderValue": {"title": "NetOrderValue", "$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            },
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettings"}
+            }
+        },
+        "itemTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Item Table Fields",
+            "description": "Fields on the item table component",
+            "properties": {
+                "SalesUnit": {"title": "SalesUnit", "$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"},
+                "BaseUnitOfMeasure": {"title": "BaseUnitOfMeasure", "$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"},
+                "NetItemPrice": {"title": "NetItemPrice", "$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"},
+                "NetOrderValue": {"title": "NetOrderValue", "$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"},
+                "ItemCategory": {"title": "ItemCategory", "$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            },
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsNoRequired"}
+            }
+        },
+        "itemSortTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Item Sort Table Fields",
+            "description": "Fields on the item sort table component",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            }
+        },
+        "materialSearchTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Material Search Table Fields",
+            "description": "Fields on the material search component",
+            "properties": {
+                "multiSelect": {
+                    "title": "Multi Select",
+                    "$ref": "#/definitions/fieldDefaultSettingsEnableOnly"
+                },
+                "autoSearch": {
+                    "title": "Auto Search",
+                    "$ref": "#/definitions/fieldDefaultSettingsEnableOnly"
+                },
+                "separateFlowComponent": {
+                    "title": "Separate Flow",
+                    "$ref": "#/definitions/fieldDefaultSettingsEnableOnly"
+                }
+            },
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            }
+        },
+        "itemEditFields": {
+            "type": "object",
+            "title": "Item Edit",
+            "description": "Fields & Tables inside the item edit component",
+            "properties": {
+                "EditItemFields": {"$ref": "#/definitions/mainEditItemFields"},
+                "PartnerTable": {"$ref": "#/definitions/partnerTableFields"},
+                "PartnerSearchTable": {"$ref": "#/definitions/partnerSearchTableFields"},
+                "CustomerSearchTable": {"$ref": "#/definitions/customerSearchTableFields"},
+                "ConditionTable": {"$ref": "#/definitions/conditionTableFields"},
+                "BillingPlanTable": {"$ref": "#/definitions/billingPlanTableFields"},
+                "ScheduleTable": {"$ref": "#/definitions/scheduleTableFields"},
+                "MaterialInventoryTable": {"$ref": "#/definitions/materialInverntotyTableFields"}
+            }
+        },
+        "mainEditItemFields": {
+            "type": "object",
+            "table": true,
+            "title": "Item Edit Fields",
+            "description": "Fields on the main edit item tab",
+            "properties": {
+                "NetWeight": {"title": "NetWeight", "$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"},
+                "NetItemPrice": {"title": "NetItemPrice", "$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"},
+                "NetOrderValue": {"title": "NetOrderValue", "$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            },
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettings"}
+            }
+        },
+        "partnerTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Partner Table Fields",
+            "description": "Fields on the partner table",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            }
+        },
+        "partnerSearchTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Partner Search Table Fields",
+            "description": "Fields on the partner search component",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            }
+        },
+        "customerSearchTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Customer Search Table Fields",
+            "description": "Fields on the customer search component",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            }
+        },
+        "conditionTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Condition Table Fields",
+            "description": "Fields on the condition table component",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            }
+        },
+        "billingPlanTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Billing Plan Table Fields",
+            "description": "Fields on the billing plan table component",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            }
+        },
+        "scheduleTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Schedule Table Fields",
+            "description": "Fields on the schedule table component",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            }
+        },
+        "materialInverntotyTableFields": {
+            "type": "object",
+            "table": true,
+            "title": "Material Inventory Table Fields",
+            "description": "Fields on the material inventory table component",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+            }
+        },
+        "addMaterial": {
+            "title": "Add Material",
+            "description": "Add SAP Material functionality",
+            "$ref": "#/definitions/tabDefaultSettings"
+        },
+        "autoInvoke": {
+            "type": "boolean",
+            "title": "Auto Invoke",
+            "description": "Enable this setting to automatically invoke the SAP transaction.",
+            "default": false
+        },
+        "displaySimulate": {
+            "type": "boolean",
+            "title": "Display Simulate Button",
+            "description": "Enable this setting to display the Simulate button",
+            "default": true
+        },
+        "displaySort": {
+            "type": "boolean",
+            "title": "Display Sort Button",
+            "description": "Enable this setting to display the Sort button",
+            "default": true
+        },
+        "displaySaveToSOject": {
+            "type": "boolean",
+            "title": "Display Save To SObject Button",
+            "description": "Enable this setting to display the Save To SObject button",
+            "default": true
+        },
+        "displaySaveToSAP": {
+            "type": "boolean",
+            "title": "Display Create/Update SAP Button",
+            "description": "Enable this setting to display the Create/Update To SAP button",
+            "default": true
+        },
+        "tabDefaultSettings": {
+            "type": "object",
+            "default": {"display": true, "edit": true},
+            "properties": {
+                "display": {"type": "boolean", "default": true, "title": "Display", "description": "Field display"},
+                "edit": {"type": "boolean", "default": true, "title": "Edit", "description": "Field editable"}
+            },
+            "if": {
+                "properties": {
+                    "display": {"const": false}
+                }
+            },
+            "then": {
+                "properties": {
+                    "edit": {"const": false}
+                }
+            },
+            "required": [
+                "display",
+                "edit"
+            ]
+        },
+        "fieldDefaultSettingsNoRequired": {"$ref": "#/definitions/tabDefaultSettings"},
+        "fieldDefaultSettings": {
+            "type": "object",
+            "default": {"display": true, "edit": true, "required": false},
+            "properties": {
+                "collection": {
+                    "type": "string",
+                    "title": "Collection",
+                    "description": "RIO object that this field belongs",
+                    "enum": [
+                        "",
+                        "SALES"
+                    ]
+                },
+                "display": {"type": "boolean", "default": true, "title": "Display", "description": "Field display"},
+                "edit": {"type": "boolean", "default": true, "title": "Edit", "description": "Field editable"},
+                "required": {"type": "boolean", "default": false, "title": "Required", "description": "Field requirement"},
+                "simulate": {"type": "boolean", "default": false, "title": "Simulate", "description": "Execute simulation on field change"},
+                "type": {
+                    "type": "string",
+                    "title": "Type",
+                    "description": "Used to override standard option select control type to text field",
+                    "enum": [
+                        "",
+                        "text"
+                    ]
+                }
+            },
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "display": {"const": false}
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "edit": {"const": false},
+                            "required": {"const": false},
+                            "type": {"const": ""}
+                        }
+                    }
+                },
+                {
+                    "if": {
+                        "properties": {
+                            "edit": {"const": false}
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "required": {"const": false}
+                        }
+                    }
+                }
+            ],
+            "required": [
+                "display",
+                "edit",
+                "required",
+                "simulate"
+            ]
+        },
+        "fieldDefaultSettingsDisplayOnly": {
+            "type": "object",
+            "default": {"display": true},
+            "properties": {
+                "display": {"type": "boolean", "default": true, "title": "Display", "description": "Field display"}
+            },
+            "required": [
+                "display"
+            ]
+        },
+        "fieldDefaultSettingsEnableOnly": {
+            "type": "object",
+            "default": {"display": true},
+            "properties": {
+                "enable": {"type": "boolean", "default": true, "title": "Enable", "description": "Enable setting"}
+            },
+            "required": [
+                "enable"
+            ]
+        },
+        "tabSettings": {
+            "type": "object",
+            "title": "Tabs",
+            "description": "Tab settings",
+            "properties": {
+                "Header": {
+                    "type": "object",
+                    "table": true,
+                    "title": "Header Tabs",
+                    "patternProperties": {
+                        "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/tabDefaultSettings"}
+                    }
+                },
+                "Item": {
+                    "type": "object",
+                    "table": true,
+                    "title": "Item Tabs",
+                    "patternProperties": {
+                        "^[A-Za-z_][A-Za-z0-9_]*$": {"$ref": "#/definitions/tabDefaultSettings"}
+                    }
+                }
+            },
+            "required": [
+                "Header",
+                "Item"
+            ]
+        },
+        "uiSettings": {
+            "type": "object",
+            "title": "Default Settings",
+            "properties": {
+                "autoInvoke": {"$ref": "#/definitions/autoInvoke"},
+                "displaySimulate": {"$ref": "#/definitions/displaySimulate"},
+                "displaySort": {"$ref": "#/definitions/displaySort"},
+                "displaySaveToSOject": {"$ref": "#/definitions/displaySaveToSOject"},
+                "displaySaveToSAP": {"$ref": "#/definitions/displaySaveToSAP"},
+                "AddMaterial": {"$ref": "#/definitions/addMaterial"},
+                "Tabs": {"$ref": "#/definitions/tabSettings"},
+                "Fields": {"$ref": "#/definitions/fieldSettings"}
+            },
+            "required": [
+                "autoInvoke",
+                "displaySimulate",
+                "displaySort",
+                "displaySaveToSOject",
+                "displaySaveToSAP",
+                "AddMaterial",
+                "Tabs",
+                "Fields"
+            ]
+        },
+        "fieldSettings": {
+            "type": "object",
+            "title": "Fields",
+            "description": "Field settings",
+            "properties": {
+                "Header": {"$ref": "#/definitions/headerFields"},
+                "PartnerTable": {"$ref": "#/definitions/partnerTableFields"},
+                "PartnerSearchTable": {"$ref": "#/definitions/partnerSearchTableFields"},
+                "CustomerSearchTable": {"$ref": "#/definitions/customerSearchTableFields"},
+                "ConditionTable": {"$ref": "#/definitions/conditionTableFields"},
+                "ItemTable": {"$ref": "#/definitions/itemTableFields"},
+                "ItemSortTable": {"$ref": "#/definitions/itemSortTableFields"},
+                "MaterialSearchTable": {"$ref": "#/definitions/materialSearchTableFields"},
+                "ItemEdit": {"$ref": "#/definitions/itemEditFields"}
+            },
+            "required": [
+                "Header",
+                "ItemTable",
+                "ItemEdit"
+            ]
+        }
+    },
+    "type": "object",
+    "patternProperties": {
+        "^[A-Za-z_][A-Za-z0-9_]*$": {
+            "type": "object",
+            "description": "App Settings Key",
+            "patternProperties": {
+                "^[A-Za-z_][A-Za-z0-9_]*$": {
+                    "type": "object",
+                    "description": "App Settings Type Name",
+                    "properties": {
+                        "itemNumberIncrement": {
+                            "type": "integer",
+                            "title": "Item Number Increment",
+                            "description": "Numeric increment of Item Number",
+                            "default": 10
+                        },
+                        "bomItemNumberIncrement": {
+                            "type": "integer",
+                            "title": "BoM Item Number Increment",
+                            "description": "Numeric increment of BoM Item Number",
+                            "default": 1
+                        },
+                        "sortOrderIncrement": {
+                            "type": "integer",
+                            "title": "Sort Order Increment",
+                            "description": "Numeric increment of Sort Order",
+                            "default": 10
+                        },
+                        "lineItemsBatchForAsync": {
+                            "type": "integer",
+                            "title": "Number of Items In Batches For Async",
+                            "description": "Number of line items per batch for async process. 0 value means process all items at once.",
+                            "default": 0
+                        },
+                        "autoSimulate": {
+                            "type": "object",
+                            "title": "Auto Simulate Settings",
+                            "description": "Automatically invoke simulation.",
+                            "properties": {
+                                "afterPartnerSelection": {
+                                    "type": "boolean",
+                                    "title": "Simulate After Selecting Partner",
+                                    "description": "Auto simulate after selecting a partner in the Partners tab.",
+                                    "default": true
+                                },
+                                "afterItemAdd": {
+                                    "type": "boolean",
+                                    "title": "Simulate After Adding Item",
+                                    "description": "Auto simulate after adding item(s).",
+                                    "default": true
+                                },
+                                "afterItemEditSave": {
+                                    "type": "boolean",
+                                    "title": "Simulate After Saving From Edit Item",
+                                    "description": "Auto simulate after saving from the edit item.",
+                                    "default": true
+                                },
+                                "afterItemDelete": {
+                                    "type": "boolean",
+                                    "title": "Simulate After Deleting Item",
+                                    "description": "Auto simulate after deleting an item.",
+                                    "default": true
+                                },
+                                "afterItemClone": {
+                                    "type": "boolean",
+                                    "title": "Simulate After Cloning Item",
+                                    "description": "Auto simulate after cloning an item.",
+                                    "default": true
+                                },
+                                "afterItemConfiguration": {
+                                    "type": "boolean",
+                                    "title": "Simulate After Configuring Item",
+                                    "description": "Auto simulate after finalizing configuration of a VC item.",
+                                    "default": true
+                                },
+                                "afterFieldUpdate": {
+                                    "type": "boolean",
+                                    "title": "Simulate After Updating A Field",
+                                    "description": "Auto simulate after field value change. Must also set at the field level.",
+                                    "default": true
+                                },
+                                "afterSortItems": {
+                                    "type": "boolean",
+                                    "title": "Simulate After Sorting Items",
+                                    "description": "Auto simulate after sorting items.",
+                                    "default": true
+                                }
+                            },
+                            "required": [
+                                "afterPartnerSelection",
+                                "afterItemAdd",
+                                "afterItemEditSave",
+                                "afterItemDelete",
+                                "afterItemClone",
+                                "afterItemConfiguration",
+                                "afterFieldUpdate",
+                                "afterSortItems"
+                            ]
+                        },
+                        "showHeaderIncompletionLogs": {
+                            "type":"boolean",
+                            "default": true,
+                            "title": "Show Header Incompletion Logs",
+                            "description": "Show the incompletion logs at the header level."
+                        },
+                        "showItemIncompletionLogs": {
+                            "type": "boolean",
+                            "title": "Show Item Incompletion Logs",
+                            "description": "Show the incompletion logs at the item level.",
+                            "default": true
+                        },
+                        "incompletionLogsAsErrors": {
+                            "type": "boolean",
+                            "title": "Treat Incompletion Logs As Errors",
+                            "description": "Treat incompletion logs as errors. When set to true then it will not create the document until all the incompletion logs are resolved.",
+                            "default": true
+                        },
+                        "enableBoMCountCommand": {
+                            "type":"boolean",
+                            "default": false,
+                            "title": "Enable BoM Count Command",
+                            "description": "Enable the callout command to retrieve the BoM count from SAP."
+                        },
+                        "enableBoMItemEdit": {
+                            "type":"boolean",
+                            "default": false,
+                            "title": "Enable BoM Item Edit",
+                            "description": "Enable editting for BoM item."
+                        },
+                        "purgeSAPMaterialsBeforeUpdate": {
+                            "type":"boolean",
+                            "default": false,
+                            "title": "Purge SAP Materials before Update",
+                            "description": "Purge SAP Materials before Update."
+                        },
+                        "compareSAPSimulateVsSObject": {
+                            "type":"boolean",
+                            "default": false,
+                            "title": "Compare SAP Simulate Vs SObject",
+                            "description": "Compare SAP Simulate Vs SObject."
+                        },
+                        "mapChildBomFields": {
+                            "type":"boolean",
+                            "default": false,
+                            "title": "Map Child Bom Fields",
+                            "description": "Map Child Bom Fields."
+                        },
+                        "updateLineItems": {
+                            "type":"boolean",
+                            "default": true,
+                            "title": "Update SObject Line Items On Save",
+                            "description": "Enabling this setting will update the SObject line items after saving a sales document."
+                        },
+                        "deleteLineItems": {
+                            "type":"boolean",
+                            "default": true,
+                            "title": "Delete SObject Line Items On Save",
+                            "description": "Enabling this setting will delete (if any) the SObject line items after saving a sales document."
+                        },
+                        "mapUpdateFromSObject": {
+                            "type":"boolean",
+                            "default": false,
+                            "title": "Map Update From SObject",
+                            "description": "During an update of a sales document, enabling this setting will map fields from the SObject."
+                        },
+                        "skipAddedLineValidation": {
+                            "type":"boolean",
+                            "default": false,
+                            "title": "Skip Added Line Validation",
+                            "description": "Skip added line items validation on save."
+                        },
+                        "InvokeMethod": {
+                            "type":"string",
+                            "title": "Invoke Method",
+                            "description": "Invoke Method"
+                        },
+                        "useConvertToObjectTrigger": {
+                            "type":"boolean",
+                            "default": false,
+                            "title": "Save Document Number Only",
+                            "description": "Enable this setting to only map the returned document number from RIO."
+                        },
+                        "enableConfiguration": {
+                            "type": "boolean",
+                            "title": "Enable VC Configuration",
+                            "description": "Enable this setting for the ability to configure a VC item.",
+                            "default": true
+                        },
+                        "SAPDocType": {
+                            "type": "string",
+                            "title": "SAP Document Type",
+                            "description": "Select which SAP document type.",
+                            "enum": [
+                                "Order",
+                                "Quote",
+                                "Contract",
+                                "Inquiry",
+                                "Credit Memo",
+                                "Debit Memo",
+                                "Return Order"
+                            ]
+                        },
+                        "SBODetailType": {
+                            "type": "string",
+                            "title": "RIO Detail Type",
+                            "description": "Contract is use for contract creation/update. Otherwise, select SalesDocument",
+                            "enum": [
+                                "SalesDocument",
+                                "Contract"
+                            ]
+                        },
+                        "DefaultDocType": {
+                            "type": "string",
+                            "title": "Default SAP Document Type",
+                            "description": "Specify the default SAP document type.",
+                            "examples": ["OR"]
+                        },
+                        "DefaultDocTypeInternal": {
+                            "type": "string",
+                            "title": "Default SAP Document Type Internal Code",
+                            "description": "Specify the internal code of the default SAP document type.",
+                            "examples": ["TA"]
+                        },
+                        "DefaultSalesOrganization": {
+                            "type": "string",
+                            "title": "Default Sales Organization",
+                            "description": "Default SAP sales organization",
+                            "examples": ["3000"]
+                        },
+                        "DefaultDistributionChannel": {
+                            "type": "string",
+                            "title": "Default Distribution Channel",
+                            "description": "Default SAP distribution channel",
+                            "examples": ["10"]
+                        },
+                        "DefaultDivision": {
+                            "type": "string",
+                            "title": "Default Division",
+                            "description": "Default SAP division",
+                            "examples": ["01"]
+                        },
+                        "sfInvokeFrom": {
+                            "type": "string",
+                            "title": "Salesforce App Invoke From",
+                            "description": "Select which Salesforce app it will be invoke from.",
+                            "enum": [
+                                "StandardUI",
+                                "Commerce"
+                            ]
+                        },
+                        "DocTypes": {
+                            "type": "array",
+                            "title": "List of SAP Document Types",
+                            "description": "List of SAP document types that can be selectable in the UI.",
+                            "default": [],
+                            "items": {
+                                "type": "object",
+                                "description": "The object of SAP document type id and label.",
+                                "properties": {
+                                    "id": {"type": "string", "title": "Document Type Id", "description": "The id of the document type.", "examples": ["OR"]},
+                                    "internalId": {"type": "string", "title": "Document Type Internal Id", "description": "The internal id of the document type.", "examples": ["TA"]},
+                                    "label": {"type": "string", "title": "Document Type Name", "description": "The name/label of the document type."}
+                                },
+                                "required": [
+                                    "id",
+                                    "internalId",
+                                    "label"
+                                ]
+                            }
+                        },
+                        "salesAreasFromCustomer": {
+                            "type":"boolean",
+                            "default": true,
+                            "title": "Sales Areas From Customer",
+                            "description": "Enable this setting to list the sales areas from the customer detail RIO. Disable this setting to use the list from the 'Sales Areas' setting."
+                        },
+                        "SalesAreas": {"$ref": "#/definitions/SalesAreas"},
+                        "optionValuesToInclude": {"$ref": "#/definitions/optionValuesToInclude"},
+                        "Header": {
+                            "type": "object",
+                            "title": "Header Settings",
+                            "description": "Additional settings for the header level",
+                            "properties": {
+                                "PartnerPickers": {"$ref": "#/definitions/partnerPickers"},
+                                "Texts": {"$ref": "#/definitions/texts"}
+                            },
+                            "required": [
+                                "PartnerPickers",
+                                "Texts"
+                            ]
+                        },
+                        "Item": {
+                            "type": "object",
+                            "title": "Item Settings",
+                            "description": "Additional settings for the item level",
+                            "properties": {
+                                "PartnerPickers": {"$ref": "#/definitions/partnerPickers"},
+                                "Texts": {"$ref": "#/definitions/texts"}
+                            },
+                            "required": [
+                                "PartnerPickers",
+                                "Texts"
+                            ]
+                        },
+                        "Default": {"$ref": "#/definitions/uiSettings"},
+                        "InvokeMethodAppSettings": {
+                            "type": "array",
+                            "title": "Invoke Method Settings",
+                            "items": {
+                                "type": "object",
+                                "description": "Object of Invoke Method App Settings",
+                                "properties": {
+                                    "InvokeMethod": {
+                                        "type": "string",
+                                        "title": "Invoke Method",
+                                        "description": "Choose the invoking method",
+                                        "enum": [
+                                            "Simulate",
+                                            "Create",
+                                            "Update"
+                                        ]
+                                    },
+                                    "insertSalesDocLog": {
+                                        "type": "boolean",
+                                        "title": "Insert Sales Doc Log",
+                                        "description": "Indicate if it needs to save the logs"
+                                    },
+                                    "skipAddedLineValidation": {
+                                        "type": "boolean",
+                                        "title": "Skip Added Line Validation",
+                                        "description": "Indicate if it need to skip the validation of pricebook entry for newly added line item"
+                                    }
+                                }
+                            }
+                        },
+                        "Simulate": {
+                            "type": "object",
+                            "description": "Simulate settings",
+                            "properties": {
+                                "displaySaveToSOject": {
+                                    "$ref": "#/definitions/displaySaveToSOject"
+                                }
+                            }
+                        },
+                        "Create": {
+                            "type": "object",
+                            "description": "Create settings",
+                            "properties": {
+                                "displaySaveToSAP": {
+                                    "$ref": "#/definitions/displaySaveToSAP"
+                                }
+                            }
+                        },
+                        "Update": {
+                            "type": "object",
+                            "description": "Update settings",
+                            "properties": {
+                                "displaySaveToSAP": {
+                                    "$ref": "#/definitions/displaySaveToSAP"
+                                },
+                                "Fields": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Header": {
+                                            "type": "object",
+                                            "properties": {
+                                                "CreateDate": {"$ref": "#/definitions/fieldDefaultSettingsDisplayOnly"}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "allOf": [
+                        {
+                            "if": {
+                                "properties": {
+                                    "showItemIncompletionLogs": {"const": false}
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "incompletionLogsAsErrors": {"const": false}
+                                }
+                            }
+                        },
+                        {
+                            "if": {
+                                "properties": {
+                                    "showHeaderIncompletionLogs": {"const": false}
+                                }
+                            },
+                            "then": {
+                                "properties": {
+                                    "incompletionLogsAsErrors": {"const": false}
+                                }
+                            }
+                        }
+                    ],
+                    "required": [
+                        "itemNumberIncrement",
+                        "sortOrderIncrement",
+                        "bomItemNumberIncrement",
+                        "lineItemsBatchForAsync",
+                        "autoSimulate",
+                        "showHeaderIncompletionLogs",
+                        "showItemIncompletionLogs",
+                        "incompletionLogsAsErrors",
+                        "enableBoMCountCommand",
+                        "enableBoMItemEdit",
+                        "updateLineItems",
+                        "deleteLineItems",
+                        "mapUpdateFromSObject",
+                        "useConvertToObjectTrigger",
+                        "enableConfiguration",
+                        "SAPDocType",
+                        "SBODetailType",
+                        "DefaultDocType",
+                        "DefaultDocTypeInternal",
+                        "sfInvokeFrom",
+                        "DocTypes",
+                        "salesAreasFromCustomer",
+                        "SalesAreas",
+                        "optionValuesToInclude",
+                        "Header",
+                        "Item",
+                        "Default"
+                    ]
+                }
+            }
+        }
+    }
+}

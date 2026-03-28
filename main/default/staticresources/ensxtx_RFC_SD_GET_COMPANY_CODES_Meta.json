@@ -1,0 +1,40 @@
+{
+  "FieldMaps": {
+    "ensxtx_RFC_SD_GET_COMPANY_CODES.RESULT": {},
+    "ensxtx_RFC_SD_GET_COMPANY_CODES.OUTPUT": {
+      "BUKRS": {
+        "FriendlyName": "BUKRS",
+        "TechnicalName": "BUKRS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "BUTXT": {
+        "FriendlyName": "BUTXT",
+        "TechnicalName": "BUTXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    }
+  },
+  "StructMap": {},
+  "CollectionMap": {
+    "OUTPUT": {
+      "Name": "OUTPUT",
+      "ItemType": "ensxtx_RFC_SD_GET_COMPANY_CODES.OUTPUT",
+      "FieldMap": {
+        "BUKRS": {
+          "FriendlyName": "BUKRS",
+          "TechnicalName": "BUKRS",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "BUTXT": {
+          "FriendlyName": "BUTXT",
+          "TechnicalName": "BUTXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  }
+}

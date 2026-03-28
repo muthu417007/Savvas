@@ -1,0 +1,106 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "definitions": {
+        "searchParamFields": {
+            "type": "array",
+            "title": "Mapping for Search Param Fields",
+            "description": "Mapping for Search Param Fields",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "sapField": {
+                        "type": "string",
+                        "title": "SAP Field",
+                        "description": "SAP Search Param Field.",
+                        "enum": [
+                            "CustomerNumber",
+                            "SalesOrganization",
+                            "DistributionChannel",
+                            "Division"
+                        ]
+                    },
+                    "defaultValue": {
+                        "type": "string",
+                        "title": "Default value",
+                        "description": "Default value to use.",
+                        "examples": ["1000", "10"]
+                    },
+                    "sfObjectType": {
+                        "type": "string",
+                        "title": "Salesforce Object Type",
+                        "description": "Salesforce Object Type to map from.",
+                        "examples": ["Account", "WebCart", "User", "WebStore"]
+                    },
+                    "sfField": {
+                        "type": "string",
+                        "title": "Salesforce Field",
+                        "description": "Salesofrce Field to map from.",
+                        "examples": ["ensxtx_SAP_Sales_Organization__c", "ensxtx_SAP_Distribution_Channel__c"]
+                    }
+                },
+                "required": [
+                    "sapField"
+                ]
+            }
+        },
+        "simulationFields": {
+            "type": "array",
+            "title": "Mapping for Sales Area Fields",
+            "description": "Mapping for Sales Area Fields",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "sapField": {
+                        "type": "string",
+                        "title": "SAP Field",
+                        "description": "SAP Sales Area Field.",
+                        "enum": [
+                            "Header:SoldToParty",
+                            "Sales:SalesDocumentType",
+                            "Sales:SalesDocumentTypeInternal",
+                            "Sales:SalesOrganization",
+                            "Sales:DistributionChannel",
+                            "Sales:Division"
+                        ]
+                    },
+                    "defaultValue": {
+                        "type": "string",
+                        "title": "Default value",
+                        "description": "Default value to use.",
+                        "examples": ["1000", "10"]
+                    },
+                    "sfObjectType": {
+                        "type": "string",
+                        "title": "Salesforce Object Type",
+                        "description": "Salesforce Object Type to map from.",
+                        "examples": ["Account", "WebCart", "User", "WebStore"]
+                    },
+                    "sfField": {
+                        "type": "string",
+                        "title": "Salesforce Field",
+                        "description": "Salesofrce Field to map from.",
+                        "examples": ["ensxtx_SAP_Sales_Organization__c", "ensxtx_SAP_Distribution_Channel__c"]
+                    }
+                },
+                "required": [
+                    "sapField"
+                ]
+            }
+        }
+    },
+    "type": "object",
+    "patternProperties": {
+        "^[A-Za-z_][A-Za-z0-9_]*$": {
+            "type": "object",
+            "description": "Cart Partner App Settings",
+            "properties": {
+                "SearchParamFields": {"$ref": "#/definitions/searchParamFields"},
+                "SimulationFields": {"$ref": "#/definitions/simulationFields"}
+            },
+            "required": [
+                "SearchParamFields",
+                "SimulationFields"
+            ]
+        }
+    }
+}
