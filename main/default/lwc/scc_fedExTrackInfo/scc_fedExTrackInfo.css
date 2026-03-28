@@ -1,0 +1,251 @@
+.order-status-BG{
+  background-color: #E5F1FD;
+  min-width: 1200px;
+}
+.breadcrumb-label{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+  text-align: left;
+  color: #173770 !important;
+}
+.breadcrumb-label.slds-text-title_bold{
+  font-weight: 700;
+}
+.slds-breadcrumb .slds-breadcrumb__item:before{
+  color: #33BDCD;
+  top: -3px;
+}
+.card-wrapper
+{
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.close-button
+{
+  width: 152px;
+  height: 45px;
+  border-radius: 90px;
+  background-color: #2150A3;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 17.6px;
+  justify-content: center;
+  
+  
+}
+.trackAlign {
+    text-align: right;
+    display: flex;
+    color: #173770;
+    width: 91%;
+    /* align-content: flex-start; */
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+.shipment-overview
+{
+  color:#0C1E3D;
+  font-weight: bold;
+  padding-right: 4.75rem;
+  padding-left: 0.75rem;
+  font-size:20px;
+  text-align: left;
+}
+
+.fedEx-cards .slds-card{
+  border: 1px solid #AFC3D8;
+  border-radius: 10px;
+}
+.order-detail-table-header::before{
+  content: "";
+  width: 8px;
+  height: 20px;
+  border-radius: 0 5px 5px 0;
+  background-color: #9ECA47;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 30px;
+}
+.max-width-container{
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+    .tableData-alignment{
+      padding: 5px;
+      font-size: 14px;
+      vertical-align: top;
+      text-align: center;
+    }
+    .tableData-alignment2{
+      padding: 5px;
+      font-size: 14px;    
+      vertical-align: top;
+      text-align: center;
+      width: 36%;
+    }
+    .tableData-alignment td{
+       padding: 5px;
+    }
+     .tableData-alignment2 td{
+       padding: 5px;
+      
+    }
+    .tableData-alignment3 td{
+       padding: 5px;
+      
+    }
+    .tableData-alignment3{
+      padding: 5px;
+      font-size: 14px;
+      vertical-align: top;
+      text-align: center;
+      width: 36%;
+    }
+    .right-align
+    {
+      text-align: right;
+      color:#173770;
+      width:65%
+    }
+    .wrapSpace
+    {
+      white-space: nowrap;
+    }
+    .left-align
+    {
+      text-align: left;
+      color:#0c285f;
+      font-weight: bold;
+      width:65%
+    }
+    .customHead{
+      height:40px;
+		  width: 13px;
+      justify-content: center;	
+      border: 1px solid #9ECA47;
+       border-radius:5px ;
+       color:#0C1E3D;
+       font-size:20px;
+       font-weight: bold;
+    }
+    .slds-box{
+      Width:92%;
+      Height:50px;
+      background-color: rgb(158, 202, 71, 20%);
+      margin: 0 auto;
+      text-align: center;
+      align-items: center;
+      padding-top: 9px;
+    }
+      .delivery-status {
+	   
+    	  width: 582px;
+		    height:440px;
+        padding: 5px;
+		    margin-right: 20px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        margin-top: 15px; 
+      }
+    
+      
+      .delivery-status {
+        text-align: center;
+      }
+      
+      /* varshaa travel history */
+       .top-align
+      {
+          vertical-align: top;
+          padding-right: 3px;
+         
+      }
+      .botton-align
+      {
+        padding-top: 20px;
+        padding-bottom: 10px;
+      }
+      .tr
+      {
+         padding-bottom: 10px;
+      }
+      .borderless-table
+      {
+        border-collapse:collapse ;
+        width: 100%;
+      }
+      .borderless-table td
+      {
+        padding: 6px;
+        color:#0c285f;
+        font-weight: bold;
+        vertical-align: top;
+        font-family: Poppins;
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 21px;
+        text-align: left; 
+      }
+    
+      .custom1
+      {
+        color:#0C1E3D;
+        font-weight: bold;
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+        font-size:20px;
+        
+      }
+      .custom2a
+      {
+        color:#0C1E3D;
+        font-weight: bold;
+        font-size:20px;
+        
+      }
+      .custom2
+      {
+        color: var(--lighter-text, #173770);
+      }
+       .table-container 
+      {      
+       width: auto;
+    height: 245px;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    padding-right: 25px;    
+      }
+       .table2-container 
+      {      
+       width:292px;
+       height:245px;      
+       position: relative;
+       margin-left: 8%;
+      }
+
+      .table-container::-webkit-scrollbar 
+      {      
+        width: 0.4em;
+        background-color: rgb(255, 255, 255);
+      }
+      
+      /* Track */
+      .table-container::-webkit-scrollbar-thumb {
+      background-color: #a9bdc6; 
+      border-radius: 10px;
+      }
+      
+      /* Handle */
+      .table-container::-webkit-scrollbar-thumb:hover {
+        background: rgb(171, 165, 165); 
+      }
+      
+      /* end varshaa travel history */

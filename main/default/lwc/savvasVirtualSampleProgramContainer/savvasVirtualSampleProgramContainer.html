@@ -1,0 +1,26 @@
+<template>
+    <div class="slds-container_center  slds-container_savvas">
+        <div class="slds-grid slds-grid slds-gutters slds-wrap mainbg ptb50">
+            <div class="slds-grid">
+                <div
+                    class="slds-col slds-size_12-of-12 slds-size_9-of-12 slds-medium-size-12-of-12 slds-small-size-12-of-12">
+                    <c-savvas-virtual-sample-program-top-banner program-banner-data={programBannerData}>
+                    </c-savvas-virtual-sample-program-top-banner>
+                </div>
+            </div>
+        </div>
+        </div>
+          <div class="slds-container_center  slds-container_savvas">
+            <div class="slds-grid slds-gutters slds-wrap">
+
+                <div class="slds-col slds-large-size_9-of-12 slds-medium-size-12-of-12 slds-small-size-12-of-12 mob_plr0">
+                    <c-savvas-virtual-sample-tab-component asset-details={assetDetails} grade-details={gradeDetails}>
+                    </c-savvas-virtual-sample-tab-component>
+                </div>
+                <div class="slds-col slds-large-size_3-of-12 slds-medium-size-12-of-12 slds-small-size-12-of-12 mob_plr0">
+                    <c-savvas-virtual-samples-parent-side-banner program-banner={programRightBanner}>
+                    </c-savvas-virtual-samples-parent-side-banner>
+                </div>
+            </div>
+        </div>
+    </template>

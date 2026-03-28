@@ -1,0 +1,31 @@
+<template>
+    <div class="spinner">
+        <template if:false={isLoading}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <div class="slds-grid slds-wrap TopBannerComponent">
+        <div class="slds-col slds-large-size_6-of-12 slds-medium-size-12-of-12 slds-small-size-12-of-12">
+            <h2 class="programTitle med-text-center">{programData.programName}</h2>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_12-of-12 programDescriptionWrapper">
+                    <p class="programDescription med-text-center">
+                        <lightning-formatted-rich-text value={programDescription}></lightning-formatted-rich-text>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="slds-col slds-large-size_6-of-12 slds-medium-size-12-of-12 slds-small-size-12-of-12 programImageWrapper med_pt2rem">
+            <template if:true={programData.programBannerSourceURL}>
+                <a href={programData.programBannerSourceURL} target="_blank">
+                    <img width="704" class="programImage " src={programData.programBannerImageURL} alt="">
+                    <div class="programPlayButton"><img alt="" src={playbtn} aria-label={programData.programName}></div>
+                </a>
+            </template>
+            <template if:false={programData.programBannerSourceURL}>
+                <img width="704" class="programImage " alt="" src={programData.programBannerImageURL}>
+            </template>
+        </div>
+    </div>
+</template>

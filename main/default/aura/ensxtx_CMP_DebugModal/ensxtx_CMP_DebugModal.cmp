@@ -1,0 +1,6 @@
+<aura:component>
+    <aura:attribute name="debugProperties" type="List" default="[]"/>
+    <aura:attribute name="httpTraces" type="List" default="[]"/>
+
+    <c:ensxtxDebug debugProperties="{!v.debugProperties}" httpTraces="{!v.httpTraces}"/>
+</aura:component>

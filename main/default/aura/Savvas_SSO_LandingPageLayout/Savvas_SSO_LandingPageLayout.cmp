@@ -1,0 +1,20 @@
+<aura:component implements="forceCommunity:layout" description="Custom Content Layout" access="global">
+    <aura:attribute name="column1" type="Aura.Component[]" required="false"></aura:attribute>
+    <aura:attribute name="bottom" type="Aura.Component[]" required="false"></aura:attribute>
+    <div class="container">
+        <div class="contentPanel">
+            <div class="slds-clear">
+                <div class="left">
+                    {!v.column1}
+                </div>
+            </div>
+            <div class="slds-container_center  slds-container_savvas1">  
+                <div class="bgbottom">
+                </div>
+            </div>
+            <div class="slds-container_center slds-container_savvas">
+                <c:savvas_SSO_FooterComponent></c:savvas_SSO_FooterComponent>
+            </div>  
+        </div>
+    </div>
+</aura:component>

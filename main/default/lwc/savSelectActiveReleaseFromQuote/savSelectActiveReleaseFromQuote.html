@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Releases" icon-name="custom:custom63">
+            <template if:true={release}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={release}
+                    columns={columns}
+                    onrowaction={handleRowActions}>
+                </lightning-datatable>
+            </template>
+    </lightning-card>
+</template>

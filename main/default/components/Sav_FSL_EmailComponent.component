@@ -1,0 +1,88 @@
+<!-- Description: W-013981, W-013981, To send Approval Process mail to Consultant, Manager & Dispatcher-->
+
+<apex:component controller="Sav_FSL_EmailComponentController" access="global">
+    <apex:attribute type="Id" name="recordId" description="Record ID" assignTo="{!recId}" />
+ <apex:outputPanel rendered="{!IF(managerEmail == 'Step 1' && managerEmail != 'Step 2',true,false)}">
+    <html>
+         <body>
+            
+            <p>Dear {!showAR.ServiceResource.Name},
+                <br/>  <br/>                 
+            
+            We would like to assign you to deliver the following Service:
+                <br/><br/>
+            Event ID: {!showAR.ServiceAppointment.Sav_FSL_Appointment_Number__c}
+                <br/>
+            Date And Time (in your time zone): {!showAR.ServiceAppointment.EarliestStartTime} to {!showAR.ServiceAppointment.Sav_FSL_Alternate_Date_Time3__c}
+                <br/>
+            Account: {!showAR.ServiceAppointment.Account.Name}
+                <br/>
+            State: {!showAR.ServiceAppointment.State}
+                <br/>
+            Delivery Mode: {!showAR.ServiceAppointment.Sav_FSL_Delivery_Mode__c}
+                <br/>
+            Program: {!showAR.ServiceAppointment.Sav_FSL_SA_Program__c}
+                <br/>
+            Service Type: {!showAR.ServiceAppointment.Sav_FSL_Service_Type__c}
+                <br/><br/>
+          
+            Please <a href="{!LEFT($Api.Enterprise_Server_URL_300, FIND('/services',$Api.Enterprise_Server_URL_300))+'/'+showAR.ServiceAppointment.Id}">click here </a>to view full assignment details.
+                <br/>
+            Please <a href="{!LEFT($Api.Enterprise_Server_URL_300, FIND('/services',$Api.Enterprise_Server_URL_300))+'/'+'flow/Approval_Rejection?recordId='+ showAR.Id}">click this</a>
+            link within 24 hours to accept or reject this assignment.</p>
+                    
+
+<p>Sincerely,
+    <br/>
+Savvas Professional Services
+    <br/>
+Services Operations Team</p>
+
+
+        
+</body>
+</html>    
+    
+</apex:outputPanel>
+<apex:outputPanel rendered="{!IF(managerEmail == 'Step 2' && managerEmail != 'Step 1',true,false)}">
+<html>
+<body>
+            
+<p>Dear {!showAR.Sav_FSL_ServiceResourceUser__r.Manager.Name},
+                        
+    <br/><br/>
+We would like to assign {!showAR.ServiceResource.Name} to the following event, which requires Manager approval.
+
+    <br/><br/>
+Event ID: {!showAR.ServiceAppointment.Sav_FSL_Appointment_Number__c}
+    <br/>
+Date And Time (in your time zone): {!showAR.ServiceAppointment.EarliestStartTime} to {!showAR.ServiceAppointment.Sav_FSL_Alternate_Date_Time3__c}
+    <br/>
+Account: {!showAR.ServiceAppointment.Account.Name}
+    <br/>
+State: {!showAR.ServiceAppointment.State}
+    <br/>
+Delivery Mode: {!showAR.ServiceAppointment.Sav_FSL_Delivery_Mode__c}
+    <br/>
+Program: {!showAR.ServiceAppointment.Sav_FSL_SA_Program__c}
+    <br/>
+Service Type: {!showAR.ServiceAppointment.Sav_FSL_Service_Type__c}
+    <br/>
+Notes: {!showAR.ServiceAppointment.Description}
+
+    <br/><br/>
+Please <a href="{!LEFT($Api.Enterprise_Server_URL_300, FIND('/services',$Api.Enterprise_Server_URL_300))+'/'+showAR.ServiceAppointment.Id}">click here </a>to view full assignment details.
+    <br/><br/>
+Please <a href="{!LEFT($Api.Enterprise_Server_URL_300, FIND('/services',$Api.Enterprise_Server_URL_300))+'/'+'flow/Approval_Rejection?recordId='+ showAR.Id}">click this</a>
+link within 24 hours to accept or reject this assignment.</p>
+
+<p>Sincerely,
+    <br/>
+Savvas Professional Services
+    <br/>
+Services Operations Team</p>
+</body>
+</html> 
+</apex:outputPanel>
+
+</apex:component>

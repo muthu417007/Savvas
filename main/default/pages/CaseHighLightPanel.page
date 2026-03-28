@@ -1,0 +1,469 @@
+<!-- 
+* ─────────────────────────────────────────────────────────────────────────────────────────────────┐
+* Visualforce page being used on console case page layouts 
+* Case > Page Layouts > [console page layout] > Top Sidebar (Highlights Panel)
+* ──────────────────────────────────────────────────────────────────────────────────────────────────
+* @author         Sridhar Subramaniam
+* @modifiedBy     Heather McLemore  <Heather.McLemore@pearson.com>
+* @maintainedBy   Heather McLemore  <Heather.McLemore@pearson.com>
+* @version        2.0
+* @created        2014-09-11
+* @modified       2018-06-28        
+* ──────────────────────────────────────────────────────────────────────────────────────────────────
+* @changes
+* v1.0            unknown; tracking began 6/28/2018
+* v2.0            Heather.McLemore@pearson.com
+* @modified date  2018-10-25
+* @modification   Added Account.Seg Des field to right panel per W-001807 <Heather.McLemore@pearson.com> 
+* @modified date  2018-07-18
+* @modification   Added Account.EB field to left panel per W-001756 <Heather.McLemore@pearson.com> 
+* @modified date  2018-06-28
+* @modification   Added Was Cust Rsp field to left panel per W-001706 <Heather.McLemore@pearson.com>
+* ─────────────────────────────────────────────────────────────────────────────────────────────────┘
+-->
+<apex:page standardController="Case" extensions="CaseDetailController2" showHeader="false" sidebar="false">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+/* jQuery Resizable Columns v0.1.0 | http://dobtco.github.io/jquery-resizable-columns/ | Licensed MIT | Built Wed Apr 30 2014 14:24:25 */
+var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+  __slice = [].slice;
+
+(function($, window) {
+  var ResizableColumns, parseWidth, pointerX, setWidth;
+  parseWidth = function(node) {
+    return parseFloat(node.style.width.replace('px', ''));
+  };
+  setWidth = function(node, width) {
+    width = width.toFixed(2);
+    return node.style.width = "" + width + "px";
+  };
+  pointerX = function(e) {
+    if (e.type.indexOf('touch') === 0) {
+      return (e.originalEvent.touches[0] || e.originalEvent.changedTouches[0]).pageX;
+    }
+    return e.pageX;
+  };
+  ResizableColumns = (function() {
+    ResizableColumns.prototype.defaults = {
+      selector: 'tr th:visible',
+      store: window.store,
+      syncHandlers: true,
+      resizeFromBody: true,
+      maxWidth: null,
+      minWidth: null
+    };
+
+    function ResizableColumns($table, options) {
+      this.pointerdown = __bind(this.pointerdown, this);
+      this.constrainWidth = __bind(this.constrainWidth, this);
+      this.options = $.extend({}, this.defaults, options);
+      this.$table = $table;
+      this.setHeaders();
+      this.restoreColumnWidths();
+      this.syncHandleWidths();
+      $(window).on('resize.rc', ((function(_this) {
+        return function() {
+            clearTimeout(_this.timer);
+            _this.timer = setTimeout(function() {
+                _this.syncTableWidthsToParent();
+                _this.syncHandleWidths();
+            }, 100);
+        };
+      })(this)));
+      if (this.options.start) {
+        this.$table.bind('column:resize:start.rc', this.options.start);
+      }
+      if (this.options.resize) {
+        this.$table.bind('column:resize.rc', this.options.resize);
+      }
+      if (this.options.stop) {
+        this.$table.bind('column:resize:stop.rc', this.options.stop);
+      }
+    }
+
+    ResizableColumns.prototype.triggerEvent = function(type, args, original) {
+      var event;
+      event = $.Event(type);
+      event.originalEvent = $.extend({}, original);
+      return this.$table.trigger(event, [this].concat(args || []));
+    };
+
+    ResizableColumns.prototype.getColumnId = function($el) {
+      return this.$table.data('resizable-columns-id') + '-' + $el.data('resizable-column-id');
+    };
+
+    ResizableColumns.prototype.setHeaders = function() {
+      this.$tableHeaders = this.$table.find(this.options.selector);
+      this.assignPercentageWidths();
+      return this.createHandles();
+    };
+
+    ResizableColumns.prototype.destroy = function() {
+      this.$handleContainer.remove();
+      this.$table.removeData('resizableColumns');
+      return this.$table.add(window).off('.rc');
+    };
+
+    ResizableColumns.prototype.assignPercentageWidths = function() {
+      return this.$tableHeaders.each((function(_this) {
+        return function(_, el) {
+          var $el;
+          $el = $(el);
+          return setWidth($el[0], $el.outerWidth());
+        };
+      })(this));
+    };
+
+    ResizableColumns.prototype.createHandles = function() {
+      var _ref;
+      if ((_ref = this.$handleContainer) != null) {
+        _ref.remove();
+      }
+      this.$table.before((this.$handleContainer = $("<div class='rc-handle-container' />")));
+      this.$tableHeaders.each((function(_this) {
+        return function(i, el) {
+          var $handle;
+          if (_this.$tableHeaders.eq(i + 1).length === 0 || (_this.$tableHeaders.eq(i).attr('data-noresize') != null) || (_this.$tableHeaders.eq(i + 1).attr('data-noresize') != null)) {
+            return;
+          }
+          $handle = $("<div class='rc-handle' />");
+          $handle.data('th', $(el));
+          return $handle.appendTo(_this.$handleContainer);
+        };
+      })(this));
+      return this.$handleContainer.on('mousedown touchstart', '.rc-handle', this.pointerdown);
+    };
+
+    ResizableColumns.prototype.syncTableWidthsToParent = function() {      
+      var tableMargin = parseInt(this.$table.css('margin-left'), 10) + parseInt(this.$table.css('margin-right'), 10);
+      var ratio = (this.$handleContainer.parent().innerWidth() - tableMargin) / this.$handleContainer.width();
+      var nw = [];
+      var newWidth = 0;
+      this.$table.find('tr th').each(function(idx, el) {
+        nw[idx] = $(el).width();
+      });
+      this.$table.find('tr th').each(function(idx, el) {
+        $(el).width(Math.floor(nw[idx] * ratio));
+        newWidth += nw[idx] * ratio;
+      });
+      this.$table.width(newWidth);
+
+    };
+
+    ResizableColumns.prototype.syncHandleWidths = function() {
+      return this.$handleContainer.width(this.$table.width()).find('.rc-handle').each((function(_this) {
+        return function(_, el) {
+          var $el;
+          $el = $(el);
+          return $el.css({
+            left: $el.data('th').outerWidth() + ($el.data('th').offset().left - _this.$handleContainer.offset().left),
+            height: _this.options.resizeFromBody ? _this.$table.height() : _this.$table.find('thead').height()
+          });
+        };
+      })(this));
+    };
+
+    ResizableColumns.prototype.saveColumnWidths = function() {
+      return this.$tableHeaders.each((function(_this) {
+        return function(_, el) {
+          var $el;
+          $el = $(el);
+          if ($el.attr('data-noresize') == null) {
+            if (_this.options.store != null) {
+              return _this.options.store.set(_this.getColumnId($el), parseWidth($el[0]));
+            }
+          }
+        };
+      })(this));
+    };
+
+    ResizableColumns.prototype.restoreColumnWidths = function() {
+      return this.$tableHeaders.each((function(_this) {
+        return function(_, el) {
+          var $el, width;
+          $el = $(el);
+          if ((_this.options.store != null) && (width = _this.options.store.get(_this.getColumnId($el)))) {
+            return setWidth($el[0], width);
+          }
+        };
+      })(this));
+    };
+
+    ResizableColumns.prototype.totalColumnWidths = function() {
+      var total;
+      total = 0;
+      this.$tableHeaders.each((function(_this) {
+        return function(_, el) {
+          return total += parseFloat($(el)[0].style.width.replace('px', ''));
+        };
+      })(this));
+      return total;
+    };
+
+    ResizableColumns.prototype.constrainWidth = function(width) {
+      if (this.options.minWidth != null) {
+        width = Math.max(this.options.minWidth, width);
+      }
+      if (this.options.maxWidth != null) {
+        width = Math.min(this.options.maxWidth, width);
+      }
+      return width;
+    };
+
+    ResizableColumns.prototype.pointerdown = function(e) {
+      var $currentGrip, $leftColumn, $ownerDocument, $rightColumn, newWidths, startPosition, widths;
+      e.preventDefault();
+      $ownerDocument = $(e.currentTarget.ownerDocument);
+      startPosition = pointerX(e);
+      $currentGrip = $(e.currentTarget);
+      $leftColumn = $currentGrip.data('th');
+      $rightColumn = this.$tableHeaders.eq(this.$tableHeaders.index($leftColumn) + 1);
+      widths = {
+        left: parseWidth($leftColumn[0]),
+        right: parseWidth($rightColumn[0])
+      };
+      newWidths = {
+        left: widths.left,
+        right: widths.right
+      };
+      this.$handleContainer.add(this.$table).addClass('rc-table-resizing');
+      $leftColumn.add($rightColumn).add($currentGrip).addClass('rc-column-resizing');
+      this.triggerEvent('column:resize:start', [$leftColumn, $rightColumn, newWidths.left, newWidths.right], e);
+      $ownerDocument.on('mousemove.rc touchmove.rc', (function(_this) {
+        return function(e) {
+          var difference;
+          difference = pointerX(e) - startPosition;
+          newWidths.left = _this.constrainWidth(widths.left + difference);
+          newWidths.right = _this.constrainWidth(widths.right - difference)
+          if (newWidths.left > 10 && newWidths.right > 10) {
+              setWidth($leftColumn[0], newWidths.left = _this.constrainWidth(widths.left + difference));
+              setWidth($rightColumn[0], newWidths.right = _this.constrainWidth(widths.right - difference));
+              if (_this.options.syncHandlers != null) {
+                _this.syncHandleWidths();
+              }
+              return _this.triggerEvent('column:resize', [$leftColumn, $rightColumn, newWidths.left, newWidths.right], e);
+          } else {
+            return false;
+          }
+        };
+      })(this));
+      return $ownerDocument.one('mouseup touchend', (function(_this) {
+        return function() {
+          $ownerDocument.off('mousemove.rc touchmove.rc');
+          _this.$handleContainer.add(_this.$table).removeClass('rc-table-resizing');
+          $leftColumn.add($rightColumn).add($currentGrip).removeClass('rc-column-resizing');
+          _this.syncHandleWidths();
+          _this.saveColumnWidths();
+          return _this.triggerEvent('column:resize:stop', [$leftColumn, $rightColumn, newWidths.left, newWidths.right], e);
+        };
+      })(this));
+    };
+
+    return ResizableColumns;
+
+  })();
+  return $.fn.extend({
+    resizableColumns: function() {
+      var args, option;
+      option = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
+      return this.each(function() {
+        var $table, data;
+        $table = $(this);
+        data = $table.data('resizableColumns');
+        if (!data) {
+          $table.data('resizableColumns', (data = new ResizableColumns($table, option)));
+        }
+        if (typeof option === 'string') {
+          return data[option].apply(data, args);
+        }
+      });
+    }
+  });
+})(window.jQuery, window);
+
+$(function() {
+    var a = $('table.resize').resizableColumns();
+    var b = a.data('resizableColumns')
+    var c = a.find('th:last');
+    var d = c.find('ul');
+    var onWindowResize = function() {
+        d.height(
+            $(document.body).height() -
+            parseInt(c.css('padding-top'), 10) -
+            parseInt(c.css('padding-bottom'), 10)
+        );
+    }
+    $(window).on('resize.rc', onWindowResize);
+    onWindowResize();
+    b.syncTableWidthsToParent();
+    b.syncHandleWidths();
+});
+    </script>
+    <style type="text/css">
+    html, body {
+        height: 100%;
+        overflow: hidden;
+    }
+    table.resize {
+        width: 98%;
+        height: 100%;
+        margin: 0 1%;
+        max-width: 98%;
+        border-collapse: collapse;;
+        border-spacing: 0;
+        table-layout: fixed;
+    }
+
+    table.resize tr th {
+        border-left: 2px solid #c3c3c3;
+        overflow: hidden;
+        padding: 5px;
+        vertical-align: top;
+        font-weight: normal;
+    }
+    table.resize tr th:first-child {
+        border-left: 0 none transparent;
+    }
+
+    table.resize tr th div {
+        padding-bottom: 3px;
+    }
+    
+    table.resize tr th ul {
+        overflow-y: auto;
+        white-space: normal;
+    }
+    table.resize .bold {
+        font-weight: 700;
+    }
+    table.resize .customValue {
+        color: #494b4e;
+    }
+
+    table.resize .customValue a {
+        color: #015ba7;
+        text-decoration: none;
+    }
+
+    table.resize .large {
+        font-size: 22px;
+    }
+    table.resize span.space {
+        width: 20px;
+        float:left;
+    }
+
+    table.resize span.right100 {
+        width: 100px;
+        padding-right: 10px;
+        float: left;
+        text-align: right;
+    }
+
+    /* jQuery Resizable Columns v0.1.0 | http://dobtco.github.io/jquery-resizable-columns/ | Licensed MIT | Built Wed Apr 30 2014 14:24:25 */
+    .rc-handle-container {
+      position: relative;
+    }
+    .rc-handle {
+      position: absolute;
+      width: 7px;
+      cursor: ew-resize;
+      margin-left: -3px;
+      z-index: 2;
+    }
+    table.rc-table-resizing {
+      cursor: ew-resize;
+    }
+    table.rc-table-resizing thead,
+    table.rc-table-resizing thead > th,
+    table.rc-table-resizing thead > th > a {
+      cursor: ew-resize;
+    }    
+    </style>
+
+    <table class="resize">
+        <tr>
+            <th style="{!IF(messages.size=0,'', 'background: rgba(255,0,0,0.3);')}">
+                <apex:outputPanel layout="none" rendered="{!messages.size=0}">
+
+                    <div>
+                        <span class="customValue bold right100"> </span>
+                        <span class="customValue" style="color: red;"><b><apex:outputField value="{!Case.Account.In_Red_Status_Text__c}" /></b></span>
+                    </div>
+                    <div>
+                        <span class="customValue bold right100">Status:</span>
+                        <span class="customValue">{!Case.Status}</span>
+                    </div>
+                   <div>
+                        <span class="customValue bold right100">Was Cust Rsp? </span>
+                        <span class="customValue"><apex:outputField value="{!Case.Was_Customer_Responsive__c}" /><br /></span>
+                    </div>
+                    <div>
+                        <span class="customValue bold right100">Priority:</span>
+                        <span class="customValue">{!Case.Priority}</span>
+                    </div>
+                    <div>
+                        <span class="customValue bold right100">Case Owner:</span>
+                        <span class="customValue"><apex:outputField value="{!Case.OwnerId}" /></span>
+                    </div>
+                    <div>
+                        <span class="customValue bold right100">Case Flag:</span>
+                        <span class="customValue"><apex:outputField value="{!Case.Case_Flag__c}" /></span>
+                    </div>
+
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!messages.size>0}" layout="none">
+                    <ul style="padding: 0;margin: 0;">
+                    <apex:repeat var="message" value="{!messages}">
+                        <apex:outputText id="title"  value="{!message.content}" rendered="{!message.isTitle == true}" style="font-size:120%;font-weight:bold"/>
+                        <apex:outputPanel rendered="{!message.isTitle == false}">
+                            <li> <apex:outputText escape="false" value="{!message.content}"/> </li>
+                        </apex:outputPanel>
+                    </apex:repeat>
+                    </ul>
+                </apex:outputPanel>
+            </th>
+            <th>
+                <div>
+                    <span class="efhpIcon" style="margin-right:5px;float:left; width:16px; height:16px; background: transparent url(/img/icon/cases16.png) 0 0 no-repeat;"><img title="" alt="" src="/s.gif" /></span>
+                    <span class="customValue bold">Case Number</span>
+                    <span class="customValue">{!Case.CaseNumber}</span>
+                    <span class="space"></span>
+                    <span class="customValue bold">Created Date</span>
+                    <span class="customValue">
+                        <apex:outputField value="{!Case.createdDate}" /> 
+                    </span>
+                </div>
+                <div>
+                    <span class="customValue bold large">{!Case.Subject}</span>
+                </div>
+                <div>
+                    <span class="customValue ">{!Case.Description}</span>
+                </div>
+
+            </th>
+            <th>
+                <div class="customValue bold">Customer</div>
+                <div class="customValue bold">
+                    <apex:outputField value="{!Case.ContactId}"/>
+                </div>
+                <div class="customValue">
+                    <apex:outputField value="{!Case.AccountId}"/>
+                </div>
+                <div class="customValue">
+                    <apex:outputField value="{!Case.Contact.Phone}"/>
+                </div>
+               <div class="customValue">
+                    <span class="customValue bold">EasyBridge:</span>
+                    <span class="customValue"><apex:outputField value="{!Case.Account.EasyBridge__c}" /><br /></span>
+                </div>
+                <div class="customValue">
+                    <span class="customValue bold">Seg Des:</span>
+                    <span class="customValue"><apex:outputField value="{!Case.Account.Market_Designation__c}" /><br /></span>
+                </div>
+
+            </th>
+        </tr>
+    </table>
+
+</apex:page>

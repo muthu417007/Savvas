@@ -1,0 +1,14 @@
+<template>
+    <lightning-card>
+        <lightning-tabset>
+            <template for:each={debugProperties} for:item="debug">
+                <lightning-tab key={debug.label} label={debug.label}>
+                    <c-ensxtx-debug-value debug-value={debug.value} debug-name={debug.label}></c-ensxtx-debug-value>
+                </lightning-tab>
+            </template>
+            <lightning-tab label="httpTraces">
+                <c-ensxtx-http-trace http-traces={httpTraces}></c-ensxtx-http-trace>
+            </lightning-tab>
+        </lightning-tabset>
+    </lightning-card>
+</template>

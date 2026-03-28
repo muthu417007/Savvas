@@ -1,0 +1,203 @@
+<!--
+- ─────────────────────────────────────────────────────────────────────────────────────────────────┐
+- Visualforce Page that shows account plan.
+-
+- Visualforce Page that shows account plan..
+- Account plan outputs each discipline and 2 year record so using a wrapper class
+- ──────────────────────────────────────────────────────────────────────────────────────────────────
+- @author         Romer Pasag     <Romer.Pasag@pearson.com>
+- @modifiedBy     Romer Pasag     <Romer.Pasag@pearson.com>
+- @maintainedBy   Romer Pasag     <Romer.Pasag@pearson.com>
+- @version        1.3
+- @created        2018-05-01
+- @modified       2018-08-17
+- @modified       2019-06-04      <charles.teague@pearson.com>
+- ──────────────────────────────────────────────────────────────────────────────────────────────────
+- @changes
+- v1.0            Romer.Pasag@pearson.com
+- v1.1            Romer.Pasag@pearson.com
+-                 Added user manager to list of user's with Edit Permission
+- v1.2            Romer.Pasag@pearson.com
+-                 Added the create opportunity button
+- v1.3            Romer.Pasag@pearson.com
+-                 Added year 3 purchase potential rating
+- v1.4            Charles.Teague@pearson.com
+-                 Added Current Year Plan Complete and Account Plan Notes display.
+- ─────────────────────────────────────────────────────────────────────────────────────────────────┘
+--> 
+
+<apex:page controller="AccountPlanController" >
+    <script>
+    function show_alert()
+    {
+        var msg = "All updated records have been saved";
+        alert(msg);
+    }
+    
+    </script>
+    <style>
+        .ct{text-align:center;}
+        .greyColour {background-color:#E0E0E0;} 
+        .currencyStyle{
+        text-align:right;
+        width:90px;
+        }
+    </style>
+    <apex:outputpanel >
+        <apex:actionstatus id="actStatusId">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading" style="background-color: #DCD6D6; height: 100%;opacity:0.65;width:100%;">
+                    <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                        <img class="waitingImage" src="/img/loading.gif"     title="Please Wait..." />
+                        <span class="waitingDescription">Saving...</span>
+                    </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+    </apex:outputpanel>
+    <apex:form >
+        <apex:pageMessages />
+        <apex:pageBlock Title="Account Purchasing Pattern {!schoolYear} (Oct-Sept FY)" id="accPlan" mode="maindetail" rendered="{!IF(canEdit,True,False)}" >
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Current Year Purchase Pattern Complete" for="currentYrPlanComplete"></apex:outputLabel>
+                    <apex:inputfield value="{!accPlanStatusAndNotes.Current_Year_Account_Plan_Complete__c}" id="currentYrPlanComplete"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="2">
+                <apex:repeat value="{!fields}" var="f">
+                    <apex:outputfield value="{!accRecord[f.fieldPath]}" />
+                </apex:repeat>
+            </apex:pageBlockSection>
+            <br/>
+            <apex:actionStatus id="ajaxStatus" startText="Saving updated Records..."  stopText=""/>
+            <apex:pageBlockTable value="{!AccPlans}" var="ap">
+                <apex:column value="{!ap.discipline}" headerClass="ct">
+                    <apex:facet name="header">Discipline/<br/>Grade Band
+                    </apex:facet>
+                </apex:column>      
+                <apex:column headerClass="ct" styleclass="greyColour ct">
+                    <apex:facet name="header">Current Implementation<br/>Purchase Year
+                    </apex:facet>
+                    <apex:selectList id="chooseYear" value="{!ap.accPurchasingPattern.Most_Recent_Purchase__c}" size="1">
+                        <apex:selectOptions value="{!MostRecentPurchaseYear}"/>
+                    </apex:selectList>
+                </apex:column>
+               
+                <apex:column headerClass="ct" styleclass="greyColour ct">
+                    <apex:facet name="header">Current Implementation<br/>Company
+                    </apex:facet>
+                    <apex:inputfield value="{!ap.accPurchasingPattern.Company_Account__c}"> </apex:inputfield>
+                </apex:column>           
+                <apex:column headerClass="ct" styleclass="greyColour ct">
+                    <apex:facet name="header">Current Implementation<br/>Product Name
+                    </apex:facet>
+                    <apex:inputfield value="{!ap.accPurchasingPattern.Product_Name__c}"> </apex:inputfield>
+                </apex:column>
+                <apex:column headerClass="ct" styleclass="ct">
+                    <apex:facet name="header">Purchase Potential<br/>{!schoolYear+1}
+                    </apex:facet>
+                    <apex:selectList value="{!ap.year1Rating}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!status}"/>
+                        <apex:actionSupport event="onchange" rerender="accPlan" status="actStatusId" action="{!save}" />
+                    </apex:selectList>
+                </apex:column>
+                <apex:column headerValue="Revenue Potential" headerClass="ct" styleclass="ct">
+                    <apex:outputfield value="{!ap.accPurchasingPattern.Revenue_Potential__c}" styleclass="currencyStyle"/>
+                </apex:column>
+                <apex:column headerClass="ct" styleclass="ct">
+                    <apex:facet name="header">Purchase Potential<br/>{!schoolYear+2}
+                    </apex:facet>
+                    <apex:selectList value="{!ap.year2Rating}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!status}"/>
+                        <apex:actionSupport event="onchange" rerender="accPlan" status="actStatusId" action="{!save}" />
+                    </apex:selectList>
+                </apex:column>
+                 <apex:column headerClass="ct" styleclass="ct">
+                    <apex:facet name="header">Purchase Potential<br/>{!schoolYear+3}
+                    </apex:facet>
+                    <apex:selectList value="{!ap.year3Rating}" multiselect="false" size="1">
+                        <apex:selectOptions value="{!status}"/>
+                        <apex:actionSupport event="onchange" rerender="accPlan" status="actStatusId" action="{!save}" />
+                    </apex:selectList>
+                </apex:column>
+            </apex:pageBlockTable>  
+            <apex:pageBlockButtons location="Bottom">
+                <apex:commandButton action="{!save}" value="Save" rerender="accPlan" OnClick="show_alert()"/>
+                 <apex:commandLink action="{!createOpp}" target="_blank" style="text-decoration: none">
+                    <apex:commandButton value="Create Opportunity" id="createOppButton"/>
+                </apex:commandLink>
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:inputField label="Account Plan Notes" value="{!accPlanStatusAndNotes.Account_Plan_Notes__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+         </apex:pageBlock>
+    </apex:form>
+    
+    <apex:pageBlock Title="Account Purchasing Pattern {!schoolYear} (Oct-Sept FY)" id="accPlanReadOnly" mode="maindetail" rendered="{!IF(NOT(canEdit),True,False)}" >
+        <apex:form >
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Current Year Plan Complete" for="currentYrPlanComplete"/>
+                    <apex:inputCheckbox value="{!currentYearPlanComplete}" disabled="true" id="currentYrPlanComplete"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:form>
+        <apex:pageBlockSection columns="2">
+            <apex:repeat value="{!fields}" var="f">
+                <apex:outputfield value="{!accRecord[f.fieldPath]}" />
+            </apex:repeat>
+        </apex:pageBlockSection>
+        <br/>
+        <apex:pageBlockTable value="{!AccPlans}" var="ap">
+            <apex:column value="{!ap.discipline}" headerClass="ct">
+                <apex:facet name="header">Discipline/<br/>Grade Band
+                </apex:facet>
+            </apex:column>
+            <apex:column headerClass="ct" styleclass="ct">
+                <apex:facet name="header">Current Implementation<br/>Purchase Year
+                </apex:facet>
+                <apex:outputtext value="{!ap.accPurchasingPattern.Most_Recent_Purchase__c}"/>
+            </apex:column>
+            <apex:column headerClass="ct" styleclass="ct">
+                <apex:facet name="header">Current Implementation<br/>Company
+                </apex:facet>
+                <apex:outputfield value="{!ap.accPurchasingPattern.Company_Account__c}"/>
+            </apex:column>
+            <apex:column headerClass="ct" styleclass="ct">
+                <apex:facet name="header">Current Implementation<br/>Product Name
+                </apex:facet>
+                <apex:outputfield value="{!ap.accPurchasingPattern.Product_Name__c}"/>
+            </apex:column>
+            <apex:column headerClass="ct" styleclass="ct">
+                <apex:facet name="header">Purchase Potential<br/>{!schoolYear+1}
+                </apex:facet>
+                <apex:outputtext value="{!ap.year1Rating}"/>
+            </apex:column>
+            <apex:column headerValue="Revenue Potential" headerClass="ct" styleclass="ct">
+                <apex:outputfield value="{!ap.accPurchasingPattern.Revenue_Potential__c}" styleclass="currencyStyle"/>
+            </apex:column>
+            <apex:column headerClass="ct" styleclass="ct">
+                <apex:facet name="header">Purchase Potential<br/>{!schoolYear+2}
+                </apex:facet>
+                <apex:outputtext value="{!ap.year2Rating}"/>
+            </apex:column>
+            <apex:column headerClass="ct" styleclass="ct">
+                <apex:facet name="header">Purchase Potential<br/>{!schoolYear+3}
+                </apex:facet>
+                <apex:outputtext value="{!ap.year3Rating}"/>
+            </apex:column>
+        </apex:pageBlockTable>  
+        
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Account Plan Notes" for="accPlanNotes"/>
+                    <apex:outputText value="{!accPlanStatusAndNotes.Account_Plan_Notes__c}" id="accPlanNotes"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        
+    </apex:pageBlock>
+</apex:page>

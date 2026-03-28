@@ -1,0 +1,3 @@
+<apex:page standardcontroller="SampleRequest__c" sidebar="false" tabstyle="Sample__tab" >
+<apex:iframe src="/apex/Single_Mass_Sample?id={!SampleRequest__c.id}" scrolling="true" id="theIframe"/>
+</apex:page>

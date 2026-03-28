@@ -1,0 +1,121 @@
+.THIS .logoContainer {
+    background-image: t('url('+brandLogoImage+')');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 80px;
+    position: relative;
+    top: -5px;
+    display: block;
+    cursor: pointer;
+}
+.THIS .profileMenuRegion .selfServiceUserProfileMenu .uiMenuList {
+    right: 16px;
+    left: auto;
+    transform: translateX(0px);
+}
+.THIS.pageContent{
+    background: var(--e-5-f-1-fd, #E5F1FD);
+            width:100%;
+}
+.THIS .navigation {
+    margin-top: 4px;
+}
+/*.THIS .navigation .slds-list_vertical  {
+background-color : #f2f2f3;
+
+}*/
+.THIS .navigation .slds-list_vertical a{
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+}
+.THIS .headerContent .navigation a{
+    cursor: pointer;
+}
+.THIS .navigation .slds-list__item button{
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.75rem !important;
+}
+.THIS .heroBanner {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 100px;
+    
+}
+.THIS .title{
+    font-size: 30px!important;
+    font-family: 'Poppins'!important;
+    color: #fff!important;
+    line-height: 1.167!important;
+    text-align: left!important;
+    position: relative;
+    text-shadow: 1px 1px 0 rgb(0 0 0 / 0%);
+}
+.THIS .subTitle{
+    margin-top:5px;
+    font-family: 'Poppins'!important;
+    color: rgba(255,255,255,.8)!important;
+    font-size: 20px!important;
+    text-shadow: 1px 1px 0 rgb(0 0 0 / 0%);
+}
+.THIS .titleCollection .slds-accordion__summary-heading .slds-button, .THIS .titleCollection .slds-accordion__summary-heading .slds-button:hover, .THIS .titleCollection .slds-accordion__summary-heading .slds-button:focus{
+    color:#173770;    
+    text-decoration:none;
+}
+.THIS .bgbottom{
+	background: linear-gradient(180deg, rgba(229, 241, 253, 0.00) 0%, #C6DCF1 100%);
+	height:150px;
+	width: 100%;
+}
+ @media (max-width:400px){
+.THIS .mobilebanner .forceCommunityBannerLayout{
+		height:375px!important;
+}
+.THIS .mobilebanner .forceCommunityBannerLayout .slds-is-relative{
+		height:375px!important;
+}
+
+}
+ 
+ @media (max-width:480px){
+.THIS .mobilebanner .forceCommunityBannerLayout{
+		height:445px!important;
+}
+.THIS .mobilebanner .forceCommunityBannerLayout .slds-is-relative{
+		height:445px!important;
+}
+
+}
+        
+@media  (min-width:600px) and (max-width:765px){
+.THIS .mobilebanner .forceCommunityBannerLayout{
+		height:750px!important;
+}
+.THIS .mobilebanner .forceCommunityBannerLayout .slds-is-relative{
+		height:750px!important;
+}
+
+}
+         @media (min-width:767px) and (max-width:1000px){
+.THIS .mobilebanner .forceCommunityBannerLayout{
+		height:900px!important;
+}
+.THIS .mobilebanner .forceCommunityBannerLayout .slds-is-relative{
+		height:900px!important;
+}
+
+}
+        
+@media (min-width:1024px) and (max-width:1366px){
+.THIS .mobilebanner .forceCommunityBannerLayout{
+		height:1200px!important;
+}
+.THIS .mobilebanner .forceCommunityBannerLayout .slds-is-relative{
+		height:1200px!important;
+}
+
+}

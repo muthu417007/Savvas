@@ -1,0 +1,237 @@
+<!--
+  *********************************************************
+  Component Name       : QuoteLinePrograms_OutputDocument
+  Created Date         : 10/01/2024  
+  Author               : Brent Mac - Cognizant
+                         Frank Berni - Cognizant
+  Description          : VF custom template page for the Price Quote Summary section for CPQ Quote generation
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>    
+  10/01/2024   Brent Mac           Initial creation
+  10/29/2024   Frank Berni         W-016384: New Discount columns, formatted percent and currency fields, Dynamically rendered columns and column width sizes.
+  10/30/2024   Frank Berni         W-016384: Adjusted Discount % so it displays with 2 decimal places
+  10/31/2024   Frank Berni         W-016384: Removed all borders except for top and bottom border for header row
+  11/04/2024   Frank Berni         W-016384: Reverted back to borders on all rows
+  11/05/2024   Frank Berni         W-016384: Added a new row for the SUM variables for Base, Free and Total Amount fields 
+  11/05/2024   Frank Berni         Updated Total columns to use Paid Amt field instead 
+  11/25/2024   Frank Berni         Switched BaseAmount__c to PromoBaseAmount__c
+  *********************************************************
+-->
+<apex:page contentType="text/xml" showHeader="false" sidebar="false" controller="CustomTemplateController">
+  <block-container>
+    <!-- Title -->
+    <block text-align="center"> Price Quote Summary </block>
+
+    <!-- Spacing between title and table -->
+    <block>&nbsp;</block>
+
+    <!-- Price Quote Summary table -->
+    <block font-size="{!template.SBQQ__FontSize__c}" font-family="{!template.SBQQ__FontFamily__c}" >
+        <table width="100%" border="0px">
+          
+            <!-- README: Make sure any new columns added have a new table-column tag along with the paired table-rows-->
+            <!-- NEW set up variables for column-width in Apex, any values hidden will have their columns set to 0% -->
+            <!-- Solution -->
+            <table-column column-width="{!solutionWidth}"/> 
+            <!-- Base Amount -->
+            <table-column column-width="{!baseWidth}"/>
+            <!-- Free Amount - conditional -->
+            <table-column column-width="{!freeWidth}"/>
+            <!-- Discount Amount - conditional -->
+            <table-column column-width="{!discountAmtWidth}"/>
+            <!-- Discount Percent - conditional -->
+            <table-column column-width="{!discountPercWidth}"/>
+            <!-- Total -->
+            <table-column column-width="{!totalWidth}"/>
+          
+          <table-header>
+            <table-row font-weight="bold" background-color="#{!template.SBQQ__ShadingColor__c}">
+              <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="center"> -->
+              <table-cell padding="3px" border-style="solid" border-width="1px" text-align="center">
+                <block>
+                  Solution
+                </block>
+              </table-cell>
+
+              <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="center"> -->
+              <table-cell padding="3px" border-style="solid" border-width="1px" text-align="center">
+                <block>
+                  Base Amount
+                </block>
+              </table-cell>
+
+              <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="center"> -->
+              <table-cell padding="3px" border-style="solid" border-width="1px" text-align="center">
+                <block>
+                  <!-- NEW Using outputText and rendered attribute to hide/show column header -->
+                  <apex:outputText value="Free Amount" rendered="{!showFreeAmount}"/>
+                </block>
+              </table-cell>
+
+              <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="center"> -->
+                <table-cell padding="3px" border-style="solid" border-width="1px" text-align="center">
+                  <block>
+                    <!-- NEW Using outputText and rendered attribute to hide/show column header -->
+                    <apex:outputText value="Discount Amt" rendered="{!showDiscount}"/>
+                  </block>
+                </table-cell>
+
+                <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="center"> -->
+                <table-cell padding="3px" border-style="solid" border-width="1px" text-align="center">
+                  <block>
+                    <!-- NEW Using outputText and rendered attribute to hide/show column header -->
+                    <apex:outputText value="Discount %" rendered="{!showDiscount}"/>
+                  </block>
+                </table-cell>
+
+                <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="center"> -->
+              <table-cell padding="3px" border-style="solid" border-width="1px" text-align="center">
+                <block>
+                  Total
+                </block>
+              </table-cell>
+
+            </table-row>
+          </table-header>
+          <table-body>
+            <apex:repeat id="programrepeat" value="{!qlPrograms}" var="p">
+              <table-row keep-together.within-page="always">
+
+                <table-cell padding="3px" border-style="solid" border-width="1px" text-align="left">
+                  <block>
+                    {!p.Name}
+                  </block>
+                </table-cell>
+
+                <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                      <!-- NEW wrapping apex:outputText with block tags so proper currency format is displayed -->
+                      <block>
+                        <apex:outputText value="{0,number,currency}">
+                          <apex:param value="{!p.PromoBaseAmount__c}"/>
+                        </apex:outputText>
+                      </block>  
+                </table-cell>
+
+                <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                    <block>
+                      <!-- NEW Using outputText for formatting and rendered attribute to hide/show row value -->
+                      <apex:outputText value="{0,number,currency}" rendered="{!showFreeAmount}">
+                        <apex:param value="{!p.FreeAmount__c}"/>
+                      </apex:outputText>
+                    </block>
+                  
+                </table-cell>
+                <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                    <block>
+                      <!-- NEW Using outputText for formatting and rendered attribute to hide/show row value -->
+                      <apex:outputText value="{0,number,currency}" rendered="{!showDiscount}">
+                        <apex:param value="{!p.Additional_Discount_Amount__c}"/>
+                      </apex:outputText>
+                    </block>
+                </table-cell>
+
+                <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                    <block>
+                      <!-- NEW Using outputText for formatting percents and rendered attribute to hide/show row value -->
+                      <apex:outputText value="{0,number,##.##%}" rendered="{!showDiscount}">
+                        <!-- NEW - formatted with 2 decimal places and divided by 100 so percents display properly -->
+                        <apex:param value="{!p.Additional_Discount_Percent__c / 100}"/>
+                      </apex:outputText>
+                    </block>
+                </table-cell>
+
+                <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                      <block>
+                        <!-- NEW wrapping apex:outputText with block tags so proper currency format is displayed -->
+                        <apex:outputText value="{0,number,currency}">
+                            <apex:param value="{!p.Paid_Amt__c}"/>
+                          </apex:outputText>
+                      </block>
+                </table-cell>
+
+              </table-row>
+            </apex:repeat>
+          </table-body>
+        </table>
+    </block>
+
+    <!-- Solution Subtotal Row -->
+    <block font-size="{!template.SBQQ__FontSize__c}" font-family="{!template.SBQQ__FontFamily__c}" >
+        <!-- NEW copy of table mimic widths from columns as above -->
+        <table width="100%" border="0px">
+          
+            <!-- NEW set up variables for column-width in Apex, any values hidden will have their columns set to 0% -->
+            <!-- Solution -->
+            <table-column column-width="{!solutionWidth}"/> 
+            <!-- Base Amount -->
+            <table-column column-width="{!baseWidth}"/>
+            <!-- Free Amount - conditional -->
+            <table-column column-width="{!freeWidth}"/>
+            <!-- Discount Amount - conditional -->
+            <table-column column-width="{!discountAmtWidth}"/>
+            <!-- Discount Percent - conditional -->
+            <table-column column-width="{!discountPercWidth}"/>
+            <!-- Total -->
+            <table-column column-width="{!totalWidth}"/>
+          
+          <!-- No header needed, just table-body -->
+          <table-body>
+            <!-- NEW only have one row with borders, and shading. all text align right, have Discount Amt and Discount columns blank -->
+            <table-row font-weight="bold" background-color="#{!template.SBQQ__ShadingColor__c}">
+              <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="right"> -->
+              <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                <block>
+                  Solution Subtotal:
+                </block>
+              </table-cell>
+
+              <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="right"> -->
+              <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                <block>
+                  <apex:outputText value="{0,number,currency}">
+                    <apex:param value="{!baseSum}"/>
+                  </apex:outputText>
+                </block>
+              </table-cell>
+
+              <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="right"> -->
+              <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                <block>
+                  <!-- NEW conditionally hide FreeSum based on showFreeAmount -->
+                  <apex:outputText value="{0,number,currency}" rendered="{!showFreeAmount}">
+                    <apex:param value="{!freeSum}"/>
+                  </apex:outputText>
+                </block>
+              </table-cell>
+
+              <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="right"> -->
+                <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                  <block>
+                    <apex:outputText value="" rendered="{!showDiscount}"/>
+                  </block>
+                </table-cell>
+
+                <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="right"> -->
+                <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                  <block>
+                    <apex:outputText value="" rendered="{!showDiscount}"/>
+                  </block>
+                </table-cell>
+
+                <!-- <table-cell padding="3px" border-top-style="solid" border-top-width="1px" border-bottom-style="solid" border-bottom-width="1px" text-align="right"> -->
+              <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                <block>
+                  <apex:outputText value="{0,number,currency}">
+                    <apex:param value="{!paidSum}"/>
+                  </apex:outputText>
+                </block>
+              </table-cell>
+
+            </table-row>
+          </table-body>
+        </table>
+    </block>
+
+  </block-container>
+</apex:page>

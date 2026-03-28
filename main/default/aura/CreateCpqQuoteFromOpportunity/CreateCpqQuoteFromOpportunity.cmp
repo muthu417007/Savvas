@@ -1,0 +1,15 @@
+<!--
+  *********************************************************
+  Component Name       : CreateCpqQuoteFromOpportunity
+  Created Date         : 6/25/2024  
+  Author               : Frank Berni - Cognizant
+  Description          : Tied to New Cpq Quote button on Opportunity - calls savCpqQuoteEditFormFromOpportunity lwc
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>
+  6/25/2024     Frank Berni        Initial Version: Ticket W-015045
+  *********************************************************
+-->
+<aura:component implements = "force:lightningQuickActionWithoutHeader,force:hasRecordId">  
+    <c:savCpqQuoteEditFormFromOpportunity recId="{!v.recordId}"/> 
+</aura:component>

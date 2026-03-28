@@ -1,0 +1,16 @@
+<apex:component >
+<div id="footerWrapper">
+    <div id="footerLeft">
+
+    </div>
+
+
+    <div id="footerLogo" class="footerButton">
+    </div>
+
+</div>
+<div id="footerContent">
+    <a href="/Terms%20of%20Use">Terms Of Use</a> | <a href="#">Privacy Policy</a> | <a href="#">Site Map</a>
+</div>
+<div id="legalStuff">Copyright ©2014 Pearson Education &amp; its Affiliates. All Rights Reserved.</div>
+</apex:component>

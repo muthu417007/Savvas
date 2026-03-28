@@ -1,0 +1,18 @@
+<apex:page sidebar="false" 
+            showHeader="false" standardStylesheets="false">
+    
+    <!--apex:page standardController="CommunitySupportPage__kav" sidebar="false" title="{!CommunitySupportPage__kav.title}"
+            showHeader="false" standardStylesheets="false">
+    <apex:composition template="pkb_CoCo_ICOM_WebTemplate">
+        <apex:define name="body">
+         <div class="col-xs-12 col-sm-12 articleTitle" style="margin-bottom:8px;">
+        <h1><apex:outputText escape="false" value="{!CommunitySupportPage__kav.title}" /></h1>  </div>
+       <div class="col-xs-12 col-sm-12 articleContent" >
+                 <apex:outputField value="{!CommunitySupportPage__kav.Content__c}" /> 
+                  <h3 id="featureditems" class="panel-title">Featured Content</h3>
+                  <apex:outputField value="{!CommunitySupportPage__kav.Featured_Content__c}" /> 
+              </div>
+        </apex:define>
+    </apex:composition>
+-->
+</apex:page>

@@ -1,0 +1,14 @@
+<template>
+    <template for:each={details} for:item="detail">
+        <dl key={detail.key} class="slds-dl_horizontal">
+            <dt class="slds-dl_horizontal__label">{detail.Name}:</dt>
+            <dd class="slds-dl_horizontal__detail">
+                <span if:true={detail.isString}>{detail.Value}</span>
+                <span if:true={detail.isDate}>
+                    <lightning-formatted-date-time value={detail.Value} time-zone="UTC"></lightning-formatted-date-time>
+                </span>
+                <span if:true={detail.isCurrency}>{detail.Value} {detail.currencyUnit}</span>
+            </dd>
+        </dl>
+    </template>
+</template>

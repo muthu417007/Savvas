@@ -1,0 +1,19 @@
+<aura:component
+	implements="force:hasRecordId,flexipage:availableForAllPageTypes"
+>
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+	<aura:attribute name="recordId" type="Id" />
+	<aura:attribute name="fieldName" type="String" default="Name" />
+	<aura:attribute name="record" type="Object" />
+	<aura:attribute name="simpleRecord" type="Object" />
+	<aura:attribute name="recordError" type="String" />
+
+	<force:recordData
+		aura:id="recordLoader"
+		targetFields="{!v.simpleRecord}"
+		targetError="{!v.recordError}"
+		recordUpdated="{!c.handleRecordUpdated}"
+	/>
+
+	<lightning:workspaceAPI aura:id="workspace" />
+</aura:component>

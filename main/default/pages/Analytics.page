@@ -1,0 +1,20 @@
+<apex:page >
+    <script type="text/javascript">
+        var role = "{!$UserRole.Name}";
+        console.log(role);
+        if(role.includes("Intervention AE Manager") || role.includes("SAA")){
+            window.top.location.href = '{!$Label.Analytics_SAA_Dashboard_URL}'
+        }
+        else if(role.includes("RGM International")){
+            window.top.location.href = '{!$Label.Analytics_International_Dashboard_URL}'
+        }
+        else if(role.includes("Professional Services")){
+            window.top.location.href = '{!$Label.Analytics_CSM_dashboard_URL}'
+        }
+        else if(role.includes("AGM")){
+            window.top.location.href = '{!$Label.AGM_Analytics}'
+        }else{
+            window.top.location.href = '{!$Label.Analytics}'
+        }
+    </script>
+</apex:page>

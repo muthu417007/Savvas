@@ -1,0 +1,5 @@
+<apex:component controller="emailtest" access="global">
+<apex:attribute type="Id" name="recordId" description="Record ID" assignTo="{!recId}" />
+{!showid}
+    
+</apex:component>

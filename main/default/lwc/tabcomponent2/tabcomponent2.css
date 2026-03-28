@@ -1,0 +1,174 @@
+.dropdown-arrow {
+    cursor: pointer;
+}
+ 
+.dropdown-container{
+    display: flex;
+    align-items: center;
+}
+ 
+.search-criteria-label{
+    margin-left: 10px;
+}
+ 
+.dropdown-visible{
+    display: block;
+}
+ 
+.dropdown-hidden{
+    display: none;
+}
+.arvicon-input {
+    border: 1px solid #76716b;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+   /* // margin-bottom: 1rem; */
+    overflow-y: scroll;
+}
+
+.dropdown-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.dropdown-arrow {
+    cursor: pointer;
+}
+
+.search-criteria-label {
+    margin-left: 0.5rem;
+}
+
+.search-results {
+    margin-top: 1rem;
+}
+
+/*.pagination {
+    margin-top: 1rem;
+    padding-left: 20px;
+    padding-bottom: 15px;
+   
+    display: flex;
+    justify-content: center;
+}*/
+
+
+
+.search-button-disabled {
+    background-color:#76716b
+}
+
+.search-button-enabled {
+    background-color: #0070d2;
+    color:white;
+}
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+/*.text-area-inputchange, .arvicon-input {
+    overflow-y: scroll !important;
+}*/
+.text-area-inputchange {
+    padding-top: 5px;  
+     padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.footer-text-value{
+     padding-top: 0px;  
+     padding-left: 20px;
+     font-size: 17px;
+}
+/*.button-container {
+    margin-bottom: 10px; /* Add spacing between buttons and textarea *
+}*/
+
+.ISBN-Name{
+   padding-top: 20px;  
+   padding-left: 25px; 
+}
+/*.align-buttons {
+    display: flex;
+    justify-content: flex-end;
+}*/
+.arvicon-input {
+    width: 50%; /* Make the textarea full width */
+    overflow-y: scroll;
+}
+.slds-grid.slds-m-bottom_medium.align-buttons {
+    padding-top: 13px;
+}
+.count-container {
+    display: flex;
+    align-items: center;
+}
+
+.total-count {
+    margin-right: 10px; /* Adjust as needed */
+}
+
+.row-count-label {
+    margin-right: 5px; /* Adjust as needed */
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.count-container {
+    display: flex;
+    align-items: center;
+}
+
+.total-count {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+
+
+.pagination-buttons {
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 0.5rem;
+}
+.row-count-label {
+    display: inline-block;
+    margin-right:5px;
+}
+
+.selected-rows select {
+    display: inline-block;
+}
+.pagination-button-enabled {
+    color:white;
+  background-color:#005fb2;
+}
+
+.pagination-button-disabled {
+    background-color:#ebebe4
+}
+.pagination-buttons{
+    border-radius: 10px;
+}
+.page-info{
+     background-color:  lightsteelblue;
+    margin-right: 5px;
+    font-weight: bold;
+}
+.search-result-value{
+    margin-top: 10px;
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="backgroundImgUrl" label="Enter Background Image relative URL" type="String" />
+            <property name="heading" label="Enter Heading" type="String" />
+            <property name="subHeading" label="Enter Sub Heading" type="String" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

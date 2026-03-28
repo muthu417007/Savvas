@@ -1,0 +1,12 @@
+<apex:component layout="block">
+    <apex:attribute name="data" type="KnowledgeArticleVersionHistory[]" required="true" description="Article History Data" />
+    <apex:outputLabel value="Contributors" styleClass="labelCol"></apex:outputLabel>         
+    <ul>
+         <apex:repeat value="{!data}" var="a">
+             <li>
+       <apex:outputField label="" value="{!a.CreatedById}" />
+                 </li>
+    </apex:repeat>   
+    </ul>
+
+</apex:component>

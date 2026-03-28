@@ -1,0 +1,1122 @@
+<template>
+    <div class="spinner-wrapper slds-spinner_container" if:true={isLoading1}>
+        <div class="slds-backdrop slds-backdrop_open">
+            <lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+        </div>
+    </div> 
+    <template if:false={showDeliveryDetails}>
+    <div class="slds-grid slds-wrap slds-grid_vertical slds-gutters slds-p-around_large order-status-BG slds-is-relative">
+        <template if:false={orderDetailsSect}>
+        <template if:false={isGuest}>
+            <div class="slds-col">
+                <nav role="navigation" aria-label="Breadcrumbs">
+                    <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                        <li class="slds-breadcrumb__item">
+                            <a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+                        </li>
+                        <li class="slds-breadcrumb__item">
+                            <a href="#" class="slds-m-horizontal_small breadcrumb-label">Order Status</a>
+                        </li>
+                        <li class="slds-breadcrumb__item">
+                            <a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Order Search</a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </template>
+            <div class="slds-col slds-size_3-of-3 slds-m-top_large max-width-container">
+                <lightning-card class="search-result-cards">
+                    <h1 class="slds-text-heading_medium slds-m-around_small slds-p-horizontal_large search-criteria-title order-detail-table-header">
+                        {labels.scc_OrderStatus_Search_Criteria}
+                        <div class="chevron-circle" onclick={toggleSearchFields}><lightning-icon icon-name='utility:chevronup' alternative-text='chevronup' size='large' title='chevronup'></lightning-icon></div>
+                        
+                         <div class="chevron-circle" onclick={toggleSearchFields}><lightning-icon icon-name='utility:chevronup' alternative-text='chevronup' size='large' title='chevronup'></lightning-icon></div>
+                    </h1>
+                    <div class="slds-form slds-p-top_large slds-p-horizontal_x-large slds-p-bottom_x-large search-fields-group slds-show">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_1-of-3">
+                                <div class="slds-form-element">
+                                    <lightning-combobox class="statuscombobox" label={labels.scc_home_Search_By} placeholder="Select option" value={SearchByvalue} options={SearchByOptions} onchange={handleSearchOptionChange}></lightning-combobox>
+                                </div>
+                            </div>
+                            <template if:true={PONumSelect}>
+                                <template if:true={locations}>
+                                    <div class="slds-col slds-size_1-of-3">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="PO-num">PO #</label>
+                                            <div class="slds-form-element__control">
+                                                <input type="text" id="PO-num" placeholder={labels.scc_home_PO} class="slds-input" onkeyup={handlePONumChange} onchange={handlePONumChange} value={PONum} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <template if:false={isGuest}>
+                                    <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="isbn12">{labels.scc_home_ISBN}</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="isbn12" placeholder={labels.scc_home_ISBN} class="slds-input" value={ISBnNum} onkeyup={handleISBnNumChange} onchange={handleISBnNumChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <lightning-combobox class="statuscombobox" label={labels.scc_home_Order_Status} value={OrderStatusValue} options={OrderStatusOptions} onchange={handleOrderStatusOptionChange}></lightning-combobox>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-size_1-of-2 slds-p-left_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="order-from-date12">{labels.scc_home_Order_Date} *</label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="order-from-date12" placeholder={labels.scc_home_From} class="slds-input" value={startDate} onkeyup={handleStartDateChange} onchange={handleStartDateChange} />
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2 slds-p-right_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="order-to-date12" style="visibility: hidden;">{labels.scc_home_Order_Date} *</label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="order-to-date12" placeholder={labels.scc_home_To} class="slds-input" value={endDate} onkeyup={handleEndDateChange} onchange={handleEndDateChange} />
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </template>
+                                </template>
+                                <template if:false={locations}>
+                                    <div class="slds-col slds-size_1-of-3">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="PO-num1">PO # *</label>
+                                            <div class="slds-form-element__control">
+                                                <input type="text" id="PO-num1" placeholder={labels.scc_home_PO} class="slds-input" onkeyup={handlePONumChange} onchange={handlePONumChange} value={PONum} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                <template if:false={isGuest}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="isbn">{labels.scc_home_ISBN}</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="isbn" placeholder={labels.scc_home_ISBN} class="slds-input" value={ISBnNum} onkeyup={handleISBnNumChange} onchange={handleISBnNumChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-grid">
+                                        <div class="slds-col slds-size_1-of-2 slds-p-left_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="order-from-date">{labels.scc_home_Order_Date}</label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="order-from-date" placeholder={labels.scc_home_From} class="slds-input" value={startDate} onkeyup={handleStartDateChange} onchange={handleStartDateChange} />
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-2 slds-p-right_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="order-to-date" style="visibility: hidden;">{labels.scc_home_Order_Date}</label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="order-to-date" placeholder={labels.scc_home_To} class="slds-input" value={endDate} onkeyup={handleEndDateChange} onchange={handleEndDateChange} />
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <lightning-combobox class="statuscombobox" label={labels.scc_home_Order_Status} value={OrderStatusValue} options={OrderStatusOptions} onchange={handleOrderStatusOptionChange}></lightning-combobox>
+                                    </div>
+                                </div>
+                                </template>
+                                </template>
+                            </template>
+
+                          <template if:true={ISBNselect}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-isbn">{labels.scc_home_ISBN} *</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-isbn" placeholder={labels.scc_home_ISBN} class="slds-input" value={ISBnNum} onkeyup={handleISBnNumChange} onchange={handleISBnNumChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-isbn-po">{labels.scc_home_PO}</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-isbn-po" placeholder={labels.scc_home_PO} class="slds-input" onkeyup={handlePONumChange} onchange={handlePONumChange} value={PONum} />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-grid"> -->
+                                        <!-- <div class="slds-col slds-size_1-of-2 slds-p-left_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="by-isbn-order-from-date">{labels.scc_home_Order_Date}</label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="by-isbn-order-from-date" placeholder={labels.scc_home_From} class="slds-input" value={startDate} onkeyup={handleStartDateChange} onchange={handleStartDateChange} />
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="slds-col slds-size_1-of-2 slds-p-right_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="by-isbn-order-to-date" style="visibility: hidden;">{labels.scc_home_Order_Date}</label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="by-isbn-order-to-date" placeholder={labels.scc_home_To} class="slds-input" value={endDate} onkeyup={handleEndDateChange} onchange={handleEndDateChange} />
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    <!-- </div>
+                                </div> -->
+                                <div class="slds-col slds-size_1-of-3">
+                                    <!-- <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-isbn-order-status">{labels.scc_home_Order_Status}</label>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-select_container">
+                                                <select class="slds-select" id="by-isbn-order-status" onchange={handleOrderStatusOptionChange}>
+                                                    <template for:each={OrderStatusOptions} for:item="OrderStatusOptions">
+                                                        <option key={OrderStatusOptions.value} value={OrderStatusOptions.value}>
+                                                            {OrderStatusOptions.label}
+                                                        </option>
+                                                    </template>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                        <div class="slds-form-element">
+                                            <lightning-combobox class="statuscombobox" label={labels.scc_home_Order_Status} value={OrderStatusValue} options={OrderStatusOptions} onchange={handleOrderStatusOptionChange}></lightning-combobox>
+                                        </div>
+                                </div>
+                                <div class="slds-col slds-size_2-of-3">
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-col slds-size_1-of-3 slds-p-left_none">
+                                            <div class="slds-form-element">
+                                                <lightning-combobox class="statuscombobox" label={labels.scc_OrderStatus_Country} value={CountryValue} placeholder="Country" options={CountryOptions} onchange={handleCountryOptionChange}></lightning-combobox>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-3">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="by-isbn-state">{labels.scc_OrderStatus_State_Province}</label>
+                                                <div class="slds-form-element__control">
+                                                    <input type="text" id="by-isbn-state" placeholder={labels.scc_OrderStatus_State_Province} class="slds-input" value={StateNum} onkeyup={handleStateNumChange} onchange={handleStateNumChange} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-3 slds-p-right_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="by-isbn-zip">{labels.scc_OrderStatus_Zip_Postal_Code}</label>
+                                                <div class="slds-form-element__control">
+                                                    <input type="text" id="by-isbn-zip" placeholder={labels.scc_OrderStatus_Zip_Postal_Code} class="slds-input" value={ZipNum} onkeyup={handleZipNumChange} onchange={handleZipNumChange} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-grid"> 
+                                        <div class="slds-col slds-size_1-of-2 slds-p-left_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="by-isbn-order-from-date">{labels.scc_home_Order_Date}</label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="by-isbn-order-from-date" placeholder={labels.scc_home_From} class="slds-input" value={startDate} onkeyup={handleStartDateChange} onchange={handleStartDateChange} />
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="slds-col slds-size_1-of-2 slds-p-right_none">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="by-isbn-order-to-date" style="visibility: hidden;">{labels.scc_home_Order_Date}</label>
+                                                <div class="slds-form-element__control slds-is-relative">
+                                                    <input type="date" id="by-isbn-order-to-date" placeholder={labels.scc_home_To} class="slds-input" value={endDate} onkeyup={handleEndDateChange} onchange={handleEndDateChange} />
+                                                    <img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+                                                </div>
+                                            </div>
+                                        </div> 
+                                 </div>
+                                </div>                
+
+                            </template> 
+
+
+                            <template if:true={InvoiceSelect}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-invoice">{labels.scc_OrderStatus_Invoice_Number} *</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-invoice" placeholder={labels.scc_OrderStatus_Invoice_Number} class="slds-input" onkeyup={handleInvoNumChange} onchange={handleInvoNumChange} value={InvoNum} />
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="isbn12">{labels.scc_home_ISBN}</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="isbn15" placeholder={labels.scc_home_ISBN} class="slds-input" value={ISBnNum} onkeyup={handleISBnNumChange} onchange={handleISBnNumChange} />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </template>
+                           
+                             
+
+
+                            <template if:true={DocumentNumSelect}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-order">{labels.scc_home_Document_Control} *</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-order" placeholder={labels.scc_home_Document_Control} class="slds-input" value={DocContrNum} onkeyup={handleDocContrNumChange} onchange={handleDocContrNumChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <template if:false={isGuest}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-order-isbn">{labels.scc_home_ISBN}</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-order-isbn" placeholder={labels.scc_home_ISBN} class="slds-input" value={ISBnNum} onkeyup={handleISBnNumChange} onchange={handleISBnNumChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <!-- <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-order-order-status">{labels.scc_home_Order_Status}</label>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-select_container">
+                                                <select class="slds-select" id="by-order-order-status" onchange={handleOrderStatusOptionChange}>
+                                                    <template for:each={OrderStatusOptions} for:item="OrderStatusOptions">
+                                                        <option key={OrderStatusOptions.value} value={OrderStatusOptions.value}>
+                                                            {OrderStatusOptions.label}
+                                                        </option>
+                                                    </template>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="slds-form-element">
+                                        <lightning-combobox class="statuscombobox" label={labels.scc_home_Order_Status} value={OrderStatusValue} options={OrderStatusOptions} onchange={handleOrderStatusOptionChange}></lightning-combobox>
+                                    </div>
+                                </div>
+                            </template>
+                            </template>
+                            <template if:true={SANSelect}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-san-customersan">{labels.scc_OrderStatus_Customer_SAN}</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-san-customersan" placeholder={labels.scc_OrderStatus_Customer_SAN} class="slds-input" value={SANNum} onchange={handleSANNumChange} onkeyup={handleSANNumChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-san-isbn">{labels.scc_home_ISBN}</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-san-isbn" placeholder={labels.scc_home_ISBN} class="slds-input" value={ISBnNum} onkeyup={handleISBnNumChange} onchange={handleISBnNumChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-san-po">{labels.scc_home_PO}</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-san-po" placeholder={labels.scc_home_PO} class="slds-input" onkeyup={handlePONumChange} onchange={handlePONumChange} value={PONum} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <!-- <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-san-order-status">{labels.scc_home_Order_Status}</label>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-select_container">
+                                                <select class="slds-select" id="by-san-order-status" onchange={handleOrderStatusOptionChange}>
+                                                    <template for:each={OrderStatusOptions} for:item="OrderStatusOptions">
+                                                        <option key={OrderStatusOptions.value} value={OrderStatusOptions.value}>
+                                                            {OrderStatusOptions.label}
+                                                        </option>
+                                                    </template>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="slds-form-element">
+                                        <lightning-combobox class="statuscombobox" label={labels.scc_home_Order_Status} value={OrderStatusValue} options={OrderStatusOptions} onchange={handleOrderStatusOptionChange}></lightning-combobox>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={ZipSelect}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-zip-zip">{labels.scc_OrderStatus_Zip_Postal_Code} *</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-zip-zip" placeholder={labels.scc_OrderStatus_Zip_Postal_Code} class="slds-input" value={ZipNum} onkeyup={handleZipNumChange} onchange={handleZipNumChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={StateSelect}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-state-state">{labels.scc_OrderStatus_State_Province} *</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-state-state" placeholder={labels.scc_OrderStatus_State_Province} class="slds-input" value={StateNum} onkeyup={handleStateNumChange} onchange={handleStateNumChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-state-city">{labels.scc_OrderStatus_City}</label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-state-city" placeholder="Enter City" class="slds-input" value={CityNum} onkeyup={handleCityNumChange} onchange={handleCityNumChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={CountrySelect}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <!-- <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-country-country">{labels.scc_OrderStatus_Country}*</label>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-select_container">
+                                                <select class="slds-select" id="by-country-country" onchange={handleCountryOptionChange}>
+                                                    <template for:each={CountryOptions} for:item="CountryOptions">
+                                                        <option key={CountryOptions.value} value={CountryOptions.value}>
+                                                            {CountryOptions.label}
+                                                        </option>
+                                                    </template>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="slds-form-element">
+                                        <lightning-combobox class="statuscombobox" label="Country *" value={CountryValue} placeholder="Country" options={CountryOptions} onchange={handleCountryOptionChange}></lightning-combobox>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-country-name">Customer Name * <span class="label-sub-text">(begins with)</span></label>
+                                        <div class="slds-form-element__control">
+                                            <input type="text" id="by-country-name" placeholder="Customer Name" class="slds-input" value={CustName} onchange={handleCustNameChange} onkeyup={handleCustNameChange} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={allOrdersSelect}>
+                                <div class="slds-col slds-size_1-of-3">
+                                    <!-- <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="by-all-order-status">{labels.scc_home_Order_Status}</label>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-select_container">
+                                                <select class="slds-select" id="by-all-order-status" onchange={handleOrderStatusOptionChange}>
+                                                    <template for:each={OrderStatusOptions} for:item="OrderStatusOptions">
+                                                        <option key={OrderStatusOptions.value} value={OrderStatusOptions.value}>
+                                                            {OrderStatusOptions.label}
+                                                        </option>
+                                                    </template>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="slds-form-element">
+                                        <lightning-combobox class="statuscombobox" label={labels.scc_home_Order_Status} value={OrderStatusValue} options={OrderStatusOptions} onchange={handleOrderStatusOptionChange}></lightning-combobox>
+                                    </div>
+                                </div>
+                            </template>
+                            <div class="slds-col slds-size_3-of-3">
+                                <div class="slds-form-element__control">
+                                    <button class="slds-button search-button slds-m-right_medium" onclick={handleSearch} disabled={SearchDisabled}>
+                                        <lightning-icon class="search-icon slds-m-right_x-small" icon-name='utility:search' alternative-text='search' size='x-small' title='search'></lightning-icon>
+                                        {labels.scc_home_Search}
+                                    </button>
+                                    <button class="slds-button clear-button" onclick={handleClearClick}  disabled={SearchDisabled}>
+                                        {labels.scc_OrderStatus_Clear}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-card>
+            </div>
+            <template if:false={isLoading1}>
+                <template if:true={showSearchResults}>
+                    <div class="slds-col slds-size_3-of-3 slds-m-top_large max-width-container">
+                        <lightning-card class="search-result-cards">
+                            <h1 class="slds-text-heading_medium slds-m-around_small slds-p-horizontal_large search-criteria-title order-detail-table-header">{labels.scc_OrderStatus_Search_Results}</h1>
+                            
+                            <div class="slds-grid slds-wrap">
+                                <template if:true={noRecordsToDisplay}>
+                                    <div class="slds-col slds-size_12-of-12">
+                                        <div class="slds-m-horizontal_large slds-p-around_x-large slds-m-bottom_large no-result-container">
+                                            <img alt="no results image" src={labels.scc_noResults} />
+                                            <div class="no-result-title slds-m-bottom_small">No Results</div>
+                                            <div>There are no orders that match your search criteria</div>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template if:false={noRecordsToDisplay}>
+                                    <div class="slds-col slds-size_3-of-3">
+                                        <div class="slds-grid slds-wrap slds-p-horizontal_small slds-p-bottom_xx-small slds-m-bottom_x-large">
+                                            <div class="slds-col slds-size_7-of-12 slds-p-right_none">
+                                                <div class="slds-form-element__control">
+                                                    <button class="slds-button table-control-button" disabled={bDisableFirst} onclick={firstPage}>{First}</button>
+                                                    <button class="slds-button table-control-button" disabled={bDisableFirst} onclick={previousPage}>{Previous}</button>
+                                                    <p class="page-count-shown slds-m-horizontal_x-small">Showing {pageNumber} of {totalPages} Page(s)</p>
+                                                    <button class="slds-button table-control-button" disabled={bDisableLast} onclick={nextPage}>{next}</button>
+                                                    <button class="slds-button table-control-button" disabled={bDisableLast} onclick={lastPage}>{Last}</button>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_5-of-12 table-row-count slds-text-align_right slds-p-horizontal_none">
+                                                <select class="slds-select" id="row-count" onchange={handleRecordsPerPage}>
+                                                    <template for:each={pageSizeOptions} for:item="option">
+                                                        <option style="font-size:12px;" key={option} value={option}>{option}</option>
+                                                    </template>
+                                                </select>        
+                                                <label class="slds-form-element__label" for="row-count"># of Rows</label>
+                                                <span>{totalRecords} {labels.scc_Order_Status_items}</span>
+                                                <label class="slds-form-element__label sort-by-label" for="sort-by"><lightning-icon icon-name='utility:sort' alternative-text='sort' size='x-small' title='sort'></lightning-icon>Sort by:</label>
+                                                <select class="slds-select" id="sort-by">
+                                                    <option>PO#</option>
+                                                </select> 
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <template for:each={recordsToDisplay} for:item='line'>
+                                        <div class="slds-col slds-size_3-of-3" key={line.Identi}>
+                                            <div class="slds-m-top_medium slds-p-horizontal_large">
+                                                <div class="slds-box slds-p-horizontal_xx-small slds-m-bottom_small">
+                                                    <div class="slds-grid slds-wrap">
+                                                        <div class="slds-col slds-size_2-of-12">
+                                                            <p class="order-label">PO #</p>
+                                                            <p class="order-value">
+                                                                <template if:true={line.siopOrder}>
+                                                                    <span class="slds-show_inline-block note-icon slds-m-right_xx-small slds-text-align_center">!</span>
+                                                                </template>
+                                                                {line.PO}</p>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-12 slds-p-around_none">
+                                                            <p class="order-label">{labels.scc_home_Document_Control}</p>
+                                                            <!--handleOrderNumClick added by Vaibhav to include new UI table change-->
+                                                            <p class="order-value"><a onclick={handleOrderNumClick} data-id={line.Identi} data-siopord={line.siopOrder} data-name={line.SAP_Document_Number}>{line.SAP_Document_Number}</a></p>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-12">
+                                                            <p class="order-label">{labels.scc_home_Order_Date}</p>
+                                                            <p class="order-value">{line.OrderDate}</p>
+                                                        </div>
+                                                        <div class="slds-col slds-size_2-of-12">
+                                                            <p class="order-label">{labels.scc_OrderDetail_Order_Method}</p>
+                                                            <p class="order-value">{line.OrderMethod}</p>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-12">
+                                                            <p class="order-label">Total Items</p>
+                                                            <p class="order-value">{line.TotalItems}</p>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-12">
+                                                            <p class="order-label">Total Units</p>
+                                                            <p class="order-value">{line.Totalunits}</p>
+                                                        </div>
+                                                        <div class="slds-col slds-size_2-of-12">
+                                                            <p class="order-label">Ship To</p>
+                                                            <p class="order-value">{line.CustShpippingAddress}</p>
+                                                        </div>
+                                                        <div class="slds-col slds-size_2-of-12">
+                                                            <p class="order-label">Bill To</p>
+                                                            <p class="order-value">{line.CustBillingAddress}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                        </lightning-card>
+                    </div>
+                </template>
+            </template>
+        </template>
+        <template if:false={showDeliveryDetails}>
+            <template if:true={orderDetailsSect}>
+            <template if:false={isGuest}>
+                <div class="slds-col slds-size_3-of-3">
+                    <nav class="slds-p-horizontal_small" role="navigation" aria-label="Breadcrumbs">
+                        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                            <li class="slds-breadcrumb__item">
+                                <a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+                            </li>
+                            <li class="slds-breadcrumb__item">
+                                <a href="#" class="slds-m-horizontal_small breadcrumb-label">{labels.scc_home_Order_Status}</a>
+                            </li>
+                            <li class="slds-breadcrumb__item">
+                                <a class="slds-m-horizontal_small breadcrumb-label">{labels.scc_OrderStatus_Order_Search}</a>
+                            </li>
+                            <li class="slds-breadcrumb__item">
+                                <a class="slds-m-left_small slds-text-title_bold breadcrumb-label">{labels.scc_OrderDetail_Order_Detail}</a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </template>
+                    <div class="slds-col slds-size_3-of-3 max-width-container slds-is-relative">
+                        <template if:true={siopOrd}>
+                            <button class="slds-button return-to-search-button1" onclick={handleRegisterSIOP} >{labels.scc_OrderStatus_SIOP_Order_Register_Participants	}</button>
+                        </template>
+                        <button class="slds-button return-to-search-button" onclick={handleBackClick} >{labels.scc_OrderDetail_Return_to_Order_Search}</button>
+                        <div class="slds-tabs_default slds-tabs_medium slds-m-top_xx-large">
+                            <ul class="slds-tabs_default__nav" role="tablist">
+                                <li class="slds-tabs_default__item slds-is-active" role="presentation" data-id="tab-default-1__item">
+                                <a class="slds-tabs_default__link" href="#null" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" data-id="tab-default-1__item" data-value="Order" onclick={handleActive}>Order</a>
+                                </li>
+                                <li class="slds-tabs_default__item" role="presentation" data-id="tab-default-2__item">
+                                <a class="slds-tabs_default__link" href="#null" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" data-id="tab-default-2__item" data-value="Shipment" onclick={handleActive}>Shipment</a>
+                                </li>
+                                <li class="slds-tabs_default__item" role="presentation" data-id="tab-default-3__item">
+                                <a class="slds-tabs_default__link" href="#null" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" data-id="tab-default-3__item" data-value="BillTo" onclick={handleActive}>Bill To</a>
+                                </li>
+                            </ul>
+                            <lightning-card class="order-detail-tab-card">
+                                <div class="slds-grid slds-wrap slds-p-around_x-small">
+                                    <div class="slds-col slds-size_2-of-12 slds-text-align_right order-detail-label">
+                                        {labels.scc_OrderStatus_Ship_To_Account} 
+                                    </div>
+                                    <div class="slds-col slds-size_4-of-12 order-detail-value">
+                                        {ShipToAccount}
+                                    </div>
+                                    <div class="slds-col slds-size_2-of-12 slds-text-align_right order-detail-label">
+                                        {labels.scc_home_Order_Date}
+                                    </div>
+                                    <div class="slds-col slds-size_4-of-12 order-detail-value">
+                                        {CustomerPurchaseOrderDate}
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-p-around_x-small">
+                                    <div class="slds-col slds-size_2-of-12 slds-text-align_right order-detail-label">
+                                        {labels.scc_OrderDetail_Ship_To} 
+                                    </div>
+                                    <div class="slds-col slds-size_4-of-12 order-detail-value">
+                                        {ShipTo}
+                                    </div>
+                                    <div class="slds-col slds-size_2-of-12 slds-text-align_right order-detail-label">
+                                        Request Ship Date
+                                    </div>
+                                    <div class="slds-col slds-size_4-of-12 order-detail-value">
+                                        {RequestedDeliveryDate}
+                                        <div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+                                            <div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+                                            <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left" role="tooltip" id="2">
+                                                <div class="slds-popover__body">{labels.scc_OrderDetail_Requested_Shipment_Date_tooltip}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-p-around_x-small">
+                                    <div class="slds-col slds-size_2-of-12 slds-text-align_right order-detail-label">
+                                        {labels.scc_home_PO} 
+                                    </div>
+                                    <div class="slds-col slds-size_4-of-12 order-detail-value">
+                                        {CustomerPurchaseOrderNumber}
+                                    </div>
+                                    <div class="slds-col slds-size_2-of-12 slds-text-align_right order-detail-label">
+                                        {labels.scc_OrderDetail_Order_Method}
+                                    </div>
+                                    <div class="slds-col slds-size_4-of-12 order-detail-value">
+                                        {CustomerPurchaseOrderType}
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-p-around_x-small">
+                                    <div class="slds-col slds-size_2-of-12 slds-text-align_right order-detail-label">
+                                        {labels.scc_home_Document_Control} 
+                                    </div>
+                                    <div class="slds-col slds-size_4-of-12 order-detail-value">
+                                        {orderNumber}
+                                    </div>
+                                    <div class="slds-col slds-size_2-of-12 slds-text-align_right order-detail-label">
+                                        {labels.scc_home_Status}
+                                    </div>
+                                    <div class="slds-col slds-size_4-of-12 order-detail-value">
+                                        {OverallStatusDescription}
+                                    </div>
+                                </div>
+                                <template if:true={siopOrd}>
+                                <div class="slds-grid slds-wrap slds-p-around_x-small">
+                                    <div class="slds-col slds-size_2-of-12 slds-text-align_right order-detail-label">
+                                        {labels.scc_OrderStatus_SIOP_Order}
+                                    </div>
+                                    <div class="slds-col slds-size_4-of-12 order-detail-value">
+                                        <div class="slds-show_inline-block note-icon slds-m-right_xx-small slds-text-align_center">!</div>
+                                        {labels.scc_OrderStatus_SIOP_Order_Note}
+                                    </div>
+                                </div>
+                                </template>
+                                <div class="slds-m-horizontal_xx-large slds-m-vertical_medium slds-p-horizontal_xx-large slds-p-vertical_medium alert-note slds-text-align_center">
+                                    <div class="slds-show_inline-block note-icon slds-m-right_xx-small">!</div>
+                                    <b>Please note:</b> Fulfillment In Process items have an average delivery time of 7-10 business days
+                                </div>
+                            </lightning-card>
+                            <div id="tab-default-1" class="slds-tabs_default__content slds-p-around_none slds-show" role="tabpanel" aria-labelledby="tab-default-1__item" data-id="tab-default-1__item" data-name="tabpanel">
+                                <div class="slds-m-top_large">
+                                    <lightning-card class="search-result-cards">
+                                        <div class="slds-grid slds-wrap slds-p-horizontal_medium">
+                                            <div class="slds-col slds-size_3-of-3 order-detail-table-header">
+                                                <div class="search-criteria-title">{labels.scc_OrderDetail_Order_Line_Detail}</div>
+                                            </div>
+                                            <div class="slds-col slds-size_3-of-3 slds-form slds-p-horizontal_large slds-p-vertical_x-small">
+                                                <div class="slds-grid slds-wrap slds-p-bottom_xx-small slds-m-vertical_large">
+                                                    <div class="slds-col slds-size_7-of-12 slds-p-horizontal_none">
+                                                        <div class="slds-form-element__control">
+                                                            <button class="slds-button table-control-button" disabled={bDisableFirst} onclick={firstPage}>&#60;&#60; First</button>
+                                                            <button class="slds-button table-control-button" disabled={bDisableFirst} onclick={previousPage}>&#60; Previous</button>
+                                                            <p class="page-count-shown slds-m-horizontal_x-small">Showing {pageNumber} of {totalPages} Page(s)</p>
+                                                            <button class="slds-button table-control-button" disabled={bDisableLast} onclick={nextPage}>Next &#62;</button>
+                                                            <button class="slds-button table-control-button" disabled={bDisableLast} onclick={lastPage}>Last &#62;&#62;</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-col slds-size_5-of-12 table-row-count slds-text-align_right slds-p-horizontal_none">
+                                                        <select class="slds-select" id="row-count1" onchange={handleRecordsPerPage}>
+                                                            <template for:each={pageSizeOptions} for:item="option">
+                                                                <option style="font-size:12px;" key={option} value={option}>{option}</option>
+                                                            </template>
+                                                        </select>        
+                                                        <label class="slds-form-element__label" for="row-count1">{labels.scc_Order_Status_no_of_rows}</label>
+                                                        <span>{totalRecords} {labels.scc_Order_Status_items}</span>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <table class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-horizontal_small" role="grid" aria-label="Example advanced table of Opportunities in actionable mode with ascending column sorting">
+                                                <thead>
+                                                    <tr class="slds-line-height_reset">
+                                                        <th aria-sort="ascending" class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode" scope="col" style="width: 6%;">
+                                                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                    <span title="Name">Seq</span>
+                                                                    <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                            </a>
+                                                            <span class="slds-assistive-text" aria-live="polite" aria-atomic="true">Sorted ascending</span>
+                                                        </th>
+                                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 12%;">
+                                                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                            <span class="slds-assistive-text">Sort by: </span>
+                                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                            <span title="Account Name">ISBN</span>
+                                                            <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                            </div>
+                                                            </a>
+                                                        </th>
+                                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 14%;">
+                                                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                            <span class="slds-assistive-text">Sort by: </span>
+                                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                            <span title="Close Date">Title</span>
+                                                            <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                            </div>
+                                                            </a>
+                                                        </th>
+                                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                            <span class="slds-assistive-text">Sort by: </span>
+                                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                            <span title="Stage">Price</span>
+                                                            <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                            </div>
+                                                            </a>
+                                                        </th>
+                                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                            <span class="slds-assistive-text">Sort by: </span>
+                                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                            <span title="Confidence">Pricing Method</span>
+                                                            <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                            </div>
+                                                            </a>
+                                                        </th>
+                                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                            <span class="slds-assistive-text">Sort by: </span>
+                                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                            <span title="Amount">Discount</span>
+                                                            <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                            </div>
+                                                            </a>
+                                                        </th>
+                                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                            <span class="slds-assistive-text">Sort by: </span>
+                                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                            <span title="Contact">Qty Ordered</span>
+                                                            <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                            </div>
+                                                            </a>
+                                                        </th>
+                                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                            <span class="slds-assistive-text">Sort by: </span>
+                                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                            <span title="Contact">Qty Closed</span>
+                                                            <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                            </div>
+                                                            </a>
+                                                        </th>
+                                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                            <span class="slds-assistive-text">Sort by: </span>
+                                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                            <span title="Contact">To Be Shipped</span>
+                                                            <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                            </div>
+                                                            </a>
+                                                        </th>
+                                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 14%;">
+                                                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                            <span class="slds-assistive-text">Sort by: </span>
+                                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                            <span title="Contact">Status</span>
+                                                            <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                            </div>
+                                                            </a>
+                                                        </th>
+                                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                            <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                            <span class="slds-assistive-text">Sort by: </span>
+                                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                            <span title="Contact">Status Updated</span>
+                                                            <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                            </div>
+                                                            </a>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template for:each={recordsToDisplay} for:item='line'>
+                                                        <tr aria-selected="false" class="slds-hint-parent" key={line.Identi}>
+                                                            <th class="slds-cell_action-mode" scope="row">
+                                                                <div title={line.SalesItem}>{line.SalesItem}</div>
+                                                            </th>
+                                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                                <div title={line.Material}>{line.Material}</div>
+                                                            </td>
+                                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                                <div title={line.ItemDescription}>{line.ItemDescription}</div>
+                                                            </td>
+                                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                                <div title={line.NetValueInDocumentCurrency}>{line.NetValueInDocumentCurrency}</div>
+                                                            </td>
+                                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                                <div title={line.MaterialPricingGroupDescription}>{line.MaterialPricingGroupDescription}</div>
+                                                            </td>
+                                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                                <div title={line.Discount}>{line.Discount}</div>
+                                                            </td>
+                                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                                <div title={line.OrderQuantity}>{line.OrderQuantity}</div>
+                                                            </td>
+                                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                                <div title={line.QtyClosed}><a onclick={handleShipDetails} tabindex="0">{line.QtyClosed}</a></div>
+                                                            </td>
+                                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                                <!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+                                                                <div title={line.QtyClosed}>{line.TobeShipped}</div>
+                                                            </td>
+                                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                                <div>
+                                                                    {line.LineStatus}
+                                                                    <!-- <template if:true={backOrderOrCancelled1}> -->
+                                                                    <template if:true={line.backOrderOrCancelled}>
+                                                                    <div class="slds-is-relative slds-show_inline-block slds-p-around_none slds-m-left_xx-small">
+                                                                        <div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+                                                                        <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left" role="tooltip" id="5">
+                                                                            <div class="slds-popover__body">{line.Reason}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    </template>
+                                                                     <template if:true={line.beingPacked}>
+                                                                    <div class="slds-is-relative slds-show_inline-block slds-p-around_none slds-m-left_xx-small">
+                                                                        <div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+                                                                        <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left" role="tooltip" id="6">
+                                                                            <div class="slds-popover__body">{line.Reason}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    </template>
+                                                                </div>
+                                                            </td>
+                                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                                <div title={line.updatedStatusDate}>{line.updatedStatusDate}</div>
+                                                            </td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </lightning-card>
+                                </div>
+                            </div>
+                            <div id="tab-default-2" class="slds-tabs_default__content slds-p-around_none slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item" data-id="tab-default-2__item" data-name="tabpanel">
+                                <div class="slds-m-top_large">
+                                    <lightning-card class="search-result-cards">
+                                        <div class="slds-grid slds-wrap slds-p-horizontal_medium">
+                                            <div class="slds-col slds-size_3-of-3">
+                                                <div class="slds-col slds-size_3-of-3 order-detail-table-header">
+                                                    <div class="search-criteria-title">Shipment Information</div>
+                                                </div>
+                                                <table class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-around_small" role="grid" aria-label="Example advanced table of Opportunities in actionable mode with ascending column sorting">
+                                                    <thead>
+                                                        <tr class="slds-line-height_reset">
+                                                            <th aria-sort="ascending" class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode" scope="col">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                    <span class="slds-assistive-text">Sort by: </span>
+                                                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                        <span title="Invoice #">Invoice #</span>
+                                                                        <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                    </div>
+                                                                </a>
+                                                                <span class="slds-assistive-text" aria-live="polite" aria-atomic="true">Sorted ascending</span>
+                                                            </th>
+                                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Shipment Date">Shipment Date</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th>
+                                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Cartons">Cartons</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th>
+                                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Weight">Weight</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th>
+                                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Shipped Lines">Shipped Lines</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th>
+                                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Shipped Units">Shipped Units</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th>
+                                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Invoice Total">Invoice Total</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <template for:each={shipmentInfoRecords} for:item='line'>
+                                                            <tr aria-selected="false" class="slds-hint-parent" key={line.id}>
+                                                                <th class="slds-cell_action-mode" scope="row">
+                                                                    <div title={line.invoiceNumber}>
+                                                                    <a onclick={handleInvoiceNumClick} data-invoice-number={line.invoiceNumber} data-ship-date={line.shipDate}
+                                                                        data-cartons={line.cartons} data-weight ={line.weight} data-shippedlines={line.shippedLines} data-shippedunits={line.shippedUnits} 
+                                                                        data-grossamount={line.grossAmount} data-ship-status={line.shipstatus} data-net-product={line.netOrderValue} data-tax={line.taxAmount}
+                                                                        data-tranportation={line.transportation} data-delivery-number={line.deliveryNumber} tabindex="0">{line.invoiceNumber}</a>
+                                                                    </div>
+                                                                </th>
+                                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                                    <div title={line.shipDate}>{line.shipDate}</div>
+                                                                </td>
+                                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                                    <div title={line.cartons}>{line.cartons}</div>
+                                                                </td>
+                                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                                    <div title={line.weight}>{line.weight}</div>
+                                                                </td>
+                                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                                    <div title={line.shippedLines}>{line.shippedLines}</div>
+                                                                </td>
+                                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                                    <div title={line.shippedUnits}>{line.shippedUnits}</div>
+                                                                </td>
+                                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                                    <div title={line.grossAmount}>{line.grossAmount}</div>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </lightning-card>
+                                </div>
+                            </div>
+                            <div id="tab-default-3" class="slds-tabs_default__content slds-p-around_none slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item" data-id="tab-default-3__item" data-name="tabpanel">
+                                <div class="slds-m-top_large">
+                                    <lightning-card class="search-result-cards">
+                                        <div class="slds-grid slds-wrap slds-p-horizontal_medium">
+                                            <div class="slds-col slds-size_3-of-3">
+                                                <div class="slds-col slds-size_3-of-3 order-detail-table-header">
+                                                    <div class="search-criteria-title">Address Information</div>
+                                                </div>
+                                                <table class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-around_small" role="grid" aria-label="Example advanced table of Opportunities in actionable mode with ascending column sorting">
+                                                    <thead>
+                                                        <tr class="slds-line-height_reset">
+                                                            <th aria-sort="ascending" class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode" scope="col">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                    <span class="slds-assistive-text">Sort by: </span>
+                                                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                        <span title="Invoice #">Account</span>
+                                                                        <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                    </div>
+                                                                </a>
+                                                                <span class="slds-assistive-text" aria-live="polite" aria-atomic="true">Sorted ascending</span>
+                                                            </th>
+                                                            <!-- <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Shipment Date">SAN</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th> -->
+                                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 28%;">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Cartons">Name</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th>
+                                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 36%;">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Weight">Address</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th>
+                                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 7%;">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Shipped Lines">Bill to</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th>
+                                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Shipped Units">Ship to</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th>
+                                                            <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 10%;">
+                                                                <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                                                                <span class="slds-assistive-text">Sort by: </span>
+                                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                                <span title="Invoice Total">License To</span>
+                                                                <lightning-icon class="table-sort-icon slds-m-right_xx-small" icon-name='utility:chevrondown' alternative-text='chevrondown' size='large' title='chevrondown'></lightning-icon>
+                                                                </div>
+                                                                </a>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <template for:each={addressInfoRecords} for:item='line'>
+                                                            <tr aria-selected="false" class="slds-hint-parent" key={line.id}>
+                                                                <th class="slds-cell_action-mode" scope="row">
+                                                                    <div title={line.account}>
+                                                                    <a href="" tabindex="0" class="slds-p-around_none">{line.account}</a>
+                                                                    </div>
+                                                                </th>
+                                                                <!-- <td class="slds-cell_action-mode" role="gridcell">
+                                                                    <div title="99/99/99">9999999999</div>
+                                                                </td> -->
+                                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                                    <div title={line.name}>{line.name}</div>
+                                                                </td>
+                                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                                    <div title={line.address}>{line.address}</div>
+                                                                </td>
+                                                                <td class="slds-cell_action-mode slds-text-align_center" role="gridcell">
+                                                                    <div class="slds-checkbox">
+                                                                        <input type="checkbox" name="options" id="checkbox-02" value="checkbox-02" tabindex="0" aria-labelledby="check-button-label-02 column-group-header" disabled checked={line.billTo} />
+                                                                        <label class="slds-checkbox__label" for="checkbox-02" id="check-button-label-02">
+                                                                        <span class="slds-checkbox_faux"></span>
+                                                                        <span class="slds-form-element__label slds-assistive-text">Select item 2</span>
+                                                                        </label>
+                                                                        </div>
+                                                                </td>
+                                                                <td class="slds-cell_action-mode slds-text-align_center" role="gridcell">
+                                                                    <div class="slds-checkbox">
+                                                                        <input type="checkbox" name="options" id="checkbox-021" value="checkbox-02" tabindex="0" aria-labelledby="check-button-label-02 column-group-header" disabled checked={line.shipTo} />
+                                                                        <label class="slds-checkbox__label" for="checkbox-021" id="check-button-label-021">
+                                                                        <span class="slds-checkbox_faux"></span>
+                                                                        <span class="slds-form-element__label slds-assistive-text">Select item 2</span>
+                                                                        </label>
+                                                                        </div>
+                                                                </td>
+                                                                <td class="slds-cell_action-mode slds-text-align_center" role="gridcell">
+                                                                    <div class="slds-checkbox">
+                                                                        <input type="checkbox" name="options" id="checkbox-022" value="checkbox-02" tabindex="0" aria-labelledby="check-button-label-02 column-group-header" disabled checked={line.licenseTo} />
+                                                                        <label class="slds-checkbox__label" for="checkbox-022" id="check-button-label-022">
+                                                                        <span class="slds-checkbox_faux"></span>
+                                                                        <span class="slds-form-element__label slds-assistive-text">Select item 2</span>
+                                                                        </label>
+                                                                        </div>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </lightning-card>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </template>
+        </template>
+    </div>
+</template>
+
+<template if:true={showDeliveryDetails}>
+    <c-scc_delivery-info-l-w-c get-deliverydata={deliveryInfo} oncloseshipdetails={closeShowDeliveryDetails} order-line-records={orderLineRecords1} invoice-info={invoiceInfo}></c-scc_delivery-info-l-w-c>
+</template>
+</template>

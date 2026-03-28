@@ -1,0 +1,9 @@
+<apex:page controller="AccountSupportNotesController" showHeader="false" sidebar="false">
+    <apex:outputPanel rendered="{!messages.size>0}">
+        <ul>
+        <apex:repeat var="message" value="{!messages}">
+            <li><apex:outputText escape="false" value="{!message.content}" /></li>
+        </apex:repeat>
+        </ul>
+    </apex:outputPanel>
+</apex:page>

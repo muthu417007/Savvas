@@ -1,0 +1,34 @@
+<apex:page showHeader="false" sidebar="false"
+    standardStylesheets="false">
+
+<!--apex:page standardController="Step_Set__kav" showHeader="false" sidebar="false"
+    extensions="ArticleExtensionStepSet" title="{!Step_Set__kav.title}"
+    standardStylesheets="false">
+    <apex:composition template="pkb_ICOM_WebTemplate">
+        <apex:define name="body">
+        
+            <apex:outputField value="{!Step_Set__kav.PublishStatus}"  rendered="false" /> 
+            <apex:outputField value="{!Step_Set__kav.KnowledgeArticleId}"  rendered="false"/>
+            <apex:outputField value="{!Step_Set__kav.CreatedBy}"  rendered="false" />  
+            <apex:outputField value="{!Step_Set__kav.Summary}"  rendered="false" />    
+            <apex:outputField value="{!Step_Set__kav.Language}"  rendered="false" />  
+            
+            <div class="col-xs-12 col-sm-12 articleTitle">
+                <h1><apex:outputText escape="false" value="{!Step_Set__kav.title}" /></h1>
+            </div>
+            <div class="col-xs-12 col-sm-12 articleContent">
+                <h2>Steps</h2>
+                <div><apex:outputField value="{!Step_Set__kav.Steps__c}" /></div>
+
+                <c:ArticleAttachmentsPublic attachment1_name="{!attachment1Name}" 
+                    attachment1_link="{!URLFOR($Action.Step_Set__kav.FileFieldDownload, Step_Set__kav.id,['field'=$ObjectType.Step_Set__kav.fields.Attachment_1__Body__s.name])}" 
+                    attachment2_name="{!attachment2Name}" 
+                    attachment2_link="{!URLFOR($Action.Step_Set__kav.FileFieldDownload, Step_Set__kav.id,['field'=$ObjectType.Step_Set__kav.fields.Attachment_2__Body__s.name])}" 
+                    attachment3_name="{!attachment3Name}" 
+                    attachment3_link="{!URLFOR($Action.Step_Set__kav.FileFieldDownload, Step_Set__kav.id,['field'=$ObjectType.Step_Set__kav.fields.Attachment_3__Body__s.name])}"/>
+
+            </div>
+        </apex:define>
+    </apex:composition>
+-->
+</apex:page>

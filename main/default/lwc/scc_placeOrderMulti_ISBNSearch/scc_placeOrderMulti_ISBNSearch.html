@@ -1,0 +1,205 @@
+<template>
+	<!-- Quick Search Component starts -->
+	<template if:true={showProductSearchPage}>
+		<template if:true={showQuickSearch}>
+			<div class="slds-grid slds-wrap">
+				<div class="slds-col slds-col-size_3-of-3">
+					<div class="slds-p-around_large isbn-wrapper">
+						<h2 class="slds-is-relative slds-m-bottom_large isbn-title">Multi ISBN</h2>
+						<div class="slds-grid slds-wrap">
+							<div class="slds-col slds-size_2-of-3">
+								<div class="slds-form-element">
+									<label class="slds-form-element__label" for="isbn">ISBN(s) & Desired Quantity</label>
+									<div class="slds-form-element__control">
+										<textarea class="slds-input arvicon-input placeOrdermultiIsbntextarea" rows="10" cols="50"  oninput={handleInputChange} value={input} aria-live="polite" aria-label="ISBN(s) & Desired Quantity,To search/order multiple ISBNs at once, paste one ISBN and quantity per line.Follow each ISBN with a space and the desired quantity. ISBNs must be complete:10 or 13 digits.">{input}</textarea>
+									</div>
+									<p>To search/order multiple ISBNs at once, paste one ISBN and quantity per line.
+										Follow each ISBN with a space and the desired quantity. ISBNs must be complete:
+										10 or 13 digits.</p>
+								</div>
+							</div>
+							 <div class="slds-col slds-size_1-of-3">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="checkbox-unique-id-80">Active Products Only</label>
+                                    <div class="slds-form-element__control">
+                                            <lightning-input type="checkbox" aria-label="Active Products Only" name="options" id="checkbox-unique-id-80" value="checkbox-unique-id-80" checked={activeProducts} onclick={handleActiveProductsChange} ></lightning-input>      
+                                    </div>
+                                </div>
+                            </div>
+							<div class="slds-col slds-size_3-of-3">
+								<div class="slds-form-element__control slds-m-top_x-small">
+									<button class="slds-button search-button slds-m-right_medium" onclick={handleSearch} aria-disabled={isSearchDisabled}>
+										<lightning-icon class="search-icon slds-m-right_x-small" icon-name='utility:search' size='x-small'></lightning-icon>
+										Search
+									</button>
+									<button class="slds-button clear-button" onclick={handleClear}  aria-disabled={isSearchDisabled}>
+										Clear
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slds-grid slds-wrap slds-m-top_large">
+				<div class="slds-col slds-col-size_3-of-3 slds-m-bottom_xx-large">
+					<div class="slds-p-around_large slds-m-bottom_xx-large isbn-wrapper">
+						<h2 class="slds-is-relative isbn-title">Search Results</h2>
+						<div class="slds-grid slds-wrap slds-grid_align-end">
+							<div class="slds-col">
+								<div class="filter-details">
+									<template if:true={showResults}>
+										<!-- <div class="slds-form-element__label" style="margin-top: 20px;">
+				<lightning-input 
+                    type="checkbox" 
+                    label="National AND my State(s)"
+                    checked={nationalStateFilter}
+                    onchange={handleNationalStateFilterChange}
+                    class="national-state-filter">
+                </lightning-input></div> -->
+				<!-- <div class="slds-form-element__label slds-float_left" style="margin-top: 20px; margin-right: 1rem;">
+				<lightning-input 
+                    type="checkbox" 
+                    label="National AND my State(s)"
+                    checked={nationalStateFilter}
+                    onchange={handleNationalStateFilterChange}
+                    class="national-state-filter">
+                </lightning-input></div> -->
+				<div class="slds-form-element">
+									<div class="slds-form-element__control" style="font-weight: 600;font-size: 16px;text-align: left;position: relative;color: #0C1E3D;margin-top: 15px;">
+										<div class="slds-checkbox">
+											<input type="checkbox" name="options" id="checkbox-unique-id-84" value="checkbox-unique-id-84" 
+											checked={nationalStateFilter} onchange={handleNationalStateFilterChange} />
+											<label class="slds-checkbox__label" for="checkbox-unique-id-84">
+											<span class="slds-checkbox_faux"></span>
+											<span>National AND my State(s)</span>
+											</label>
+										</div>
+									</div>
+								</div>
+															<div
+																class="slds-is-relative slds-show_inline-block slds-m-right_x-small" style="padding-left: 5px;">
+																<div
+																	class="slds-show_inline-block info-icon slds-text-align_center" style="margin-right: 62px;">
+																	i</div>
+																<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-right"
+																	role="tooltip" style="margin-left: -23px;">
+																	<div class="slds-popover__body">{labels.scc_stateFilterMessage}</div>
+																</div>
+															</div>
+
+										<button class="slds-button slds-m-right_small add-to-cart" onclick={addSelectedToCartHandleClick} aria-disabled={addSelectedToCartBtnDisabled}>{addToCartButtonLabel}</button>
+										<button class="slds-button slds-m-right_small clear-cart" onclick={clearCartHandleClick} aria-disabled={clearCartBtnDisabled}>{clearCartButtonLabel}</button>
+										<button class="slds-button slds-m-right_small review-cart" onclick={reviewCartHandleClick} aria-disabled={reviewCartDisabled}>
+																<img class="slds-m-right_xx-small cart-blue" src={labels.scc_checkout_cart} alt="cart icon" />
+																<img class="slds-m-right_xx-small cart-white" src={labels.scc_checkout_cart_white} alt="cart icon" />
+																{reviewCartButtonLabel}
+															</button>
+									</template>
+									<label class="slds-form-element__label" for="filter-search-input">Filter Results &nbsp; <span class="slds-assistive-text">Enter a keyword to filter within the current set of search results. Showing {transformedDataLength} of {totalCount} Items,Search by pasting one or more ISBNs</span></label>
+									<div class="slds-is-relative slds-show_inline-block slds-m-right_x-small">
+										<div class="slds-show_inline-block info-icon slds-text-align_center">i</div>
+										<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip"
+											id="5">
+											<div class="slds-popover__body">Enter a keyword to filter within the current
+												set of search results</div>
+										</div>
+									</div>
+									<div class="slds-is-relative">
+										<input type="text" id="filter-search-input" value={filterSearchValue} class="slds-input filter-search-input" onchange={handleFilter} onkeyup={handleFilter} />
+										<button class="slds-button filter-clear no-outline" onclick={clearFilterInput} style="outline: none;" aria-label="close">x</button>
+
+									</div>
+									<div class="slds-form-element__label item-count" role="alert">{transformedDataLength} of
+										{totalCount} Items</div>
+									<div class="slds-is-relative slds-show_inline-block slds-m-left_x-small">
+										<div class="slds-show_inline-block info-icon slds-text-align_center">i</div>
+										<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-right"
+											role="tooltip">
+											<div class="slds-popover__body">Search by pasting one or more ISBNs</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<template if:true={showResults}>
+							<!-- Data Table -->
+							<c-scc_custom-table filter={filterCriteria} raw-parent-table-data={productQuantityData}
+								oncheckboxchange={handleCheckboxChange} onshowproducttitlepage={openChildTitlePage}
+								check-active-id={activeCartId} onquantitychange={handleQuantityChange}
+								add-selected-to-cart={addToCart} userselection={userInputs}
+								userinputmulti={userInputMultiISBN} onreveiewcartcount={handleReviewCartCount}  onresetaddtocart={handleresetaddtocart}
+								ontransformeddatalength={handleTransformedDataLength}
+								default-national-state-filter={nationalStateFilter}>
+							</c-scc_custom-table>
+						</template>
+					</div>
+				</div>
+			</div>
+		</template>
+	</template>
+	<!--Clear cart model-->
+	<template if:true={isModalOpen}>
+		<!-- Modal/Popup Box LWC starts here -->
+		<div class="slds-modal slds-fade-in-open slds-backdrop">
+			<div class="slds-modal__container">
+				<!------HEADER Section-->
+				<div class="slds-modal__header">
+					<button class="slds-modal__close" onclick={closeModal}>x</button>
+					<h3>Clear cart</h3>
+				</div>
+				<!------Body Section-->
+				<div class="slds-modal__content slds-p-around_medium">
+					<div class="slds-form_horizontal slds-text-align_center">
+						<p> Are you sure you want to clear all items from this Cart?</p>
+						<div class="slds-show_inline-block note-icon slds-m-right_xx-small">!</div>
+						<span role="alert">This action cannot be undone</span>
+					</div>
+				</div>
+				<!------Footer Section-->
+				<div class="slds-modal__footer">
+					<button class="slds-button clear-cart-modal-button" onclick={handleClearCart}>Clear Cart</button>
+					<button class="slds-button cancel-modal-button" onclick={handleCancel}>Cancel</button>
+				</div>
+			</div>
+		</div>
+
+	</template>
+	<template if:true={reviewCartPage}>
+		<c-scc_review-cart-page userselection={userInputs}> </c-scc_review-cart-page>
+	</template>
+	<template if:true={clearCartItems}>
+		<c-scc_delete-items-from-cart onrefreshevent={handlerefreshevent}> </c-scc_delete-items-from-cart>
+	</template>
+
+	<!--Start warning message when qty > 1000   -->
+	<template if:true={showWarningMessage}>
+		<!-- Modal/Popup Box LWC starts here -->
+		<div class="slds-modal slds-fade-in-open slds-backdrop">
+			<div class="slds-modal__container">
+				<!-- HEADER Section -->
+				<div class="slds-modal__header">
+					<button class="slds-modal__close" onclick={closeCartModal}>x</button>
+					<h3>Quantity Exceeds 1000</h3>
+				</div>
+				<!-- Body Section -->
+				<div class="slds-modal__content slds-p-horizontal_xx-large slds-p-top_large">
+					<div class="slds-form_horizontal" style="width: 100%;">
+						<p style="text-align: left;">Note that at least one line has a quantity greater than 1000. <br/>
+						   If you would like to correct the entry, select Cancel and update the quantity in the ISBN(s) & Desired Quantity field, or select Ok to proceed.
+						</p>
+					</div>
+				</div>
+				<!--Footer -->
+				<div class="slds-modal__footer">
+					<button class="slds-button ok-modal-button" onclick={handleQuantity}>Ok</button>
+					<button class="slds-button cancel-modal-button" onclick={handleCancelBtn}>Cancel</button>
+				</div>
+			</div>
+		</div>
+	</template>
+	<!--End  -->
+
+
+
+</template>

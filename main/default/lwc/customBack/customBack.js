@@ -1,0 +1,104 @@
+import { LightningElement, api, track } from 'lwc';
+import { FlowAttributeChangeEvent, FlowNavigationBackEvent } from 'lightning/flowSupport';
+
+export default class CustomBack extends LightningElement {
+    @api imageUrl;
+    @api variable1;
+    @api variable2;
+    @api variable3;
+    @api variable4;
+    @api navLogic;
+    @api fontLarge;
+    @api fontSmall;
+    @api fontColor
+    @api componentTextLarge;
+    @api componentTextSmall;
+    @api nLogic;
+    @api var1;
+    @api var2;
+    @api var3;
+    @api var4; 
+    @api ariaText;
+    
+    get fontLargeStyle() {
+      if (this.fontColor === undefined) {
+        if (this.fontLarge === undefined) {
+          return `display: table-cell; vertical-align: middle; font-size: 24px!important; color: white!important;`;
+        } else {
+          return `display: table-cell; vertical-align: middle; font-size: ${this.fontLarge}px!important; color: white!important;`;
+        }
+      } else if (this.fontLarge === undefined) {
+        return `display: table-cell; vertical-align: middle; font-size: 24px!important; color: ${this.fontColor}!important;`;
+      } else {
+        return `display: table-cell; vertical-align: middle; font-size: ${this.fontLarge}px!important; color: ${this.fontColor}!important;`;
+      }
+    }
+
+    get fontSmallStyle() {
+      if (this.fontSmall === undefined) {
+        return `display: table-cell; vertical-align: middle; font-size: 14px; color:${this.fontColor};`;
+      } else {
+        return `display: table-cell; vertical-align: middle; font-size: ${this.fontSmall}px; color:${this.fontColor};`;
+      }
+    }
+
+
+
+    get imageUrlStyle() {
+        return `cursor: pointer; display: table; height: 150px; width: 300px; margin-left: auto; margin-right: auto; padding:20px; background: url("${this.imageUrl}"); background-repeat: no-repeat;background-size: 90%; background-position: center;`;
+      }
+
+
+
+      @api
+      availableActions = [];
+  
+      @api
+      get todos() {
+          return this._todos;
+      }
+  
+      set todos(todos = []) {
+          this._todos = [...todos];
+      }
+  
+      @track _todos = [];
+  
+      get todosList() {
+          return this._todos.map(todo => {
+              return {text: todo, id: Date.now().toString()};
+          });
+      }
+  
+      get hasTodos() {
+          return this._todos && this._todos.length > 0;
+      }
+  
+      handleUpdatedText(event) {
+          this._text = event.detail.value;
+      }
+  
+      handleAddTodo() {
+          this._todos.push(this._text);
+          // notify the flow of the new todo list
+          const attributeChangeEvent = new FlowAttributeChangeEvent('todos', this._todos);
+          this.dispatchEvent(attributeChangeEvent);
+      }
+  
+      handleGoBack() {
+        
+          // check if BACK is allowed on this screen
+          if (this.availableActions.find(action => action === 'BACK')) {;
+
+            // navigate to the back screen
+            
+            const navigateBackEvent = new FlowNavigationBackEvent();
+              this.dispatchEvent(navigateBackEvent);
+            
+              //Send data to GTM
+              document.dispatchEvent(new CustomEvent("updateGTMdataLayer", { "detail" : { event: "CustomNext-click", category: "Tech Support Flow", action: "Flow Path", label: this.variable4} }));
+            // open window in modal
+            //  window.open('http://google.com','popup','width=600,height=600'); return true;
+          }
+      }
+}

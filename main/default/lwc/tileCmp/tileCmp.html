@@ -1,0 +1,17 @@
+<template>
+    <div class="backgroundImg">
+        <div class="box">
+            <div if:true={isHeadingPresent}>
+                <div class="heading slds-text-align_center">
+                    <p>{heading}</p>
+                </div>
+            </div>
+
+            <div if:true={isSubheadingPresent}>
+                <div class="subHeading slds-text-align_center">
+                    <p>{subHeading}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

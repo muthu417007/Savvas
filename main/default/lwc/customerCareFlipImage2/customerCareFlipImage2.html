@@ -1,0 +1,41 @@
+<!--customNextFlip.html-->
+<template>
+<!--
+    <div class="flipcontent">
+        <a class="flipcard">
+            <div class="flipfront" style={imageUrlStyle} aria-label={ariaText} onclick={handleGoNext}>
+                <p class="fliptext-front" style={fontLargeStyle}>
+                <div class="flipfront" onclick={handleGoNext}>
+                    <div>
+                        <img src={frontImageUrl}>
+                        <p class="fliptext-front">
+                            {componentTextLarge}
+                        </p>
+                    </div>                  
+                </div>
+            <div class="flipback" onclick={handleGoNext}>
+                <div>
+                    <img src={frontImageUrl}>
+                    <p class="fliptext-back">{componentTextSmall}</p>
+                </div>
+            </div>
+        </a>
+    </div> -->
+    <div class="flip-card">
+    
+        <div  class="flip-card-inner" data-row-index=0 data-id=0 onmouseover={addClass} data-target-id={componentTextLarge} onmouseout={removeClass} onclick={handleNext}>
+            <div class="flip-card-front">
+               <div style={backgroundImgStyle}>
+               <!--  <p class="slds-text-color_destructive"><text class="slds-text-title_caps" style="text-align: center;"></text>{componentTextLarge}</p> -->
+               <p class="heading slds-text-align_center">{componentTextLarge}</p>
+             </div>
+            </div>
+            <div class="flip-card-back">
+                <div style={backgroundImgStyle}>
+                    <p class="heading1 slds-text-align_center">{componentTextSmall}</p>
+                </div>
+            </div>
+        </div>
+    
+</div>
+</template>

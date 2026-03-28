@@ -1,0 +1,88 @@
+<!--
+  *********************************************************
+  Component Name       : ExportQuoteLines
+  Created Date         : 8/21/2024  
+  Author               : Frank Berni - Cognizant
+  Description          : VF page tied to Export Quote Lines button on SBQQ Quote - automatically downloads excel file of all Quote Lines
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>    
+  8/21/2024    Frank Berni         Ticket W-015737: Initial Creation: formatting excel to handle specific field outputs
+  *********************************************************
+-->
+  <!-- extension is required for page to be assigned to button | contentType is needed to automatically download excel file -->
+<apex:page standardController="SBQQ__Quote__c" extensions="ExportQuoteLinesExtension" sidebar="false" showHeader="false" contentType="application/vnd.ms-excel"
+  applyBodyTag="false" applyHtmlTag="false" cache="true" standardStylesheets="false"
+>
+  <!-- Formatting table for Excel, checkbox columns render as True/False and Currency fields use outputField tag -->
+  <apex:pageBlock title="Quote Name: {!SBQQ__Quote__c.Quote_Name__c}">
+    <apex:pageBlockTable value="{!QuoteLines}" var="ql">
+      <apex:column headerValue="Name">
+        <apex:outputText value="{!ql.Name}" />
+      </apex:column>
+      <apex:column headerValue="Optional">
+        <!-- This prevents columns to show a checkbox shape in the excel -->
+        <apex:outputText value="{!IF(ql.QL_Optional__c, 'True', 'False')}" />
+      </apex:column>
+      <apex:column headerValue="Program Name">
+        <apex:outputText value="{!ql.Program_Name__c}" />
+      </apex:column>
+       <apex:column headerValue="ISBN">
+        <apex:outputText value="{!ql.SBQQ__ProductCode__c}" />
+      </apex:column>
+      <apex:column headerValue="Description">
+        <apex:outputText value="{!ql.SBQQ__Description__c}" />
+      </apex:column>
+      <apex:column headerValue="Paid Quantity">
+        <apex:outputText value="{!ql.SBQQ__Quantity__c}" />
+      </apex:column>
+      <apex:column headerValue="FWO Quantity">
+        <apex:outputText value="{!ql.FWO_Quantity__c}" />
+      </apex:column>
+      <apex:column headerValue="Total Quantity">
+        <apex:outputText value="{!ql.Total_Quantity__c}" />
+      </apex:column>
+      <apex:column headerValue="List Price">
+        <!-- outputField to render the correct currency for these Quote lines -->
+        <apex:outputField value="{!ql.SBQQ__ListPrice__c}" />
+      </apex:column>
+      <apex:column headerValue="List Total">
+        <apex:outputField value="{!ql.SBQQ__ListTotal__c}" />
+      </apex:column>
+      <apex:column headerValue="Additional Discount">
+        <apex:outputField value="{!ql.SBQQ__AdditionalDiscount__c}" />
+      </apex:column>
+      <apex:column headerValue="Additional Discount Amount">
+        <apex:outputField value="{!ql.SBQQ__AdditionalDiscountAmount__c}" />
+      </apex:column>
+      <apex:column headerValue="Net Price">
+        <apex:outputField value="{!ql.SBQQ__NetPrice__c}" />
+      </apex:column>
+      <apex:column headerValue="Standard Cost">
+        <apex:outputField value="{!ql.StandardCost__c}" />
+      </apex:column>
+      <apex:column headerValue="Paid Amt">
+        <apex:outputField value="{!ql.Paid_Amt__c}" />
+      </apex:column>
+      <apex:column headerValue="Free Amt">
+        <apex:outputField value="{!ql.Free_Amt__c}" />
+      </apex:column>
+      <apex:column headerValue="Contract Price Checked">
+        <apex:outputText value="{!IF(ql.Contract_Price_Checked__c, 'True', 'False')}"
+        />
+      </apex:column>
+      <apex:column headerValue="Promo Code">
+        <apex:outputText value="{!ql.Applied_Promotion_Name__c}" />
+      </apex:column>
+      <apex:column headerValue="Base S&H">
+        <apex:outputField value="{!ql.Base_SH__c}" />
+      </apex:column>
+      <apex:column headerValue="S&H Amount">
+        <apex:outputField value="{!ql.SH_Amount__c}" />
+      </apex:column>
+      <apex:column headerValue="Net Total">
+        <apex:outputField value="{!ql.SBQQ__NetTotal__c}" />
+      </apex:column>
+    </apex:pageBlockTable>
+  </apex:pageBlock>
+</apex:page>

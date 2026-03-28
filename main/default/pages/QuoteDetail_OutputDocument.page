@@ -1,0 +1,64 @@
+<apex:page contentType="text/xml" showHeader="false" sidebar="false" controller="CustomTemplateController">
+<block-container>
+<block text-align="center"> Price Quote Summary </block>
+<block>&nbsp;</block>
+<block font-size="{!template.SBQQ__FontSize__c}" font-family="{!template.SBQQ__FontFamily__c}" >
+    <table width="100%">
+      <table-column column-width="50%"/>
+      <table-column column-width="15%"/>
+      <table-column column-width="15%"/>
+      <table-column column-width="20%"/>
+      <table-header>
+        <table-row font-weight="bold" background-color="#{!template.SBQQ__ShadingColor__c}">
+          <table-cell padding="3px" border-style="solid" border-width="1px" text-align="center">
+            <block>
+              Solution
+            </block>
+          </table-cell>
+          <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+            <block>
+              Base Amount
+            </block>
+          </table-cell>
+          <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+            <block>
+              Free Amount
+            </block>
+          </table-cell>
+          <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+            <block>
+              Total
+            </block>
+          </table-cell>
+        </table-row>
+      </table-header>
+      <table-body>
+        <apex:repeat id="programrepeat" value="{!qlPrograms}" var="p">
+          <table-row keep-together.within-page="always">
+            <table-cell padding="3px" border-style="solid" border-width="1px" text-align="left">
+              <block>
+                {!p.Name}
+              </block>
+            </table-cell>
+            <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                <block>
+                  {!p.BaseAmount__c}
+                </block>
+            </table-cell>
+            <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                <block>
+                  {!p.FreeAmount__c}
+                </block>
+            </table-cell>
+            <table-cell padding="3px" border-style="solid" border-width="1px" text-align="right">
+                <block>
+                  {!p.Total__c}
+                </block>
+            </table-cell>
+          </table-row>
+        </apex:repeat>
+      </table-body>
+    </table>
+  </block>
+</block-container>
+</apex:page>

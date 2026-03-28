@@ -1,0 +1,52 @@
+.container{
+	display: flex;
+}
+.left-panel {
+	flex: 3;
+}
+.right-panel {
+	flex: 1;
+}
+.lightning-dual-listbox {
+	width: 100%;
+	margin-right: 4.5rem;
+}
+.pagination-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
+.no-records{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 300px;
+	font-weight: bold;
+	color: red;
+}
+.custom-datatable .slds-table{
+	border: 1px solid #d8dde6;
+}
+.customborder{
+	border: 1px solid #d8dde6;
+	padding: 16px;
+	margin: 16px 0;
+	border-radius: 4px;
+}
+.search-button {
+	margin-left: 10px;
+}
+.custom-alignment {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.lightning-dual-listbox{
+	flex: 2;
+}
+.highlight-cell {
+	background-color: aquamarine;
+	font-weight: bold;
+}

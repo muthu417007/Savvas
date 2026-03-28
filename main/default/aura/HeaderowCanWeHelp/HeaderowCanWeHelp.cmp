@@ -1,0 +1,61 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="backgroundImageURL" type="String" default=""/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>   
+    
+    <!-- Background image for "How Can We Help"-->
+    
+    <div style=" background-image: URL(/support/resource/SavvasHomeBlueBackDrop);
+                 background-repeat: no-repeat ; 
+                 background-position: center center;
+                 background-size: 100% 100% ;
+                 width: 100%;">
+        
+        <!-- SLDS Grid for "How can we help" section starts here -->
+        <div class="slds-grid slds-gutters slds-wrap slds-grid_align-center
+                    slds-container_fluid slds-container_center">
+            
+        <!-- Grid Column for "How can we help" Label starts here -->
+  <div class="slds-col slds-size_12-of-12">
+    <span>
+         <div style="color:white; text-align: center;" >
+            <b class="" 
+               style="font-size:60px;
+                      padding-top:50px;
+                      font-family: Poppins-regular;
+                      font-weight: 700;
+					  line-height: 110%;">
+               <br/> How Can We Help?</b><br/>
+         </div>
+        
+        <div class="slds-align_absolute-center" 
+             style="font-family: Poppins-regular;
+                    color:white; 
+                    text-align: center;
+                    font-size:1vw">
+            <b class="slds-p-around_x-small" 
+               style="font-size:20px;
+                      font-family: Poppins-regular;
+                      color:white; 
+                      text-align: center;">
+                Get Help with orders or platform and program issue
+            </b>
+        </div>
+      </span>
+  </div>
+            <!-- Grid Column for Zoomin Search starts here -->
+  <div class="slds-col slds-size_12-of-12">
+    <span>
+        <div class="slds-align_absolute-center slds-p-around_medium">
+            <!-- Zoomin Search Box Component -->
+           <br/> <br/><zoomin_app:ZMSearchBoxComponent />
+            <br/>
+        </div>
+      </span>
+  </div>
+</div>
+        
+    </div>
+    <!-- platformStatusCenterTrack Component -->
+    <c:platformStatusCenterTrack></c:platformStatusCenterTrack>
+
+</aura:component>

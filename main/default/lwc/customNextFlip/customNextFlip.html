@@ -1,0 +1,19 @@
+<!--customNextFlip.html-->
+<template>
+
+    <div class="flipcontent">
+        <a class="flipcard">
+            <div class="flipfront" style={imageUrlStyle} aria-label={ariaText} onclick={handleGoNext}>
+                <p class="fliptext-front" style={fontLargeStyle}>
+                    {componentTextLarge}
+                </p>
+            </div>
+            <div class="flipback" onclick={handleGoNext}>
+                <div>
+                    <p class="fliptext-back" style={fontSmallStyle}>{componentTextSmall}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+</template>

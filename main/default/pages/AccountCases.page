@@ -1,0 +1,16 @@
+<apex:page standardController="Account" extensions="AccountCasesController" showheader="false">
+<!-- This page is for displaying Legacy A&I/K12Tech Cases for a given Account in ICOM -->
+<apex:pageblock >
+<!-- <apex:pageblocksection columns="1" title="Cases in Legacy SFDC Instance"> -->
+<apex:pageblocktable value="{!records}" var="r">
+<apex:column value="{!r.CaseNumber__c}"/>
+<apex:column value="{!r.ContactName__c}"/>
+<apex:column value="{!r.Subject__c}"/>
+<apex:column value="{!r.Priority__c}"/>
+<apex:column value="{!r.DateOpened__c}"/>
+<apex:column value="{!r.Status__c}"/>
+<apex:column value="{!r.Owner__c}"/>
+</apex:pageblocktable>
+<!-- </apex:pageblocksection> -->
+</apex:pageblock>
+</apex:page>

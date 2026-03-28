@@ -1,0 +1,22 @@
+<template>
+    <lightning-card >
+        <div class="slds-grid slds-gutters slds-wrap">
+        <lightning-combobox 
+            label="Accounts"
+            placeholder="Select an account"
+            options={accountOptions}
+            value={selectedAccountId}
+            onchange={handleAccountChange}>
+        </lightning-combobox>
+
+        <lightning-button 
+            label="Go"
+            onclick={handleGoClick}
+            class="go-button">
+        </lightning-button>
+    </div>
+    <div class="slds-p-around_medium">
+        <canvas lwc:dom="manual" class="chart" id="licenseChart"></canvas>
+    </div>
+    </lightning-card>
+</template>

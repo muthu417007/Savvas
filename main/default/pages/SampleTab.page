@@ -1,0 +1,11 @@
+<apex:page standardcontroller="SampleRequest__c" tabstyle="Sample__tab" sidebar="false" >
+    <apex:form >
+        <apex:commandButton value="Mass Sample/Free/Pilot" action="/apex/SampleCreation" />
+        <br/>
+        <br/>
+        <apex:commandButton value="Self-Sample/Free/Pilot" action="/apex/SelfSampleIFRAME" />
+        <br/>
+        <br/>
+        <apex:commandButton value="Sample/Free/Pilot Reports" action="/apex/SampleReports" />
+        </apex:form>
+</apex:page>

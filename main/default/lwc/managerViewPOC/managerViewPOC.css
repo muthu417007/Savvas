@@ -1,0 +1,58 @@
+.box {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+	background-color: white;
+}
+.box .row.user {
+	flex: 0 1 auto;
+	padding-top: 0.5rem;
+	font-size: xx-small;
+	color: gray;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	width: 20%;
+}
+.box .row.error{
+	position: relative;
+	width: fit-content;
+	left: 30%;
+	top: 30%;
+	color: red;
+	font-size: large;
+}
+.box .row.action {
+	flex: 0 1 auto;
+	padding-bottom: 0.5rem;
+	font-size: small;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+.search{
+	width: 20%;
+}
+.buttons{
+	
+}
+.box .row.header {
+    flex: 0 1 auto;
+	font-size: large;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	padding-bottom: 0.5rem;
+}
+.box .row.content {
+	flex: 1 1 auto;
+	overflow-y: scroll;
+	border-style: solid;
+	border-color: gray;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+.box .row.footer {
+    flex: 0 1 40px;
+	color: black;
+}
+.box-container {
+    display: contents;
+}

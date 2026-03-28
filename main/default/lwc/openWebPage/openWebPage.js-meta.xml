@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+
+    <isExposed>true</isExposed>
+
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="newRecordId" type="String" label="New Record Id" description="Id of the new record created via Flow" />
+            <property name="objectName" type="String" label="Object Name" description="Select the Object to Navigate to." />
+            <property name="productScreen" type="Boolean" label="Navigate to Product Screen" description="If the Object is Quote, and it is desired to Navigate directly to the product Screen, then set to true." />
+            <property name="destinationURL" type="String" label="URL" description="URL of site to navigate to." />
+            <property name="openNewWindow" type="Boolean" label="Open in New window" description="Set to true to open the web page in a new window" />
+            <property name="NavigateToNextScreen" type = "Boolean" label = "Navigate to Next Screen"/>
+            <property name="FinishFlow" type = "Boolean" label = "Finish Flow (works on Last Screen Element Only)"/>
+        </targetConfig>
+    </targetConfigs>
+
+
+</LightningComponentBundle>

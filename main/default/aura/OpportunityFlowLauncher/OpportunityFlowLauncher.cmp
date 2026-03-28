@@ -1,0 +1,25 @@
+<!--
+  *********************************************************
+  Component Name       : OpportunityFlowLauncher
+  Created Date         : 8/14/2024
+  Author               : Frank Berni - Cognizant
+  Description          : Aura App that launches ScreenFlow_NewOpportunity_FromAcct
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>
+  8/14/2024     Frank Berni        Initial Version
+  *********************************************************
+-->
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="recordId" type="String" />
+    
+    <!-- Calling ScreenFlow New Opportunity FromAcct -->
+    <aura:attribute name="flowApiName" type="String" default="ScreenFlow_NewOpportunity_FromAcct" />
+
+    <lightning:flow aura:id="flowData" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.startFlow}" />
+
+    <aura:method name="startFlow" action="{!c.startFlow}" />
+
+</aura:component>

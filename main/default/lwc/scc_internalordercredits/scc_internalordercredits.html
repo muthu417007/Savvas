@@ -1,0 +1,64 @@
+<template>
+    <lightning-card>
+        <div class="slds-grid slds-wrap slds-align-middle slds-align_absolute-center">
+            <div class="slds-col">
+
+                <h4 class="slds-text-heading_medium slds-m-around_small recent-order">Recently viewed orders </h4>
+            </div>
+            <div class="slds-col slds-text-align_right slds-m-right_medium">
+                <p class="view-all-link">{getRecentOrderCount} Items</p>
+                <span class="slds-p-horizontal_small">|</span>
+                <a href="#" class="view-all-link" onclick={viewAll}>
+
+                    <div class="chevron-circle">
+                        <lightning-icon class="chevron-icon " icon-name='utility:chevronright'
+                            alternative-text='chevronright' size='xx-small' title='chevronright'></lightning-icon>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="slds-m-around_medium">
+            <template lwc:if={hasRecentOrder}>
+                <template for:each={getOrderData} for:item="order">
+                    <div key={order.OrderNumber} class="slds-box slds-m-bottom_medium">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-size_1-of-5">
+                                <p class="order-label">{labels.scc_home_PO}</p>
+                                <p class="order-value">{order.PoNumber}</p>
+                            </div>
+                            <div class="slds-size_1-of-5 slds-text-align_left">
+                                <p class="order-label">{labels.scc_home_Document_Control}</p>
+                                <p class="order-link"><a href={orderrecorddetail}>{order.SAP_Document_Number}</a></p>
+                            </div>
+                            <div class="slds-size_1-of-5 slds-text-align_left">
+                                <p class="order-label">{labels.scc_home_Ship_To_Name}</p>
+                                <p class="order-value">{order.ShipToName}</p>
+                            </div>
+                            <div class="slds-size_1-of-5 slds-text-align_left">
+                                <p class="order-label">{labels.scc_home_Order_Date}</p>
+                                <p class="order-value">{order.EffectiveDate}</p>
+                            </div>
+                            <div class="slds-size_1-of-5 slds-text-align_left">
+                                <p class="order-label">{labels.scc_home_Status}</p>
+                                <p class="order-value">{order.Status}</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </template>
+            <!-- <template lwc:else> -->
+            <template if:false={hasRecentOrder}>
+                <div class="slds-box no-recent-order-box">
+                    <div class=" slds-align_absolute-center">
+                        <img src={noRecentOrderImage}><br>
+                    </div><span></span>
+                    <h5 class="slds-align_absolute-center no-recent-order-text">No Recent Orders</h5>
+                </div>
+            </template>
+            <template if:true={error}>
+                {labels.scc_recentOrder_Error_Message}
+            </template>
+        </div>
+    </lightning-card>
+
+</template>

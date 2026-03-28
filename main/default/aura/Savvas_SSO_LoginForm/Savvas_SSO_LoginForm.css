@@ -1,0 +1,148 @@
+.THIS #sfdc_username_container{
+    width: 350px;
+    height: 55px;
+    padding: 0px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    margin-bottom:18px;
+    margin-top:-18px;
+    margin-left: 0px;
+    background: #FFFFFF;
+    border: 1px solid #AFC3D8;
+    box-shadow: 0px 4px 8px rgba(33, 80, 163, 0.1);
+    border-radius: 5px;
+    background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+    background-position: 5px 5px, 0, 100% 0;
+    background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+}
+
+.THIS #sfdc_username_container input[type="text"]{
+    width: 92%;
+    height: 15px;
+    margin-left: 20px;
+    margin-top: 9px;
+    border: none;
+    font-family: Poppins;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 22.4px;
+	text-align: left;
+    color: #173770;
+}
+
+.THIS #sfdc_password_container{
+    width: 350px;
+    height: 55px;
+    padding: 0px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    margin-bottom:18px;
+    margin-top:-18px;
+    margin-left: 0px;
+    background: #FFFFFF;
+    border: 1px solid #AFC3D8;
+    box-shadow: 0px 4px 8px rgba(33, 80, 163, 0.1);
+    border-radius: 5px;
+    background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+    background-position: 5px 5px, 0, 100% 0;
+    background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+}
+
+.THIS #password_toggle{
+    margin-top: 9px;
+}
+
+.THIS #sfdc_password_container input[type="text"]{
+    width: 92%;
+    height: 15px;
+    margin-left: 20px;
+    border: none;
+    font-family: Poppins;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 22.4px;
+	text-align: left;
+    color: #173770;
+}
+
+.THIS #sfdc_password_container input[type="password"]{
+    width: 92%;
+    height: 15px;
+    margin-left: 20px;
+    border: none;
+    font-family: Poppins;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 22.4px;
+	text-align: left;
+    color: #173770;
+}
+
+.THIS  #error {
+    text-align: center;
+    color:#FF0000;
+}
+
+.THIS  button.sfdc_button {
+    width: 350px;
+    height: 55px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    color: #0C1E3D;
+    background-color: #9ECA47;
+    border-color: #357ebd;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    background-image: none;
+    border: 1px solid #9ECA47;
+    white-space: nowrap;
+    padding: 10px 12px;
+    gap: 10px;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 19.8px;
+    border-radius: 90px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.THIS  button.sfdc_button:hover {
+    background-color: var(--lwc-colorBackgroundButtonBrandHover, #83ac32);
+    cursor:pointer;
+}
+
+.THIS button .label {
+    color: rgb(11 75 139);	
+}
+        
+.THIS  input {
+    -webkit-appearance: none;
+    color: #173770;
+    font-size: 16px;
+    border-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+    display: inline-block;
+}
+                
+.THIS  input:focus {
+    box-shadow: var(--lwc-shadowButtonFocus, 0 0 3px #0176d3);
+}
+
+.THIS .rememberMe{
+    border-radius: 2px;
+    --slds-c-checkbox-color-background-checked : #2150A3;
+    --slds-c-checkbox-mark-color-foreground : #fff;
+}
+
+.THIS  a {
+    text-decoration: underline;
+}
+
+.THIS label.uiLabel-hidden {
+    display:none;
+}

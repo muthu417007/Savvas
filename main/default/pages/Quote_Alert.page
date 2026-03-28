@@ -1,0 +1,21 @@
+<apex:page StandardController="SBQQ__Quote__c">
+
+ <script> 
+
+   window.onload = function() {
+
+      alert('my test');   
+
+      if({!SBQQ__Quote__c.CPQ_Quote_Expiry_Date__c < TODAY()}) { 
+
+          alert("This quote is expired and has old pricing. For a new Quote release: Update the Pricing Date to the current date to update the expiry date and the pricing. Reaplly contract pricing if needed. Questions: Contact @ICOM Support on Chatter."); 
+
+      }
+
+  }
+
+ </script>
+
+ <apex:outputField value="{!SBQQ__Quote__c.CPQ_Quote_Expiry_Date__c}"/>
+
+</apex:page>

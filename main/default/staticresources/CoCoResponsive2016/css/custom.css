@@ -1,0 +1,529 @@
+/*=======================
+-CUSTOM.CSS - Please let Lynn know if you make changes.
+===========================================================*/
+/*=======================
+-DEFAULT PEARSON COLORS
+	====BLUE ->
+	#007fa3
+	====gray ..
+	#f7f7f7
+	====white ->
+	#ffffff
+
+
+===========================================================*/
+/*=======================
+-BOOTSTRAP OVERRIDES
+===========================================================*/
+@font-face {
+	font-family: 'Glyphicons Halflings';
+	src: url('../fonts/glyphicons-halflings-regular.eot');
+	src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+body {
+	background: #ffffff;
+}
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: 'Open Sans';
+}
+h1, h2, h3, h4 {
+	color: #666;/*#0089b7;*/
+}
+h1 {
+	font-size: xx-large;
+	color: #333;
+	margin-top: 5px;
+}
+h2, h3 {
+	font-size: x-large;
+	color: #666;
+	margin-top: 10px;
+}
+h4 {
+	font-size: medium;
+}
+h5 {
+	font-size: 13px;
+	color: #333;
+}
+.btn-primary, a.btn-primary {
+	background-color: #007fa3;
+	border-color: #007fa3;
+	color: #fff !important;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+	background-color: #006da4;
+	border-color: #006da4;
+}
+a, a:active, a:focus, a:hover, a:visited {
+	color: #007fa3;
+}
+
+/*-- hamburger icon --*/
+.navbar-toggle {
+	background-color: #fff;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+	background-color: #005A70;
+}
+.navbar-inverse .navbar-toggle {
+	border-color: #fff;
+}
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+	background-color: #fff;
+}
+
+/*-- hamburger icon --*/
+.navbar {
+	border-radius: 0;
+	border: none;
+}
+.navbar-inverse {
+	background-color: #ffffff;
+}
+.navbar-strap {
+clear:both;
+height:36px;
+background-color: #f7f7f7;
+color: #3d3935;
+padding:8px;
+}
+.navbar-strap .sitename {
+font-weight:600;
+}
+.navbar-header {
+		background-color: #003057;
+		width:100%;
+		clear:both;
+		min-height:40px;
+		color:#ffffff;
+		padding:8px;
+		}
+.navbar-nav > li > a {
+	padding-top:10px !important;
+	padding-bottom:10px !important;
+}
+.navbar-inverse .navbar-collapse {
+	background:#007fa3;
+}
+.navbar-form {
+	margin: 0;
+}
+.navbar, .navbar-form {
+	min-height:30px !important;
+}
+.navbar-inverse .navbar-text {
+	color: #fff;
+}
+.navbar-inverse .navbar-nav > li > a {
+	color: #fff;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+	color: #fff;
+	text-decoration: none;
+	background-color: #005A70;
+}
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+	color: #364395;
+	background-color: #fff;
+}
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+	color: #364395;
+	background-color: #fff;
+}
+select.form-control.product {
+	margin-top: -10px;
+}
+.carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right {
+	color: #364395;
+}
+.carousel a {
+	text-decoration: none;
+}
+.carousel img {
+	margin-bottom: 20px;
+	border:1px solid #205f9f;
+}
+.carousel-indicators {
+	bottom: -6%;
+}
+.carousel-indicators li {
+	border-color: #ccc;
+	background-color: #ccc;
+}
+.carousel-indicators li.active {
+	background-color: #364395;
+	border-color: #364395;
+	width: 10px;
+	height: 10px;
+	margin: 1px;
+}
+
+.carousel-inner > div > div {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.carousel-caption {
+	position: relative;
+	right: 0;
+	left: 0;
+	padding: 0;
+	text-shadow: none;
+	border:1px solid #205f9f;
+}
+a .carousel-caption h4 {
+	color: #fff;
+	background-color: #205f9f;
+	font-size: small;
+	text-transform: uppercase;
+	letter-spacing: .05em;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 7px 3px;
+	min-height: 42px;
+}
+a .carousel-caption p {
+	color: #fff;
+	background-color: #0089b7;
+	font-size: small;
+	line-height: 1.4;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 5px;
+	min-height: 84px;
+	max-height: 84px;
+	overflow: hidden;
+}
+.carousel-control {
+	bottom: 25%;
+}
+.tooltip.top {
+	text-shadow: none;
+}
+h3.panel-title {
+	background: #006da4;
+	color: #fff;
+	text-align: center;
+	font-size: large;
+	font-weight: 200;
+}
+.panel-default > .panel-heading {
+	background-color: #006da4;
+}
+.panel, .panel-default {
+	background-color: transparent;
+	border: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.alert-warning {
+	background-color: #fbf5ea;
+	border: 4px solid #9d1348;
+	color: #000;
+}
+.alert-warning button.close {
+	color: #9d1348;
+	opacity: .6;
+}
+/*-- EQUAL COLUMNS--*/
+.equal, .equal > div[class*='col-'] {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	flex:1 1 auto;
+}
+/*------ END BOOTSTRAP OVERRIDES -------*/
+/*=======================
+-CUSTOM STYLES
+===========================================================*/
+a:active, a:focus {
+	outline-style: none; /*removes dotted border*/
+}
+h3 span {
+	text-shadow: none;
+}
+span.searchIcon {
+	position: absolute;
+	right: 25px;
+	top: 10px;
+	color: #364395;
+}
+footer {
+	background-color: #364395;
+	padding: 3px 10px;
+}
+footer a, footer a:hover, footer a:focus, footer a:visited {
+	color: #9bbfe0;
+}
+.footer {
+	color: #fff;
+}
+.footerLeft {
+	height: 44px;
+	background: url(../images/footer_always_learning.png) no-repeat;
+	float: left;
+}
+.footerRight {
+	float: right;
+	cursor: pointer;
+}
+.footerLinks, .footerLinks a {
+	background: #003057;
+	color: #f2f2f2;
+	font-size: smaller;
+	padding: 3px;
+}
+.header {
+	height:70px;
+}
+copyright {
+	color: #999;
+	font-size: smaller;
+}
+.logo {
+	border: none;
+	margin-left: 28px;
+	background: url(../images/PearsonLogo-coco.png) no-repeat;
+	width: 180px;
+	min-height: 82px;
+	float: left;
+}
+
+
+
+.featuredProducts.list-inline>li:first-child {
+	width: 37%;
+	border: 1px solid #205f9f;
+	text-align: center;
+}
+.featuredProducts.list-inline li:first-child img {
+	padding: 10px;
+	width: 100px;
+	height: 90px;
+}
+.featuredProducts.list-inline li:first-child h5 {
+	text-transform: uppercase;
+	background-color: #205f9f;
+	color: #fff;
+	line-height: 1.4;
+	margin: 0;
+	padding: 10px 3px;
+}
+.featuredProducts.list-inline li:nth-child(2) {
+	width: 60%;
+	padding: 5px 10px;
+	vertical-align: top;
+}
+.featuredProducts.list-inline li:nth-child(2) h4 {
+	font-weight: bold;
+}
+.featuredProducts.list-inline li ul {
+	list-style: circle;
+	padding-left: 15px;
+}
+.kbSearch {
+	float: right;
+}
+.container.noPadding {
+	padding-right: 0;
+	padding-left: 0;
+}
+.marginLeftRight0 {
+	margin-left: 0;
+	margin-right: 0;
+}
+.marginLeft0 {
+	margin-left: 0;
+}
+.marginRight0 {
+	margin-right: 0;
+}
+.marginBottom10 {
+	margin-bottom: 10px;
+}
+.marginBottom20 {
+	margin-bottom: 20px;
+}
+.marginTop10 {
+	margin-top: 10px;
+}
+.marginTop20 {
+	margin-top: 20px;
+}
+.paddingLeftRight0 {
+	padding-left: 0;
+	padding-right: 0;
+}
+.padding10 {
+	padding: 10px;
+}
+.paddingLeft0 {
+	padding-left: 0;
+}
+.paddingRight0 {
+	padding-right: 0;
+}
+.paddingBottom10 {
+	padding-bottom: 10px;
+}
+.paddingBottom15 {
+	padding-bottom: 15px;
+}
+.pointer {
+	cursor: pointer;
+}
+.carousel-control {
+	width:  4%;
+}
+.carousel-control.left, .carousel-control.right {
+	margin-left: -40px;
+	margin-right: -40px;
+	background-image: none;
+	cursor: pointer;
+}
+.carousel-control.right {
+	margin-left: 10px;
+	margin-right: -40px;
+}
+.carousel-control.left {
+	margin-left: -40px;
+	margin-right: 10px;
+}
+
+/*------ END CUSTOM STYLES -------*/
+/*=======================
+-MEDIA QUERIES
+===========================================================*/
+
+
+@media only screen and (max-width: 320px) {
+
+}
+/*=======================
+--EXTRA SMALL DEVICES ... (phones, 767px and smaller)
+  ===========================================================*/
+@media only screen and (max-width: 767px) {
+	/*-- hamburger icon --*/
+	/*.navbar-header {
+		position: absolute;
+		right: 1px;
+		top: 30px;
+		margin-right:5px;
+	}
+	.navbar-nav .open .dropdown-menu {
+		background-color: #fff;
+	}
+	.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+	.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+		color: #ffffff;
+		background-color: #9bbfe0;
+	}
+	.loginContainer {
+		position: absolute;
+		top: 40px;
+		right: 10px;
+		margin-right:5px;
+		margin-top: 15px;
+	}
+	.header {
+		margin-bottom: 20px;
+	}
+	h3, h3.panel-title {
+		font-size: large;
+	}*/
+	a .carousel-caption p {
+		display: none;
+	}
+kb
+}
+/*=======================
+--EXTRA SMALL-TO-MEDIUM DEVICES ... (996px and smaller)
+  ===========================================================*/
+@media only screen and (max-width: 996px) {
+	.container {
+		width: auto;
+	}
+}
+/*=======================
+--EXTRA SMALL DEVICES ... (505px and smaller)
+  ===========================================================*/
+/*@media only screen and (max-width: 505px) {
+	-- hamburger icon --
+	.navbar-header {
+		top: 3px;
+		position: absolute;
+		right: 1px;
+	}*/
+	@media only screen and (max-width: 505px) {
+	.infocontainer {
+		display:none;
+		}
+	.logo {
+		background: url(../images/PearsonLogo-coco.png) no-repeat;
+		width: 220px;
+		height: 70px;
+		margin-left: 10px;
+	}
+}
+/*=======================
+--SMALL DEVICES ... (505px and up)
+  ===========================================================*/
+/*@media only screen and (min-width: 505px) {
+	-- hamburger icon --
+	.navbar-header {
+		margin-top: -30px;
+	}
+}*/
+/*=======================
+-- BOOTSTRAP SMALL DEVICES ... (between 768px and 992px)
+  ===========================================================*/
+@media (min-width: 768px) and (max-width: 992px ) {
+
+}
+/*=======================
+-- BOOTSTRAP SMALL AND UP DEVICES ... (desktops, 768px and up)
+  ===========================================================*/
+@media only screen and (min-width: 768px) {
+	.navbar {
+		border-radius: 0 !important;
+		border: none;
+	}
+	.navbar-form {
+		margin: 0;
+	}
+}
+/*=======================
+-- BOOTSTRAP MEDIUM TO LARGE DEVICES ... (desktops, 992px and up)
+  ===========================================================*/
+@media (min-width: 992px ) {
+
+}
+/*=======================
+-- BOOTSTRAP MEDIUM TO LARGE DEVICES ... (desktops, 1024px and up)
+  ===========================================================*/
+
+/*=======================
+-- BOOTSTRAP LARGE DEVICES ... (desktops, 1200px and up)
+  ===========================================================*/
+@media (min-width: 1024px ) {
+	.featuredProducts.list-inline>li:first-child {
+		width: 43%;
+	}
+	.featuredProducts.list-inline li:nth-child(2) {
+		width: 55%;
+	}
+
+}

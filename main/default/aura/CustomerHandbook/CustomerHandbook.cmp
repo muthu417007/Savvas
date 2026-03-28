@@ -1,0 +1,5 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:appHostable,force:hasRecordId,flexipage:availableForAllPageTypes" access="global">
+    <div onclick="{!c.openHandbook}">
+        <img src="{!$Resource.Handbook_22_23}"/>
+    </div>
+</aura:component>

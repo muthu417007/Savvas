@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuraDefinitionBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>45.0</apiVersion>
+    <description>Displays the record&apos;s Classic URL.
+
+Created by: Heather McLemore, Created: 4/9/2019, Reference: W-005834</description>
+</AuraDefinitionBundle>

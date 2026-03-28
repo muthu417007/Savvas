@@ -1,0 +1,144 @@
+<!-- /*********************************************************
+  Component Name       : scc_signInLWC
+  Created Date         : 06/10/2024  
+  Author               : Cognizant 
+  Description          : This component used in Login page the OOB features have been 
+                         implemented to existing component to enhance login page functionality.
+  Modifications Log
+  06/10/2024      Monami           Initial Version
+*********************************************************/ -->
+
+
+<template>
+    <div>
+        <template if:true={isChecking}>
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading" size="large" style="margin-top: 30%; margin-bottom: auto; text-align: center;"></lightning-spinner>
+            </template>
+            <template if:false={isLoading}>
+                <h3 style="margin-top: 30%; margin-bottom: auto; text-align: center;"><b>Your IP address has been blocked from accessing this site</b></h3>
+            </template>
+        </template>
+    </div>
+<template if:false={isChecking}>
+<div class="signin-page"  style={backgroundImageStyle} >   
+    <div class="mobile-only">
+        <img src={labels.scc_brand_logo_mobile} alt="logo for mobile" />
+    </div> 
+    <div class="signin-form">
+    <form method="post">
+          <!-- SignIn Component Design -->
+        <div class="main-container slds-grid slds-grid_vertical"> 
+            <div class=slds-col>
+                <template if:true={errorCheck}>
+                    <div class="error slds-var-p-vertical_x-small slds-var-p-top_small " role="alert">
+                        <span>{scc_signIn_Error_Message}</span>
+                    </div>
+                </template>
+            </div>
+            <div class="slds-col">
+                <div class="no-signin-label">{labels.scc_signIn_No_SignIn_Text}</div>
+                <!-- <a href="#" class="no-signin-reqd-links">{labels.scc_signIn_Order_Status_Text}</a> -->
+                <lightning-button class="no-signin-reqd-links guestOrderStatusLink" variant="base" label={labels.scc_signIn_Order_Status_Text} onclick={showOrderStatusModal}></lightning-button>  
+                <template if:true={openOrderStatusModal}>
+                    <c-scc_guest-order-status-l-w-c onclosepopup={closeOrderStatusModal}></c-scc_guest-order-status-l-w-c> 
+                </template>
+                <!--<a href="#" class="no-signin-reqd-links">{labels.scc_signIn_Access_Code_Text}</a>-->
+                <!--<lightning-button class="no-signin-reqd-links" variant="base" label="SIOP Registration" onclick={showModal}> </lightning-button>-->
+                <lightning-button class="no-signin-reqd-links guestAccessCodeLink" variant="base" label="Access Code" onclick={showAccessCodeModal}></lightning-button>  
+                <template if:true={openAccessCodeModal}>
+                      <c-scc_check-access-code-l-w-c onclosepopup={closeaccessmodalpopup}>  </c-scc_check-access-code-l-w-c>  
+                 </template>
+                
+               <!-- <a href="#" class="no-signin-reqd-links">SIOP Registration</a> -->
+                <lightning-button class="no-signin-reqd-links guestSiopLink" variant="base" label="SIOP Registration" onclick={showSIOPModal}> </lightning-button>
+                 <template if:true={openSIOPModal}>
+                     <c-scc_siop-registration-l-w-c onclosepopup={closesiopmodalpopup}>  </c-scc_siop-registration-l-w-c> 
+                 </template>
+                
+                 <!-- <a href="#" class="no-signin-reqd-links">{labels.scc_signIn_View_Invoice_Text}</a> -->
+                 <lightning-button class="no-signin-reqd-links guestInvoiceLink" variant="base" label={labels.scc_signIn_View_Invoice_Text} onclick={showViewInvoiceModal}> </lightning-button>
+                  <template if:true={openViewInvoice}>
+                     <c-scc_view-invoice-l-w-c onclosepopup={closeviewinvoice}>  </c-scc_view-invoice-l-w-c> 
+                 </template>
+                <h1 class="sign-in-title">{labels.scc_signIn_SignIn_Text}</h1>
+            </div>
+         <!-- Username input box -->
+            <div class="slds-col">    
+                <div class="slds-form-element__label">{labels.scc_username_Text}</div>            
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+                        <input aria-label="K12 School, District or Dealer Sign In Required" type="text" data-id="inputUsername" data-name="inputUsername" placeholder="Username" class="slds-input input-element username-input" value={username} onchange={handleUserNameChange} onkeyup={handleUserNameChange} data-index="0"  />
+                    </div>
+                </div>
+            </div>
+
+         <!-- Password input box -->
+         <div class="slds-col"> 
+            <div class="slds-form-element__label">{labels.scc_password_Text}</div>              
+             <div class="slds-form-element">
+                 <div class="slds-form-element__control">
+                    <input aria-label="Password Required" type="password" data-id="inputPassword" placeholder="Password" class="slds-input input-element" autocomplete="off" onchange={handlePasswordChange} onkeyup={handlePasswordChange} data-index="0" />
+                 </div>
+             </div>
+         </div>
+
+         <!-- Remember me input checkbox -->
+         <div class="slds-col forgot-password">
+            <lightning-input type="checkbox" label="Remember Me" name="rememberMe" checked={rememberMeChecked} onclick={handleChange}></lightning-input>
+            <div>
+            <a href={labels.scc_forgot_Password_Url} class="forgot-password-text">{labels.scc_forgot_Password_Text}</a>
+           </div>
+         </div>
+
+         <!-- Sign In button -->
+         <div class="slds-col">
+             <button type="submit" class="login-button slds-button" onclick={handleLogin} aria-disabled={isSignInDisabled}>{labels.scc_signIn}</button> 
+         </div>
+
+         <!-- hyperlinks for new user registration and Forgot Password page -->
+         <div class="slds-col register-text-link-wrapper">
+            <!-- <a href={labels.scc_forgot_Password_Url} class="forgot-password-text">{labels.scc_forgot_Password_Text}</a> -->
+            <a href={labels.scc_self_Register_Url} class="register-text">
+                {labels.scc_new_User_Text}
+                <div class="chevron-circle"><lightning-icon icon-name='utility:chevronright' alternative-text='chevronright' size='large'></lightning-icon></div>
+            </a>
+        </div>
+         <div class="slds-col not-a-dealer-container">
+            <div class="not-a-dealer-title">{labels.scc_signIn_Dealer_Title}</div>
+            <div class="not-a-dealer-links">
+                <a href="https://homeschool.savvas.com/">
+                    {labels.scc_signIn_Homeschool_Text}
+                    <div class="chevron-circle"><lightning-icon icon-name='utility:chevronright' alternative-text='chevronright' size='large'></lightning-icon></div>
+                </a>
+            </div>
+            <div class="not-a-dealer-links">
+                <a href="https://savvas.com/privateschools">
+                    {labels.scc_signIn_Private_Student_Text}
+                    <div class="chevron-circle"><lightning-icon icon-name='utility:chevronright' alternative-text='chevronright' size='large'></lightning-icon></div>
+                </a>
+            </div>
+            <div class="not-a-dealer-links">
+                <a href="https://www.savvas.com">
+                    {labels.scc_signIn_Other_Student_Text}
+                    <div class="chevron-circle"><lightning-icon icon-name='utility:chevronright' alternative-text='chevronright' size='large'></lightning-icon></div>
+                </a>
+            </div>
+         </div>
+         
+        </div>
+    </form>
+    <div class="slds-grid slds-grid_vertical">
+        <div class="slds-col signin-blue-footer">
+            <div class="signin-footer-copyright-text">{labels.scc_signIn_Footer_Text}</div>
+            <div style="gap:12px">
+                <a href={createCase} target="_blank" class="signin-footer-links">{labels.scc_signIn_Footer_Savvas_Support}</a>
+                <a href={dynamicurl} class="signin-footer-links" style="margin-left: 11px; margin-right: 11px;">{labels.scc_signIn_Footer_Terms_Text}</a>
+                <a href={dynamicprivacy} class="signin-footer-links">{labels.scc_signIn_Footer_Privacy_Text}</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</template>
+</template>

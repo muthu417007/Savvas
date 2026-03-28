@@ -1,0 +1,209 @@
+<!--
+  *********************************************************
+  Component Name       : ProductFamilyAddOpptyLines_vf
+  Created Date         : 7/08/2024  
+  Author               : Frank Berni - Cognizant
+  Description          : VF page tied to Add Products button on Opportunity Products related list
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>    
+  7/08/2024    Frank Berni         Ticket W-015412: Initial Creation
+  7/09/2024    Frank Berni         Ticket W-015412: Core functionality in place. Add, Removing and Saving Opp Line Items and Seearch bar
+  7/10/2024    Frank Berni         Ticket W-015412: Lightning styling added. Editable Free Qty column added to line item review
+  7/18/2024    Frank Berni         Sprint 6 feedback: Removed pricebook title, Removed Free Qty column, moved buttons to bottom of tables along with scrolling
+  8/19/2024    Frank Berni         Ticket W-015814: Updating Cancel buttons to be white and Next button to be blue
+  12/19/2024   Frank Berni         Added spinner logic and disabling Save button to avoid spam clicks
+  *********************************************************
+-->
+<!-- StandardController must be present for Add Products button to call this VF page, extension contains custom logic and lightningStylesheets for lightning design -->
+<apex:page standardController="Opportunity" extensions="AddOpptyProductsControllerExtension" tabStyle="Opportunity" lightningStylesheets="true">
+    <!-- Needed to allow for slds styling -->
+    <apex:slds />    
+    <apex:form >
+        <div>
+            <!-- mainPageBlock contains the elements - gets rerendered based on buttons clicked in the page -->
+            <apex:pageBlock id="mainPageBlock">
+                <!-- Step 1: Product Selection -->
+                <apex:actionRegion >
+                    <!-- conditionally rendered if isReviewStep is False -->
+                    <apex:outputPanel layout="block" rendered="{!NOT(isReviewStep)}" id="productSelectionSection">
+                        <!-- Title and help text -->
+                        <div style="text-align: center;">
+                            <h1 style="font-size:20px;">Add Products</h1> 
+                            <h1 style="font-size:15px;">Please select as many Product Family Products as needed and click Next when finished.</h1>
+                        </div>
+                
+                        <!-- Used for spacing -->
+                        <div class="slds-m-top_medium"></div>
+
+                        <!-- Search bar and buttons -->
+                        <div class="slds-grid slds-wrap">
+                            <!-- old button layout in top - keeping just in case -->
+                            <div class="slds-col">
+                                <!-- <apex:commandButton value="Cancel" action="{!cancel}" immediate="true" title="Takes you back to the Opportunity record page" styleClass="slds-button slds-button_destructive"/> -->
+                            </div>
+                            <div class="slds-col"></div>
+                            <!-- Search Bar -->
+                            <div class="slds-col slds-text-align_center">
+                                <apex:inputText id="searchInput" value="{!searchTerm}" title="Enter your Product name and click Search" alt="Select Products..." styleClass="slds-input"/>
+                            </div>
+                            <!-- Search Button - styled so it is close to the search bar -->
+                            <div class="slds-col slds-text-align_right" style="text-align: left">
+                                <apex:commandButton id="searchButton" value="Search" action="{!searchPbEntries}" reRender="productTable" styleClass="slds-button slds-button_neutral"/>
+                            </div>   
+                            <!-- old button layout in top - keeping just in case -->
+                            <!-- Next Button - aligned right -->
+                            <div class="slds-col slds-text-align_right">
+                                <!-- <apex:commandButton value="Next" title="Takes you to the review table" action="{!moveToReview}" rerender="mainPageBlock" styleClass="slds-button slds-button_neutral"/> -->
+                            </div>                      
+                        </div>
+
+                        <div class="slds-m-top_medium"></div>
+                    
+                        <!-- Contains all available pricebook entries that can be selected -->
+                        <apex:pageBlockTable value="{!searchedPbEntrylist}" var="spbe" id="productTable" styleClass="slds-table slds-table_bordered slds-table_cell-buffer">
+                            <apex:column >
+                                <apex:inputCheckbox value="{!spbe.selected}"/>
+                            </apex:column>
+                            <apex:column value="{!spbe.pbe.Name}"/>
+                            <apex:column value="{!spbe.pbe.Business_Line__c}"/>
+                            <apex:column value="{!spbe.pbe.ProductFamily__c}"/>
+                            <apex:column value="{!spbe.pbe.ProductDescription__c}"/>
+                            <apex:column value="{!spbe.pbe.IsActive}"/>
+                            <apex:column value="{!spbe.pbe.UnitPrice}"/>
+                        </apex:pageBlockTable>
+
+                        <div class="slds-m-top_medium"></div>
+
+                        <!-- add button-container class -->
+                        <!-- Search bar and buttons -->
+                        <div class="slds-grid slds-wrap button-container">
+                            <!-- Cancel and Next Button now at the bottom right and always present when scrolling -->
+                            <div class="slds-col slds-text-align_right">
+                                <!-- changing color from Red to White slds-button_neutral-->
+                                <apex:commandButton style="top: -1px;" value="Cancel" action="{!cancel}" immediate="true" title="Takes you back to the Opportunity record page" styleClass="slds-button slds-button_neutral"/>
+                                <!-- Changing color from White to Blue slds-button_brand -->
+                                <apex:commandButton value="Next" title="Takes you to the review table" action="{!moveToReview}" rerender="mainPageBlock" styleClass="slds-button slds-button_brand"/>
+                            </div>                      
+                        </div>
+                    
+                    </apex:outputPanel>
+                </apex:actionRegion>
+                
+                <!-- Step 2: Line Item Review and Edit -->
+                <apex:actionRegion >
+                    <!-- Conditionally rendered if isReviewStep is True -->
+                    <apex:outputPanel layout="block" id="lineItemsSection" rendered="{!isReviewStep}">
+
+                        <!-- Title and help text -->
+                        <div style="text-align: center;">
+                            <h1 style="font-size:20px;">Review and Edit Products</h1> 
+                            <h1 style="font-size:15px;">Please edit products and click Save when finished.</h1> 
+                            <!-- NEW added spinner to show feedback -->
+                            <apex:outputPanel id="loadingSpinner" style="display: none">
+                                <img src="/img/loading.gif" alt="Saving Opportunity Products..."/>
+                            </apex:outputPanel>
+                        </div>
+
+                        <div class="slds-m-top_medium"></div>
+
+                        <!-- table to hold all Oppty Line Items that are about to be inserted. Users can edit some fields before saving -->
+                        <apex:pageBlockTable value="{!oppLineItems}" var="oliWrapper" styleClass="slds-table slds-table_bordered slds-table_cell-buffer">
+                            <apex:column headerValue="Product Name">
+                                <apex:outputText value="{!oliWrapper.productName}"/>
+                            </apex:column>
+                            <apex:column headerValue="Quantity">
+                                <apex:inputText value="{!oliWrapper.opportunityLineItem.Quantity}"/>
+                            </apex:column>
+                            <apex:column headerValue="Sales Price">
+                                <apex:inputText value="{!oliWrapper.opportunityLineItem.UnitPrice}"/>
+                            </apex:column>
+                            <apex:column headerValue="Date">
+                                <apex:inputField value="{!oliWrapper.opportunityLineItem.ServiceDate}"/>
+                            </apex:column>
+                            <apex:column headerValue="Description">
+                                <apex:inputText value="{!oliWrapper.opportunityLineItem.Description}"/>
+                            </apex:column>
+                            <!-- Each row has a remove button where a user can remove a line item one at a time -->
+                            <apex:column >
+                                <apex:commandLink action="{!removeLineItem}" value="Remove" reRender="lineItemsSection" styleClass="slds-button slds-button_destructive">
+                                    <apex:param name="uniqueId" value="{!oliWrapper.uniqueId}" assignTo="{!uniqueId}"/>
+                                </apex:commandLink>
+                            </apex:column>
+                        </apex:pageBlockTable>
+
+                        <div class="slds-m-top_medium"></div>
+
+                        <!-- moved buttons to the bottom -->
+                        <!-- Cancel, Back and Next buttons -->
+                        <div class="slds-grid slds-wrap slds-m-top_large button-container">
+                            <div class="slds-col slds-size_1-of-4 slds-text-align_left">
+                                <!-- Back button needed -->
+                                <apex:commandButton value="Back" title="Takes you to the product selection table" action="{!moveToSelection}" reRender="mainPageBlock" styleClass="slds-button slds-button_neutral"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-4 slds-col_bump-left slds-text-align_right">
+                                <!-- Changing color of Cancel to White slds-button_neutral-->
+                                <!-- Cancel button needed - extra styling to improve button alignment  -->
+                                <apex:commandButton style="top: -1px;" value="Cancel" title="Takes you to the Opportunity record page" action="{!cancel}" immediate="true" styleClass="slds-button slds-button_neutral"/> 
+                                <!-- Save Button -->
+                                <apex:commandButton id="saveButton"  value="Save" onclick="handleSave();" action="{!saveOppLineItems}" reRender="mainPageBlock" styleClass="slds-button slds-button_brand"/>
+                            </div>
+                        </div>
+
+                    </apex:outputPanel>
+                </apex:actionRegion>  
+                
+            </apex:pageBlock>
+        </div>
+    
+    </apex:form>    
+    <!-- NEW script function to disable Save button, show spinner and run Apex as usual -->
+    <script>
+        function handleSave() {
+          const saveButton = document.querySelector(
+            '[id$="saveButton"]'
+          );
+          console.log(saveButton);
+          if (saveButton) {
+            saveButton.disabled = true; // Disable the Save button
+          }
+    
+          const spinner = document.querySelector(
+            '[id$="loadingSpinner"]'
+          );
+          console.log(spinner);
+          if (spinner) {
+            spinner.style.display = 'block'; // Show the spinner
+          }
+    
+          return true; // Allow the save action to proceed
+        }
+    </script>
+    <!-- style tag -->
+    <style>
+        /* styling applied to button-container so buttons always appear below table when scrolling */
+        /* Ensures container is always visible at the bottom*/
+        .button-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white; /* matches background color of page*/
+            border-top: 1px solid #ddd; /* top border for separation*/
+            padding: 10px;
+            text-align: center; 
+            z-index: 1000; /* ensures buttons are above other content*/
+        }
+
+        /* Ensure buttons are spaced and aligned properly*/
+        .button-container apex|commandButton {
+            margin: 0 10px;
+        }
+
+        /* bottom padding to avoid overlap*/
+        apex:pageBlock {
+            /* controls height of button container*/
+            padding-bottom: 60px;
+        }
+    </style>
+</apex:page>

@@ -1,0 +1,66 @@
+<!--
+@Description: Component to Display Bio of Legal Team on Community Page in Modal Window
+@Implemented as a part of Community Pages Build for Savvas Central Community
+@Author: Prabhat Kanuri (Cognizant)
+-->
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="Community_Bio_Body">
+    <!--Boolean attribute to indicate if modal is open or not 
+       default value is false as modal is closed when page is loaded 
+    -->
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    <aura:attribute name="body" type="String" /><!-- To carry Body from JS-->
+    <aura:attribute name="image_1" type="String" /><!-- To carry image Name from JS-->
+    <aura:attribute name="cand" type="String"/><!-- To carry Candidate Name from JS-->
+	<aura:attribute name="Bio_Name" type="String" default=""/><!--Setting Name for Bio-->
+    <div>
+        <h1 style="align: center;">Our Team</h1>
+    </div>
+    <div class="slds-m-around_xx-large"><!--please add Images Here to display on Site: Start -->
+         <img src="{!$Resource.AY_Pic_Lgl}" onclick="{!c.openBio}" title = "AY" class="disp_img" style="padding:10px"/>  
+        <img src="{!$Resource.KS_Pic_Lgl}" onclick="{!c.openBio}" title = "Kevin" class="disp_img" style="padding:10px" /> 
+        <img src="{!$Resource.Christine_Pic_Lgl}" onclick="{!c.openBio}" title = "Christine" class="disp_img" style="padding:10px" /> 
+        <img src="{!$Resource.Debi_pic_lgl}" onclick="{!c.openBio}" title = "DFD" class="disp_img" style="padding:10px" />
+        <img src="{!$Resource.RJ_Pic_Lgl}" onclick="{!c.openBio}" title = "Ryan"  class="disp_img" style="padding:10px"/> 
+       	<img src="{!$Resource.Paula_Pic_Lgl}" onclick="{!c.openBio}" title = "Paula" class="disp_img" style="padding:10px"/>
+        <img src="{!$Resource.Erin_Pic_Lgl}" onclick="{!c.openBio}" title = "Erin" class="disp_img_Erin" style="padding:10px" /> 
+        <img src="{!$Resource.Mer_Pic_Lgl}" onclick="{!c.openBio}" title = "Meredith" class="disp_img" style="padding:10px" />
+        <img src="{!$Resource.Rosa_Pic_Lgl}" onclick="{!c.openBio}" title = "Rosa" class="disp_img" style="padding:10px" />
+         
+        <!--please add Images Here to display on Site : End -->
+        
+        <!--Use aura:if tag to display/hide popup based on isModalOpen value-->  
+        <aura:if isTrue="{!v.isModalOpen}">
+            
+            <!-- Modal/Popup Box starts here-->
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Box Header Starts here-->
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.goBack }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!v.cand}</h2>
+                    </header>
+                    
+                    <!--Modal/Popup Box Body Starts here-->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-align_absolute-center"><img src="{!v.image_1}" class="disp_img"/></div> 
+                        <p>{!v.body}</p>
+                    </div>
+                    
+                    <!--Modal/Popup Box Footer Starts here-->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="brand"
+                                          label="Back"
+                                          title="Back"
+                                          onclick="{! c.goBack }"/>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+    </div>
+    
+</aura:component>

@@ -1,0 +1,104 @@
+<template>
+    <div class="product-information">
+        <div class="image slds-m-right_small">
+            <figure class="slds-p-around_xx-small slds-border_top slds-border_right slds-border_bottom slds-border_left">
+                <img src={image.url} alt={image.alternativeText} />
+            </figure>
+            <lightning-accordion
+                active-section-name="description"
+                allow-multiple-sections-open>
+                <lightning-accordion-section
+                    name="description"
+                    label={label.ensxtx_CartPDP_Section_Description}>
+                    <lightning-formatted-rich-text
+                        value={description}>
+                    </lightning-formatted-rich-text>
+                </lightning-accordion-section>
+            </lightning-accordion>
+        </div>
+        <div class="details-area" if:true={recordId}>
+            <div class="heading">
+                <h2 class="slds-text-heading_medium">{name}</h2>
+                <div class="slds-p-top_x-small">{label.ensxtx_CartPDP_Field_SKU} {sku}</div>
+                <div class="slds-p-bottom_medium">
+                    <template for:each={_displayableFields} for:item="field">
+                        <div key={field.id} if:true={field.value} class="slds-grid slds-p-top_x-small">
+                            <p class="slds-m-right_xx-small">{field.name}:</p>
+                            <lightning-formatted-rich-text 
+                                value={field.value}>
+                            </lightning-formatted-rich-text>
+                        </div>
+                    </template>
+                </div>
+                <div if:true={inStock} class="slds-p-bottom_small">
+                    <lightning-icon
+                        icon-name="utility:check"
+                        variant="success">
+                    </lightning-icon>
+                    <span class="slds-p-horizontal_small">{label.ensxtx_CartPDP_Message_InStock}</span>
+                </div>
+                <div if:false={inStock} class="slds-p-bottom_small">
+                    <lightning-icon
+                        icon-name="utility:ban"
+                        variant="error">
+                    </lightning-icon>
+                    <span class="slds-p-horizontal_small">{label.ensxtx_CartPDP_Message_OutOfStock}</span>
+                </div>
+            </div>
+            <div class="slds-p-vertical_small">
+                <lightning-layout vertical-align="end">
+                    <lightning-layout-item size="2">
+                        <lightning-input
+                            type="number"
+                            name="quantity"
+                            label={label.ensxtx_CartPDP_Field_Quantity}
+                            value={quantity}
+                            min="1"
+                            max="9999"
+                            step="1"
+                            message-when-step-mismatch="Enter a whole number."
+                            oncommit={handleQuantityChange}>
+                        </lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item>
+                        <lightning-button
+                            label={label.ensxtx_CartPDP_Button_AddToCart}
+                            variant="brand"
+                            class="slds-m-left_x-small"
+                            disabled={_isAddToCartDisabled}
+                            onclick={notifyAddToCart}>
+                        </lightning-button>
+                    </lightning-layout-item>
+                    <lightning-layout-item>
+                        <lightning-button
+                            label={label.ensxtx_CartPDP_Button_AddToList}
+                            variant="brand"
+                            class="slds-m-left_x-small"
+                            onclick={notifyAddToList}>
+                        </lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+            <div class="price">
+                <c-ensxtx-pricing-details
+                    record-id={recordId}
+                    price={price}
+                    tax={tax}
+                    pricing-tiers={pricingTiers}
+                    currency-iso-code={currencyIsoCode}
+                    display-price={displayPrice}
+                    display-tax={displayTax}
+                    conditions={conditions}
+                    display-conditions={displayConditions}
+                    display-conditions-values={displayConditionsValues}
+                    display-tiers={displayTiers}>
+                </c-ensxtx-pricing-details>
+            </div>
+            <div class="schedule">
+                <c-ensxtx-product-availability-dates
+                    availabilities={availabilities}>
+                </c-ensxtx-product-availability-dates>
+            </div>
+        </div>
+    </div>
+</template>

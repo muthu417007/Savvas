@@ -1,0 +1,38 @@
+<!-- <template>
+    <div class="chart-container">
+    
+        <div class="dropdown-container">
+            <lightning-combobox
+                placeholder="Select an account"
+                value={selectedAccountId}
+                options={accountOptions}
+                onchange={handleAccountChange}>
+            </lightning-combobox>
+        </div>
+
+    
+        <canvas></canvas>
+        <div class="chart-note">
+            {graphText}
+        </div>
+    </div>
+</template> -->
+<template>
+   <div class="chart-container1">
+      <!--- <div class="combobox-container">
+            <lightning-combobox
+                value={selectedAccountId}
+                placeholder="Select Account"
+                options={accountOptions}
+                onchange={handleAccountChange}>
+            </lightning-combobox>
+        </div>-->
+    <!-- Move the visual text here, positioned absolutely to the top right -->
+        <span class="visual-text">
+            {graphText}tesssttt
+        </span>
+        <div class="chart-container1"><canvas></canvas></div>************
+        
+    <!-- <canvas lwc:dom="manual" class="chart"></canvas> -->
+    </div>
+</template>

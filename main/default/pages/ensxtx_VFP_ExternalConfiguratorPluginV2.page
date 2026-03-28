@@ -1,0 +1,85 @@
+<apex:page label="CPQeECP" docType="html-5.0" showHeader="false" sidebar="false">
+  <apex:slds />
+  <apex:includeLightning />
+  <style>
+    html,
+    body,
+    .fullHeight {
+      height: 100vh!important;
+      width: 100vw!important;
+      overflow-y: auto;
+      border: none;
+      background: white!important;
+    }
+
+    .slds-card__header.header {
+      display:none;
+    }
+
+    .fullHeight .slds-modal, .fullHeight .slds-modal__container, .fullHeight .slds-modal__container .slds-modal__content {
+      padding-top:0;
+      padding-bottom:0;
+    }
+
+    /* Fixes scrolling on iOS */
+    @supports (-webkit-overflow-scrolling:touch) {
+      #app {
+        overflow:auto;
+        -webkit-overflow-scrolling:touch;
+      }
+    }
+  </style>
+  <div class="fullHeight" id="ExternalConfiguratorApp"/>
+
+  <script>
+    /**************onload events ********/
+    
+    // receive the message from CPQ and load the iframe in parallel to minimize UI lag
+    document.head.appendChild(Object.assign(
+      document.createElement('script'), {
+        src: "{!URLFOR($Resource.SBQQ__easyXDM)}",
+        onload: cpqCallback
+    }))
+
+
+    /*********** Functions **************/
+
+    function receiveMessageFromCPQ(messageFromCPQString) {
+      // From CPQ
+      var messageFromCPQ = JSON.parse(messageFromCPQString)
+      if (messageFromCPQ.product && messageFromCPQ.product.configuredProductId) {
+        initExternalConfiguratorComponent(messageFromCPQ);
+      }
+    }
+
+    function initExternalConfiguratorComponent(messageFromCPQ) {
+      $Lightning.use('c:ensxtx_APP_ExternalConfigurator', function () {
+        $Lightning.createComponent('c:ensxtxBundleOptionSelector', {
+            messageFromCPQ: messageFromCPQ
+          },
+          "ExternalConfiguratorApp",
+          function (cmp) {});
+      });
+      return;
+    }
+
+    document.addEventListener("bundle_option_selector_finished", function(event) {
+      rpc.postMessage(JSON.stringify(event.detail.messageFromCPQ))
+    });
+
+    function cpqCallback() {
+      if (easyXDM) {
+        rpc = new easyXDM.Rpc({}, {
+          remote: {
+            postMessage: {}
+          },
+          local: {
+            postMessage: function (messageFromCPQString) {
+              receiveMessageFromCPQ(messageFromCPQString)
+            }
+          }
+        })
+      }
+    }
+  </script>
+</apex:page>

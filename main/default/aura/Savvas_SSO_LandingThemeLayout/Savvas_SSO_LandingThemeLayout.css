@@ -1,0 +1,120 @@
+.THIS .logoContainer {
+    background-image: t('url('+brandLogoImage+')');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 60px;
+    position: relative;
+    top: -5px;
+    display: block;
+    cursor: pointer;
+    margin: 10px;
+}
+.THIS .profileMenuRegion .selfServiceUserProfileMenu .uiMenuList {
+    right: 16px;
+    left: auto;
+    transform: translateX(0px);
+}
+.THIS.pageContent{
+    background: var(--e-5-f-1-fd, #E5F1FD);
+    width:100%;
+}
+.THIS .title{
+    padding-left: 15px;
+    font-size: 50px!important;
+    font-family: 'Poppins'!important;
+    color: #fff!important;
+    font-weight: 700!important;
+    line-height: 71.5px!important;
+    text-align: left!important;
+    letter-spacing: -0.04em!important;
+    position: relative;
+    max-width: 826px;
+}
+.THIS .line{
+	width: 91px;
+    border-top: solid 3px rgba(51, 189, 205, 1);
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.THIS .subTitle{
+    padding-top: 10px;
+    font-size: 18px !important;
+    font-family: 'Poppins' !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    line-height: 30px !important;
+    letter-spacing: normal;
+    max-width: 615px;
+}
+/*.THIS ul.scrollable li.home{
+    display: none!important;
+}*/
+.THIS ul.scrollable li.myAccount{
+    display: none!important;
+}
+
+@media (max-width:480px) {
+    .THIS .mobilebanner{
+        background-size: cover;
+        background-position: center;
+        height: 150px!important;
+    }
+}
+
+@media (min-width:480px) and (max-width:600px) {
+    .THIS .mobilebanner{
+        background-size: cover;
+        background-position: center;
+        height: 200px!important;
+    }
+}
+
+@media (min-width:600px) and (max-width:700px) {
+    .THIS .heroBanner{
+        background-size: cover;
+        background-position: center;
+        height: 160px!important;
+    }
+}
+
+@media (min-width:700px) and (max-width:800px) {
+    .THIS .heroBanner{
+        background-size: cover;
+        background-position: center;
+        height: 220px!important;
+    }
+}
+
+@media (min-width:800px) and (max-width:900px) {
+    .THIS .heroBanner{
+        background-size: cover;
+        background-position: center;
+        height: 250px!important;
+    }
+}
+
+@media (min-width:900px) and (max-width:1024px) {
+    .THIS .heroBanner{
+        background-size: cover;
+        background-position: center;
+        height: 280px!important;
+    }
+}
+
+@media (min-width:1024px) and (max-width:1366px) {
+    .THIS .heroBanner{
+        background-size: cover;
+        background-position: center;
+        height: 320px!important;
+    }
+}
+
+@media (min-width:1366px) {
+    .THIS .heroBanner{
+        background-size: cover;
+        background-position: center;
+        height: 430px!important;
+    }
+}

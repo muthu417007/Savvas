@@ -1,0 +1,22 @@
+<apex:component >
+    <apex:attribute name="attachment1_name" type="String" description="Attachment 1 Name" />
+    <apex:attribute name="attachment1_link" type="String" description="Attachment 1 Link" />
+    <apex:attribute name="attachment2_name" type="String" description="Attachment 2 Name" />
+    <apex:attribute name="attachment2_link" type="String" description="Attachment 2 Link" />    
+    <apex:attribute name="attachment3_name" type="String" description="Attachment 3 Name" />
+    <apex:attribute name="attachment3_link" type="String" description="Attachment 3 Link" />    
+    
+                        <apex:pageBlockSection columns="1" title="Attachment(s)">
+                        <apex:outputText value="{!$Label.ICOM_KM_ARTICLE_NO_ATTACHMENTS}" rendered="{!attachment1_name =='' && attachment2_name=='' && attachment3_name==''}"></apex:outputText>
+
+                        <apex:outputLabel value="Attachment 1: " style="font-weight:bold" rendered="{!attachment1_name!=''}">
+                            <apex:outputLink style="font-weight:Normal" value="{!attachment1_link}">{!attachment1_name}</apex:outputLink>
+                        </apex:outputLabel>
+                        <apex:outputLabel value="Attachment 2: " style="font-weight:bold" rendered="{!attachment2_name!=''}">
+                            <apex:outputLink style="font-weight:Normal" value="{!attachment2_link}">{!attachment2_name}</apex:outputLink>
+                        </apex:outputLabel>
+                        <apex:outputLabel value="Attachment 3: " style="font-weight:bold" rendered="{!attachment3_name!=''}">
+                            <apex:outputLink style="font-weight:Normal" value="{!attachment3_link}">{!attachment3_name}</apex:outputLink>
+                        </apex:outputLabel>
+                    </apex:pageBlockSection>
+</apex:component>

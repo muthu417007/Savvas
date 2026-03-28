@@ -1,0 +1,26 @@
+.slds-box{
+    border-color: #c9c9c9;
+}
+
+.slds-card{
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--slds-c-card-color-border,
+        var(--slds-c-card-color-border,
+        var(--slds-c-card-color-border,
+        rgb(201, 201, 201))));
+    box-shadow: var(--slds-c-card-shadow,
+        var(--slds-c-card-shadow,
+        var(--slds-c-card-shadow,
+        0 2px 2px 0 rgba(0, 0, 0, 0.10))))
+}
+
+.deleteButtonIcon{
+    width: var(--lwc-squareIconMediumBoundary, 2rem);
+    height: var(--lwc-squareIconMediumBoundary, 2rem);
+    background-color: var(--slds-c-button-destructive-color-background, #ba0517);
+}
+
+.deleteButtonIcon:hover{
+    background-color: var(--slds-c-button-destructive-color-background-hover, #8e030f);
+}

@@ -1,0 +1,38 @@
+<!--<template>
+    <div class="lwcClass">
+        <div class="Company_Questions">
+                <a href="https://status.savvas.com/"><span style="font-size: 180%;">Platform Status Center</span></a>
+        </div>
+        <div style="font-size:16px; font-weight: normal; padding-left:10px;padding-right:25px;padding-top:15px;">
+                <span>Click above to view status updates for Savvas Platforms, including any service interruptions. You may also subscribe to receive notifications via email.</span>
+                <span>{allOK}</span>
+        </div>
+</div>
+</template> -->
+<template>
+  <div class="lwcClass">
+    <div class="Company_Questions">
+            <a href="https://status.savvas.com/"><span style="font-size: 180%;">Platform Status Center</span></a>
+    </div>
+    <div style="font-size:16px; font-weight: normal; padding-left:10px;padding-right:25px;padding-top:15px;">
+            <span>Click above to view status updates for Savvas Platforms, including any service interruptions. You may also subscribe to receive notifications via email.</span>
+            <span>{allOK}</span>
+    </div>
+</div>
+        <template if:true={repos}>
+          <table style="margin: 10px 15px;">
+            <tr>
+              <th>Platform</th>
+              <th>Status</th>
+            </tr>
+            <template for:each={repos} for:item="repo">
+              <tr key={repo.name}>
+                <td>{repo.name}</td>
+                <td><a href="https://status.savvas.com">{repo.status}</a></td>
+              </tr>
+            </template>
+          </table>
+        </template>
+      
+        <!--<lightning-button label="Fetch Data" onclick={handleFetch}></lightning-button>-->
+      </template>

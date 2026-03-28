@@ -1,0 +1,57 @@
+<template>
+    <lightning-card title="User Hierarchy" icon-name="standard:user">
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-m-around_medium">
+                Error: {error.body.message}
+            </div>
+        </template>
+
+        <template if:true={userOptions}>
+            <lightning-dual-listbox
+                name="userDualListbox"
+                label="Select Users"
+                source-label="Available Users"
+                selected-label="Selected Users"
+                field-level-help="Use this to select multiple users from the hierarchy."
+                options={userOptions}
+                value={selectedUserIds}
+                onchange={handleUserChange}
+                class="slds-m-around_medium"
+            ></lightning-dual-listbox>
+        </template>
+
+        <template if:false={userOptions}>
+            <p class="slds-m-around_medium">No users available.</p>
+        </template>
+    </lightning-card>
+
+    <lightning-card title="Account" icon-name="standard:user">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading Users"></lightning-spinner>
+        </template>
+
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-m-around_medium">
+                Error: {error.body.message}
+            </div>
+        </template>
+
+        <template if:true={accountOptions}>
+            <lightning-dual-listbox
+                name="accountDualListbox"
+                label="Select Accounts"
+                source-label="Available Accounts"
+                selected-label="Selected Accounts"
+                field-level-help="Accounts related to selected users are preselected."
+                options={accountOptions}
+                value={selectedAccountIds}
+                onchange={handleAccountChange}
+                class="slds-m-around_medium"
+            ></lightning-dual-listbox>
+        </template>
+
+        <template if:false={accountOptions}>
+            <p class="slds-m-around_medium">No accounts available.</p>
+        </template>
+    </lightning-card>
+</template>

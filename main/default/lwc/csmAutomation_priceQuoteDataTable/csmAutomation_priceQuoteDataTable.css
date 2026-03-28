@@ -1,0 +1,40 @@
+.border-div{
+    border: 2px;
+}
+
+.hover-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+
+}
+
+.container{
+    display: flex;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.quote-details {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-right: 15px;
+    text-align: right;
+}
+
+.quote-detail-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #dcdcdc; 
+}
+
+.quote-detail-item strong {
+    flex: 1;
+    text-align: left; 
+}
+
+.quote-detail-item span {
+    flex: 2;
+}

@@ -1,0 +1,278 @@
+<!-- 
+* ─────────────────────────────────────────────────────────────────────────────────────────────────┐
+* Visualforce Pre-Chat Form page used to capture information from customer before chat
+*
+* Visualforce Pre-Chat Form page used to capture information from customer before chat
+* The Page is Branded with the Pearson Banner.  The ChatTemplate VF Page provide the formatting
+* ──────────────────────────────────────────────────────────────────────────────────────────────────
+* @author         Romer Pasag       <Romer.Pasag@pearson.com>
+* @modifiedBy     Heather McLemore  <Heather.McLemore@pearson.com>
+* @maintainedBy   Romer Pasag       <Romer.Pasag@pearson.com>
+* @version        2.0
+* @created        2018-01-02
+* @modified       2018-07-20        
+* ──────────────────────────────────────────────────────────────────────────────────────────────────
+* @changes
+* v1.0            Romer.Pasag@pearson.com
+* v2.0            Romer.Pasag@pearson.com
+* @modified date  2018-07-20
+* @modification   Added Grade Level Picklist and Teacher Information
+* @modified date  2018-06-01
+* @modification   Mapped form fields to transcript fields per W-001469 <Heather.McLemore@pearson.com>
+* @modified date  2018-02-28
+* @modification   Added Zip Code field per W-001146 <Heather.McLemore@pearson.com>
+* @modified date  2018-01-30
+* @modification   Added the Role picklist and Age verification checkbox
+*                 Added the javascript and CSS to show or hide the age verification and chat button
+*                 The role picklist value is saved on the chat transcript custom field
+* ─────────────────────────────────────────────────────────────────────────────────────────────────┘
+-->
+
+<apex:page showHeader="false">
+    <apex:composition template="ChatTemplate" >
+        <apex:define name="head">  
+            <!-- This script takes the endpoint URL parameter passed from the deployment page and makes it the action for the form -->
+            <script type='text/javascript'> 
+            (function() { 
+                function handlePageLoad() { 
+                    var endpointMatcher = new RegExp("[\\?\\&]endpoint=([^&#]*)"); 
+                    document.getElementById('prechatForm').setAttribute('action',
+                                                                        decodeURIComponent(endpointMatcher.exec(document.location.search)[1].replace("javascript:", "")));
+                } if (window.addEventListener) { 
+                    window.addEventListener('load', handlePageLoad, false); 
+                } else { window.attachEvent('onload', handlePageLoad, false); 
+                       }})(); 
+            </script>
+            
+        </apex:define>
+        <apex:define name="mainbody">
+            
+            <h3 align="center">Learning Services Chat Support Request</h3>
+            
+            
+            <!-- Form that gathers information from the chat visitor and sets the values to Live Agent Custom Details used later in the example -->
+            <form method='post' id='prechatForm'>
+                <table style="width:100%" cellpadding="2" align="center">
+                    <col width="50"></col>
+                <col width="80"></col>
+            
+            <tbody>
+                
+                <tr>
+                    <td><label for="name">First name:<font color="red">*</font> </label></td>
+                    <td><input maxlength="80" size="40" type="text"  name='liveagent.prechat:ContactFirstName' id='firstName' required="true" /></td>
+                </tr>
+                <tr>
+                    <td><label for="name">Last name:<font color="red">*</font> </label></td>
+                    <td><input maxlength="80" size="40" type="text"  name='liveagent.prechat:ContactLastName' id='lastName' required="true" /></td>
+                </tr>
+                <tr>
+                    <td><label for="name">Email:<font color="red">*</font> </label></td>
+                    <td><input maxlength="80" size="40" type="text"  name='liveagent.prechat:ContactEmail' id='email' required="true" /></td>
+                </tr>
+                <tr>
+                    <td><label for="name">Phone:<font color="red">*</font> </label></td>
+                    <td><input maxlength="80" size="40" type="text"  name='liveagent.prechat:ContactPhone' id='phone' required="true" /></td>
+                </tr>
+                <tr>
+                    <td><label for="name">District:<font color="red">*</font> </label></td>
+                    <td><input maxlength="80" size="40" type="text"  name='liveagent.prechat:ContactDistrict' id='district' required="true" /></td>
+                </tr>
+                <tr>
+                    <td><label for="name">District Zip / Postal Code:<font color="red">*</font> </label></td>
+                    <td><input maxlength="10" size="40" type="text" name='liveagent.prechat:ContactDistrictZip' id='districtzip' required="true" /></td>
+                </tr>
+                <tr>
+                    <td><label for="name">Existing Case #<br /> (if applicable):</label></td>
+                    <td><input maxlength="8" size="40" type="text"  name='liveagent.prechat:ExistingCase' id='existingcase' /></td>
+                </tr>
+                <tr>
+                    <td><label for="name">Issue:<font color="red">*</font></label></td>
+                    <td><input maxlength="800" size="40" type="text"  name='liveagent.prechat:CaseSubject' id='subject' required="true" /></td>
+                </tr>
+                <tr><td><label for="name">Your Role:<font color="red">*</font></label></td>
+                    <td>
+                        <select name="liveagent.prechat:Role" id="roleDropDown" onchange="toggleVerifyAndButton();">
+                            <option value="choose" selected="selected">Please choose</option>
+                            <option value="System Administrator">System Administrator</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Parent or Guardian">Parent/Guardian</option>
+                            <option value="Student">Student</option>
+                            <option value="Pearson Employee">Pearson Employee</option>
+                        </select>
+                    </td>           
+                </tr>
+            </tbody>
+        </table>
+        <div id="VerificationDiv">
+            <br/>
+            <tr><td><label for="grade">Grade Level:<font color="red">*</font></label></td>
+                <td>
+                    <select name="liveagent.prechat:Role" id="gradeDropDown" onchange="toggleVerifyAndButton();">
+                        <option value="choose" selected="selected">Please choose</option>
+                        <option value="PreK">Pre-K</option>
+                        <option value="Kindergarten">Kindergarten</option>
+                        <option value="1">First Grade</option>
+                        <option value="2">Second Grade</option>
+                        <option value="3">Third Grade</option>
+                        <option value="4">Fourth Grade</option>
+                        <option value="5">Fifth Grade</option>
+                        <option value="6">Sixth Grade</option>
+                        <option value="7">Seventh Grade</option>
+                        <option value="8">Eighth Grade</option>
+                        <option value="9">Ninth Grade</option>
+                        <option value="10">Tenth Grade</option>
+                        <option value="11">Eleventh Grade</option>
+                        <option value="12">Twelfth Grade</option>
+                        <option value="13">College</option>
+                    </select>
+                </td>           
+            </tr>
+        </div>
+        <br/>
+        <div id="notAuthorized">
+            <b>Unfortunately, our agents are not authorized to chat with students in your grade.</b>
+            <p style="font-size:12px">View<a href="https://pearsonnacommunity.force.com/support/s/students-and-parents"> our list</a> of the most common issues and resolutions for students. If you still need help, have an adult contact us on your behalf.</p>
+        </div>
+        <div id="teacherInfo">
+              <tbody>
+                <tr>
+                    <td><label for="teacherName">Teacher Name:<font color="red">*</font></label></td>
+                    <td><input maxlength="800" size="40" type="text"  name='liveagent.prechat:TeacherName' id='TeacherName'/></td>
+                </tr>
+                <br/>
+                <br/>
+                <tr>
+                    <td><label for="teacherEmail">Teacher Email:</label></td>
+                    <td><input maxlength="800" size="40" type="text"  name='liveagent.prechat:TeacherEmail' id='TeacherEmail'/></td>
+                </tr>
+                <br/>
+                <br/>
+            </tbody>
+        </div>
+        <div id="chatButton">
+            <input type='submit' value='Chat Now' id='prechat_submit' onclick="setName()"/>
+        </div>
+        <!-- Hidden fields used to set prechat form fields -->
+        <input type="hidden" name="liveagent.prechat.save:Role" value="Role__c" /> 
+        <input type="hidden" name="liveagent.prechat.save:ContactFirstName" value="First_Name__c" /> 
+        <input type="hidden" name="liveagent.prechat.save:ContactLastName" value="Last_Name__c" /> 
+        <input type="hidden" name="liveagent.prechat.save:ContactEmail" value="Email__c" /> 
+        <input type="hidden" name="liveagent.prechat.save:ContactPhone" value="Phone__c" /> 
+        <input type="hidden" name="liveagent.prechat.save:ContactDistrict" value="District__c" /> 
+        <input type="hidden" name="liveagent.prechat.save:ContactDistrictZip" value="District_Zip__c" /> 
+        <input type="hidden" name="liveagent.prechat.save:ExistingCase" value="Existing_Case__c" /> 
+        <input type="hidden" name="liveagent.prechat.save:CaseSubject" value="Issue__c" /> 
+        
+        <!-- Hidden fields used to set additional custom details -->
+        <input type="hidden" name="liveagent.prechat:CaseStatus" value="New" /><br />
+        
+        <!-- This example assumes that "Chat" was added as picklist value to the Case Origin field -->
+        <input type="hidden" name="liveagent.prechat:CaseOrigin" value="Chat" /><br />
+        
+        <!-- This example will set the Case Record Type to a specific value for the record type configured on the org. Lookup the case record type's id on your org and set it here -->
+        <input type="hidden" name="liveagent.prechat:CaseRecordType" value="012d0000000lHW4" />
+        
+        <!-- Used to set the visitor's name for the agent in the Console -->
+        <input type="hidden" name="liveagent.prechat.name" id="prechat_field_name" />
+        
+        <!-- map: Use the data from prechat form to map it to the Salesforce record's fields -->
+        <input type="hidden" name="liveagent.prechat.findorcreate.map:Contact" value="FirstName,ContactFirstName;LastName,ContactLastName;Email,ContactEmail;Phone,ContactPhone" />
+        
+        <input type="hidden" name="liveagent.prechat.findorcreate.map:Case" value="CaseNumber,ExistingCase;Subject,CaseSubject;Status,CaseStatus;Origin,CaseOrigin;RecordTypeId,CaseRecordType" />
+        
+        
+        <!-- doFind, doCreate and isExactMatch example for a Contact: 
+Find a contact whose Email exactly matches the value provided by the customer in the form 
+If there's no match, then create a Contact record and set it's First Name, Last Name, Email, and Phone to the values provided by the customer -->
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.doFind:Contact" value="Email,true" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.isExactMatch:Contact" value="Email,true" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.doCreate:Contact" value="FirstName,true;LastName,true;Email,true;Phone,true" />
+        
+        <!-- doCreate example for a Case: create a case to attach to the chat, set the Case Subject to the value provided by the customer and set the case's Status and Origin fields -->
+        
+        <!-- doCreate example for a Case: create a case to attach to the chat, set the Case Subject to the value provided by the customer and set the case's Status and Origin fields -->
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.doFind:Case" value="CaseNumber,true" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.isExactMatch:Case" value="CaseNumber,true" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.map.doCreate:Case" value="Subject,true;Status,true;Origin,true;RecordTypeId,true" />
+        
+        <!-- linkToEntity: Set the record Contact record, found/created above, as the Contact on the Case that's created --> 
+        <input type="hidden" name="liveagent.prechat.findorcreate.linkToEntity:Contact" value="Case,ContactId" />
+        
+        <!-- showOnCreate: Open the Contact and Case records as sub-tabs to the chat for the agent in the Console -->
+        <input type="hidden" name="liveagent.prechat.findorcreate.showOnCreate:Contact" value="true" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.showOnCreate:Case" value="true" />
+        
+        <!-- saveToTranscript: Associates the records found / created, i.e. Contact and Case, to the Live Chat Transcript record. --> 
+        <input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript:Contact" value="ContactId" />
+        <input type="hidden" name="liveagent.prechat.findorcreate.saveToTranscript:Case" value="CaseId" />
+        
+        <!-- displayToAgent: Hides the case record type from the agent -->
+        <input type="hidden" name="liveagent.prechat.findorcreate.displayToAgent:CaseRecordType" value="false" />
+        
+        <!-- searchKnowledge: Searches knowledge article based on the text, this assumes that Knowledge is setup -->
+        <input type="hidden" name="liveagent.prechat.knowledgeSearch:CaseSubject" value="true" />
+        
+        
+        <!-- Set the visitor's name for the agent in the Console to first and last name provided by the customer -->
+        <!-- Show or Hide the Age verification and Chat button -->
+        <script type="text/javascript">
+        function setName() {
+            document.getElementById("prechat_field_name").value =  
+                document.getElementById("firstName").value + " " + document.getElementById("lastName").value;
+        }
+        function toggleVerifyAndButton() {
+            if (document.getElementById('roleDropDown').value == 'Student' && (+document.getElementById('gradeDropDown').value <= 8 || document.getElementById('gradeDropDown').value == 'choose'||document.getElementById('gradeDropDown').value == 'PreK'|| document.getElementById('gradeDropDown').value == 'Kindergarten')) {
+                document.getElementById('VerificationDiv').style.display = 'block';
+                document.getElementById('chatButton').style.display = 'none';
+                document.getElementById('teacherInfo').style.display = 'none';
+                if(document.getElementById('gradeDropDown').value == 'choose'){
+                    document.getElementById('notAuthorized').style.display = 'none';
+                }else{
+                    document.getElementById('notAuthorized').style.display = 'block';
+                }
+            }else if (document.getElementById('roleDropDown').value == 'Student' && +document.getElementById('gradeDropDown').value > 8) {
+                document.getElementById('VerificationDiv').style.display = 'block';
+                document.getElementById('notAuthorized').style.display = 'none';
+                document.getElementById('chatButton').style.display = 'block';
+                document.getElementById('teacherInfo').style.display = 'block';
+            }else{             
+                document.getElementById('VerificationDiv').style.display = 'none';
+                document.getElementById('chatButton').style.display = 'block';
+                document.getElementById('notAuthorized').style.display = 'none';
+                document.getElementById('teacherInfo').style.display = 'none';
+            }
+        }
+        </script>
+        
+        <style type="text/css">
+            p {font-weight: bolder }
+            select { 
+            
+            height: 25px    
+            }
+            #VerificationDiv {
+            display: none;
+            font-weight: bold
+            }
+            #chatButton {
+            display: none
+            }
+            #notAuthorized {
+            display: none;
+            background-color:red;
+            color:white;
+            font-weight: bold
+            }
+            #teacherInfo{
+            	display: none
+            }
+        </style>
+        
+    </form>
+</apex:define>
+</apex:composition>
+
+
+
+</apex:page>

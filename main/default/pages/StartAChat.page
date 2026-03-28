@@ -1,0 +1,67 @@
+<!-- 
+* ─────────────────────────────────────────────────────────────────────────────────────────────────┐
+* Visualforce Page that provide the live agent chat button/product picklist
+*
+* Visualforce page used in the communities that route to appropriate live agent based on product
+* Based on the product selected, the appropriate chat button is used
+* ──────────────────────────────────────────────────────────────────────────────────────────────────
+* @author         Romer Pasag       <Romer.Pasag@pearson.com>
+* @modifiedBy     Romer Pasag       <Romer.Pasag@pearson.com>
+* @maintainedBy   Romer Pasag       <Romer.Pasag@pearson.com>
+* @version        1.0
+* @created        2018-01-02
+* @modified       
+* ──────────────────────────────────────────────────────────────────────────────────────────────────
+* @changes
+* v1.0            Romer.Pasag@pearson.com
+* 
+* ─────────────────────────────────────────────────────────────────────────────────────────────────┘
+-->
+
+
+<apex:page controller="StartAChatController" showheader="false" sidebar="false">
+    <head>
+        <style type="text/css">
+            .boldText
+            { 
+            font-family: Open Sans;
+            font-style: normal; 
+            font-weight: bold
+            }
+        </style>
+    </head>
+    <div align="center" draggable="false" >
+        <apex:form > 
+            <apex:outputText styleClass="boldText" value="Please select a product from the list to check if"/><br/>
+            <apex:outputText styleClass="boldText" value="an agent is available."/>
+            <apex:panelGrid columns="2">
+                <apex:outputText style="font-style: normal; font-weight: bold;font-size:20px" value="Product:"/> 
+                <apex:selectList size="1" value="{!Product}">
+                    <apex:actionSupport event="onchange" action="{!selectProduct}"/>          
+                    <apex:selectOptions value="{!picklistvalues}">
+                    </apex:selectOptions>
+                </apex:selectList>
+            </apex:panelGrid>           
+        </apex:form> 
+        <img id="liveagent_button_online_{!buttonId}" style="display: none; border: 0px none; cursor: pointer" onclick="liveagent.startChat('{!buttonId}')" src="{!OnlineIconURL}" />
+        <img id="liveagent_button_offline_{!buttonId}" style="display: none; border: 0px none; " src="{!OfflineIconURL}" />
+        
+        <script type="text/javascript">
+        if (!window._laq) { window._laq = []; }
+        window._laq.push(function(){liveagent.showWhenOnline("{!buttonId}", document.getElementById('liveagent_button_online_'+"{!buttonId}"));
+                                    liveagent.showWhenOffline("{!buttonId}", document.getElementById('liveagent_button_offline_'+"{!buttonId}"));
+                                   });</script>
+        
+    </div>
+    <!-- Deployment Code -->
+    <script type='text/javascript' src='https://c.la3-c2-phx.salesforceliveagent.com/content/g/js/41.0/deployment.js'></script>
+    <script type='text/javascript'>
+        liveagent.init('https://d.la3-c2-phx.salesforceliveagent.com/chat', '5720W0000010wCr', '00Dd0000000gWBA');
+    /* Sets the width of the chat window to 500px */
+    liveagent.setChatWindowWidth(500);
+    
+    /* Sets the height of the chat window to 500px */
+    liveagent.setChatWindowHeight(500);
+    </script>
+    
+</apex:page>

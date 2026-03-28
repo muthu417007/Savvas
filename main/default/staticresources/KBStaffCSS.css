@@ -1,0 +1,82 @@
+body {
+ background-color:#fbf5ea;
+ font-family:Verdana!important;
+ }
+ 
+
+ body .bPageBlock {
+ margin-bottom:0px!important;
+ }
+
+.bPageHeader {display:block;}
+
+h1.noSecondHeader {
+font-size: 14pt!important;
+font-weight: normal;
+display:block;
+}
+
+.knowledgeTab .secondaryPalette, .individualPalette .knowledgeBlock .secondaryPalette {
+border-color: #364395;
+}
+
+
+body .bPageBlock .pbBody .sectionblock .pbSubheader {
+background-color: #364395;
+min-height: 20px;
+font-size: 13px;}
+
+.knowledgeTab .tertiaryPalette, .individualPalette .knowledgeBlock .tertiaryPalette, .layoutEdit .individualPalette .knowledgeBlock .tertiaryPalette {
+border-color: #364395;
+background-color:#364395;
+color:white;
+font-size:13px;
+}
+
+.pbSubheader {
+color: #ffffff;
+font-weight: bold;
+margin-top: 15px;
+overflow: hidden;
+margin-bottom: 2px;
+
+
+.popup .bPageBlock .labelCol{
+width: 15%!important;
+}
+
+
+
+/*Text readability fix August 2014 */
+body .bPageBlock .pbBody .labelCol {
+font-family: Verdana;
+font-size:11pt!important;
+}
+
+body .bPageBlock .pbBody .dataCol {
+font-family: Verdana;
+font-size:12px;
+}
+
+.sfdc_richtext{
+font-family: Verdana;
+font-size:11pt!important;
+}
+.sfdc_richtext a{
+color:#0066ff!important;
+text-decoration:none;
+}
+.sfdc_richtext a:hover{
+color:#0066ff!important;
+text-decoration:underline;
+}
+
+.sfdc_richtext a.visited{
+color:#993333!important;
+text-decoration:none;
+}
+
+.bPageBlock .detailList {
+font-family: Verdana;
+font-size:12px!important;
+}

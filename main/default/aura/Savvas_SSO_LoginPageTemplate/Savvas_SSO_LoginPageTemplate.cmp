@@ -1,0 +1,20 @@
+<aura:component implements="forceCommunity:themeLayout" access="global" description="Savvas Login Page" >
+	 <aura:attribute name="backgroundImageURL" type="String" default=""/>
+    <aura:attribute name="copyRight" type="String" default=""/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <ltng:require styles="{! $Resource.BootStrap + '/bootstrap-5.0.2-dist/css/bootstrap.min.css'}" scripts="{! $Resource.BootStrap + '/bootstrap-5.0.2-dist/js/bootstrap.min.js'}" afterScriptsLoaded="{!c.scriptsLoaded}"/>
+    <div class="logoContainerBg" style="{!'background-image: url('+v.backgroundImageURL+');'}">
+        <div class="loginContainer col-xl-6 col-lg-6 col-md-8 col-sm-10">
+            <div class="loginPage">{!v.body}</div>
+            <div class="copyright">
+                <div >
+                <p>{!$Label.c.Savvas_SSO_Login_Copyright}</p>
+                    <a href="{!$Label.c.Customer_Care_Community_URL}" target="_blank" class="footerLink">my Savvas Support &nbsp;&nbsp; </a>
+                    <a href="{!$Label.c.Savvas_Terms_Conditions}" target="_blank" class="footerLink">Terms &amp; Conditions&nbsp;&nbsp;&nbsp; </a>
+                    <a href="{!$Label.c.Savvas_Privacy_Notice}" target="_blank" class="footerLink">Privacy Notice</a>
+                </div>
+                
+            </div>        
+        </div>    
+    </div>
+</aura:component>

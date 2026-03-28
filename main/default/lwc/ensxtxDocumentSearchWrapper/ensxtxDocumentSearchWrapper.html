@@ -1,0 +1,14 @@
+<template>
+    <template if:true={messages.length}>
+        <div class="slds-m-top_medium">
+            <template for:each={messages} for:item="message">
+                <c-ensxtx-message message={message} key={message.key}></c-ensxtx-message>
+            </template>
+        </div>
+    </template>
+    <c-ensxtx-document-search
+        if:true={hasAccountId}
+        record-id={accountId}
+        app-settings-name={appSettingsName}>
+    </c-ensxtx-document-search>
+</template>

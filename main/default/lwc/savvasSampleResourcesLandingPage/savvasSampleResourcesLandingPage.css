@@ -1,0 +1,169 @@
+.lgc-bg {
+    width: fit-content;
+    height: fit-content;
+    --sds-c-card-color-background: rgb(242,242,242);
+}
+.lgc-bg-inverse {
+    width: fit-content;
+    height: fit-content;
+}
+.THIS a:link {
+    text-decoration: underline;
+    cursor: auto;
+}
+
+.THIS a:visited {
+text-decoration: underline;
+cursor: auto;
+}
+.outerContainer{
+    border-radius: 10px;
+    background-color: #E5F1FD;
+}
+.titleCollection{
+    font-style: normal;
+    font-weight: 700; 
+    font-size: 47px;
+    letter-spacing: -0.04em;
+    color: #173770;
+    --slds-c-accordion-heading-font-size:35px;
+    --slds-c-accordion-heading-text-color:#173770;
+}
+.slds-accordion__summary-content {
+    font-family: 'Poppins'!important;
+}
+.anchorClass{
+    font-family: 'Poppins'; 
+    font-style: normal; 
+    font-weight: 600; 
+    font-size: 24px;     
+    line-height: 120%;
+    flex: none; 
+    order: 0; 
+    flex-grow: 0;
+    color: #173770;
+}
+.imageCass{
+    border-radius: 10px;
+    background: #E5F1FD;
+}
+
+.assetName{
+    padding-top: 17px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 120%;
+    text-align: center;
+    color: #173770;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    word-break: break-word;
+}
+
+.thumbnailVSpace{
+    margin-bottom: 10px;
+}
+.no-wrap {
+    white-space: normal;
+}
+.programReview{
+    left: 240px;
+    top: 674px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 120%;
+    letter-spacing: -0.03em;
+    color: #173770;
+}
+.lightning-button .buttonStyle{
+    --sds-c-button-brand-color-background : #9eca47;
+    --sds-c-button-text-color: #fff;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 700;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 32px;
+    gap: 10px;
+    border:none;
+    border-radius: 30px;
+    display: flex;
+}
+.buttonClass{
+    width: 337px;
+    height: 55px;
+}
+.landingContainer{
+    padding-left: 1.5vw;
+}
+@media (max-width:1366px){
+    .buttonClass{
+        width: 295px;
+    }
+    
+}
+
+
+@media (min-width:767px) and (max-width:1023px){
+      .buttonClass{
+        width: 90%;
+        font-size: 25px;
+    }
+      .salesBtn{
+        width: 100%;
+    }
+    .small-text-center{
+        text-align: left;
+        padding-left: 4%;
+    }
+     .mobpl20{
+        padding-left:10%;
+    }
+    .mobplr{
+        padding-left:10%!important;
+        padding-right:10%!important;
+    }
+    .titleCollection{
+         padding-left:4.5%;
+    }
+    .contactRep {
+    width: 300.75px;
+    height: 300.35px;}
+    .needClass {
+    font-size: 44px;
+    line-height: 44px;
+    }
+    .helpClass {
+    font-size: 64px;
+    line-height: 34px;
+    }
+}
+
+@media (min-width:330px) and (max-width:767px){
+      .buttonClass{
+        width: 90%;
+    }
+    .salesBtn{
+        width: 100%;
+    }
+    .small-text-center{
+        text-align: left;
+    }
+    .mobpl20{
+        padding-left:10%;
+    }
+    .mobplr{
+        padding-left:10%!important;
+        padding-right:10%!important;
+    }
+    .titleCollection{
+         padding-left:8.5%;
+    }
+}

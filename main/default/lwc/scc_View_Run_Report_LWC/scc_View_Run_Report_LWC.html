@@ -1,0 +1,817 @@
+<template>
+ 
+<template if:true={isLoading}>
+    <!-- <div class="slds-backdrop"></div> -->
+        <div class="slds-modal slds-fade-in-open slds-backdrop">
+            <div class="slds-spinner_container slds-is-fixed">
+                <div role="status" class="slds-spinner slds-spinner_medium">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template if:true={OrderStatusReport}>
+    <div
+		class="slds-grid slds-wrap slds-grid_vertical slds-gutters slds-p-around_large order-status-BG slds-is-relative">
+		<div class="slds-col">
+			<nav role="navigation" aria-label="Breadcrumbs">
+				<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+					<li class="slds-breadcrumb__item">
+						<a href="#" class="slds-m-right_small breadcrumb-label first-breadcrumb">Home</a>
+					</li>
+                  <li class="slds-breadcrumb__item">
+						<a href="#" class="slds-m-right_small breadcrumb-label">Reports</a>
+					</li>
+                      <template if:false={isdetailedopen}>
+					<li class="slds-breadcrumb__item">
+						<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">ViewSample</a>
+					</li>
+                      </template>
+                          <template if:true={isdetailedopen}>
+					<li class="slds-breadcrumb__item">
+						<a class="slds-m-left_small slds-text-title_bold breadcrumb-label" >Report Detail</a>
+					</li>
+                      </template>
+				</ol>
+			</nav>
+		</div>
+    <template if:false={isdetailedopen}>
+        	<div class="slds-col slds-size_3-of-3 title-page-content">                    
+			<div class="slds-text-align_right shopping-buttons">            
+				<button class="slds-button  close" onclick={handleClose} aria-disabled={closeDisabled}>Close</button>
+				<!-- <button class="slds-button  delete-report" onclick={deletereporthander} disabled={deletereportDisabled}>Delete Report</button> -->
+				<button class="slds-button  edit-criteria" onclick={editCriteriaHander} aria-disabled={editcriteriaDisabled}>Edit Criteria</button>
+				<button class="slds-button  run-report" onclick={runreporthander} aria-disabled={runreportDisabled}>Run Report</button>
+			</div>
+		</div>
+    </template>
+     <template if:true={isdetailedopen}>
+        	<div class="slds-col slds-size_3-of-3 title-page-content">                    
+			<div class="slds-text-align_right shopping-buttons">            
+				<button class="slds-button  email-report" onclick={handleOpenEmailReportModal} aria-disabled={emailDisabled}>Email Report</button>
+				<!-- <button class="slds-button  delete-report" onclick={deletereporthander} disabled={deletereportDisabled}>Delete Report</button> -->
+				<button class="slds-button  edit-criteria" onclick={editCriteriaHander} aria-disabled={editcriteriaDisabled}>Edit Criteria</button>
+              
+                <button class="slds-button  save" onclick={saveahander} aria-disabled={saveDisabled}>Save</button> 
+                
+				<!-- <button class="slds-button  run-report" onclick={runreporthander} disabled={runreportDisabled}>Run Report</button> -->
+                <button class="slds-button  close-detail" onclick={detailhandleClose} aria-disabled={closeDisabled}>Close</button>
+			</div>
+		</div>
+    </template>
+     
+    
+    <template if:true={showEmailReportPopup}>
+        <!-- <div class="backdrop"></div> -->
+        <div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog" aria-label="Email Report">
+				<div class="slds-modal__container" style="max-width: 668px">
+					<!------HEADER Section-->
+					<div class="slds-modal__header">
+						<button class="slds-modal__close closebtnOnFocus emailRprtCloseBtn" onclick={closeEmailReportModal} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+						<h3 role="heading" aria-level="2">Email Report</h3>
+					</div>
+					<!------Body Section-->
+					<div class="slds-modal__content slds-p-around_medium ">
+                        <template if:true={isLoading}>
+                            <!-- <div class="slds-modal slds-fade-in-open slds-backdrop"></div> -->
+                                <div style="position:relative;  height:120px;">
+                                    <lightning-spinner alternative-text="Loading" size="medium" ></lightning-spinner>
+                                </div>
+                            <!-- </div> -->
+                        </template>
+                        <template if:false={isLoading}>
+                            <div class="slds-form_horizontal slds-text-align_left">
+                                <div class="email-label slds-p-bottom_xx-small">Email(s) *</div>
+                                <div class="email-text slds-p-bottom_x-small">Separate multiple email addresses with commas</div>
+                                <div>
+                                    <input type="email" placeholder="Email" aria-label="Email(s) required, Separate multiple email addresses with commas" value={emailInput} oninput={handleEmailInput}  class="slds-input" data-index="0"/>
+                                   <template if:true={showError}>
+                                    <div class="slds-text-color_error" style="padding-top: 5px; font-size: 14px;">{errorMessage}</div>
+                                </template>
+                                </div>
+                                
+                            </div>
+                        </template>
+                        
+					</div>
+                    <!------Footer Section-->
+					<div class="slds-modal__footer slds-p-bottom_medium">
+                        <div>
+                            <button class="slds-button clear-cart-modal-button " onclick={emailHandler} onkeypress={emailHandler} aria-disabled={isDisabled} data-index="0" ><span><img src={emailIcon} alt="emailIcon" class="email-icon"/></span> Email Report</button>
+                        </div>
+                        <div>
+                            <a tabindex="0" class="cancel-modal-button" role="button" onclick={closeEmailReportModal} onfocusout={focusOutButton}>Cancel</a>
+                        </div>
+					</div>
+					
+				</div>
+			</div>
+    </template>
+
+
+<!--Displaying report name and discription (added by zubiya) -->
+        <div class="slds-col slds-m-top_medium max-width-container" style="width: 100%;">
+            <h1 class="slds-assistive-text">Reports</h1>
+			<lightning-card class="search-result-cards">
+                            <div class="slds-grid slds-wrap review-address-container" key={Billaddr.id}>
+                                <div class="slds-col slds-size_12-of-12">
+                                    <div class="slds-grid slds-wrap slds-gutters">
+                                        <div class="slds-col slds-size_2-of-12">
+                                            <p class="address-label">Report</p>
+                                        </div>
+                                        <div class="slds-col slds-size_10-of-12 slds-m-bottom_small">
+                                            <!-- <p class="address-value">{Billaddr.BillToNumber}<br>{Billaddr.AccountName}</p> -->
+                                             <p class="address-value" role="alert">{displayedReportName} </p>
+                                        </div>
+                                        <template if:true={editCriteriaMsg}>
+                                               <div class="slds-col slds-size_2-of-12">
+                                            <p class="address-label"> </p>
+                                        </div>
+                                        <div class="slds-col slds-size_10-of-12 slds-m-bottom_small" style="display: flex;">
+                                            <div class="border">
+                                             <div class="slds-show_inline-block slds-text-align_center Warning-msg">!</div>
+                                             <p class="address-value"> Report criteria have been updated. To save this version, select Save
+                                                 </p>
+                                             </div>
+                                             </div>
+                                        </template>
+                                        <div class="slds-col slds-size_2-of-12">
+                                            <p class="address-label">Order Date</p>
+                                        </div>
+                                        <template if:false={isdetailedopen}>
+                                        <div class="slds-col slds-size_10-of-12 slds-m-bottom_small">
+                                            <p class="address-value">{minOrderDateFirst15} to {maxOrderDateFirst15}</p>
+                                        </div>
+                                        </template>
+                                        <template if:true={isdetailedopen}>
+                                        <div class="slds-col slds-size_10-of-12 slds-m-bottom_small">
+                                            <p class="address-value">{minOrderDate} to {maxOrderDate}</p>
+                                        </div>
+                                        </template>
+                                        <div class="slds-col slds-size_2-of-12">
+                                            <p class="address-label">Report Description</p>
+                                        </div>
+                                        <div class="slds-col slds-size_10-of-12 slds-m-bottom_small">
+                                            <p class="address-value">{Description}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                       </div>
+		</lightning-card>
+		</div>
+            <!--Ended -->
+
+        <div class="slds-col  slds-m-top_large catalog-panel-list-wrapper">
+                 <lightning-card class="search-result-cards">
+                    <div class="slds-grid slds-wrap slds-p-left_large slds-p-right_x-small">
+                        <div class="slds-col slds-size_3-of-3 slds-p-around_none slds-m-bottom_medium order-detail-table-header">
+                            <div class="search-criteria-title" role="heading" aria-level="2">Report Details</div>
+                            <!-- <span class="slds-assistive-text" >Report Details</span> -->
+                        </div>
+                        <template if:true={isdetailedopen}>
+                        <div class="slds-col slds-size_3-of-3 slds-form slds-p-horizontal_large slds-p-vertical_x-small">
+                            
+                            <div class="slds-grid slds-wrap slds-p-bottom_xx-small slds-m-vertical_large">
+                                    
+                                <div class="slds-col slds-size_7-of-12 slds-p-horizontal_none">
+                                    <div class="slds-form-element__control">
+                                        <!-- <span class="slds-assistive-text" >Report Details</span> -->
+                                        <button class="slds-button table-control-button" aria-label="Order Date First button" aria-disabled={bDisableFirst} onclick={firstPage}>&#60;&#60; First</button>
+                                        <button class="slds-button table-control-button" aria-disabled={bDisableFirst} onclick={previousPage}>&#60; Previous</button>
+                                        <p class="page-count-shown slds-m-horizontal_x-small" role="alert">Showing {pageNumber} of {totalPages} Pages</p>
+                                        <button class="slds-button table-control-button" aria-disabled={bDisableLast} onclick={nextPage}>Next &#62;</button>
+                                        <button class="slds-button table-control-button" aria-disabled={bDisableLast} onclick={lastPage}>Last &#62;&#62;</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="slds-col slds-size_5-of-12 table-row-count slds-text-align_right slds-p-horizontal_none">
+                                    <select class="slds-select" id="row-count1" onchange={handleRecordsPerPage}>
+                                        <template for:each={pageSizeOptions} for:item="option">
+                                            <option style="font-size:12px;" key={option} value={option}>{option}</option>
+                                        </template>
+                                    </select>        
+                                    <label class="slds-form-element__label" for="row-count1">{labels.scc_Order_Status_no_of_rows} # of Rows</label>
+                                    <span style="padding-right: 8px;" role="alert">{displayedRecords} of {totalRecords} Items</span>
+                                    <div
+                                        style="display: inline-block;margin-left: -4px;">
+                                        <img src={excelIcon} alt="excel" style="width: 15px;height: 15px;padding-right: 2px;">
+                                        <a href="#" tabindex="0" title={DownloadtoExcel}
+                                            onclick={handleExport}>Download to Excel
+                                        </a>
+                                    </div>
+                                        <!-- <span>0 records </span> -->
+                                </div>
+                                    
+                            </div>
+                            
+                        </div>
+                        </template>
+                        <!-- Report Detail table -->
+                        <div class="table-wrapper">
+                            <table class="slds-table slds-table_bordered slds-table_fixed-layout" role="grid" aria-label="Report Details">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th aria-sort="ascending" class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode" scope="col" style="width: 150px;">
+                                            <a class="slds-th__action slds-text-link_reset"  tabindex="0">
+                                                <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                                    <span>PO #</span>
+                                                </div>
+                                            </a>
+                                        </th>
+                                        
+                                    
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 150px;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">   
+                                            <span>ISBN</span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                    
+                                        
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode test1 test2 " scope="col" style="width: 21%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>Title Description</span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 7%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>Order Date</span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 7%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span >Order # </span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 6%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>Ordered Qty</span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                        <!-- For Summary Report only -->
+                            <template if:true={showSummaryReport}>
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>Shipped Qty</span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>Backorder Qty </span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>Due Date</span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>On Hold Qty</span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                         <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>Shippable Quantity</span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>Cancelled Quantity </span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 10%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>Ship-to Account #</span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 12%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>Ship-to Account Name</span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                         <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>City</span>
+                                            </div>
+                                            </a>
+                                        </th>
+                                        <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                            <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                            <span>State</span>
+                                            </div>
+                                            </a>
+                                        </th>
+
+
+                            </template>
+                                <!-- For Detail Report only -->
+                            <template if:true={showDetailReport}>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 7%">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Invoice #</span>
+                                    </div>
+                                    </a>
+                                 </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Status </span>
+                                    </div>
+                                    </a>
+                                 </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 11%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Quantity</span>
+                                    </div>
+                                    </a>
+                                 </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 11%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Reason </span>
+                                    </div>
+                                    </a>
+                                 </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Ship Date</span>
+                                    </div>
+                                    </a>
+                                 </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Due Date </span>
+                                    </div>
+                                    </a>
+                                 </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 10%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Backorder Cancel Date</span>
+                                    </div>
+                                    </a>
+                                 </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 10%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Future Ship Date </span>
+                                    </div>
+                                    </a>
+                                 </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 10%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Ship-to Account #</span>
+                                    </div>
+                                    </a>
+                                 </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 12%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Ship-to Account Name </span>
+                                    </div>
+                                    </a>
+                                 </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>City </span>
+                                    </div>
+                                    </a>
+                                 </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 6%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>State </span>
+                                    </div>
+                                    </a>
+                                 </th>
+                            </template>
+                            <!-- For Tracking Report only -->
+                            <template if:true={showTrackingReport}>
+                                <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 10%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Invoice #</span>
+                                    </div>
+                                    </a>
+                                </th>
+                                <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Ship Date </span>
+                                    </div>
+                                    </a>
+                                </th>
+                                <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 10%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Shipping Method</span>
+                                    </div>
+                                    </a>
+                                </th>
+                                <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 10%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Parcel ID </span>
+                                    </div>
+                                    </a>
+                                </th>
+                                <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Tracking # </span>
+                                    </div>
+                                    </a>
+                                </th>
+                                <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Signature </span>
+                                    </div>
+                                    </a>
+                                </th>
+                                <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 10%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Ship-to Account # </span>
+                                    </div>
+                                    </a>
+                                </th>
+                                <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 12%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>Ship-to Account Name </span>
+                                    </div>
+                                    </a>
+                                </th>
+                                 <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>City </span>
+                                    </div>
+                                    </a>
+                                </th>
+                                <th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col" style="width: 8%;">
+                                    <a class="slds-th__action slds-text-link_reset" tabindex="0">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                                    <span>State </span>
+                                    </div>
+                                    </a>
+                                </th>   
+                            </template>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={recordsToDisplay} for:item='orderItem'>
+                                            
+                                            <tr aria-selected="false" class="slds-hint-parent" key={orderItem.orderItemId}>
+                                        
+                                            <th class="slds-cell_action-mode" scope="row">
+                                                <div title={orderItem.PO}>{orderItem.PO}</div>
+                                            </th>
+                                                    
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <div title={orderItem.isbn13}>{orderItem.isbn13}</div>
+                                            </td>
+                                                
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <div title={orderItem.productDescription}>{orderItem.productDescription}</div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <div title={orderItem.orderDate}>{orderItem.orderDate}</div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <div title={orderItem.orderNumber}>{orderItem.orderNumber}</div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <div title={orderItem.quantity}>{orderItem.orderedQuantity}</div>
+                                            </td>
+                                            <!-- For SummaryReport only -->
+                                        <template if:true={showSummaryReport}>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+                                                <div title={orderItem.shippedQuantity}>{orderItem.shippedQuantity}</div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+                                                <div title={orderItem.backorderQuantity}>{orderItem.backorderQuantity}</div>
+                                            </td>
+                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                <!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+                                                <div title={orderItem.DueDate}>{orderItem.dueDate}</div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+                                                <div title={orderItem.holdQuantity}>{orderItem.holdQuantity}</div>
+                                            </td>
+                                              <td class="slds-cell_action-mode" role="gridcell">
+                                                <!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+                                                <div title={orderItem.shippedQuantity}>{orderItem.shippedQuantity}</div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+                                                <div title={orderItem.cancelledQuantity}>{orderItem.cancelledQuantity}</div>
+                                            </td>
+                                                <td class="slds-cell_action-mode" role="gridcell">
+                                                <!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+                                                <div title={orderItem.shipAccount}>{orderItem.shipAccount}</div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+                                                <div title={orderItem.shipAccountName}>{orderItem.shipAccountName}</div>
+                                            </td>
+                                              <td class="slds-cell_action-mode" role="gridcell">
+                                                <!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+                                                <div title={orderItem.city}>{orderItem.city}</div>
+                                            </td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+                                                <!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+                                                <div title={orderItem.state}>{orderItem.state}</div>
+                                            </td>
+                                        </template>
+                                        <!--For Detail Report only  -->
+                                        <template if:true={showDetailReport}>
+											<td class="slds-cell_action-mode" role="gridcell">
+												
+												<div title={orderItem.invoiceNumber}>{orderItem.invoiceNumber}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												
+												<div title={orderItem.status}>{orderItem.status}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												
+												<div title={orderItem.quantity}>{orderItem.quantity}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												
+												<div title={orderItem.reason}>{orderItem.reason}</div>
+											</td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+											     <div title={orderItem.shipDate}>{orderItem.shipDate}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												
+												<div title={orderItem.dueDate}>{orderItem.dueDate}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												
+												<div title={orderItem.backorderCancelDate}>{orderItem.backorderCancelDate}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												
+												<div title={orderItem.futureShipDate}>{orderItem.futureShipDate}</div>
+											</td> 
+                                            <td class="slds-cell_action-mode" role="gridcell">
+											     <div title={orderItem.shipAccount}>{orderItem.shipAccount}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												
+												<div title={orderItem.shipAccountName}>{orderItem.shipAccountName}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												
+												<div title={orderItem.city}>{orderItem.city}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												
+												<div title={orderItem.state}>{orderItem.state}</div>
+											</td> 
+                                        </template>
+
+                                        <!-- For Tracking Report only -->
+                                        <template if:true={showTrackingReport}>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+												<div title={orderItem.invoiceNumber}>{orderItem.invoiceNumber}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+												<div title={orderItem.shipDate}>{orderItem.shipDate}</div>
+											</td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+												<!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+												<div title={orderItem.carrierName}>{orderItem.carrierName}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+												<div title={orderItem.parcelID}>{orderItem.parcelID}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+												<div title={orderItem.trackingNumber}>{orderItem.trackingNumber}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+												<div title={orderItem.signature}>{orderItem.signature}</div>
+											</td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+												<!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+												<div title={orderItem.shipAccount}>{orderItem.shipAccount}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+												<div title={orderItem.shipAccountName}>{orderItem.shipAccountName}</div>
+											</td>
+                                            <td class="slds-cell_action-mode" role="gridcell">
+												<!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+												<div title={orderItem.city}>{orderItem.city}</div>
+											</td>
+											<td class="slds-cell_action-mode" role="gridcell">
+												<!-- <div title={line.TobeShipped}>{line.TobeShipped}</div> -->
+												<div title={orderItem.state}>{orderItem.state}</div>
+											</td>
+                                        </template>
+
+                                        </tr>
+                                    </template>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+				</div>
+				</lightning-card>
+				</div>
+				</div>
+				<!-- Popup  -->
+				   <template if:true={showPopup}>
+               <div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog" aria-label="Pending changes">
+				<div class="slds-modal__container">
+					<!------HEADER Section-->
+					<div class="slds-modal__header">
+						<button class="slds-modal__close pendingchngCloseBtn" onclick={closeDetailModal} aria-label="close">x</button>
+						<h3 role="heading" aria-level="2">Pending Changes</h3>
+					</div>
+					<!------Body Section-->
+					<div class="slds-modal__content slds-p-around_medium">
+				<div class="slds-form_horizontal slds-text-align_left">
+							<p> Pending report changes will be lost. Select Cancel and then save if you would like to apply these changes, or select Close Report Detail to discard the changes.</p>
+							<!-- <div class="slds-show_inline-block note-icon slds-m-right_xx-small">!</div><span>This action cannot be undone</span> -->
+						</div>
+					</div>
+					<!------Footer Section-->
+					<div class="slds-modal__footer slds-p-bottom_medium">
+						<button class="slds-button clear-cart-modal-button" onclick={CloseDeailhander}>Close Report Details</button>
+						<button class="slds-button cancel-modal-button" onclick={CancelDetailHandler}>Cancel</button>
+					</div>
+				</div>
+			</div>
+                </template>   
+                 <!--Save report   -->
+                <template if:true={savereport}>
+                    <div class="slds-modal slds-fade-in-open slds-backdrop save-report-popup" role="dialog" aria-label="Save Report">
+                        <div class="slds-modal__container" style="max-width: 548px;">
+                
+                            <div class="slds-modal__header">
+                                <button class="slds-modal__close closebtnOnFocus saveModalCloseBtn" onclick={closesaveModal} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+                                <h3 class="save-report-label" role="heading" aria-level="2">Save Report</h3>
+                            </div>
+                      
+                     <!-- <template if:false={isLoader}> -->
+                               
+                    
+                            <div class="slds-modal__content popup-content">
+                                  <template if:true={isLoader}>
+                                <div style="position:absolute;  height:120px; left:250px;">
+                                    <lightning-spinner alternative-text="Loading" variant="brand" size="medium" ></lightning-spinner>
+                                </div>
+                        </template>
+                                <div class="slds-p-left_xx-large slds-p-right_xx-large slds-p-top_large modal-content">
+                                <div class="slds-col slds-size_12-of-12">
+                
+                                    <div class="slds-form search-fields-group slds-show slds-grid slds-wrap">
+                
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element">
+                
+                                                <div style="display:flex; height:35px">
+                                                    <div class="slds-form-element__control">
+                                                        <span class="slds-radio">
+                                                       <input type="radio" id="radio-61" value="OverideExistedreport" name="customerAccount"
+                                                   onchange={handleOverideradioChange} data-id="include-all-description" aria-label="Override Existing Report" onkeypress={keypressRadio} disabled={isRadioDisabled} data-index="0"/>
+                                      
+                                          <label class="slds-radio__label" for="radio-61">
+                                   <span class="slds-radio_faux"></span>
+                                                        <span class="slds-form-element__label label-sub-text">
+                                         Override Existing Report
+                                    </span>
+                                                        </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label sub-label-save-report" for="isbn12">Report Description *</label>
+                                                        <div class="text-area-input-change">
+                                                            <textarea id="message" class="arvicon-input" data-type="unique-textarea" aria-label="Report Description required"  rows="10" cols="50"  oninput={handleDescriptionChange} disabled={isoverrideDisabled} data-index="0"></textarea>
+                
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12">
+                
+                                    <div class="slds-form search-fields-group slds-show slds-grid slds-wrap">
+                
+                                        <div class="slds-col slds-size_6-of-12">
+                                            <div class="slds-form-element">
+                
+                                                <div style="display:flex; height:35px">
+                                                    <div class="slds-form-element__control">
+                                                        <span class="slds-radio">
+                                                                    <input type="radio" id="radio-62" value="SaveAS" name="customerAccount"
+                                                                          onchange={handleSaveasRadioChange} checked  data-index="0" />
+                                                                    <label class="slds-radio__label" for="radio-62">
+                                                                        <span class="slds-radio_faux"></span>
+                                                        <span class="slds-form-element__label label-sub-text">Save as
+                                                                        </span>
+                                                        </label>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-form-element">
+                                                    <label class="slds-form-element__label sub-label-save-report" for="isbn12">New Report Name *</label>
+                                                    <div class="slds-form-element__control">
+                                                        <input type="text" id="order-from-date12" placeholder="Report Name" class="slds-input report-name-input" oninput={handleReportNameChange}  disabled={isInputsavedisabled} aria-label="New Report Name Required" data-index="0"/>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-form-element">
+                                                    <label class="slds-form-element__label sub-label-save-report" for="isbn12">New Report Description *</label>
+                                                    <div class="text-area-input-change">
+                                                        <textarea class="arvicon-input"  placeholder="Description" rows="10" cols="50" oninput={handleSaveAsDescription}  disabled={isInputsavedisabled} aria-label="New Report Description Required" data-index="0"></textarea>
+                
+                                                    </div>
+                
+                                                </div>
+                     <!--  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer slds-p-top_medium">
+                                    <button class="slds-button clear-cart-modal-button handleCustomSaveButton" onclick={handleCustomSave}   aria-disabled={isSaveButtonDisabled} data-index="0">Save Report</button>
+                                    <button tabindex="0" class="slds-button cancel-modal-button" onclick={handleSaveCancel} onfocusout={focusOutButton}>Cancel</button>
+                                </div>
+                            </div>
+                            </div>
+                  
+                        </div>
+                    </div>
+                </template>
+				
+				</template>
+      
+
+<!-- Edit section editedreport sending to edit  -->
+            <template if:true={editCriteria}>
+                 <c-scc_edit-criteria-l-w-c 
+                 editedreport={EditedReportName}
+                breadcrumbmsg={breadcrumbDisplaymsg}
+                 ondataretrieved={handleDataRetrieved}
+                 onopen={handleOpen}
+                 records-data={records}
+                 msgfromc={valuefromC}
+                 customdescription={customReportDescription}
+                 searchcriteria={editCriteriaResult}
+                  oldreporttype={reporttypename}                
+                 ></c-scc_edit-criteria-l-w-c >
+            </template>
+               </template>

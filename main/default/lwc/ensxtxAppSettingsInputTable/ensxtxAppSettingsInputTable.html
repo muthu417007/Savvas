@@ -1,0 +1,72 @@
+<template>
+    <article class="slds-card slds-m-top_x-small">
+        <c-ensxtx-app-settings-input-header setting={inputSetting}></c-ensxtx-app-settings-input-header>
+        <div class="slds-card__body slds-card__body_inner">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <caption></caption>
+                <thead>
+                    <template for:each={columns} for:item="column">
+                        <th key={column.name}>
+                            <div class="slds-truncate" title={column.title}>{column.title}</div>
+                        </th>
+                    </template>
+                </thead>
+                <tbody>
+                    <template for:each={values} for:item="value">
+                        <tr class="slds-hint-parent" key={value.name}>
+                            <template if:true={enableAddAndRemove}>
+                                <td>
+                                    <div class="slds-truncate">
+                                        <button class="slds-button slds-button_icon deleteButtonIcon" title="Delete" name={value.name} onclick={handleDelete}>
+                                            <lightning-icon icon-name="utility:delete" alternative-text="Delete" size="xx-small" variant="inverse"></lightning-icon>
+                                        </button>
+                                    </div>
+                                </td>
+                            </template>
+                            <td>
+                                <div class="slds-truncate">
+                                    {value.name}
+                                </div>
+                            </td>
+                            <template for:each={value.cellInputs} for:item="input">
+                                <td key={input.name}>
+                                    <div>
+                                        <c-ensxtx-app-settings-input setting={input} hide-label="true"></c-ensxtx-app-settings-input>
+                                    </div>
+                                </td>
+                            </template>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section to input a new field/value -->
+        <footer class="slds-card__footer">
+            <template if:true={enableAddAndRemove}>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col slds-size_1-of-2 slds-small-size_4-of-12">
+                        <lightning-input
+                            type="text"
+                            placeholder="Enter new name"
+                            value={inputValue}
+                            onblur={handleInputOnBlur}
+                            variant="label-hidden">
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 slds-small-size_2-of-12 slds-text-align_left">
+                        <lightning-button-icon
+                            icon-name="utility:add"
+                            alternative-text="Add"
+                            variant="brand"
+                            onclick={handleAddNewValue}>
+                        </lightning-button-icon>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-small-size_6-of-12 slds-text-align_left">
+                        <p class="slds-text-color_error">{errorMessage}</p>
+                    </div>
+                </div>
+            </template>
+        </footer>
+    </article>
+</template>

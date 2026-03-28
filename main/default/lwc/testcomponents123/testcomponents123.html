@@ -1,0 +1,198 @@
+<template>
+	<!-- Quick Search Component starts -->
+	<template if:true={showProductSearchPage}>
+		<template if:true={showQuickSearch}>
+			<!-- search and clear buttons -->
+			<div class="slds-grid slds-grid_align-end">
+				<div class="slds-col">
+					<lightning-button label="Clear Search" onclick={handleClear}
+						class="slds-m-left_x-small neutral-button-text-color small-button"></lightning-button>
+				</div>
+				<div class="slds-col">
+					<lightning-button variant="brand" label="Search" disabled={isSearchDisabled} onclick={handleSearch}
+						class="slds-m-left_x-small small-button"></lightning-button>
+				</div>
+			</div>
+			<!-- multi ISBN Input Search area -->
+			<div>
+				<div
+					class="slds-box slds-theme_shade slds-p-vertical_xx-small slds-m-vertical_xx-small slds-p-horizontal_none">
+					<div class="slds-grid slds-grid_vertical-align-center">
+						<lightning-icon size="xx-small" icon-name="utility:chevrondown" alternative-text="chevrondown">
+						</lightning-icon>
+						<div>&nbsp;&nbsp;Multi ISBN</div>
+					</div>
+				</div>
+				<div class="ISBN-Name">
+					<h4>ISBN(s) &nbsp;&nbsp; & &nbsp;&nbsp; Desired Quantity </h4>
+				</div>
+				<div class="text-area-inputchange">
+					<textarea class="arvicon-input" rows="10" cols="50"  oninput={handleInputChange}></textarea>
+					<div>
+						{PlaceOrder_Multi_ISBN}
+					</div>
+				</div>
+			</div>
+			<!-- Search result starts  -->
+			<div class="search-result-value">
+				<div
+					class="slds-box slds-theme_shade slds-p-vertical_xx-small slds-m-vertical_xx-small slds-p-horizontal_none">
+					<div class="slds-grid slds-grid_vertical-align-center">
+						<lightning-icon size="xx-small" icon-name="utility:chevrondown" alternative-text="chevrondown">
+						</lightning-icon>
+						<div>&nbsp;&nbsp;Search Result</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="slds-grid ">
+			<!-- b3 buttons Add to cart  clear cart Review cart  -->
+			<div class="slds-col slds-size_7-of-12 ">
+				<div class="slds-grid slds-grid_align-end">
+					<lightning-button variant="brand" class="slds-p-horizontal_xx-small" label={addToCartButtonLabel}
+					
+						onclick={addSelectedToCartHandleClick} disabled={addSelectedToCartBtnDisabled}>
+					</lightning-button>
+					<lightning-button variant="brand" class="slds-p-horizontal_xx-small" label={clearCartButtonLabel}
+					 onclick={clearCartHandleClick}
+						disabled={clearCartBtnDisabled}>
+					</lightning-button>
+					<!-- <lightning-button variant="brand" class="slds-p-horizontal_x-small"
+									label={displayProductSearchBtnSectionConfig.reviewCartLabel}
+									title={displayProductSearchBtnSectionConfig.reviewCartLabel}
+									onclick={reviewCartHandleClick}
+									disabled={displayProductSearchBtnSectionConfig.reviewCartDisabled}>
+								</lightning-button> -->
+					<lightning-button variant="brand" class="slds-p-horizontal_x-small" icon-name="utility:cart"
+						label={reviewCartButtonLabel} 
+						onclick={reviewCartHandleClick} disabled={reviewCartDisabled}>
+					</lightning-button>
+				</div>
+			</div>
+			<!-- <div class="slds-col slds-size_4-of-12 ">
+			<div class="slds-grid slds-grid_align-end">
+				<div class="slds-align-top">
+					<div style="padding-top:4px !important;"> Filter Results &nbsp; </div>
+				</div>
+				<div>
+					<lightning-input type="search" variant="label-hidden" name="searchFilter" onchange={handleFilter}>
+					</lightning-input>
+				</div>
+				<div class="slds-col slds-size_2-of-12 ">
+							<div class="slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+								
+								{transformedDataLength} of {totalCount} Items &nbsp;
+								<button class="slds-button slds-button_icon" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+								<div class={taskTypeHelpTextClass} role="tooltip" id="help"
+									style="position:absolute;top:194px;right:43px;width:250px;background-color:#504c6e!important;">
+									<div class="slds-popover_body">
+										<ul class="slds-list_dotted slds-has-dividers_around-space "
+											style="color:white !important;padding-top:5px !important;">
+											Search by <b>pasting one or more ISBNs With quantities</b> 
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div> -->
+			<div class="slds-col slds-size_3-of-12 ">
+				<div class="slds-grid slds-grid_align-end">
+					<div class="slds-align-top">
+						<div style="padding-top:4px !important;"> Filter Results &nbsp; </div>
+					</div>
+					<div class="slds-col slds-size_2-of-12 ">
+						<div class="slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+
+							<button class="slds-button slds-button_icon" onmouseover={togglePasswordHintfilter} onmouseout={togglePasswordHintfilter}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+							<div class={taskTypeHelpTextClassfilter} role="tooltip" id="help"
+								style="position:absolute;top:360px;right:394px;width:250px;background-color:#504c6e!important;">
+								<div class="slds-popover_body">
+									<ul class="slds-list_dotted slds-has-dividers_around-space "
+										style="color:white !important;padding-top:5px !important;">
+										Enter a keyword to filter within the current set of search results
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<lightning-input type="search" variant="label-hidden" name="searchFilter"
+							onchange={handleFilter}>
+						</lightning-input>
+					</div>
+				</div>
+		</div>
+			<div class="slds-col slds-size_2-of-12 ">
+				<div class="slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+					{transformedDataLength} of {totalCount} Items &nbsp;
+					<button class="slds-button slds-button_icon" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+					<div class={taskTypeHelpTextClass} role="tooltip" id="help1"
+						style="position:absolute;top:360px;right:13px;width:250px;background-color:#504c6e!important;">
+						<div class="slds-popover_body">
+							<ul class="slds-list_dotted slds-has-dividers_around-space "
+								style="color:white !important;padding-top:5px !important;">
+								<!-- Search by <b>ISBN, Keyword</b> -->
+								Search by pasting one or more ISBNs With quantities
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			<!-- cleanuptkt changes for futuer sprint -->
+			<!-- <button class="slds-button slds-button_icon" onmouseover={togglePasswordHintfilter} onmouseout={togglePasswordHintfilter}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+								<div class={taskTypeHelpTextClassfilter} role="tooltip" id="helpfilter"
+									style="position:absolute;top:194px;right:43px;width:250px;background-color:#504c6e!important;">
+									<div class="slds-popover_body">
+										<ul class="slds-list_dotted slds-has-dividers_around-space "
+											style="color:white !important;padding-top:5px !important;">
+											this is for filter</b>
+										</ul>
+									</div>
+								</div> -->
+			<!-- </div> -->
+			<!-- cleanuptkt changes for futuer sprint -->
+			<!-- <div class="slds-col slds-size_2-of-12 ">
+							<div class="slds-grid slds-grid_align-center slds-grid_vertical-align-end">
+								{displayedRecords} of {totalCount} Items &nbsp;
+								<button class="slds-button slds-button_icon" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+								<div class={taskTypeHelpTextClass} role="tooltip" id="help"
+									style="position:absolute;top:194px;right:43px;width:250px;background-color:#504c6e!important;">
+									<div class="slds-popover_body">
+										<ul class="slds-list_dotted slds-has-dividers_around-space "
+											style="color:white !important;padding-top:5px !important;">
+											Search by <b>ISBN, Keyword</b>
+										</ul>
+									</div>
+								</div> -->
+			<!-- <button class="slds-button">
+								<lightning-icon style="padding-bottom:3px !important;" icon-name="utility:info" size="xx-small" alternative-text="Doc image" ></lightning-icon>
+							</button> -->
+			<!-- </div> -->
+
+		</template>
+		<template if:true={showResults}>
+			<!-- Data Table -->
+			<c-test-p-rotable filter={filterCriteria} raw-parent-table-data={productQuantityData}
+				oncheckboxchange={handleCheckboxChange} onshowproducttitlepage={openChildTitlePage}
+				onquantitychange={handleQuantityChange} add-selected-to-cart={addToCart} userselection={userInputs}
+				onreveiewcartcount={handleReviewCartCount} ontransformeddatalength={handleTransformedDataLength}>
+			</c-test-p-rotable>
+		</template>
+	</template>
+	<template if:true={reviewCartPage}>
+		<c-scc_review-cart-page> </c-scc_review-cart-page>
+	</template>
+	<template if:true={clearCartItems}>
+		<c-scc_delete-items-from-cart onrefreshevent={handlerefreshevent}> </c-scc_delete-items-from-cart>
+	</template>
+</template>

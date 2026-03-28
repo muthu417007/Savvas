@@ -1,0 +1,15 @@
+<apex:page >
+           <!--standardController="Flow__kav" 
+           sidebar="false" showHeader="false" 
+           title="{!Flow__kav.title}"
+           extensions="ArticleExtensionDecisionTree">
+    <apex:composition template="pkb_ICOM_WebTemplate">
+     <apex:define name="body">
+         <apex:outputLabel value="{!Flow__kav.Flow_Name__c}" rendered="false"></apex:outputLabel>
+    <apex:sectionHeader title="{!Flow__kav.title}"/>
+         <apex:include pageName="{!dynamicFlowPage}"/>
+      </apex:define>
+    </apex:composition>    
+       
+</apex:page-->
+</apex:page>

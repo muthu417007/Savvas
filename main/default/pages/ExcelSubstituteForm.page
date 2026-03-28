@@ -1,0 +1,97 @@
+<apex:page standardController="ExcelSubstitute__c" lightningStylesheets="true" Extensions="ExcelSubsExtension1">
+  
+<!-- 
+{!Quoterecords}
+{!Forecastrecords}
+{!UBErecords}  
+{!TotalQuoteValue}
+{!TotalforecastValue}
+{!TotalubeValue}
+-->
+<apex:form >
+  
+  <!--Displaying Submit Button -->
+  <apex:pageBlock >
+       <apex:outputPanel layout="block" html-align="center">
+          <apex:commandButton value="Submit" action="{!Save}"/>
+        </apex:outputPanel>
+   </apex:pageBlock>
+  
+   <apex:pageBlock >
+       <apex:pageBlockSection columns="3">
+           <apex:pageBlockSectionItem dataStyle="width:35%" labelStyle="width:23%">
+               <apex:pageBlockTable id="DynamicTable" value="{!Quoterecords}" var="Excelsubs">
+                  <!--Displaying Market i.e. Node 1 values of Excel Substitute Records-->
+                  <apex:column headerValue="Market">
+                        <apex:outputField value="{!Excelsubs.Node1__c}"/>
+                    </apex:column>
+        
+                  <!--Displaying Node 2 values of Excel Subtitute records with predicate as Quota-->      
+                  <apex:column headerValue="Quota">
+                        <apex:inputField value="{!Excelsubs.Node2__c}"/>
+                    </apex:column>
+                    
+               </apex:pageBlockTable>
+             </apex:pageBlockSectionItem>
+      
+            <apex:pageBlockTable id="DynamicTable1" value="{!Forecastrecords}" var="Excelsubs1">
+                 <!-- <apex:column headerValue="Market">
+                        <apex:outputField value="{!Excelsubs1.Node1__c}" />
+                    </apex:column> -->
+             
+                  <!--Displaying Node 2 values of Excel Subtitute records with predicate as Forecast-->
+                   <apex:column headerValue="Forecast">
+                        <apex:inputField value="{!Excelsubs1.Node2__c}" rendered="{!Excelsubs1.Predicate__c == 'Forecast'}"/>
+                    </apex:column>
+               </apex:pageBlockTable>
+                   
+            <apex:pageBlockTable id="DynamicTable2" value="{!UBErecords}" var="Excelsubs2">
+               <!-- <apex:column headerValue="Market">
+                        <apex:outputField value="{!Excelsubs2.Node1__c}" />
+                    </apex:column> -->
+                                                            
+                  <!--Displaying Node 2 values of Excel Subtitute records with predicate as Untracked Business Expected-->
+                    
+                  <apex:column headerValue="UBE">
+                        <apex:inputField value="{!Excelsubs2.Node2__c}" rendered="{!Excelsubs2.Predicate__c == 'Untracked Business Expected'}"/>
+                    </apex:column>
+             </apex:pageBlockTable>              
+       </apex:pageBlockSection>
+            
+       <apex:pageblockSection columns="3">
+          <apex:pageBlockTable value="{!TotalQuoteValue}" var="t">
+            <apex:column >
+               <apex:outputText value="Total Quota : {!TotalQuoteValue}">
+                   <apex:param value="{!I}"/> 
+                 </apex:outputText>
+             </apex:column>
+          </apex:pageBlockTable> 
+      
+         <apex:pageBlockTable value="{!TotalforecastValue}" var="u">
+             <apex:column >
+               <apex:outputText value="Total Forecast : {!TotalforecastValue}">
+                 <apex:param value="{!J}"/> 
+               </apex:outputText>
+             </apex:column>
+         </apex:pageBlockTable>
+      
+         <apex:pageBlockTable value="{!TotalubeValue}" var="v">
+             <apex:column >
+               <apex:outputText value="Total UBE : {!TotalubeValue}">
+                   <apex:param value="{!K}"/> 
+                 </apex:outputText>
+             </apex:column>
+         </apex:pageBlockTable>
+              
+      <!-- <apex:pageBlockTable value="{!TotalubeValue}" var="v">
+           <apex:column value="Total UBE: {!v['totalube']}" />
+      </apex:pageBlockTable> -->
+                      
+     <!-- <apex:pageBlockTable value="{!TotalQuotaValue}" var="tot">
+               <apex:column value="{!tot}" headerValue="Total Quota"/>             
+           </apex:pageBlockTable>  -->
+           
+       </apex:pageblockSection>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

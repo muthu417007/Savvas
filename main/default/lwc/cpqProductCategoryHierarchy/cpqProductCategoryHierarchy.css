@@ -1,0 +1,19 @@
+/* NEW select the button container class styling for static scrolling 
+This will have the button overlay at the bottom to prevent scrolling */
+/* Ensures container is always visible at the bottom*/
+.button-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white; /* matches background color of page*/
+    border-top: 1px solid #ddd; /* top border for separation*/
+    padding: 10px;
+    text-align: center; 
+    z-index: 1000; /* ensures buttons are above other content*/
+}
+
+/* Ensure buttons are spaced and aligned properly*/
+.button-container apex|commandButton {
+    margin: 0 10px;
+}

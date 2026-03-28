@@ -1,0 +1,57 @@
+<template>
+    <article class="slds-card">
+        <c-ensxtx-app-settings-input-header if:true={showHeader} setting={inputSetting}></c-ensxtx-app-settings-input-header>
+        <template if:false={isEdit}>
+            <div class="slds-card__body slds-card__body_inner slds-m-vertical_xx-small">
+                <ul>
+                    <template for:each={values} for:item="value">
+                        <li key={value.key}>{value.value}</li>
+                    </template>
+                </ul>
+            </div>
+        </template>
+        <template if:true={isEdit}>
+            <div class="slds-card__body slds-card__body_inner slds-m-vertical_xx-small">
+                <template for:each={values} for:item="value">
+                    <div key={value.key} class="slds-m-bottom_xxx-small">
+                        <lightning-input
+                            class="edit-input"
+                            type={value.inputType}
+                            value={value.value}
+                            name={value.key}
+                            onfocus={handleOnFocusInput}
+                            onblur={handleOnBlurInput}
+                            variant="label-hidden">
+                        </lightning-input>
+                        <lightning-button-icon
+                            icon-name="utility:delete"
+                            size="medium"
+                            name={value.key}
+                            alternative-text="Delete"
+                            onclick={handleDelete}>
+                        </lightning-button-icon>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <footer class="slds-card__footer slds-p-around_none slds-m-top_none">
+            <div if:false={isEdit}>
+                <button class="slds-button slds-button_icon footer-button" title="Edit" onclick={handleModifyButton}>
+                    <lightning-icon icon-name="utility:edit" alternative-text="Edit" size="x-small"></lightning-icon>
+                </button>
+            </div>
+            <div if:true={isEdit} class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-2 slds-p-horizontal_none border-right">
+                    <button class="slds-button slds-button_icon footer-button" title="Add" onclick={handleAddValue}>
+                        <lightning-icon icon-name="utility:add" alternative-text="Add" size="x-small"></lightning-icon>
+                    </button>
+                </div>
+                <div class="slds-col slds-size_1-of-2 slds-p-horizontal_none">
+                    <button class="slds-button slds-button_icon footer-button" title="Confirm" onclick={handleConfirmButton}>
+                        <lightning-icon icon-name="utility:check" alternative-text="Confirm" size="x-small"></lightning-icon>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </article>
+</template>

@@ -1,0 +1,12 @@
+<apex:page standardController="Account">
+
+    <apex:outputText value="{!if(Account.Intervention_Renewal_Count__c >= 1, 'INTERVENTION RENEWAL ESCALATION', '')}" style="color:blue;font-size:200%;"/>
+    <br/>
+    <apex:outputText value="{!if(Account.Intervention_Renewal_Count__c >= 1, 'This account has at least one opportunity that is an intervention renewal escalation.', '')}" style="color:blue;"/>
+    <br/>
+    <apex:outputText value="{!if(Account.Intervention_Renewal_Count__c >= 1, 'For additional information contact ', '')}" style="color:blue;"/>
+    <apex:outputLink value="https://savvas.my.salesforce.com/_ui/core/chatter/groups/GroupProfilePage?g=0F90W000001LxWe" id="RAPLink" target="_blank"><apex:outputText value="{!if(Account.Intervention_Renewal_Count__c >= 1, '@[Red Account Renewals]', '')}" style="color:blue;"/></apex:outputLink>
+    <apex:outputText value="{!if(Account.Intervention_Renewal_Count__c >= 1, ' via Chatter.', '')}" style="color:blue;"/>
+
+
+</apex:page>

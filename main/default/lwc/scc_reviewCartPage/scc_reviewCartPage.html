@@ -1,0 +1,390 @@
+<template>
+	<template if:true={cartPage}>
+		<div class="spinner-wrapper slds-spinner_container" if:true={isLoading1}
+			style="height: 200px; position:absolute;">
+			<div class="slds-backdrop slds-backdrop_open">
+				<lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+			</div>
+		</div>
+
+		<div class="slds-grid slds-wrap slds-grid_vertical slds-p-around_large review-cart-BG slds-is-relative">
+			<div class="slds-col">
+				<nav role="navigation" aria-label="Breadcrumbs">
+					<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+						<template if:false={isGuest}>
+							<li class="slds-breadcrumb__item">
+								<a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+							</li>
+							<li class="slds-breadcrumb__item">
+								<a href="#" class="slds-m-horizontal_small breadcrumb-label">Place Order</a>
+							</li>
+						</template>
+						<template if:true={reviewCart}>
+							<li class="slds-breadcrumb__item">
+								<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Review Cart</a>
+							</li>
+						</template>
+						<template if:false={isGuest}>
+							<template if:true={holdCart}>
+								<li class="slds-breadcrumb__item">
+									<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Hold Cart</a>
+								</li>
+							</template>
+						</template>
+
+					</ol>
+				</nav>
+			</div>
+
+			<template if:true={isERPOrderSubmitted}>
+				<div class="erp-success-message" role="alert">
+					Your order was submitted for approval to your ERP system
+				</div>
+			</template>
+
+			<div class="slds-col slds-size_3-of-3 review-cart-content">
+				<div class="slds-text-align_right slds-m-bottom_large shopping-buttons">
+					<template if:true={reviewCart}>
+						<template if:false={isGuest}>
+							<template if:false={isERPOrderSubmitted}>
+										<button class="slds-button" onclick={handleClearCartClick}>{clearCartButtonLabel}</button>
+							</template>
+							<button class="slds-button" onclick={handleGeneratePDF} aria-label="Click this button to view/ print the items in your cart as a quote this will open in new tab, View Quote">
+								View Quote
+								<div class="slds-is-relative slds-show_inline-block slds-p-around_none slds-m-left_xx-small">
+									<div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+									<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip" id="1">
+										<div class="slds-popover__body">Click this button to view/ print the items in your cart as a quote</div>
+									</div>
+								</div>
+							</button>
+							<button class="slds-button" onclick={handleHoldCartClick}>Hold Cart</button>
+						</template>
+
+						<template if:false={isERPOrderSubmitted}>
+							<button class="slds-button" onclick={handleContinueShopping}>Continue Shopping</button>
+						</template>
+
+						<template if:false={isGuest}>
+							<button class="slds-button checkout-button" onclick={handleCheckout}>
+								<img src={labels.scc_checkout_cart} alt="cart icon" />
+								Proceed to Checkout
+							</button>
+						</template>
+						<template if:true={isGuest}>
+							<template if:false={isERPOrderSubmitted}>
+								<button class="slds-button checkout-button" onclick={handleERPSubmit}>
+									<img src={labels.scc_checkout_cart} alt="cart icon" />
+									Submit to ERP
+								</button>
+							</template>
+
+						</template>
+					</template>
+					<template if:false={isGuest}>
+						<template if:true={holdCart}>
+							<template if:false={isERPOrderSubmitted}>
+										<button class="slds-button emailCartbtn" style="padding-top: 17px;" onclick={handleClearCartClick}>{clearCartButtonLabel}</button>
+							</template>
+							<button class="slds-button review-cart-button" onclick={handleReviewCartClick}>
+								<img class="slds-m-right_xx-small" src={labels.scc_checkout_cart_lightblue} alt="cart icon" />
+								{reviewCartButtonLabel}
+							</button>
+							<button class="slds-button emailCartbtn" onclick={openCart}>Email Cart</button>
+							<template if:true={isOpen}>
+								<c-scc_email-cart-L-W-C onsend={sendEmailHandler} onclosepopup={closeEmailModal}
+									oncancel={cancelSend}></c-scc_email-cart-L-W-C>
+							</template>
+							<button class="slds-button" onclick={handleContinueShopping}>Continue Shopping</button>
+							<button class="slds-button hold-cart-active" onclick={handleHeldCartClick}>Hold Cart</button>
+
+						</template>
+					</template>
+
+				</div>
+
+				<template if:false={isGuest}>
+					<template if:true={holdCart}>
+						<div class="slds-grid slds-gutters slds-m-bottom_medium hold-cart-name-container">
+							<div class="slds-col slds-size_3-of-3 heading-color">
+								<label class="slds-form-element__label" for="cartName">Cart Name</label>
+								<input type="text" maxlength="32" class="slds-input custom-button" value={webcartName} onkeyup={handleCartNameChange} variant="standard" name="name" aria-label="Cart Name"></input>
+							</div>
+						</div>
+					</template>
+				</template>
+				<template if:true={showErrorMSG}>
+					<template if:false={holdCart}>
+					<div class="order-error-message" role="alert">
+						{labels.scc_creditCheckErrorMsg}
+					</div>
+					</template>
+				</template>
+				<lightning-card class="review-cart-cards">
+					<div class="slds-grid slds-wrap slds-grid_vertical-stretch">
+						<div class="slds-col slds-size_9-of-12 slds-p-bottom_medium">
+							<div class="slds-grid slds-wrap">
+								<div class="slds-col">
+									<h2 class="review-cart-title slds-p-around_large">Cart Detail</h2>
+				
+								</div>
+				
+								<div class="slds-col">
+									<!-- <template if:true={holdCart}>
+									<template if:false={isERPOrderSubmitted}>
+										<a href="#null" class="slds-float_right slds-p-around_x-large slds-p-bottom_none clear-link"
+											role="button" onclick={handleClearCartClick}>{clearCartButtonLabel}</a>
+									</template>
+									</template>  -->
+								</div>
+							</div>
+							<div class="slds-m-right_x-small cart-content">
+								<template for:each={productDetailsInCart} for:item="cartproduct">
+									<div class="slds-media slds-p-horizontal_large slds-m-bottom_medium" key={cartproduct.cartId}>
+										<div class="slds-media__figure slds-m-right_large">
+											<span class="slds-avatar slds-avatar_large">
+																<img alt="" src={coverImage} />
+															</span>
+										</div>
+										<div class="slds-media__body slds-p-right_xx-large slds-is-relative">
+											<h3 class="slds-m-bottom_large slds-p-bottom_xx-small" aria-live="polite"
+												id="cartProductDescription">
+												{cartproduct.description}<span class="slds-assistive-text">delete</span>
+											</h3>
+											<template if:true={reviewCart}>
+												<template if:false={isERPOrderSubmitted}>
+													<img class="delete-icon" role="button" src={labels.scc_delete_icon} alt="delete icon" data-row-id={cartproduct.cartId} onclick={handleDeleteIconClick}
+																	aria-label="delete" aria-labelledby="cartProductDescription" tabindex="0" onkeydown={handleKeyDown}/>
+				
+													<!-- <div id="indicates-customreport"><span class="slds-assistive-text">delete</span>{cartproduct.description}</div> -->
+												</template>
+				
+											</template>
+											<div class="slds-grid slds-wrap">
+												<div class="slds-col slds-size_8-of-12">
+													<div class="slds-grid slds-wrap slds-gutters">
+														<div class="slds-col slds-size_2-of-12 slds-m-bottom_x-small item-detail">
+															ISBN
+														</div>
+														<div class="slds-col slds-size_4-of-12 item-value">
+															{cartproduct.isbn}
+														</div>
+														<div class="slds-col slds-size_3-of-12 item-detail">
+															 Price per unit
+														</div>
+														<div class="slds-col slds-size_3-of-12 item-value">
+															$ {cartproduct.price}															
+															<template if:true={cartproduct.showContractPricing}>
+																<div
+																	class="slds-is-relative slds-show_inline-block slds-p-around_none slds-m-left_xx-small">
+																	<div
+																		class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+																		i</div>
+																	<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+																		role="tooltip" id="7">
+																		<div class="slds-popover__body">Contract pricing
+																			applied</div>
+																	</div>
+																</div>
+															</template>
+														</div>
+														<div class="slds-col slds-size_2-of-12 slds-m-bottom_x-small item-detail">
+															Copyright
+														</div>
+														<div class="slds-col slds-size_4-of-12 item-value">
+															{cartproduct.copyRight}
+														</div>
+														<div class="slds-col slds-size_3-of-12 item-detail">
+															Status
+														</div>
+														<div class="slds-col slds-size_3-of-12 item-value">
+															{cartproduct.status}
+														</div>
+														<div class="slds-col slds-size_2-of-12 item-detail">
+															Grade
+														</div>
+														<div class="slds-col slds-size_4-of-12 item-value">
+															{cartproduct.gradeLevel}
+														</div>
+														<div class="slds-col slds-size_3-of-12 slds-p-left_none item-detail">
+															Stock Availability
+														</div>
+														<div class="slds-col slds-size_3-of-12 item-value">
+															{cartproduct.stockAvailability}
+														</div>
+													</div>
+												</div>
+												<div class="slds-col slds-size_4-of-12">
+													<div class="slds-form-element">
+														<div class="slds-grid slds-wrap slds-gutters">
+															<div class="slds-col slds-size_6-of-12 slds-text-align_right">
+																<label class="item-detail"  for="count1">Quantity</label>
+															</div>
+															<div class="slds-col slds-size_6-of-12">
+																<div class="slds-form-element__control slds-p-around_none slds-m-bottom_large button-group"
+																	tabindex="0">
+																	<input type="text" id="count1" class="slds-input" min="1"  data-row-id={cartproduct.cartId} data-attribute-quantity={cartproduct.quantity} data-attribute-price={cartproduct.price} onkeypress={handlekeyPress} value={cartproduct.quantity} disabled ={holdCart} onkeyup={handleQuantityChange}
+																					aria-label="Quantity" aria-labelledby="cartProductDescription"/>
+																	<button class="slds-button" data-row-id={cartproduct.cartId} data-attribute-quantity={cartproduct.quantity} data-attribute-price={cartproduct.price} onclick={handleQuantityDecrease} disabled={holdCart}>-</button>
+																	<button class="slds-button" data-row-id={cartproduct.cartId} data-attribute-quantity={cartproduct.quantity} data-attribute-price={cartproduct.price} disabled={holdCart} onclick={handleQuantityIncrease}>+</button>
+																</div>
+															</div>
+															<div class="slds-col slds-size_6-of-12 slds-text-align_right">
+																<label class="item-detail">Extended Price</label>
+															</div>
+															<div class="slds-col slds-size_6-of-12">
+																<div class="price-value" aria-live="polite" aria-label="Extended Price">
+																	$ {cartproduct.totalPrice}</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</template>
+							</div>
+						</div>
+						<div class="slds-col slds-size_3-of-12 slds-p-horizontal_large slds-p-top_x-large summaryBg">
+				
+							<div class="slds-grid slds-grid_vertical">
+								<template if:true={reviewCart}>
+									<template if:false={isERPOrderSubmitted}>
+										<div class="slds-form-element slds-m-bottom_x-large">
+											<label class="slds-form-element__label" for="promo-code">Promo Code</label>
+											<div class="slds-form-element__control slds-is-relative">
+												<input type="text" id="promo-code" placeholder="Promo Code" class={inputClass} value={promocodeValue} oninput={handlePromoCode} />
+												<button class="slds-button promo-apply-button" onclick={handlePromoCodeApply} aria-disabled={disabledApplyButton}>Apply</button>
+												<template if:true={errorMessage}>
+													<div class="error-message" role="alert">{errorMessage}</div>
+												</template>
+											</div>
+										</div>
+									</template>
+								</template>
+								<h2 class="slds-m-bottom_medium" role="alert">
+									Summary
+									<div class="slds-is-relative slds-show_inline-block slds-p-around_none slds-m-left_xx-small">
+										<div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+											i</div>
+										<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip"							id="6">
+											<div class="slds-popover__body">Please note that these are estimated totals
+												and may change once your order is submitted</div>
+										</div>
+									</div>
+									<span class="slds-assistive-text">Please note that these are estimated totals and may change once your order is submitted</span>
+								</h2>
+								<div class="slds-p-vertical_small summary-details" role="alert">
+									<span>Subtotal</span>
+									<span>$ {subTotalPriceData}</span>
+								</div>
+								<div class="slds-p-vertical_small summary-details" role="alert">
+									<span>Promo Discount<p>{validPromo}</p></span>
+									<template if:true={showDiscount}>
+										<div class="discount-value">{discountValueData}</div>
+									</template>
+									<template if:false={showDiscount} role="alert">
+										<span>{discountValueData}</span>
+									</template>
+								</div>
+								<div class="slds-p-vertical_small summary-details" role="alert">
+									<span>Shipping</span>
+									<span>N/A</span>
+								</div>
+								<div class="slds-p-vertical_small summary-details" role="alert">
+									<span>Tax</span>
+									<span>N/A</span>
+								</div>
+								<div class="slds-p-vertical_small summary-details summary-total" role="alert">
+									<span>Total</span>
+									<span>$ {totalPriceValue}</span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</lightning-card>
+			</div>
+		</div>
+		<template if:true={isModalOpen}>
+			<!-- Modal/Popup Box LWC starts here -->
+			<div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog">
+				<div class="slds-modal__container">
+					<!------HEADER Section-->
+					<div class="slds-modal__header">
+						<button class="slds-modal__close closebtnOnFocus clearCartCloseBtn" onclick={closeModal} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+						<h2>Clear cart</h2>
+					</div>
+					<!------Body Section-->
+					<div class="slds-modal__content slds-p-around_medium">
+						<div class="slds-form_horizontal slds-text-align_center">
+							<p> Are you sure you want to clear all items from this Cart and start over in the Place
+								Order Process?<span class="slds-assistive-text"></span></p>
+							<div class="slds-show_inline-block note-icon slds-m-right_xx-small">!</div>
+							<span role="alert">This action cannot be undone</span>
+						</div>
+					</div>
+					<!------Footer Section-->
+					<div class="slds-modal__footer">
+						<button class="slds-button clear-cart-modal-button" onclick={handleClearCart} data-index="0">Clear cart</button>
+						<button class="slds-button cancel-modal-button" onclick={handleCancel} onfocusout={focusOutButton} tabindex="0">Cancel</button>
+
+					</div>
+				</div>
+			</div>
+		</template>
+		<template if:true={openDeleteModel}>
+			<div class="spinner-wrapper slds-spinner_container" if:true={isLoading}
+				style="height: 200px; position:absolute;">
+				<div class="slds-backdrop slds-backdrop_open">
+					<lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+				</div>
+			</div>
+			<!-- Modal/Popup Box LWC starts here -->
+			<div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog">
+				<div class="slds-modal__container">
+					<!------HEADER Section-->
+					<div class="slds-modal__header">
+						<button class="slds-modal__close closebtnOnFocus removeCartCloseBtn" onclick={closeDeleteModal} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+						<h2>Remove From Cart</h2>
+					</div>
+					<!------Body Section-->
+					<div class="slds-modal__content slds-p-around_medium">
+						<div class="slds-form_horizontal slds-text-align_center">
+							<p>Are you sure you want to remove the item(s) from the cart?</p>
+							<div class="slds-show_inline-block note-icon slds-m-right_xx-small">!</div>
+							<span role="alert">This action cannot be undone</span>
+						</div>
+					</div>
+					<!------Footer Section-->
+					<div class="slds-modal__footer">
+						<button class="slds-button clear-cart-modal-button" onclick={handleRemoveItem} data-index="0">Remove From Cart</button>
+						<button tabindex="0" class="slds-button cancel-modal-button" onclick={handleCancelDelete} onfocusout={focusOutButton}>Cancel</button>
+					</div>
+				</div>
+			</div>
+
+		</template>
+	</template>
+	<template if:true={clearCartItems}>
+		<c-scc_delete-items-from-cart onrefreshevent={handlerefreshevent}> </c-scc_delete-items-from-cart>
+	</template>
+	<template if:true={homePage}>
+		<c-scc_home-l-w-c></c-scc_home-l-w-c>
+	</template>
+	<template if:true={homePageAfterHeldCart}>
+		<c-scc_home-l-w-c tabselection="true"></c-scc_home-l-w-c>
+	</template>
+	<template if:true={continueShopping}>
+		<c-scc_place-order-criteria-search-l-w-c userselection={userInputs}></c-scc_place-order-criteria-search-l-w-c>
+	</template>
+
+	<template if:true={showCheckOutDetails}>
+		<c-scc_check-out-l-w-c onclosecheckout={closeCheckOutDetails} cart-id={activeCartId}>
+		</c-scc_check-out-l-w-c>
+
+	</template>
+	<template if:true={isReviewOrder}>
+		<c-scc_review-order-l-w-c onclosecheckout={closeCheckOutDetails}></c-scc_review-order-l-w-c>
+	</template>
+</template>

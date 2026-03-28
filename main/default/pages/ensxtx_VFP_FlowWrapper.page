@@ -1,0 +1,80 @@
+<!--
+Opportunity
+ Custom Button or Link
+ Detail Page Button
+ Display in existing window
+ URL: /apex/ensxtx_VFP_FlowWrapper?c__wfn=ensxtx_enosiX_Sales_Document_Create_Order&recordId={!Opportunity.Id}
+-->
+<apex:page sidebar="true" showHeader="true">
+  <apex:slds />
+  <apex:includeLightning />
+  <div id="app">
+    <div id="auraErrorMessage" class="slds-text-color_error slds-var-p-around_large"></div>
+  </div>
+  <script>
+    var myUserContext = "{!$User.UITheme}";
+
+    function displayError(errorMessage)
+    {
+      document.getElementById('auraErrorMessage').style.display = 'block';
+      document.getElementById('auraErrorMessage').innerText = errorMessage;
+    }
+
+    function initLightningFlow(flowName, flowParams) {
+      var appName = 'c:ensxtx_APP_FlowWrapper';
+      var componentName = 'lightning:flow';
+      var componentParams = {};
+      componentParams.onstatuschange = function handleStatusChange(event) {
+        console.log(event);
+        if (event.getParam('status') === "FINISHED") {
+          if (recordId) {
+            window.location = '/' + recordId;
+          } else {
+            window.history.back();
+          }
+        }
+      }
+      $Lightning.use(appName, function () {
+        $Lightning.createComponent(componentName, componentParams,
+          "app",
+          function (cmp, status) {
+            $A.eventService.addHandler({
+              event: 'force:navigateToSObject',
+              handler: function (event) {
+                if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d') {
+                  // The Visualforce page is in S1 or Lightning Experience
+                  sforce.one.navigateToSObject(event.getParams().recordId);
+                } else if (myUserContext == 'Theme3') {
+                  // The Visualforce page is  running in Classic
+                  window.parent.location = '/' + event.getParams().recordId;
+                } else {
+                  console.log("Unsupported theme");
+                }
+              }
+            });
+
+            if (status === 'SUCCESS') {
+              var r = cmp.startFlow(flowName, flowParams);
+            }
+          });
+      });
+    }
+
+    var urlParams = new URLSearchParams(location.search);
+    var wrappedFlowName;
+    let flowVariables = [];
+    urlParams.forEach(function(value, key) {
+      console.log(key, value);
+      if (key === 'c__wfn') {
+        wrappedFlowName = value;
+      } else if (key.startsWith('c__')) {
+        if (value) flowVariables.push({name: key.substring(3), type: 'String', value: value});
+      } else {
+        if (value) flowVariables.push({name: key, type: 'String', value: value});
+      }
+    });
+    if (!wrappedFlowName) displayError('Missing Wrapped Flow Name URL parameter (?c__wfn=...).');
+	
+    if (wrappedFlowName) initLightningFlow(wrappedFlowName, flowVariables);
+  </script>
+</apex:page>

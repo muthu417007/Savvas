@@ -1,0 +1,85 @@
+<apex:page controller="PaymentController">
+    <apex:includeScript value="{!$Resource.scc_Paymetric_Script}"/>
+    <html>
+	<head>
+		<title>XiIntercept IFrame </title>
+	</head>
+		
+    <script>
+    
+        var merchantGuid = "89067fa9-a724-4fad-b593-02f6473fc87a";
+        var accesstoken = '{!iframeSrc}'; 
+    
+    
+         function IFrame_OnLoad() {
+
+             //alert('onload called');
+             
+            var iframe = document.getElementsByName('dieCommFrame');
+             console.log("$XIFrame",$XIFrame);
+            if (iframe) {
+                 $XIFrame.onload({
+                        iFrameId: 'dieCommFrame',
+                        targetUrl: iframe[0].getAttribute("src"),
+                        autosizewidth: true,
+                        autosizeheight: true,
+
+                        onSuccess: function (msg) {
+                            console.log('A form for the merchant guid and access token combination is loading in the iFrame successfully.');
+                        },
+                        onError: function (msg) {
+
+                            console.log(msg);
+                            console.log('A form for the merchant guid and access token combination has FAILED to load.');
+                        }
+                    });
+            }
+        }
+         
+        function submitform() 
+		{
+        	
+            var iframe = document.getElementsByName('dieCommFrame');
+            if (iframe) {
+                $XIFrame.submit({
+                    iFrameId: 'dieCommFrame',
+                    targetUrl: iframe[0].getAttribute("src"),
+                    onSuccess: function (msg) {
+                        var message = JSON.parse(msg);
+                        if (message && message.data.HasPassed) {
+                            //var accessToken = document.getElementById('AccessToken');
+                            //var signedToken = document.getElementById('SignedToken');
+                            console.log("Credit card data submitted !!");
+							// Now trigger the server side GET call to retrieve the token data & other CC data from Paymetric to proceed with pre auth.
+                           // window.location = "${secureresponse}?id=" + accessToken.value + "&s=" + signedToken.value;
+                        } else {
+                            alert(message.data.Message);
+                        }
+                    },
+                    onError: function (msg) {
+                        alert(msg);
+                    }
+                });
+            }
+        }
+        
+   
+    </script>
+    
+    
+    <body>
+    <div>
+        <p>Credit Card Payment form</p>           
+            <div id="iframewrapper">
+                <iframe id="IFrame" src="{!iframeSrc}"  name="dieCommFrame" onload="IFrame_OnLoad()"></iframe>
+	            <div>
+	                <button onclick="submitform()" class="IFrameButton">submit payment</button>
+	            </div>
+            </div>
+            
+           	          
+   	</div>
+   
+   	</body>
+ </html>
+</apex:page>

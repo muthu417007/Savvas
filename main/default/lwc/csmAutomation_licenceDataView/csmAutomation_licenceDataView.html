@@ -1,0 +1,151 @@
+<template>
+    <lightning-card tittle="Resize the Modal">
+        <div class="page-header" style="margin-bottom: 20px; text-align: center;">
+            <h1 class="page-title"
+                style="font-size: 24px; font-family: Arial, sans-serif; color: #333; font-weight: bold;">License Data
+            </h1>
+        </div>
+
+        <!-- Main Container -->
+        <div class="component-container"
+            style="padding: 10px; background-color: #f4f6f9; width: 100%; margin: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <!-- Filter, Data Refresh, and Export Section -->
+            <div class="filter-data-section" style="display: flex; gap: 20px; align-items: flex-start;">
+                <!-- Local Filter Box -->
+                <div class="local-filter-box"
+                    style="flex: none; min-width: 500px; border: 1px solid #ccc; border-radius: 8px; padding: 20px;">
+                    <h3 style="font-size: 18px; font-family: Arial, sans-serif; color: #333; font-weight: bold;">
+                        Local Filters</h3>
+                    <!-- Container for Filter By, Dynamic Filter Options, and Go Button -->
+                    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: nowrap;">
+                        <!-- Filter By Dropdown -->
+                        <lightning-combobox name="columnFilter" label="Filter By" value={selectedColumn}
+                            options={columnOptions} onchange={handleColumnChange} style="width: 100px;">
+                        </lightning-combobox>
+                        <!-- Dynamic Filter Options -->
+                        <template if:true={isMultiSelect}>
+                            <lightning-dual-listbox label="Select Values" source-label="Available"
+                                selected-label="Selected" field-level-help="Select values for filtering"
+                                options={filterOptions} onchange={handleMultiSelectChange}
+                                style="flex: 1; width: 100px;">
+                            </lightning-dual-listbox>
+                        </template>
+
+                        <template if:true={isdatepicker}>
+                            <lightning-input type="date" label="Select Date" value={selectedDate}
+                                onchange={handleDateChange} style="flex: 1;">
+                            </lightning-input>
+                        </template>
+
+                        <template if:true={isTextType}>
+                            <lightning-input type="search" label="Search" value={searchTerm}
+                                onchange={handleSearchChange} style="flex: 1;">
+                            </lightning-input>
+                        </template>
+
+                        <template if:true={isNumberType}>
+                            <lightning-input type="search" label="Search" value={searchTerm}
+                                onchange={handleSearchChange} style="flex: 1;">
+                            </lightning-input>
+                        </template>
+
+                        <!-- Go Button -->
+                        <lightning-button label="Go" variant="brand" onclick={handleGoClick} style="flex-shrink: 0;">
+                        </lightning-button>
+                    </div>
+                </div>
+                <!-- Data Refresh Box -->
+                <div class="api-filter-box"
+                    style="flex: none; min-width: 350px; border: 1px solid #ccc; border-radius: 8px; padding: 16px;">
+                    <h3 style="font-size: 18px; font-family: Arial, sans-serif; color: #333; font-weight: bold;">
+                        Data Refresh</h3>
+
+                        <template if:true={errorMessage}>
+                            <p style="color: red; text-align: center; font-weight: bold;">
+                                {errorMessage}</p>
+                        </template>
+
+                    <!-- Row with Start Date, Expiration Date, and Go Button -->
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <!-- Start Date -->
+                        <lightning-input type="date" label="Start Date" value={startDate}
+                            onchange={handleStartDateChange} style="width: 150px;" class="date-format-hide">
+                        </lightning-input>
+
+                        <!-- Expiration Date -->
+                        <lightning-input type="date" label="End Date" value={expirationDate}
+                            onchange={handleExpirationDateChange} style="width: 150px;" class="date-format-hide">
+                        </lightning-input>
+
+                        <!-- Go Button -->
+                        <lightning-button label="Go" variant="brand" onclick={handleGoClick} style="margin-top: 22px;"
+                        disabled={isGoDisabled}>
+                        </lightning-button>
+                    </div>
+
+                    <!-- Row with Checkboxes -->
+                    <div style="display: flex; align-items: flex-start; gap: 12px; margin-top: 16px;">
+                        <!-- Checkbox: Include Expired Licenses -->
+                        <div style="flex: 1;">
+                            <lightning-input type="checkbox" label="Include Expired Licenses"
+                                checked={includeExpiredLicenses} onchange={handleIncludeExpiredLicensesChange}>
+                            </lightning-input>
+                        </div>
+
+                        <!-- Checkbox: Include Add-On Products -->
+                        <div style="flex: 1;">
+                            <lightning-input type="checkbox" label="Include Add-On Products"
+                                checked={includeAddOnProducts} onchange={handleIncludeAddOnProductsChange}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Button -->
+                <div class="export-button-container" style="display: flex; align-items: center;">
+                    <c-csm-automation_generic-export-data response-data={responseData}
+                        account-id={recordId}></c-csm-automation_generic-export-data>
+                </div>
+            </div>
+
+            <template if:true={apexMessage}>
+                <div
+                    style="padding: 10px;font-size: 12px; font-family: Arial, sans-serif; color: #333; font-weight: bold;">
+                    <p>*{apexMessage}</p>
+                </div>
+            </template>
+
+            <!-- Table Section -->
+            <div class="datatable-section" style="margin-top: 10px;">
+                <div style="overflow-x: auto;">
+                    <template if:true={data}>
+
+                        <lightning-datatable key-field="id" data={data} columns={columns} onsort={handleSort}
+                            sorted-by={sortedBy} sorted-direction={sortedDirection} hide-checkbox-column>
+                        </lightning-datatable>
+
+                    </template>
+                    <template if:false={data}>
+                        <div
+                            style="display: flex;justify-content: center;align-items: center;font-weight: bold;color: red;">
+                            No records found.
+                        </div>
+                    </template>
+                    <template if:true={isNoRecordsFound}>
+                        <div
+                            style="display: flex;justify-content: center;align-items: center;font-weight: bold;color:red;">
+                            No such records found.
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div class="slds-m-around_medium pagination-container">
+                <template if:true={totalRecordCount}>
+                    <c-csm-automation_pagination totalrecords={totalRecordCount} page-size={pageSize}
+                        onpagination={handlePaginationPage}>
+                    </c-csm-automation_pagination>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

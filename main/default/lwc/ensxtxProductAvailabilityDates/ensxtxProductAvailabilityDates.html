@@ -1,0 +1,29 @@
+<template>
+    <div class="slds-p-vertical_small">
+        <div class="enosix-price-table">
+            <span class="slds-text-heading_small slds-p-right_x-small">{label.ensxtx_CartPDP_Field_DateAvailable}</span>
+            <template if:false={multipleDates}>
+                <span class="slds-text-heading_small enosix-text_bold"><lightning-formatted-date-time value={availableDate} time-zone="UTC"></lightning-formatted-date-time></span>
+            </template>
+        </div>
+    </div>
+    <template if:true={multipleDates}>
+        <div class="slds-p-vertical_small">
+            <table class="enosix-product-table">
+                <caption>{label.ensxtx_CartPDP_Field_DateAvailable}</caption>
+                <tbody>
+                    <tr>
+                        <th class="slds-p-around_x-small enosix-product-cell slds-border_right">{label.ensxtx_CartPDP_Table_QtyAvailable}</th>
+                        <th class="slds-p-around_x-small enosix-product-cell">{label.ensxtx_CartPDP_Table_Date}</th>
+                    </tr>
+                    <template for:each={availabilities} for:item="availability">
+                        <tr key={availability.ScheduleLineNumber} aria-live="assertive" aria-atomic="true">
+                            <td class="slds-text-heading_small slds-p-around_x-small enosix-product-cell slds-border_right">{availability.ConfirmedQuantity}</td>
+                            <td class="slds-text-heading_small slds-p-around_x-small enosix-product-cell"><lightning-formatted-date-time value={availability.ScheduleLineDate} time-zone="UTC"></lightning-formatted-date-time></td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </template>
+</template>

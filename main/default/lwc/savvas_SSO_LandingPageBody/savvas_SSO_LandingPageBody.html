@@ -1,0 +1,68 @@
+<template>
+	<div class="subheader">
+	</div>
+	<template if:false={isLoading}>
+		<div class="slds-container_width slds-container_large slds-container_center">
+			<div class="slds-grid slds-wrap slds-var-p-bottom_large">
+				<div for:each={userAppAccessData} for:item="app" key={app.appSequence}
+					class="slds-col slds-p-horizontal_x-small slds-p-vertical_x-small slds-size_12-of-12  slds-small-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_4-of-12">
+						<div class="box">
+							<div class="imageContainer">
+								<img class="appImage" src={app.imageUrl} alt="App Image">
+							</div>
+							<div class="textContainer">
+								<div class="appTitle">
+									{app.appTitle}
+								</div>
+								<div class="appSubtitle">
+									{app.appDescription}
+									<template if:true={app.isReadMore}>
+										<a data-id={app.appTitle} onclick={showModalBox}>&nbsp;... read more</a>
+									</template>
+								</div>
+							</div>
+							<div class="linkContainer">
+								<div class="actionLink">
+									<a href={app.acsURL} target="_blank">
+										{app.appActionVerbiage} &nbsp;
+										<span class="arrow_img"><img alt="" src={arrow_icon}></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</template>
+	<template if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" size="small" variant="brand"></lightning-spinner>
+	</template>
+	<template if:true={isShowModal}>
+		<section role="dialog" tabindex="-1" aria-modal="true" aria-label="modal-heading-01"
+			class="slds-modal slds-modal_large slds-fade-in-open">
+			<div class="slds-modal__container popup">
+				<div class="slds-modal__content slds-p-around_medium slds-modal__content_headless"
+					id="modal-content-id-1">
+					<button class="slds-button slds-button_icon slds-modal__close close-icon"
+						onclick={hideModalBox}>
+						<lightning-icon icon-name="action:reject" alternative-text="close"
+							size="xx-small" class="close-icon"></lightning-icon>
+					</button>
+					<div class="modal-appTitle">
+						{title}
+					</div>
+					<div class="modal-appSubtitle">
+						{description}
+					</div>
+					<div class="modal-actionLink">
+						<a href={acsURL} target="_blank">
+							{actionVerbiage} &nbsp;
+							<span class="arrow_img"><img alt="" src={arrow_icon}></span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+	</template>
+</template>

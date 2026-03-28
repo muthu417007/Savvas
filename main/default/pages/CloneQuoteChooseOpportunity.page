@@ -1,0 +1,14 @@
+<apex:page standardController="CameleonCPQ__Quote__c" extensions="cloneQuoteChooseOppControllerExtension">
+  <apex:form >
+  <apex:pageBlock title="New Opportunity">
+
+        <apex:pageBlockSection title="Please enter new opportunity for the quote" columns="1">
+
+            <apex:inputField value="{!CameleonCPQ__Quote__c.CPQOpportunityId__c}"/>
+            <apex:commandButton action="{!getclonequotepage}" value="Clone"/>
+        </apex:pageBlockSection>
+
+    </apex:pageBlock> 
+
+  </apex:form>
+</apex:page>

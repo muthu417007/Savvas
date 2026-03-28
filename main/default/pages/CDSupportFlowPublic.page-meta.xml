@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>29.0</apiVersion>
+    <availableInTouch>true</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>&lt;flow:interview name=&quot;{$ObjectType.Flow__kav.fields.Flow_Name__c}&quot;/&gt;</description>
+    <label>CD Support Flow Public</label>
+</ApexPage>

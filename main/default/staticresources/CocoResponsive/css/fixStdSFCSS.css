@@ -1,0 +1,202 @@
+/***********************************************************
+ * revert changes made by standard salesforce style sheets *
+ **********************************************************/
+
+/* menu item are wider */
+#menu2 ul li, #menu2 ol li {
+    margin-left: 0;
+}
+
+/* font family do not match */
+body td {
+    font-family: verdana, "Helvetica", Arial, sans-serif;
+}
+
+/* fix labels below phone, chat and email images in footer */
+.emailBox h5, .chatBox h5, .phoneBox h5 {
+    display: block;
+    background: transparent;
+}
+
+/* set background and border for pageBlock elements */
+.container.mainContainer {
+    background: #FFFFFF;
+}
+
+body .bPageBlock,
+body #bodyCell .bResource .secondaryPalette,
+body .secondaryPalette.bPageBlock,
+body .individualPalette .secondaryPalette.bPageBlock, 
+body .bodyDiv .genericTable,
+body .genericPageBlockTable,
+body .bodyDiv .bSubBlock,
+body .bComponentBlock .bPageBlock,
+body .bMyDashboard .bPageBlock,
+body.rlHoverFrame .bPageBlock,
+body.subjectSelectionPopup
+div.choicesBox,
+body.lookupTab
+.secondaryPalette.bPageBlock,
+body.popupTab .secondaryPalette.bPageBlock,
+body.UserTagStatsPage .secondaryPalette.bPageBlock {
+    background-color: #FFFFFF;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    border-bottom: 0 none transparent;
+    border-left: 0 none transparent;
+    border-right: 0 none transparent;
+}
+
+body .pbBody table.list,
+body .bRelatedList .bPageBlock .pbBody,
+body .bRelatedList table.list tr.headerRow th.noRowsHeader {
+    background-color: transparent;
+}
+/* //set background for pageBlock elements */
+
+/* fix page block section title */
+body .bRelatedList .pbTitle h2,
+body .bPageBlock .pbTitle h2,
+body .bPageBlock .pbTitle h2,
+body .bSubBlock h2.lbHeader {
+    color: #0089b7;
+    font-size: 30px;
+}
+body .bRelatedList .pbTitle h3,
+body .bPageBlock .pbTitle h3,
+body .bPageBlock .pbTitle h3,
+body .bSubBlock h3.lbHeader {
+    color: #0089b7;
+    font-size: 24px;
+}
+body .bRelatedList .bPageBlock,
+.detailPage .bRelatedList .bPageBlock,
+.editPage .bRelatedList .bPageBlock,
+body.subjectSelectionPopup div.choicesBox,
+body .bPageBlock .pbBody .pbSubheader,
+.caseTab .secondaryPalette,
+.individualPalette .caseBlock .secondaryPalette {
+    border-top-width: 2px;
+    border-color: #8F8F8F;
+}
+body .bRelatedList table.list tr.headerRow th.noRowsHeader {
+    color: #000000;
+}
+body .bRelatedList .pbBody table.list,
+body .apexp .pbBody table.list {
+    border: 1px solid #8F8F8F;
+}
+body .pbBody table.list tr.headerRow td,
+body .pbBody table.list tr.headerRow th {
+    border-color: #8F8F8F;
+    background: #006DA4;
+    color: #FFFFFF;
+}
+body .pbBody table.list tr th,
+body .pbBody table.list tr td {
+    border-color: #8F8F8F;
+}
+/* //fix list border color*/
+
+/* mouse over popup box background:  */
+.RLPanel {
+    background: #FFFFFF;
+}    
+
+/* clear background set by chatter */
+.container {
+    background: transparent;
+}
+.container.footerLinks {
+    background: #0080aa;
+}
+/* //clear background set by chatter */
+
+/* PKB Fixes */
+#right_content {
+    clear: both;
+}
+div#right_column {
+    width: 100%!important;
+}
+
+/* PKB remove border radius */
+.action, a.action:hover, #searchAskContainer, .answer_input input, .notice, .feedcontainer .singlefeeditemheader .thisupdatespan, .publishercontainer div.publishertextareaerror, .feedcontainer div.feeditemcommentnew div.newcommenttextareaerror, .publishercontainer .publishererrorcontainer, .feedcontainer .newcommenterrorcontainer, .feedcontainer .feeditemcommentplaceholder input, .feedcontainer .feeditemcommentnew .foobar, .publishercontainer .publishertextarea, .sub_action, .filter .current, .filter a, .signin, .leftContent li a, #searchAskInputContainer, #searchAskForm, .waitingHolder, .csAlert, .csInfo, .prompt, #searchAskContainer .current, .sectionHeader, .popUpContent {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+#searchAskForm {
+    width: auto;
+    max-width: 600px;
+}
+#searchAskForm .form-group {
+    margin-left: 0;
+}
+#searchAskForm .searchInput{
+    border: 1px solid #bababa;
+}
+
+#searchAskButton {
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+#searchAskInput {
+    padding: 0 30px 0 10px;
+    color: #000000;
+    width: 100%;
+    height: 50px;
+}
+
+#searchAskInput.default {
+    color: #bababa;
+}
+span.searchIcon {
+    top: 18px;
+    right: 10px;
+    color: #808080;
+}
+#searchAskForm .btn-primary,
+#searchAskForm .btn-primary:hover,
+#searchAskForm .btn-primary:focus,
+#searchAskForm .btn-primary:active,
+#searchAskForm .btn-primary.active,
+#searchAskForm .open .dropdown-toggle.btn-primary {
+    border-radius: 0;
+    height: 52px;
+    background-color: #0084b7;
+    border-color: #0084b7;
+    font-size: 18px;
+}
+
+/* PKB narrow search*/
+div.searchDrill {
+    margin-right: 0;
+    padding: 0;
+}
+
+div.searchDrill select {
+    min-width: initial;
+    width: 95%;
+}
+
+.narrowSearch {
+    background: #0084b7;
+    color: #ffffff;
+    overflow: hidden;
+    padding: 5px; 
+}
+
+.narrowSearch h2 {
+    background: #0084b7;
+    color: #ffffff;
+    border-bottom: 0 none transparent; 
+}
+div#rightHeader {
+    height: auto!important;
+}
+
+/* //PKB Fixes */

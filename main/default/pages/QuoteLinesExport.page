@@ -1,0 +1,30 @@
+<apex:page standardController="SBQQ__Quote__c" extensions="quoteRelatedVF" sidebar="false" showHeader="false" contentType="application/vnd.ms-excel" 
+applyBodyTag="false" applyHtmlTag="false" cache="true" standardStylesheets="false">
+     <apex:pageBlock title="Quote Lines">
+
+         <apex:pageBlockTable value="{!QuoteLines}" var="ql" columnsWidth="100px,50px,125px,300px,50Px,50px,75px,75px,75px,75px,75px,75px,75px,75px,75px,75px,75px,75px,75px">
+         <!--<apex:pageBlockTable value="{!QuoteLines}" var="ql" columnsWidth="50px,50px,250px,100px,50px,150px,100px,50px"> -->
+           <!-- <apex:column headerValue="Quote Lines" ><apex:outputLink value="/{!ql.Id}"> {!ql.Name} </apex:outputLink>  </apex:column> -->
+            <apex:column headerValue="Name" value="{!ql.Name}" />
+            <apex:column headerValue="Optional" value="{!ql.QL_Optional__c }" />
+            <apex:column headerValue="Program Name" value="{!ql.Program_Name__c }" />
+            <apex:column headerValue="Description" value="{!ql.SBQQ__Description__c }" />
+            <apex:column headerValue="Paid Quantity" value="{!ql.SBQQ__Quantity__c }" />
+            <apex:column headerValue="FWO Quantity" value="{!ql.FWO_Quantity__c }" />
+            <apex:column headerValue="Total Quantity" value="{!ql.Total_Quantity__c }" />
+            <apex:column headerValue="List Price" value="{!ql.SBQQ__ListPrice__c }" />
+            <apex:column headerValue="List Total" value="{!ql.SBQQ__ListTotal__c }" />
+            <apex:column headerValue="Additional Discount" value="{!ql.SBQQ__AdditionalDiscount__c }" />
+            <apex:column headerValue="Additional Discount Amount" value="{!ql.SBQQ__AdditionalDiscountAmount__c }" />
+            <apex:column headerValue="Net Price" value="{!ql.SBQQ__NetPrice__c }" />
+            <apex:column headerValue="Standard Cost" value="{!ql.StandardCost__c }" />
+            <apex:column headerValue="Paid Amt" value="{!ql.Paid_Amt__c }" />
+            <apex:column headerValue="Free Amt" value="{!ql.Free_Amt__c }" />
+            <apex:column headerValue="Contract Price Checked" value="{!ql.Contract_Price_Checked__c }" />
+            <apex:column headerValue="Promo Code" value="{!ql.Applied_Promotion_Name__c }" />
+            <apex:column headerValue="Base S&H" value="{!ql.Base_SH__c }" />
+            <apex:column headerValue="S&H Amount" value="{!ql.SH_Amount__c }" />
+            <apex:column headerValue="Net Total" value="{!ql.SBQQ__NetTotal__c}" />
+        </apex:pageBlockTable>
+     </apex:pageBlock>
+</apex:page>

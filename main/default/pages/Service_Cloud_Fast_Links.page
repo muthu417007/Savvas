@@ -1,0 +1,52 @@
+<apex:page controller="ServiceConsoleFastLinksController"
+	sidebar="false" 
+	showHeader="false"  
+	>
+	
+<style>
+   a {
+      color: #015ba7;
+      font-size: 1.2em;
+      margin-left: 20px;
+      line-height: 1.5;
+      text-decoration: none;
+    }
+</style>
+
+<apex:form >
+    <p style = "font-weight:bold; margin-left:10px; font-size:150%">
+        Links
+    </p>
+    &nbsp; &nbsp; &nbsp; &nbsp;Search&nbsp;
+
+    <apex:inputText value="{!searchField}" html-class="knowledgeSearch"  onkeypress="return disableEnterKey(event);">
+    	<apex:actionSupport event="onkeyup"  action="{!updateList}" reRender="theList"/>
+    </apex:inputText>
+ 
+	<hr/>
+  
+    <div style="height: 225px; overflow: auto">
+	  	<apex:outputPanel id="theList">
+ 		    <apex:repeat value="{!fastLinks}" var="fl" >
+				<a href="{!fl.URL__c}" target="_blank">{!fl.name}</a><br/>		
+			</apex:repeat>
+		</apex:outputPanel>
+	</div>
+ </apex:form>  
+ 
+ <script type="text/javascript">
+ 
+   function disableEnterKey(e) {
+      
+      var key;
+      if(window.event)    //ie, chrome
+          key = window.event.keyCode
+      else // ff
+          key = e.which;
+          
+      return (key != 13);
+ 
+   }
+ </script>
+
+</apex:page>

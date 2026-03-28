@@ -1,0 +1,20 @@
+<apex:page standardController="Contact" showHeader="false" sidebar="false" standardStylesheets="false">
+    <apex:composition template="{!$Site.Template}">
+        <apex:define name="mainbody">  
+            <style type="text/css">
+                .ptBreadcrumb {
+                    display: none;
+                }
+            </style>
+            <apex:detail inlineEdit="false" showChatter="false" relatedList="false" subject="{!Contact.Id}" />
+        </apex:define>
+        <apex:define name="JS">  
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    // hide std account name field...can't remove from layout
+                    $("input[value='Account Name']").hide(); 
+                });
+             </script>
+        </apex:define>
+    </apex:composition>    
+</apex:page>

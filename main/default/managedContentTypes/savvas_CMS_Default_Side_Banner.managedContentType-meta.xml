@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ManagedContentType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Savvas CMS Default Side Banner</description>
+    <developerName>savvas_CMS_Default_Side_Banner</developerName>
+    <managedContentNodeTypes>
+        <helpText>Side Banner Name</helpText>
+        <isLocalizable>true</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Savvas Side Banner Name</nodeLabel>
+        <nodeName>SideBannerDetailsDefault</nodeName>
+        <nodeType>NAMEFIELD</nodeType>
+        <placeholderText>Enter Savvas Side Banner Name.</placeholderText>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Enter Need further</helpText>
+        <isLocalizable>true</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Help Related Text 1</nodeLabel>
+        <nodeName>NeedFurther</nodeName>
+        <nodeType>MTEXT</nodeType>
+        <placeholderText>Enter heading part 1</placeholderText>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Enter Help?</helpText>
+        <isLocalizable>true</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Help Related Text 2</nodeLabel>
+        <nodeName>Help</nodeName>
+        <nodeType>MTEXT</nodeType>
+        <placeholderText>Enter heading part 2</placeholderText>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Upload a top Image</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Image 1</nodeLabel>
+        <nodeName>TopImage</nodeName>
+        <nodeType>IMG</nodeType>
+        <placeholderText>Attach an Image</placeholderText>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Upload a logo Image</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Image 2</nodeLabel>
+        <nodeName>Logo</nodeName>
+        <nodeType>IMG</nodeType>
+        <placeholderText>Attach an Image</placeholderText>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Upload a Laptop Image</helpText>
+        <isLocalizable>false</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Image 3</nodeLabel>
+        <nodeName>Laptop</nodeName>
+        <nodeType>IMG</nodeType>
+        <placeholderText>Attach an Image</placeholderText>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Text Paragraph 1</helpText>
+        <isLocalizable>true</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Text Paragraph 1</nodeLabel>
+        <nodeName>Curriculum</nodeName>
+        <nodeType>MTEXT</nodeType>
+        <placeholderText>Add Text</placeholderText>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Text Paragraph 2</helpText>
+        <isLocalizable>true</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Text Paragraph 2</nodeLabel>
+        <nodeName>Gain</nodeName>
+        <nodeType>MTEXT</nodeType>
+        <placeholderText>Add Text</placeholderText>
+    </managedContentNodeTypes>
+    <managedContentNodeTypes>
+        <helpText>Text Paragraph 3</helpText>
+        <isLocalizable>true</isLocalizable>
+        <isRequired>true</isRequired>
+        <nodeLabel>Text Paragraph 3</nodeLabel>
+        <nodeName>SavvasRealize</nodeName>
+        <nodeType>RTE</nodeType>
+        <placeholderText>Add Text</placeholderText>
+    </managedContentNodeTypes>
+    <masterLabel>Savvas CMS Default Side Banner</masterLabel>
+</ManagedContentType>

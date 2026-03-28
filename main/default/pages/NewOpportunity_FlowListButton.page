@@ -1,0 +1,31 @@
+<!--
+  *********************************************************
+  Page Name            : NewOpportunity_FlowListButton
+  Created Date         : 8/14/2024
+  Author               : Brent Mac / Frank Berni - Cognizant
+  Description          : VF page tied to New Opportunity button on Opp List View that launches ScreenFlow_NewOpportunity_FromAcct
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>
+  8/12/2024     Brent Mac          Initial Version
+  8/14/2024     Frank Berni        Modified to launch Aura:App so that Flow is run in lightning runtime
+  *********************************************************
+-->
+<apex:page standardController="Opportunity" recordSetVar="opportunities" lightningStylesheets="true">
+    
+    <apex:includeLightning />
+    <!-- <flow:interview name="ScreenFlow_NewOpportunity_FromAcct"/> -->
+    
+    <!-- Launching Aura Component that hosts ScreenFlow_NewOpportunity_FromAcct  -->
+    <div id="LightningComponentid"/>
+
+    <script type="text/javascript">
+        // Contains reference to Aura:App that launches ScreenFlow_NewOpportunity_FromAcct
+        $Lightning.use("c:OpportunityFlowLauncherApp", function() {
+
+            $Lightning.createComponent("c:OpportunityFlowLauncherApp", {},
+                "LightningComponentid"
+            );
+        });  
+    </script>
+</apex:page>

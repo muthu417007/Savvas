@@ -1,0 +1,216 @@
+.label-sub-text{
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 500 !important;
+    line-height: 22.4px;
+    text-align: left;
+    color: #0C1E3D;
+    margin-top: 3px;
+    margin-bottom: 7px;
+  }
+  
+  
+  
+
+  
+  
+  .custom-button {
+  font-size: 12px;
+  }
+  
+  
+  input[type=text]{
+  padding: 16px;
+  font-size: 14px;
+}
+input[type=tet\xt]::-webkit-calendar-picker-indicator{
+  width: 0;
+  height: 0;
+  padding: 20px;
+  margin-right: -15px;
+  z-index: 2;
+}
+  
+  
+  
+  .slds-modal__container{
+      /* width: 625px; */
+      /* max-width: ;
+      border-radius: 20px; */
+      width: 548px;
+height: 738px;
+/* top: 126px;
+left: 686px; */
+gap: 0px;
+border-radius: 20px 0px 0px 0px;
+opacity: 0px;
+
+  }
+  .slds-modal__header{
+      border-radius: 20px 20px 0 0;
+      border: none;
+      padding: 0;
+      padding-top: 46px;
+  }
+  .slds-modal__footer{
+      border-radius: 0 0 20px 20px;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  .clear-cart-modal-button{
+      width: 200px;
+      height: 55px;
+      background-color: #9ECA47;
+      border-radius: 90px;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 19.8px;
+      text-align: center;
+      color: #0C1E3D;
+      display: inline-block;
+  }
+  .cancel-modal-button{
+      padding: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 21px;
+      letter-spacing: 0.01em;
+      text-align: center;
+      color: #2150A3;
+      display: inline-block;
+      width: 200px;
+  }
+  .slds-modal__header .slds-modal__close{
+      top: 10px;
+      right: 10px;
+      background-color: #0C1E3D;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-family: sans-serif !important;
+      font-size: 24px;
+      color: #fff;
+  }
+  .slds-modal__header h3{
+      font-size: 35px;
+      font-weight: 700;
+      line-height: 38.5px;
+      letter-spacing: -0.02em;
+      text-align: center;
+      color: #173770;
+  }
+  .slds-modal__content p{
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      text-align: left;
+      color: #173770;
+      margin-bottom: 10px;
+  }
+  .slds-modal__content span{
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 21px;
+      text-align: left;
+      color: #173770;
+  }
+  .slds-modal__content .slds-form_horizontal{
+      width: 85%;
+      margin: 0 auto;
+  }
+  .report-detail-grid{
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .arvicon-input{
+
+    max-width: 438px;
+    max-height: 124px;
+    min-width: 430px;
+    min-height: 230px;
+    padding: 20px;
+    top: 578px;
+    left: 281px;
+    gap: 0px;
+    border-radius: 5px;
+    border: 1px solid #AFC3D8;
+    opacity: 0px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 8px 0px #2150A31A;
+    background-image: linear-gradient(319deg, transparent 50%, #33BDCD 50%);
+    background-position: 5px 5px, 0, 100% 0;
+    background-size: 10px 10px, 10px 10px, 2.5em 2.5em;
+    background-repeat: no-repeat;
+  }
+  .arvicon-input:disabled{
+    background-color: #AFC3D8;
+    background-image: linear-gradient(319deg, transparent 50%, #FFFFFF 50%);
+  }
+  .arvicon-input:focus-visible{
+    outline: none;
+  }
+
+  .slds-radio_faux{
+    width: 24px;
+    height: 24px;
+    gap: 0px;
+    border: 1px solid #AFC3D8;
+    opacity: 0px;
+  }
+  .slds-radio [type=radio]:checked+.slds-radio__label .slds-radio_faux::after{
+    width: 14px;
+    height: 14px;
+    gap: 0px;
+    opacity: 0px;
+    background-color: #2150A3;
+  }
+  .slds-input{
+   /* // width:205px; */
+    width: 431px;
+  }
+  input::placeholder{
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    text-align: left;
+    color: #173770;
+    opacity: 50%;
+  }
+  .slds-radio_faux {
+    padding: 0 10px;
+}
+
+.slds-form-element__label {
+    font-weight: bold;
+}
+.label-sub-text{
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500 !important;
+  line-height: 22.4px;
+  text-align: left;
+  color: #0C1E3D;
+  margin-top: 3px;
+  margin-bottom: 7px;
+}
+.slds-form-element__control {
+    margin-bottom: 1rem;
+}
+.slds-form-element__label {
+    font-weight: bold;
+}
+.slds-radio_button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.slds-radio_button {
+    display: flex;
+    align-items: center;
+}

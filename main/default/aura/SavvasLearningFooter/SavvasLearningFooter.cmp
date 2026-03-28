@@ -1,0 +1,12 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" >
+    <aura:attribute name="logo" type="String" default=""/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <footer class="pageFooter slds-p-around_small slds-clearfix slds-m-top_medium slds-no-print">
+        <div >
+            <img src="{!v.logo}" class="imgClass"></img>
+            <div class="copyRight">
+                {!$Label.c.Savvas_Copyright} Savvas and Savvas logo are registered trademarks of Savvas Learning Company LLC.&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="{!$Label.c.Savvas_Terms_Link}" target="_blank">Terms</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="{!$Label.c.Savvas_Privacy_Link}" target="_blank">Privacy</a>
+            </div>
+        </div>
+    </footer>
+</aura:component>

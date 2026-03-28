@@ -1,0 +1,270 @@
+<template>
+	<template if:true={showProductSearchPage}>
+		<div class="spinner-wrapper slds-spinner_container" if:true={isLoading}
+			style="height: 200px; position:absolute;">
+			<div class="slds-backdrop slds-backdrop_open">
+				<lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+			</div>
+		</div>
+		<template lwc:if={showTabset}>
+			<h1 class="slds-assistive-text">Place Order</h1>
+			<nav class="slds-p-around_large" role="navigation" aria-label="Breadcrumbs">
+				<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+					<template if:false={isGuest}>
+						<li class="slds-breadcrumb__item">
+							<a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+						</li>
+						<li class="slds-breadcrumb__item">
+							<a href="#" class="slds-m-horizontal_small breadcrumb-label">Place Order</a>
+						</li>
+					</template>
+					<li class="slds-breadcrumb__item">
+						<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Product Search</a>
+					</li>
+				</ol>
+			</nav>
+			<div class="place-order-container">
+				<div class="slds-grid slds-wrap slds-p-horizontal_large">
+					<div class="slds-col slds-size_3-of-3">
+						<div class="slds-tabs_default slds-tabs_medium">
+							<ul class="slds-tabs_default__nav" role="tablist">
+								<li class="slds-tabs_default__item slds-is-active" role="presentation"
+									data-id="tab-default-1__item">
+									<a class="slds-tabs_default__link" href="#" role="tab" tabindex="0"
+										aria-selected="true" aria-controls="tab-default-1" data-id="tab-default-1__item"
+										data-value="ISBN /Title" onclick={handleActive}>ISBN /Title</a>
+								</li>
+								<li class="slds-tabs_default__item" role="presentation" data-id="tab-default-2__item">
+									<a class="slds-tabs_default__link" href="#" role="tab" aria-selected="false"
+										aria-controls="tab-default-2" data-id="tab-default-2__item"
+										data-value="Multi ISBN" onclick={handleActive}>Multi ISBN</a>
+								</li>
+								<li class="slds-tabs_default__item" role="presentation" data-id="tab-default-3__item">
+									<a class="slds-tabs_default__link" href="#" role="tab" aria-selected="false"
+										aria-controls="tab-default-3" data-id="tab-default-3__item" data-value="Catalog"
+										onclick={handleActive}>Catalog</a>
+								</li>
+							</ul>
+							<div id="tab-default-1" class="slds-tabs_default__content slds-p-around_none slds-show"
+								role="tabpanel" aria-labelledby="tab-default-1__item" data-id="tab-default-1__item"
+								data-name="tabpanel">
+								<template if:false={showProductTitlePage}>
+									<div class="slds-grid slds-wrap">
+										<div class="slds-col slds-col-size_3-of-3">
+											<div class="isbn-wrapper slds-p-around_large">
+												<h2 class="slds-is-relative slds-m-bottom_large isbn-title">Search
+													Criteria</h2>
+												<div class="slds-grid slds-gutters slds-wrap">
+													<div class="slds-col slds-size_1-of-3">
+														<div class="slds-form-element">
+															<label class="slds-form-element__label" for="isbn">ISBN</label>
+															<div class="slds-form-element__control">
+																<input type="text" data-id="isbn" placeholder="Enter ISBN" class="slds-input isbnInputField" maxlength="13" value={isbnValue} oninput={handleTextInputChange} onkeypress={handleTextInputChange} aria-label="ISBN, Search for complete ISBNs only: 10 or 13 digits"/>
+															</div>
+															<p class="slds-m-top_x-small">Search for complete ISBNs
+																only: 10 or 13 digits</p>
+														</div>
+													</div>
+													<div class="slds-col slds-size_1-of-3">
+														<div class="slds-form-element">
+															<label class="slds-form-element__label" for="keyword">Title Keyword(s)</label>
+															<div class="slds-form-element__control">
+																<input type="text" id="keyword" placeholder="Enter Keywords" class="slds-input" value={titlekeyword} oninput={handleTextInputChange} onkeypress={handleTextInputChange} />
+															</div>
+														</div>
+													</div>
+													<div class="slds-col slds-size_1-of-3">
+														<div class="slds-form-element">
+															<label class="slds-form-element__label" for="checkbox-unique-id-80">Active Products Only</label>
+															<div class="slds-form-element__control slds-m-top_medium">
+																<span class="slds-checkbox slds-checkbox_standalone">
+																<input type="checkbox" id="checkbox-unique-id-80" name="label" aria-label="Active Products Only" value="option" checked={activeProducts} onchange={handleActiveProductsChange} />
+																<label class="slds-checkbox__label">
+																	<span class="slds-checkbox_faux"></span>
+																</label>
+																</span>
+															</div>
+														</div>
+													</div>
+													<div class="slds-col slds-size_3-of-3">
+														<div class="slds-form-element__control slds-m-top_medium">
+															<button class="slds-button search-button slds-m-right_medium" onclick={handleSearch} aria-disabled={searchDisabled} >
+															<lightning-icon class="search-icon slds-m-right_x-small"  size='x-small'></lightning-icon>
+															Search
+														</button>
+															<button class="slds-button clear-button" onclick={handleClear} aria-disabled={disableClearButton}>
+															Clear
+														</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="slds-grid slds-wrap slds-m-top_large">
+										<div class="slds-col slds-col-size_3-of-3 slds-m-bottom_xx-large">
+											<div class="slds-p-around_large slds-m-bottom_xx-large isbn-wrapper">
+												<h2 class="slds-is-relative isbn-title">Search Results</h2>
+												<div class="slds-grid slds-wrap slds-grid_align-end">
+													<div class="slds-col">
+														<div class="filter-details">
+															<template if:true={showResults}>
+																
+
+	<!-- <div class="slds-form-element__label slds-float_left" style="margin-top: 20px; margin-right: 1rem;">
+				<lightning-input 
+                    type="checkbox" 
+                    label="National AND my State(s)"
+                    checked={nationalStateFilter}
+                    onchange={handleNationalStateFilterChange}
+                    class="national-state-filter">
+                </lightning-input></div> -->
+				<div class="slds-form-element">
+									<div class="slds-form-element__control" style="font-weight: 600;font-size: 16px;text-align: left;position: relative;color: #0C1E3D;margin-top: 15px;">
+										<div class="slds-checkbox">
+											<input type="checkbox" name="options" id="checkbox-unique-id-84" value="checkbox-unique-id-84" 
+											checked={nationalStateFilter} onchange={handleNationalStateFilterChange} />
+											<label class="slds-checkbox__label" for="checkbox-unique-id-84">
+											<span class="slds-checkbox_faux"></span>
+											<span>National AND my State(s)</span>
+											</label>
+										</div>
+									</div>
+								</div>
+				
+															<div
+																class="slds-is-relative slds-show_inline-block slds-m-left_x-small">
+																<div
+																	class="slds-show_inline-block info-icon slds-text-align_center" style="margin-right: 42px;margin-bottom: 5px;">
+																	i</div>
+																<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-right stateFilter"
+																	role="tooltip" style=" margin-left: -12px;">
+																	<div class="slds-popover__body">{labels.scc_stateFilterMessage}</div>
+																</div>
+															</div>
+
+																<button class="slds-button slds-m-right_small add-to-cart" onclick={addSelectedToCartHandleClick} aria-disabled={addSelectedToCartBtnDisabled}>{addToCartButtonLabel}</button>
+																<button class="slds-button slds-m-right_small clear-cart" onclick={clearCartHandleClick} aria-disabled={clearCartBtnDisabled}>{clearCartButtonLabel}</button>
+																<button class="slds-button slds-m-right_small review-cart" onclick={reviewCartHandleClick} aria-disabled={reviewCartDisabled}>
+																<img class="slds-m-right_xx-small cart-blue" src={labels.scc_checkout_cart} alt="cart icon" />
+																<img class="slds-m-right_xx-small cart-white" src={labels.scc_checkout_cart_white} alt="cart icon" />
+																{reviewCartButtonLabel}
+															</button>
+															</template>
+															<label class="slds-form-element__label" for="filter-search-input">Filter Results &nbsp;<span class="slds-assistive-text">Enter a keyword to filter within the current set of search results. Showing {transformedDataLength} of {totalCount} Items,Search by ISBN, Keyword</span></label>
+															<div
+																class="slds-is-relative slds-show_inline-block slds-m-right_x-small">
+																<div
+																	class="slds-show_inline-block info-icon slds-text-align_center">
+																	i</div>
+																<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+																	role="tooltip" id="5">
+																	<div class="slds-popover__body">Enter a keyword to
+																		filter within the current set of search results
+																	</div>
+																</div>
+															</div>
+															<div class="slds-is-relative">
+																<input type="text" id="filter-search-input" value={filterSearchValue} class="slds-input filter-search-input" onchange={handleFilter} onkeyup={handleFilter} />
+																<button class="slds-button filter-clear" onclick={clearFilterInput} aria-label="Close">x</button>
+															</div>
+															<div class="slds-form-element__label item-count">
+																{transformedDataLength} of {totalCount} Items</div>
+															<div
+																class="slds-is-relative slds-show_inline-block slds-m-left_x-small">
+																<div
+																	class="slds-show_inline-block info-icon slds-text-align_center">
+																	i</div>
+																<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-right"
+																	role="tooltip">
+																	<div class="slds-popover__body">Search by ISBN,
+																		Keyword</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<template if:true={showSearchResultErrorMessage}>
+													<p class="slds-p-around_x-small slds-text-body_small slds-text-color_destructive"
+														role="alert">
+														{searchResultErrorMessage}
+													</p>
+												</template>
+												<template if:true={showResults}>
+													<c-scc_custom-table filter={filterCriteria}
+														raw-parent-table-data={productQuantityData}
+														oncheckboxchange={handleCheckboxChange}
+														onshowproducttitlepage={openChildTitlePage}
+														check-active-id={activeCartId}
+														onquantitychange={handleQuantityChange}
+														add-selected-to-cart={addToCart}
+														onreveiewcartcount={handleReviewCartCount}
+														userselection={userInputs}
+														ontransformeddatalength={handleTransformedDataLength}
+														onresetaddtocart={handleresetaddtocart}
+														default-national-state-filter={nationalStateFilter}>
+													</c-scc_custom-table>
+												</template>
+											</div>
+										</div>
+									</div>
+								</template>
+							</div>
+							<div id="tab-default-2" class="slds-tabs_default__content slds-p-around_none slds-hide"
+								role="tabpanel" aria-labelledby="tab-default-2__item" data-id="tab-default-2__item"
+								data-name="tabpanel">
+								<c-scc_place-order-multi_-i-s-b-n-search
+									parent-selected-product-record={selectedProductRecord}
+									onshowproducttitlepage={handleshowproducttitlepage}
+									onhideparenttab={handlehideparenttab} userselection={userInputs}
+									multiuserinput={userInputOfMultiISBN} multireturn={multiReturnPages}>
+								</c-scc_place-order-multi_-i-s-b-n-search>
+							</div>
+							<div id="tab-default-3" class="slds-tabs_default__content slds-p-around_none slds-hide"
+								role="tabpanel" aria-labelledby="tab-default-3__item" data-id="tab-default-3__item"
+								data-name="tabpanel">
+								<c-scc_place-order-catalog-l-w-c onshowproducttitlepage={handleshowproducttitlepage}
+									parent-selected-product-record={selectedProductRecord}
+									onhideparenttab={handlehideparenttab} userselection={userInputs}>
+								</c-scc_place-order-catalog-l-w-c>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+		<template if:true={isModalOpen}>
+			<div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog">
+				<div class="slds-modal__container">
+					<div class="slds-modal__header">
+						<button class="slds-modal__close closebtnOnFocus clearCartCloseBtn" onclick={closeModal} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+						<h2>Clear cart</h2>
+					</div>
+					<div class="slds-modal__content slds-p-around_medium">
+						<div class="slds-form_horizontal slds-text-align_center" role="alert">
+							<p> Are you sure you want to clear all items from this Cart?</p>
+							<div class="slds-show_inline-block note-icon slds-m-right_xx-small">!</div>
+							<span role="alert">This action cannot be undone</span>
+						</div>
+					</div>
+					<div class="slds-modal__footer">
+						<button class="slds-button clear-cart-modal-button" data-index="0"  onclick={handleClearCart}>Clear Cart</button>
+						<button tabindex="0" class="slds-button cancel-modal-button" onclick={handleCancel} onfocusout={focusOutButton}>Cancel</button>
+					</div>
+				</div>
+			</div>
+		</template>
+		<template if:true={showProductTitlePage}>
+			<c-scc_place-order-title-page-l-w-c parent-selected-product-record={selectedProductRecord}
+				userselection={userInputs} currentabtitle={currentTab} onclosetitlepage={closeChildTitlePage}
+				multiinputs={userInputOfMultiISBN}>
+			</c-scc_place-order-title-page-l-w-c>
+		</template>
+	</template>
+	<template if:true={reviewCartPage}>
+		<c-scc_review-cart-page currentabtitle={currentTab} userselection={userInputs}> </c-scc_review-cart-page>
+	</template>
+	<template if:true={clearCartItems}>
+		<c-scc_delete-items-from-cart onrefreshevent={handlerefreshevent}> </c-scc_delete-items-from-cart>
+	</template>
+</template>

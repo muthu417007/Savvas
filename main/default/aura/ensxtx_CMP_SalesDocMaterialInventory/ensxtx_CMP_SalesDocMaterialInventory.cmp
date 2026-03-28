@@ -1,0 +1,40 @@
+<aura:component access="global">
+
+    <aura:attribute name="fieldSettings" type="Map"/>
+    <aura:attribute name="inventoryList" type="List"/>
+
+    <lightning:card class="slds-card slds-m-around_xsmall slds-is-relative">
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer table-fixed-layout">
+            <caption></caption>
+            <thead>
+                <tr class="table-head slds-grid--vertical-stretch">
+                    <aura:if isTrue="{!v.fieldSettings.Plant.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_Plant}</th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.CommittedDate.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_CommittedDate}</th>
+                    </aura:if>
+                    <aura:if isTrue="{!v.fieldSettings.CommittedQuantity.display}">
+                        <th scope="col">{!$Label.c.ensxtx_SalesDoc_Table_CommittedQuantity}</th>
+                    </aura:if>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.inventoryList}" var="inventory">
+                    <tr>      
+                        <aura:if isTrue="{!v.fieldSettings.Plant.display}">
+                            <td><lightning:formattedText value="{!inventory.Plant}"/></td>
+                        </aura:if>                              
+                        <aura:if isTrue="{!v.fieldSettings.CommittedDate.display}">
+                            <td><lightning:formattedDateTime value="{!inventory.CommittedDate}"/></td>
+                        </aura:if>
+                        <aura:if isTrue="{!v.fieldSettings.CommittedQuantity.display}">
+                            <td><lightning:formattedNumber style="decimal" minimumFractionDigits="2" value="{!inventory.CommittedQuantity}"/></td>
+                        </aura:if>
+                    </tr>                                    
+                </aura:iteration>
+            </tbody>
+        </table>
+    </lightning:card>
+
+</aura:component>

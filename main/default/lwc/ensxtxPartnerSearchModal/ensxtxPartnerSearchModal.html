@@ -1,0 +1,50 @@
+<template>
+    <lightning-modal-header label={title}></lightning-modal-header>
+    <lightning-modal-body>
+        <template if:false={displayPagging}>
+            <div class="slds-col slds-size_2-of-12" onkeypress={onKeyPressPartnerNumber}>
+                <lightning-input name="partnerSearchField" type="text" placeholder={customLabel.ensxtx_PartnerSearch_PlaceHolder_SearchPartners} value=""></lightning-input>
+            </div>
+        
+            <div class="slds-m-top_x-small">
+                <lightning-button variant="brand" label={customLabel.ensxtx_PartnerSearch_Button_Search} onclick={onSearch}></lightning-button>
+            </div>
+        </template>
+
+        <lightning-card class="slds-card slds-m-around_xsmall slds-is-relative wideBox">
+            <div class="slds-form">  
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text={customLabel.ensxtx_Common_Loading} size="medium" variant="brand"></lightning-spinner>
+                </template>
+                <template if:true={messages.length}>
+                    <div class="slds-m-top_small">
+                        <template for:each={messages} for:item="message">
+                            <c-ensxtx-message message={message} key={message.key}></c-ensxtx-message>
+                        </template>
+                    </div>
+                </template>
+                <template if:false={isLoading}>
+                    <lightning-datatable 
+                        key-field="Key" 
+                        data={displayedPartners} 
+                        columns={columns}
+                        onrowselection={onRowSelect}
+                        default-sort-direction={defaultSortDirection}
+                        sorted-direction={sortDirection}
+                        sorted-by={sortedBy}
+                        onsort={onSort}
+                        suppress-bottom-bar>
+                    </lightning-datatable>
+                    <template if:true={displayPagging}>
+                        <div class="slds-m-top_medium">
+                            <c-ensxtx-pagination paging-options={pagingOptions} onpagingchange={onPagingOptionsChange}></c-ensxtx-pagination>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </lightning-card>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <button class="slds-button slds-button_brand" onclick={onCancel}>{customLabel.ensxtx_PartnerSearch_Button_Cancel}</button>
+    </lightning-modal-footer>
+</template>

@@ -1,0 +1,16 @@
+<template>
+    <lightning-combobox
+        if:true={showThis}
+        name="Disipline" 
+        placeholder="-Discipline-" 
+        value={thisValue}
+        class="minwidth-200"
+        disabled={disabled}
+        options={options} 
+        onchange={handleChange} 
+        data-id={thisDataId}
+        required
+        variant="label-hidden"
+        message-when-value-missing="Missing Value">
+    </lightning-combobox>
+</template>

@@ -1,0 +1,12 @@
+.slds-card{
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--slds-c-card-color-border,
+        var(--slds-c-card-color-border,
+        var(--slds-c-card-color-border,
+        rgb(201, 201, 201))));
+    box-shadow: var(--slds-c-card-shadow,
+        var(--slds-c-card-shadow,
+        var(--slds-c-card-shadow,
+        0 2px 2px 0 rgba(0, 0, 0, 0.10))))
+}

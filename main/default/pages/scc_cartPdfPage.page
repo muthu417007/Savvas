@@ -1,0 +1,133 @@
+<apex:page renderAs="pdf" showHeader="false" contentType="application/pdf" controller="scc_pdfCartController"> 
+    <!-- Page 1: User and Cart Details with Logo -->
+    <div style="page-break-after:always;">
+        <img style="width: 200px;margin-top:30px;" src="{!URLFOR($Resource.scc_savvasLogo)}" />
+        <p style="float: right;font-family:sans-serif;font-size:15px;font-weight:500;line-height: 16px;text-align:right;">
+            15 E Midland Ave St 502<br/>Paramus, NJ, 07652-2938
+        </p>
+        <table>
+            <tr style="height: 30px;"><td></td></tr>
+        </table>
+        <table>
+            <apex:repeat value="{!webCartData}" var="item1">
+                <tr>
+                    <td style="vertical-align:top;">
+                        <table style="width:330px">                
+                            <tr><td style="font-family:sans-serif;font-size:16px;font-weight:500;line-height: 16px;">{!userNameData.Name}</td></tr>
+                            <tr><td style="font-family:sans-serif;font-size:16px;font-weight:500;line-height: 16px;">{!item1.Shipping_Street__c}</td></tr>
+                            <tr><td style="font-family:sans-serif;font-size:16px;font-weight:500;line-height: 16px;">
+                                <apex:outputText value="{!item1.Shipping_City__c}" rendered="{!NOT(ISBLANK(item1.Shipping_City__c))}"/>
+                                <apex:outputText value=", " rendered="{!NOT(ISBLANK(item1.Shipping_City__c)) && NOT(ISBLANK(item1.Shipping_State__c))}"/>
+                                <apex:outputText value="{!item1.Shipping_State__c}" rendered="{!NOT(ISBLANK(item1.Shipping_State__c))}"/>
+                                <apex:outputText value=" " rendered="{!NOT(ISBLANK(item1.Shipping_State__c)) && NOT(ISBLANK(item1.Shipping_Zip_Code__c))}"/>
+                                <apex:outputText value="{!item1.Shipping_Zip_Code__c}" rendered="{!NOT(ISBLANK(item1.Shipping_Zip_Code__c))}"/>
+                            </td></tr>
+                            <tr><td style="font-family:sans-serif;font-size:16px;font-weight:500;line-height: 16px;">{!item1.Shipping_Country__c}</td></tr>
+                        </table>
+                    </td>
+                    <td style="vertical-align:top;">
+                        <table style="margin-left:auto;">
+                            <tr style="font-family:sans-serif;font-size:16px;font-weight:500;line-height: 16px;"><td style="font-weight: 600;">Cart Number</td><td>&nbsp;&nbsp;&nbsp;{!item1.Id}</td></tr>
+                            <tr><td style="font-family:sans-serif;font-size:16px;font-weight:500;line-height: 6px;">&nbsp;</td></tr>
+                            <tr style="font-family:sans-serif;font-size:16px;font-weight:500;line-height: 16px;"><td style="font-weight: 600;">Cart Creation Date</td><td>&nbsp;&nbsp;&nbsp;{!creationDate}</td></tr>
+                            <tr><td style="font-family:sans-serif;font-size:16px;font-weight:500;line-height: 6px;">&nbsp;</td></tr>
+                            <tr style="font-family:sans-serif;font-size:16px;font-weight:500;line-height: 16px;"><td style="font-weight: 600;">Price Expiration Date</td><td>&nbsp;&nbsp;&nbsp;{!expirationDate}</td></tr>
+                            <tr><td style="font-family:sans-serif;font-size:16px;font-weight:500;line-height: 6px;">&nbsp;</td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </apex:repeat>
+        </table>
+        <table>
+            <tr style="height: 20px;"><td></td></tr>
+        </table>
+        <h2 style="font-family:sans-serif;font-size:20px;font-weight:600;text-align:center;">Price Quote Details</h2>
+        <table style="width: 100%;">
+            <tr>
+                <th style="font-family:sans-serif;font-size:16px;font-weight:600;width:6%;border-top: 2px solid #000;border-bottom: 2px solid #000;">Line</th>
+                <th style="font-family:sans-serif;font-size:16px;font-weight:600;width:19%;border-top: 2px solid #000;border-bottom: 2px solid #000;">ISBN</th>
+                <th style="font-family:sans-serif;font-size:16px;font-weight:600;width:31%;border-top: 2px solid #000;border-bottom: 2px solid #000;">Description</th>
+                <th style="font-family:sans-serif;font-size:16px;font-weight:600;width:12%;border-top: 2px solid #000;border-bottom: 2px solid #000;">Price</th>
+                <th style="font-family:sans-serif;font-size:16px;font-weight:600;width:12%;border-top: 2px solid #000;border-bottom: 2px solid #000;">Disc</th>
+                <th style="font-family:sans-serif;font-size:16px;font-weight:600;width:6%;border-top: 2px solid #000;border-bottom: 2px solid #000;">Qty</th>
+                <th style="font-family:sans-serif;font-size:16px;font-weight:600;width:14%;text-align:right;border-top: 2px solid #000;border-bottom: 2px solid #000;">Ext. Price</th>
+            </tr>
+            <apex:variable var="lineNumber" value="{!1}"/>
+            <apex:repeat value="{!cartwrap}" var="item">
+                <tr style="border-top: 2px solid black;">
+                    <td style="font-family:sans-serif;font-size:16px;font-weight:500;vertical-align:top;">
+                        <apex:outputText value="{!lineNumber}"/>
+                        <apex:variable var="lineNumber" value="{!lineNumber + 1}"/>
+                    </td>
+                    <td style="font-family:sans-serif;font-size:16px;font-weight:500;vertical-align:top;">
+                        <apex:outputText rendered="{!NOT(ISNULL(item.ISBN13))}" value="{!item.ISBN13}"/>
+                        <apex:outputText rendered="{!ISNULL(item.ISBN13)}" value="{!item.ISBN10}"/>
+                    </td>
+                    <td style="font-family:sans-serif;font-size:16px;font-weight:500;vertical-align:top;">{!item.Description}</td>
+                    <td style="font-family:sans-serif;font-size:16px;font-weight:500;vertical-align:top;">${!item.NetUnit}</td>
+                    <td style="font-family:sans-serif;font-size:16px;font-weight:500;vertical-align:top;">
+                        <apex:outputText rendered="{!item.PriceCondition=='ZNET'}" value="Net"/>
+                        <apex:outputText rendered="{!item.PriceCondition=='ZCON'}" value="Contract"/>
+                    </td>
+                    <!--<td style="font-family:sans-serif;font-size:16px;font-weight:500;">text</td>-->
+                    <td style="font-family:sans-serif;font-size:16px;font-weight:500;text-align:right;vertical-align:top;">{!item.Quant}</td>
+                    <td style="font-family:sans-serif;font-size:16px;font-weight:500;text-align:right;vertical-align:top;">${!item.Total}</td>
+                </tr>
+                <tr style="height: 4px;"><td>&nbsp;</td></tr>
+            </apex:repeat> 
+            <tr><td style="border-top: 2px solid black;">&nbsp;</td><td colspan="5" style="font-family:sans-serif;font-size:16px;font-weight:600;width:100%;text-align:right;border-top: 2px solid #000;">
+                Quote Total:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="font-family:sans-serif;font-size:16px;font-weight:600;width:100%;text-align:right;border-top: 2px solid #000;">${!formattedTotalPrice}</td>
+            </tr>
+        </table>
+        <table style="width: 100%;">
+            <tr><td>&nbsp;</td></tr>
+            <tr><td style="font-family:sans-serif;font-size:16px;font-weight:400;text-align:right;font-style:italic;">(Does not include shipping and applicable taxes)</td></tr>
+        </table>
+    </div>
+
+    <!-- Page 2: Terms and Conditions --> 
+    <div class="terms-conditions"> 
+        <h2 style="font-family:sans-serif;font-size:20px;font-weight:600;">Savvas Learning Company LLC Terms and Conditions</h2> 
+        <!-- Add your terms and conditions content here -->
+        <table>
+            <tr>
+                <td style="font-family:sans-serif;font-size:14px;font-weight:500;line-height: 16px;">
+                    <span style="font-weight: 600;">To place your order</span> please submit a copy of this price quote with your Purchase Order, include the Quote Number on your Purchase Order, and include any other required documentation. You may send the order documents using an electronic form or by mail. Please submit your PO and price via one of the following methods: 
+                    <br/>
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 600;">e-Form</span>: <a href="#" style="color:blue;">http://support.savvas.com/support/s/contactsupport</a> 
+                    <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: 600;">Mail</span>: PO Box 6820, Chandler, AZ 85246 
+                    <br/>
+                    <br/>
+                    Savvas does not accept Credit Card information via postal mail, facsimile, or email. Credit Card information will only be accepted via phone, eCommerce, or OASIS. 
+                    <br/>
+                    For questions regarding your order please call Customer Service: 1-800-848-9500. 
+                    <br/>
+                    <br/>
+                    <p style="text-align: justify;word-break: break-all;">
+                        <span style="font-weight: 600;">Price quote</span>: This is a price quote for the customer's convenience only, and not an offer to contract. All quotes are subject to review and final acceptance by an authorized representative of Savvas at its offices. Savvas reserves the right to correct typographical, computational or other errors. Savvas’ standard payment terms are net 30 days unless otherwise specified. All pricing is in US Dollars unless otherwise specified. Pricing calculations use multiple decimal places to determine the most accurate extended pricing but are represented in standard currency format. </p>
+                    
+                    <p style="text-align: justify;word-break: break-all;"><span style="font-weight: 600;">Shipping &#38; handling</span> charges (where applicable) are shown on the quote. S&#38;H rates quoted are for standard ground transportation and may not reflect account contracted rates. If expedited shipping is requested, actual charges may be higher. For orders picked up at the Savvas warehouse by the customer or a third-party carrier contracted by the customer, a 2% handling charge will be applied to shippable items. The 2% charge will appear on the customer proposal and invoice as a S&#38;H charge. </p>
+                    
+                    
+                    <p style="text-align: justify;word-break: break-all;"><span style="font-weight: 600;">Taxes</span>: All pricing in this quote is exclusive of any applicable sales, use or other similar taxes or duties. The customer is responsible for any such taxes or duties that may apply; if the customer is tax exempt, evidence of such tax exemption must be provided. Estimated tax may be provided solely for customer convenience. The amount indicated is only an estimate and is intended to be helpful for budgeting purposes. The actual amount of sales tax assessed at the time of invoicing may be more or less. </p>
+                    
+                    <p style="text-align: justify;word-break: break-all;"><span style="font-weight: 600;">Platforms</span>: Savvas, and any third party for which Savvas serves as the sales agent or distributor, reserve the right to change and/or update technology platforms, including possible edition updates to customers during the term of access. Customers will be notified of any change prior to the beginning of the new school year. </p>
+                    
+                    <p style="text-align: justify;word-break: break-all;"> <span style="font-weight: 600;">Damaged &#38; Defective Products</span>: If a print product, or the print component of a blended (print &#38; digital) product, is received in damaged or defective condition, Savvas will issue a credit or replacement at no charge to the customer if the customer promptly (no later than 120 days) returns the damaged or defective product.  Customers must report missing product immediately upon receipt. </p>
+                    
+                    <p style="text-align: justify;word-break: break-all;"> <span style="font-weight: 600;">Return Policy</span>: Returns (other than damaged or defective products) are subject to the following conditions:  (a) materials must be returned to Savvas at the customer’s expense in new, unused condition, suitable for resale by Savvas (note that any barcoding, stickering, stamping or similar marking on any print materials renders them unsuitable for resale); (b) materials must be returned within six (6) months from the date of purchase; (c) the customer must obtain a Return Materials Authorization (“RMA”) from Savvas prior to returning the materials, and must ship the materials back to Savvas within thirty days of receiving the RMA; (d) all materials sold in a set or package must be returned complete as originally sold; and (e) any materials provided by Savvas to the customer on a no-charge basis in consideration of the customer’s purchase must be returned in proportion to the purchased materials that are being returned for a credit.  A restocking fee of 3% may be applied to credits over $1,000.  Savvas’ return policy does not apply to science lab kits or trade publication novels, which are sold on a non-returnable basis.</p> 
+                    
+                    <p style="text-align: justify;word-break: break-all;"> <span style="font-weight: 600;">Consumable Worktexts</span>: Subsequent year consumable worktexts will ship each year on the order date of the original order for the duration of their license. Worktexts will ship to the location listed on the original order. Quantities for each grade level and title will remain consistent each year. Changes to quantities of titles previously ordered, shipping location changes, or any other changes to consumable worktext shipments must be made 4 weeks prior to the original order date. Changes should be made using the e-form:<a href="#" style="color:blue;"> https://worktext-subscriptions.savvas.com/</a>. </p>
+                    
+                    <p style="text-align: justify;word-break: break-all;"> <span style="font-weight: 600;">Annual subscriptions for iLit and Successmaker Only</span>: Savvas’ iLit and Successmaker products (and no others) automatically renew on the anniversary date of the original purchase and will be invoiced accordingly unless otherwise specified. If you wish to cancel, please let us know in writing prior to the date of renewal by completing the customer service request form which you can access here:<a href="#" style="color:blue;"> https://support.savvas.com/support/s/customer-service-support-form</a>. </p>
+                    
+                    <p style="text-align: justify;word-break: break-all;"><span style="font-weight: 600;">Technical support services</span> are included with purchase of Savvas digital products. eform: <a href="#" style="color:blue;">https://support.savvas.com/support/s/k12-curriculum-support-form</a> phone: 1-800-848-9500 </p>
+                    
+                    <p style="text-align: justify;word-break: break-all;"><span style="font-weight: 600;">Professional Services</span>: All paid services must be scheduled and delivered within twelve (12) months of the order date of those services. Any unused services expire at the end of such twelve (12) month period, unless otherwise specified in contract terms. MySavvasTraining, which provides online access to on-demand tutorials and interactive webinar sessions, is included with purchase of products (<a href="#" style="color:blue;">https://mysavvastraining.com/</a>). 
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div></apex:page>

@@ -1,0 +1,73 @@
+<apex:page controller="SearchContactMassSampleController">
+    
+    <apex:pageMessages id="errors" />  
+    
+    <apex:form id="pageForm">
+        <apex:actionFunction name="updateSelected" action="{!runSelectedQuery}"/>
+        <apex:actionFunction name="selectAll" action="{!toggleSelectAll}" rerender="ContactTable"/>
+        <apex:pageBlock >
+            
+            <b>Available List Views for Contacts:</b>
+            <br/>
+            <apex:selectList value="{!ContFilterId}" size="1" id="filterMenu">
+                <apex:selectOptions value="{!ContactExistingViews}"></apex:selectOptions>
+                <apex:actionSupport event="onchange"  action="{!resetFilter}" rerender="ContactTable,pagPanel" status="ajaxStatus"/>
+            </apex:selectList>
+        </apex:pageBlock>
+        <apex:actionStatus id="ajaxStatus" startText="Loading..."  stopText=""/>
+        <apex:pageBlock title="Contacts">
+            <apex:inputCheckbox id="selectedAll" onclick="selectAll()"/> <b>Select All:</b>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!Add}" value="Add Selected Contacts" rendered="{!$User.UITheme == 'Theme3'}"/>
+                <apex:commandButton action="{!Add}" value="Add Selected Contacts" oncomplete="callLWC()" rendered="{!$User.UITheme != 'Theme3'}" rerender="jspanel"/>
+                <apex:commandButton action="{!cancel}" value="Cancel" rendered="{!$User.UITheme == 'Theme3'}"/>
+                <apex:commandButton action="{!cancel}" value="Cancel" oncomplete="cancelLWC()" rendered="{!$User.UITheme != 'Theme3'}" rerender="jspanel"/>
+            </apex:pageBlockButtons>
+            <apex:outputPanel id="jspanel"> 
+                <script>     
+                function callLWC(){                        
+                    var belowLimit = '{!withinLimit}';
+                    if(document.referrer.indexOf(".lightning.force.com") > 0 && belowLimit == 'Yes'){
+                        var compDefinition = { 
+                            "componentDef" : "c:massSampleComponent", 
+                            "attributes" :{ 
+                                "sampleId" : "{!passSampleId}",
+                            } 
+                        };
+                        var encodedCompDef = btoa(JSON.stringify(compDefinition));
+                        window.parent.location = "/one/one.app#"+encodedCompDef;
+                        
+                    }
+                    else if(document.referrer.indexOf(".lightning.force.com") > 0 && belowLimit == 'No'){
+                        alert ('Maximum number of Account is 20');
+                    }
+                }
+                function cancelLWC(){
+                    var compDefinition = { 
+                        "componentDef" : "c:massSampleComponent", 
+                        "attributes" :{ 
+                            "sampleId" : "{!passSampleId}",
+                        } 
+                    };
+                    var encodedCompDef = btoa(JSON.stringify(compDefinition));
+                    window.parent.location = "/one/one.app#"+encodedCompDef;
+                }                
+                </script>
+            </apex:outputPanel>
+            <apex:pageBlockTable value="{!Contacts}" var="c" id="ContactTable">
+                <apex:column headerValue="Select">
+                    <apex:inputCheckbox value="{!c.isSelected}" id="selected" onclick="updateSelected()"/>
+                </apex:column>
+                <apex:repeat value="{!$ObjectType.Contact.FieldSets.MassSampleContactField}" var="field">
+                    <apex:column value="{!c.cont[field]}"/>
+                </apex:repeat>
+            </apex:pageBlockTable>
+            <apex:panelGrid columns="4" id="pagPanel">
+                <apex:commandLink action="{!firstPage}" rendered="{!hasPrevious}">First</apex:commandLink>
+                <apex:commandLink action="{!prev}" rendered="{!hasPrevious}">Previous</apex:commandLink>
+                <apex:commandLink action="{!next}" rendered="{!hasNext}">Next</apex:commandLink>
+                <apex:commandLink action="{!lastPage}" rendered="{!hasNext}">Last</apex:commandLink>
+            </apex:panelGrid>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

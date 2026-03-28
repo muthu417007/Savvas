@@ -1,0 +1,16 @@
+<template>
+    <article class="slds-card slds-m-top_x-small">
+        <c-ensxtx-app-settings-input-header setting={setting}></c-ensxtx-app-settings-input-header>
+        <div class="slds-card__body slds-card__body_inner">
+            <template for:each={setting.objectSettings} for:item="objectSetting">
+                <div key={objectSetting.name} class="slds-m-top_x-small">
+                    <c-ensxtx-app-settings-input
+                        setting={objectSetting}
+                        is-child-input={isChildInput}
+                        oninputchange={handleSettingsChange}>
+                    </c-ensxtx-app-settings-input>
+                </div>
+            </template>
+        </div>
+    </article>
+</template>

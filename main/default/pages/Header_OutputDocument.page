@@ -1,0 +1,77 @@
+<!--
+  *********************************************************
+  Component Name       : Header_OutputDocument
+  Created Date         : 10/30/2024  
+  Author               : Frank Berni - Cognizant
+  Description          : VF custom header template page for CPQ Quote generation. Conditionally displays specific fields
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>    
+  10/30/2024   Frank Berni         W-016391 : Initial creation - displays specific quote fields horiziontally, date field formatting, conditional rendering
+  *********************************************************
+-->
+<apex:page contentType="text/xml" showHeader="false" sidebar="false" controller="CustomHeaderController">
+    <block>&nbsp;</block>
+    <block-container>
+        <block font-size="10px" font-family="{!template.SBQQ__FontFamily__c}" >
+            <!-- text-align="left" -->
+            <table width="100%" border-style="none" border-width="0px" >
+                <table-column column-width="70%"/>
+                <table-column column-width="50%"/>
+                <table-body>
+
+                    <table-row>
+                        <!-- left side -->
+                        <table-cell padding="5px" border-style="none" border-width="0px" text-align="left">
+                            <block><apex:outputText value="{!quote.PrimaryContactName__c}"/></block>
+                            <block><apex:outputText value="{!quote.PrimaryContactRole__c}"/></block>
+                            <block><apex:outputText value="{!quote.SBQQ__Account__r.Name}"/></block>
+                            <block><apex:outputText value="{!quote.SBQQ__BillingStreet__c}"/></block>
+                            <block><apex:outputText value="{!quote.SBQQ__BillingCity__c}, {!quote.SBQQ__BillingState__c}, {!quote.SBQQ__BillingPostalCode__c}"/></block>
+                            
+                            <block font-weight="bold"><apex:outputText value="Shipping Information:" rendered="{!showShipAddress}"/></block>
+                            <block><apex:outputText value="{!quote.ShippingAddress__c}" rendered="{!showShipAddress}"/></block>
+                            
+                            <block font-weight="bold"><apex:outputText value="Special Notes:" rendered="{!showSpecialNotes}"/></block>
+                            <block><apex:outputText value="{!quote.Special_Notes__c}" rendered="{!showSpecialNotes}"/></block>
+                        </table-cell>
+                        
+                        <!-- Right side -->
+                        <table-cell padding="5px" border-style="none" border-width="0px" text-align="left">
+                            
+                            <block font-weight="bold"><apex:outputText value="Quote Name: "/></block>
+                            <block><apex:outputText value="{!quote.Quote_Name__c}"/></block>
+                            
+                            <block font-weight="bold"><apex:outputText value="Quote Creation Date:"/> </block>
+                            <block>                                
+                                <apex:outputText value="{0,date,MM-dd-yyyy}"> 
+                                    <apex:param value="{!quote.SBQQ__StartDate__c}"/>
+                                </apex:outputText>
+                            </block>
+
+                            <block font-weight="bold"><apex:outputText value="Quote Expiration Date:"/> </block>
+                            <block>                                        
+                                <apex:outputText value="{0,date,MM-dd-yyyy}"> 
+                                    <apex:param value="{!quote.CPQ_Quote_Expiry_Date__c}"/>
+                                </apex:outputText>
+                            </block>
+
+                            <block font-weight="bold"><apex:outputText value="License to District #:" rendered="{!showDistrictLicense}"/></block>
+                            <block><apex:outputText value="{!quote.License_to_District__c}" rendered="{!showDistrictLicense}"/></block>
+                            
+                            <block font-weight="bold"><apex:outputText value="Invoice for Future Date:" rendered="{!showFutureShipDate}"/></block>
+                            <block>                                                          
+                                <apex:outputText value="{0,date,MM-dd-yyyy}" rendered="{!showFutureShipDate}"> 
+                                    <apex:param value="{!quote.Future_Ship_Start_Date__c}"/>
+                                </apex:outputText>
+                            </block>
+
+                        </table-cell>
+                    </table-row>
+
+                </table-body>
+            </table>
+        </block>
+    </block-container>
+
+</apex:page>

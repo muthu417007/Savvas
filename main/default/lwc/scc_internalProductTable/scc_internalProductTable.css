@@ -1,0 +1,242 @@
+.dummy{
+	color : black;
+}
+img {
+    max-width: 17px;
+    height: 17px;
+}
+.filterInput{
+    width: 184px;
+    height: 40px;
+    left: 137.5px;
+    gap: 0px;
+    border-radius: 5px;
+    border: 1px solid #D1D7E2;
+    box-shadow: 0px 4px 10px 0px #2150A31A;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22.5px;
+    text-align: left;
+    color: #173770;
+    padding-left: 10px;
+
+}
+.brown-font
+{
+  color: #82755b;
+}
+/* .CAD{
+  color: #82755b !important;
+} */
+.CAD,.CAD a{
+  color: #82755b !important;
+}
+.filterInput:focus-visible{
+    outline: none;
+}
+
+.filterSearch{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    color: #173770;
+}
+.countItems{
+    height: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    color: #173770;
+    margin-left: 15px;
+    padding-left: 15px;
+    border-left: 1px solid rgb(12, 30, 61, 20%);
+}
+
+.slds-popover{
+  width: 400px;
+  max-width: none;
+  position:absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  background-color: #0D2A7A;
+  color: #fff;
+  border-radius: 4px;
+}
+.slds-popover.isbnTooltip{
+  width: 254px;
+}
+.slds-popover.filterTooltip{
+  width: 185px;
+}
+.slds-popover .slds-popover__body{
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: left;
+  color: #fff;
+}
+.info-icon:hover+.slds-popover{
+  display: block;
+}
+
+.filterInfo-poppup{
+    margin-bottom: 57px; 
+    margin-left: -5px; 
+    max-width: 250px;
+}
+
+.countInfoSingleISBN-poppup{
+    margin-top: -40px;
+    margin-left: -3px;
+    max-width: 200px;
+}
+
+.countInfoMultiISBN-poppup{
+    margin-top: auto;
+    margin-left: 63px;
+    max-width: 190px;
+    bottom: 240px;
+}
+.countInfo-poppup{
+  margin-top: auto;
+    margin-left: 63px;
+    max-width: 190px;
+    bottom: 240px;
+}
+
+.sampleTest:hover{
+    margin-top: 7px;
+    visibility: hidden;
+}
+
+.page-count-shown{
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  color: #173770;
+  margin-top:10px; 
+}
+
+.table-control-button{
+  background-color: #D1D7E2;
+  border: 1px solid #D1D7E2;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 19.8px;
+  text-align: left;
+  padding: 10px;
+  margin-right: 5px;
+}
+.table-control-button:not([disabled]){
+  background-color: #2150A3;
+}
+.slds-button .slds-button__icon{
+  fill: #2150A3;
+}
+.tableDiv{
+  max-height: 650px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+table{
+  background-color: #ffff;
+  color:#173770;
+  
+}
+
+.tableDiv::-webkit-scrollbar{
+  background-color: #FFFFFF;
+  width: 8px;
+}
+.tableDiv::-webkit-scrollbar-thumb{
+  background-color: #AFC3D8;
+  border: 1px solid #AFC3D8;
+  border-radius: 10px;
+}
+.table-head{
+font-size: 14px;
+font-weight: 600;
+line-height: 21px;
+text-align: left;
+color: #0C1E3D;
+background-color: #ffff;
+
+}
+
+/* .table-head > td{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+.table-body{
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+  text-align: left;
+  color:#173770;
+}
+td{
+  padding: 4px;
+}
+/* .table-body tr.CAD td , .table-body tr.CAD td a{
+  color:#fb3a43 !important;
+} */
+
+.loader {
+  width: 30px;
+  aspect-ratio: 1;
+  display:grid;
+  -webkit-mask: conic-gradient(from 15deg,#0000,#000);
+  animation: l26 1s infinite steps(12);
+}
+
+.loader, .loader:before, .loader:after{
+  background: radial-gradient(closest-side at 50% 12.5%, #2150A3  96%,#0000) 50% 0/20% 80% repeat-y, radial-gradient(closest-side at 12.5% 50%, #2150A3 96%,#0000) 0 50%/80% 20% repeat-x;
+}
+.loader:before, .loader:after {
+  content: "";
+  grid-area: 1/1;
+  transform: rotate(30deg);
+}
+.loader:after {
+  transform: rotate(60deg);
+}
+
+@keyframes l26 {
+  100% {transform:rotate(1turn)}
+}
+
+tr:nth-child(odd) { 
+  background: #E5F1FD;
+}
+thead > tr > td{
+  max-height: 30px;
+}
+thead > tr > td:not(:last-child){
+  //border-right: 1px solid rgb(12, 30, 61, 20%);
+}
+.thBorder{
+  width: 2px;
+  height: 17px;
+  border-right: 1px solid rgb(12, 30, 61, 20%);
+}
+/* tr:first-child {
+  background : #fff;
+} */
+/* .slds-card{
+  border: 1px solid #AFC3D8;
+  border-radius: 10px;
+} */
+/* .search-result-cards .slds-card{
+  border: 1px solid #AFC3D8;
+  border-radius: 10px;
+} */

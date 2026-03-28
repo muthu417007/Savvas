@@ -1,0 +1,48 @@
+<template>
+    <lightning-card title="enosix BO Config" icon-name="custom:custom21">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <template if:true={messages.length}>
+            <div class="slds-m-top_small">
+                <template for:each={messages} for:item="message">
+                    <c-ensxtx-message message={message} key={message.key}></c-ensxtx-message>
+                </template>
+            </div>
+        </template>
+        <div class="slds-p-horizontal_small">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-4">
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label">Filter</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-select_container">
+                                <select class="slds-select" onchange={onSelectChange}>
+                                    <template for:each={businessObjects} for:item="item">
+                                        <option key={item.value} value={item.value}>{item.label}</option>
+                                    </template>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-4 slds-text-align_right">
+                    <div class="slds-p-top_small slds-text-heading_small">Total Records: {totalRecords}</div>
+                </div>
+            </div>
+
+            <div class="tableWrapper slds-m-top_small">
+                <lightning-datatable
+                    key-field="id"
+                    data={displayData}
+                    columns={columns}
+                    onsort={onSort}
+                    sorted-by={sortedBy}
+                    sorted-direction={sortedDirection}
+                    hide-checkbox-column="true"
+                    is-loading={isLoading}>
+                </lightning-datatable>
+            </div>
+        </div>
+    </lightning-card>
+</template>

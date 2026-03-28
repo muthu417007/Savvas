@@ -1,0 +1,11 @@
+<template>
+<template if:true= {showContentV2}>
+    <c-savvas-virtual-sample-side-banner></c-savvas-virtual-sample-side-banner>
+</template>
+<template if:true={showContentDefault}>
+    <c-savvas-virtual-samples-default-side-banner></c-savvas-virtual-samples-default-side-banner>
+</template>
+<template if:true={showNoContent}>
+   &nbsp;
+</template>
+</template>

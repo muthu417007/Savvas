@@ -1,0 +1,30 @@
+<apex:page sidebar="false" standardStylesheets="false">
+ <apex:includeScript value="/support/console/20.0/integration.js"/>
+   <script type="text/javascript">     
+  function setTabTitle() {
+           sforce.console.setTabTitle('Defective Returns Guide');
+       }      
+       var previousOnload = window.onload;       
+       window.onload = function() {
+            if (previousOnload) {
+                previousOnload();
+            }               
+            setTimeout('setTabTitle()', '500');
+       }
+   </script>
+
+<STYLE type="text/css">
+.resolution {
+float:left;}
+.choice {border-bottom-style:solid; border-color:#ff77cc; border-bottom-width:1px;}
+.resolution ul {list-style-type:decimal;}
+.detailList {
+border-spacing: 10px;}
+.interviewDisplayTextRow div {margin-top:5px;}
+</STYLE>
+    <apex:outputLabel > <h1>Defective Returns Guide</h1></apex:outputLabel>
+  <flow:interview name="Defective_Returns_Guide" buttonStyle="color:#050; background-color:#fed; border:1px solid;" />
+  
+
+
+</apex:page>

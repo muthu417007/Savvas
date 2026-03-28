@@ -1,0 +1,179 @@
+/* slider filter will have its color match the other filters due to out of box combobox limitations */
+.slider {
+    /* color:rgb(116, 116, 116); */
+    font-weight: bold;
+}
+
+/* all filter fields except slider filter will have their text darkened and boldened */
+.filter {
+    color:black; 
+    font-weight: bold;
+    /* spacing between filter fields */
+    margin-right: 10px;
+}
+
+/* styling the slider range line */
+.slds-slider__range {
+    -webkit-appearance: none;
+    width: 100%;
+    /* background: #dfe1e6; */
+    outline: none;
+    opacity: 1;
+    transition: opacity 0.2s;
+    border-radius: 15px;
+}
+
+/* when hovering over the slider */
+.slds-slider__range:hover {
+    opacity: 1;
+}
+
+/* modifies the button to have a slight shadow around it */
+.slds-slider__range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #0070d2;
+    cursor: pointer;
+    box-shadow: 0 0 0 4px rgba(0, 112, 210, 0.2);
+}
+
+/* modifies the range to have shadow */
+.slds-slider__range::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #0070d2;
+    cursor: pointer;
+    box-shadow: 0 0 0 4px rgba(0, 112, 210, 0.2);
+}
+
+/* when focused have a shadow around it */
+.slds-slider__range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 8px rgba(0, 112, 210, 0.16);
+}
+
+/* when focused have a shadow around it */
+.slds-slider__range:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 8px rgba(0, 112, 210, 0.16);
+}
+
+
+/* div for table setting max width*/
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* removed fixed from table*/
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    }
+
+.product-table th, .product-table td {
+    padding: 0.75rem;
+    border: 1px solid #d3d3d3;
+    text-align: left;
+}
+
+/*individual classes for each column*/
+.checkbox-col {
+    width: 40px;
+}
+
+.isbn-col {
+    width: 100px;
+}
+/* category-col*/
+.category-col {
+    width: 125px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+/* removed word-wrap and white-space */
+.description-col {
+    width: 125px;
+}
+
+.audience-col {
+    width: 120px;
+}
+
+.subtype-col {
+    width: 120px;
+}
+
+/* added word-wrap and white-space*/
+.programseries-col {
+    width: 100px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+/* added word-wrap and white-space */
+.gradeband-col {
+    width: 120px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+/* added word-wrap and white-space */
+.solutiontype-col {
+    width: 100px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.duration-col {
+    width: 100px;
+}
+
+/* added word-wrap and white-space*/
+.copyright-col {
+    width: 100px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.price-col {
+    width: 100px;
+}
+
+/* select the button container class and model it similar to ProductFamilyAddOpptyLines_vf
+This will have the button overlay at the bottom to prevent scrolling */
+/* Ensures container is always visible at the bottom*/
+.button-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white; /* matches background color of page*/
+    border-top: 1px solid #ddd; /* top border for separation*/
+    padding: 10px;
+    text-align: center; 
+    z-index: 1000; /* ensures buttons are above other content*/
+}
+
+/* Ensure buttons are spaced and aligned properly*/
+.button-container apex|commandButton {
+    margin: 0 10px;
+}
+
+/* additional styling to increase size of checkboxes */
+.checkbox-div {
+    transform: scale(2);
+}
+
+.checkboxes {
+    transform: scale(1);
+}
+
+/* NEW formating button to be at center of page */
+.resetButton {
+    margin-top: 5px;
+    margin-right: 215px;
+}

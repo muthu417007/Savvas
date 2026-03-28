@@ -1,0 +1,9 @@
+<apex:page standardController="Opportunity">
+
+    <apex:outputText value="{!if(Opportunity.In_Red_Renewal_Status__c, 'INTERVENTION RENEWAL ESCALATION', '')}" style="color:blue;font-size:200%;"/>
+    <br/>
+    <apex:outputText value="{!if(Opportunity.In_Red_Renewal_Status__c, 'For additional information contact ', '')}" style="color:blue;"/>
+    <apex:outputLink value="https://savvas.my.salesforce.com/_ui/core/chatter/groups/GroupProfilePage?g=0F90W000001LxWe" id="RAPLink" target="_blank"><apex:outputText value="{!if(Opportunity.In_Red_Renewal_Status__c, '@[Red Account Renewals]', '')}" style="color:blue;"/></apex:outputLink>
+    <apex:outputText value="{!if(Opportunity.In_Red_Renewal_Status__c, ' via Chatter.', '')}" style="color:blue;"/>
+     
+</apex:page>

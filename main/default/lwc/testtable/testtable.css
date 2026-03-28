@@ -1,0 +1,8 @@
+.dummy{
+	color : black;
+}
+
+.restricted-row {
+    background-color: #f8d7da; /* Light red color to indicate restriction */
+    pointer-events: none; /* Disable any actions on this row */
+}

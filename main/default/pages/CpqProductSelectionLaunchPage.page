@@ -1,0 +1,48 @@
+<!--
+*********************************************************
+  Page Name            : CpqProductSelectionLaunchPage
+  Created Date         : 4/22/2024
+  Author               : Frank Berni - Cognizant
+  Description          : VisualForce page that launches CpqProductSelectionApp and cpqProductSelection. This is called by the Custom Action "Select Products" from the Quote Line Editor
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>
+  4/22/2024     Frank Berni        Initial Version
+  *********************************************************
+-->
+<apex:page showHeader="false" sidebar="false" title="Select Products" standardController="SBQQ__Quote__c">
+    <head>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/easyXDM/2.4.20/easyXDM.js"/>
+    </head>
+    <body class="slds-scope">
+        <apex:includeLightning />
+        <div id="LightningComponentid"/>
+        <script type="text/javascript">
+            var configuredObject;
+            var rpc = new easyXDM.Rpc({}, {
+                remote: {
+                    postMessage: {}
+                },
+                local: {
+                    postMessage: function(message) {
+                        console.log(message);
+                        configuredObject = JSON.parse(message);
+                        console.log('this is when it runs');
+                        console.log(configuredObject);
+                    }
+                }
+            });
+
+            $Lightning.use("c:CpqProductSelectionApp", function() {
+                $Lightning.createComponent("c:cpqProductSelection",
+                {
+                    recordId : configuredObject.quote.Id,
+                    "xdm": easyXDM,
+                    "cd": configuredObject
+                },
+                "LightningComponentid",)
+            });
+                   
+        </script>
+    </body>
+</apex:page>

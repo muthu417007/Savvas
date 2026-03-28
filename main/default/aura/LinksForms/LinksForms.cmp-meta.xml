@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuraDefinitionBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>46.0</apiVersion>
+    <description>Standard Lightning component intended to replicate Classic Home page components.
+
+Created by: Heather McLemore, Created: 6/6/2019, Reference: W-005972</description>
+</AuraDefinitionBundle>

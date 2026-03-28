@@ -1,0 +1,6 @@
+<apex:page >
+<!-- standardController="Flow__kav" extensions="ArticleExtensionDecisionTree" action="{!redirectInternal}">
+    
+    <apex:outputLabel > This is supposed to redirect to {!Flow__kav.Flow_Name__c}</apex:outputLabel> -->
+       
+</apex:page>

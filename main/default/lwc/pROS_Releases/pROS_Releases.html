@@ -1,0 +1,21 @@
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="utility:connected_apps" size="small"></lightning-icon>
+            Quote Releases
+        </h3>
+        <lightning-button label="Set as active" slot="actions" onclick={handleSetAsActive} disabled={disabled}></lightning-button>
+        <template if:true={loaded}>
+            <lightning-datatable key-field="Id" data={ressList} columns={columns} onrowselection={getSelected} selected-rows={selectedRows}>
+            </lightning-datatable>
+        </template>
+        <template if:false={loaded} class="slds-spinner_inline spinner-padding">
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+        <div slot="footer">
+            <template if:true={error}>
+                 <p>{error}</p>
+               </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,15 @@
+<apex:page standardController="District_Technical_Profile__c" >
+<p>Allow outgoing HTTPS/SSL communication to pearsonrealize.com through port 443.</p>
+<p><b>Speed Test Information</b><br />
+- Please perform a network bandwidth test using your preferred tool or SpeedTest.Net or TestMy.Net.<br />
+- Ideally these tests should be run at each location that will be using products based on Pearson Realize.<br />
+- Tests should also be run when there is normal bandwidth traffic to simulate what students will face on an average day.<br />
+- Please provide as much detail as possible regarding network bandwidth tests. Both upload and download speeds at each location should be recorded. If you have known issues or variances between sites, please note those details as well.</p>
+<p><b>Browser Information</b><br />
+- Web browser will cache Realize for a period of 30 days or until a newer version becomes available which will help with the loading of the web pages.<br />
+- Pearson does not recommend disabling pop-up blockers.<br />
+- Enable JavaScript and cookies.<br />
+- Disable the Internet Explorer Content Advisor.</p>
+
+  
+</apex:page>

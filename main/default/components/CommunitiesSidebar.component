@@ -1,0 +1,33 @@
+<apex:component allowDML="true" controller="CommunitiesSidebarController" layout="none">
+    <script type="text/javascript" src="{!URLFOR($Resource.CocoResponsive, 'js/jquery.tabSlideOut.v1.3.js')}"></script>
+
+    <div class="slide-out-div" id="slideout">
+        <a class="handle" href="#">&nbsp;</a>
+        <h4>Recent Items</h4>
+        <hr/>
+        <ul>
+            <apex:repeat value="{!recentItems}" var="recentItem">
+            <li>
+                <a href="{!$Site.Prefix & recentItem.url}"><small>{!recentItem.name}</small></a>
+            </li>
+            </apex:repeat>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            $('.slide-out-div').tabSlideOut({
+                tabHandle: '.handle',                    //class of the element that will become your tab
+                tabLocation: 'left',                     //side of screen where tab lives, top, right, bottom, or left
+                speed: 300,                              //speed of animation
+                action: 'click',                         //options: 'click' or 'hover', action to trigger animation
+                topPos: '200px',                         //position from the top/ use if tabLocation is left or right
+                fixedPosition: true                       //options: true makes it stick(fixed position) on scroll
+
+            });
+         });
+	
+	   $(document).ready(function() {
+            $('#slideout').css("position","fixed");
+         });
+    </script>
+</apex:component>

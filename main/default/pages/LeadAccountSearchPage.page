@@ -1,0 +1,130 @@
+<apex:page standardcontroller="lead" extensions="LeadAccountSearchController" showheader="false" sidebar="false">
+    <apex:pageMessages id="errors" />
+	<apex:form >
+        <apex:actionFunction name="setTabAccount" action="{!accTab}"/>
+        <apex:actionFunction name="setTabOpp" action="{!oppTab}"></apex:actionFunction>
+    		<table width="100%" border="0">
+  			<tr> 
+            	<td width="25%" valign="top">
+                	<apex:pageBlock mode="maindetail">
+	   				<div>                   
+                       	<apex:actionRegion >
+                          <table cellpadding="2" cellspacing="2">
+      					  <tr>
+        				   <td style="font-weight:bold;"><br/>
+							<apex:pageBlockSection columns="1">
+								<apex:inputfield value="{!lead.company}" label="Name" required="False"/> 
+        						<apex:inputfield value="{!lead.state}" label="State"/> 
+								<apex:inputfield value="{!lead.PostalCode}" label="Zip Code"/>
+      						</apex:pageBlockSection> 
+                        	</td>
+      					  </tr>
+      					 </table>
+                      	</apex:actionRegion>  
+                        <div align="Left">
+  							<apex:commandButton value="Search by Name and State" action="{!searchAccNameSt}"/>  
+  							<apex:commandButton value="Search by Zip" action="{!searchZip}"/>  
+  						</div>
+                    </div>                                   
+                    </apex:pageBlock>
+             	</td>
+             
+  				<td width="75%" valign="top">
+                    <apex:tabPanel switchType="Client" value="{!tabOpt}">
+						<apex:tab name="Accounts" label="Accounts" id="Accounts" ontabenter="setTabAccount()">
+							<apex:pageBlock id="accOut" rendered="{!(acc.size!=null && acc.size != 0)}" mode="maindetail">  
+    							<apex:pageblockTable value="{!acc}" var="a">  
+     								<apex:column >  
+          								<apex:commandLink action="{!searchRecords}" value="{!a.Name}">
+                                        	<apex:param name="AccId" value="{!a.Id}" assignTo="{!accId}"/>
+                                        </apex:commandLink> 
+     								</apex:column>  
+     								<apex:column value="{!a.billingstate}"/>  
+     								<apex:column value="{!a.BillingPostalCode}"/> 
+                                    <apex:column value="{!a.Do_Not_Contact__c}"/> 
+                                    <apex:column value="{!a.Do_Not_Contact_End_Date__c}"/> 
+                                    <apex:column value="{!a.Do_Not_Contact_Reason__c}"/> 
+                                </apex:pageblockTable>
+                                 <apex:pageBlockButtons location="bottom">
+                 					<apex:commandButton value="First Page" rerender="accOut" action="{!FirstPage}" disabled="{!prev}"/>
+									<apex:commandButton value="Previous" rerender="accOut" action="{!previous}" disabled="{!prev}"/>
+									<apex:commandButton value="Next" rerender="accOut" action="{!next}" disabled="{!nxt}"/>
+									<apex:commandButton value="Last Page" rerender="accOut" action="{!LastPage}" disabled="{!nxt}"/>
+        						</apex:pageBlockButtons>
+   							</apex:pageBlock>  
+        
+    					<apex:pageBlock rendered="{!acc.size == 0}">  
+        					<apex:outputLabel value="No Match Found"></apex:outputLabel>  
+  						 </apex:pageBlock>   
+                        </apex:tab>
+                        <apex:tab name="AGM" label="AGM/Territory" Id="AGM" rendered="{!((usersInTerr.size!=null && usersInTerr.size!=0)||(Territories.size!=null && Territories.size!=0) || accId!=null)}">
+							    <apex:pageBlock mode="maindetail"  rendered="{!(usersInTerr.size!=null && usersInTerr.size!=0)}">  
+        							<apex:pageBlockTable value="{!usersInTerr}" var="u">       
+            							<apex:column >
+                							<apex:facet name="header">User Name</apex:facet>
+                                            <apex:outputLink value="/{!u.user.id}" target="_blank">{!u.user.Name}</apex:outputLink>
+            							</apex:column>
+            							<apex:column >
+                							<apex:facet name="header">Phone</apex:facet>
+                							<apex:outputText value="{!u.user.Phone}"/>
+            							</apex:column>
+            							<apex:column >
+                							<apex:facet name="header">Role in Territory</apex:facet>
+                							<apex:outputText value="{!u.RoleInTerritory2}"/>
+            							</apex:column>
+        							</apex:pageBlockTable>
+    							</apex:pageBlock>
+    							<apex:pageBlock mode="maindetail" rendered="{!usersInTerr.size == 0}">  
+         							<apex:outputLabel value="No AGM Found"></apex:outputLabel>  
+   								</apex:pageBlock> 
+                            	<apex:pageBlock mode="maindetail" rendered="{!Territories.size == 0}">  
+         							<apex:outputLabel value="No Territories Found"></apex:outputLabel>  
+   								</apex:pageBlock> 
+                            	<apex:pageBlock mode="maindetail"  rendered="{!(Territories.size!=null && Territories.size!=0)}">  
+        							<apex:pageBlockTable value="{!Territories}" var="t">       
+            						<apex:column >
+                							<apex:facet name="header">Territory Type</apex:facet>
+                                            <apex:outputText value="{!t.territory2type.MasterLabel}" />
+            							</apex:column>
+                                        <apex:column >
+                							<apex:facet name="header">Territory Name</apex:facet>
+                                            <apex:outputText value="{!t.name}" />
+            							</apex:column>
+            							<apex:column >
+                							<apex:facet name="header">Parent Territory</apex:facet>
+                							<apex:outputText value="{!t.ParentTerritory2.name}"/>
+            							</apex:column>
+        							</apex:pageBlockTable>
+    							</apex:pageBlock>
+                        </apex:tab>
+                        <apex:tab name="Opportunity" label="Opportunity" Id="Opportunity" ontabenter="setTabOpp()" rendered="{!((opportunityList.size!=null && opportunityList.size!=0)|| accId!=null)}">
+ 							<apex:pageBlock id="Opps" mode="maindetail" rendered="{!(opportunityList.size!=null && opportunityList.size!=0)}">
+        						<apex:pageBlockSection columns="1">
+            						<apex:pageBlockTable value="{!opportunityList}" var="o">
+               							<apex:column headerValue="Opportunity Name" >
+                    					<apex:outputLink value="/{!o.id}" target="_blank">{!o.Name}
+                    					</apex:outputLink>  
+                						</apex:column>
+                						<apex:column value="{!o.Amount}"/>
+                						<apex:column value="{!o.StageName}"/>
+                						<apex:column value="{!o.AccountId}"/>
+                                         <apex:column value="{!o.CloseDate}"/>
+            						</apex:pageBlockTable> 
+        						</apex:pageBlockSection>
+                                     <apex:pageBlockButtons location="bottom">
+                 						<apex:commandButton value="First Page" rerender="Opps" action="{!FirstPage}" disabled="{!prev}"/>
+										<apex:commandButton value="Previous" rerender="Opps" action="{!previous}" disabled="{!prev}"/>
+										<apex:commandButton value="Next" rerender="Opps" action="{!next}" disabled="{!nxt}"/>
+										<apex:commandButton value="Last Page" rerender="Opps" action="{!LastPage}" disabled="{!nxt}"/>
+        							</apex:pageBlockButtons>                                
+    						</apex:pageBlock>
+    						<apex:pageBlock mode="maindetail" rendered="{!(opportunityList.size==null || opportunityList.size==0)}">  
+        						<apex:outputLabel value="No Opportunities Found"></apex:outputLabel>
+    						</apex:pageBlock>
+                        </apex:tab>
+                    </apex:tabPanel>
+          		</td>
+ 			</tr>
+ 		</table> 
+	</apex:form>  
+</apex:page>

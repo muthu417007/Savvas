@@ -1,0 +1,61 @@
+<template>
+    <lightning-card>
+        <template if:true={quoteWrapper}>
+            <!-- Displaying Quote Details -->         
+            <div class="quote-details">
+                <p><strong>Quote Number:</strong> {quoteWrapper.quote.Name}</p>
+                <p><strong>Quote Creation Date:</strong>  {quoteWrapper.quoteDate}</p>
+                <p><strong>Quote Expiration Date:</strong> {formattedQuoteExpirationDate}</p>
+                <p><strong>Quote Status:</strong> {quoteWrapper.quote.ApprovalStatus__c}</p>
+            </div>
+
+            <template if:true={quoteLineTemp}>
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <h2 style="font-size: 20px; font-weight: bold;"> Price Quote Summary </h2>
+                </div>
+                <!-- Displaying Quote Line Programs -->
+                <lightning-datatable 
+                    key-field="id" 
+                    data={quoteWrapper.quoteLinePrograms} 
+                    columns={quoteLineProgramColumns}
+                    hide-checkbox-column="true">
+                </lightning-datatable>
+          
+                <div style="text-align: center; margin-bottom: 10px; margin-top: 10px;">
+                    <h2 style="font-size: 20px; font-weight: bold;"> Price Quote Detail </h2>
+                </div>
+                <!-- Displaying Quote Lines-->
+                <template for:each={quoteLinesData} for:item="quoteLine">
+                    <div style="margin-bottom: 30px;" key={quoteLine.SBQQ__ProductCode__c}>
+                        <b> {quoteLine.quoteLineProductCategory}</b>
+                            <br>
+                                <lightning-datatable
+                                    key-field="id"
+                                    data={quoteLine.records}
+                                    columns={quoteLineColumns}
+                                    hide-checkbox-column="true"
+                                    >
+                                </lightning-datatable>
+                    </div>
+                </template>
+
+                <template if:true={optionalProduct}>
+                 <h2 style="font-size: 19px; font-weight: bold;"> Optional Products </h2>
+                 <lightning-datatable 
+                    key-field="id" 
+                    data={quoteLinesOptionalData} 
+                    columns={quoteLineOptionalProducts}
+                    hide-checkbox-column="true">
+                 </lightning-datatable>
+                </template>                
+            </template>
+        </template>  
+        
+        <template if:false={quoteLineTemp}>
+            <div style="text-align: center; margin-bottom: 10px;">
+                <p>No data available</p>
+            </div>
+        </template>
+
+    </lightning-card>
+</template>

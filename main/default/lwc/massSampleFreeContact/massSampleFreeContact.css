@@ -1,0 +1,11 @@
+.divider{
+    width:8px;
+    height:auto;
+    display:inline-block;
+}
+.myUniqueTable th {
+    text-align: center !important;
+}
+.slds-modal__content {
+    overflow: initial;
+ }

@@ -1,0 +1,65 @@
+<template>
+	<div data-id="mobile" style="padding-left:0rem!important;">
+		<div class="slds-grid ">
+			<div class="slds-col slds-size_12-of-12">
+				<lightning-accordion class="example-accordion mt10 assetAccordion" onsectiontoggle={handleToggleSection}
+					active-section-name={defaultSection}>
+					<template for:each={assetDetails} for:item="eachResource">
+						<lightning-card key={eachResource.key} class="pb10">
+							<lightning-accordion-section name={eachResource.key} label={eachResource.key}>
+								<div class="slds-grid slds-gutters thumbnailmargin slds-wrap">
+									<template for:each={eachResource.value} for:item="item">
+										<template if:true={item.sequence}>
+											<div key={item.assetItemId}
+												class="mr0 mobgap pos-rel plr_mob slds-col slds-size_1-of-1 slds-medium-size_1-of-1  slds-large-size_4-of-12 slds-small-size_12-of-12">
+												<template if:true={item.isVideoAsset}>
+													<a aria-hidden="true" tabindex="0" data-id={item.assetItemId}
+														data-name={item.assetName} onkeypress={handleOnClick}
+														onclick={handleOnClick} data-isasset={isAsset}>
+														<img alt="" src={item.thumbnailId} class="round img_gap" width="100%">
+														<div class="assetPlayButton pos-abs">
+															<img alt="" src={playbtn} aria-label={item.assetName}></div>
+															<p class="line mt5 gapblueline">{item.assetName} </p>
+															<span hidden>{item.assetURL}</span>
+													</a>
+												</template>
+												<template if:false={item.isVideoAsset}>
+													<a aria-hidden="true" tabindex="0" data-id={item.assetItemId}
+														data-name={item.assetName} onkeypress={handleOnClick}
+														onclick={handleOnClick} data-isasset={isAsset}>
+														<img alt="" src={item.thumbnailId} class="round img_gap" width="100%">
+														<p class="line mt5 gapblueline">{item.assetName} </p>
+														<span hidden>{item.assetURL}</span>
+													</a>
+												</template>
+											</div>
+										</template>
+									</template>
+								</div>
+								<div class="slds-grid slds-gutters slds-wrap mt1rem">
+									<div class="slds-col slds-m-around_medium plr_mob ml_mob">
+										<ul class="list pl10 pb10">
+											<template for:each={eachResource.value} for:item="item">
+												<div key={item.assetItemId}>
+													<template if:false={item.sequence}>
+														<a tabindex="0" data-id={item.assetItemId}
+															data-name={item.assetName} onkeypress={handleOnClick}
+															onclick={handleOnClick} data-isasset={isAsset}>
+															<li>{item.assetName}<span class="arrow_img"><img alt="" src={arrow_icon}></span>
+																<span hidden>{item.assetURL}</span>
+															</li>
+														</a>
+													</template>
+												</div>
+											</template>
+										</ul>
+									</div>
+								</div>
+							</lightning-accordion-section>
+						</lightning-card>
+					</template>
+				</lightning-accordion>
+			</div>
+		</div>
+	</div>
+</template>

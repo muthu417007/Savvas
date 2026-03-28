@@ -1,0 +1,11 @@
+<apex:page sidebar="false" >
+<a class="twitter-timeline" href="https://www.Twitter.com/SavvasLearning">Tweets by SavvasLearning</a> <script async="async" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<a href="https://www.Twitter.com/SavvasLearning" class="twitter-follow-button" data-show-count="false">Follow @SavvasLearning</a><script async="async" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<a href="https://twitter.com/intent/tweet?screen_name=SavvasLearning" class="twitter-mention-button" data-show-count="false">Tweet to @SavvasLearning</a><script async="async" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    
+    </apex:page>

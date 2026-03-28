@@ -1,0 +1,18 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+	 <lightning:card title="Announcements" iconName="standard:announcement">
+       <!--   Ticket - #W-010574 
+			  Author - Smitha
+     		  Date - 4/28/2022
+			  Description - Commented the existing text  
+		<blockquote><b>•</b> ICOM has been updated to the <a href="https://www.salesforce.com/products/innovation/winter-22-release/" target="_blank">Salesforce Winter '22 release</a>.<br></br>
+                     <b>•</b> Check out <a href="https://trailhead.salesforce.com/" target="_blank">Trailhead</a> for Lightning training courses!	   
+       </blockquote>-->
+         <!-- Ticket - #W-010574 
+			  Author - Smitha
+     		  Date - 4/28/2022
+			  Description - Updated the text and training links as given in ticket-->
+         <blockquote><b>•</b> Check out the Salesforce Training page for your Salesforce training needs: <a href="https://sites.google.com/savvas.com/salesforcetraining" target="_blank">Salesforce Training Library</a>.<br></br><br/>
+             <b>•</b> Check out the SF Lightning training in the Salesforce Training Library: <a href="https://sites.google.com/savvas.com/salesforcetraining/salesforce-lightning" target="_blank">Salesforce Lightning Training</a>  
+         </blockquote>
+    </lightning:card>
+</aura:component>

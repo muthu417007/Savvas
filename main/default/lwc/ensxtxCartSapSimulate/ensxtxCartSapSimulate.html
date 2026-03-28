@@ -1,0 +1,11 @@
+<template>
+    <template if:true={loading}>
+        <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+    </template>
+    <button
+        disabled={loading}
+        class="slds-button slds-align_absolute-center slds-button_brand slds-button_stretch"
+        onclick={handleSAPSimulateButtonClicked}
+    >{sapButtonLabel}
+    </button>
+</template>

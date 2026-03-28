@@ -1,0 +1,21 @@
+<template>
+    <div class="productCriteriaBg">
+        <div class="searchCard">
+            <div class="tableDiv">
+                <table aria-label="searchCard">
+                    <tbody class="table-body">
+                        <template for:each={items} for:item="item">
+                            <tr key={item.id} class={item.class}>
+                                <td>
+                                    <div class="slds-truncate">
+                                        <a href={item.type} target="_blank" class="link-button">{item.title}</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>
