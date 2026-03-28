@@ -1,0 +1,591 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 07-29-2024
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+	<div class="productCriteriaBg">
+		<div class="slds-grid slds-wrap slds-grid_vertical slds-gutters slds-p-around_large slds-is-relative">
+			<template if:false={isRelatedView}>
+				<div class="slds-col">
+					<nav role="navigation" aria-label="Breadcrumbs">
+						<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+							<li class="slds-breadcrumb__item">
+								<a href="https://savvas--dev3.sandbox.my.site.com/MySavvasOrders/"
+									class="slds-m-right_small breadcrumb-label">Home</a>
+							</li>
+							<li class="slds-breadcrumb__item">
+								<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Search Orders</a>
+							</li>
+						</ol>
+					</nav>
+				</div>
+			</template>
+
+			<template if:true={isRelatedView}>
+				<div class="slds-tabs_default slds-col slds-size_3-of-3 slds-m-top_large">
+					<div class="searchCard slds-m-top_x-large">
+						<div >
+							<div style="display: flex;">
+								<div class="greenBox"></div>
+								<!-- <div class="searchCriteriaTitle"><b>Search Results</b></div> -->
+								<nav role="navigation" aria-label="Breadcrumbs" style="margin-left: 31px;">
+									<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+										<li class="slds-breadcrumb__item">
+											<a href="https://savvas--dev3.sandbox.my.site.com/MySavvasOrders/"
+												class="slds-m-right_small breadcrumb-label" style="margin-left: 2px;">Home</a>
+										</li>
+										<li class="slds-breadcrumb__item">
+											<a class="slds-m-left_small slds-text-title_bold breadcrumb-label"><b>
+                                            Search Orders</b></a>
+										</li>
+										<li class="slds-breadcrumb__item">
+											<a class="slds-m-left_small slds-text-title_bold breadcrumb-label"><b>Access
+                                            Codes
+                                            (Order # {sapDocumentNumber})</b></a>
+										</li>
+									</ol>
+								</nav>
+								<!-- <div class="slds-grid slds-grid_align-end"> -->
+								<template if:false={isInternalUser}>
+									<div class="closeButton">
+										<div class="slds-col">
+											<lightning-button variant="brand" label="Close" onclick={handleClose}
+												class="slds-m-left_x-small small-button"></lightning-button>
+										</div>
+									</div>
+								</template>
+							</div>
+						</div>
+						<div class="slds-m-top_x-small">
+							<div class="slds-grid slds-wrap slds-p-horizontal_medium">
+								<div
+									class="slds-col slds-size_3-of-3 slds-form slds-p-horizontal_large slds-p-vertical_x-small">
+									<div class="slds-grid slds-wrap slds-p-bottom_xx-small">
+										<div class="slds-col slds-size_7-of-13 slds-p-horizontal_none">
+											<div class="slds-form-element__control"
+												style="display:flex;margin-left: -10px;">
+												<button class="slds-button table-control-button" disabled={bDisableFirstRelated} onclick={firstPageRelated}>&#60;&#60; First</button>
+												<button class="slds-button table-control-button" disabled={bDisableFirstRelated} onclick={previousPageRelated}>&#60; Previous</button>
+												<p class="page-count-shown slds-m-horizontal_x-small">Showing
+													{pageNumberRelated}
+													of {totalPagesRelated}
+													Page(s)
+												</p>
+												<button class="slds-button table-control-button" disabled={bDisableNextRelated} onclick={nextPageRelated}>Next &#62;</button>
+												<button class="slds-button table-control-button" disabled={bDisableLastRelated} onclick={lastPageRelated}>Last &#62;&#62;</button>
+											</div>
+										</div>
+										<div class="slds-col slds-size_6-of-13 slds-p-horizontal_none"
+											style="display: flex; margin-left: auto; align-items: flex-end; margin-right: 10px;">
+											<div class="filterSearch">
+												<!-- <div class="slds-is-relative slds-show_inline-block slds-m-left_large">
+                                                    <div
+                                                        class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+                                                        i</div>
+                                                    <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+                                                        role="tooltip" id="5">
+                                                        <div class="slds-popover__body">E-access Code can be viewed for up to 18 months after purchase. 
+                                                        Please download the codes and keep in a secure location.</div>
+                                                    </div>
+                                                </div> -->
+												<template if:true={isInternalUser}>
+													<lightning-combobox name="pageSizeRelated"
+														value={displayPageSizeRelated} options={pageSizeOptionsRelated}
+														onchange={handlePageSizeChangeRelated}
+														style="margin-top: -24px; margin-left: 161px;">
+													</lightning-combobox>
+												</template>
+												<template if:false={isInternalUser}>
+													<lightning-combobox name="pageSizeRelated"
+														value={displayPageSizeRelated} options={pageSizeOptionsRelated}
+														onchange={handlePageSizeChangeRelated}
+														style="margin-left: 161px; margin-top: -4px;">
+													</lightning-combobox>
+												</template>
+												# of Rows &nbsp;
+											</div>
+											<div class="slds-form-element" style="margin-top: -4px;margin-left: 20px;">
+												<div
+													class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+												</div>
+											</div>
+											<div style="display: flex; margin-top: 5px; margin-bottom: auto;">
+												<div class="filterSearch">{transformedDataLengthRelated} of
+													{totalCountRelated}
+													Items
+													&nbsp;
+													<div class="slds-is-relative slds-show_inline-block">
+														<div
+															class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+															i</div>
+														<template if:true={isInternalUser}>
+														<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+															role="tooltip" id="4"
+															style="max-width: 326px; margin-bottom:25px; margin-left:-1.5px;">
+															<div class="slds-popover__body">E-access Code can be viewed
+																for up to 18 months after 
+																purchase. Please download the codes and keep in a secure 
+																location.
+															</div>
+															</div>
+														</template>
+														<template if:false={isInternalUser}>
+															<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+															role="tooltip" id="7"
+															style="max-width: 426px; margin-bottom:25px; margin-left:-1.5px;">
+															<div class="slds-popover__body">E-access Code can be viewed
+																for up to 18 months after 
+																purchase. Please download the codes and keep in a secure 
+																location.
+															</div>
+															</div>
+														</template>
+														</div>
+													</div>
+												</div>
+												<!--Varshaa-->
+												<div
+													style="display: flex; margin-top: 5px; margin-bottom: auto; margin-left: 31px;">
+													<img src={excelIcon} alt="excel" style="width: 15px;height: 15px; margin-right:5px;">
+													<a href="#" tabindex="0" title={DownloadtoExcel}
+														onclick={handleExport}>Download to Excel
+													</a>
+												</div>
+												<!--End-->
+												<!-- <div> -->
+												<template if:true={isInternalUser}>
+													<div class="resendButton"
+														style="font-size: 12px; display: flex; margin-top: 5px; margin-bottom: auto; margin-left: 5px;">
+														<div class="resend">
+															<lightning-button variant="brand"
+																label="Resend Access Codes" onclick={handleResendForAccess}
+																class="slds-m-left_x-small small-button">
+															</lightning-button>
+															<template if:true={isOpen}>
+																<c-scc_resend-access-email onsend={sendResendAceessCode} oncancel={cancelResend}></c-scc_resend-access-email>
+															</template>
+														</div>
+													</div>
+												</template>
+												<!-- </div> -->
+											</div>
+										</div>
+									</div>
+									<!-- <div class="scrollable-table">
+										<lightning-datatable key-field="id" data={pagedRelatedRecords}
+											columns={relatedColumns} hide-checkbox-column="true"></lightning-datatable>
+									</div> -->
+									<!-- <div class="slds-col slds-size_3-of-3 result-table"> -->
+									<div class="slds-scrollable_y" style="width: 100%;">
+										<table class="slds-table slds-table_bordered slds-table_fixed-layout"
+											role="grid">
+											<thead>
+												<tr class="slds-line-height_reset">
+													<th class="slds-is-sortable slds-cell_action-mode" scope="col"
+														style="width: 18%;">
+														<a class="slds-th__action slds-text-link_reset"
+															href="javascript:void(0);" role="button">
+															<span class="slds-truncate" title="PO#">PO#</span>
+															<lightning-icon
+																class="table-sort-icon slds-m-right_xx-small"
+																icon-name="utility:chevrondown" size="small">
+															</lightning-icon>
+														</a>
+													</th>
+													<th class="slds-is-sortable slds-cell_action-mode" scope="col"
+														style="width: 13%;">
+														<a class="slds-th__action slds-text-link_reset"
+															href="javascript:void(0);" role="button">
+															<span class="slds-truncate" title="Order#">Order#</span>
+															<lightning-icon
+																class="table-sort-icon slds-m-right_xx-small"
+																icon-name="utility:chevrondown" size="small">
+															</lightning-icon>
+														</a>
+													</th>
+													<th class="slds-is-sortable slds-cell_action-mode" scope="col"
+														style="width: 13%;">
+														<a class="slds-th__action slds-text-link_reset"
+															href="javascript:void(0);" role="button">
+															<span class="slds-truncate" title="Order Date">Order<br>Date</span>
+															<lightning-icon
+																class="table-sort-icon slds-m-right_xx-small"
+																icon-name="utility:chevrondown" size="small">
+															</lightning-icon>
+														</a>
+													</th>
+													<th class="slds-is-sortable slds-cell_action-mode" scope="col"
+														style="width: 10%;">
+														<a class="slds-th__action slds-text-link_reset"
+															href="javascript:void(0);" role="button">
+															<span class="slds-truncate" title="ISBN">ISBN</span>
+															<lightning-icon
+																class="table-sort-icon slds-m-right_xx-small"
+																icon-name="utility:chevrondown" size="small">
+															</lightning-icon>
+														</a>
+													</th>
+													<th class="slds-is-sortable slds-cell_action-mode" scope="col"
+														style="width: 22%;">
+														<a class="slds-th__action slds-text-link_reset"
+															href="javascript:void(0);" role="button">
+															<span class="slds-truncate" title="Title Description">Title Description</span>
+															<lightning-icon
+																class="table-sort-icon slds-m-right_xx-small"
+																icon-name="utility:chevrondown" size="small">
+															</lightning-icon>
+														</a>
+													</th>
+													<th class="slds-is-sortable slds-cell_action-mode" scope="col"
+														style="width: 15%;">
+														<a class="slds-th__action slds-text-link_reset"
+															href="javascript:void(0);" role="button">
+															<span class="slds-truncate" title="E-Access Code">E-Access<br>Code</span>
+															<lightning-icon
+																class="table-sort-icon slds-m-right_xx-small"
+																icon-name="utility:chevrondown" size="small">
+															</lightning-icon>
+														</a>
+													</th>
+													<th class="slds-is-sortable slds-cell_action-mode" scope="col"
+														style="width: 20%;">
+														<a class="slds-th__action slds-text-link_reset"
+															href="javascript:void(0);" role="button">
+															<span class="slds-truncate" title="Email Recipient">Email Recipient</span>
+															<lightning-icon
+																class="table-sort-icon slds-m-right_xx-small"
+																icon-name="utility:chevrondown" size="small">
+															</lightning-icon>
+														</a>
+													</th>
+													<th class="slds-is-sortable slds-cell_action-mode" scope="col"
+														style="width: 16%">
+														<div style="display:flex">
+														<div style="display:flex">
+															<a class="slds-th__action slds-text-link_reset"
+																href="javascript:void(0);" role="button" style="word-wrap: break-word; max-width: min-content;">
+																<!-- <span class="slds-truncate" title="Code Redemption">Code Redemption</span> -->
+																<span title="Code Redemption">Code Redemption</span>
+																<div class="slds-is-relative slds-show_inline-block" style="margin-left:5px;margin-top:auto">
+																	<div
+																		class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+																		i</div>
+																		<template if:true={isInternalUser}>
+																	<div class="slds-popover slds-popover_tooltip slds-nubbin_top-right"
+																		role="tooltip" id="5"
+																		style="max-width: 300px; margin-bottom: -105px; margin-left: -128px;">
+																		<div class="slds-popover__body">{labels.scc_code_redemption_hover_message}</div>
+																		</div>
+																		</template>
+																		<template if:false={isInternalUser}>
+																			
+																	<div class="slds-popover slds-popover_tooltip slds-nubbin_top-right"
+																		role="tooltip" id="6"
+																		style="max-width: 360px; margin-bottom: -105px; margin-left: -128px;">
+																		<div class="slds-popover__body">{labels.scc_code_redemption_hover_message}</div>
+																		</div>
+																			
+																		</template>
+																	</div>
+															</a>
+															
+														</div>
+															
+																	<div>
+																	<a href="javascript:void(0);" role="button">
+																	<lightning-icon
+																		class="table-sort-icon slds-m-right_xx-small"
+																		icon-name="utility:chevrondown" size="small">
+																	</lightning-icon>
+																	</a>
+																	</div>
+														</div>
+														<!-- </div> -->
+														<!-- <div
+															class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+															<div
+																class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+																i</div>
+															<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+																role="tooltip" id="code-redemption-tooltip">
+																<div class="slds-popover__body pop" >
+																	{labels.scc_code_redemption_hover_message}</div>
+															</div>
+														</div> -->
+														<!-- <div class="slds-is-relative slds-show_inline-block">
+															<div
+																class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+																i</div>
+															<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+																role="tooltip" id="5"
+																style="width: 462px;margin-bottom: -9px;margin-left: -5px;height: 48px;">
+																<div class="slds-popover__body">Code Redemption value
+																	represents the number of <br>
+                                                            times this code can be used
+															</div>
+																</div>
+															</div> -->
+													</th>
+												</tr>
+											</thead>
+											<tbody>
+												<template for:each={pagedRelatedRecords} for:item='line'>
+													<tr aria-selected="false" class="slds-hint-parent"
+														key={line.productId}>
+														<td class="slds-cell_action-mode" scope="row">
+															<div title={line.PO_Number__c}>{line.PO_Number__c}</div>
+														</td>
+														<td class="slds-cell_action-mode" role="gridcell">
+															<div title={line.SAP_Document_Number__c}>
+																{line.SAP_Document_Number__c}</div>
+														</td>
+														<td class="slds-cell_action-mode" role="gridcell">
+															<div title={line.EffectiveDate}>{line.EffectiveDate}
+															</div>
+														</td>
+														<td class="slds-cell_action-mode" role="gridcell">
+															<div title={line.ISBN__c}>{line.ProductCode__c}</div>
+														</td>
+														<td class="slds-cell_action-mode" role="gridcell">
+															<div title={line.Title_Description__c}>
+																{line.Title_Description__c}</div>
+														</td>
+														<td class="slds-cell_action-mode" role="gridcell">
+															<div title={line.EAccess_Code__c}>{line.EAccess_Code__c}
+															</div>
+														</td>
+														<td class="slds-cell_action-mode" role="gridcell">
+															<div title={line.Customer_Email__c}>
+																{line.Customer_Email__c}
+															</div>
+														</td>
+														<td class="slds-cell_action-mode" role="gridcell">
+															<div title={line.No_Of_Redemptions__c}>
+																{line.No_Of_Redemptions__c}</div>
+														</td>
+													</tr>
+												</template>
+											</tbody>
+										</table>
+									</div>
+									<!-- </div> -->
+								</div>
+							</div>
+							<template if:true={showSearchResultErrorMessage}>
+								<div class="noResultBgg">
+									<img src={noResult} alt="No Result" class="noResultImage"/>
+									<h5 class="noResultText">No Results</h5>
+									<p class="noResultMessage">There are no orders that match your search criteria
+									</p>
+								</div>
+							</template>
+						</div>
+					</div>
+			</template>
+
+			<template if:false={isRelatedView}>
+				<div class="slds-tabs_default slds-col slds-size_3-of-3 slds-m-top_large">
+					<div class="searchCard">
+						<div class="slds-grid slds-grid_vertical-align-center" style="padding-top: 0px;">
+							<div class="greenBox"></div>
+							<div class="searchCriteriaTitle" style="margin-bottom: -5px;"><b>Search Criteria</b></div>
+						</div>
+						<div class="slds-grid slds-gutters slds-p-horizontal_small"
+							style="margin-left: -6px; margin-top: 20px;">
+							<div class="slds-col slds-size_1-of-3">
+								<div class="slds-form-element">
+									<div class="slds-grid slds-grid_vertical-align-left">
+										<label class="slds-form-element__label" for="text-input-id-56">PO#</label>
+									</div>
+									<div class="slds-form-element__control">
+										<lightning-input type="text" variant="standard" name="poNumber" value={poNumber}
+											placeholder="" onchange={handleInputChange}></lightning-input>
+									</div>
+								</div>
+							</div>
+							<div class="slds-col slds-size_1-of-3">
+								<div class="slds-form-element">
+									<div class="slds-grid slds-grid_vertical-align-left">
+										<label class="slds-form-element__label" for="text-input-id-56">Order#</label>
+									</div>
+									<div class="slds-form-element__control">
+										<lightning-input type="text" variant="standard" name="orderNumber"
+											value={orderNumber} placeholder="" onchange={handleInputChange}>
+										</lightning-input>
+									</div>
+								</div>
+							</div>
+							<div class="slds-col slds-size_1-of-3">
+								<div class="slds-form-element">
+									<div class="slds-grid slds-grid_vertical-align-left">
+										<label class="slds-form-element__label" for="text-input-id-56">Containing ISBN</label>
+									</div>
+									<div class="slds-form-element__control">
+										<lightning-input type="text" variant="standard" name="isbn" value={isbn}
+											placeholder="" onchange={handleInputChange}></lightning-input>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="slds-grid slds-grid_vertical-align-left">
+							<div class="slds-col" style="padding-left:20px; gap:20px; display: flex;">
+								<button class={searchButtonClass} onclick={handleSearch} disabled={isSearchDisabled}>
+                                    <span>
+                                        <img src={searchIconUrl} alt="search" style="max-width: 24px; height: 24px; gap: 0px; opacity: 0px; padding: padding: 1px 2px 1px 1px; margin-top: -2px;" />
+                                    </span> Search
+                                </button>
+								<button class="clearButton" onclick={handleClear}>Clear</button>
+							</div>
+						</div>
+					</div>
+					<!-- Accordion for Search Results -->
+					<div class="searchCard slds-m-top_x-large">
+						<div style="display: flex;">
+							<div style="display: flex;">
+								<div class="greenBox"></div>
+								<div class="searchCriteriaTitle"><b>Search Results</b></div>
+							</div>
+						</div>
+						<div class="slds-m-top_x-small">
+							<div class="slds-grid slds-wrap slds-p-horizontal_medium">
+								<div
+									class="slds-col slds-size_3-of-3 slds-form slds-p-horizontal_large slds-p-vertical_x-small">
+									<div class="slds-grid slds-wrap slds-p-bottom_xx-small">
+										<div class="slds-col slds-size_7-of-12 slds-p-horizontal_none">
+											<div class="slds-form-element__control"
+												style="display:flex;margin-left: -10px;">
+
+												<button class="slds-button table-control-button" disabled={bDisableFirst} onclick={firstPage}>&#60;&#60; First</button>
+												<button class="slds-button table-control-button" disabled={bDisableFirst} onclick={previousPage}>&#60; Previous</button>
+												<p class="page-count-shown slds-m-horizontal_x-small">Showing
+													{pageNumber}
+													of {totalPages}
+													Page(s)
+												</p>
+												<button class="slds-button table-control-button" disabled={bDisableNext} onclick={nextPage}>Next &#62;</button>
+												<button class="slds-button table-control-button" disabled={bDisableLast} onclick={lastPage}>Last &#62;&#62;</button>
+											</div>
+										</div>
+										<div class="slds-col slds-size_5-of-12 slds-p-horizontal_none"
+											style="display: flex; margin-left: auto; align-items: flex-end; margin-top: -40px; margin-right: 10px;justify-content: flex-end;">
+											<div class="filterSearch">
+												<template if:true={isInternalUser}>
+													<lightning-combobox name="pageSizeRelated" value={displayPageSize}
+														options={pageSizeOptions} onchange={handlePageSizeChange}
+														style="margin-top: -24px;">
+													</lightning-combobox>
+												</template>
+												<template if:false={isInternalUser}>
+													<lightning-combobox name="pageSizeRelated" value={displayPageSize}
+														options={pageSizeOptions} onchange={handlePageSizeChange}>
+													</lightning-combobox>
+												</template>
+												# of Rows &nbsp;
+											</div>
+											<!-- <img src={infoIconUrl} alt="info" onmouseover={togglePasswordHintfilter} onmouseout={togglePasswordHintfilter} style="margin-left: 1px; margin-bottom: auto; margin-top: 13px;"/><span class="slds-assistive-text">Help</span> -->
+											<!-- <div class={taskTypeHelpTextClassfilter} role="tooltip" id="help">
+													<div class="slds-popover__body">
+														Enter a keyword to filter within the current set of search
+														results
+													</div>
+												</div> -->
+											<div class="slds-form-element" style="margin-top: -4px; margin-left: 20px;">
+												<div
+													class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+													<!-- <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Clear">
+                                        <img src={crossIconUrl} alt="cross" style="width: 11.88px; height: 11.88px; margin-left: -0.5px; margin-top: 7px;" onclick={clearFilterInput} />
+                                        <span class="slds-assistive-text">Clear</span>
+                                    </button> -->
+													<!-- <input type="search" id="text-input-id-58" class="filterInput" value={filterSearchValue}  oninput={handleFilter}/> -->
+												</div>
+											</div>
+											<div style="display: flex; margin-top: 5px; margin-bottom: auto;">
+												<span class="slds-p-horizontal_small separator">|</span>
+												<div class="filterSearch">{totalCount}
+													Items
+													&nbsp;</div>
+												<!-- <img src={infoIconUrl} alt="info" onmouseover={togglePasswordHintCount} onmouseout={togglePasswordHintCount} style="margin-top: 9px"/><span class="slds-assistive-text">Help</span> -->
+												<div class={taskTypeHelpTextClassCount} role="tooltip" id="help2">
+													<div class="slds-popover__body">
+														<!-- {message} -->
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- <template if:true={showResults}>
+									<div class="scrollable-table">
+										<lightning-datatable key-field="id" data={pagedOrders} columns={columns}
+											hide-checkbox-column="true" onrowaction={handleRowAction}>
+										</lightning-datatable>
+									</div>
+								</template> -->
+								<template lwc:if={showResults}>
+									<template for:each={pagedOrders} for:item="row">
+										<div key={row.id} class="slds-box slds-m-bottom_medium" style="width:1550px;">
+											<div class="slds-grid slds-wrap">
+												<div class="slds-size_1-of-12">
+													<p class="order-label">PO #</p>
+													<p class="order-value">{row.PO_Number__c}</p>
+												</div>
+												<div class="slds-size_1-of-12 slds-text-align_left">
+													<p class="order-label">Order #</p>
+													<p class="order-link">
+														<a href="javascript:void(0);" onclick={handleOrderClick}
+															data-id={row.Id}
+															data-sap-number={row.SAP_Document_Number__c}>
+															{row.SAP_Document_Number__c}
+														</a>
+													</p>
+												</div>
+												<div class="slds-size_1-of-12 slds-text-align_left">
+													<p class="order-label">Order Date</p>
+													<p class="order-value">{row.CreatedDate}</p>
+												</div>
+												<div class="slds-size_1-of-12 slds-text-align_left">
+													<p class="order-label">Order Method</p>
+													<p class="order-value">{row.SAP_Order_Method__c}</p>
+												</div>
+												<div class="slds-size_1-of-12 slds-text-align_left">
+													<p class="order-label">Total Items</p>
+													<p class="order-value">{row.Total_Items__c}</p>
+												</div>
+												<div class="slds-size_1-of-12 slds-text-align_left">
+													<p class="order-label">Total Units</p>
+													<p class="order-value">{row.Order_Total_Units__c}</p>
+												</div>
+												<div class="slds-size_3-of-12 slds-text-align_left">
+													<p class="order-label">Ship To</p>
+													<p class="order-value">{row.ShippingAddress}</p>
+												</div>
+												<div class="slds-size_3-of-12 slds-text-align_left">
+													<p class="order-label">Bill To</p>
+													<p class="order-value">{row.BillingAddress}</p>
+												</div>
+											</div>
+										</div>
+									</template>
+								</template>
+
+							</div>
+						</div>
+						<!-- Search Result Error Message -->
+						<template if:true={showSearchResultErrorMessage}>
+							<div class="noResultBg">
+								<img src={noResult} alt="No Result" class="noResultImage"/>
+								<h5 class="noResultText">No Results</h5>
+								<p class="noResultMessage">There are no orders that match your search criteria</p>
+							</div>
+						</template>
+					</div>
+
+				</div>
+
+			</template>
+		</div>
+	</div>
+</template>

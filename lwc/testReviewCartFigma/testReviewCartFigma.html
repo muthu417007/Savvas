@@ -1,0 +1,13 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-is-relative" style="background-color: #0D2A7A;">
+            <button class="need-help" onclick={toggleDropdown} onmouseout={hideDropdown}>Need Help</button>
+            <nav class="need-help-nav" onmouseover={showDropdown} onmouseout={hideDropdown}>
+                <ul>
+                    <li><a href="https://www.google.com/">Google</a></li>
+                    <li><a href="https://www.savvas.com/contact">Savvas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</template>

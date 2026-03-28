@@ -1,0 +1,82 @@
+<template>
+	<template if:false={showContent}>
+		<div class="slds-container_center  slds-container_savvas allProgramComponent" role="main">
+			<div class="slds-grid slds-grid slds-gutters slds-wrap">
+				<div class="slds-col slds-large-size_8-of-12 slds-medium-size-12-of-12 slds-small-size-12-of-12">
+					<h2 class="AllprogramTitle ptb2rem m-text-center">All Programs You Have <br role="presentation">Signed Up For</h2>
+					<p class="subhead m-text-center ">Select the program you want to review</p>
+				</div>
+				<div class="slds-col slds-large-size_4-of-12 mhide">
+				</div>
+			</div>
+			<div class="slds-grid ptb3rem">
+				<div class="slds-col slds-size_12-of-12 " role="list">
+					<template if:true={contentAccessData}>
+						<template for:each={contentAccessData} for:item="eachRecord">
+							<div class="whitebg" key={eachRecord.id} role="listitem">
+								<template if:false={eachRecord.isExpired}>
+									<div class="slds-grid slds-wrap p1">
+										<div
+											class="slds-col  pos-rel slds-large-size_4-of-12 slds-medium-size-12-of-12 slds-small-size-12-of-12">
+											<div class="bulletstyle"></div>
+											<img alt="" style="float:left" class="ml20" src={programImages.programDoc} />
+											<a tabindex="0" style="display:flex" class="proList pl1rem" data-item={eachRecord.name}
+												onkeypress={openProgramData} onclick={openProgramData}>{eachRecord.name}</a>
+										</div>
+										<div
+											class="slds-col m-padding-left slds-large-size_8-of-12 slds-medium-size-12-of-12 slds-small-size-12-of-12 ">
+											<img alt="" style="float:left" class="" src={programImages.programCalender} />
+											<span class="proList1 pl1rem"
+												style="display:flex">{eachRecord.expiry}</span>
+										</div>
+									</div>
+								</template>
+								<template if:true={eachRecord.isExpired}>
+									<div class="slds-grid slds-wrap p1">
+										<div
+											class="slds-col pos-rel  slds-large-size_4-of-12 slds-medium-size-12-of-12 slds-small-size-12-of-12">
+											<div class="bulletstylered"></div>
+											<img alt="" style="float:left" class="ml20" src={programImages.programFailedFile} />
+											<span style="display:flex" class="proListExp pl1rem disabled">{eachRecord.name}</span>
+										</div>
+										<div
+											class="slds-col m-padding-left  slds-large-size_8-of-12 slds-medium-size-12-of-12 slds-small-size-12-of-12  ">
+											<img alt="" class="iconImage" src={programImages.programFailedCal} />
+											<span class="proListExp1 pl1rem">
+
+												<lightning-formatted-rich-text value={label.expiryLabel}>
+												</lightning-formatted-rich-text>
+											</span>
+										</div>
+									</div>
+								</template>
+							</div>
+						</template>
+					</template>
+				</div>
+			</div>
+		</div>
+	</template>
+	<template if:true={showContent}>
+		<template if:false={isVirtualSample}>
+			<div class="programNavigation">
+				<c-savvas-virtual-sample-programs-navigation program-name={programName}
+					is-virtual-sample={isVirtualSample}>
+				</c-savvas-virtual-sample-programs-navigation>
+				<br>
+				<c-savvas-sample-resources-landing-page collection-name={contentId}>
+				</c-savvas-sample-resources-landing-page>
+			</div>
+		</template>
+		<template if:true={isVirtualSample}>
+			<div class="slds-container_center  slds-container_savvas">
+				<c-savvas-Virtual-Sample-Programs-Navigation program-name={programName}
+					is-virtual-sample={isVirtualSample}>
+				</c-savvas-Virtual-Sample-Programs-Navigation>
+				<br>
+				<c-savvas-virtual-sample-program-container container-id={contentId} program-banner-data={programBanner}
+					asset-details={assetDetails} grade-details={gradeDetails}></c-savvas-virtual-sample-program-container>
+			</div>
+		</template>
+	</template>
+</template>

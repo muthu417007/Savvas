@@ -1,0 +1,22 @@
+<template>   
+    <lightning-card>
+    <div class="slds-form">
+    
+    <div class="spinner-wrapper slds-spinner_container" if:true={isLoading}
+			style="height: 200px; position:absolute;">
+			<div class="slds-backdrop slds-backdrop_open">
+				<lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+			</div>
+	</div>
+
+    <template if:false={isLoading}>
+        <div class="slds-col slds-size_12-of-12">
+            <div class="slds-m-top_large slds-align_absolute-center">
+                <h2 class="slds-text-heading_medium slds-m-around_small slds-align_absolute-center case_created_message">{caseNumber} : {labels.scc_caseCreatedMessageLabel}</h2>
+            </div> 
+        </div> 
+    </template>
+    
+    </div>                 
+    </lightning-card>
+</template>

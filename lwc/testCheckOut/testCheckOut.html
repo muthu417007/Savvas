@@ -1,0 +1,1036 @@
+<template>
+	<template if:true={checkOutPage}>
+		<div class="slds-p-vertical_medium slds-p-horizontal_x-large mobile-container">
+			<div class="slds-grid slds-wrap slds-p-bottom_medium">
+				<template if:false={isGuest}>
+					<div class="slds-col slds-size_12-of-12 slds-float_left">
+						<nav role="navigation" aria-label="Breadcrumbs">
+							<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+								<li class="slds-breadcrumb__item">
+									<a href="#" class="slds-m-right_small breadcrumb-label">Home</a>
+								</li>
+								<li class="slds-breadcrumb__item">
+									<a href="#" class="slds-m-horizontal_small breadcrumb-label">Place Order</a>
+								</li>
+								<li class="slds-breadcrumb__item">
+									<a href="#" class="slds-m-horizontal_small breadcrumb-label">Product Search</a>
+								</li>
+								<li class="slds-breadcrumb__item">
+									<a href="#" class="slds-m-horizontal_small breadcrumb-label">Review Cart</a>
+								</li>
+								<li class="slds-breadcrumb__item">
+									<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Checkout</a>
+								</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="slds-col slds-size_12-of-12 top-buttons">
+						<button class="Cart-button1" onclick={closeShowDeliveryDetails} >Return to Cart</button>
+						<button class="Cart-button2" onclick={handleReviewOrder} aria-disabled={isReviewOrdrDisabled1}>
+						<img class="slds-m-right_xx-small cart-blue" src={labels.scc_checkout_cart} alt="cart icon" />
+						<img class="slds-m-right_xx-small cart-white" src={labels.scc_checkout_cart_white} alt="cart icon" />
+						Review Order
+					</button>
+					</div>
+				</template>
+				<template if:true={isGuest}>
+					<div class="slds-col slds-size_12-of-12 slds-float_left">
+						<nav role="navigation" aria-label="Breadcrumbs">
+							<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+								<li class="slds-breadcrumb__item">
+									<a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Checkout</a>
+								</li>
+							</ol>
+						</nav>
+					</div>
+					<div class="slds-col slds-size_12-of-12 top-buttons">
+						<button class="Cart-button2" onclick={handleReviewOrder} aria-disabled={isGuestReviewOrdrDisabled}>
+						<img class="slds-m-right_xx-small cart-blue" src={labels.scc_checkout_cart} alt="cart icon" />
+						<img class="slds-m-right_xx-small cart-white" src={labels.scc_checkout_cart_white} alt="cart icon" />
+						Review Order
+					</button>
+					</div>
+				</template>
+			</div>
+
+			<div class="CheckOut">
+				<div class="slds-grid">
+					<div class="slds-col slds-size_8-of-12 slds-p-vertical_large slds-p-left_large scroll-bar">
+						<h2 class="Checkout-title">{labels.scc_checkOut_ContactInfo_Text}</h2>
+						<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_5-of-12">
+								<div class="slds-form-element__label">{labels.scc_register_FirstName_Text}</div>
+								<input placeholder="First Name" type="text" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} name="FirstName" value={firstName} class="fixed-width-input slds-input"
+								aria-label="First Name Required"/>
+							</div>
+							<div class="slds-col slds-size_5-of-12 lastname-container">
+								<div class="slds-form-element__label">{labels.scc_register_LastName_Text}</div>
+								<input placeholder="Last Name" type="text" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} class="fixed-width-input slds-input" name="LastName" value={lastName}
+								aria-label="Last Name Required"/>
+							</div>
+						</div>
+						<div class="slds-grid slds-gutters">
+							<!-- <div class="slds-col-slds-size_2-of-12">
+							<div class="slds-form-element__label">{labels.scc_checkOut_Phone_Text}</div>
+							<input placeholder="555-555-5555" type="phone" oninput={handlePhoneNumberInput} class="fixed-width-input slds-input" name="Phone" value={phone}/>
+						</div> -->
+							<div class="slds-col slds-size_5-of-12">
+								<div class="slds-form-element__label">{labels.scc_checkOut_Order_Email_Text}*</div>
+								<input placeholder="user@domain.com" type="email" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} class="fixed-width-input slds-input" name="OrderConfirmationEmail" value={email}
+								aria-label="Order Confirmation Email Required"/>
+							</div>
+							<div class="slds-col slds-size_5-of-12 lastname-container">
+								<div class="slds-form-element__label">{labels.scc_checkOut_Shipment_mail_Text}
+								</div>
+								<input placeholder="user@domain.com" type="email" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData}  class="fixed-width-input slds-input" name="ShipmentConfirmationEmail" value={ship_email}
+								aria-label="Shipment Confirmation Email"/>
+							</div>
+						</div>
+						<div class="slds-grid slds-gutters">
+							<!-- <div class="slds-col-slds-size_2-of-12">
+							<div class="slds-form-element__label">{labels.scc_checkOut_Shipment_mail_Text}</div>
+							<input placeholder="user@domain.com" type="email" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData}  class="fixed-width-input slds-input" name="ShipmentConfirmationEmail" value={ship_email}/>
+						</div> -->
+							<div class="slds-col slds-size_5-of-12">
+								<div class="slds-form-element__label">{labels.scc_checkOut_Phone_Text}</div>
+								<input placeholder="555-555-5555" type="text" maxlength="12" oninput={handlePhoneNumberInput} class="fixed-width-input slds-input" name="Phone" value={testPhone}
+								aria-label="Phone Required"/>
+							</div>
+						</div>
+						<div>
+							<h2 class="Checkout-title">{labels.scc_checkOut_OrderInfo_Text}</h2>
+							<div class="slds-grid slds-gutters">
+								<div class="slds-col slds-size_5-of-12">
+									<div class="slds-is-relative">
+										<div class="cancel-back-order-text">
+											{labels.scc_Cancel_Back_Order_Text} <a
+												href="https://support.savvas.com/">support.savvas.com</a>
+											<!-- <lightning-helptext class="help-text"
+																content={labels.scc_checkOut_Back_Order_HelpText}>
+															</lightning-helptext> -->
+											<!--<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+																<div class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">i</div>
+																<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom backorder-popover" role="tooltip">
+																	<div class="slds-popover__body">Date on which any Backordered line items will be automatically cancelled from your order.</div>
+																</div>
+															</div>-->
+										</div>
+										<!--<input placeholder="01/01/2024" type="Date" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} class="fixed-width-input slds-input" name="CancelBackOrderDate" value={CancelBackOrderDate}/>
+														<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />-->
+									</div>
+								</div>
+								<div class="slds-col slds-size_5-of-12 lastname-container">
+									<div class="slds-is-relative">
+										<div class="slds-form-element__label">
+											{labels.scc_checkOut_Requested_Ship_Text}
+											<!-- <lightning-helptext class="help-text"
+																	content={labels.scc_checkout_ShipDate_HelpText}>
+																</lightning-helptext> -->
+											<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+												<div
+													class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+													i</div>
+												<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+													role="tooltip">
+													<div class="slds-popover__body">Your order will ship from the
+														warehouse on or after this date - please allow 7-10 days for
+														delivery</div>
+												</div>
+											</div>
+										</div>
+										<input placeholder="04/01/2024" type="Date" max="9999-12-31" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} class="fixed-width-input slds-input" name="RequestedShipDate" value={RequestedShipDate}
+										aria-label="Requested Ship Date, Your order will ship from the warehouse on or after this date- please allow 7-10 days for delivery."/>
+										<img class="calender-icon" alt="calender icon" src={labels.scc_calender_icon} />
+									</div>
+								</div>
+							</div>
+
+							<div class="slds-grid slds-gutters">
+								<div class="slds-col slds-size_5-of-12">
+									<div class="slds-form-element__label">
+										{labels.scc_checkOut_PromoCode_Text}</div>
+									<div class="input-wrapper">
+										<input type="text" data-id="promoinput" class="fixed-width-input slds-input" name={PromoCode} value={promoCodeValue} oninput={handleChange} aria-label="Promo Code"/>
+										<button class="apply-btn" onclick={handleApplyClick}>Apply</button>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h2 class="Checkout-title">
+									{labels.scc_checkOut_BillingInfo_Text}</h2>
+								<div class="slds-grid slds-gutters">
+									<template if:false={isGuest}>
+										<div class="slds-col slds-size_5-of-12">
+											<div class="slds-form-element__label">
+												{labels.scc_checkOut_BillTo_Text}</div>
+											<input placeholder="Type Here" type="Text" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} class="fixed-width-input slds-input" name="BillToAttention" value={BillToAttention} aria-label="Bill to Attention"/>
+										</div>
+									</template>
+									<div class="slds-col slds-size_10-of-12">
+										<template if:true={isGuest}>
+											<lightning-input type="checkbox" label="Use Ship To Address As Bill To"
+												onchange={handlebillAddressCheckbox} checked={isBillAddressSame}>
+											</lightning-input>
+											<template if:false={isBillAddressSame}>
+												<lightning-input class="bill-address-details"
+													label={labels.scc_Checkout_Name} value={billName}
+													onchange={handleBillAddressChange} name="billName"
+													placeholder="Type here">
+												</lightning-input>
+												<lightning-input class="bill-address-details"
+													label={labels.scc_Checkout_Street} value={billStreet}
+													onchange={handleBillAddressChange} name="billStreet"
+													placeholder="Type here">
+												</lightning-input>
+												<div class="slds-grid slds-gutters">
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-input label={labels.scc_Checkout_Floor}
+															value={billFloor} onchange={handleBillAddressChange}
+															name="billFloor" placeholder="Type here">
+														</lightning-input>
+													</div>
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-input label={labels.scc_Checkout_City}
+															value={billCity} onchange={handleBillAddressChange}
+															name="billCity" placeholder="Type here">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="slds-grid slds-gutters">
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-combobox class="statuscombobox slds-p-top_medium"
+															label={labels.scc_Checkout_State} value={billState}
+															options={billStateOptions}
+															onchange={handleBillAddressChange}>
+														</lightning-combobox>
+													</div>
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-input class="addressZip1"
+															label={labels.scc_Checkout_Zip} value={billZip}
+															placeholder={labels.scc_ZipHelpText}
+															onchange={handleBillAddressChange} name="billZip">
+														</lightning-input>
+													</div>
+												</div>
+												<lightning-combobox class="statuscombobox bill-address-details"
+													label={labels.scc_Checkout_Country} value={billCountry}
+													options={billCountryOptions}
+													onchange={handleBillCountryOptionChange}>
+												</lightning-combobox>
+											</template>
+										</template>
+									</div>
+								</div>
+								<div class="payment-method-container">
+									<h2 class="slds-m-bottom_small payment-title">Payment Method
+									</h2>
+									<template if:true={showErrorMessage}>
+										<div class="slds-text-color_error slds-m-bottom_small" role="alert">
+											{errorMessage}</div>
+									</template>
+									<div class="slds-col slds-size_1-of-2 payment-method">
+										<div class="slds-form-element radio-labels">
+											<div class="slds-show_inline-block slds-m-right_medium">
+												<input class="payment-option-radio payment-options slds-m-right_xx-small" type="radio" name ="paymentMethods" value="creditCard" checked={isCreditCardSelected} onchange={handlePaymentChange} aria-label="Payment Method, Pay with Credit Card.">
+												<div class="slds-show_inline-block slds-m-right_small">
+													{labels.scc_Credit_Card}</div>
+												<template if:false={isGuest}>
+													<input class="payment-option-radio slds-m-left_large slds-m-right_xx-small" type="radio" name ="paymentMethods" value="poMethod" checked={isPoSelected} onchange={handlePaymentChange} aria-label="Pay Via Purchase order">
+													<div class="slds-show_inline-block">{labels.scc_Checkout_PO}</div>
+												</template>
+											</div>
+										</div>
+									</div>
+									<template if:true={isCreditCardSelected}>
+										<template if:true={displayiFrame}>
+											<div class="credit-card-details slds-p-around_large">
+												<div id="iframewrapper">
+													<iframe id="paymetric-iframe" class="payment-metric-iframe"
+														src={iFrameUrl} name="dieCommFrame" onload={IFrame_OnLoad}>
+													</iframe>
+												</div>
+												<lightning-input type="checkbox" label={labels.scc_CreditCardAddress}
+													onchange={handleCardAddressCheckbox} checked={isAddressDifferent} >
+												</lightning-input>
+												<template if:true={isAddressDifferent}>
+													<lightning-input class="card-address-details-container"
+														label={labels.scc_Checkout_Name} value={cardName}
+														onchange={handleCardAddressChange} name="cardName" aria-label="Name Required" >
+													</lightning-input>
+													<lightning-input class="card-address-details-container"
+														label={labels.scc_Checkout_Street} value={cardStreet}
+														onchange={handleCardAddressChange} name="cardStreet" aria-label="Street (No PO Boxes) Required">
+													</lightning-input>
+													<div class="slds-grid slds-gutters">
+														<div class="slds-col slds-size_1-of-2">
+															<lightning-input label={labels.scc_Checkout_Floor}
+																value={cardFloor} onchange={handleCardAddressChange}
+																name="cardFloor">
+															</lightning-input>
+														</div>
+														<div class="slds-col slds-size_1-of-2">
+															<lightning-input label={labels.scc_Checkout_City}
+																value={cardCity} onchange={handleCardAddressChange}
+																name="cardCity" aria-label="City Required">
+															</lightning-input>
+														</div>
+													</div>
+													<div class="slds-grid slds-gutters">
+														<div class="slds-col slds-size_1-of-2">
+															<lightning-combobox class="statuscombobox"
+																label={labels.scc_Checkout_State} value={cardState}
+																options={cardStateOptions}
+																onchange={handleCardAddressChange} aria-label="State / Province Required">
+															</lightning-combobox>
+														</div>
+														<div class="slds-col slds-size_1-of-2">
+															<lightning-input class="addressZip2"
+																label={labels.scc_Checkout_Zip} value={cardZip}
+																placeholder={labels.scc_ZipHelpText}
+																onchange={handleCardAddressChange} name="cardZip" aria-label="Zip / Postal Code Required">
+															</lightning-input>
+														</div>
+													</div>
+													<lightning-combobox
+														class="statuscombobox card-address-details-container"
+														label={labels.scc_Checkout_Country} value={cardCountry}
+														options={cardCountryOptions}
+														onchange={handleCardCountryOptionChange} aria-label="Country Required">
+													</lightning-combobox>
+												</template>
+											</div>
+										</template>
+									</template>
+									<template if:false={isGuest}>
+										<template if:true={isPoSelected}>
+											<div
+												class="slds-grid slds-p-around_large credit-card-details credit-card-details-po">
+												<div class="slds-col slds-size_12-of-12">
+													<div class="slds-form-element__label">
+														{labels.scc_Checkout_PONumber}
+														<!-- <lightning-helptext class="help-text"
+																					content={labels.scc_PO_Info_Text}>
+																				</lightning-helptext> -->
+														<div class="slds-is-relative slds-show_inline-block">
+															<div
+																class="slds-show_inline-block info-icon slds-text-align_center">
+																i</div>
+															<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+																role="tooltip" id="45">
+																<div class="slds-popover__body">
+																	{labels.scc_PO_Info_Text}</div>
+															</div>
+														</div>
+													</div>
+													<input placeholder="PO #" type="Text" onkeyup={handleReviewOrderData} onchange={handlePOChange} class="slds-input" value={poNumber}
+													aria-label="PO# Required, If your institution does not provide a PO#,enter your last name."/>
+												</div>
+											</div>
+										</template>
+									</template>
+								</div>
+
+								<div>
+									<h2 class="Checkout-title">
+										{labels.scc_checkOut_ShippingInfo_Text}</h2>
+									<div class="slds-grid slds-wrap slds-gutters">
+										<div class="slds-col slds-size_5-of-12">
+											<div class="slds-form-element__label">
+												{labels.scc_checkOut_ShipTo_Attention_Text}
+												<!-- <lightning-helptext class="help-text"
+																			content={labels.scc_checkOut_ShipTo_Attention_HelpText}>
+																		</lightning-helptext> -->
+												<div
+													class="slds-is-relative slds-show_inline-block slds-m-left_xx-small ship-to-attention-tooltip">
+													<div
+														class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+														i</div>
+													<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+														role="tooltip" id="44">
+														<div class="slds-popover__body">
+															{labels.scc_checkOut_ShipTo_Attention_HelpText}</div>
+													</div>
+												</div>
+											</div>
+											<input placeholder="Type Here" type="Address" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} class="fixed-width-input slds-input" name="ShipToAttention" value={ShipToAttention} 
+											aria-label="Ship To Attention, Add Contact Name, Department,Room ID,etc to selected Ship-To."/>
+										</div>
+										<div class="slds-col slds-size_10-of-12">
+											<template if:true={isGuest}>
+												<template if:true={displayInstitution}>
+													<template if:true={showInstitutionName}>
+														<div class="slds-form-element__label">
+															{labels.scc_Institution_Name}
+															<div class="slds-form-element__label">
+																{institutionName}
+															</div>
+														</div>
+													</template>
+													<lightning-combobox
+														class="statuscombobox slds-p-top_medium institution-details"
+														label={labels.scc_Institution_Type} value={institutionType}
+														options={institutionTypeOptions}
+														onchange={handleShipAddressChange}>
+													</lightning-combobox>
+													<lightning-combobox
+														class="statuscombobox slds-p-top_medium institution-details"
+														label={labels.scc_Instution_Iam} value={iAm}
+														options={iAmOptions} onchange={handleShipAddressChange}>
+													</lightning-combobox>
+												</template>
+												<lightning-input class="ship-address-details"
+													label={labels.scc_Checkout_Name} value={shipName}
+													onchange={handleShipAddressChange} name="shipName"
+													placeholder="Type here">
+												</lightning-input>
+												<lightning-input class="ship-address-details"
+													label={labels.scc_Checkout_Street} value={shipStreet}
+													onchange={handleShipAddressChange} name="shipStreet"
+													placeholder="Type here">
+												</lightning-input>
+												<div class="slds-grid slds-gutters">
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-input label={labels.scc_Checkout_Floor}
+															value={shipFloor} onchange={handleShipAddressChange}
+															name="shipFloor" placeholder="Type here">
+														</lightning-input>
+													</div>
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-input label={labels.scc_Checkout_City}
+															value={shipCity} onchange={handleShipAddressChange}
+															name="shipCity" placeholder="Type here">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="slds-grid slds-gutters">
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-combobox class="statuscombobox slds-p-top_medium"
+															label={labels.scc_Checkout_State} value={shipState}
+															options={shipStateOptions}
+															onchange={handleShipAddressChange}>
+														</lightning-combobox>
+													</div>
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-input class="addressZip"
+															label={labels.scc_Checkout_Zip} value={shipZip}
+															placeholder={labels.scc_ZipHelpText}
+															onchange={handleShipAddressChange} name="shipZip">
+														</lightning-input>
+													</div>
+												</div>
+												<lightning-combobox class="statuscombobox ship-address-details"
+													label={labels.scc_Checkout_Country} value={shipCountry}
+													options={shipCountryOptions}
+													onchange={handleShipCountryOptionChange} disabled={isShipDisabled}>
+												</lightning-combobox>
+											</template>
+										</div>
+									</div>
+									<template if:false={isGuest}>
+                                        	<div class="slds-col slds-size_10-of-12">
+										<template if:true={oneTimeShipping}>
+											<div class="slds-col-slds-size_2-of-12">
+												<div class="slds-form-element__label">Name*
+												</div>
+												<input type="text" placeholder="Name" onkeyup={handleOneTimeAddressChange} onchange={handleReviewOrderData} name="oneTimeShippingName1" value={oneTimeShippingName} class="fixed-width-input slds-input"/>
+											</div>
+											<div>
+												<lightning-input-address street-label="Street (No PO Boxes)"
+													city-label="City" country-label="Country" province-label="State"
+													postal-code-label="PostalCode" country-options={CountryOptions}
+													province-options={getStatesOptions}
+													onchange={handleOneTimeAddressChange}>
+												</lightning-input-address>
+											</div>
+
+                                                <div class="slds-form-element__label">One-Time Shipping Address for this order only
+												</div>
+                                             <lightning-input class="ship-address-details"
+													label={labels.scc_Checkout_Name} value={shipName}
+													onchange={handleOneTimeShipAddressChange} name="shipName"
+													placeholder="Type here">
+												</lightning-input>
+												<lightning-input class="ship-address-details"
+													label={labels.scc_Checkout_Street} value={shipStreet}
+													onchange={handleOneTimeShipAddressChange} name="shipStreet"
+													placeholder="Type here">
+												</lightning-input>
+												<div class="slds-grid slds-gutters">
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-input label={labels.scc_Checkout_Floor}
+															value={shipFloor} onchange={handleOneTimeShipAddressChange}
+															name="shipFloor" placeholder="Type here">
+														</lightning-input>
+													</div>
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-input label={labels.scc_Checkout_City}
+															value={shipCity} onchange={handleOneTimeShipAddressChange}
+															name="shipCity" placeholder="Type here">
+														</lightning-input>
+													</div>
+												</div>
+												<div class="slds-grid slds-gutters">
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-combobox class="statuscombobox slds-p-top_medium"
+															label={labels.scc_Checkout_State} value={shipState}
+															options={shipStateOptions}
+															onchange={handleOneTimeShipAddressChange}>
+														</lightning-combobox>
+													</div>
+													<div class="slds-col slds-size_1-of-2">
+														<lightning-input class="addressZip"
+															label={labels.scc_Checkout_Zip} value={shipZip}
+															placeholder={labels.scc_ZipHelpText}
+															onchange={handleOneTimeShipAddressChange} name="shipZip">
+														</lightning-input>
+													</div>
+												</div>
+												<lightning-combobox class="statuscombobox ship-address-details"
+													label={labels.scc_Checkout_Country} value={shipCountry}
+													options={shipCountryOptions}
+													onchange={handleShipCountryOptionChange} >
+												</lightning-combobox>
+
+
+
+
+
+
+
+
+										</template>
+                                            </div>
+										<template if:false={oneTimeShipping}>
+											<div class="slds-grid slds-gutters">
+												<div class="slds-col slds-size_5-of-12">
+													<div class="slds-form-element__label">
+														{labels.scc_checkOut_ShipTo_Text}
+														&nbsp;&nbsp;&nbsp;
+														<!-- <a class="slds-button" href="#">Change</a> -->
+														<template if:true={showShipChangeButton}>
+															<lightning-button
+																class="no-signin-reqd-links slds-float_right shipto-address-change-link"
+																variant="base" label="Change" aria-label="Ship To, Change"
+																onclick={showchangeAddressModal}>
+															</lightning-button>
+														</template>
+
+													</div>
+													<!-- <input type="Address" required class="Ship-to"/> -->
+													<template for:each={curaddress1} for:item="shippaddr"
+														class="Ship-to">
+														<div class="slds-visual-picker slds-visual-picker_medium ship-to-address"
+															key={shippaddr.Id}>
+															<input type="radio" id={shippaddr.Id} value={shippaddr.Id} name="shipping-address" data-record-id={shippaddr.Id}/>
+															<label for={shippaddr.Id}>
+															<div class="card-size">
+																<span class="default-shipping-address slds-visual-picker__figure slds-visual-picker__text card-size card-padding slds-p-around_medium">
+																	<span>
+																			<p>{shippaddr.Shipto_name__c}</p>
+																		{shippaddr.Shipping_Street__c}
+																		<br>{shippaddr.Shipping_City__c} {shippaddr.Shipping_State__c} {shippaddr.Shipping_Zip_Code__c}
+																		<br>{shippaddr.Shipping_Country__c}
+																	</span>
+																</span>
+																<span class="slds-icon_container slds-visual-picker__text-check">
+																	<svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true">
+																	</svg>
+																</span>
+															</div>
+														</label>
+														</div>
+													</template>
+												</div>
+											</div>
+										</template>
+									</template>
+
+									<div class="slds-grid">
+										<div class="slds-col-slds-size_2-of-12 slds-m-top_medium">
+											<div class="slds-form-element__label">
+												{labels.scc_checkOut_Ship_Service_Text}
+												<!-- <lightning-helptext class="help-text"
+																			content={labels.scc_checkOut_Ship_Service_HelpText}>
+																		</lightning-helptext> -->
+												<div
+													class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+													<div
+														class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+														i</div>
+													<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+														role="tooltip">
+														<div class="slds-popover__body">
+															{labels.scc_checkOut_Ship_Service_HelpText}</div>
+													</div>
+												</div>
+											</div>
+											<template if:true={serviceOptions.length}>
+												<div class="Shipping-Method">
+													<template if:true={internationalShipping}>
+														<label class="slds-assistive-text" id="radio-group-label">Shipping Service Level, Only provide shipping service level that you would like for this order.If order.If you have permanent shipping preferences on your account ,we will ship via your carrier.Otherwise,we will choose an appropriate carrier for you.International orders to an established,permanent Ship-To address will be shipped using an air carrier of your choosing,please contact customer service prior to placing your orders so that we may establish your carrier as a shipping option on your account. Additional charges will be applied for Domestic, Next Day Air and Domestic, 2nd Day Air</label>
+														<lightning-radio-group name="radioGroup1"
+															options={internationalShipService}
+															value={internationalServiceValue} 
+															aria-labelledby="radio-group-label">
+														</lightning-radio-group>
+													</template>
+													<template if:false={internationalShipping}>
+														<label class="slds-assistive-text" id="radio-group-label1">Shipping Service Level, Only provide shipping service level that you would like for this order.If order.If you have permanent shipping preferences on your account ,we will ship via your carrier.Otherwise,we will choose an appropriate carrier for you.International orders to an established,permanent Ship-To address will be shipped using an air carrier of your choosing,please contact customer service prior to placing your orders so that we may establish your carrier as a shipping option on your account. Additional charges will be applied for Domestic, Next Day Air and Domestic, 2nd Day Air</label>
+														<lightning-radio-group name="radioGroup1"
+															options={serviceOptions} value={serviceValue}
+															onchange={handleServiceOptionChange} aria-labelledby="radio-group-label1">
+														</lightning-radio-group>
+														<div class="ShLevel-Helptext">
+															<!-- <lightning-helptext
+																						class="help-text"
+																						content={labels.scc_checkout_Shipping_Level_Helptext}>
+																					</lightning-helptext>
+																					<lightning-helptext
+																						class="help-text"
+																						content={labels.scc_checkout_Shipping_Level_Helptext}>
+																					</lightning-helptext> -->
+															<div
+																class="slds-is-relative slds-show_inline-block slds-m-left_xx-small slds-m-top_large">
+																<div
+																	class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+																	i</div>
+																<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+																	role="tooltip">
+																	<div class="slds-popover__body">
+																		{labels.scc_checkout_Shipping_Level_Helptext}
+																	</div>
+																</div>
+															</div>
+															<div
+																class="slds-is-relative slds-show_inline-block slds-m-left_xx-small slds-m-top_small">
+																<div
+																	class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+																	i</div>
+																<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+																	role="tooltip">
+																	<div class="slds-popover__body">
+																		{labels.scc_checkout_Shipping_Level_Helptext}
+																	</div>
+																</div>
+															</div>
+														</div>
+													</template>
+
+												</div>
+											</template>
+										</div>
+									</div>
+									<template if:false={isGuest}>
+										<div class="slds-grid slds-gutters">
+											<div class="slds-col slds-size_5-of-12">
+												<div class="slds-form-element__label">
+													{labels.scc_checkOut_DeliveryInfo_Text}
+												</div>
+												<span>
+												<lightning-combobox placeholder="Selection Option" name="shipping/delivery Instruction" value={ShippingInstructionValue} options={ShippingInstructionOptions1}
+													class="checkout-combo-input statuscombobox" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} aria-label="Shipping / Delivery Instructions"></lightning-combobox>
+											</span>
+											</div>
+										</div>
+										<div class="slds-grid slds-gutters">
+											<div class="slds-col slds-size_10-of-12 slds-p-right_none">
+												<div class="slds-form-element__label">
+													Warehouse Instructions <span>(70 characters max)</span>
+												</div>
+												<input placeholder="Placeholder content here, 70 characters max here. This is placeholder." type="Text" maxlength="70" class="slds-input warehouse" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} name="WarehousText" value={WarehouseText}
+												aria-label="Warehouse Instructions (70 characters max)"/>
+											</div>
+										</div>
+										<div class="slds-grid slds-gutters">
+											<div class="slds-col slds-size_5-of-12">
+												<div class="slds-form-element__label">
+													{labels.scc_checkOut_ContactPhone_Text}
+												</div>
+												<input placeholder="555-555-5555" type="Phone" maxlength="12" class="fixed-width-input slds-input" oninput={handlePhoneNumberInput} name="DeliveryContactPhone" value={DeliveryContactPhone}
+												aria-label="Delivery Contact Phone # Required" />
+											</div>
+											<div class="slds-col slds-size_5-of-12 lastname-container">
+												<div class="slds-form-element__label">
+													{labels.scc_checkOut_ContactMail_Text}
+												</div>
+												<input placeholder="user@domain.com" type="Email" class="fixed-width-input slds-input" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} name="DeliveryContactEmail" value={DeliveryContactEmail}
+												aria-label="Delivery Contact Email Required"/>
+											</div>
+										</div>
+										<div>
+											<template if:true={showLicense}>
+												<h2 class="Checkout-title">Provision
+													License To
+													<!-- <lightning-helptext
+																						class="help-text"
+																						content={labels.scc_checkout_License_Helptext}>
+																					</lightning-helptext> -->
+													<div
+														class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+														<div
+															class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+															i</div>
+														<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+															role="tooltip">
+															<div class="slds-popover__body">
+																{labels.scc_checkout_License_Helptext}</div>
+														</div>
+													</div>
+												</h2>
+											</template>
+											<div class="slds-grid">
+												<div class="slds-col-slds-size_2-of-12">
+													<template if:true={showLicense}>
+														<div class="slds-form-element__label">
+															License To
+														</div>
+														<div class="Provision-Method">
+															<lightning-radio-group name="radioGroup"
+																options={provisionOptions} value={value} type="radio"
+																onchange={handleProvisionChange}>
+															</lightning-radio-group>
+															<lightning-button
+																class="slds-button slds-p-top_x-small change-licenceto-btn"
+																variant="base" label="Change"
+																disabled={isProvisionDisabled}
+																onclick={showLicenseToAddressModal}>
+															</lightning-button>
+															<!-- <input type="Address" class="Ship-to"/> -->
+														</div>
+													</template>
+													<template if:true={ShowLicenseAddress}>
+													
+															<div class="slds-visual-picker slds-visual-picker_medium" >
+															
+														
+																<div class="card-size">
+																	<span class="slds-visual-picker__figure slds-visual-picker__text card-size card-padding" style="width:300px;height: 150px;">
+																		<span style="padding-left: 15px;text-align: left;">
+																			<span class="slds-text-heading_small" style="padding-bottom: 8px;"></span>
+																			{licaddress.accountName}
+																			<br>{licaddress.lStreet}
+																			<p>{licaddress.Lcity}{licaddress.lProvionce}{licaddress.lPostalcode}</p>
+																			<span>{licaddress.lCountry}</span>
+																		</span>
+																	</span>
+																	<span class="slds-icon_container slds-visual-picker__text-check">
+																		<svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true">
+																		</svg>
+																	</span>
+																</div>
+													
+															</div>
+													
+													</template>
+												</div>
+											</div>
+										</div>
+									</template>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<template if:false={isGuest}>
+						<div class="slds-col slds-size_4-of-12 slds-p-horizontal_large slds-p-top_x-large summaryBg" role="alert">
+							<h2 class="slds-m-bottom_medium">
+								Summary
+								<div
+									class="slds-is-relative slds-show_inline-block slds-p-around_none slds-m-left_xx-small">
+									<div
+										class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+										i</div>
+									<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip"
+										id="6">
+										<div class="slds-popover__body">{labels.scc_reviewCartPage_SummaryHelpText}
+										</div>
+									</div>
+								</div>
+							</h2>
+							<div class="slds-p-vertical_small summary-details">
+								<span>Subtotal</span>
+								<span>{subTotalPrice}</span>
+							</div>
+							<div class="slds-p-vertical_small summary-details">
+								<span>Promo Discount<p>{promoCode}</p></span>
+								<span>{discountValue}</span>
+							</div>
+							<div class="slds-p-vertical_small summary-details">
+								<span>Shipping</span>
+								<span>{shippingAmount}</span>
+							</div>
+							<div class="slds-p-vertical_small summary-details">
+								<span>Tax</span>
+								<span>{taxAmount}</span>
+							</div>
+							<div class="slds-p-vertical_small summary-details summary-total">
+								<span>Total</span>
+								<span>{totalPrice}</span>
+							</div>
+						</div>
+					</template>
+
+					<template if:true={isGuest}>
+						<template if:true={guestCartRetrieved}>
+							<div
+								class="slds-col slds-size_4-of-12 slds-p-horizontal_large slds-p-top_x-large summaryBg">
+								<h2 class="slds-m-bottom_medium">
+									Summary
+									<div
+										class="slds-is-relative slds-show_inline-block slds-p-around_none slds-m-left_xx-small">
+										<div
+											class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+											i</div>
+										<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom"
+											role="tooltip">
+											<div class="slds-popover__body">{labels.scc_reviewCartPage_SummaryHelpText}
+											</div>
+										</div>
+									</div>
+								</h2>
+								<div class="slds-p-vertical_small summary-details">
+									<span>Subtotal</span>
+									<span>{guestCartSubtotal}</span>
+								</div>
+								<div class="slds-p-vertical_small summary-details">
+									<span>Promo Discount<p>{promoCode}</p></span>
+									<span>{discountValue}</span>
+								</div>
+								<div class="slds-p-vertical_small summary-details">
+									<span>Shipping</span>
+									<span>{guestCartShipping}</span>
+								</div>
+								<div class="slds-p-vertical_small summary-details">
+									<span>Tax</span>
+									<span>{guestCartTax}</span>
+								</div>
+								<div class="slds-p-vertical_small summary-details summary-total">
+									<span>Total</span>
+									<span>{guestCartTotal}</span>
+								</div>
+							</div>
+						</template>
+					</template>
+
+				</div>
+			</div>
+		</div>
+		<template if:false={isGuest}>
+			<template if:true={openModal}>
+				<div class="slds-modal slds-fade-in-open slds-backdrop change-modal" role="dialog" aria-label="Select Shipping Address">
+					<div class="slds-modal__container modal-page">
+						<!------HEADER Section-->
+						<div class="slds-modal__header modal-header">
+							<div class="slds-p-horizontal_large change-modal-title">
+								<button class="slds-modal__close closebtnOnFocus emailRprtCloseBtn" onclick={closeModal1} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+								<h2>Select Shipping Address</h2>
+							</div>
+							<div class="slds-p-right_large slds-m-bottom_medium slds-float_right change-modal-filter">
+								<label class="slds-form-element__label slds-p-right_none slds-m-left_x-small" for="filter-search-input">Filter Results &nbsp;<span class="slds-assistive-text">Filter Results, Filter by Name or Zip / Postal Code. Showing {totalShipToRecords} of {totalShipToRecords} Items,Filter by Name or Zip / Postal Code.</span></label>
+								<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+									<div
+										class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+										i</div>
+									<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+										<div class="slds-popover__body">{labels.scc_checkOut_Filter_HelpText}</div>
+									</div>
+								</div>
+								<div class="slds-is-relative">
+									<input type="text" id="filter-search-input" class="slds-input filter-search-input" value={searchTermShip} onchange={handleUserInputsShip} onkeyup={handleUserInputsShip} data-index="0" />
+									<a href="#" class="slds-button filter-clear" onclick={clearFilterInput}  aria-label="close">x</a>
+								</div>
+								<div class="slds-form-element__label item-count" role="alert">{totalShipToRecords} of
+									{totalShipToRecords} Items</div>
+								<div class="slds-is-relative slds-show_inline-block">
+									<div class="slds-show_inline-block info-icon slds-text-align_center">i</div>
+									<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-right filter-popover"
+										role="tooltip">
+										<div class="slds-popover__body">{labels.scc_checkOut_Filter_HelpText}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!------Body Section-->
+						<div class="slds-modal__content slds-p-around_medium" data-index="0">
+							<div class="slds-form_horizontal">
+								<div class="slds-grid slds-gutters slds-wrap">
+									<template for:each={filteredresultt} for:item="shippaddr" >
+										<div class="slds-col slds-size_4-of-12" key={shippaddr.AccShipId}>
+											<div class="slds-visual-picker slds-visual-picker_large">
+												<input type="radio" id={shippaddr.AccShipId} value={shippaddr.AccShipId} name="shipping-addres"  onclick={handleShipRowClick} data-record-id={shippaddr.AccShipId}
+												data-address-name={shippaddr.SAccountName} data-address-city={shippaddr.ShippingCity} data-address-street={shippaddr.ShipStreet} data-address-provionce={shippaddr.Provionce}
+												data-address-postal-code={shippaddr.PostalCode} data-address-country={shippaddr.ShippingCountry} data-ship-to-number={shippaddr.ShipToNumber} data-index="0"/>
+												<label for={shippaddr.AccShipId}>
+																				<div class="card-size">
+																					<span class="slds-visual-picker__figure slds-visual-picker__text card-padding slds-p-around_medium" >
+																						<span>
+																								{shippaddr.SAccountName} <br/> {shippaddr.ShipStreet} <br/>
+																								{shippaddr.ShippingCity} {shippaddr.Provionce} {shippaddr.PostalCode}
+																								<br/>{shippaddr.ShippingCountry}
+																						</span>
+																					</span>
+																					<span class="slds-icon_container slds-visual-picker__text-check">
+																						<svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true">
+																						</svg>
+																					</span>
+																				</div>
+																			</label>
+											</div>
+										</div>
+									</template>
+								</div>
+							</div>
+						</div>
+						<!------Footer Section-->
+						<div class="slds-modal__footer slds-text-align_right">
+							<button class="Cancel slds-m-right_medium" onclick={closeModal1} data-index="0">Cancel</button>
+							<button tabindex="0" class="Change-Address changeAddress" aria-disabled={isChangeAddDisabled} onclick={handleUpdateShipAddress} onfocusout={focusOutButton} type="submit" >Change Address</button>
+						</div>
+					</div>
+				</div>
+			</template>
+			<template if:true={openLicenseToModal}>
+				<div class="slds-modal slds-fade-in-open slds-backdrop change-modal">
+					<div class="slds-modal__container modal-page">
+						<!------HEADER Section-->
+						<div class="slds-modal__header modal-header">
+							<div class="slds-p-horizontal_large change-modal-title">
+								<button class="slds-modal__close closebtnOnFocus" onclick={closeLicenseToModal1} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+								<h2>Provision License To</h2>
+							</div>
+							<div class="slds-p-right_large slds-m-bottom_medium slds-float_right change-modal-filter">
+								<label class="slds-form-element__label slds-p-right_none slds-m-left_x-small" for="filter-search-input1">Filter Results</label>
+								<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+									<div
+										class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+										i</div>
+									<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip">
+										<div class="slds-popover__body">{labels.scc_checkOut_Filter_HelpText}</div>
+									</div>
+								</div>
+								<div class="slds-is-relative">
+									<input type="text" id="filter-search-input1" class="slds-input filter-search-input" value={searchTermShip} onchange={handleUserInputsShip} onkeyup={handleUserInputsShip} data-index="0" />
+									<a href="#" class="slds-button filter-clear"  onclick={clearFilterInput} aria-label="close">x</a>
+								</div>
+								<div class="slds-form-element__label item-count" role="alert">{totalShipToRecords} of
+									{totalShipToRecords} Items</div>
+								<div class="slds-is-relative slds-show_inline-block">
+									<div class="slds-show_inline-block info-icon slds-text-align_center">i</div>
+									<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-right filter-popover"
+										role="tooltip">
+										<div class="slds-popover__body">{labels.scc_checkOut_Filter_HelpText}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!------Body Section-->
+						<div class="slds-modal__content slds-p-around_medium">
+							<div class="slds-form_horizontal">
+								<div class="slds-grid slds-gutters slds-wrap">
+									<template for:each={filteredresultt} for:item="shippaddr">
+										<div class="slds-col slds-size_4-of-12" key={shippaddr.AccShipId}>
+											<div class="slds-visual-picker slds-visual-picker_medium">
+												<input type="radio" id={shippaddr.AccShipId} value={shippaddr.AccShipId} name="shipping-address-license"  onclick={handleLicenseRowClick} data-record-id={shippaddr.AccShipId}
+											data-address-name={shippaddr.SAccountName} data-address-city={shippaddr.ShippingCity} data-address-street={shippaddr.ShipStreet} data-address-provionce={shippaddr.Provionce}
+											data-address-postal-code={shippaddr.PostalCode} data-address-country={shippaddr.ShippingCountry} data-index="0"/>
+												<label for={shippaddr.AccShipId}>
+																			<div class="card-size">
+																				<span class="slds-visual-picker__figure slds-visual-picker__text card-size card-padding slds-p-around_medium">
+																					<span>
+																							{shippaddr.SAccountName} <br/> {shippaddr.ShipStreet} <br/>
+																							{shippaddr.ShippingCity} {shippaddr.Provionce} {shippaddr.PostalCode}<br/>
+																							{shippaddr.ShippingCountry}
+																					</span>
+																				</span>
+																				<span class="slds-icon_container slds-visual-picker__text-check">
+																					<svg class="slds-icon slds-icon-text-check slds-icon_x-small" aria-hidden="true">
+																					</svg>
+																				</span>
+																			</div>
+																		</label>
+											</div>
+										</div>
+									</template>
+								</div>
+							</div>
+						</div>
+						<!------Footer Section-->
+						<div class="slds-modal__footer">
+							<button class="Cancel slds-m-right_medium"  onclick={closeLicenseToModal1} data-index="0">Cancel</button>
+							<button tabindex="0" class="Change-Address" aria-disabled={isChangeAddDisabled} onclick={SaveLicenseMethod} type="submit" onfocusout={focusOutButton}>Change License to</button>
+						</div>
+					</div>
+				</div>
+			</template>
+		</template>
+
+		<!-- Replace Promo Code Pop-UP -->
+		<template if:true={showPromoConfirmation}>
+			<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+				class="slds-modal slds-fade-in-open">
+				<div class="slds-modal__container">
+					<div class="slds-modal__header">
+						<button class="slds-modal__close closebtnOnFocus" onclick={closePromoPopUp} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+						<h2>Replace Promo</h2>
+						<!-- <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate"
+														tabindex="-1">Replace Promo</h1>
+													<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closePromoPopUp}> X </button> -->
+					</div>
+					<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+						<div class="slds-form_horizontal slds-text-align_center">
+							<p>Only one promo code can be applied. Are you sure you would like to
+								replace the existing promo code?</p>
+						</div>
+					</div>
+					<div class="slds-modal__footer">
+						<button class="slds-button slds-button_brand action-modal-button" onclick={updatePromoCode} data-index="0">Replace Promo</button>
+						<button tabindex="0" class="slds-button slds-button_neutral cancel-modal-button" aria-label="Cancel and close" onclick={closePromoPopUp} onfocusout={focusOutButton}>Cancel</button>
+					</div>
+				</div>
+			</section>
+			<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+		</template>
+		<!-- Invalid Promo Code Pop-UP -->
+		<template if:true={showInvalidPromo}>
+			<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-02"
+				class="slds-modal slds-fade-in-open">
+				<div class="slds-modal__container">
+					<div class="slds-modal__header">
+						<button class="slds-modal__close closebtnOnFocus" onclick={closeInvalidPromoPopUp} onfocusout={focusOutClose} aria-label="close" data-id="closeButton">x</button>
+						<h2>Invalid Promo Code</h2>
+						<!-- <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate"
+														tabindex="-1">Invalid Promo Code</h1>
+													<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeInvalidPromoPopUp}> X </button> -->
+					</div>
+					<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2"
+						style="text-align: centre;">
+						<div class="slds-form_horizontal slds-text-align_center">
+							<p>Invalid Promo Code, please check your entry.</p>
+						</div>
+					</div>
+					<div class="slds-modal__footer">
+						<button class="slds-button slds-button_brand cancel-modal-button Change-Address" onclick={closeInvalidPromoPopUp} onfocusout={focusOutButton}>Close</button>
+					</div>
+				</div>
+			</section>
+			<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+		</template>
+		<template if:true={showLoader}>
+			<!-- <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner> -->
+				<!-- <div class="spinner-wrapper slds-spinner_container" style="height: 200px; position:absolute;">
+			<div class="slds-backdrop slds-backdrop_open">
+				<lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+			</div>
+		</div> -->
+		</template>
+
+
+	</template>
+
+	<template if:true={showReviewOrderDetails}>
+		<c-scc_review-order-l-w-c order-id={activeOrderId} onclosecheckout={closeShowDeliveryDetails}
+			onrevieworder={dispatchGARecords} cart-id={cartId} institution={institutionDetails}>
+		</c-scc_review-order-l-w-c>
+	</template>
+
+</template>

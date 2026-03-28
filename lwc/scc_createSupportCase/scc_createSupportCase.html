@@ -1,0 +1,189 @@
+<template>
+    <div class="no-horizontal-scroll auto-hide-scrollbar">
+    <template if:false={showCaseCreatedMessage}>
+    <lightning-card>
+        <div class="slds-form">
+        <div class="slds-grid slds-gutters slds-grid_pull-padded-small slds-m-top_small slds-text-align_center">        
+
+            <div class="spinner-wrapper slds-spinner_container" if:true={isLoading}
+			style="height: 200px; position:absolute;">
+			<div class="slds-backdrop slds-backdrop_open">
+				<lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+			</div>
+		    </div>
+
+            <div class="slds-col slds-size_2-of-12">
+                <span></span>
+            </div>                    
+
+            <div class="slds-col slds-size_8-of-12">
+            <div class="slds-m-top_large">
+                <h2 class="slds-text-heading_medium slds-m-around_small recent-order form-title">Create Case</h2>
+            </div>            
+            
+            <div>
+                <label for="FieldSelect" class="form-label">
+                    <div class="slds-form-element slds-m-around_small slds-align_absolute-left">{labels.scc_createCaseHeader} </div>                    
+                </label>
+            </div>                       
+
+            <div class="slds-form-element  slds-m-around_small">
+                <label for="FieldSelect" class="form-label">
+                    <span style="color: #C23934; font:16px Poppins">
+                        *
+                    </span>
+                    {labels.scc_selectCaseCategory}
+                </label>
+            <lightning-combobox  class="statuscombobox select-category-input" name="selectedCaseCat"
+                value={selectedCaseCatagories} options={getCaseCatagories} onblur={validateCaseCategory} onchange={handleCatgoriesChange} dropdown-alignment="left"
+                placeholder="Select case category">
+            </lightning-combobox>
+            
+            <template if:true={showCategoryError}>
+                <div class="slds-text-color_error slds-m-around_small input-fields-validation-err" role="alert">{categoryError}</div>
+            </template>         
+            </div>                         
+
+            <div class="slds-form-element slds-m-around_small">
+                <label for="FieldSelect" class="form-label">
+                    <span style="color: #C23934; font:16px Poppins">
+                        *
+                    </span>
+                    {labels.scc_emailAddress}
+            </label>
+            
+            <div class="slds-form-element__control input-fields-wrapper">
+            <template if:true={isGuest}>
+                <input  id="userEmail1" type="text" name="userEmail" required value={userEmail} data-id="userEmail" data-name="userEmail" class="slds-input input-wrapper input-fields-wrapper" onchange={handleEmailInputChange} placeholder="Enter your email address" />
+            </template>
+
+            <template if:false={isGuest}>
+                <input  id="userEmail2" type="text" readonly name="userEmail" required value={userEmail} data-id="userEmail" data-name="userEmail" class="slds-input input-wrapper input-fields-wrapper" onchange={handleEmailInputChange} placeholder="Enter your email address" />
+            </template>
+
+            </div>
+            <template if:true={showEmailError}>
+                <div class="slds-text-color_error slds-m-around_small input-fields-validation-err" role="alert">{emailError}</div>
+            </template>                                
+            </div>
+                      
+
+            <div class="slds-form-element slds-m-around_small">
+                <label for="FieldSelect" class="form-label">
+                    <span style="color: #C23934; font:16px Poppins">
+                        *
+                    </span>
+                    {labels.scc_UserName}
+                </label>
+            
+                <div class="slds-form-element__control input-fields-wrapper">
+                    <template if:true={isGuest}>
+                        <input  id="userName" type="text" name="userName" required  value={userName} data-id="userName" data-name="userName" class="slds-input input-wrapper input-fields-wrapper" onchange ={validateUserName} placeholder="Enter your name" maxlength="100" />
+                    </template>
+                    <template if:false={isGuest}>
+                        <input  id="userName1" type="text" readonly name="userName" required  value={userName} data-id="userName" data-name="userName" class="slds-input input-wrapper input-fields-wrapper" onchange ={validateUserName} placeholder="Enter your name" maxlength="100" />
+                    </template>
+
+                </div>
+
+                <template if:true={showNameError}>
+                    <div class="slds-text-color_error slds-m-around_small input-fields-validation-err" role="alert">{nameError}</div>
+                </template>
+                
+            </div>
+            
+            
+            <template if:false={isInternal}>
+
+            <div class="slds-form-element slds-m-around_small">
+                
+                <div class="form-label">
+                    <span style="color: #C23934; font:16px Poppins">
+                        *
+                    </span>
+                    {labels.scc_AccountZipCode}</div>                
+                <input  data-id="schoolZipCode" aria-label="Account Postal Code/ Zip Code required" type="text" value={selectedZipCode} placeholder="Enter your postal/ zip" oninput={handleZipCodeChange}  onchange={handleZipCodeChange}  class="slds-input input-wrapper" />
+                <template if:true={showSchoolOptions}>
+                    <template if:false={hideSelectSchool}>                        
+                        <div class="dropdown">
+                            <ul class="dropdown-list">
+                                <template for:each={schoolOptions} for:item="school">
+                                    <li key={school.value} class="dropdown-item"
+                                        data-value={school.value} onclick={handleSchoolSelect}
+                                        onkeyup={handleSchoolSelect} tabindex="0">
+                                        {school.label}</li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+                </template>
+                <template if:true={showZipCodeError}>
+                    <div class="slds-text-color_error slds-m-around_small input-fields-validation-err" role="alert">{zipCodeError}</div>
+                </template>
+            </div>            
+            
+            <div class="slds-form-element slds-m-around_small">
+                <label for="FieldSelect" class="form-label">
+                    <span style="color: #C23934; font:16px Poppins">
+                        *
+                    </span>
+                    {labels.scc_AccountName}
+                </label>
+                <div class="slds-form-element__control">
+                    <input  id="userAccountName"  type="text" name="userAccountName" required value={userAccountName} onchange={validateAccountName} data-id="userAccountName" data-name="userAccountName" placeholder="Enter account name here..." class="slds-input input-wrapper " maxlength="100" />
+                </div>
+                <template if:true={showAccountNameError}>
+                    <div class="slds-text-color_error slds-m-around_small input-fields-validation-err" role="alert">{accountNameError}</div>
+                </template>
+            </div>
+
+            </template>
+        
+            <div class="slds-form-element  slds-m-around_small auto-hide-scrollbar">
+                <label for="FieldSelect" class="form-label">
+                    <span style="color: #C23934; font:16px Poppins">
+                        *
+                    </span>
+                    {labels.scc_AdditionalDetailsOfIssue}
+                </label>
+                <div>
+                    <lightning-textarea  class = "input-fields-wrapper" name="caseDescription" id="caseDescription" placeholder="Enter case description here..." value={caseDescription} onblur={validateCaseDescription} onchange={handleCaseDescription} maxlength="4000"></lightning-textarea>                    
+                    <template if:true={showAccountCaseDescError}>
+                        <div class="slds-text-color_error slds-m-around_small input-fields-validation-err" role="alert">{caseDescError}</div>
+                    </template> 
+                </div>                              
+                <div class="slds-form-element slds-m-around_small remaing-char-file-upload"><p>{remainingCharactersMessage}</p></div>                
+            </div>
+
+            <lightning-input class="slds-m-around_medium slds-form-element__control" type="file" label="Upload File" onuploadfinished={handleUploadFinished} onchange={handleFileChange}></lightning-input>            
+            <div class="slds-form-element slds-m-around_small">
+            <template if:true={fileUploaded}>
+                <div class="slds-form-element slds-m-around_small remaing-char-file-upload">{fileUploadMessage}</div>
+            </template>
+            </div>
+            <div class = "slds-align_absolute-center ">
+            <button class="slds-button submit-button slds-form-element slds-m-around_small slds-align_absolute-center slds-m-horizontal_small" onclick={handleSubmit} aria-disabled={submitDisabled}>                                            
+                Submit
+            </button>           
+            </div>
+            </div> 
+            
+        
+        </div>
+    </div>
+    </lightning-card>
+    </template>         
+
+    <template if:true={showCaseCreatedMessage}>
+        <lightning-card class="slds-p-around_medium">
+        <template if:false={isLoading}>
+            <div class="slds-col slds-size_12-of-12">
+                <div class="slds-m-top_large slds-align_absolute-center">
+                    <h2 class="slds-text-heading_medium slds-m-around_small slds-align_absolute-center case_created_message">{labels.scc_caseCreatedMessageLabel} [{caseNumber}] {labels.scc_caseCreatedMessageLabel1}</h2>
+                </div> 
+            </div> 
+        </template>
+        </lightning-card>
+    </template>
+    </div>  
+</template>

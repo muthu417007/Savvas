@@ -1,0 +1,86 @@
+.checkout-cancel{
+    width: 40px;
+    height: 40px;
+    background-color: #0C1E3D;
+    font-size: 16px;
+    float: right;
+
+}
+.ship-address{
+  float: left; 
+  text-align: left;  
+}
+.Checkout-title{
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: -2%;
+    text-align: left;
+    color: #0C1E3D;
+    padding: 10px 0 30px;
+}
+
+.Cancel{
+    width: 108px;
+    height: 46px;
+    border-radius: 90px;
+    border: 1px #AFC3D8;
+}
+
+.Change-Address{
+    width: 206px;
+    height: 45px;
+    border-radius: 90px;
+    border: #AFC3D8;
+    background-color:#AFC3D8;
+    color: #FFFFFF;
+}
+
+.Change-Address:not([disabled]) {
+    background-color: #9ECA47;
+    color: #0C1E3D;
+}
+
+.Filter-By{
+    height: 40px;
+    float: right;
+}
+.filter-text{
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-size: 600;
+    color: #173770;
+}
+
+.filter-box{
+    height: 20px;
+    border-radius: 10px;
+    border: 1px #AFC3D8;
+}
+.filter-result{
+    width: 120px;
+    height: 24px;
+}
+.filter-result-text{
+    font-family: 'Poppins';
+    font-size: 16px;
+    font-size: 600;
+    color: #173770;
+}
+
+.modal-header{
+    display: inline;
+}
+
+.modal-page{
+    width: 1110px;
+    height: 650px;
+}
+.eighty-percent-width-modal .slds-modal__container {
+    width: 70vw; /* 80% of viewport width */
+    max-width: 70vw; /* Ensure it doesn't shrink smaller */
+    margin: 0 auto; /* Center the modal horizontally */
+}
+.slds-modal__content{
+    min-height: 40vh;
+}

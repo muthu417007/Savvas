@@ -1,0 +1,13 @@
+.held-cart-message{
+    width: 100%;
+    border: 1px solid #B3CA83;
+    background-color: #F0F4E6;
+    border-radius: 10px;
+}
+.held-cart-message div{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: center;
+    color: #008816;
+}

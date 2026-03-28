@@ -1,0 +1,79 @@
+<!-- sldsValidatorIgnore -->
+<template>
+	<template if:true={showCombobox}>
+		<div class={formElementClasses}>
+			<div class="slds-form-element__control minwidth-200">
+				<div class={comboboxContainerClass}>
+					<div class={comboboxClass}>
+						<div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+							role="none">
+							<div if:true={isValueSelected}>
+								<button
+		                                    type="button"
+		                                    class="slds-input_faux slds-combobox__input slds-combobox__input-value"
+		                                    aria-labelledby="combobox-label combobox-id-selected-value"
+		                                    id="combobox-selected-value"
+		                                    aria-controls="listbox"
+		                                    aria-expanded="false"
+		                                    aria-haspopup="listbox"
+											disabled={disabled}
+		                                >
+		                                <span class="slds-truncate" id="combobox-value-id-38">
+		                                    {selectedLabel}
+		                                </span>
+		                                </button>
+								<button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Clear the text input"  disabled={disabled}>
+		                                    <lightning-icon icon-name="utility:close" alternative-text="Clear" title="Clear" size="x-small" onclick={clearSelection} ></lightning-icon>
+		                                </button>
+							</div>
+							<div if:false={isValueSelected}>
+								<input
+		                                    type="text"
+		                                    class={inputClass}
+		                                    id="combobox"
+		                                    aria-autocomplete="list"
+		                                    aria-controls="listbox"
+		                                    aria-expanded={comboboxIsOpen}
+		                                    aria-haspopup="listbox"
+		                                    autocomplete="off"
+		                                    role="combobox"
+		                                    placeholder={placeHolder}
+		                                    onfocus={focusCombobox}
+		                                    onblur={blurCombobox}
+		                                    onkeyup={handleSearchInput}
+		                                    onkeydown={handleKeyDown}
+											disabled={disabled}
+											aria-invalid={isInvalid}
+		                                />
+								<span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+		                                    <lightning-icon icon-name="utility:search" alternative-text="Search" title="Search" size="x-small"></lightning-icon>
+		                                </span>
+							</div>
+						</div>
+						<div if:true={tempOptions.length} id="listbox" style="width: 100%;"
+							class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox"
+							onmousedown={handleDropdownMouseDown} onmouseup={handleDropdownMouseUp}>
+							<ul class="slds-listbox slds-listbox_vertical" role="presentation">
+								<li role="presentation" class="slds-listbox__item" for:each={tempOptions}
+									for:item="option" key={option.value}>
+									<div id={option.value} class={option.classes} data-value={option.value}
+										data-focused={option.focused} onclick={handleSelect} role="option">
+										<span class="slds-media__figure slds-listbox__option-icon">
+		                                        <lightning-icon icon-name={iconName} alternative-text={iconTitle} title={iconTitle} size="x-small"></lightning-icon>
+		                                    </span>
+										<span class="slds-media__body">
+		                                        <span class="slds-truncate" title={option.label}>
+		                                            {option.label}
+		                                        </span>
+										</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div if:true={isInvalid} class="slds-text-color_destructive slds-text-body_regular">Missing Value</div>
+		</div>
+	</template>
+</template>

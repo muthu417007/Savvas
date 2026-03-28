@@ -1,0 +1,214 @@
+.Register{
+margin-left: 198px;
+font-size: 24px;
+font-style: bold;
+  display: flex;
+}
+.firstpageheading{
+	text-align : center;
+	margin-top: 15px;
+	margin-bottom: 15px;
+
+}
+/*.slds-form-element__control, .zipcodemarhin{
+	margin-top:-22px;
+}*/
+
+.mergingspace{
+	margin-top: -16px;
+
+}
+.centered-buttons{
+	
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button.true {
+    background-color: blue; /* Change to desired color */
+    color: rgb(187, 34, 34); /* Change to desired text color */
+}
+
+
+
+.RegisterNewUser {
+    width: 100%; /* Ensure the card takes up the available width */
+    max-width: 600px; /* Set a maximum width for the card to prevent it from becoming too wide */
+}
+.fixed-width-input {
+    width: 100px; /* Adjust the width as needed */
+}
+.registration-text p {
+    color: red;
+    font-size: 16px;
+
+}
+.blue-link {
+    color:brgb(10, 112, 156)
+}
+.select-container {
+    position: relative; /* Ensure relative positioning */
+   z-index: 1 !important; /* Ensure overflow is visible */
+}
+
+/* Style the dropdown options */
+.select-container select {
+    position: relative; /* Ensure relative positioning */
+}
+
+/* Style the dropdown options list */
+.select-container select option {
+    /* Add any necessary styling for the dropdown options */
+}
+
+.slds-input {
+    max-width: 200px; /* Adjust the maximum width as needed */
+}
+
+/* .slds-form_horizontal.slds-form.slds-grid.slds-wrap{
+	margin-top: 50px;
+	margin-bottom: 0px;
+} */
+
+.info {
+    margin-bottom: 10px; /* Add margin between each info block */
+}
+
+
+.label {
+    display: inline-block;
+    width: 200px; /* Adjust width as needed */
+	padding-left: 10px;
+}
+
+
+.detail {
+    display: inline-block;
+    margin-left: 10px; /* Adjust margin as needed */
+    vertical-align: top;
+}
+.registration-text {
+    text-align: center;
+    padding: 20px; /* Adjust the padding value as needed */
+}
+
+.registered-user-message {
+    text-align: center;
+    padding: 20px; 
+}
+
+
+.registered-user-message a.blue-link {
+    color: blue; /* Blue color for links */
+}
+
+
+.registered-user-message p {
+    color: red; /* Red color for other text */
+}
+
+.registration-details {
+    text-align: center;
+}
+
+
+.registration-heading {
+    margin: 20px 0;
+}
+
+
+.registration-info {
+    display: flex;
+    flex-direction: column;
+    /* align-items: left; */
+    padding-right: 20px;
+    padding-left: 86px;
+}
+
+
+/*.registration-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+.registration-label {
+    margin-right: 10px;
+    font-weight: bold;
+    align-items: left;
+    direction: 1tr;
+}
+
+.registration-value{
+    align-items: right;
+    direction: 1tr;
+}*/
+.registration-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.registration-label {
+    font-weight: bold;
+    margin-right: 10px;
+    width: 150px; /* Adjust as needed */
+    direction: rtl; /* Set direction to right-to-left */
+}
+
+.registration-value {
+    flex: 1; /* Expand to fill remaining space */
+    margin-left: 68px; /* Adjust as needed */
+    direction: ltr; /* Set direction to right-to-left */
+}
+
+
+
+.slds-modal__container {
+    max-width: 400px; /* Adjust the maximum width as needed */
+}
+
+.slds-modal__header {
+    text-align: left; /* Align the header text to the left */
+}
+
+.slds-modal__footer {
+    justify-content: flex-end; /* Align footer buttons to the right */
+}
+
+.registration-success {
+   text-align: center;
+}
+.center-align {
+   text-align: center;
+}
+.user-info p {
+   margin: 8px 0;
+}
+.user-info p strong {
+   margin-right: 8px;
+}
+.text-value-changed{
+    font-size:15px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+}
+ 
+ 
+.dropdown-arrow {
+    cursor: pointer;
+}
+ 
+ 
+.dropdown-container{
+    display: flex;
+    align-items: center;
+}
+ 
+.search-criteria-label{
+    margin-left: 10px;
+}

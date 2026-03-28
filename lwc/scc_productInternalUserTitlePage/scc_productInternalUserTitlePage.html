@@ -1,0 +1,251 @@
+<template>
+	<!-- Detail Page Design -->
+	<template if:true={displaypage}>
+		<!-- Breadcrumbs -->
+		<nav role="navigation" aria-label="Breadcrumbs">
+			<ol class="slds-breadcrumb slds-list_horizontal slds-wrap breadcrumbsTop">
+				<li class="slds-breadcrumb__item slds-p-horizontal_x-small">
+					Home
+				</li>
+				<li class="slds-breadcrumb__item slds-p-horizontal_x-small">
+					Price & Availability
+				</li>
+				<li class="slds-breadcrumb__item slds-p-horizontal_x-small">
+					Product Search
+				</li>
+				<li class="slds-breadcrumb__item slds-p-horizontal_x-small">
+					<div style="font-weight: bold;">
+						Title Detail
+					</div>
+				</li>
+			</ol>
+		</nav>
+
+
+		<!-- Product Information -->
+		<div class="slds-grid slds-p-top_medium">
+			<div class="slds-col_bump-right">
+				<!-- Product Title -->
+				<div class="slds-grid slds-grid_vertical">
+					<div><b><u>{currentSelectedProductRecord.Title_Description}</u></b></div>
+					<!-- <div class="slds-align-top" style="font-size:10px !important;"> By BOCK </div> -->
+				</div>
+			</div>
+
+			<!-- Return Button -->
+			<div>
+				<lightning-button variant="brand" label="Return to Product Search" title="titleName"
+					onclick={returnProductSearchOnclick}></lightning-button>
+			</div>
+		</div>
+
+
+		<!-- Product Details -->
+		<div class="slds-grid slds-p-vertical_medium">
+			<div class="slds-col slds-size_1-of-12 placeholder-text  border-coverimage slds-align_absolute-center"
+				style="margin:0 !important;">
+				<!-- Cover Image -->
+				Cover Image
+			</div>
+			<div class="slds-col slds-size_10-of-12 slds-p-horizontal_medium ">
+				<div class="slds-grid">
+					<!-- Product Attributes -->
+					<div class="slds-col  slds-size_5-of-12 slds-p-horizontal_medium ">
+						<!-- ISBN -->
+						<template if:true={userIsInternational}>
+							<template if:true={externalUser}>
+						<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">
+								ISBN</div>
+							<div class="slds-col slds-size_9-of-12">{currentSelectedProductRecord.ISBN}</div>
+						</div>
+							</template>
+							</template>
+							<template if:false={userIsInternational}>
+							<template if:true={externalUser}>
+						<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">
+								ISBN</div>
+							<div class="slds-col slds-size_9-of-12">{currentSelectedProductRecord.ISBN}</div>
+						</div>
+							</template>
+							</template>
+
+						<!-- <template if:true={userIsInternal}>
+							<template if:true={InternationalDivision}> -->
+							<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">
+								ISBN</div>
+						  <a href={constructedUrl} target="_blank" class="slds-button slds-button_link">
+                    9780132154116
+                </a>
+						</div>
+						<!-- </template>
+						</template> -->
+								<template if:true={userIsInternal}>
+								<template if:true={USDivision}>
+
+								<div class="slds-grid slds-gutters">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">
+								ISBN</div>
+							<div class="slds-col slds-size_9-of-12">{currentSelectedProductRecord.ISBN}</div>
+						</div>	
+							</template>
+							</template>
+						<!-- Type -->
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">
+								Type</div>
+							<div class="slds-col slds-size_9-of-12">{currentSelectedProductRecord.Type}</div>
+						</div>
+						<!-- Status -->
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">
+								Status</div>
+							<div class="slds-col slds-size_9-of-12">{currentSelectedProductRecord.Status}</div>
+						</div>
+						<!-- Restriction -->
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">
+								Restriction</div>
+							<div class="slds-col slds-size_9-of-12">{restrictionValue}</div>
+						</div>
+						<div class="slds-grid slds-gutters ">
+							<div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important;">
+								Copyright</div>
+							<div class="slds-col slds-size_9-of-12">{currentSelectedProductRecord.Copyright}</div>
+						</div>
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_3-of-12  heading-color" style="text-align:right!important;">
+								Grade</div>
+							<div class="slds-col slds-size_9-of-12 ">{currentSelectedProductRecord.Grade_Level}</div>
+						</div>
+					</div>
+					<div class="slds-col  slds-size_4-of-12 slds-p-horizontal_medium ">
+						<!-- Price -->
+						<!-- <div class="slds-grid slds-gutters">
+                            <div class="slds-col  slds-size_1-of-2  heading-color" style="text-align:right!important;">Price</div>
+                            <div class="slds-col  slds-size_1-of-2">${currentSelectedProductRecord.Price}</div>
+                        </div> -->
+						<!-- Conditional Rendering Based on User Type -->
+						<template if:true={userIsInternational}>
+							<template if:true={externalUser}>
+							<!-- List Price -->
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_1-of-2 heading-color"
+									style="text-align:right!important;">List Price</div>
+								<div class="slds-col slds-size_1-of-2">${listPrice}</div>
+							</div>
+							<!-- Discount -->
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_1-of-2 heading-color"
+									style="text-align:right!important;">Discount</div>
+								<div class="slds-col slds-size_1-of-2">{discount}%</div>
+							</div>
+							<!-- Net Price -->
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_1-of-2 heading-color"
+									style="text-align:right!important;">Net Price</div>
+								<div class="slds-col slds-size_1-of-2">${formattedPrice}</div>
+							</div>
+						</template>
+						</template>
+
+						<template if:false={userIsInternational}>
+							<template if:true={externalUser}>
+							<!-- Price -->
+							<div class="slds-grid slds-gutters">
+								<div class="slds-col slds-size_1-of-2 heading-color"
+									style="text-align:right!important;">Price</div>
+								<div class="slds-col slds-size_1-of-2">${formattedPrice}</div>
+							</div>
+							<!-- Discount -->
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_1-of-2 heading-color"
+									style="text-align:right!important;">Discount</div>
+								<div class="slds-col slds-size_1-of-2">{DiscountType}</div>
+									<!-- <div class="slds-col slds-size_1-of-2">hehi</div> -->
+							</div>
+							</template>
+						</template> 
+							<!-- added by sudha from 135 to 168 lines for internal user , price is displaying based on  userstatus and uertype sprint7 backup ticket   -->
+						<template if:true={userIsInternal}>
+							<template if:true={InternationalDivision}>
+							<!-- Price -->
+							<div class="slds-grid slds-gutters">
+								<div class="slds-col slds-size_1-of-2 heading-color"
+									style="text-align:right!important;">Price</div>
+								<div class="slds-col slds-size_1-of-2">{currentSelectedProductRecord.ListPrice}</div>
+							</div>
+							<!-- Discount -->
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_1-of-2 heading-color"
+									style="text-align:right!important;">Discount</div>
+								<div class="slds-col slds-size_1-of-2">{currentSelectedProductRecord.Discount}</div>
+								 <!-- <div class="slds-col slds-size_1-of-2">List </div> -->
+							</div>
+						</template>
+						</template>
+							<template if:true={userIsInternal}>
+								<template if:true={USDivision}>
+							<!-- Price -->
+							<div class="slds-grid slds-gutters">
+								<div class="slds-col slds-size_1-of-2 heading-color"
+									style="text-align:right!important;">Price</div>
+								<div class="slds-col slds-size_1-of-2">{currentSelectedProductRecord.NetPrice}</div>
+							</div>
+							<!-- Discount -->
+							<div class="slds-grid slds-gutters slds-p-top_small">
+								<div class="slds-col slds-size_1-of-2 heading-color"
+									style="text-align:right!important;">Discount</div>
+								 <!-- <div class="slds-col slds-size_1-of-2">{currentSelectedProductRecord.Discount}</div> -->
+								 <div class="slds-col slds-size_1-of-2">Net </div>
+							</div>
+						</template>
+							</template>
+							<!-- ended by  sudha  -->
+						<!-- Carton Quantity -->
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_1-of-2 heading-color" style="text-align:right!important;">
+								Carton Quantity</div>
+							<div class="slds-col slds-size_1-of-2">{batchQuantity}</div>
+						</div>
+						<!-- Stock Availability -->
+						<div class="slds-grid slds-gutters slds-p-top_small">
+							<div class="slds-col slds-size_1-of-2 heading-color" style="text-align:right!important;">
+								Stock Availability</div>
+							<div class="slds-col slds-size_1-of-2 ">{stockAvailability}</div>
+						</div>
+					</div>
+					<div class="slds-col   slds-size_3-of-12 slds-p-horizontal_medium ">
+						<!-- Copyright -->
+						<!-- <div class="slds-grid slds-gutters ">
+                            <div class="slds-col slds-size_1-of-2 heading-color" style="text-align:right!important;">Copyright</div>
+                            <div class="slds-col slds-size_1-of-2">{currentSelectedProductRecord.Copyright}</div>
+                        </div> -->
+						<!-- Grade -->
+						<!-- <div class="slds-grid slds-gutters slds-p-top_small">
+                            <div class="slds-col slds-size_1-of-2  heading-color" style="text-align:right!important;">Grade</div>
+                            <div class="slds-col slds-size_1-of-2 ">{currentSelectedProductRecord.Grade_Level}</div>
+                        </div> -->
+						<!-- Other Grades -->
+						<!-- <div class="slds-grid slds-gutters slds-p-top_small">
+                            <div class="slds-col slds-size_1-of-2  heading-color" style="text-align:right!important;">Other Grades</div>
+                            <div class="slds-col slds-size_1-of-2 "> 
+                                {gradeRange}</div>
+                        </div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+
+	<!-- Load Child Component -->
+	
+	
+	<template if:true={loadchild}>
+		<c-scc_internal-related-products message={Recordidval} onclosetitlepage={closePage} onopentitlepage={openpage}
+			onselectedproduct={onselected}></c-scc_internal-related-products>
+	</template>
+
+</template>

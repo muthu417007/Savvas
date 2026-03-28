@@ -1,0 +1,44 @@
+<template>
+    <lightning-card title="Addresses">
+        <div class="container">
+            <div class="address-section">
+                <h2>Billing Addresses</h2>
+                <div class="addresses-container">
+                    <template if:true={billingAddresses}>
+                        <template for:each={billingAddresses} for:item="address">
+                            <div key={address.Id} 
+                                 class={address.classNames} 
+                                 data-id={address.Id}
+                                 data-type="billing"
+                                 onmouseover={handleMouseOver} 
+                                 onmouseout={handleMouseOut}
+                                 onclick={handleClick}>
+                                <p>{address.BillinStreet}<br>{address.BillingCity}, {address.State} {address.ZipCode}</p>
+                                                                <p>{address.AccountId}<br>{address.AccountName}, {address.AccId} {address.ZipCode}</p>
+                              </div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+            <div class="address-section">
+                <h2>Shipping Addresses</h2>
+                <div class="addresses-container">
+                    <template if:true={shippingAddresses}>
+                        <template for:each={shippingAddresses} for:item="address">
+                            <div key={address.Id} 
+                                 class={address.classNames} 
+                                 data-id={address.Id}
+                                 data-type="shipping"
+                                 onmouseover={handleMouseOver} 
+                                 onmouseout={handleMouseOut}
+                                 onclick={handleClick}>
+                                <p>{address.BillinStreet}<br>{address.BillingCity}, {address.State} {address.ZipCode}</p>
+                                                                <p>{address.AccountId}<br>{address.AccountName}, {address.AccId} {address.ZipCode}</p>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

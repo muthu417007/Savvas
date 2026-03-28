@@ -1,0 +1,88 @@
+<!--
+*********************************************************
+Component Name       : generateProposal
+Created Date         : 11/20/2024  
+Author               : Frank Berni - Cognizant
+                       Brent Mac - Cognizant
+Description          : LWC on record page that can redirect user to preview doc page 
+                       or generate a doc straight to the Quote without leaving the page.
+
+Modifications Log
+<Date>       <Author>            <Modification>
+11/19/2024   Brent Mac           Initial creation: Ticket W-016591
+11/20/2024   Frank Berni         W-016591: Added Preview Document button, default Template to facilitate doc gen process
+11/21/2024   Frank Berni         W-016591: Disabled combobox so it is greyed out, added reactive refresh to use most up to date Quote Template Id 
+11/22/2024   Frank Berni         W-016591 feedback: Updated labels for both buttons to be "Preview Proposal" & "Save Proposal"
+11/25/2024   Brent Mac           W-016591 feedback: Updated labels for both buttons to be "Generate Proposal"
+11/26/2024   Brent Mac           W-016591 feedback: Commented out Preview Button. Can be uncommented out if desired.
+12/16/2024   Frank Berni         HC-30: added a character count on documentName, if greater than 80, throw error and return
+12/19/2024   Frank Berni         HC-44: added checks for currentQuoteName with newQuoteName to refresh Document Name if there is an update
+*********************************************************
+-->
+<template>
+    <lightning-card>
+        <!-- Title for card -->
+        <div slot="title">
+            <div class="slds-grid slds-grid_vertical-align-center">
+                <div class="slds-col">
+                    <h2 class="slds-card__header-title" style="text-indent: 20px;">Generate Proposal</h2>
+                </div>
+                <div class="slds-col slds-text-align_right">
+                </div>
+            </div>
+        </div>
+        <div class="slds-m-around_medium">
+            <!-- Quote Name - defaulted value is Quote_Name_Override__c but can be edited -->
+            <lightning-input
+                type="text"
+                label="Document Name"
+                value={documentName}
+                onchange={handleDocumentNameChange}
+                class="slds-m-bottom_small"
+                message-when-value-missing="Document Name is required"
+                required
+            ></lightning-input>
+            <!-- Dropdown box to select which template to use, defaults to first template returned -->
+            <lightning-combobox
+                name="template"
+                label="Template"
+                value={selectedTemplateId}
+                placeholder="Select a template"
+                options={templateOptions}
+                onchange={handleTemplateChange}
+                class="slds-m-bottom_small"
+                disabled="true"
+            ></lightning-combobox>
+            
+            <!-- Centering buttons -->
+            <div slot="footer" class="slds-grid slds-grid_align-center slds-m-top-top_medium">
+                <!-- Adding Preview Proposal button - directs user to preview page for template
+                <lightning-button 
+                    label="Preview Proposal" 
+                    onclick={handlePreviewDocument} 
+                    variant="neutral"   
+                    disabled={isLoading}       
+                ></lightning-button>
+                Commented Preview Button out on 11/26/2024 -->
+
+                <!-- Save Proposal button - saves Document to Quote's Notes & Attachments -->
+                <lightning-button 
+                    label="Generate Proposal" 
+                    onclick={handleGenerateDocument} 
+                    variant="brand"
+                    disabled={isLoading}   
+                    class="slds-m-left_small"      
+                ></lightning-button>
+                
+            </div>
+            
+            <!-- Conditional render spinner with loading text -->
+            <template lwc:if={isLoading}>
+                <div class="slds-m-top_small">
+                    <lightning-spinner alternative-text="Generating document..." size="small"></lightning-spinner>
+                    <p aria-live="polite">Generating document... This may take a few moments.</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

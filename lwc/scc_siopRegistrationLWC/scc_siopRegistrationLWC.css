@@ -1,0 +1,109 @@
+.dummy{
+	color : black;
+}
+.slds-modal__content p.errormsg{
+   font-size: 16px;
+   font-weight: 500;
+   line-height: 24px;
+   text-align: left;
+   color: #D73A59;
+   padding: 10px 15px 10px 15px;
+   gap: 10px;
+   border-radius: 10px 10px 10px 10px;
+   border: 1px 0px 0px 0px;
+   background-color: #FFF4F4;
+   border-color:#FFCDCD;
+   border-style: solid;
+   font-family: Poppins;
+   font-weight: bold;
+}
+
+.lightning-button{
+ text-align: center;
+}
+.slds-modal__container{
+   width: 550px;
+   border-radius: 20px;
+}
+.slds-modal__header{
+   border-radius: 20px 20px 0 0;
+   border: none;
+   padding: 0;
+   padding-top: 46px;
+}
+.slds-modal__footer{
+   border-radius: 0 0 20px 20px;
+   border: none;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   padding: 0 55px 50px;
+}
+.siop-modal-button{
+   padding: 14px 20px;
+   font-family: Poppins;
+   font-size: 16px;
+   font-weight: 600;
+   line-height: 17.6px;
+   text-align: left;
+   color: #fff;
+   display: inline-block;
+   border-radius: 90px;
+   background-color: #AFC3D8;
+}
+.siop-modal-button:not([aria-disabled=true]){
+   background-color: #9ECA47;
+   color: #0C1E3D;
+}
+.slds-modal__header .slds-modal__close{
+   top: 10px;
+   right: 10px;
+   background-color: #0C1E3D;
+   border-radius: 50%;
+   width: 50px;
+   height: 50px;
+   font-family: sans-serif !important;
+   font-size: 24px;
+   color: #fff;
+   border: none;
+}
+.slds-modal__header h3{
+   font-size: 35px;
+   font-weight: 700;
+   line-height: 38.5px;
+   letter-spacing: -0.02em;
+   text-align: center;
+   color: #173770;
+}
+.slds-modal__content p{
+   font-size: 16px;
+   font-weight: 500;
+   line-height: 24px;
+   color: #173770;
+   margin-bottom: 10px;
+}
+.slds-modal__content .slds-form_horizontal{
+   width: 85%;
+   margin: 0 auto;
+}
+.slds-backdrop{
+   background-color: rgb(23 55 112 / 80%);
+}
+@media only screen and (max-width: 767px){
+   .slds-modal__container{
+      width: 92%;
+      margin: 0 auto;
+   }
+   .slds-modal__content .slds-form_horizontal{
+      width: 100%;
+   }
+   .slds-modal__footer{
+      padding: 0 20px 30px;
+   }
+   .slds-modal__header .slds-modal__close{
+      width: 34px;
+      height: 34px;
+      line-height: 24px;
+      padding: 0;
+   }
+}

@@ -1,0 +1,20 @@
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="utility:connected_apps" size="small"></lightning-icon>
+            Create Quote
+        </h3>
+    <lightning-record-edit-form object-api-name="CameleonCPQ__Quote__c" onsuccess={handleSuccess} onerror={handleError} onsubmit={handleSubmit}>
+            <lightning-messages></lightning-messages>
+            <div class="slds-m-around_medium">
+                <lightning-input-field required field-name='Name' value={oppName}></lightning-input-field>
+                    <lightning-input-field field-name='CameleonCPQ__AccountId__c' ></lightning-input-field>
+                    <lightning-input-field field-name='CPQOpportunityId__c' ></lightning-input-field>
+                    <!--lightning-input-field field-name='CameleonCPQ__PrimaryContactId__c'></lightning-input-field-->
+                <div class="slds-m-top_medium">
+                    <lightning-button id="submitBtn" variant="brand" type="submit" name="save" label="Create Quote"></lightning-button>
+                </div>
+            </div>
+        </lightning-record-edit-form>
+    </lightning-card>
+    </template>

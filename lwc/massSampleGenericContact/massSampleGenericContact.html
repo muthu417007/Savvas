@@ -1,0 +1,75 @@
+<template>
+	<div class="spinner">
+        <template if:true={fullLoading}>
+             <lightning-spinner alternative-text="Loading" variant="brand" size="large" class="slds-is-fixed">
+             </lightning-spinner>
+        </template>
+    </div>
+    <lightning-card title="Generic Contacts">   
+        <div class="slds-col slds-text-align_center">
+                <lightning-button label="Generic Contacts" onclick={handleGenericCreate}></lightning-button>
+                <div class="divider">
+                </div>
+                <lightning-button label="Add Account from List" onclick={addAccountFromList}></lightning-button>
+        </div>
+        <!--<div class="slds-m-around_medium slds-text-body_small overflow-x: auto slds-col slds-size_7-of-8">-->
+            <div class="slds-m-around_medium slds-text-body_small overflow-x:">
+                <template if:true={showTable}>
+                    <lightning-datatable
+                        data={recordList}
+                        columns={columnsVal}
+                        key-field="nameLink"
+                        onrowaction={handleRowAction}
+                        hide-checkbox-column="true">
+                    </lightning-datatable>
+                </template>
+                <template if:true={noData}>
+                    {noData}
+                </template>
+                <template if:true={fetchError}>
+                    {fetchError}
+                </template>
+        </div>
+    </lightning-card>      
+    <template if:true={showGenericCreate}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <template if:true={loading}>                    
+                    <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass" style="position:relative"></lightning-spinner>
+                </template>
+                    <!-- Modal/Popup Box LWC header here -->
+                    <header class="slds-modal__header">
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Generic Contact</h2>
+                    </header>
+                    <!-- Modal/Popup Box LWC body starts here -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <!--<lightning-record-form  object-api-name="SampleRequestContact__c" layout-type="Full" columns="2" mode="edit">
+                        </lightning-record-form>-->
+                            <lightning-record-edit-form object-api-name="Mass_Sample_Generic_Contacts__c" onsuccess={massSampleGenericCreation}  columns="2" onerror={handleError} record-id ={newGenericId} onload={handleLoad}>
+                                <div class="slds-col slds-size_8-of-12 slds-p-horizontal_medium">	
+                                    <lightning-input-field field-name="Generic_Contact__c" required=true></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_8-of-12 slds-p-horizontal_medium">										
+                                    <lightning-input-field field-name="Account__c"></lightning-input-field>
+                                </div>
+                                <div class="slds-col slds-size_8-of-12 slds-p-horizontal_medium">		
+                                    <lightning-input-field field-name="Mass_Sample_Generic__c" value={parentSampleId}></lightning-input-field>
+                                </div>	
+                                <div class="slds-col slds-size_8-of-12 slds-p-horizontal_medium">		
+                                    <lightning-input-field field-name="CurrencyIsoCode"></lightning-input-field>
+                                </div>
+                                    <footer class="slds-modal__footer">
+                                        <div class="slds-col slds-text-align_center">
+                                                <lightning-button type="cancel" label="Cancel" onclick={handleCancel}></lightning-button>
+                                                <div class="divider"></div>
+                                                <lightning-button type="submit" label="Save" onclick={handleSave} variant="brand"></lightning-button>
+                                        </div>
+                                        </footer>
+                            </lightning-record-edit-form>
+                    </div>
+                    
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+</template>

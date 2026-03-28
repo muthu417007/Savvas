@@ -1,0 +1,36 @@
+/* :host{
+    --backgroundImgUrl: url('/support/resource/TS_flow_generic_btn');  
+}
+
+.backgroundImg{
+    background-image: var(--backgroundImgUrl);
+    cursor: pointer;
+    display: table;
+    height: 150px;
+    width: 243px;
+    background-repeat: no-repeat;
+    background-position: center;
+} */
+/* Made font size changes as part of WI - W-011424
+ */
+
+.box{
+    padding: 20px;
+}
+
+.heading{
+    font-weight: 700;
+    font-family: Poppins,sans-serif;
+    vertical-align: middle;
+    font-size: 20px;
+    color:black;
+}
+
+.subHeading{
+    padding-top: 10px;
+    vertical-align: middle;
+    font-family: Poppins,sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color:white;
+}

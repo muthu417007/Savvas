@@ -1,0 +1,40 @@
+<template>    
+     <div class="slds-modal slds-fade-in-open slds-backdrop">  
+       <div class="slds-modal__container" style="min-width:50rem">  
+         <!------HEADER Section-->  
+          <div class="slds-modal__header">  
+                <b class="slds-float_left"><h3>{labels.scc_OrderStatus_SIOP_Order_Register_Participants}</h3></b>
+          </div>  
+         <!------Body Section-->  
+          <div class="slds-modal__content slds-p-around_medium" >  
+             <div class="slds-form_horizontal "  style="width:95%" >
+              <div>
+                {labels.scc_register_SIOP_Your_order_includes}
+              </div>
+              <div>
+                {labels.scc_register_SIOP_the_site_where}
+              </div>
+              <div>
+                {labels.scc_register_SIOP_To_Register}
+              </div>
+              <div>
+                {labels.scc_register_SIOP_link}
+              </div>
+              </div>
+          </div>
+         <!------Footer Section-->  
+         <div class="slds-modal__footer">  
+          <div class="slds-grid slds-gutters slds-float_right">
+            <div class="slds-col">
+            </div>
+            <div class="slds-col">
+            </div>
+            <div class="slds-col">
+                <lightning-button  label="Register now" variant="brand"  onclick={closeModal}>
+              </lightning-button>
+            </div>
+          </div>
+         </div>  
+       </div>  
+     </div> 
+</template>

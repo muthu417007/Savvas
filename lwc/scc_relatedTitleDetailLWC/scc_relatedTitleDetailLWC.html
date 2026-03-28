@@ -1,0 +1,144 @@
+<template>
+     <template for:each={relatedProducts} for:item="product">
+         <div   key={product.id}>
+             <!-- Detail Page Design -->
+        <nav role="navigation" aria-label="Breadcrumbs">
+        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+            <li class="slds-breadcrumb__item slds-p-horizontal_x-small">
+            Title Detail&nbsp;<span style="color: blue;">ISBN {product.ISBN13__c}</span>
+        </li>
+            <li class="slds-breadcrumb__item slds-p-horizontal_x-small" style="font-weight: bold;">
+                Related Title Detail
+            </li>
+        </ol>
+    </nav>
+    <div class="slds-grid slds-p-top_medium">
+		<div class="slds-col_bump-right">
+			<div class="slds-grid slds-grid_vertical">
+				<div><b><u>{product.Description}</u></b></div>
+				<div class="slds-align-top" style="font-size:10px !important;"> By BOCK </div>
+			</div>
+		</div>
+
+        
+        <div>
+            <lightning-button variant="brand" label="Close" title="titleName"
+        onclick={returnProductDetailpageOnclick}></lightning-button>
+        </div>
+    </div>
+	<div class="slds-grid slds-p-vertical_medium">
+		<div class="slds-col slds-size_1-of-12 placeholder-text  border-coverimage slds-align_absolute-center" 
+        style="margin:0 !important;" >
+            <!-- style="text-align:center!important;" -->
+			Cover Image
+		</div>
+		<div class="slds-col slds-size_10-of-12 slds-p-horizontal_medium ">
+            <div class="slds-grid">
+				<div class="slds-col  slds-size_5-of-12 slds-p-horizontal_medium ">
+                    <div class="slds-grid slds-gutters"> 
+                        <div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">ISBN</div> 
+                        <div class="slds-col slds-size_9-of-12">{product.ISBN13__c}</div> 
+                    </div>
+                    <div class="slds-grid slds-gutters slds-p-top_small">
+                        <div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">Type</div> 
+                        <div class="slds-col slds-size_9-of-12">{product.Product_Sub_Type__c}</div> 
+                    </div>
+                    <div class="slds-grid slds-gutters slds-p-top_small">
+                        <div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">Status</div> 
+                        <div class="slds-col slds-size_9-of-12">{product.Product_Status__c}</div> 
+                    </div>
+                    <div class="slds-grid slds-gutters slds-p-top_small">
+                        <div class="slds-col slds-size_3-of-12 heading-color" style="text-align:right!important">Restriction</div> 
+                        <div class="slds-col slds-size_9-of-12">{product.Sales_Restriction_Code__c}</div> 
+                    </div>
+
+				</div>
+				<div class="slds-col  slds-size_4-of-12 slds-p-horizontal_medium ">
+					
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col  slds-size_1-of-2  heading-color" style="text-align:right!important;">Price</div>
+                        <div class="slds-col  slds-size_1-of-2">${product.Net_Price__c}</div>
+                    </div>
+                    <div class="slds-grid slds-gutters slds-p-top_small">
+                        <div class="slds-col slds-size_1-of-2  heading-color" style="text-align:right!important;">Discount</div>
+                        <div class="slds-col slds-size_1-of-2 ">Net</div>
+                    </div>
+                    <div class="slds-grid slds-gutters slds-p-top_small">
+                        <div class="slds-col slds-size_1-of-2 heading-color" style="text-align:right!important;">Carton Quantity</div>
+                        <div class="slds-col slds-size_1-of-2"> {product.SBQQ__BatchQuantity__c}</div>
+                    </div>
+                    <div class="slds-grid slds-gutters slds-p-top_small">
+                        <div class="slds-col slds-size_1-of-2 heading-color" style="text-align:right!important;">Stock Availability</div>
+                        <div class="slds-col slds-size_1-of-2 ">{product.Availability__c}</div>
+                    </div>
+				</div>
+				<div class="slds-col   slds-size_3-of-12 slds-p-horizontal_medium ">
+					<div class="slds-grid slds-gutters ">
+                        <div class="slds-col slds-size_1-of-2 heading-color" style="text-align:right!important;">Copyright</div>
+                        <div class="slds-col slds-size_1-of-2">{product.Copyright_Year__c}</div>
+                    </div>
+                    <div class="slds-grid slds-gutters slds-p-top_small">
+                        <div class="slds-col slds-size_1-of-2  heading-color" style="text-align:right!important;">Grade</div>
+                        <div class="slds-col slds-size_1-of-2 ">{product.Grade_Level__c}</div>
+                    </div>
+                    <div class="slds-grid slds-gutters slds-p-top_small">
+                        <div class="slds-col slds-size_1-of-2  heading-color" style="text-align:right!important;">Other Grades</div>
+                        <div class="slds-col slds-size_1-of-2 "> {product.Grade_Range__c}</div>
+                    </div>
+				</div>
+			</div>    
+		</div>
+    </div>
+    </div>
+   </template>
+  </template>
+
+<!--  
+       <div class="slds-grid slds-p-top_medium">
+        <div class="slds-col_bump-right">
+             <div>Title Detail ISBN{product.ISBN13__c}> Related Title Details</div>
+        </div>
+
+         <div>
+            <lightning-button variant="brand" label="close" title="titleName"
+        onclick={returnProductDetailpageOnclick}> </lightning-button>
+        </div>
+         </div>    <br>  
+              <b>  {product.Description}</b>
+    <div class="c-container">
+        <lightning-layout>
+            <lightning-layout-item padding="around-small">
+                <div class="header-column" style="width: 450%;" >
+                    <p>Name</p>
+                    <div class="slds-col slds-size_1-of-12 placeholder-text  border-coverimage slds-align_absolute-center" 
+        style="margin:0 !important;">
+            style="text-align:center!important;" 
+			Cover Image
+		</div>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small" style="width: 250%;">
+                <div class="header-column">
+                    <p class="field-title"  >&nbsp;ISBN  &nbsp;&nbsp; {product.ISBN13__c}</p>
+                    <p>&nbsp;Type  &nbsp;&nbsp;{product.Product_Sub_Type__c}</p>
+                    <p>&nbsp;&nbsp;Status  &nbsp;&nbsp;{product.Product_Status__c}</p>
+                    <p>Restriction  &nbsp;&nbsp;{product.Sales_Restriction_Code__c}</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small" style="width: 250%;">
+                <div class="header-column">
+                    <p>&nbsp;Price  &nbsp;&nbsp; {product.Net_Price__c} </p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discount  &nbsp;&nbsp;  Net</p>
+                    <p>&nbsp;&nbsp;Carton Quantity  &nbsp;&nbsp;{product.SBQQ__BatchQuantity__c}</p>
+                    <p>Stock avilability  &nbsp;&nbsp;  yes</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small" style="width: 250%;">
+                <div class="header-column">
+                    <p class="field-title" title="Field 4"> Copy Right&nbsp;&nbsp;{product.Copyright_Year__c} 4</p>
+                    <p> <span title="">Grade&nbsp;&nbsp; {product.Grade_Level__c}</span></p>
+                   <p>Other Grades  &nbsp;&nbsp;{product.Grade_Range__c}</p>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div></div> </template> </template> -->

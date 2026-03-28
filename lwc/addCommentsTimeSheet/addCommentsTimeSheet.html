@@ -1,0 +1,40 @@
+<template>
+    <lightning-button-icon
+    variant="bare"
+    label="Comments"
+    title="Please specify your comments here!"
+    onclick={showCommentsModal}
+    icon-name="utility:comments"
+    class="slds-p-around_xxx-small slds-text-align_center "
+	size="large">
+    </lightning-button-icon>
+
+   <template if:true={isShowCommentsModal}>
+		<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="Comments-Modal"
+			class="slds-modal slds-fade-in-open slds-modal_small">
+			<div class="slds-modal__container">
+				<!-- Close Button -->
+				<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+          <lightning-icon class="close-icon" icon-name="utility:close" alternative-text="Close" title="Close" onclick={closeCommentsModal}></lightning-icon>
+        </button>
+				<!-- Header Section -->
+				<div class="slds-modal__header">
+					<h1 id="Advanced-Search-Modal-Header" class="slds-modal__title slds-hyphenate">Add Comments
+					</h1>
+				</div>
+				<!-- Body Section -->
+				<div class="slds-modal__content slds-var-p-around_medium">
+					<lightning-textarea name="Comments" value={commentsValue} onchange={handleComments}
+						placeholder="Specify your comments here..." label="Comments"
+						maxlength="131000" message-when-too-long="A maximum of 131000 characters are allowed."
+						></lightning-textarea>
+				</div>
+				<div class="slds-modal__footer">
+					<button class="slds-button slds-button_neutral" aria-label="Cancel" onclick={closeCommentsModal}>Cancel</button>
+					<button class="slds-button slds-button_brand" aria-label="Submit" onclick={submitComments} disabled={disabled}>Submit</button>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+	</template>
+</template>

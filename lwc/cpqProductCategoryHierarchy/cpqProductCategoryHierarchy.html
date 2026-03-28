@@ -1,0 +1,67 @@
+<!--
+*********************************************************
+  Component Name       : cpqProductCategoryHierarchy
+  Created Date         : 4/24/2024  
+  Author               : Frank Berni - Cognizant
+  Description          : Nested component for CpqProductSelection LWC. Holds the lightning-tree-grid for all ProductCategories
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>
+  4/24/2024     Frank Berni        Initial Version: Ticket W-014433
+  4/30/2024     Frank Berni        Reworked to inherit specific information from parent and create gridData in Javascript
+  5/08/2024     Frank Berni        Adjusted max-column-width to fit entire screen
+  5/13/2024     Frank Berni        Added spinner for visually loading data more smoothly
+  5/14/2024     Frank Berni        Ticket W-014414: Editted row selection so that it immediately takes user to ProductList
+  5/15/2024     Frank Berni        Ticket W-014415: Clicking a row now builds the breadcrumb array and sends it to the parent component
+  5/17/2024     Frank Berni        Ticket W-014415: Adjusted on row click function so it clears the preselected row array
+  8/12/2024     Frank Berni        W-015738: Updated refs and variables to support multi select category functionality, added new buttons to search and clear selections with static styling
+*********************************************************
+-->
+<template>
+    <!-- spinner for CategoryHierarchy-->
+    <template if:false={isLoaded}>
+        <div class="demo-only demo-only_viewport" style="height:6rem;position:relative">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+            </div>
+            </div>
+    </template>
+
+    <!-- Loads this element when isLoaded is true -->
+    <template if:true={isLoaded}>
+        <template if:true={gridData}>
+            <div class="slds-p-around_medium">
+                <lightning-card variant="Narrow" title={title}>
+                    <!-- lightning tree grid drilldown for all categories in Org -->
+                    <lightning-tree-grid 
+                        columns={gridColumns} 
+                        data={gridData} 
+                        key-field="Id" 
+                        max-column-width="2000"
+                        ontoggle={handleRowToggle}
+                        onrowselection={getSelectedName}
+                    >
+                    <!-- NEW removed from tree-grid selected-rows={preselectedRow} -->
+                    </lightning-tree-grid>
+
+                    <!-- NEW for feedback 66 - add button-container class tho this div, update CSS file -->
+                    <!-- Inserts products and directs user to ProductCart-->
+                    <div class="slds-grid slds-grid_align-spread button-container">
+                        <div class="slds-col"></div>
+                        <div class="slds-col"></div>
+                        <div class="slds-col">
+                            <div>
+                                <!-- NEW moved handleFilterProducts from the onrowselection and assigned it to this button -->
+                                <lightning-button label="Clear Selections" title="Clear Selections" onclick={clearSelection}></lightning-button>
+                                <lightning-button variant="brand" label="Search Categories" title="Search Categories" onclick={handleFilterProducts}></lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-card>
+            </div>
+        </template>
+    </template>
+    
+</template>

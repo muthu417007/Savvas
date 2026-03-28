@@ -1,0 +1,407 @@
+<template>
+    
+    <template if:true={showHeldCartMsg}>
+    <div class="section01">
+    <div class="scrollable-text slds-var-p-around_small">
+          <div class="slds-text-align_center slds-text-color_success">{labels.scc_heldCartMessage}</div>
+    </div>
+    </div>
+    <div class="slds-m-top_medium"></div>
+    </template>
+    <div class="section0 slds-m-top_medium">
+    
+    <div class="scrollable-text slds-var-p-around_small slds-var-m-around_small ">
+            <lightning-formatted-rich-text value={richtext} readonly></lightning-formatted-rich-text>
+    </div>
+    </div>
+    <div class="container">
+        <div class="section1">
+            <div class="tablebox slds-var-m-around_small slds-var-p-around_small">
+                <div style="font-size: 16px; margin-bottom: 20px;"><b>{labels.scc_home_Recent_Orders}</b></div>
+                <div style="font-size:12px;">{items} items &nbsp;&nbsp;<span><a href="#" style="color:#3D8ACB;font-size:12px;" onclick={handleOrderViewAll}>{labels.scc_home_ViewAll}</a></span></div>
+                <template if:true={tableData}>
+                <table class="tablu">
+                    <tbody>
+                        <template for:each={tableData} for:item="row">
+                            <tr class="slds-var-p-around_small" key={row.index}>
+                                <td>
+                                    <div>{labels.scc_home_PO}</div>
+                                    <div>{row.PoNumber}</div>
+                                </td>
+                                <td>
+                                    <div>{labels.scc_home_Document_Control}</div>
+                                    <div><a data-id={row.SAP_Document_Number} onclick={handleorderDetails}>
+                                           {row.SAP_Document_Number}
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>{labels.scc_home_Ship_To_Name}</div>
+                                    <div>{row.ShipToName}</div>
+                                </td>
+                                <td>
+                                    <div>{labels.scc_home_Order_Date}</div>
+                                    <div>{row.EffectiveDate}</div>
+                                </td>
+                                <td>
+                                    <div>{labels.scc_home_Status}</div>
+                                    <div>{row.Status}</div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+            <template if:false={showTableData}>
+                    {labels.scc_recentOrder_Error_Message}
+            </template>
+            </div>
+
+        </div>
+        <div class="section2">
+            <div class="tablebox slds-var-m-around_small slds-var-p-around_small" style="font-size: 16px;">
+                <b>{labels.scc_home_Order_Status}</b>
+                <div class="slds-grid slds-gutters slds-m-vertical_none">
+                    <div class="slds-col slds-size_3-of-12" style="padding-top:28px;text-align: center;font-size: 12px;">
+                    <span>{labels.scc_home_Search_By}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12 slds-m-vertical_none">
+                    <span>
+                        <lightning-combobox style="font-size: 12px;" name="progressqwer" value={SearchByvalue} options={SearchByOptions}
+                        onchange={handleSearchByChange}></lightning-combobox>
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6"></div>
+                </div>
+                <template if:true={PONumSelect}> <!--Changes for changes for W-014196 US-163-->
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_3-of-12" style="text-align: center;font-size: 12px;">
+                    <span><span style="color:red;">*</span>{labels.scc_home_PO}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12 slds-m-vertical_none">
+                    <span>
+                        <!-- <lightning-input class="slds-m-vertical_none" style="font-size: 12px;" onkeyup={handleNumChange} 
+                        onchange={handleNumChange} value={PONum} name="PONum" type="text"></lightning-input> -->
+                        <input style="padding: 4px; border-radius: 4px;border: 1px solid black; font-size: 12px;width:250px;"
+                        type="text" onkeyup={handleNumChange} onchange={handleNumChange} name="PONum" value={PONum}></input>
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6"></div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-var-m-vertical_small">
+                    <div class="slds-col slds-size_3-of-12" style="text-align: center;font-size: 12px;">
+                    <span>{labels.scc_home_ISBN}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12 slds-m-vertical_none">
+                    <span>
+                        <!-- <lightning-input class="slds-m-vertical_none" value={ISBnNum} onkeyup={handleNumChange} onchange={handleNumChange} name="ISBnNum" type="text"></lightning-input> -->
+                        <input style="padding: 4px; border-radius: 4px;border: 1px solid black; font-size: 12px;width:250px;"
+                            value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} type="text"></input>
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6"></div>
+                </div>
+
+                <div class="slds-grid" style="font-size: 12px;">
+                    <div class="slds-col slds-size_3-of-12" style="font-size: 12px;">
+                    <span>{labels.scc_home_Order_Entry_Period}</span>
+                    </div>
+                    <div class="slds-col slds-size_1-of-12 slds-var-p-left_x-small" style="font-size: 10px;">
+                        <span>{labels.scc_home_From}</span>
+                    </div>
+                    <div class="slds-col slds-var-p-left_x-small slds-size_3-of-12" style="font-size: 10px;">
+                    <span>
+                        <!-- <lightning-input class="DateSelector" value={startDate} onkeyup={handleNumChange} onchange={handleNumChange} 
+                        type="Date" name="startDate"
+                        style="border-radius: 3px;font-size:12px; width:80px; margin-right:0px" date-style="medium" variant="label-hidden"></lightning-input> -->
+                        <input style="padding: 4px;width:90px; border-radius: 4px;border: 1px solid black; font-size: 10px;" value={startDate} onkeyup={handleNumChange} 
+                        onchange={handleNumChange} name="startDate" type="date"></input>                   
+                    </span>
+                    </div>
+                    <div class="slds-col slds-var-p-left_x-small slds-var-p-right_x-small" style="font-size: 10px;">
+                        <span>{labels.scc_home_To}</span>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12" style="font-size: 10px;">
+                    <span>
+                            <!-- <lightning-input class="DateSelector" value={endDate} onkeyup={handleNumChange} onchange={handleNumChange} type="Date" name="endDate"
+                            style="border-radius: 3px; font-size:12px; width:80px" date-style="short" variant="label-hidden"></lightning-input>   -->
+                        <input style="padding: 4px;width:90px; border-radius: 4px;border: 1px solid black; font-size: 10px;" value={endDate} onkeyup={handleNumChange} onchange={handleNumChange}
+                         name="endDate" type="date"></input>                           
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12"></div>
+                </div>
+            </template>
+            <!--Changes for changes for W-014196 US-163 starts-->
+            <template if:true={InvoiceSelect}>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_3-of-12" style="text-align: center;font-size: 12px;">
+                    <span><span style="color:red;">*</span>{labels.scc_OrderStatus_Invoice_Number}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12 slds-m-vertical_none">
+                    <span>
+                        <!-- <lightning-input class="slds-m-vertical_none" type="text"></lightning-input> -->
+                        <input style="padding: 4px; border-radius: 4px;border: 1px solid black; font-size: 12px;width:250px;"
+                        value={InvoNum} onkeyup={handleNumChange} name="InvoNum" onchange={handleNumChange} type="text"></input>
+                    </span>
+                    </div>
+                    <div class="slds-col" style="font-size: 12px;text-align:center; float:center;">
+                        <!-- <lightning-button class="slds-button--small" variant="brand" style="width: 20px;" label={labels.scc_home_Search} onclick={handleClick}></lightning-button> -->
+                        <button type="button" style="padding-right:4px;padding-left:4px;border-radius: 4px; height:35px;width:60px" onclick={handleSearch} disabled={SearchDisabled}>{labels.scc_home_Search}</button>
+                        <!-- <button class="slds-button slds-button_brand">Search</button> -->
+                    </div>
+                </div>
+            </template>
+
+            <template if:true={ISBNselect}> <!--Changes for changes for W-014196 US-163-->
+
+
+                <div class="slds-grid slds-gutters slds-var-m-vertical_small">
+                    <div class="slds-col slds-size_3-of-12" style="text-align: center;font-size: 12px;">
+                    <span><span style="color:red;">*</span>{labels.scc_home_ISBN}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12 slds-m-vertical_none">
+                    <span>
+                        <!-- <lightning-input class="slds-m-vertical_none" value={ISBnNum} onkeyup={handleNumChange} onchange={handleNumChange} name="ISBnNum" type="text"></lightning-input> -->
+                        <input style="padding: 4px; border-radius: 4px;border: 1px solid black; font-size: 12px;width:250px;"
+                            value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} type="text"></input>
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6"></div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-var-m-vertical_small">
+                    <div class="slds-col slds-size_3-of-12" style="text-align: center;font-size: 12px;">
+                    <span>{labels.scc_home_PO}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12 slds-m-vertical_none">
+                    <span>
+                        <!-- <lightning-input class="slds-m-vertical_none" style="font-size: 12px;" onkeyup={handleNumChange} onchange={handleNumChange} value={PONum} name="PONum" type="text"></lightning-input> -->
+                        <input style="padding: 4px; border-radius: 4px;border: 1px solid black; font-size: 12px;width:250px;"
+                        type="text" onkeyup={handleNumChange} onchange={handleNumChange} name="PONum" value={PONum}></input>
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6"></div>
+                </div>
+
+
+                <div class="slds-grid" style="font-size: 12px;">
+                    <div class="slds-col slds-size_3-of-12" style="font-size: 12px;">
+                    <span>{labels.scc_home_Order_Entry_Period}</span>
+                    </div>
+                    <div class="slds-col slds-size_1-of-12 slds-var-p-left_x-small" style="font-size: 10px;">
+                        <span>{labels.scc_home_From}</span>
+                    </div>
+                    <div class="slds-col slds-var-p-left_x-small slds-size_3-of-12" style="font-size: 10px;">
+                    <span>
+                        <!-- <lightning-input class="DateSelector" value={startDate} onkeyup={handleNumChange} onchange={handleNumChange} type="Date" name="startDate"
+                        style="border-radius: 3px;font-size:12px; width:80px; margin-right:0px" date-style="short" variant="label-hidden"></lightning-input> -->
+                        <input style="padding: 4px;width:90px; border-radius: 4px;border: 1px solid black; font-size: 10px;" value={startDate}
+                         onkeyup={handleNumChange} onchange={handleNumChange} name="startDate" type="date" ></input>                   
+                    </span>
+                    </div>
+                    <div class="slds-col slds-var-p-left_x-small slds-var-p-right_x-small" style="font-size: 10px;">
+                        <span>{labels.scc_home_To}</span>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12" style="font-size: 10px;">
+                    <span>
+                            <!-- <lightning-input class="DateSelector" value={endDate} onkeyup={handleNumChange} onchange={handleNumChange} type="Date" name="endDate"
+                            style="border-radius: 3px; font-size:12px; width:80px" date-style="short" variant="label-hidden"></lightning-input>   -->
+                        <input style="padding: 4px;width:90px; border-radius: 4px;border: 1px solid black; font-size: 10px;" value={endDate} onkeyup={handleNumChange}
+                         onchange={handleNumChange} name="endDate" type="date"></input>                           
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12"></div>
+                </div>
+
+                <!-- <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_3-of-12" style="padding-top:28px;text-align: center;font-size: 12px;">
+                    <span>{labels.scc_home_Order_Status}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12" style="font-size: 12px;">
+                    <span>
+                        <lightning-combobox name="progress1" value={OrderStatusValue} options={OrderStatusOptions1}
+                        onchange={handleOrderStatusChange}></lightning-combobox>
+                    </span>
+                </div>
+                </div> -->
+
+                <div class="slds-grid slds-gutters slds-var-m-vertical_small">
+                    <div class="slds-col slds-size_3-of-12" style="text-align: center;font-size: 12px;">
+                        <span>{labels.scc_OrderStatus_Country}</span>
+                    </div>
+                    <div class="group1 slds-col slds-size_7-of-12">
+                        <!-- <label style="font-size: 12px;">{labels.scc_OrderStatus_Country}</label> -->
+                        <select class="dropdown-select"
+                            style="padding: 4px;border: 1px solid black;width:250px;; border-radius: 4px; font-size: 12px;"
+                            onchange={handleCountryOptionChange}>
+                            <template for:each={CountryOptions} for:item="CountryOptions">
+                                <option key={CountryOptions.value} value={CountryOptions.value}>
+                                    {CountryOptions.label}
+                                </option>
+                            </template>
+                        </select>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6"></div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-var-m-vertical_small">
+                    <div class="slds-col slds-size_3-of-12" style="text-align: center;font-size: 12px;">
+                    <span>{labels.scc_OrderStatus_State_Province}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12 slds-m-vertical_none">
+                    <span>
+                        <!-- <lightning-input class="slds-m-vertical_none" style="font-size: 12px;" onkeyup={handleNumChange} onchange={handleNumChange} value={PONum} name="PONum" type="text"></lightning-input> -->
+                        <input style="padding: 4px; border-radius: 4px;border: 1px solid black; font-size: 12px;width:250px;"
+                        type="text" onkeyup={handleNumChange} onchange={handleNumChange} name="StateNum" value={StateNum}></input>
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6"></div>
+                </div>
+
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_3-of-12" style="text-align: center;font-size: 12px;">
+                    <span>{labels.scc_OrderStatus_Zip_Postal_Code}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12 slds-m-vertical_none">
+                    <span>
+                        <!-- <lightning-input class="slds-m-vertical_none" style="font-size: 12px;" onkeyup={handleNumChange} onchange={handleNumChange} value={PONum} name="PONum" type="text"></lightning-input> -->
+                        <input style="padding: 4px; border-radius: 4px;border: 1px solid black; font-size: 12px;width:250px;"
+                        type="text" onkeyup={handleNumChange} onchange={handleNumChange} name="ZipNum" value={ZipNum}></input>
+                    </span>
+                    </div>
+                    <!-- <div class="slds-col slds-size_2-of-6" style="padding-bottom:16px;font-size: 12px;">
+                        <button type="button" style="padding-right:4px;border-radius: 4px; height:35px;width:60px" onclick={handleSearch} disabled={SearchDisabled}>{labels.scc_home_Search}</button>
+                    </div> -->
+                </div>
+
+            </template>
+
+        
+
+            <template if:true={DocumentNumSelect}>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_3-of-12" style="text-align: center;font-size: 12px;">
+                    <span><span style="color:red;">*</span>{labels.scc_home_Document_Control}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12 slds-m-vertical_none">
+                    <span>
+                        <!-- <lightning-input class="slds-m-vertical_none" style="font-size: 12px;" onkeyup={handleNumChange} onchange={handleNumChange} value={PONum} name="PONum" type="text"></lightning-input> -->
+                        <input style="padding: 4px; border-radius: 4px;border: 1px solid black; font-size: 12px;width:250px;"
+                        type="text" onkeyup={handleNumChange} onchange={handleNumChange} name="DocContrNum" value={DocContrNum}></input>
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6"></div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-var-m-vertical_small">
+                    <div class="slds-col slds-size_3-of-12" style="text-align: center;font-size: 12px;">
+                    <span>{labels.scc_home_ISBN}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12 slds-m-vertical_none">
+                    <span>
+                        <!-- <lightning-input class="slds-m-vertical_none" value={ISBnNum} onkeyup={handleNumChange} onchange={handleNumChange} name="ISBnNum" type="text"></lightning-input> -->
+                        <input style="padding: 4px; border-radius: 4px;border: 1px solid black; font-size: 12px;width:250px;"
+                            value={ISBnNum} onkeyup={handleNumChange} name="ISBnNum" onchange={handleNumChange} type="text"></input>
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6"></div>
+                </div>
+            </template>
+            <template if:false={InvoiceSelect}>
+            <!-- <template if:false={ISBNselect}>  -->
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_3-of-12" style="padding-top:28px;text-align: center;font-size: 12px;">
+                <span>{labels.scc_home_Order_Status}</span>
+                </div>
+                <div class="slds-col slds-size_7-of-12" style="font-size: 12px;">
+                <span>
+                    <lightning-combobox name="progress1" value={OrderStatusValue} options={OrderStatusOptions1}
+                    onchange={handleOrderStatusChange}></lightning-combobox>
+                </span>
+                </div>
+                <div class="slds-col slds-size_2-of-6" style="padding-top:16px;font-size: 12px;">
+                    <!-- <lightning-button class="slds-button--small" variant="brand" style="width: 20px;" label={labels.scc_home_Search} onclick={handleClick}></lightning-button> -->
+                    <button type="button" style="padding-right:4px;padding-left:4px; border-radius: 4px; height:35px;width:60px" onclick={handleSearch} disabled={SearchDisabled}>{labels.scc_home_Search}</button>
+                    <!-- <button class="slds-button slds-button_brand">Search</button> -->
+                </div>
+            </div>
+            </template> 
+            <!-- </template> -->
+            <!--Changes for changes for W-014196 US-163 ends-->
+            </div>
+        
+            <div class="tablebox slds-var-m-around_small slds-var-p-around_small" style="font-size: 16px;">
+                <b>{labels.scc_home_Quick_Reports}</b>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_3-of-12" style="padding-top:28px;text-align: center;font-size: 12px;">
+                    <span>{labels.scc_home_Reports}</span>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12">
+                    <span>
+                        <lightning-combobox name="progressqwer" value={value} options={options}
+                        onchange={handleChange}></lightning-combobox>
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6"></div>
+                </div>
+
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_3-of-12" style="padding-top:30px;text-align: center;font-size: 12px;">
+                    <span>{labels.scc_home_Delivery_Method}</span>
+                    </div>
+                    <div class="slds-col slds-size_5-of-12" style="padding-top:26px;">
+                    <span>
+                        <template iterator:delivery={deliveryMethodOptions}>
+                            <span style="font-size: 12px;" class="radio-inline"
+                                key={deliveryMethodOptions.label}>
+                                <input type="radio" class="deliveryOptions"
+                                    name="deliveryMethodOptions" data-name={delivery.value.label} checked={delivery.value.isChecked}
+                                    onchange={saveChangeInDeliveryMethodOpt}>&nbsp;<label>{delivery.value.label}</label>
+                            </span>
+                            &nbsp;
+                        </template>
+                    </span>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12" style="padding-top:6px;font-size: 10px;">
+                        <lightning-input type="text" style="font-size: 10px;"></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12 slds-var-p-left_small" style="padding-top:24px;font-size: 12px;">
+                        <!-- <lightning-button class="slds-button--small" variant="brand" label="Run" onclick={handleClick}></lightning-button> -->
+                        <button type="button" style="background-color:#005FB2;color:white;padding-right:4px;padding-left:4px;border-color:#005FB2; border-radius: 4px; height:35px; width:60px">{labels.scc_home_Run}</button>                    
+                    </div>
+                </div>
+            </div>
+            <div class="tablebox slds-var-m-around_small slds-var-p-around_small">
+                <div style="font-size: 16px;margin-bottom: 20px;"><b>{labels.scc_home_Held_Carts}</b></div>
+                <div style="font-size:12px;">{cartItems} items &nbsp;&nbsp;<span><a href="#" style="color:#3D8ACB;font-size:12px;" onclick={handleViewAllHeldCarts}>{labels.scc_home_ViewAll}</a></span></div>
+                <table class="tablu">
+                    <tbody>
+                        <template for:each={heldCartData} for:item="row">
+                            <tr class="slds-var-p-around_small" key={row.Id}>
+                                <td>
+                                    <div>{labels.scc_home_Cart_Name}</div>
+                                    <div><a onclick={openReviewHeldCarts} data-id={row.Id}>{row.Name}</a></div>
+                                </td>
+                                <td>
+                                    <div>{labels.scc_home_Date}</div>
+                                    <div>{row.CreatedDate}</div>
+                                </td>
+                                <td>
+                                    <div>{labels.scc_home_Items}</div>
+                                    <div>{row.TotalProductLineItemCount}</div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <lightning-input-rich-text value={richtext} onchange={handleChange}></lightning-input-rich-text>
+    <template if:true={reviewCartPage}>
+        {heldCartId}
+        <c-scc_review-cart-page cart-page={parentValue} cart-page-id={heldCartId}> </c-scc_review-cart-page>
+    </template>
+</template>

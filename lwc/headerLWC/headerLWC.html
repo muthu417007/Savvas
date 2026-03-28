@@ -1,0 +1,85 @@
+<template>
+    <header class="header">
+        <div class="top-section">
+            <div class="logo-container">
+                <!-- Replace 'logo.png' with your company logo -->
+                <img src="/resources/logo.png" alt="Company Logo" class="logo">
+            </div>
+            <div class="account-options">
+                <!-- Account-related options (e.g., login/logout) -->
+                <div class="username">John Doe</div>
+                <div class="account-text">Account Name</div>
+                <!-- Or -->
+                <!-- <a href="#">Logout</a> -->
+            </div>
+
+            <div class="mytest slds-m-horizontal_x-small">
+                <span class="slds-icon_container slds-icon_container_circle">
+                <lightning-icon icon-name='standard:account' alternative-text='account' size='medium'
+						title='account'>
+				</lightning-icon>
+                <!--<template if:true={showDropdownMenuProf}>-->
+                <div class="dropdown2">
+                    <ul>
+                        <li><a href="https://test.salesforce.com"  style="color:white;font-size:10px;">Profile</a></li>
+                        <li><a href="https://test.salesforce.com/" style="color:white;font-size:10px;">Other Apps ></a></li>
+                        <li><a href="https://test.salesforce.com/" style="color:white; font-size:10px;">Sign Out</a></li>
+                    </ul>
+                </div>
+                <!-- </template>-->
+                </span>
+            </div>
+
+            <div class="help-link slds-m-left_xx-large">
+                <!-- Need Help link -->
+                <span style="font-size:10px;color:white">?Need Help? ></span>
+                 <!-- <template if:true={showDropdownMenu}> -->
+                <div class="dropdown">
+                    <ul>
+                        <li><a href="https://test.salesforce.com" style="color:white;font-size:10px;">FAQ</a></li>
+                        <li><a href="https://test.salesforce.com" style="color:white;font-size:10px;">Site Training</a></li>
+                        <li><a href="https://test.salesforce.com" style="color:white;font-size:10px;">Contact Commerce Cloud Support</a></li>
+                        <li><a href="https://test.salesforce.com" style="color:white;font-size:10px;">Contact Customer Service Support</a></li>
+                    </ul>
+                </div>
+                 <!-- </template> -->
+            </div>
+
+        </div>
+        <nav class="nav-links slds-float_left" style="margin-left:160px">
+            <ul>
+						<li class="nav-item">
+							<a href="#" class={homeClass} onclick={handleTabClick} data-tab="home">Home</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class={OrderStatusClass} onclick={handleTabClick} data-tab="OrderStatus">Order
+								Status</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class={CheckPriceAvailabilityClass} onclick={handleTabClick}
+								data-tab="CheckPriceAvailability">Check Price & Availability</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class={PlaceOrderClass} onclick={handleTabClick} data-tab="PlaceOrder">Place
+								Order</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class={FileClaimClass} onclick={handleTabClick} data-tab="FileClaim">File
+								Claim</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class={GenerateRequestsClass} onclick={handleTabClick}
+								data-tab="GenerateRequests">Generate Requests</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class={RequestDocumentsClass} onclick={handleTabClick}
+								data-tab="RequestDocuments">Request Documents</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class={CheckAccessCodeClass} onclick={handleTabClick}
+								data-tab="CheckAccessCode">Check Access Code</a>
+						</li>
+            </ul>
+        </nav>
+    </header>
+</template>

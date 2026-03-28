@@ -1,0 +1,122 @@
+.subheader{
+	font-size: 30px;
+    font-family: 'Poppins';
+    color: #173770 ;
+    font-weight: 700;
+    line-height: 60px;
+    text-align: center;
+    letter-spacing: -.04em ;
+    max-width: 100%;
+    padding:20px;
+}
+.box{
+	background-color: #FFFF;
+    text-align:center;
+	height: 260px;
+    border: 2px solid rgb(154 191 223);
+    border-radius: 12px;
+}
+.box:hover{
+    border: 2px solid rgb(154 191 223);
+    border-radius: 12px;
+	box-shadow: 2px 3px 5px #333;
+	/*cursor: pointer;*/
+}
+.imageContainer{
+	display: flex;
+    align-items: center;
+	justify-content: space-around;
+	height: 40%;
+	width: 100%;
+}
+img.appImage{
+	object-fit: contain;
+    height: -webkit-fill-available;
+}
+.textContainer{
+	height: 45%;
+	color: rgba(23, 55, 112, 1);
+	font-family: Poppins;
+	width: 100%;
+	text-align: left;
+}
+.appTitle{
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 20px;
+	padding: 0 10px 0 10px;
+}
+.appSubtitle{
+	color: rgba(23, 55, 112, 1);
+	font-family: Poppins;
+	font-size: 12px;
+	font-weight: 500;
+	padding: 15px 10px 0 10px;
+}
+.linkContainer{
+	font-family: Poppins;
+	width: 100%;
+	text-align: left;
+}
+.actionLink{
+	display: flex;
+	align-items: flex-end;
+	padding: 0 10px 0 10px;
+}
+.actionLink a{
+	color: rgba(23, 55, 112, 1);
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 27px;
+	text-decoration: none;
+}
+.modal-appTitle{
+	color: rgba(23, 55, 112, 1);
+	font-family: Poppins;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 36px;
+	text-align: center;
+	width: 100%;
+	padding: 0 10px 0 10px;
+}
+.modal-appSubtitle{
+	color: rgba(23, 55, 112, 1);
+	font-family: Poppins;
+	font-size: 12px;
+	font-weight: 500;
+	text-align: left;
+	width: 100%;
+	/* height: 34px; */
+	padding: 5px 10px 10px 10px;
+}
+.modal-actionLink{
+	/* display: flex;
+	align-items: flex-end; */
+	text-align: center;
+	width: 100%;
+	height: 15%;
+	padding: 0 10px 0 10px;
+}
+.modal-actionLink a{
+	color: rgba(23, 55, 112, 1);
+	font-family: Poppins;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 27px;
+	text-decoration: none;
+}
+.close-icon{
+	 --sds-c-icon-color-background: #0C1E3D;
+	 /* --sds-c-icon-color-foreground: white; */
+}
+@media (min-width:768px){
+	.popup{
+		width: 50%;
+	}
+}
+
+.close-icon{
+	display: flex;
+	float: right;
+}

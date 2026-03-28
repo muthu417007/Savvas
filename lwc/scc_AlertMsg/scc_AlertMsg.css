@@ -1,0 +1,51 @@
+.recent-order1{
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 33px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #173770;
+ }
+ .order-label1{
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;  
+  color:#3D4149;
+ }
+ .popup-container {
+   background-color: #FFFCED;  
+   /* Border matching the background */
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px; /* Space below the pop-up */
+    margin-top: 20px;
+    border: 1px solid #FFE05080;
+    position: relative;
+}
+/* .close-button {
+   
+} */
+.slds-button.slds-button_icon.close-button{
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+      top: 10px;
+    right: 10px;
+   
+    width: 25px;
+    height: 25px;
+    border-radius: 90px;
+    background-color:#0C1E3D;
+    color: #FFE050;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-decoration: none;
+   
+}
+.slds-theme_warning .slds-icon, .slds-theme_warning .slds-button__icon, .slds-theme--warning .slds-icon, .slds-theme--warning .slds-button__icon 
+.slds-button.slds-button_icon.slds-modal__close.register-modal-close  {
+     --slds-c-icon-color-foreground-default: orange;
+}

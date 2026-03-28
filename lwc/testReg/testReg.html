@@ -1,0 +1,337 @@
+<template>
+    <!-- <template if:true={isHeaders}>
+     <c-scc-header-l-w-c></c-scc-header-l-w-c> 
+   </template> -->
+   <div class="selfRegister-form">
+    <div class="mainPage slds-align_absolute-center">
+      <lightning-card  class="RegisterNewUser">
+           <h1 class="Register" > {registerMsg}</h1>
+           <div class="text-value-changed">
+               <div class="firstpageheading">
+                   <template if:true={firstPageheading}>
+                      <p>{firstPageHeading}</p>
+                      <!-- </p>{firstPageHeading2}</p> -->
+                    </template>
+                </div>
+
+               <template if:true={isregistereduser}>
+                 <!-- <div class="registered-user-message"> -->
+                  <div class="registration-text">
+                    <p>{isRegisteredUser}&nbsp;<a href={signInUrl} onclick={handleSignInClick} class="blue-link">{signInPage}</a>, or <a href="#" onclick={handleCaseSubmission} class="blue-link">{resetYourPassword}</a>.</p>
+                     <!--<p>{isRegisteredUser}< onclick={handleCaseSubmission} class="blue-link">{signInPage}</a>, or <a href="#" onclick={handleCaseSubmission} class="blue-link">{resetYourPassword}</a></p>-->
+                  </div>
+                </template>
+
+               <template if:true ={isnotvalidcontact}>
+                  <div class="registration-text">
+                     <!-- <p>{isNotValidContact}</p> -->
+                     <p>{isNotValidContact}&nbsp;<a href="#" onclick={handleCaseSubmission} class="blue-link">{submitACase}</a>&nbsp;{isNotValidContact2}</p>
+                  </div>
+               </template>
+
+   
+
+              <template if:true={isNouser}>
+                  <div class="registration-details">
+                     <p class="registration-heading">{nouser}{isNoUser3}</p>
+                     <!-- <p class="registration-heading">{isNoUser3}</p> -->
+                  </div>    
+                  <div class="registration-info">
+                      <!-- <div class="registration-row">
+                         <p class="registration-label">{scc_isNouser4}User </p>
+                         <p class="registration-value">{firstName} {lastName}</p>
+                      </div> -->
+                      <div class="slds-col-slds-size_2-of-12 registration-row">
+                         <div class="info">
+                            <p class="registration-label">{userID}</p>
+                         </div>
+                         <div class="info">
+                            <p class="registration-value">{schoolEmail}</p>
+                         </div>
+                       </div>
+                       <div class="slds-col-slds-size_2-of-12 registration-schoolname">
+                          <div class="info">
+                              <p class="registration-label">{companyName}</p>
+                          </div>
+                           <div class="info">
+                              <p class="registration-value">{companySchoolName}</p>
+                            </div>
+                        </div>
+                   </div>
+              </template>
+                <template if:true={registredsuccessfull}>
+                    <div class="backdrop"></div>
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                     aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+                        <div class="slds-modal__container">
+                            <!-- Modal Header -->
+                            <header class="slds-modal__header">
+                                <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">{goodNewsRegistered}</h2>
+                                <button class="slds-button slds-button_icon slds-modal__close register-modal-close" title="Close" onclick={handleClose}>
+                                    <lightning-icon icon-name="utility:close" alternative-text="Close"></lightning-icon>
+                                </button>
+                            </header>
+                            <!-- Modal Content -->
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-01">
+                                    <p>{registeredSuccessfully}</p>
+                            </div>
+                            <div class="slds-modal__content slds-p-around_medium">
+                                
+                                        <div class="info" style="margin-top:10px">
+                                            <p class="registration-label">{userID}</p>
+                                        </div>
+                                        <div class="info">
+                                            <p class="registration-value">{schoolEmail}</p>
+                                        </div>
+                                    
+                                 
+                                        <div class="info" style="margin-top:10px">
+                                            <p class="registration-label">{companyName}</p>
+                                        </div>
+                                        <div class="info">
+                                            <p class="registration-value">{companySchoolName}</p>
+                                        </div>
+                                    
+                            </div>
+                            <!-- Modal Footer -->
+                            <footer class="slds-modal__footer">
+                                <lightning-button class="modal-confirm-button" label="Go To Sign In" onclick={handleSignInClick} variant="brand"></lightning-button>
+                            </footer>
+                        </div> 
+                    </section>
+                </template>
+                <!-- <div class="registration-success">
+                   <template if:true={registredsuccessfull}>
+                      <p class="center-align">{goodNewsRegistered}</p>
+                      <p class="center-align">{registeredSuccessfully}</p>
+                      <p class="center-align">{registrationsuccessfulemail}</p>
+                      <div class="user-info">
+                         <p class="text--1"><strong>{userID}</strong> {schoolEmail}</p>
+                         <p class="text-2"><strong>{companyName} </strong> {companySchoolName}</p>
+                       </div>
+                       <div class="center-align"> -->
+                          <!--   <a href="https://savvas--dev3.sandbox.my.site.com/MySavvasOrders/login" onclick={hadlersignpage}>
+                                    <lightning-button label=" Go To Sign In"  variant="brand"></lightning-button>
+                                 </a>-->
+                           <!-- <a onclick={handleSignInClick} class="blue-link">
+                               <lightning-button label="Go To Sign In" variant="brand"></lightning-button>
+                            </a>
+                        </div>
+                    </template>
+                </div> -->
+
+              <div>
+
+                  <template if:true={isAccesstype}>
+                     <div class="access-type-wrapper">
+                        <div>
+                            <!--<lightning-button alternative-text="Show menu" lable="Accesse type" icon-name={arrowIcon} variant="border" onclick={toggleCheckboxes} ></lightning-button> 
+                            <h3 style="margin-left: 10px;"></h3>-->
+                           <div class="access-type">
+                               <span>{selectAccessType}</span>
+                            </div>
+                        </div>
+
+                        <!-- <template if:true={showCheckboxes}>  -->
+                        <div style="display: inline-flex; align-items: center;">
+                           <!-- <div class="slds-m-bottom_small">{accountWillBeUsedTo}</div> -->
+                           <lightning-checkbox-group class="access-type-checkbox-group" name="accessType" options={checkboxOptions} value={selectedcheckboxs} onchange={handleCheckboxChange} ></lightning-checkbox-group>
+                        </div>
+                         <!-- </template> -->
+                      </div>
+                   </template>
+               </div>
+
+               <div class="slds-grid" style="margin-top:20px">
+                  <div class="slds-col-slds-size_2-of-12">
+                     <template if:true={showFirstNameLastName}>
+                        <div class="slds-form-element__label">{labels.scc_register_FirstName_Text}</div>
+                         <input placeholder="Enter your first name" type="text" value={firstName} disabled={isFirstNameDisabled} required onchange={handleFirstNameInputChange} class="fixed-width-input slds-input"/>
+                         <!-- <lightning-input label="Last Name" value={lastName} disabled={isLastNameDisabled} required onchange={handleLastNameInputChange} class="fixed-width-input"></lightning-input> -->
+                     </template>
+                    </div>
+                    <div class="slds-col-slds-size_2-of-12 lastname-container">
+                        <template if:true={showFirstNameLastName}>
+                            <div class="slds-form-element__label">{labels.scc_register_LastName_Text}</div>
+                            <!-- <lightning-input label="First Name" value={firstName} disabled={isFirstNameDisabled} required onchange={handleFirstNameInputChange} class="fixed-width-input"></lightning-input> -->
+                            <input placeholder="Enter your last name" type="text" value={lastName} disabled={isLastNameDisabled} required onchange={handleLastNameInputChange} class="fixed-width-input slds-input"/>
+                        </template>
+                       </div>
+                </div>
+
+
+                <div class="slds-grid">
+                    <template if:true={showemailzipcode}>
+                        <div class="slds-col-slds-size_2-of-12">
+                        <div class="slds-form-element__label">{labels.scc_register_SchoolEmail_Text}</div>
+                          <input type="text" placeholder="Enter your email" value={schoolEmail} disabled={isEmailDisabled} required onchange={handleEmailInputChange} class="fixed-width-input slds-input"/>
+                          <template if:true={showEmailError}>
+                            <div class="slds-text-color_error">{emailError}</div>
+                         </template>
+                        </div>
+                           <!-- <template if:true={showEmailError}>
+                               <div class="slds-text-color_error">{emailError}</div>
+                            </template> -->
+                            <div class="slds-col-slds-size_2-of-12 schoolzip-container">
+                                <div class="slds-form-element__label">{labels.scc_register_SchoolZip_Text}</div>
+                                <input data-id="schoolZipCode" type="text" value={selectedZipCode} placeholder="Enter your postal/ zip" disabled={isZipCodeDisabled} required onchange={handleZipCodeChange} onkeyup={handleZipCodeChange} pattern="[0-9]*" class="fixed-width-input slds-input" />
+                                
+								<template if:true={showSchoolOptions}>
+									<template if:false={hideSelectSchool}>
+										<!-- <div class="dropdown"> -->
+                                             <div class="dropdown">
+                                            <ul class="dropdown-list">
+												<template for:each={schoolOptions} for:item="school">
+													<li key={school.value} class="dropdown-item" data-value={school.value} onclick={handleSchoolSelect}>
+														{school.label}</li>
+												</template>
+											</ul>
+										</div>
+									</template>
+								</template>
+                                <template if:true={showZipCodeError}>
+                                    <div class="slds-text-color_error zip-code-error">{zipCodeError}</div>
+                                </template>
+                            </div>
+                            <!-- <template if:true={showZipCodeError}>
+                                <div class="slds-text-color_error zip-code-error">{zipCodeError}</div>
+                            </template> -->
+                    </template>
+    
+                </div>  
+
+                <template if:true={showSchoolDetails}>
+                    <div class="slds-col-slds-size_2-of-12 company-name">
+                        <div class="info">
+                            <span class="label">{companyName} </span>
+                        </div>
+                        <div class="info">
+                            <span class="detail">{companySchoolName}</span>
+                        </div>
+                    </div>
+                    <div class="slds-col-slds-size_2-of-12 address-container">
+                       <div class="info">
+                          <span class="label">{address}</span>
+                       </div>
+                       <div class="info">
+                          <span class="detail">
+                            <b>{street}</b>, {city}, {postalCode}<br/>
+                            {state}<br/>
+                            <b>{country}</b>
+                          </span>
+                        </div>
+                    </div>
+                </template>
+                <!-- Company/school name colour should be black not red class="slds-text-color_error"-->
+                <div  class= "school-not-found" if:true={showSchoolNotFoundError}>
+                    <div>
+                        <p>{companySchoolNameNotFoundPlease} <a href="#" onclick={handleCaseSubmission}>{submitACase}</a> {toGetYourSchoolAdded}</p>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <div class="centered-buttons">
+                        <template if:true={isalways}>
+                            <!-- Empty div to create space -->
+                            <!-- <div style="width: 20px;"></div> -->
+
+                           <!-- <div class="register-button">
+                            <lightning-button label="Verify" onclick={handleVerify} variant= "brand" disabled={disableVerify} class={verifyBtnClass}></lightning-button>
+                           </div> -->
+                           <div class="register-button">
+                            <button type="submit" class="verifyBtnClass" onclick={handleVerify} disabled={disableVerify}>Verify</button> 
+                        </div>
+                           <!-- <div slds-col>
+                            <lightning-button label="Cancel" onclick={handleCancel}></lightning-button>
+                           </div> -->
+
+                            <!-- Empty div to create space -->
+                            <!-- <div style="width: 20px;"></div>
+
+                            <lightning-button label="Verify" onclick={handleVerify} variant= "brand" disabled={disableVerify} class={verifyBtnClass}></lightning-button> -->
+                        </template>
+                        <template if:true={isalways}>
+                            <div class="slds-text-align_center">
+                                <button class="slds-button" onclick={handleCancel}>Cancel</button>
+                               </div>
+                        </template>
+                    </div>
+                </div> 
+ 
+                <div>
+                    <!-- <template if:true={isregiter}>
+                        <lightning-button label="Register" onclick={registerVerify} disabled={isRegistrationEnabled}></lightning-button>
+                                &nbsp;  
+                        <lightning-button label="Cancel" onclick={RegisterCancel}></lightning-button>
+                    </template> -->
+                    <template if:true={isregiter}>
+                        <div class="slds-text-align_center">
+                           <button class="slds-registerbutton" onclick={registerVerify} disabled={isRegistrationEnabled}>Register</button>
+                        </div>
+                        <div class="slds-text-align_center">        
+                           <button class="slds-button" onclick={RegisterCancel}>Cancel</button>
+                        </div>
+                    </template>
+                </div>
+                <template if:true={showPopup}>
+                    <div class="backdrop"></div>
+                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                     aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+                        <div class="slds-modal__container">
+                            <!-- Modal Header -->
+                            <header class="slds-modal__header">
+                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{placeOrderConfirmation}</h2>
+                                <button class="slds-button slds-button_icon slds-modal__close register-modal-close" title="Close" onclick={handleClose}>
+                                    <lightning-icon icon-name="utility:close" alternative-text="Close"></lightning-icon>
+                                </button>
+                            </header>
+                            <!-- Modal Content -->
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    <p>{pleaseConfirmAuthorization}</p>
+                            </div>
+                            <!-- Modal Footer -->
+                            <footer class="slds-modal__footer">
+                                <lightning-button class="modal-confirm-button" label="Confirm" onclick={PlaceorderConfirm} variant="brand"></lightning-button>
+                                <lightning-button class="modal-cancel-button" label="Cancel" onclick={PopupCancel} variant="neutral"></lightning-button>
+                            </footer>
+                        </div> 
+                    </section>
+                </template>
+            </div>
+            <template if:false={isNouser}>
+                <div class="slds-col not-a-dealer-container">
+                    <div class="not-a-dealer-title">{labels.scc_signIn_Dealer_Title}</div>
+                    <div class="not-a-dealer-links">
+                        <a href="#">
+                            {labels.scc_signIn_Homeschool_Text}
+                            <div class="chevron-circle"><lightning-icon icon-name='utility:chevronright' alternative-text='chevronright' size='large' title='chevronright'></lightning-icon></div>
+                        </a>
+                    </div>
+                    <div class="not-a-dealer-links">
+                        <a href="#">
+                            {labels.scc_signIn_Private_Student_Text}
+                            <div class="chevron-circle"><lightning-icon icon-name='utility:chevronright' alternative-text='chevronright' size='large' title='chevronright'></lightning-icon></div>
+                        </a>
+                    </div>
+                    <div class="not-a-dealer-links">
+                        <a href="#">
+                            {labels.scc_signIn_Other_Student_Text}
+                            <div class="chevron-circle"><lightning-icon icon-name='utility:chevronright' alternative-text='chevronright' size='large' title='chevronright'></lightning-icon></div>
+                        </a>
+                    </div>
+                </div>
+            </template>
+            <div class="slds-grid slds-grid_vertical">
+                <div class="slds-col register-blue-footer">
+                  <div class="register-footer-copyright-text">{labels.scc_signIn_Footer_Text}</div>
+                  <div class="footer-links">
+                  <a href="#" class="register-footer-links">{labels.scc_signIn_Footer_Savvas_Support}</a>
+                  <a href="#" class="register-footer-links"> {labels.scc_signIn_Footer_Terms_Text} </a>
+                  <a href="#" class="register-footer-links">{labels.scc_signIn_Footer_Privacy_Text}</a>
+                  </div>
+                </div>
+            </div>
+        </lightning-card>
+    </div>
+ </div>
+    
+</template>

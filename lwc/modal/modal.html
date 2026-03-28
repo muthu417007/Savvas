@@ -1,0 +1,15 @@
+<template>
+    <section role="dialog" tabindex="-1" class={modalClass} aria-labelledby="modal-heading-01" aria-modal="true">
+        <!-- SLDS Modal code satrts here for the Platform Status Pop Up -->
+				<div class="slds-modal__container">
+            <div>
+                <slot name="headercontent">Default content</slot>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1"
+								 style="background-color:#173770;">
+                <slot name="bodycontent">Default content</slot>
+            </div>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</template>

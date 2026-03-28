@@ -1,0 +1,191 @@
+<template>
+	<div class="slds-m-top_x-small">
+
+		<div class="slds-grid slds-wrap slds-p-horizontal_medium">
+			<div class="slds-col slds-size_3-of-3 slds-form slds-p-horizontal_large slds-p-vertical_x-small">
+				<div class="slds-grid slds-wrap slds-p-bottom_xx-small">
+					<div class="slds-col slds-size_6-of-12 slds-p-horizontal_none">
+						<div class="slds-form-element__control" style="display:flex;margin-left: -10px;">
+
+							<button class="slds-button table-control-button" disabled={bDisableFirst} onclick={firstPage}>&#60;&#60; First</button>
+							<button class="slds-button table-control-button" disabled={bDisableFirst} onclick={previousPage}>&#60; Previous</button>
+							<p class="page-count-shown slds-m-horizontal_x-small">Showing {pageNumber} of {totalPages} Page(s)
+							</p>
+							<button class="slds-button table-control-button" disabled={bDisableLast} onclick={nextPage}>Next &#62;</button>
+							<button class="slds-button table-control-button" disabled={bDisableLast} onclick={lastPage}>Last &#62;&#62;</button>
+						</div>
+					</div>					
+						<div class="slds-col slds-size_6-of-12 slds-p-horizontal_none" style="display: flex; margin-left: auto; align-items: center;justify-content: flex-end;">                  
+								<div class="filterSearch"> Filter Results &nbsp; </div>
+                                <div class="slds-is-relative slds-show_inline-block slds-m-horizontal_xx-small">
+                                    <img src={infoIconUrl} class="slds-show_inline-block info-icon">
+                                    <div class="slds-popover slds-popover_tooltip slds-nubbin_bottom isbnTooltip" role="tooltip">
+                                        <div class="slds-popover__body">Enter a keyword to filter within the current set of search results</div>
+                                    </div>
+                                </div>
+                            <div class="slds-form-element">
+                                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                                    <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Clear">
+                                        <img src={crossIconUrl} alt="cross" style="width: 11.88px; height: 11.88px; margin-left: -0.5px; margin-top: 7px;" onclick={clearFilterInput} />
+                                        <span class="slds-assistive-text">Clear</span>
+                                    </button>
+                                    <input type="search" id="text-input-id-58" class="filterInput" value={filterSearchValue}  oninput={handleFilter}/>
+                                </div>
+                            </div>
+                            <div style="display: flex;">
+                                <div class="countItems">{transformedDataLength} of {totalCount} Items &nbsp;</div>
+                                <div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+									<img src={infoIconUrl} class="slds-show_inline-block info-icon">
+									<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom filterTooltip" role="tooltip">
+										<div class="slds-popover__body">Search by ISBN, Keyword</div>
+									</div>
+								</div>
+                            </div>
+                     
+                        </div>
+					
+						</div>
+
+					</div>
+					
+					<table>
+						<thead >
+						<tr class="table-head" style="background-color: #ffff">
+							<td class="slds-is-sortable slds-cell_action-mode"> 
+								<div style="display: flex; justify-content: space-between; align-items: center;max-height: 30px;">
+								<div>
+								ISBN
+								</div>
+								<div class="thBorder">
+								</div></div>
+							</td>
+							<td class="slds-is-sortable slds-cell_action-mode" style="width: 500px">
+								<div style="display: flex; justify-content: space-between; align-items: center; max-height: 30px;">
+								<div>
+								Title Description
+								</div>
+								<div class="thBorder">
+								</div></div>
+							</td>
+							<td class="slds-is-sortable slds-cell_action-mode">
+								<div style="display: flex; justify-content: space-between; align-items: center; max-height: 30px;">
+								<div>
+								Type
+								</div>
+								<div class="thBorder">
+								</div></div>
+							</td>
+							<td class="slds-is-sortable slds-cell_action-mode">
+								<div style="display: flex; justify-content: space-between; align-items: center; max-height: 30px;">
+								<div>
+								Grade
+								</div>
+								<div class="thBorder">
+								</div></div>
+							</td>
+							<td class="slds-is-sortable slds-cell_action-mode">
+								<div style="display: flex; justify-content: space-between; align-items: center; max-height: 30px;">
+								<div>©</div>
+								<div class="thBorder">
+								</div></div>
+							</td>
+							<td class="slds-is-sortable slds-cell_action-mode">
+								<div style="display: flex; justify-content: space-between; align-items: center; max-height: 30px;">
+								<div>Status</div>
+								<div class="thBorder">
+								</div></div>
+							</td>
+							<td class="slds-is-sortable slds-cell_action-mode">
+								<div style="display: flex; justify-content: space-between; align-items: center; max-height: 30px;">
+								<div>Price</div>
+								<div>
+								</div></div>
+							</td>
+						</tr>
+						</thead>
+						
+						<tbody class="table-body">
+							
+						<template for:each={transformedChildTableData} for:item="row">
+							<template if:true={showCAD}>	
+							<tr  class={row.countryCodeISO} key={row.productId}>
+							<td class='CAD'>
+							
+							<a href="#" style="color: var(--links, #82755b); text-decoration: underline;"
+							data-row-id={row.productId}							
+							title={row.ISBN} 
+							onclick={handleRowAction}>							
+							{row.ISBN}</a></td>
+							<td class='CAD' style="width: 500px;">{row.Title_Description}</td>
+							<td class='CAD'>{row.Type}</td>
+							<td class='CAD'>{row.Grade_Level}</td>
+							<td class='CAD'>{row.Copyright}</td>
+							<td class='CAD'>{row.Status}</td>
+							<td class='CAD'>							  
+								<template if:true={DisplayPriceloaded}>
+									<template if:true={isPriceLoading}>
+														<div class="loader"></div>
+													</template> -->
+													<template if:false={isPriceLoading}>
+														{row.DisplayPrice} 
+												 </template> 
+									 </template>
+									  <template if:true={isEnosixprice}>
+									<template if:true={isPriceLoading}>
+														<div class="loader"></div>
+													</template>
+													<template if:false={isPriceLoading}>
+														${row.Price} 
+													</template>
+									 </template>	
+							</td>
+						</tr>
+							</template>
+							<template if:false={showCAD}>	
+							<tr  class={row.countryCodeISO} key={row.productId}>
+							<td>
+							
+							<a href="#" style="color: var(--links, #2150A3); text-decoration: underline;"
+							data-row-id={row.productId}							
+							title={row.ISBN} 
+							onclick={handleRowAction}>							
+							{row.ISBN}</a></td>
+							<td style="width: 500px;">{row.Title_Description}</td>
+							<td>{row.Type}</td>
+							<td>{row.Grade_Level}</td>
+							<td>{row.Copyright}</td>
+							<td>{row.Status}</td>
+							<td>
+												  <!--single isbn  fo -->
+								 <template if:true={DisplayPriceloaded}> 
+								<!-- <template if:true={isPriceLoading}> -->
+													<!-- <div class="loader"></div> -->
+												<!-- </template> -->
+												<!-- <template if:false={isPriceLoading}> -->
+													{row.DisplayPrice} 
+												<!-- </template> -->
+								 </template>
+								 
+								
+								  <template if:true={isEnosixprice}>
+								<template if:true={isPriceLoading}>
+													<div class="loader"></div>
+												</template>
+												<template if:false={isPriceLoading}> 
+													${row.Price} 
+												</template>
+								 </template>
+								 
+							</td>
+						</tr>
+							</template>
+						</template>
+						
+						</tbody>
+						
+					</table>
+				
+				</div>
+
+			</div>
+</template>

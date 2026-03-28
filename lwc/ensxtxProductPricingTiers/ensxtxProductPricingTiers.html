@@ -1,0 +1,33 @@
+<template>
+    <template if:true={hasTiers}>
+        <div class="enosix-quantity-and-list">
+            <div class="slds-m-top_small">
+                <div class="slds-m-right_small slds-grid_vertical-align-center slds-text-title_caps">
+                    <span class="slds-m-right_x-small">
+                        <lightning-helptext
+                            style="float: right"
+                            icon-name="utility:info" 
+                            content={label.ensxtx_CartPDP_Message_AdditionalPricing}>
+                        </lightning-helptext>
+                        {label.ensxtx_CartPDP_Section_TieredPricing}
+                    </span>
+                    <br />
+                    <table role="presentation" class="enosix-product-table">
+                        <tbody>
+                            <tr aria-live="assertive" aria-atomic="true">
+                                <template iterator:tier={tieredPricing}>
+                                    <template if:false={tier.last}>
+                                        <td key={tier.value.key} class="slds-text-heading_small slds-p-around_x-small enosix-product-cell slds-border_right">{tier.value.range}<br />{tier.value.price}</td>
+                                    </template>
+                                    <template if:true={tier.last}>
+                                        <td key={tier.value.key} class="slds-text-heading_small slds-p-around_x-small enosix-product-cell">{tier.value.range}<br />{tier.value.price}</td>
+                                    </template>
+                                </template>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,263 @@
+<template>
+	<template if:true={showrelatedproducts}>
+		<template if:true={isLoading}>
+			<div class="slds-spinner_container">
+				<div role="status" class="slds-spinner slds-spinner_medium">
+					<span class="slds-assistive-text">Loading</span>
+					<div class="slds-spinner__dot-a"></div>
+					<div class="slds-spinner__dot-b"></div>
+				</div>
+			</div>
+		</template>
+		<template if:true={showResults}>
+			<div class="slds-p-top_large related-products-wrapper">
+				<h2 class="slds-p-horizontal_x-large slds-is-relative related-products-title">Related Products</h2>
+				<div class="slds-grid slds-wrap slds-grid_align-end">
+					<div class="slds-col">
+						<div class="filter-details slds-p-around_large shopping-buttons">
+							<button class="slds-button add-title-to-cart" onclick={addToSelectedToCartHandleClick}
+								aria-disabled={disableAddToCart}>{addToCartButtonLabel}</button>
+							<button class="slds-button clear-cart" onclick={clearCartHandleClick}
+								aria-disabled={disableClearCart}>{clearCartButtonLabel}</button>
+							<button class="slds-button review-cart" onclick={reviewCartHandleClick}
+								aria-disabled={disableReviewCart}>
+								<img class="slds-m-right_xx-small cart-blue" src={labels.scc_checkout_cart}
+									alt="cart icon" />
+								<img class="slds-m-right_xx-small cart-white" src={labels.scc_checkout_cart_white}
+									alt="cart icon" />
+								{reviewCartButtonLabel}
+							</button>
+							<label class="slds-form-element__label slds-p-right_none slds-m-left_x-small"
+								for="filter-search-input">Filter Results &nbsp; <span class="slds-assistive-text">Enter
+									a keyword to filter within the current set of search results. Showing
+									{pageRecordCount} of {totalRecords} Items,Search by ISBN, Keyword</span></label>
+							<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small">
+								<div
+									class="slds-show_inline-block info-icon slds-m-right_xx-small slds-text-align_center">
+									i</div>
+								<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom" role="tooltip"
+									id="44">
+									<div class="slds-popover__body">Enter a keyword to filter within the current set of
+										search results</div>
+								</div>
+							</div>
+							<div class="slds-is-relative">
+								<input type="text" id="filter-search-input" class="slds-input filter-search-input"
+									value={filterSearchValue} oninput={handleFilter} />
+								<button class="slds-button filter-clear" onclick={clearFilterInput}
+									aria-label="Close">x</button>
+							</div>
+							<div class="slds-form-element__label item-count">{pageRecordCount} of {totalRecords} Items
+							</div>
+							<div class="slds-is-relative slds-show_inline-block">
+								<div class="slds-show_inline-block info-icon slds-text-align_center">i</div>
+								<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-right filter-popover"
+									role="tooltip" id="45">
+									<div class="slds-popover__body">Search by ISBN, Keyword</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="slds-grid slds-wrap">
+					<div class="slds-col">
+						<div class="slds-form-element__control slds-p-left_x-large">
+							<button class="slds-button table-control-button" disabled={bDisableFirst}
+								onclick={firstPage}>&#60;&#60;&nbsp;&nbsp;First</button>
+							<button class="slds-button table-control-button" disabled={bDisableFirst}
+								onclick={previousPage}>&#60;&nbsp;&nbsp;Previous</button>
+							<p class="page-count-shown slds-m-horizontal_x-small" role="alert">Showing {pageNumber} of
+								{totalPages} Pages</p>
+							<button class="slds-button table-control-button" disabled={bDisableLast}
+								onclick={nextPage}>Next&nbsp;&nbsp;&#62;</button>
+							<button class="slds-button table-control-button" disabled={bDisableLast}
+								onclick={lastPage}>Last&nbsp;&nbsp;&#62;&#62;</button>
+						</div>
+					</div>
+				</div>
+				<div class="slds-grid slds-wrap">
+					<div class="slds-col slds-size_3-of-3">
+						<table
+							class="slds-table slds-table_bordered slds-table_fixed-layout slds-p-horizontal_x-large slds-p-vertical_medium"
+							role="grid"
+							aria-label="Example advanced table of Opportunities in actionable mode with ascending column sorting">
+							<thead>
+								<tr class="slds-line-height_reset">
+									<th aria-sort="ascending"
+										class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode"
+										scope="col">
+										<a class="slds-th__action slds-text-link_reset" tabindex="0">
+											<div
+												class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+												<span>QTY</span>
+											</div>
+										</a>
+									</th>
+									<th aria-sort="ascending"
+										class="slds-is-sortable slds-is-sorted slds-is-sorted_asc slds-cell_action-mode"
+										scope="col" style="width: 13%;">
+										<a class="slds-th__action slds-text-link_reset" tabindex="0">
+											<div
+												class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+												<span>ISBN</span>
+											</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+										style="width: 34%;">
+										<a class="slds-th__action slds-text-link_reset" tabindex="0">
+											<div
+												class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+												<span>Title Description</span>
+											</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+										style="width: 14%;">
+										<a class="slds-th__action slds-text-link_reset" tabindex="0">
+											<div
+												class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+												<span>Type</span>
+											</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+										style="width: 7%;">
+										<a class="slds-th__action slds-text-link_reset" tabindex="0">
+											<div
+												class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+												<span>Level</span>
+											</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+										style="width: 6%;">
+										<a class="slds-th__action slds-text-link_reset" tabindex="0">
+											<div
+												class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+												<span>&#169;</span>
+											</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col">
+										<a class="slds-th__action slds-text-link_reset" tabindex="0">
+											<div
+												class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+												<span>Status</span>
+											</div>
+										</a>
+									</th>
+									<th aria-sort="none" class="slds-is-sortable slds-cell_action-mode" scope="col"
+										style="width: 7%;">
+										<a class="slds-th__action slds-text-link_reset" tabindex="0">
+											<div
+												class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+												<span>Price</span>
+											</div>
+										</a>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<template for:each={productQuantityData1} for:item="product">
+									<tr key={product.productDetails.Id}>
+										<template if:true={isQuantityDisabled}>
+											<td data-label="Qty">
+												<input type="number"
+													class="slds-input quantity-field slds-m-around_small"
+													data-row-id={product.productDetails.Id}
+													data-attribute-price={product.productDetails.Net_Price}
+													data-attribute-name={product.productDetails.ISBN13}
+													value={product.quantity} onchange={QuantityChange}
+													data-field-name="quantityCount" id="quantity" name="quantity"
+													min="0" oninput={QuantityChange} onfocus={handleFocus}
+													disabled={isQuantityDisabled} />
+
+											</td>
+											<td data-label="ISBN">
+												<button class="slds-button slds-p-around_small" data-field-name="isbnId" data-row-id={product.productDetails.Id}
+													onclick={tableRowAction} disabled={isQuantityDisabled}>{product.productDetails.ISBN13}</button>
+											</td>
+										</template>
+										<template if:false={isQuantityDisabled}>
+											<td data-label="Qty">
+												<input type="number"
+													class="slds-input quantity-field slds-m-around_small"
+													data-row-id={product.productDetails.Id}
+													data-attribute-price={product.productDetails.Net_Price}
+													data-attribute-name={product.productDetails.ISBN13}
+													value={product.quantity} onchange={QuantityChange}
+													data-field-name="quantityCount" id="quantity1" name="quantity"
+													min="0" oninput={QuantityChange} onfocus={handleFocus}
+													disabled={product.makedisable} />
+												<template if:true={product.makedisable}>
+													<div class="slds-is-relative slds-show_inline-block slds-m-left_xx-small"
+														style="margin-top: auto; margin-bottom: auto; bottom: 5px;">
+														<span class="slds-icon_container slds-icon-utility-lock lock-icon">
+															<svg width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd"
+																	d="M1.37647 5.44444V4.04444C1.37647 1.81082 3.15686 0 5.35294 0C7.54902 0 9.32941 1.81082 9.32941 4.04444V5.44444H9.63529C10.2267 5.44444 10.7059 5.93177 10.7059 6.53333V12.9111C10.7059 13.5127 10.2267 14 9.63529 14H1.07059C0.479134 14 0 13.5127 0 12.9111V6.53333C0 5.93177 0.479134 5.44444 1.07059 5.44444H1.37647ZM3.21177 4.04444C3.21177 2.84192 4.17063 1.86667 5.35294 1.86667C6.53525 1.86667 7.49412 2.84192 7.49412 4.04444V5.44444H3.21177V4.04444ZM5.88824 9.5242C6.16425 9.34495 6.34706 9.03019 6.34706 8.67228C6.34706 8.11387 5.90197 7.66117 5.35294 7.66117C4.80391 7.66117 4.35882 8.11387 4.35882 8.67228C4.35882 9.03019 4.54163 9.34494 4.81765 9.5242V11.2389C4.81765 11.5397 5.05721 11.7833 5.35294 11.7833C5.64867 11.7833 5.88824 11.5397 5.88824 11.2389V9.5242Z"
+																	fill="#0C1E3D" />
+															</svg>
+														</span>
+														<div class="slds-popover slds-popover_tooltip slds-nubbin_bottom-left filter-popup" role="tooltip" id="6">
+															<div class="slds-popover__body schldistrict" style=" white-space: normal !important;">
+																{product.restrictionMessage}</div>
+														</div>
+													</div>
+												</template>
+											</td>
+											<td data-label="ISBN">
+												<button class="slds-button slds-p-around_small" data-field-name="isbnId" data-row-id={product.productDetails.Id}
+													onclick={tableRowAction} disabled={product.makedisable}>{product.productDetails.ISBN13}</button>
+											</td>
+										</template>
+
+										<td data-label="Title Description">
+											<div>{product.productDetails.Description}</div>
+										</td>
+										<td data-label="Type" style="word-break: break-all;">
+											<div>{product.productDetails.Product_Sub_Type}</div>
+										</td>
+										<td data-label="Grade Level">
+											<div class="slds-text-align_center">{product.productDetails.Grade_Level}
+											</div>
+										</td>
+										<td data-label="Copyright">
+											<div>{product.productDetails.Copyright_Year}</div>
+										</td>
+										<td data-label="Status">
+											<div>{product.productDetails.Product_Status}</div>
+										</td>
+										<template if:false={priceLoaded}>
+											<td data-label="Price">
+												<div class="loader slds-text-align_center"></div>
+											</td>
+										</template>
+										<template if:true={priceLoaded}>
+											<td data-label="Price">
+												<div class="slds-text-align_center">${product.productDetails.Net_Price}
+												</div>
+											</td>
+										</template>
+									</tr>
+								</template>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</template>
+	</template>
+	<template if:true={clearCartItems}>
+		<c-scc_delete-items-from-cart onrefreshevent={handlerefreshevent}> </c-scc_delete-items-from-cart>
+	</template>
+	<template if:true={callAddItemToCart}>
+		<c-scc_add-items-to-cart message={itemsList} onreveiewcartcount={handleReviewCartCount}
+			onresetaddtocart={handleresetaddtocart} userselection={userInputs} check-active-cart-id={activeCartId}>
+		</c-scc_add-items-to-cart>
+	</template>
+	<template if:true={reviewCartPage}>
+		<c-scc_review-cart-page userselection={userInputs}> </c-scc_review-cart-page>
+	</template>
+</template>

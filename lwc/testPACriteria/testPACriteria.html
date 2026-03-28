@@ -1,0 +1,208 @@
+<template>
+ <template if:true={showProductSearchPage}>
+	  <div class="spinner-wrapper slds-spinner_container" if:true={isLoading} style="height: 200px; position:absolute;">
+        <div class="slds-backdrop slds-backdrop_open">
+            <lightning-spinner size="medium" variant="brand" alternative-text="Loading"></lightning-spinner>
+        </div>
+    </div> 
+	<!-- Conditional rendering based on showTabset variable -->
+	<div lwc:if={showTabset}>
+		<!-- Breadcrumbs -->
+		<nav role="navigation" aria-label="Breadcrumbs">
+			<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+				<!-- Breadcrumb item for Price & Availability -->
+				<li class="slds-breadcrumb__item slds-p-horizontal_x-small">
+					Place Order
+				</li>
+				<!-- Breadcrumb item for Product Search -->
+				<li class="slds-breadcrumb__item slds-p-horizontal_x-small">
+					Confirm Addresses
+				</li>
+				<li class="slds-breadcrumb__item slds-p-horizontal_x-small" style="font-weight: bold;">
+					Product Search
+				</li>
+			</ol>
+		</nav>
+		<!-- Lightning Tabset -->
+		<lightning-tabset class="custom-tabset">
+			<!-- Tab 1: ISBN/Title -->
+			<lightning-tab label="ISBN/Title" class="tabs-coloroverride">
+				<template if:false={showProductTitlePage}>
+					<div>
+						<!-- Search Buttons -->
+						<div class="slds-grid slds-grid_align-end">
+							<!-- Clear Search Button -->
+							<div class="slds-col">
+								<lightning-button label="Clear Search" onclick={handleClear}
+									class="slds-m-left_x-small neutral-button-text-color small-button">
+								</lightning-button>
+							</div>
+							<!-- Search Button -->
+							<div class="slds-col">
+								<lightning-button variant="brand" label="Search" disabled={checkInputValues}
+									onclick={handleSearch} class="slds-m-left_x-small small-button"></lightning-button>
+							</div>
+						</div>
+						<!-- Accordion for Search Criteria -->
+						<div
+							class="slds-box slds-theme_shade slds-p-vertical_xx-small slds-m-vertical_xx-small slds-p-horizontal_none">
+							<div class="slds-grid slds-grid_vertical-align-center">
+								<lightning-icon size="xx-small" icon-name="utility:chevrondown"
+									alternative-text="chevrondown">
+								</lightning-icon>
+								<div>&nbsp;&nbsp;Search Criteria</div>
+							</div>
+						</div>
+						<!-- Criteria Section -->
+						<div class="slds-grid slds-gutters slds-p-horizontal_small slds-grid_vertical-align-end">
+							<!-- ISBN Input -->
+							<div class="slds-col">
+								<lightning-input maxlength="13" label="ISBN" value={isbnValue}
+									onchange={handleTextInputChange}>
+								</lightning-input>
+							</div>
+							<!-- Title Keyword Input -->
+							<div class="slds-col">
+								<lightning-input label="Title Keyword(s)" value={titlekeyword}
+									onchange={handleTextInputChange}>
+								</lightning-input>
+							</div>
+							<!-- Active Products Checkbox -->
+							<div class="slds-col slds-align-middle slds-p-top_small">
+								<div class="slds-form-element">
+									<label class="slds-form-element__label" for="checkbox-unique-id-80">Active Products Only</label>
+									<div class="slds-form-element__control">
+										<span class="slds-checkbox slds-checkbox_standalone">
+                                            <input type="checkbox" id="checkbox-unique-id-80" name="label" value="option" checked={activeProducts} onchange={handleActiveProductsChange} />
+                                            <span class="slds-checkbox_faux"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Accordion for Search Results -->
+					<div
+						class="slds-box slds-theme_shade slds-p-vertical_xx-small slds-m-vertical_xx-small slds-p-horizontal_none">
+						<div class="slds-grid slds-grid_vertical-align-center">
+							<lightning-icon size="xx-small" icon-name="utility:chevrondown"
+								alternative-text="chevrondown">
+							</lightning-icon>
+							<div>&nbsp;&nbsp;Search Results</div>
+						</div>
+					</div>
+					<div class="slds-grid ">
+						<div class="slds-col slds-size_7-of-12 ">
+							<div class="slds-grid slds-grid_align-end">
+								<lightning-button variant="brand" class="slds-p-horizontal_xx-small"
+									label={addToCartButtonLabel}
+								
+									onclick={addSelectedToCartHandleClick}
+									disabled={addSelectedToCartBtnDisabled}>
+								</lightning-button>
+								<lightning-button variant="brand" class="slds-p-horizontal_xx-small"
+									label={clearCartButtonLabel}
+								
+									onclick={clearCartHandleClick}
+									disabled={clearCartBtnDisabled}>
+								</lightning-button>
+								<lightning-button variant="brand" class="slds-p-horizontal_x-small"
+									icon-name="utility:cart"
+									label={reviewCartButtonLabel}
+								
+									onclick={reviewCartHandleClick}
+									disabled={reviewCartDisabled}>
+								</lightning-button>
+							</div>
+						</div>
+						<div class="slds-col slds-size_3-of-12 ">
+							<div class="slds-grid slds-grid_align-end">
+								<div class="slds-align-top">
+									<div style="padding-top:4px !important;"> Filter Results &nbsp; </div>
+								</div>
+								<div class="slds-col slds-size_2-of-12 ">
+									<div class="slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+								
+										<button class="slds-button slds-button_icon" onmouseover={togglePasswordHintfilter} onmouseout={togglePasswordHintfilter}>
+																<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+															</button>
+										<div class={taskTypeHelpTextClassfilter} role="tooltip" id="help1"
+											style="position:absolute;top:394px;right:394px;width:250px;background-color:#504c6e!important;">
+											<div class="slds-popover_body">
+												<ul class="slds-list_dotted slds-has-dividers_around-space "
+													style="color:white !important;padding-top:5px !important;">
+													Enter a keyword to filter within the current set of search results
+												</ul>
+											</div>
+										</div>
+						</div>
+					</div>
+								<div>
+									<lightning-input type="search" variant="label-hidden" name="searchFilter" placeholder="Search To Filter"
+										onchange={handleFilter}>
+									</lightning-input>
+								</div>
+							</div>
+						</div>
+						<div class="slds-col slds-size_2-of-12 ">
+							<div class="slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+								<!-- {pageRecordCount} of {totalCount} Items &nbsp; -->
+								{transformedDataLength} of {totalCount} Items &nbsp;
+								<button class="slds-button slds-button_icon" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+								<div class={taskTypeHelpTextClass} role="tooltip" id="help"
+									style="position:absolute;top:194px;right:43px;width:250px;background-color:#504c6e!important;">
+									<div class="slds-popover_body">
+										<ul class="slds-list_dotted slds-has-dividers_around-space "
+											style="color:white !important;padding-top:5px !important;">
+											Search by <b>ISBN, Keyword</b>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>`
+					<!-- Search Result Error Message -->
+					<template if:true={showSearchResultErrorMessage}>
+						<p class="slds-p-around_x-small slds-text-body_small slds-text-color_destructive">
+							{searchResultErrorMessage}
+						</p>
+					</template>
+					<!-- Data Table to display search results -->
+					<template if:true={showResults}>											
+							<c-custom-table filter={filterCriteria} raw-parent-table-data={productQuantityData}
+								oncheckboxchange={handleCheckboxChange} onshowproducttitlepage={openChildTitlePage}
+								onquantitychange={handleQuantityChange} add-selected-to-cart={addToCart} onreveiewcartcount={handleReviewCartCount} 
+								ontransformeddatalength={handleTransformedDataLength}>
+							</c-custom-table>
+					</template>
+				</template>
+			</lightning-tab>
+			<!-- Tab 2: Multi ISBN -->
+			<lightning-tab label="Multi ISBN">
+				<!-- Custom LWC component for multi ISBN search -->
+				<c-scc_place-order-multi_-i-s-b-n-search parent-selected-product-record={selectedProductRecord}
+					onshowproducttitlepage={handleShowProductTitlePage} onhideparenttab={handlehideparenttab} ></c-scc_place-order-multi_-i-s-b-n-search>
+			</lightning-tab>
+			<!-- Tab 3: Catalog -->
+			<lightning-tab label="Catalog">
+				<c-scc_place-order-catalog-l-w-c onshowproducttitlepage={handleShowProductTitlePage}
+				parent-selected-product-record={selectedProductRecord}></c-scc_place-order-catalog-l-w-c>
+			</lightning-tab>
+		</lightning-tabset>
+	</div>
+	<!-- Conditional rendering for Product Title Page -->
+	<template if:true={showProductTitlePage}>
+		<c-test_title-page parent-selected-product-record={selectedProductRecord}
+			onclosetitlepage={closeChildTitlePage}>
+		</c-test_title-page>
+	</template>
+</template>
+	<template if:true={reviewCartPage}>
+	  <c-scc_review-cart-page> </c-scc_review-cart-page>
+	</template>	
+	<template if:true={clearCartItems}>
+	  <c-scc_delete-items-from-cart onrefreshevent={handlerefreshevent}>  </c-scc_delete-items-from-cart> 
+	</template>
+</template>

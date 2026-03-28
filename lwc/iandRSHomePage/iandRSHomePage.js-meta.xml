@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <masterLabel>IandRSHomePage</masterLabel>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen"
+        configurationEditor="c-custom-next-editor">
+            <property name="imageUrl" type="String"/>
+            <property name="variable1" type="String"/>
+            <property name="variable2" type="String"/>
+            <property name="variable3" type="String"/>
+            <property name="variable4" type="String"/>
+            <property name="var1" type="String"/>
+            <property name="var2" type="String"/>
+            <property name="var3" type="String"/>
+            <property name="var4" type="String"/>
+            <property name="fontLarge" type="String"/>
+            <property name="fontSmall" type="String"/>
+            <property name="fontColor" type="String"/>
+            <property name="navLogic" type="String"/>
+            <property name="componentTextLarge" type="String"/>
+            <property name="componentTextSmall" type="String"/>
+            <property name="nLogic" type="String"/>
+            <property name="ariaText" type="String"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

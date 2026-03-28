@@ -1,0 +1,463 @@
+.dropdown-arrow {
+    cursor: pointer;
+}
+ 
+.dropdown-container{
+    display: flex;
+    align-items: center;
+}
+ 
+.search-criteria-label{
+    margin-left: 10px;
+}
+ 
+.dropdown-visible{
+    display: block;
+}
+ 
+.dropdown-hidden{
+    display: none;
+}
+.arvicon-input {
+    width: 80%;
+    height: 230px;
+    top: 23px;
+    gap: 0px;
+    border-radius: 5px;
+    opacity: 0px;
+    border: 1px solid #AFC3D8;
+    box-shadow: 0px 4px 8px 0px #2150A31A;
+    padding: 1rem;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    text-align: left;
+    color: #173770;
+   /* // margin-bottom: 1rem; */
+    overflow-y: auto;
+}
+.arvicon-input:focus{
+    box-shadow: 0 0 0 1px #FFFFFF, 0 0 0 2px #0C1E3D !important;
+    text-decoration: none !important;
+    outline: none !important;
+    border: none !important;
+}
+.arvicon-input:focus-visible{
+    outline: none;
+}
+
+.arvicon-input::-webkit-scrollbar{
+    background-color: #FFFFFF;
+    width: 8px;
+    height:180px;
+}
+.arvicon-input::-webkit-scrollbar-thumb{
+    background-color: #AFC3D8;
+    border: 1px solid #AFC3D8;
+    border-radius: 10px;
+    width: 5px;
+}
+
+.dropdown-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.dropdown-arrow {
+    cursor: pointer;
+}
+
+.search-criteria-label {
+    margin-left: 0.5rem;
+}
+
+.search-results {
+    margin-top: 1rem;
+}
+
+/*.pagination {
+    margin-top: 1rem;
+    padding-left: 20px;
+    padding-bottom: 15px;
+   
+    display: flex;
+    justify-content: center;
+}*/
+
+
+
+.search-button-disabled {
+    background-color:#76716b
+}
+
+.search-button-enabled {
+    background-color: #0070d2;
+    color:white;
+}
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+/*.text-area-inputchange, .arvicon-input {
+    overflow-y: scroll !important;
+}*/
+.text-area-inputchange {
+    padding-top: 5px;  
+     padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.footer-text-value{
+     padding-top: 0px;  
+     padding-left: 20px;
+     font-size: 17px;
+}
+/*.button-container {
+    margin-bottom: 10px; /* Add spacing between buttons and textarea *
+}*/
+
+.ISBN-Name{
+   padding-top: 20px;  
+   padding-left: 25px; 
+}
+/*.align-buttons {
+    display: flex;
+    justify-content: flex-end;
+}*/
+/* .arvicon-input {
+    width: 50%; 
+    overflow-y: scroll;
+} */
+.slds-grid.slds-m-bottom_medium.align-buttons {
+    padding-top: 13px;
+}
+.count-container {
+    display: flex;
+    align-items: center;
+}
+
+.total-count {
+    margin-right: 10px; /* Adjust as needed */
+}
+
+.row-count-label {
+    margin-right: 5px; /* Adjust as needed */
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.count-container {
+    display: flex;
+    align-items: center;
+}
+
+.total-count {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+
+
+.pagination-buttons {
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 0.5rem;
+}
+.row-count-label {
+    display: inline-block;
+    margin-right:5px;
+}
+
+.selected-rows select {
+    display: inline-block;
+}
+.pagination-button-enabled {
+    color:white;
+  background-color:#005fb2;
+}
+
+.pagination-button-disabled {
+    background-color:#ebebe4
+}
+.pagination-buttons{
+    border-radius: 10px;
+}
+.page-info{
+     background-color:  lightsteelblue;
+    margin-right: 5px;
+    font-weight: bold;
+}
+.search-result-value{
+    margin-top: 10px;
+}
+
+
+.searchCriteriaTitle{
+    
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: left;
+    color: var(--dark-tex, #0C1E3D);
+    margin-left: 31px;
+    display: flex;
+    margin-top: -5px;
+}
+.greenBox{
+    width: 8px;
+    height: 20px;
+    gap: 0px;
+    border-radius: 0px 5px 5px 0px;
+    opacity: 0px;
+    background: #9ECA47;
+    margin-left: -20px;
+}
+img {
+    max-width: 17px;
+    height: 17px;
+    margin-top: 2.5px;
+    margin-left: -5px;
+}
+
+.searchCard{
+    background-color: #FFFF;
+    border: 1px solid #AFC3D8;
+    border-radius: 10px;
+    padding: 30px 20px 30px 20px;
+}
+.ISBNLabel{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22.4px;
+    text-align: left;
+    color: #0C1E3D;
+    display: block;
+}
+
+.searchButton{
+    width: 235px;
+    height: 45px;
+    padding: 10px 20px 10px 20px;
+    gap: 5px;
+    border-radius: 90px;
+    opacity: 0px;
+    color: #FFFFFF;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 17.6px;
+    text-align: center;
+    background-color: #2150A3;
+    border:none;
+}
+.searchButtonDisabled{
+    width: 235px;
+    height: 45px;
+    padding: 10px 20px 10px 20px;
+    gap: 5px;
+    border-radius: 90px;
+    opacity: 0px;
+    color: #FFFFFF;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 17.6px;
+    text-align: center;
+    background-color: #AFC3D8;
+    border:none;
+}
+.clearButton{
+    width: 115px;
+    height: 45px;
+    padding: 10px 20px 10px 20px;
+    gap: 5px;
+    border-radius: 90px;
+    border: 1px solid #AFC3D8;
+    opacity: 0px;
+    background-color: #FFFFFF;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 17.6px;
+    text-align: center;
+    color: #2150A3;
+}
+.clearButtonDisabled{
+    width: 115px;
+    height: 45px;
+    padding: 10px 20px 10px 20px;
+    gap: 5px;
+    border-radius: 90px;
+    border: 1px solid #AFC3D8;
+    opacity: 0px;
+    background-color: #AFC3D8;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 17.6px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+.noResultBg{
+    height: min-content;
+    gap: 0px;
+    border-radius: 5px;
+    opacity: 0px;
+    background-color: #F5F9FE;
+    text-align: center;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    margin : 20px 20px 10px 20px;
+}
+.noResultImage{
+    max-width: 85px;
+    height: 102px;
+    gap: 0px;
+    opacity: 0px;
+}
+.noResultText{
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 22px;
+    color: #173770;
+}
+.noResultMessage{
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22.5px;
+    color: #173770;
+}
+
+
+.filterInput{
+    width: 184px;
+    height: 40px;
+    left: 137.5px;
+    gap: 0px;
+    border-radius: 5px;
+    opacity: 0px;
+    border: 1px solid #D1D7E2;
+    box-shadow: 0px 4px 10px 0px #2150A31A;
+    /* margin-top: 6px; */
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22.5px;
+    text-align: left;
+    color: #173770;
+    padding-left: 10px;
+    margin-left: -8px;
+
+}
+.filterInput:focus-visible{
+    outline: none;
+}
+
+.filterSearch{
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    /* padding-top: 4px !important;  */
+    width: max-content; 
+    height: 40px; 
+    gap: 20px; 
+    opacity: 0px; 
+    display: flex;
+    margin-bottom: auto;
+    margin-top: auto;
+    align-items: flex-start;
+    /* position: absolute;  
+    margin-left: -100px; */
+    color: #173770;
+    
+
+}
+
+.countItems{
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    color: #173770;
+    /* margin-top: 7px; */
+    margin-left: 15px;
+    padding-left: 15px;
+    padding-right: 10px;
+    border-left: 1px solid rgb(12, 30, 61, 20%);
+    height: 25px;
+}
+
+.slds-popover{
+    background-color: #0D2A7A;
+    position:absolute;
+    
+    width:max-content;
+    
+}
+.slds-popover__body{
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    color: #FFFFFF;
+    text-align: left;
+
+}
+
+.isbn-poppup{
+    top:-48px;
+    left:-24px;
+}
+
+.filterInfo-poppup{
+    margin-bottom: 57px; 
+    margin-left: -4px; 
+    max-width: 250px;
+}
+
+.countInfo-poppup{
+    margin-top: auto;
+    margin-left: -22px;
+    max-width: 200px;
+    bottom: 88px;
+}
+
+.slds-nubbin_bottom-left:after, .slds-nubbin_bottom-left:before{
+    left: 4.5rem;
+}
+.slds-nubbin_bottom-right:after, .slds-nubbin_bottom-right:before{
+    right: 2rem;
+}
+
+.MultiISBNText{
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22.4px;
+    text-align: left;
+    width: max-content;
+    color: #173770;
+}

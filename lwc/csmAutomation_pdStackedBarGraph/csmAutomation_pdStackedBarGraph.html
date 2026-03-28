@@ -1,0 +1,18 @@
+<template>
+    <div class="chart-container">
+        <div class ="chart-scroll-area">
+        <div class="combobox-container">
+            <lightning-combobox
+                value={selectedAccountId}
+                placeholder="Select Account"
+                options={accountOptions}
+                onchange={handleAccountChange}>
+            </lightning-combobox>
+        </div>
+        <span class="visual-text">
+            {graphText}
+        </span>
+        <canvas></canvas>
+    </div>
+    </div>
+</template>

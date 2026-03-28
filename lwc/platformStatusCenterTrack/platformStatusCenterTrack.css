@@ -1,0 +1,32 @@
+.dummyClass{color:black;}
+
+.red {
+    --slds-c-button-brand-color-background: #FF0000;
+   --slds-c-button-brand-color-background-hover: #FF0000;
+    --slds-c-button-brand-color-border: #9050e9; 
+    --slds-c-button-brand-text-color-hover: #000000; 
+    --slds-c-button-brand-text-color: #000000; 
+		padding-left: var(--lwc-varSpacingHorizontalSmall);
+    padding-right: var(--lwc-varSpacingHorizontalSmall);
+}
+.green {
+    --slds-c-button-brand-color-background: #9ECA47;
+    --slds-c-button-brand-color-background-hover: #9ECA47;
+    --slds-c-button-brand-color-border: #9ECA47; 
+    --slds-c-button-brand-text-color-hover: #000000; 
+    --slds-c-button-brand-text-color: #000000; 
+}
+
+.yellow {
+    --slds-c-button-brand-color-background: #FFFF00;
+    --slds-c-button-brand-color-background-hover:#FFFF00;
+    --slds-c-button-brand-color-border: #2e844a; 
+    --slds-c-button-brand-text-color-hover: #000000; 
+    --slds-c-button-brand-text-color: #000000; 
+		padding-left: var(--lwc-varSpacingHorizontalSmall);
+    padding-right: var(--lwc-varSpacingHorizontalSmall);
+}
+lightning-button.button {
+	--sds-c-button-brand-color-background: #9ECA47;
+    --sds-c-button-text-color: #000000;
+}

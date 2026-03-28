@@ -1,0 +1,36 @@
+<template>
+    <template if:true={isSuccess}>
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert">
+            <!--error graphic-->
+            <span class="slds-icon_container slds-icon-utility-success slds-m-right_x-small" title="Description of icon when needed">
+              <lightning-icon icon-name="utility:success" alternative-text="SUCCESS" title="SUCCESS" variant="success"></lightning-icon>
+            </span>
+            <!--error message-->
+            <span class="slds-align_absolute-center">
+                <table border="0">
+                  <tr><td> <h2><b>{errorMessageToDisplay}</b></h2></td></tr>
+                  <tr></tr>
+                  <tr></tr>
+                  <tr><td> <h3><b>Close current tab and go to {number} | Order tab -> Related -> Click view all.</b></h3></td></tr>
+                </table>
+            </span>
+          </div>
+    </template>
+    <template if:false={isSuccess}>
+        <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+            <!--error graphic-->
+            <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+              <lightning-icon icon-name="utility:error" alternative-text="Error" title="Error" variant="warning"></lightning-icon>
+            </span>
+            <!--error message-->
+            <span class="slds-align_absolute-center">
+                <table border="0">
+                  <tr><td> <h2><b>{errorMessageToDisplay}</b></h2></td></tr>
+                  <tr></tr>
+                  <tr></tr>
+                  <tr><td> <h3><b> Close current tab and try again with right data.</b></h3></td></tr>
+                </table>
+            </span>
+          </div>
+    </template>
+</template>

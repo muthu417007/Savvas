@@ -1,0 +1,275 @@
+<template>
+    <template if:true={checkOutPage}>
+        <div class="slds-grid" style="font-size: 12px;">
+            <div class="slds-col slds-size_10-of-12" style="float: left;font-size: 14px;">
+                <span style="font-weight:bold"> Checkout </span>
+            </div>
+            <div class="slds-size_1-of-12" style="float:right;">
+                <button class="Cart-button2" onclick={handleReviewOrder} disabled={isReviewOrdrDisabled1}>Review Order</button>
+            </div>
+        </div>
+        
+        <div class="CheckOut">
+            <div class="slds-grid" style="height:2000px;">
+                <div class="slds-col slds-size_8-of-12 scroll-bar">
+                    <h1 class="Checkout-title">{labels.scc_checkOut_ContactInfo_Text}</h1>
+                    <div class="slds-grid">
+                        <div class="slds-col-slds-size_2-of-12">
+                            <div class="slds-form-element__label">{labels.scc_register_FirstName_Text}</div>
+                            <input placeholder="First Name" type="text" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} name="FirstName" value={firstName} class="fixed-width-input slds-input"/>
+                        </div>
+                        <div class="slds-col-slds-size_2-of-12 lastname-container">
+                            <div class="slds-form-element__label">{labels.scc_register_LastName_Text}</div>
+                            <input placeholder="Last Name" type="text" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} class="fixed-width-input slds-input" name="LastName" value={lastName}/>
+                        </div>
+                    </div>
+                    <div class="slds-grid">
+                        <div class="slds-col-slds-size_2-of-12">
+                            <div class="slds-form-element__label">{labels.scc_checkOut_Phone_Text}</div>
+                                <input placeholder="555-555-5555" type="phone" oninput={handlePhoneNumberInput} class="fixed-width-input slds-input" name="Phone" value={phone}/>
+                            </div>
+                            <div class="slds-col-slds-size_2-of-12 lastname-container">
+                                <div class="slds-form-element__label">{labels.scc_checkOut_Order_Email_Text}</div>
+                                <input placeholder="user@domain.com" type="email" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} class="fixed-width-input slds-input" name="OrderConfirmationEmail" value={email}/>
+                            </div>
+                        </div>
+                        <div class="slds-grid">
+                            <div class="slds-col-slds-size_2-of-12">
+                                <div class="slds-form-element__label">{labels.scc_checkOut_Shipment_mail_Text}</div>
+                                <input placeholder="user@domain.com" type="email" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData}  class="fixed-width-input slds-input" name="ShipmentConfirmationEmail" value={ship_email}/>
+                            </div>
+                        </div>
+                        <div>
+                            <h1 class="Checkout-title">{labels.scc_checkOut_OrderInfo_Text}</h1>
+                            <div class="slds-grid">
+                                <div class="slds-col-slds-size_2-of-12">
+                                    <div class="slds-form-element__label">{labels.scc_checkOut_Back_Order_Text}
+                                        <lightning-helptext class="help-text" content={labels.scc_checkOut_Back_Order_HelpText}></lightning-helptext>
+                                    </div>
+                                    <input placeholder="01/01/2024" type="Date" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} class="fixed-width-input slds-input" name="CancelBackOrderDate" value={CancelBackOrderDate}/>
+                               </div>
+                                <div class="slds-col-slds-size_2-of-12 lastname-container">
+                                    <div class="slds-form-element__label">{labels.scc_checkOut_Requested_Ship_Text}
+                                        <lightning-helptext class="help-text" content={labels.scc_checkout_ShipDate_HelpText}></lightning-helptext>
+                                    </div>
+                                    <input placeholder="04/01/2024" type="Date" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} class="fixed-width-input slds-input" name="RequestedShipDate" value={RequestedShipDate}/>
+                               </div>
+                            </div>
+                            <div class="slds-grid">
+                                <div class="slds-col-slds-size_2-of-12">
+                                    <div class="slds-form-element__label">{labels.scc_checkOut_PromoCode_Text}</div>
+                                    <div class="input-wrapper">
+                                        <input type="text" data-id="promoinput" class="fixed-width-input slds-input" name={PromoCode} value={promoCode} onchange={handleChange} />
+                                        <button onclick={handleApplyClick}>Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h1 class="Checkout-title">{labels.scc_checkOut_BillingInfo_Text}</h1>
+                            <div class="slds-grid">
+                                <div class="slds-col-slds-size_2-of-12">
+                                    <lightning-input type="checkbox" label="Use Ship To Address as Bill To" onchange={handlebillAddressCheckbox} checked={isBillAddressSame}></lightning-input>
+                                    <template if:false={isBillAddressSame}>
+                                        <lightning-input class="bill-address-container" label={labels.scc_Checkout_Name} value={billName} onchange={handlebillAddressChange} name="billName" placeholder="Type here"></lightning-input>
+                                        <lightning-input class="bill-address-container" label={labels.scc_Checkout_Street} value={billStreet} onchange={handlebillAddressChange} name="billStreet" placeholder="Type here"></lightning-input>
+                                        <div class="slds-grid slds-gutters">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <lightning-input label={labels.scc_Checkout_Floor} value={billFloor} onchange={handlebillAddressChange} name="billFloor" placeholder="Type here"></lightning-input>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <lightning-input label={labels.scc_Checkout_City} value={billCity} onchange={handlebillAddressChange} name="billCity" placeholder="Type here"></lightning-input>
+                                            </div>
+                                        </div>
+                                        <div class="slds-grid slds-gutters">
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <lightning-combobox class="statuscombobox slds-p-top_medium" label={labels.scc_Checkout_State} value={billState} options={billStateOptions} onchange={handlebillAddressChange}></lightning-combobox>
+                                            </div>
+                                            <div class="slds-col slds-size_1-of-2">
+                                                <lightning-input class="addressZip" label={labels.scc_Checkout_Zip} value={billZip} placeholder={labels.scc_ZipHelpText} onchange={handlebillAddressChange} name="billZip"></lightning-input>
+                                            </div>
+                                        </div>
+                                        <lightning-combobox class="statuscombobox bill-address-container" label={labels.scc_Checkout_Country} value={billCountry} options={billCountryOptions} onchange={handleBillCountryOptionChange}></lightning-combobox>
+                                    </template>
+                                </div>
+                            </div>
+                            <div class="payment-method-container">
+                                <h2 class="slds-m-bottom_small payment-title">Payment Method</h2>
+                                    <div class="slds-col slds-size_1-of-2 payment-method">
+                                        <div class="slds-form-element radio-labels">
+                                            <div class="slds-show_inline-block slds-m-right_medium">
+                                                <input class="payment-option-radio payment-options slds-m-right_xx-small" type="radio" name ="paymentMethods" checked>{labels.scc_Credit_Card}</div>
+                                            </div>
+                                        </div>
+                                        <template if:true={isCreditCardSelected}>
+                                            <template if:true={displayiFrame}>
+                                                <div class="credit-card-details slds-p-around_large">
+                                                    <div id="iframewrapper">
+                                                        <iframe id="paymetric-iframe"
+                                                            class="payment-metric-iframe"
+                                                            src={iFrameUrl} name="dieCommFrame"
+                                                            onload={IFrame_OnLoad}>
+                                                        </iframe>
+                                                    </div>
+                                                    <lightning-input type="checkbox" label={labels.scc_CreditCardAddress} onchange={handleCardAddressCheckbox} checked={isAddressDifferent}>
+                                                    </lightning-input>
+                                                    <template if:true={isAddressDifferent}>
+                                                        <lightning-input class="card-address-details-container" label={labels.scc_Checkout_Name} value={cardName} onchange={handleCardAddressChange} name="cardName"></lightning-input>
+                                                        <lightning-input class="card-address-details-container" label={labels.scc_Checkout_Street} value={cardStreet} onchange={handleCardAddressChange} name="cardStreet"></lightning-input>
+                                                        <div class="slds-grid slds-gutters">
+                                                            <div class="slds-col slds-size_1-of-2">
+                                                                <lightning-input label={labels.scc_Checkout_Floor} value={cardFloor} onchange={handleCardAddressChange} name="cardFloor"></lightning-input>
+                                                            </div>
+                                                            <div class="slds-col slds-size_1-of-2">
+                                                                <lightning-input label={labels.scc_Checkout_City} value={cardCity} onchange={handleCardAddressChange} name="cardCity"></lightning-input>
+                                                            </div>
+                                                        </div>
+                                                        <div class="slds-grid slds-gutters">
+                                                            <div class="slds-col slds-size_1-of-2">
+                                                                <lightning-combobox class="statuscombobox slds-p-top_medium" label={labels.scc_Checkout_State} value={cardState} options={cardStateOptions} onchange={handleCardAddressChange}></lightning-combobox>
+                                                            </div>
+                                                            <div class="slds-col slds-size_1-of-2">
+                                                                <lightning-input class="addressZip" label={labels.scc_Checkout_Zip} value={cardZip} placeholder={labels.scc_ZipHelpText} onchange={handleCardAddressChange} name="cardZip"></lightning-input>
+                                                            </div>
+                                                        </div>
+                                                        <lightning-combobox class="statuscombobox card-address-details-container" label={labels.scc_Checkout_Country} value={cardCountry} options={cardCountryOptions} onchange={handleCardCountryOptionChange}></lightning-combobox>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </template>
+                                        
+                                    </div>
+                                </div>
+                                <div>
+                                    <h1 class="Checkout-title">{labels.scc_checkOut_ShippingInfo_Text}</h1>
+                                        <div class="slds-grid">
+                                            <div class="slds-col-slds-size_2-of-12">
+                                                <div class="slds-form-element__label">{labels.scc_checkOut_ShipTo_Attention_Text}
+                                                    <lightning-helptext class="help-text" content={labels.scc_checkOut_ShipTo_Attention_HelpText}></lightning-helptext>
+                                                </div>
+                                                    <input type="Address" onkeyup={handleReviewOrderData} onchange={handleReviewOrderData} class="fixed-width-input slds-input" name="ShipToAttention" value={ShipToAttention}/>
+                                                    <lightning-input class="ship-address-details" label={labels.scc_Checkout_Name} value={shipName} onchange={handleShipAddressChange} name="shipName"></lightning-input>
+                                                    <lightning-input class="ship-address-details" label={labels.scc_Checkout_Street} value={shipStreet} onchange={handleShipAddressChange} name="shipStreet"></lightning-input>
+                                                    <div class="slds-grid slds-gutters">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-input label={labels.scc_Checkout_Floor} value={shipFloor} onchange={handleShipAddressChange} name="shipFloor"></lightning-input>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-input label={labels.scc_Checkout_City} value={shipCity} onchange={handleShipAddressChange} name="shipCity"></lightning-input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-grid slds-gutters">
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-combobox class="statuscombobox slds-p-top_medium" label={labels.scc_Checkout_State} value={shipState} options={shipStateOptions} onchange={handleShipAddressChange}></lightning-combobox>
+                                                        </div>
+                                                        <div class="slds-col slds-size_1-of-2">
+                                                            <lightning-input class="addressZip" label={labels.scc_Checkout_Zip} value={shipZip} placeholder={labels.scc_ZipHelpText} onchange={handleShipAddressChange} name="shipZip"></lightning-input>
+                                                        </div>
+                                                    </div>
+                                                    <lightning-combobox class="statuscombobox ship-address-details" label={labels.scc_Checkout_Country} value={shipCountry} options={shipCountryOptions} onchange={handleShipCountryOptionChange}></lightning-combobox>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid">
+                                                    <div class="slds-col-slds-size_2-of-12">
+                                                        <div class="slds-form-element__label">{labels.scc_checkOut_Ship_Service_Text}
+                                                            <lightning-helptext class="help-text" content={labels.scc_checkOut_Ship_Service_HelpText}></lightning-helptext>
+                                                        </div>
+                                                         <template if:true={serviceOptions.length}>
+                                                            <div class="Shipping-Method">
+                                                                <lightning-radio-group name="radioGroup1" options={serviceOptions} value={serviceValue} onchange={handleServiceOptionChange}></lightning-radio-group>
+                                                                <div class="ShLevel-Helptext">
+                                                                    <lightning-helptext class="help-text" content={labels.scc_checkout_Shipping_Level_Helptext}></lightning-helptext>
+                                                                    <lightning-helptext class="help-text" content={labels.scc_checkout_Shipping_Level_Helptext}></lightning-helptext>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                                <div class="slds-col slds-size_4-of-12 Summary">
+                                    <div><b>Summary</b> &nbsp;&nbsp;
+                                        <lightning-helptext class="" content={labels.scc_reviewCartPage_SummaryHelpText}></lightning-helptext>
+                                    </div>
+                                    <div class="slds-grid slds-gutters slds-p-top_small">
+                                        <div class="slds-col slds-size_9-of-12 heading-color slds-form-element__label">SubTotal</div>
+                                            <div class="slds-col slds-size_2-of-12" style="text-align:centre!important">${totalPrice}</div>
+                                        </div>
+                                    <div class="slds-grid slds-gutters slds-p-top_small">
+                                        <div class="slds-col slds-size_9-of-12 heading-color slds-form-element__label">Promo Discount
+                                            <p>{promoCode}</p>
+                                        </div>
+                                        <div class="slds-col slds-size_2-of-12 errormsg" style="text-align:centre!important; color:red;">${discountValue}</div>
+                                    </div>
+                                    <div class="slds-grid slds-gutters slds-p-top_small">
+                                        <div class="slds-col slds-size_9-of-12 heading-color slds-form-element__label">Shipping</div>
+                                        <div class="slds-col slds-size_2-of-12" style="text-align:centre!important">N/A</div>
+                                    </div>
+                                    <div class="slds-grid slds-gutters slds-p-top_small">
+                                        <div class="slds-col slds-size_9-of-12 heading-color slds-form-element__label">Tax</div>
+                                            <div class="slds-col slds-size_2-of-12" style="text-align:centre!important">N/A</div>
+                                        </div>
+                                        <div class="slds-grid slds-gutters slds-p-top_small">
+                                            <div class="slds-col slds-size_9-of-12 slds-form-element__label">Total</div>
+                                            <div class="slds-col slds-size_2-of-12" style="text-align:centre!important">
+                                                <b> ${totalPrice}</b></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Replace Promo Code Pop-UP -->
+                            <template if:true={showPromoConfirmation}>
+                                <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                                    class="slds-modal slds-fade-in-open">
+                                    <div class="slds-modal__container">
+                                        <div class="slds-modal__header">
+                                            <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">Replace Promo</h1>
+                                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closePromoPopUp}> X </button>
+                                        </div>
+                                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                            Only one promo code can be applied. Are you sure you would like to replace the existing promo code?
+                                        </div>
+                                        <div class="slds-modal__footer">
+                                            <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={closePromoPopUp}>Cancel</button>
+                                            <button class="slds-button slds-button_brand" onclick={updatePromoCode}>Replace Promo</button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                            </template>
+                            <!-- Invalid Promo Code Pop-UP -->
+                            <template if:true={showInvalidPromo}>
+                                <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-02"
+                                    class="slds-modal slds-fade-in-open">
+                                    <div class="slds-modal__container">
+                                        <div class="slds-modal__header">
+                                            <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate" tabindex="-1">Invalid Promo Code</h1>
+                                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeInvalidPromoPopUp}> X </button>
+                                        </div>
+                                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2" style="text-align: centre;">
+                                            Invalid Promo Code, please check your entry.
+                                        </div>
+                                        <div class="slds-modal__footer">
+                                            <button class="slds-button slds-button_brand" onclick={closeInvalidPromoPopUp}>Close</button>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                            </template>
+                            <template if:true={showLoader}>
+                                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                            </template>
+    
+        
+    </template>
+    
+    <template if:true={showReviewOrderDetails}>
+            
+        <c-scc_review-order-l-w-c promo-code={appliedPromocodeValue} total-price={formattedTotalPrice}
+            discount-value={discount} order-id={activeOrderId} onclosecheckout={closeShowDeliveryDetails} cart-id={cartId}>
+        </c-scc_review-order-l-w-c>
+    
+    </template>
+    </template>

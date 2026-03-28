@@ -1,0 +1,93 @@
+<template>
+
+        <div class="search-container">
+
+            <div class="slds-grid slds-m-bottom_medium align-buttons">
+            <div class="slds-col slds-size_8-of-12"></div>
+            <div class="slds-col slds-size_2-of-12 slds-float_right">
+            </div>
+            <div class="slds-col slds-size_3-of-12">
+                <span>
+                    <button class={clearButtonClass} onclick={handleClearSearch} disabled={isclearDisabled} style="border-radius: 5px;"> Clear Search </button>
+                </span>&nbsp;&nbsp;
+                <span>                                                                                                                                                  
+                     <button  onclick={handleSearch} variant= "brand" class={searchButtonClass} disabled={isSearchDisabled} style="border-radius: 5px; padding-left:20px; padding-right:20px;"> Search </button>
+                </span>
+            </div>
+           
+        </div>
+             <div style="background-color: #536878 ;width:100%;margin-top:20px;">
+            <span style="padding-bottom: 5px;">&nbsp;&nbsp;<i class="arrow down"></i></span><span
+                style="font-size: 17px;">&nbsp;&nbsp;Qucik Search </span>
+        </div>
+         
+        <div class="ISBN-Name"> <h4>ISBN(s)</h4></div>
+        <div class="text-area-inputchange">
+        <textarea class="arvicon-input" rows="10" cols="50" placeholder="Enter your search query" oninput={handleInputChange}></textarea>
+       <div>To search  for multiple titles at once, paste list of ISBNs </div>
+        </div>
+       
+
+   
+       
+    </div>  <div style="background-color: #F2F3F5;width:100%;margin-top:20px;">
+            <span style="padding-bottom: 5px;">&nbsp;&nbsp;<i class="arrow down"></i></span><span
+                style="font-size: 12px;">&nbsp;&nbsp;Search Result </span>
+        </div>
+
+
+
+  <div class="search-results">
+    <div class="pagination">
+        <div class="count-container">
+            <div class="total-count">
+                Total Items: {totalCount}
+            </div>
+            <div class="selected-rows">
+                <div class="row-count-label">
+                    # of Rows 
+                </div>
+                <select onchange={handleChangeRowsPerPage}>
+                    <option value="15">15</option>
+                    <option value="20">30</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+        </div>
+
+      
+      <!--  <div class="pagination-buttons">
+    <button class={firstButtonClass} disabled={isFirstPage} onclick={navigateToFirstPage}>&lt;&lt; First</button>
+    <span style="margin: 0 10px;"> 
+        <button class={previousButtonClass} disabled={isFirstPage} onclick={navigateToPreviousPage}>&lt; Previous</button>
+    </span>
+    <span class="page-info"> Showing {currentPage} of {totalPages} page(s) </span> 
+    <span style="margin: 0 10px;"> 
+        <button class={nextButtonClass} disabled={isLastPage} onclick={navigateToNextPage}>Next &gt;</button>
+    </span>
+    <button class={lastButtonClass} disabled={isLastPage} onclick={navigateToLastPage}> Last &gt;&gt; </button>
+    </div>
+
+    </div>-->
+      
+   <lightning-button variant="brand" class="slds-m-left_x-small" disabled={isFirstPage} onclick={navigateToFirstPage}>&lt;&lt; First </lightning-button>
+    <span style="margin: 0 10px;"> 
+        <button class={previousButtonClass} disabled={isFirstPage} onclick={navigateToPreviousPage}>&lt; Previous</button>
+    </span>
+    <span class="page-info"> Showing {currentPage} of {totalPages} page(s) </span> 
+    <span style="margin: 0 10px;"> 
+        <button class={nextButtonClass} disabled={isLastPage} onclick={navigateToNextPage}>Next &gt;</button>
+    </span>
+    <lightning-button class={lastButtonClass} disabled={isLastPage} onclick={navigateToLastPage}> Last &gt;&gt;  </lightning-button>
+ 
+
+    </div>
+         <lightning-datatable
+            key-field="Id"
+            data={searchResults}
+            columns={columns}
+            hide-checkbox-column="true">
+        </lightning-datatable>
+        
+    </div>
+</template>

@@ -1,0 +1,200 @@
+.catalogue-wrapper{
+    background-color: #fff;
+    border: 1px solid #AFC3D8;
+    border-radius: 10px;
+    min-height: 872px;
+    position: relative;
+    overflow: hidden;
+}
+.catalogue-title{    /*title style*/
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: left;
+    color: #0C1E3D;
+}
+.catalogue-title::before{
+    content: "";
+    width: 8px;
+    height: 20px;
+    border-radius: 0 5px 5px 0;
+    background-color: #9ECA47;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 5px;
+  }
+.slds-breadcrumb a{  /*breadcrumb links text style*/
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18.2px;
+    text-align: left;
+    color: #173770;
+}
+.slds-breadcrumb a:first-child{
+    padding-left: 0 !important;
+}
+.slds-breadcrumb a:last-child{
+    font-weight: 600;
+}
+.slds-breadcrumb a:first-child::before{
+    content: none;
+}
+.slds-breadcrumb a:before{
+    content: ">";
+    color: #33BDCD;
+    top: -3px;
+    font-weight: 600;
+    margin: 0 10px;
+}
+.info-icon{
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background-color: #2150A3;
+    font-weight: 600;
+    line-height: 18px;
+    font-style: italic;
+    font-family: auto;
+    color: #fff;
+}
+.info-icon:hover+.slds-popover{
+    display: block;
+}
+.slds-popover{
+    width: 250px;
+    max-width: none;
+    position:absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    background-color: #0D2A7A;
+    color: #fff;
+    border-radius: 4px;
+}
+.item-count+div .slds-popover{
+    left: -90px;
+}
+.toggle-panel-button>div .slds-popover{
+    bottom: 45px;
+}
+.menu.hidden .toggle-panel-button>div .slds-popover{
+    left: 110px;
+}
+.slds-popover .slds-popover__body{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+    color: #fff;
+}
+.filter-search-input{
+    width: 184px;
+    height: 40px;
+    padding: 0;
+    padding-left: 10px;
+    background: none;
+    border: 1px solid #D1D7E2;
+    box-shadow: 0px 4px 10px 0px #2150A31A;
+}
+.filter-clear{
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    color: rgb(23 55 112 / 50%);
+    width: 15px;
+    height: 15px;
+    padding-left: 3px;
+/* position: absolute;
+    right: 10px;
+    top: 3px;
+    color: #173770;
+    opacity: 50%; */
+}
+.filter-details{
+    display: flex;
+    align-items: center;
+}
+.item-count::before{
+    content: "";
+    border: 1px solid rgba(12, 30, 61, 20%);
+    margin: 0 20px;
+}
+.menu{
+    width: 380px;
+    height: 762px;
+    border: 1px solid #AFC3D8;
+    background-color: #F2F9FF;
+    position:absolute;
+    bottom:0; 
+    left: 0 !important; 
+    z-index: 2;
+}
+.catalog-panel-list-wrapper{
+    width: 300px;
+    position: absolute;
+    top: 56px;
+    max-height: 700px;
+    overflow-y: scroll;
+    padding-right: 12px;
+}
+.catalog-panel-list{
+    border: 1px solid #AFC3D8;
+    background-color: #fff;
+}
+.menu h2{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: left;
+    color: #0C1E3D;
+}
+.menu .slds-button{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: right;
+    color: #2150A3;
+    text-decoration: underline;
+}
+.toggle-panel-button{
+    height: 760px;
+    padding-top: 310px;
+}
+.toggle-panel-button lightning-icon:hover+.slds-popover{
+    display: block;
+}
+/*scrollbar style*/
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+  
+  /* Handle */
+::-webkit-scrollbar-thumb {
+    background: #AFC3D8; 
+    border-radius: 10px;
+}
+.menu .slds-col{
+    padding: 0;
+}
+
+
+/*---------------------*/
+
+.menu.hidden {
+   /* width: 1%; Show the menu */
+   left: -350px !important;
+}
+/* CSS Class for changing the text color of a button to black and adjusting line height */
+.neutral-button-text-color {
+    --slds-c-button-text-color-neutral: black !important; /* Changing button text color to black */
+    --slds-c-button-line-height: 1.5rem !important; /* Adjusting button line height */
+}
+
+ .wrapword{ 
+     white-space: -moz-pre-wrap !important; /*Mozilla, since 1999*/
+     white-space: -webkit-pre-wrap;
+     word-wrap: break-word;
+ }

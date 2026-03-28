@@ -1,0 +1,114 @@
+<template>
+    <!-- Quick Search component -->
+    <div class="searchCard">
+        <!-- Accordion for Search Criteria -->
+        <div class="slds-grid slds-grid_vertical-align-center" style="padding-top: 0px;">
+            <div class="greenBox"></div>
+            <div class="searchCriteriaTitle" role="heading" aria-level="2" style="margin-bottom: -5px"><b>Multi ISBN</b>
+            </div>
+        </div>
+        <!-- Criteria Section -->
+        <div class="slds-grid slds-gutters slds-p-horizontal_small" style="margin-left: -6px; margin-top: 20px;">
+            <!-- ISBN Input -->
+            <div class="slds-col slds-size_2-of-3">
+                <div class="slds-form-element">
+                    <div class="slds-grid slds-grid_vertical-align-left">
+                        <label class="slds-form-element__label" for="text-input-id-56">ISBN</label>
+                        <div class={taskTypeHelpTextClass} role="tooltip" id="help-1">
+                            <div class="slds-popover__body">ISBNs must be complete: 10 or 13 digits</div>
+                        </div>
+                        <img src={infoIconUrl} alt="info" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}><span class="slds-assistive-text">Help</span>
+
+                    </div>
+                    <div class="text-area-input-change">
+                        <textarea class="slds-input arvicon-input multiISBN pNamultiIsbntextarea" rows="10" cols="50" oninput={handleInputChange} aria-labelledby="indicates-Product_Multi_ISBN" data-id="multiISBN"></textarea>
+                        <!-- <div class="MultiISBNText">{Product_Multi_ISBN}</div>  -->
+                        <div class="MultiISBNText" id="indicates-Product_Multi_ISBN">
+                            <span class="slds-assistive-text">ISBN, ISBNs must be complete: 10 or 13 digits</span>{Product_Multi_ISBN}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-3">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="checkbox-unique-id-80">Active Products Only</label>
+                                    <div class="slds-form-element__control">
+                                            <lightning-input type="checkbox" aria-label="Active Products Only" name="options" id="checkbox-unique-id-80" value="checkbox-unique-id-80" checked={activeProducts} onclick={handleActiveProductsChange} ></lightning-input>      
+                                    </div>
+                                </div>
+                            </div>
+        </div>
+        
+        <!-- Search Buttons -->
+        <div class="slds-grid slds-grid_vertical-align-left">
+            <!-- Clear Search Button -->
+
+            <div class="slds-col" style="padding-left:20px; gap:20px; display: flex;">
+                <!-- Search Button -->
+                <button class={searchButtonCSS} onclick={handleSearch} aria-disabled={isSearchDisabled}><span><img src={searchIconUrl} alt="" style="max-width: 24px; height: 24px; gap: 0px; opacity: 0px; padding: padding: 1px 2px 1px 1px; margin-top: -2px;"/></span> Search</button>
+                <!-- clear Button -->
+                <button class={clearButtonCSS} onclick={handleClear} aria-disabled={disableClearButton}>Clear</button>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="searchCard slds-m-top_x-large">
+        <div style="display: flex;">
+            <div style="display: flex;">
+                <div class="greenBox"></div>
+                <div class="searchCriteriaTitle" role="heading" aria-level="2"><b>Search Results</b></div>
+            </div>
+            <template lwc:if={showSearchFilter}>
+                <div
+                    style="display: flex; margin-left: auto; align-items: flex-end; margin-top: -5px; margin-right: 10px;">
+                    <div class="filterSearch"> Filter Results &nbsp; </div>
+                    <img src={infoIconUrl} alt="info" onmouseover={togglePasswordHintfilter} onmouseout={togglePasswordHintfilter} style="margin-left: 1px; margin-bottom: auto; margin-top: 9px;"/><span class="slds-assistive-text">Help</span>
+                    <div class={taskTypeHelpTextClassfilter} role="tooltip" id="help">
+                        <div class="slds-popover__body">
+                            Enter a keyword to filter within the current set of search results
+                        </div>
+                    </div>
+                    <div class="slds-form-element" style="margin-top: -4px; margin-left: 20px;">
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                            <input type="search" id="text-input-id-58" class="filterInput" value={filterSearchValue}  onchange={handleFilter} aria-label="Filter Results, Enter a keyword to filter within the current set of search results" />
+                            <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Clear" onkeydown={handleFilterKeydown} >
+                                        <img src={crossIconUrl} alt="cross" style="width: 11.88px; height: 11.88px; margin-left: -0.5px; margin-bottom: 2px;" onclick={clearFilterInput} />
+                                        <span class="slds-assistive-text">Clear</span>
+                                    </button>
+
+                        </div>
+                    </div>
+                    <div style="display: flex; margin-top: 5px; margin-bottom: auto;">
+                        <div class="countItems" role="alert">{transformedDataLength} of {totalCount} Items &nbsp;</div>
+                        <img src={infoIconUrl} alt="info" onmouseover={togglePasswordHintCount} onmouseout={togglePasswordHintCount} /><span class="slds-assistive-text">Help</span>
+                        <div class={taskTypeHelpTextClassCount} role="tooltip" id="help1">
+                            <div class="slds-popover__body">
+                                Search by pasting one or more ISBNs
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </template>
+        </div>
+        <!-- Lightning Data Table to display search results -->
+        <template if:true={showResults}>
+            <!-- Data Table -->
+            <c-scc_product-table columns={columns} filter={filterCriteria} raw-parent-table-data={productData}
+                onshowproducttitlepage={openChildTitlePage} parentname={message}
+                ontransformeddatalength={handleTransformedDataLength}
+                default-national-state-filter={defaultNationalStateValue}>
+            </c-scc_product-table>
+        </template>
+        <!-- Search Result Error Message -->
+        <template if:true={showSearchResultErrorMessage}>
+            <div class="noResultBg">
+                <img src={noResult} alt=""  class="noResultImage"/>
+                <h3 class="noResultText">No Results</h3>
+                <p class="noResultMessage" role="alert"><span class="slds-assistive-text">No Results</span> No ISBN
+                    found to match your search criteria</p>
+            </div>
+        </template>
+    </div>
+</template>

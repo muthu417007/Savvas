@@ -1,0 +1,93 @@
+<template>
+    <lightning-card variant="Narrow" title={label.ensxtx_PDF_SalesDoc_Title} icon-name={icon}>
+        <div class="slds-p-horizontal_small">
+            <lightning-spinner if:true={loading} alternative-text={label.ensxtx_Common_Loading}></lightning-spinner>
+            <template if:true={messages.length}>
+                <div class="slds-m-top_small">
+                    <template for:each={messages} for:item="message">
+                        <c-ensxtx-message message={message} key={message.key}></c-ensxtx-message>
+                    </template>
+                </div>
+            </template>
+            <div class="slds-scrollable">
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-max-medium-table_stacked-horizontal">
+                    <caption></caption>
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <template if:true={displayLanguage}>
+                                <th scope="col">
+                                    <div class="slds-truncate">
+                                        {label.ensxtx_PDF_SalesDoc_Language}
+                                    </div>
+                                </th>
+                            </template>
+                            <template if:true={displayConditionType}>
+                                <th scope="col">
+                                    <div class="slds-truncate">
+                                        {label.ensxtx_PDF_SalesDoc_ConditionType}
+                                    </div>
+                                </th>
+                            </template>
+                            <template if:true={displayConditionTypeDescription}>
+                                <th scope="col">
+                                    <div class="slds-truncate">
+                                        {label.ensxtx_PDF_SalesDoc_ConditionTypeDesc}
+                                    </div>
+                                </th>
+                            </template>
+                            <th scope="col">
+                                {label.ensxtx_PDF_SalesDoc_Action}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={documentResults} for:item="d">
+                            <tr key={d.ConditionType}>
+                                <template if:true={displayLanguage}>
+                                    <td data-label="Sales Document Language">
+                                        <div class="slds-truncate">
+                                            {d.Language}
+                                        </div>
+                                    </td>
+                                </template>
+                                <template if:true={displayConditionType}>
+                                    <td data-label="Sales Document Message Type">
+                                        <div class="slds-truncate">
+                                            {d.ConditionType}
+                                        </div>
+                                    </td>
+                                </template>
+                                <template if:true={displayConditionTypeDescription}>
+                                    <td data-label="Message Type Description">
+                                        <div class="slds-truncate">
+                                            {d.ConditionTypeDescription}
+                                        </div>
+                                    </td>
+                                </template>
+                                <td>
+                                    <div class="slds-truncate">
+                                        <template if:true={d.ConditionType}>
+                                            <template if:true={displayPreview}>
+                                                <a class="slds-button slds-button_neutral" onclick={handlePreviewPDF} data-id={d.ConditionType} >
+                                                    {label.ensxtx_PDF_SalesDoc_Preview}
+                                                </a>
+                                            </template>
+                                            <template if:true={displayDownload}>
+                                                <a class="slds-button slds-button_neutral" onclick={handleDownloadPDF} data-id={d.ConditionType} >
+                                                    {label.ensxtx_PDF_SalesDoc_Download}
+                                                </a>
+                                            </template>
+                                        </template>
+                                        <template if:false={d.ConditionType}>
+                                            {label.ensxtx_PDF_NotAvailable}
+                                        </template>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </lightning-card>
+</template>

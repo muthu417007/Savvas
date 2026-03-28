@@ -1,0 +1,31 @@
+<template>
+    <div class="slds-grid tabptb50 tabcomponent">
+        <div class="slds-col slds-size_12-of-12">
+             <div class="tab-container" style="position:relative;">
+                  <div class="tabs">
+                       <template for:each={visibleTabs} for:item="tab" for:index="index">
+                            <template if:false={index}>
+                            <div role="tab" aria-selected="true" tabindex="0" key={tab} data-id={tab} class="tab active" onkeypress={handleEnter} onclick={handleClick} title={tab}>{tab}</div>
+                            </template>
+                               <template if:true={index}>
+                            <div role="tab" aria-selected="false" tabindex="0" key={tab} data-id={tab} class="tab" onkeypress={handleEnter} onclick={handleClick} title={tab}>{tab}</div>
+                            </template>
+                          
+
+                       </template>
+                       <div tabindex="0" role="tab" aria-selected="false" class={more_tab} onclick={moreBtnDropdown} onkeypress={moreBtnDropdown}>More <i class="arrow down"></i>
+                       </div>
+                       <div class={dropdownclass} style="position:absolute;">
+                            <template for:each={hiddenTabs} for:item="tab">
+                                 <div tabindex="0" role="tab" aria-selected="false" key={tab} data-id={tab} class="tab1 tab" onkeypress={handleEnter} onclick={handleClick}>{tab}</div>
+                            </template>
+                       </div>
+                  </div>
+             </div>
+        </div>
+   </div>
+   <template if:true={displayAssets}>
+        <c-savvas-virtual-sample-asset-display asset-data={assetDetails} tab={tabSelected}>
+        </c-savvas-virtual-sample-asset-display>
+   </template>
+</template>

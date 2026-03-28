@@ -1,0 +1,166 @@
+<template>
+    <div class="landingContainer">
+        <div class="slds-grid slds-wrap slds-gutters">
+            <br role="presentation">
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_9-of-12">
+                <div class="spinner">
+                    <!--spinner-->
+                    <template if:false={isLoading}>
+                        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+                        </lightning-spinner>
+                    </template>
+                </div>
+                <template if:true={loaded}>
+                    <template if:true={hasAccess}>
+                        <template if:true={contentAccessData}>
+                            <template for:each={contentAccessData} for:item="data">
+                                <div key={data.key}>
+                                    <div style="font-family:Poppins" class="slds-accordion__summary-content no-wrap">
+                                        <div class="titleCollection small-text-center ">{data.key}</div>
+                                        <div class="slds-grid slds-wrap test">
+                                            <template for:each={data.value} for:item="programDescription"
+                                                for:index="index">
+                                                <div key={programDescription.item.index}
+                                                    class="slds-col slds-size_3-of-4">
+                                                    <template if:true={programDescription.item.showProgramDescription}>
+                                                        <span>
+                                                            <div style="padding-bottom: 1.5%; padding-left:24px;">
+                                                                <lightning-formatted-rich-text
+                                                                    value={programDescription.item.programDescription}>
+                                                                </lightning-formatted-rich-text>
+                                                            </div>
+                                                            <p class="programReview"
+                                                                style="padding-bottom:1.5%; padding-left:24px">Start
+                                                                Your
+                                                                Program Review Here</p>
+                                                        </span>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                        <div class="slds-grid slds-wrap test">
+                                            <template for:each={data.value} for:item="productData" for:index="index1">
+                                                <!--NCA-14 added asset_itemId as key instead of entity id-->
+                                                <div key={productData.item.asset_itemId}
+                                                    class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1  slds-large-size_4-of-12">
+                                                    <span>
+
+                                                        <div
+                                                            class="slds-p-around_small slds-text-align_center thumbnailVSpace">
+                                                            <div class="outerContainer">
+                                                                <div>
+                                                                    <a aria-hidden="true" data-id={productData.item.asset_itemId}
+                                                                         onclick={handleOnClick}>
+                                                                        <img alt="" src={productData.item.thumbnailId} />
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <!--NCA-14 added asset_itemId as data-id instead of entity id-->
+                                                                <a tabindex="0" data-id={productData.item.asset_itemId}
+                                                                    onkeypress={handleOnClick} onclick={handleOnClick}>
+                                                                    <p class="assetName no-wrap"
+                                                                        title={productData.item.assetName}>
+                                                                        {productData.item.assetName}</p> 
+                                                                </a>
+                                                            </div>
+                                                            <div class="no-wrap word-break: break-word;">
+                                                                <template
+                                                                    if:true={productData.item.showEntityDescription}>
+                                                                    <div style="padding-top: 10px;">
+                                                                        <lightning-formatted-rich-text
+                                                                            value={productData.item.entityDescription}>
+                                                                        </lightning-formatted-rich-text>
+                                                                    </div>
+                                                                </template>
+                                                            </div>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <!-- </lightning-accordion-section> -->
+                                    <!-- </lightning-accordion> -->
+                                </div>
+                            </template>
+                        </template>
+                        <template if:false={contentAccessData}>
+                            <div
+                                style="font-family: Poppins;font-size: 18px;font-weight: 400;line-height: 25px;letter-spacing: 0em;text-align: center;">
+                                You don't have access to any books.
+                            </div>
+                        </template>
+                    </template>
+                    <template if:false={hasAccess}>
+                        <div class="slds-align_absolute-center">
+                            <div class="slds-text-heading_medium slds-m-bottom_small"
+                                style="font-family: Poppins;font-size: 18px;font-weight: 400;line-height: 25px;letter-spacing: 0em;text-align: center;">
+                                <strong>Permissions Needed</strong>
+                            </div>
+                            <br />
+                        </div>
+                        <div class="slds-align_absolute-center"
+                            style="font-family: Poppins;font-size: 18px;font-weight: 400;line-height: 25px;letter-spacing: 0em;text-align: center;">
+                            You do not have access to this functionality.<br />
+                            Please contact your company administrator for assistance.
+                        </div>
+                    </template>
+                </template>
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_3-of-12">
+                <div>
+                    <div class="needHelp mobpl20">
+                        <div style="position: relative;" >
+                            <p style="position: absolute;bottom: 68px;left: 0;" class="needClass mobpos">Need Further<br></p>
+                            <p style="position: absolute;bottom: 25px;left: 0;" class="helpClass mobpos">Help?</p>&nbsp;
+                        </div>
+                        <div>
+                            <img alt="" style="float:left;" class="contactRep" src={Contact_Rep}>
+                        </div>
+                    </div>
+                    <div style="position:relative" >
+                        <a target="blank" class="salesBtn mobpl20" href={label.contactURL}
+                            style="position:absolute;text-decoration: none;"><button type="button"
+                                class="buttonFont styled buttonClass">Contact My Sales Rep</button></a>
+                        &nbsp;<br role="presentation">
+                        &nbsp;
+                        &nbsp;
+                        <br role="presentation">
+                    </div>
+                    <br role="presentation">
+                    <br role="presentation">
+                    <br role="presentation">
+                    <div style="background: #E5F1FD;border-radius:25px;">
+                        <div class="small-text-center">
+                        <img alt="" style="background-color:#E5F1FD;" src={Savvas_Desktop}>
+                        </div>
+                        <div style="border-radius: 25px;padding: 5px;" class="mobplr">
+                            <p
+                                style="font-family: 'Poppins';font-style: normal;font-weight: 700;font-size: 24px;line-height: 120%;letter-spacing: -0.03em;color: #173770;">
+                                Want a deeper dive into this curriculum?
+                            </p>
+                            <br role="presentation">
+                            <p
+                                style="font-family: 'Poppins'; font-style: normal; font-weight: 600; font-size: 18px; line-height: 150%; color: #173770;">
+                                Gain access to a free 30-day educator trial on our award-winning Learning Management
+                                System,
+                                Savvas Realize(TM).
+                            </p>
+                            <br role="presentation">
+                            <p
+                                style="font-family: 'Poppins';font-style: normal;font-weight: 400;font-size: 16px;line-height: 150%;color: #173770;">
+                                Simply visit SavvasRealize.com and <a target="blank"
+                                    href={label.savvasSignupURL}>sign-up</a> today! <br role="presentation"><br role="presentation"> If you have any questions
+                                or
+                                would like to request a sample or demonstration, contact your dedicated Savvas
+                                representative at <a target="blank"
+                                    href={label.savvasFindMyRep}>Savvas.com/find-my-rep</a>.
+                            </p> &nbsp;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

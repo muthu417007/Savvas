@@ -1,0 +1,183 @@
+<template>
+	<template if:true={showResults}>
+		<div class="slds-box slds-theme_shade slds-p-vertical_xx-small slds-m-vertical_xx-small slds-p-horizontal_none">
+			<div class="slds-grid slds-grid_vertical-align-center">
+				<lightning-icon size="xx-small" icon-name="utility:chevrondown" alternative-text="chevrondown">
+				</lightning-icon>
+				<div>&nbsp;&nbsp;<b> Related Products</b></div>
+			</div>
+		</div>
+
+		<div class="slds-grid ">
+			<div class="slds-grid slds-grid_align-end">
+								<lightning-button variant="brand" class="slds-p-horizontal_xx-small"
+									label={displayProductSearchBtnSectionConfig.addSelectedToCartBtnLabel}
+									title={displayProductSearchBtnSectionConfig.addSelectedToCartBtnLabel}
+									onclick={addToSelectedToCartHandleClick}
+									disabled={displayProductSearchBtnSectionConfig.addSelectedToCartBtnDisabled}>
+								</lightning-button>
+								<lightning-button variant="brand" class="slds-p-horizontal_xx-small"
+									label={displayProductSearchBtnSectionConfig.clearCartBtnLabel}
+									title={displayProductSearchBtnSectionConfig.clearCartBtnLabel}
+									onclick={clearCartHandleClick}
+									disabled={displayProductSearchBtnSectionConfig.clearCartBtnDisabled}>
+								</lightning-button>
+								<!-- <lightning-button variant="brand" class="slds-p-horizontal_x-small"
+									label={displayProductSearchBtnSectionConfig.reviewCartLabel}
+									title={displayProductSearchBtnSectionConfig.reviewCartLabel}
+									onclick={reviewCartHandleClick}
+									disabled={displayProductSearchBtnSectionConfig.reviewCartDisabled}>
+								</lightning-button> -->
+								<lightning-button variant="brand" class="slds-p-horizontal_x-small"
+									icon-name="utility:cart"
+									label={displayProductSearchBtnSectionConfig.reviewCartLabel}
+									title={displayProductSearchBtnSectionConfig.reviewCartLabel}
+									onclick={reviewCartHandleClick}
+									disabled={displayProductSearchBtnSectionConfig.reviewCartDisabled}>
+								</lightning-button>
+							</div>
+			<div class="slds-col slds-size_3-of-12 ">
+				<div class="slds-grid slds-grid_align-end">
+					<div class="slds-align-top">
+						<!-- slds-col slds-size_4-of-12 slds-align-middle -->
+						<div style="padding-top:4px !important;"> Filter Results &nbsp; </div>
+					</div>
+					<div>
+						<!-- slds-col slds-size_8-of-12 -->
+						<lightning-input type="search" variant="label-hidden" name="searchFilter"
+							placeholder="Search To Filter"></lightning-input>
+						<!-- style="width:80%!important;" -->
+					</div>
+				</div>
+			</div>
+			<div class="slds-col slds-size_2-of-12 ">
+				<div class="slds-grid slds-grid_align-center slds-grid_vertical-align-center">
+					{pageRecordCount} of {totalCount} Items &nbsp;
+					<button class="slds-button slds-button_icon" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}>
+								<lightning-icon icon-name="utility:info" alternative-text="Info" size="xx-small" title=""></lightning-icon>
+							</button>
+				</div>
+			</div>
+		</div>`
+		<template if:false={relatedProducts}>
+			No related products found.
+		</template>
+
+		<!-- Data Table to display search results -->
+		<!-- <template if:true={showResults}> -->
+		<div class="slds-grid slds-grid_vertical">
+			<div class="slds-col">
+				<div class="slds-scrollable" style="height: 300px;">
+					<div class="slds-m-around_small">
+						<table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+							<thead>
+								<tr class="slds-line-height_reset">
+									<th scope="col">
+										<div class="slds-truncate" title=""></div>
+									</th>
+									<th scope="col" width="10px">
+										<div class="slds-truncate" title="Quantity">Quantity</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="ISBN">ISBN</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Title Description">Title
+											Description</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Type">Type</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Grade Level">Grade Level</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Copyright">Copyright</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Status">Status</div>
+									</th>
+									<th scope="col">
+										<div class="slds-truncate" title="Price">Price</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Iterate over productData to populate table rows -->
+								<template for:each={productQuantityData} for:item="product">
+									<tr key={product.productDetails.Id}>
+										<td data-label="">
+											<template if:false={product.hideCheckbox}>
+												<lightning-input type="checkbox"
+													data-row-id={product.productDetails.Id}
+													disabled={product.disabledCheckbox} data-field-name="checkbox"
+													onchange={tableRowAction} checked={product.checkboxValue}>
+												</lightning-input>
+											</template>
+										</td>
+										<!-- Quantity Column -->
+										<td data-label="Quantity">
+											<input type="number" data-row-id={product.productDetails.Id}
+                                                            value={product.quantity} onchange={tableRowAction}
+                                                             data-field-name="quantityCount" id="quantity" name="quantity" min="1"
+                                                             disabled={product.disableQuantity}>
+														</td>
+										<td data-label="ISBN">
+											<div class="slds-truncate">
+												<lightning-button variant="base" data-field-name="isbnId"
+													label={product.productDetails.ISBN13__c}
+													data-row-id={product.productDetails.Id}
+													title={product.productDetails.ISBN13__c} onclick={tableRowAction}>
+												</lightning-button>
+											</div>
+										</td>
+										<td data-label="Title Description">
+											<div class="slds-truncate" title={product.productDetails.Description}>
+												{product.productDetails.Description}</div>
+										</td>
+										<td data-label="Type">
+											<div class="slds-truncate" title={product.productDetails.Product_Sub_Type__c}>
+												{product.productDetails.Product_Sub_Type__c}</div>
+										</td>
+										<td data-label="Grade Level">
+											<div class="slds-truncate" title={product.productDetails.Grade_Level__c}>
+												{product.productDetails.Grade_Level__c}</div>
+										</td>
+										<td data-label="Copyright">
+											<div class="slds-truncate" title={product.productDetails.Copyright_Year__c}>
+												{product.productDetails.Copyright_Year__c}</div>
+										</td>
+										<td data-label="Status">
+											<div class="slds-truncate" title={product.productDetails.Product_Status__c}>
+												{product.productDetails.Product_Status__c}</div>
+										</td>
+										<td data-label="Price">
+											<div class="slds-truncate" title={product.productDetails.Product_Status__c}>
+												{product.productDetails.Net_Price__c}</div>
+										</td>
+
+										<!-- <td data-label="Price">
+											<lightning-button-icon data-product-id={product.productDetails.Id}
+												icon-name="utility:hourglass" variant="border-filled"
+												alternative-text="Info" size="small" onclick={handlePriceInfo}>
+											</lightning-button-icon>
+										</td> -->
+									</tr>
+								</template>
+							</tbody>
+						</table>
+						<template if:true={showLoadNextButton}>
+							<lightning-button stretch label="Load Next 15 Rows" onclick={handleLoadNext}
+								class="slds-m-top_medium "></lightning-button>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- </template> -->
+	</template>
+	<!-- <template if:true={showRelatedTitlePage}>
+        <c-scc_related-title-detail-l-w-c message={selectedProductRecord} isbn={selectedISBN}
+        onclosetitlepage={closeTitlePage}></c-scc_related-title-detail-l-w-c>
+    </template> -->
+</template>

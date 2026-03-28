@@ -1,0 +1,31 @@
+<template>
+    <div lwc:if={showHttpTrace} class="slds-p-horizontal_small">
+        <lightning-button label="Back" icon-name="utility:chevronleft" onclick={onClickBack}></lightning-button>
+        <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_1-of-1">
+                <lightning-input type="text" label="Request URL" readonly="true" value={httpTrace.ensxapp__Request_URL__c}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                <lightning-textarea label="Request Header" class="textarea" readonly="true" value={httpTrace.ensxapp__Request_Headers__c}></lightning-textarea>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                <lightning-textarea label="Response Header" class="textarea" readonly="true" value={httpTrace.ensxapp__Response_Headers__c}></lightning-textarea>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                <lightning-textarea label="Request Body" class="textarea" readonly="true" value={httpTrace.formattedRequest}></lightning-textarea>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                <lightning-textarea label="Response Body" class="textarea" readonly="true" value={httpTrace.formattedResponse}></lightning-textarea>
+            </div>
+        </div>
+    </div>
+    <div lwc:else>
+        <lightning-datatable
+            key-field=Id
+            data={httpTraces}
+            columns={columns}
+            hide-checkbox-column="true"
+            onrowaction={handleRowAction}>
+        </lightning-datatable>
+    </div>
+</template>

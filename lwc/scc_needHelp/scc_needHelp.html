@@ -1,0 +1,125 @@
+<!--*********************************************************
+  Component Name       : scc_needHelp
+  Created Date         : 06/09/2024  
+  Author               : Cognizant
+  Description          : This component used in Home page to render the other apps links for login user.
+  Modifications Log
+  06/09/2024      Monami             Initial Version
+*********************************************************/-->
+<template>
+	<div class="slds-form-element">
+		<div class="slds-grid slds-gutters">
+			<div class="slds-col">
+				<div class="slds-form-element__control">
+					<div class="need-help-nav">
+						<a class="skip-to-content-link" href="#body-content">
+							Skip to main content
+						</a>
+						<button class="slds-button slds-button_neutral button-size" aria-haspopup="true" aria-expanded={isOpen} onclick={toggleDropdown} onmouseleave={hideDropdown}>
+                            <img src={labels.scc_need_help_icon} alt="" class="slds-m-right_x-small"></img>
+                            <span class="need-help">Need Help?</span>
+                            <lightning-icon icon-name='utility:chevrondown' alternative-text='chevrondown' size='x-small' class="slds-button__icon_right dropdown-icon"></lightning-icon>
+						</button>
+						<div class="slds-dropdown slds-dropdown_left slds-p-around_x-small need-help-dropdown"
+							onmouseover={showDropdown} onmouseout={hideDropdown}>
+							<ul class="slds-dropdown__list" role="listbox" aria-label="Need Help">
+								<li class="slds-p-bottom_x-small" role="option">
+									<a href="#" role="menuitem" class="firstMenuItem" onclick={handleNeedHelp}
+										onkeydown={handleUpDownClick}>
+										<span class="slds-truncate" >
+								  <span class="option-text"> {labels.scc_needHelpFAQ} </span>
+										</span>
+									</a>
+								</li>
+								<li class="slds-p-bottom_x-small" role="option" tabindex="-1">
+									<a href="#" role="menuitem" onclick={handleSiteTraining}
+										onkeydown={handleUpDownClick} tabindex="-1">
+										<span class="slds-truncate">
+									<span class="option-text"> {labels.scc_needHelpSiteTraining} </span>
+										</span>
+									</a>
+								</li>
+								<li class="slds-p-bottom_x-small" role="option" tabindex="-1">
+									<!-- <a href={labels.scc_needHelpContactEmail} -->
+									<a href="#" role="menuitem" onclick={handleCreateCase}
+										onkeydown={handleUpDownClick} tabindex="-1">
+										<span class="slds-truncate">
+								   <span class="option-text"> {labels.scc_needHelpContactMysavvasOrders} </span>
+										</span>
+									</a>
+								</li>
+								<li class="slds-p-bottom_x-small" role="option" tabindex="-1">
+									<a href={labels.scc_contactCustomerSupport} role="menuitem" class="lastMenuItem"
+										onkeydown={handleUpDownClick} tabindex="-1">
+										<span class="slds-truncate">
+									<span class="option-text">{labels.scc_needHelpContactCustomer}</span>
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slds-col">
+				<div class="slds-form-element__control">
+					<div class="other-apps-nav">
+						<button class="slds-button slds-button_neutral button-size" aria-haspopup="true" aria-expanded={isOpenOtherApps} onclick={toggleDropdownOtherApps} onmouseleave={hideDropdownOtherApps}>
+                            <span class="need-help">Other Apps</span>
+                            <lightning-icon icon-name='utility:chevrondown' alternative-text='chevrondown' size='x-small' class="slds-button__icon_right dropdown-icon"></lightning-icon>
+                        </button>
+						<div class="slds-dropdown slds-dropdown_left slds-p-around_x-small other-apps-dropdown"
+							onmouseover={showDropdownOtherApps} onmouseout={hideDropdownOtherApps}>
+							<ul class="slds-dropdown__list otherAppMenu" role="menu" aria-label="Other Apps">
+								<template if:true={showWorkTextNational}>
+									<li class="slds-p-bottom_x-small" role="presentation">
+										<a role="menuitem" tabindex="-1" class="option-text"
+											onkeydown={handleUpDownClickOtherApps}
+											href={labels.scc_header_WorkText_National_URL}>
+											{labels.scc_otherAppsWorktextNational}
+										</a>
+									</li>
+								</template>
+								<li class="slds-p-bottom_x-small" role="presentation">
+									<a role="menuitem" tabindex="-1" class="option-text"
+										onkeydown={handleUpDownClickOtherApps} href={labels.scc_header_WorkText_TX_URL}>
+										{labels.scc_needHelpWorktext}
+									</a>
+								</li>
+								<template if:true={showSIOP}>
+									<li class="slds-p-bottom_x-small" role="presentation">
+										<a role="menuitem" tabindex="-1" class="option-text"
+											href={labels.scc_header_SIOP_Registration_URL}
+											onkeydown={handleUpDownClickOtherApps}>
+											{labels.scc_otherAppsSIOP}
+										</a>
+									</li>
+								</template>
+								<li class="slds-p-bottom_x-small" role="presentation">
+									<a role="menuitem" tabindex="-1" class="option-text"
+										href={labels.scc_header_Workbook_URL} onkeydown={handleUpDownClickOtherApps}>
+										{labels.scc_workbooks}
+									</a>
+								</li>
+								<template if:true={isLicall}>
+									<li class="slds-p-bottom_x-small" role="presentation">
+										<a role="menuitem" onkeydown={handleUpDownClickOtherApps} class="option-text"
+											href={labels.scc_header_LICALL_URL} tabindex="-1">
+											{labels.scc_header_LICALL_Link}
+										</a>
+									</li>
+								</template>
+								<li class="slds-p-bottom_x-small" role="presentation">
+									<a role="menuitem" onkeydown={handleUpDownClickOtherApps} class="option-text"
+										href={labels.scc_header_Novel_TX_ONLY_URL} tabindex="-1">
+										{labels.scc_novels}
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

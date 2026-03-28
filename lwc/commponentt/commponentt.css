@@ -1,0 +1,7 @@
+.neutral-button-text-color{
+	--slds-c-button-text-color-neutral : black!important;
+	--slds-c-button-line-height: 1.5rem !important;
+}
+.b-red{
+	border: 2px solid red !important;
+}

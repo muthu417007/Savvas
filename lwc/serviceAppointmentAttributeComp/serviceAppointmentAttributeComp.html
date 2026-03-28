@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Service Appointment Attributes" icon-name="standard:opportunity" >
+        
+        <template for:each={options} for:item="item" >
+            <div key={item.label}>
+            <lightning-record-edit-form  object-api-name="Service_Appointment_Attributes__c" data-id={item.label} onsubmit={handleSave} onsuccess={handleSuccess} onerror={handleError}>
+                <lightning-messages></lightning-messages>
+                <lightning-layout horizontal-align="space">    
+                    <lightning-layout-item  flexibility="auto"  padding="around-small" >
+                        <lightning-input-field  field-name="Work_Order__c" variant="label-stacked" value={myValue} disabled> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item   size ="2" padding="around-small">
+                        <lightning-input-field  field-name="Sav_FSL_Service_Delivery_Address__c"  variant="label-stacked" required="true"> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item   flexibility="auto"  padding="around-small">
+                        <lightning-input-field class="reqDate" field-name="Sav_FSL_Requested_Delivery_Dates__c" variant="label-stacked" required="true"> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item   flexibility="auto"  padding="around-small">
+                        <lightning-input-field class="alt3" field-name="Sav_FSL_Alternate_Delivery_Dates3__c" variant="label-stacked" required="true"> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item   flexibility="auto"  padding="around-small">
+                        <lightning-input-field class="alt1" field-name="Sav_FSL_Alternate_Delivery_Dates1__c" variant="label-stacked"> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item   flexibility="auto"  padding="around-small">
+                        <lightning-input-field class="alt2" field-name="Sav_FSL_Alternate_Delivery_Dates2__c" variant="label-stacked"> </lightning-input-field>
+                    </lightning-layout-item>
+                    <lightning-layout-item   flexibility="auto"  padding="around-small">
+                        <lightning-input-field field-name="Customer_Contact__c" variant="label-stacked" required="true">  </lightning-input-field>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-record-edit-form></div>
+        </template>
+        </br>
+               
+        <div class="slds-align_absolute-center">
+            <lightning-button variant="brand"  onclick={handleSubmit} name="Submit" label="Submit" type="submit"></lightning-button>
+        </div>
+
+        <br/>
+        
+        <div class="red-text">
+            <p><strong>Click Submit to complete your request and send it on for scheduling. Click Cancel to abandon this request. Disregard any onscreen confirmation; no scheduling action will be taken and your cancelled request will be deleted.</strong></p>
+        </div>
+    </lightning-card>
+</template>

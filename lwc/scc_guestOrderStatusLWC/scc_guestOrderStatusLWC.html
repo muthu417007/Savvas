@@ -1,0 +1,97 @@
+<template>    
+    <!-- <lightning-button  variant="base" label="SIOP Registration" onclick={showModal}> </lightning-button>  -->
+   <template if:true={openModal}>  
+     <div class="slds-modal slds-fade-in-open slds-backdrop" role="dialog">  
+       <div class="slds-modal__container">  
+         <!------HEADER Section-->  
+          <div class="slds-modal__header">  
+            <button class="slds-modal__close guestOrderStatusClose" onclick={closeModal} onfocusout={focusOutClose} aria-label="close">x</button>
+						<h3 aria-level="2">{labels.scc_home_Order_Status}</h3>
+            <!-- <lightning-button-icon icon-name="utility:close" alternative-text="Close this window" size="large"  
+              variant="bare-inverse" onclick={closeModal} class="slds-modal__close">  
+            </lightning-button-icon>  
+                <b><h3 class="order-status-header">{labels.scc_home_Order_Status}</h3></b> -->
+          </div>  
+         <!------Body Section-->  
+          <div class="slds-modal__content slds-p-around_medium" >  
+             <div class="form-container">
+                 <template if:true= {showerrormsg}>              
+                   <p role="alert" class="errormsg order-not-found-error">{labels.scc_guestOrderStatus_Order_not_found}</p>
+                 </template>
+                 <template if:true= {showErrorMessage}>
+                    <p tabindex="0" aria-live="assertive" class="errormsg" >{errorMessageHelpContact}</p>
+                 </template>
+                 <div class="slds-col slds-size_3-of-3 slds-m-top_medium"> 
+                    <div class="slds-form-element__label">Zip / Postal Code *</div>              
+                    <div class="slds-form-element slds-p-around_none">
+                        <div class="slds-form-element__control slds-p-around_none">
+                            <input aria-label="Zip / Postal Code Required" type="text" placeholder="Zip Code" value={Zipcode} onchange={handleZipcodeChange} onkeyup={handleZipcodeChange} class="slds-input fixed-width-input zipcode-input" data-index="0" name="zip-code"/>
+                            <!-- <lightning-input class="required-none zipcode-input" aria-label="Zip / Postal Code" label="Zip / Postal Code*" type="text" placeholder="Zip Code" value={Zipcode} onchange={handleZipcodeChange} onkeyup={handleZipcodeChange} message-when-value-missing="Zip / Postal Code field is required." data-index="0" name="zip-code" required></lightning-input> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_3-of-3">
+                    <div class="slds-form-element">
+                      <lightning-combobox class="statuscombobox fixed-width-input" label={labels.scc_home_Search_By} placeholder="Select option" value={SearchByvalue} options={SearchByOptions} onchange={handleSearchOptionChange} data-index="0"></lightning-combobox>
+                    </div>
+                </div>
+                <!-- <lightning-input label={labels.scc_OrderStatus_Zip_Postal_Code} value={Zipcode}  required onchange={handleZipcodeChange} class="fixed-width-input"></lightning-input> 
+                <lightning-combobox class="statuscombobox fixed-width-input" label={labels.scc_home_Search_By} placeholder="Select option" value={SearchByvalue} options={SearchByOptions} onchange={handleSearchOptionChange}></lightning-combobox>-->
+                <template if:true={orderNumb}>
+                  <div class="slds-col slds-size_3-of-3 slds-m-top_medium"> 
+                      <div class="slds-form-element__label">{labels.scc_home_Document_Control} *</div>              
+                      <div class="slds-form-element slds-p-around_none">
+                          <div class="slds-form-element__control slds-p-around_none">
+                              <input aria-label={labels.scc_home_Document_Control} type="text" placeholder="Order #" data-id="Order#" value={ordernum} onchange={handleNumChange} onkeyup={handleNumChange} class="slds-input fixed-width-input" data-index="0" />
+                              <!-- <lightning-input class="required-none" aria-label={labels.scc_home_Document_Control} data-id="Order#" label={labels.scc_home_Document_Control} type="text" placeholder={labels.scc_home_Document_Control} value={ordernum} onchange={handleNumChange} onkeyup={handleNumChange} message-when-value-missing="Order # field is required." data-index="0" required></lightning-input> -->
+                          </div>
+                      </div>
+                  </div>
+                  <!-- <lightning-input label={labels.scc_home_Document_Control} name="Order#" value={ordernum} required onchange={handleNumChange} class="fixed-width-input"></lightning-input> -->
+                </template>
+                <template if:true={invoiceNumb}>
+                  <div class="slds-col slds-size_3-of-3 slds-m-top_medium"> 
+                      <div class="slds-form-element__label">{labels.scc_OrderStatus_Invoice_Number} *</div>              
+                      <div class="slds-form-element slds-p-around_none">
+                          <div class="slds-form-element__control slds-p-around_none">
+                              <input aria-label={labels.scc_OrderStatus_Invoice_Number} type="text" placeholder="Invoice #" data-id="Invoice #" value={invoiceNum} onchange={handleNumChange} onkeyup={handleNumChange} class="slds-input fixed-width-input" data-index="0" />
+                              <!-- <lightning-input class="required-none" aria-label={labels.scc_OrderStatus_Invoice_Number} data-id="Invoice #" label={labels.scc_OrderStatus_Invoice_Number} type="text" placeholder={labels.scc_OrderStatus_Invoice_Number} value={invoiceNum} onchange={handleNumChange} onkeyup={handleNumChange} message-when-value-missing="Invoice # field is required." data-index="0" required></lightning-input>                           -->
+                          </div>
+                      </div>
+                  </div>
+                  <!-- <lightning-input label={labels.scc_OrderStatus_Invoice_Number} name="Invoice #" value={invoiceNum} required onchange={handleNumChange} class="fixed-width-input"></lightning-input> -->
+                </template>
+                <template if:true={PONumb}>
+                  <div class="slds-col slds-size_3-of-3 slds-m-top_medium"> 
+                    <div class="slds-form-element__label">PO # *</div>              
+                    <div class="slds-form-element slds-p-around_none">
+                        <div class="slds-form-element__control slds-p-around_none">
+                            <input aria-label="PO Required" type="text" placeholder="PO #" data-id="PO#" value={poNum} onchange={handleNumChange} onkeyup={handleNumChange} class="slds-input fixed-width-input" data-index="0" />
+                            <!-- <lightning-input class="required-none" aria-label="PO" data-id="PO#" label="PO #" type="text" placeholder="PO #"  value={poNum} onchange={handleNumChange} onkeyup={handleNumChange} message-when-value-missing="PO # field is required." data-index="0" required></lightning-input>                           -->
+                        </div>
+                    </div>
+                </div>
+                  <!-- <lightning-input label={labels.scc_home_PO} name="PO#" value={poNum} required onchange={handleNumChange} class="fixed-width-input"></lightning-input> -->
+                </template>
+              </div>
+          </div>
+         <!------Footer Section-->  
+         <div class="slds-modal__footer">  
+          <button tabindex="0" class="slds-button siop-modal-button aria-disabled-button" onclick={handleGo} aria-disabled={inputsCheck} onfocusout={focusOutButton}>{labels.scc_guestOrderStatus_Check_Order_Status}</button>
+           <!-- <lightning-button  label={labels.scc_guestOrderStatus_Check_Order_Status} variant="brand"  onclick={handleGo} disabled={inputsCheck}>  
+           </lightning-button>   -->
+         </div>  
+         <!-- Spinner -->
+                <template if:true={isLoading}>
+                    <div class="slds-spinner_container">
+                        <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                            <span class="slds-assistive-text">Loading</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </template>
+       </div>  
+     </div>  
+   </template>  
+</template>

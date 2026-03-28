@@ -1,0 +1,201 @@
+<!-- /*********************************************************
+  Component Name       : scc_productCriteriaSearchLWC
+  Created Date         : 06/10/2024  
+  Author               : Cognizant 
+  Description          : This component used in price and availability page the OOB features have been 
+                         implemented to existing component to enhance page functionality.
+  
+  Modifications Log
+  06/10/2024      Jaba           Initial Version
+*********************************************************/ -->
+ 
+
+<template>
+    <!-- Conditional rendering based on showTabset variable -->
+    <div lwc:if={showTabset} class="productCriteriaBg">
+        <div class="slds-grid slds-wrap slds-grid_vertical slds-p-around_x-large slds-is-relative" >
+            <h1 class="slds-assistive-text">Price and Availability</h1>
+        <!-- Breadcrumbs -->
+        <template if:false={hideSearchResultSection}>
+            <div class="slds-col">
+                <nav role="navigation" aria-label="Breadcrumbs">
+                    <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                        <li class="slds-breadcrumb__item">
+                                <a href="" class="slds-m-right_small breadcrumb-label">Home</a>
+                            </li>
+                            <li class="slds-breadcrumb__item">
+                                <a href="" class="slds-m-horizontal_small breadcrumb-label">Price & Availability</a>
+                            </li>
+                            <li class="slds-breadcrumb__item">
+                                <a class="slds-m-left_small slds-text-title_bold breadcrumb-label">Product Search</a>
+                            </li>
+                    </ol>
+                </nav>
+            </div>
+        </template>
+
+        <div class="slds-tabs_default slds-col slds-size_3-of-3 slds-m-top_large">
+            <!-- Tab 1: ISBN/Title -->
+            <ul class="slds-tabs_default__nav" role="tablist">
+                <li class="slds-tabs_default__item slds-is-active" role="presentation" data-id="tab-default-1__item">
+                <a class="slds-tabs_default__link" href="#" role="tab" tabindex="0" aria-selected="false" aria-controls="tab-default-1" data-id="tab-default-1__item" data-value="ISBN" onclick={handleActive} onkeydown={handleKeyDownISBN}>ISBN/Title</a>
+                </li>
+                <li class="slds-tabs_default__item border-line" role="presentation" data-id="tab-default-2__item">
+                <a class="slds-tabs_default__link" href="#" role="tab" aria-selected="false" aria-controls="tab-default-2" data-id="tab-default-2__item" data-value="multiISBN"  onclick={handleActive}>Multi ISBN</a>
+                </li>
+                <li class="slds-tabs_default__item" role="presentation" data-id="tab-default-3__item">
+                <a class="slds-tabs_default__link" href="#" role="tab" aria-selected="false" aria-controls="tab-default-3" data-id="tab-default-3__item" data-value="Catalog" onclick={handleActive}>Catalog</a>
+                </li>
+            </ul>
+            <div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item" data-id="tab-default-1__item" data-name="tabpanel">
+                <template if:false={showProductTitlePage}>
+                    <div class="searchCard">
+                        
+                        <!-- Accordion for Search Criteria -->
+                        
+                            <div class="slds-grid slds-grid_vertical-align-center" style="padding-top: 0px;">
+                                <div class="greenBox"></div><div class="searchCriteriaTitle" role="heading" aria-level="2" style="margin-bottom: -5px;"><b>Search Criteria</b></div>
+                            </div>
+                        
+                        <!-- Criteria Section -->
+                        <div class="slds-grid slds-gutters slds-p-horizontal_small" style="margin-left: -6px; margin-top: 20px;">
+                            <!-- ISBN Input -->
+                            <div class="slds-col slds-size_1-of-3">
+                                <div class="slds-form-element">
+                                    <div class="slds-grid slds-grid_vertical-align-left">
+                                        <label class="slds-form-element__label" for="text-input-id-56">ISBN</label>
+                                            
+                                            <div class={taskTypeHelpTextClass} role="tooltip" id="help-1" style="top:-48px; left:-24px;">
+                                                <div class="slds-popover__body">ISBNs must be complete: 10 or 13 digits</div>
+                                            </div>
+                                            <img src={infoIconUrl} alt="info" onmouseover={togglePasswordHint} onmouseout={togglePasswordHint}><span class="slds-assistive-text">Help</span>
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <input type="text" id="text-input-id-56" maxlength="13" placeholder="Enter ISBN" aria-label="ISBN, ISBNs must be complete: 10 or 13 digits." class="slds-input priceAvaIsbnFirstField" value={isbnValue} oninput={handleTextInputChange} onkeypress={handleTextInputChange} data-id="ISBN"/>
+                                    </div>
+								</div>
+                            </div>
+                            <!-- Title Keyword Input -->
+                            <div class="slds-col slds-size_1-of-3">
+                                <div class="slds-form-element">
+                                    <div class="slds-grid slds-grid_vertical-align-left">
+                                        <label class="slds-form-element__label" for="text-input-id-57">Title Keyword(s)</label>
+                                    </div>
+                                    <div class="slds-form-element__control">
+                                        <input type="text" id="text-input-id-57" placeholder="Enter Keywords" class="slds-input" value={titlekeyword} oninput={handleTextInputChange} onkeypress={handleTextInputChange}/>
+                                    </div>
+								</div>
+                            </div>
+                            <!-- Active Products Checkbox -->
+                            <div class="slds-col slds-size_1-of-3">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="checkbox-unique-id-80">Active Products Only</label>
+                                    <div class="slds-form-element__control" style="padding-top: 15px;">
+                                        
+                                            <lightning-input type="checkbox" aria-label="Active Products Only" name="options" id="checkbox-unique-id-80" value="checkbox-unique-id-80" checked={activeProducts} onclick={handleActiveProductsChange} ></lightning-input>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Search Buttons -->
+                        <div class="slds-grid slds-grid_vertical-align-left">
+                            <!-- Clear Search Button -->
+                            
+                            <div class="slds-col" style="padding-left:20px; gap:20px; display: flex;">
+                                <!-- Search Button -->
+                                <button class={searchButtonCSS} onclick={handleSearch} aria-disabled={manualSearchBtnDisabled}><span><img src={searchIconUrl} alt="" style="max-width: 24px; height: 24px; gap: 0px; opacity: 0px; padding: padding: 1px 2px 1px 1px; margin-top: -2px;"/></span> Search</button>
+                                <!-- clear Button -->
+                                <button class={clearButtonCSS} onclick={handleClear} aria-disabled={disableClearButton}>Clear</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!-- Accordion for Search Results -->
+                    <div class="searchCard slds-m-top_x-large">
+                    <div style="display: flex;">
+                    <div style="display: flex;" >
+                            <div class="greenBox"></div><div class="searchCriteriaTitle" role="heading" aria-level="2"><b>Search Results</b></div>
+                    </div>
+                        <template lwc:if={showSearchFilter}>
+                    <div style="display: flex; margin-left: auto; align-items: flex-end; margin-top: -5px; margin-right: 10px;">                  
+                                    <label class="filterSearch" for="filter-search-input"> Filter Results &nbsp; <span class="slds-assistive-text">Enter a keyword to filter within the current set of search results. Showing {transformedDataLength} of {totalCount} Items. Search by ISBN, Keyword</span></label>
+                                <img src={infoIconUrl} alt="info" onmouseover={togglePasswordHintfilter} onmouseout={togglePasswordHintfilter} style="margin-left: 1px; margin-bottom: auto; margin-top: 9px;"/><span class="slds-assistive-text">Help</span>
+                                <div class={taskTypeHelpTextClassfilter} role="tooltip" id="help">
+                                    <div class="slds-popover__body">
+                                            Enter a keyword to filter within the current set of search results
+                                    </div>
+                                </div>
+                            <div class="slds-form-element" style="margin-top: -4px; margin-left: 20px;">    
+                                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                                    
+                                    <input type="search" id="filter-search-input" class="filterInput" value={filterSearchValue}  onchange={handleFilter} aria-label="Filter Results, Enter a keyword to filter within the current set of search results." />
+                                    <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" aria-label="Clear"  onkeydown={handleFilterKeydown} >
+                                        <img src={crossIconUrl} alt="cross" style="width: 11.88px; height: 11.88px; margin-left: -0.5px; margin-bottom: 2px;" onclick={clearFilterInput} />
+                                        <span class="slds-assistive-text">Close</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="display: flex; margin-top: 5px; margin-bottom: auto;">
+                                <div class="countItems">{transformedDataLength} of {totalCount} Items &nbsp;</div>
+                                <img src={infoIconUrl} alt="info" onmouseover={togglePasswordHintCount} onmouseout={togglePasswordHintCount} /><span class="slds-assistive-text">Help</span>
+                                <div class={taskTypeHelpTextClassCount} role="tooltip" id="help1">
+                                    <div class="slds-popover__body">
+                                            Search by ISBN, Keyword
+                                    </div>
+                                </div>
+                            </div>
+                     
+                        </div>
+                        </template>
+                    
+                    </div>
+                
+                    <!-- Lightning Data Table to display search results -->
+                    <template if:true={showResults}>
+                        <!-- Data Table -->                     
+                        <c-scc_product-table columns={columns} filter={filterCriteria} raw-parent-table-data={productData}
+                            onshowproducttitlepage={openChildTitlePage} parentname={message} ontransformeddatalength={handleTransformedDataLength}>
+                        </c-scc_product-table>
+                    </template>
+                    <!-- Search Result Error Message -->
+                    <template if:true={showSearchResultErrorMessage}>
+                        <div class="noResultBg">
+                            <img src={noResult} alt=""  class="noResultImage"/> 
+                            <h3 class="noResultText" >No Results</h3>
+                            <p class="noResultMessage" role="alert"><span class="slds-assistive-text">No Results</span> No ISBN found to match your search criteria</p>
+                        </div>
+                    </template>
+                    </div>
+                </template>
+            </div>
+
+
+            <!-- Tab 2: Multi ISBN -->
+            <div id="tab-default-2" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item" data-id="tab-default-2__item" data-name="tabpanel">
+                <!-- Custom LWC component for multi ISBN search -->
+                <c-scc_product-quick-search-l-w-c parent-selected-product-record={selectedProductRecord}
+                    onshowproducttitlepage={handleShowProductTitlePage} multiisbntab={multiisbntab}>
+                </c-scc_product-quick-search-l-w-c>
+            </div>
+            <!-- <template if:true={viewForCatalogSection}> -->
+            <div id="tab-default-3" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item" data-id="tab-default-3__item" data-name="tabpanel">
+                <!-- Custom LWC component for Catalog search -->
+                <c-scc_catalog-l-w-c  parent-selected-product-record={selectedProductRecord}
+                    onshowproducttitlepage={handleShowProductTitlePage} catalogtab={catalogtab}>
+                    </c-scc_catalog-l-w-c>
+            </div>
+            <!-- </template> -->
+        </div>
+        </div>
+    </div>
+    <!-- Conditional rendering for Product Title Page -->
+    <template if:true={showProductTitlePage}>
+        <c-scc_product-title-page parent-selected-product-record={selectedProductRecord}
+           currentabtitle={currentTab} onclosetitlepage={closeChildTitlePage} tab-value={getactiveTabValue}></c-scc_product-title-page>
+    </template>
+    <!-- Placeholder template -->
+    <template if:true={variable}>
+        <!-- Add content here if needed -->
+    </template>
+</template>

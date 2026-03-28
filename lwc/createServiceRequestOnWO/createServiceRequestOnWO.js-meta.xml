@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="OpportunityId" label="Opportunity ID" type="String"/>
+            <property name="difference" type="Integer" label="difference" role="outputOnly"/>
+            <property name="sessionsXqty" type="Integer" label="sessionsXqty" role="outputOnly"/>
+            <property name="ServiceAppCount" type="Integer" label="ServiceAppCount" role="outputOnly"/>
+            <property name="buttonId" type="String" label="Button ID" role="inputOnly"/>
+            <property name="selectedButtonId" type="String" label="Selected Button ID" role="outputOnly"/>
+            <property name="selectedWo_Id" type="String" label="selectedWo_Id" role="outputOnly"/>
+            <property name="selectedWo_Name" type="String" label="selectedWo_Name" role="outputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

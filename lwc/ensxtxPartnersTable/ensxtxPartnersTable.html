@@ -1,0 +1,73 @@
+<template>
+    <lightning-card>
+
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer table-fixed-layout">
+            <caption></caption>
+            <thead>
+                <tr class="table-head slds-grid--vertical-stretch">
+                    <th scope="col"></th>
+                    <th scope="col">{label.ensxtx_PartnersTable_Table_PartnerFunction}</th>
+                    <template if:true={displayedFieldSettings.PartnerName.display}>
+                        <th scope="col">{label.ensxtx_PartnersTable_Table_PartnerName}</th>
+                    </template>
+                    <template if:true={displayedFieldSettings.CustomerNumber.display}>
+                        <th scope="col">{label.ensxtx_PartnersTable_Table_PartnerNumber}</th>
+                    </template>
+                    <template if:true={displayedFieldSettings.Vendor.display}>
+                        <th scope="col">{label.ensxtx_PartnersTable_Table_Vendor}</th>
+                    </template>
+                    <template if:true={displayedFieldSettings.PersonnelNumber.display}>
+                        <th scope="col">{label.ensxtx_PartnersTable_Table_Personnel}</th>
+                    </template>
+                    <template if:true={displayedFieldSettings.ContactPersonNumber.display}>
+                        <th scope="col">{label.ensxtx_PartnersTable_Table_ContactPerson}</th>
+                    </template>
+                    <template if:true={displayedFieldSettings.TelePhoneNumber.display}>
+                        <th scope="col">{label.ensxtx_PartnersTable_Table_TelePhoneNumber}</th>
+                    </template>
+                    <template if:true={displayedFieldSettings.EmailAddress.display}>
+                        <th scope="col">{label.ensxtx_PartnersTable_Table_EmailAddress}</th>
+                    </template>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={displayedPartners} for:item="partner">
+                    <tr key={partner.partnerFunction}>
+                        <td>
+                            <template if:true={partner.allowSearch}>
+                                <lightning-button-icon icon-name="utility:search" alternative-text={label.ensxtx_PartnersTable_Button_Search} title={label.ensxtx_PartnersTable_Button_Search} name={partner}  onclick={onSearch} disabled={isReadOnly}>
+                                </lightning-button-icon>
+                            </template>
+                            <template if:true={partner.allowAddressOverride}>
+                                <lightning-button-icon icon-name="utility:edit_form" alternative-text={label.ensxtx_PartnersTable_Button_OverrideAddress} title={label.ensxtx_PartnersTable_Button_OverrideAddress} name={partner}  onclick={onOverrideAddress} disabled={isReadOnly}>
+                                </lightning-button-icon>
+                            </template>
+                        </td>
+                        <td><lightning-formatted-text value={partner.partnerFunction}></lightning-formatted-text></td>
+                        <template if:true={displayedFieldSettings.PartnerName.display}>
+                            <td><lightning-formatted-text value={partner.PartnerNameDisplay}></lightning-formatted-text></td>
+                        </template>
+                        <template if:true={displayedFieldSettings.CustomerNumber.display}>
+                            <td><lightning-formatted-text value={partner.CustomerNumber}></lightning-formatted-text></td>
+                        </template>
+                        <template if:true={displayedFieldSettings.Vendor.display}>
+                            <td><lightning-formatted-text value={partner.Vendor}></lightning-formatted-text></td>
+                        </template>
+                        <template if:true={displayedFieldSettings.PersonnelNumber.display}>
+                            <td><lightning-formatted-text value={partner.PersonnelNumber}></lightning-formatted-text></td>
+                        </template>
+                        <template if:true={displayedFieldSettings.ContactPersonNumber.display}>
+                            <td><lightning-formatted-text value={partner.ContactPersonNumber}></lightning-formatted-text></td>
+                        </template>
+                        <template if:true={displayedFieldSettings.TelePhoneNumber.display}>
+                            <td><lightning-formatted-text value={partner.TelePhoneNumber}></lightning-formatted-text></td>
+                        </template>
+                        <template if:true={displayedFieldSettings.EmailAddress.display}>
+                            <td><lightning-formatted-text value={partner.EmailAddress}></lightning-formatted-text></td>
+                        </template>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </lightning-card>
+</template>

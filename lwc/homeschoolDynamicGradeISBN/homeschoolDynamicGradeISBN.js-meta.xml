@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <masterLabel>gradeISBNComp</masterLabel>
+   <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="selectedGrades" type="String[]" />
+            <property name="selectedGradesStr" type="String" />
+            <property name="gradeKGList" type="String[]" />
+            <property name="grade1List" type="String[]" />
+            <property name="grade2List" type="String[]" />
+            <property name="grade3List" type="String[]" />
+            <property name="grade4List" type="String[]" />
+            <property name="grade5List" type="String[]" />
+            <property name="grade6List" type="String[]" />
+            <property name="grade7List" type="String[]" />
+            <property name="grade8List" type="String[]" />
+            <property name="grade9List" type="String[]" />
+            <property name="grade10List" type="String[]" />
+            <property name="grade11List" type="String[]" />
+            <property name="grade12List" type="String[]" />
+            <property name="gradeISBNValues" type="String[]" />
+            <property name="gradeISBNValue" type="String[]" />
+            <property name="gradeISBNData" type="String[]" />
+            <property name="gradeISBNDataStr" type="String" />
+            <property name="gradeAllIsbnList" type="String[]" />
+            <property name="validSelection" type="String" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

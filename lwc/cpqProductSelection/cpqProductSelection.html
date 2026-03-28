@@ -1,0 +1,174 @@
+<!--
+  *********************************************************
+  Component Name       : cpqProductSelection
+  Created Date         : 4/22/2024  
+  Author               : Frank Berni - Cognizant
+  Description          : Parent Component that replaces Add Products in Quote Line Editor. User filters across nested categories and additional field filters to control what Products are displayed
+                         Products can  then be selected and added to the Quote as Quote Line records
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>
+  4/22/2024     Frank Berni        Initial Version: Ticket W-014433 
+  4/26/2024     Frank Berni        Modified so that it queries master category id and its children categories and sends it to cpqProductCategoryHierarchy
+  4/30/2024     Frank Berni        Reworked so that only masterCategoryId and gridColumns are passed to cpqProductCategoryHierarchy
+  5/07/2024     Frank Berni        Ticket W-014669: Added ProductCart component to view existing quote lines
+  5/09/2024     Frank Berni        Ticket W-014669: Introduce Save & Exit buttons to close and refresh the QLE
+  5/10/2024     Frank Berni        Ticket W-014669: Fixed styling and alignment for Title and Buttons, added screen to screen rendering with back buttons
+  5/13/2024     Frank Berni        Ticket W-014412: Added ISBN search bar functionality and communication to ProductList
+  5/14/2024     Frank Berni        Adjusted layout of buttons and added conditional label names
+  5/15/2024     Frank Berni        Ticket W-014415: Added a dynamic breadcrumb trail to show Category Hierarchy on ProductList. Navigates user back to category tree
+  5/16/2024     Frank Berni        Ticket W-014412: updated ISBN search bar so it also searches by Description and updated variable names
+                                   > Ticket W-014516: Updated all queries to use Product2 fields instead of ProductCategoryProduct and made all Product List Filter fields available
+  5/17/2024     Frank Berni        Ticket W-014415: Adjusted rendering of cpqProductCategoryHierarchy so its CSS display is adjusted to keep it from resetting itself
+  6/04/2024     Frank Berni        Updated Product List title based on which search was used
+  8/09/2024     Frank Berni        Minor update to remove extra outline for cpqProductCart
+  8/12/2024     Frank Berni        W-015738: Updated refs and variables to support multi select category functionality
+  *********************************************************
+-->
+<template>
+    <!-- Toast component -->
+    <c-cpq-toast auto-close-time="6000" top-style=true></c-cpq-toast>
+
+    <!-- Spinner for ProductSelection -->
+    <template if:false={isLoaded}>
+        <div class="demo-only demo-only_viewport" style="height:12rem;position:relative">
+            <div role="status" class="slds-spinner slds-spinner_large slds-spinner_brand">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+            </div>
+            </div>
+    </template>
+
+    <template if:true={isLoaded}>
+        <lightning-card>
+
+            <!-- Title and Button group with styling -->
+            <div class="slds-grid slds-grid_align-spread" style="padding: 0 15px;">
+                <div class="slds-col">
+                    <!-- Custom title with icon -->
+                    <h1 slot="title">
+                        <lightning-icon icon-name="standard:product" size="medium" style="margin-right: 10px;"></lightning-icon>
+                        <b style="font-size: large;">Product Selection</b>
+                    </h1>
+                </div>
+                <div class="slds-col"></div>
+                <div class="slds-col">
+                    <div>
+                        <lightning-button-group>
+                            <!-- Ticket W-014669: Back to Categories and Back to Products buttons (These will hide ProductCart in favor for Grid Tree or Product List) -->
+                            <!-- Ticket W-014415: To account for no breadcrumb element created, this renders this button on Product List if ISBN/Description Search -->
+                            <template if:true={showBackOnProductList}>
+                                <lightning-button variant="brand-outline" label="Back to Categories" title="Back to Categories" onclick={handleCategoriesFromCart}></lightning-button>
+                            </template>
+                            <template if:true={showProductCart}>
+                                <lightning-button variant="brand-outline" label="Back to Products" title="Back to Products" onclick={handleBackFromCart}></lightning-button>
+
+                                <!-- Ticket W-014415: Otherwise render this button on Product Cart, in case user doesn't ISBN/Description Search -->
+                                <template if:false={showBackOnProductList}>
+                                    <lightning-button variant="brand-outline" label="Back to Categories" title="Back to Categories" onclick={handleCategoriesFromCart}></lightning-button>
+                                </template>
+                            </template>
+                            <!-- Ticket W-014669: Handles the close and refresh logic (label changes depending on if on ProductCart or not) -->
+                            <lightning-button variant="brand" label={saveExitLabel} title={saveExitLabel} onclick={handleSaveExit}></lightning-button>
+                        </lightning-button-group>
+                    </div>
+                </div>
+            </div>
+
+            <!-- help message to guide user through component  -->
+            <div class="slds-grid slds-grid_align-spread" style="padding: 0 15px; margin-top: 10px">
+                <div class="slds-col">
+                    <h2>{helpMessage}</h2>
+                </div>
+                <div class="slds-col"></div>
+                <div class="slds-col"></div>
+            </div>
+
+            <!-- renders based on showCategoryHiearchy -->
+            <template if:true={showCategoryTree}>
+
+                <!-- warning message for user when they search with no text -->
+                <template if:true={warnUserSearch}>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <h1 style="color: red;">Please enter a value before searching</h1>
+                    </lightning-layout-item>
+                </template>
+
+                <!-- Ticket W-014412: Search bar for ISBN -->
+                <lightning-card>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col" style="margin-left: 20px;">
+                            <div class="slds-form-element">
+                                <!-- The search bar (supports keyup Enter) -->
+                                <label class="slds-form-element__label" for="search-input">ISBN or Description</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="search-input" class="slds-input" placeholder="Search Products..." onchange={handleSearchChange} onkeyup={handleEnterSearch} />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col">
+                            <div class="slds-form-element" style="margin-right: -43px;">
+                                <!-- The search button -->
+                                <label class="slds-form-element__label">&nbsp;</label>
+                                <div class="slds-form-element__control">
+                                    <lightning-button class="slds-m-top_small" label="Search" onclick={handleSearchClick} icon-name="utility:search" data-id="search-button"></lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-card>
+            </template>
+
+                <!-- Ticket W-014433:  Renders CategoryHierachy once the master category Id is returned -->
+                <c-cpq-product-category-hierarchy 
+                    class="categoryTree"
+                    product-category-api={productCategoryApi}
+                    parent-field={parentField}
+                    col-name-api={colNameApi}
+                    grid-columns={gridColumns}
+                    master-category-id={masterCategoryId}
+                    onfilterproducts={handleFilterProducts}
+                    onupdatebreadcrumbs={handleUpdateBreadcrumbs}
+                ></c-cpq-product-category-hierarchy>
+            <!-- </div> -->
+    
+            <!-- Ticket W-014433: Renders Product List when there are returned Products -->
+            <template if:true={showProductList}>
+                <!-- added conditional title based on search used -->
+                <lightning-card title={productListTitle}>
+                    <!-- Ticket W-014415: conditionally render breadcrumbs when user doesn't ISBN search -->
+                    <template if:false={termSearch}>
+                        <!-- Ticket W-014415: MVP vers - breadcrumb element to handle taking user back to Category Tree -->
+                        <lightning-breadcrumbs style="padding: 0 15px; margin-top: 10px">
+                            <template for:each={breadcrumbItems} for:item="catCrumbs">
+                                <lightning-breadcrumb key={catCrumbs.value} label={catCrumbs.label} onclick={handleBreadCrumbClick}></lightning-breadcrumb>
+                            </template>
+                        </lightning-breadcrumbs>
+                        
+                    </template>
+                    
+                    <!-- NEW updated variable name to category-ids -->
+                    <c-cpq-product-list 
+                        category-ids={selectedCategoryIds}
+                        term-search={termSearch}
+                        record-id={recordId}
+                        onshowcart={handleShowCart}
+                        onhidecategories={handleHideCategories}
+                        onreturntocategories={handleBackFromList}
+                    ></c-cpq-product-list>
+                </lightning-card>
+            </template>
+        
+
+        <!-- Ticket W-014669: Renders Product Cart once user selects and inserts their Products -->
+        <template if:true={showProductCart}>
+            <c-cpq-product-cart 
+                record-id={recordId} 
+            ></c-cpq-product-cart>
+        </template>
+    <!-- NEW moved lightning card here to remove extra bold outline on Cart  -->
+    </lightning-card>
+
+    </template>
+</template>

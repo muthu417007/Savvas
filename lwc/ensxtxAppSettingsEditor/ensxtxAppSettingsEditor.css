@@ -1,0 +1,9 @@
+.headerSection{
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+}
+.appSettingsEditor{
+    max-height:79vh;
+    overflow-y: scroll;
+}

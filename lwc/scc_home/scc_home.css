@@ -1,0 +1,134 @@
+.chevron-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #679608;
+    margin-left: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+ }
+ .chevron-icon {
+    --slds-c-icon-color-foreground-default: white; /* Set the color of the icon */
+    --slds-icon_xx-small:5px;
+ }
+ .chevron-circle-dropdown{
+  display: none;
+ }
+ .view-all-link {
+    display: inline-block;
+    color: #173770 !important;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+ }
+ .recent-order{
+   font-family: 'Poppins', sans-serif;
+   font-size: 26px;
+   font-weight: 700;
+   line-height: 28.6px;
+   letter-spacing: -0.01em;
+   text-align: left;
+   color: #173770;
+ }
+ .order-label{
+   font-family: 'Poppins', sans-serif;
+   font-size: 14px;
+   font-weight: 500;
+   line-height: 21px;
+   text-align: left;
+   color:#173770;
+   margin-bottom: 5px;
+ }
+ .order-value{
+   font-family: 'Poppins', sans-serif;
+   font-size: 14px;
+   font-weight: 600;
+   line-height: 21px;
+   text-align: left;
+   color:#0C1E3D;
+   word-break: break-word;
+ }
+ .order-link a{
+   font-family: 'Poppins', sans-serif;
+   font-size: 14px;
+   font-weight: 600;
+   line-height: 21px;
+   text-align: left;
+   color:#2150A3;
+   text-decoration: underline;
+   word-break: break-word;
+ }
+ .no-recent-order-box{
+   height: 220px;
+   top: 846px;
+   left: 280px;
+   gap: 0px;
+   border-radius: 5px;
+   border: none;  
+   background-color:#F5F9FE;
+ }
+ .no-recent-held-carts-box p{
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22.5px;
+  text-align: center;
+  color: #173770;
+  margin-top: 10px;
+ }
+ .no-recent-order-text{
+   font-family: 'Poppins', sans-serif;
+   font-size: 20px;
+   font-weight: 600;
+   line-height: 22px;
+   text-align: left;
+   color:#173770;
+ }
+ .view-all-link+span{
+  opacity: 20%;
+ }
+ @media only screen and (max-width: 767px){
+  .view-all-mobile{
+    width: 100%;
+    text-align: left !important;
+    margin-left: 14px;
+ }
+ .full-width-in-mobile{
+  margin-top: 10px;
+  display: none;
+ }
+ .full-width-in-mobile.slds-show{
+   display: block;
+ }
+ .chevron-circle-dropdown{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #679608;
+  margin-left: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 8px;
+ }
+ .chevron-circle-dropdown .chevron-up{
+  transform: rotate(180deg);
+  background-color: #2150A3;
+ }
+}
+
+.no-order{
+  font-family: 'Poppins', sans-serif;
+   font-size: 15px;
+   font-weight: 500;
+   line-height: 22.5px;
+   text-align: center;
+   color: #173770;
+
+}

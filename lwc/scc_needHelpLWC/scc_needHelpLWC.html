@@ -1,0 +1,609 @@
+<!--*********************************************************
+  Component Name       : scc_needHelpLWC
+  Created Date         : 06/09/2024  
+  Author               : Cognizant
+  Description          : This component used in Home page to render the other apps links for login user.
+  
+  Modifications Log
+  06/09/2024      Monami             Initial Version
+*********************************************************/-->
+<template>
+    <template if:true={showEntireComponent}>
+        <!-- <template if:true={showNeedhelp}> -->
+        <div class="slds-col slds-size_1-of-1  max-width-container">
+            <lightning-card>
+                <div class="slds-p-around_xx-small slds-p-top_xx-small slds-p-left-xx-small pad">
+                    <table class="tableData-alignment2" style="color: #173770; font-size: 17px">
+                        <tbody>
+                            <tr>
+                                <td class="td-align">></td>
+                                <td class="td-align">
+                                    <a href="#" onclick={handleFAQ}>
+                                        <span> FAQ </span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="right-align">></td>
+                                <td class="td-align">
+                                    <a href="#" onclick={handleSiteTraining}>
+                                        <span>Site Training</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-align">></td>
+                                <td class="td-align">
+                                    <!-- <a href={labels.scc_needHelpContactEmail} target="_blank">
+                                        <span>Contact mySavvas Order Site Support</span>
+                                    </a> -->
+                                    <a  href="javascript:void(0);" onclick={handleNavigate}>
+                                        <span>Contact mySavvas Order Site Support</span>
+                                    </a>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-align">></td>
+                                <td class="td-align">
+                                    <a href={scc_contactCustomerSupportURL} target="_blank">
+                                        <span>Contact Customer Support</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-align">></td>
+                                <td class="td-align">
+                                    <a href={scc_needHelpKMArticle} target="_blank">
+                                        <span>KM Article</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </lightning-card>
+        </div>
+        <!-- </template> -->
+    </template>
+    <template if:true={showFAQ}>
+        <lightning-card>
+            <div style="line-height: 1.6; margin: 0; padding-top: 20px; padding-left: 50px;">
+                <!-- <div style="color: #173770; font-weight: 700; font-size: 30px; text-align: Left; margin-bottom: 20px;">FAQ</div> -->
+                <ul style="list-style-type: none; padding: 0; color: #173770; font-weight: 600; font-size: 20px">
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">1. </span><a href="#question1"
+                            style="color: #173770;text-decoration: underline;" onclick={scrollToQuestion}>What
+                            information do I need to place an
+                            order?</a></li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">2. </span><a href="#question2"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>Can I ship
+                            this order to a one-time drop-ship address?</a></li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">3. </span><a href="#question3"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How long will
+                            you retain back
+                            orders?</a></li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">4. </span><a href="#question4"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>What is a
+                            Promotion Code? Is one
+                            required?</a></li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">5. </span><a href="#question5"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>Can I use a
+                            credit card to pay for my
+                            order?</a></li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">6. </span><a href="#question6"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How will my
+                            order ship?</a></li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">7. </span><a href="#question7"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>Can I place a
+                            rush order?</a></li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">8. </span><a href="#question8"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>When will my
+                            order ship?</a></li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">9. </span><a href="#question9"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How do I
+                            check on the status of my
+                            order?</a></li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">10. </span><a href="#question10"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>I need more
+                            information about a title.
+                            Where can I find it?</a></li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">11. </span><a href="#question11"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How do I find
+                            supplements to this
+                            text?</a>
+                    </li>
+                    <!-- new FAQs -->
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">12. </span><a href="#question12"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>On some
+                            items, why is the price listed as N/A (Not Available)?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">13. </span><a href="#question13"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How do I
+                            change the quantity of an item on this order?</a>
+                    </li>
+
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">14. </span><a href="#question14"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>Can I enter
+                            my order now and delay the delivery?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">15. </span><a href="#question15"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How do I use
+                            Copy &amp; Paste to quickly add items to my Order?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">16. </span><a href="#question16"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How do I use
+                            Copy &amp; Paste to quickly enter ISBNs in Price and Availability?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">17. </span><a href="#question17"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How do I
+                            correctly format the ISBNs before I use Copy &amp; Paste to check
+                            Price and Availability?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">18. </span><a href="#question18"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>What are
+                            &quot;Custom Reports&quot;?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">19. </span><a href="#question19"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>What kind of
+                            reports can I get?
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">20. </span><a href="#question20"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How do I know
+                            which report to choose?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">21. </span><a href="#question21"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>I want to
+                            check the status of multiple ISBNs or Purchase Orders. Do I have
+                            to enter them by hand?
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">22. </span><a href="#question22"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How can I
+                            Copy and Paste ISBNs and PO combinations?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">23. </span><a href="#question23"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>Can I enter
+                            combinations of POs and ISBNs?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">24. </span><a href="#question24"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}> Can I search
+                            by only part of my PO number?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">25. </span><a href="#question25"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>What if I
+                            want to upload my Order Status request on an Excel spreadsheet?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">26. </span><a href="#question26"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How can I
+                            specify the date range for which I want to generate the report?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">27. </span><a href="#question27"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>Can I specify
+                            the item status for my Order Status Reports?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">28. </span><a href="#question28"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>I want to run
+                            the same report every month. Do I have to re-enter the same
+                            information each time?
+                        </a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">29. </span><a href="#question29"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>How will I
+                            receive my report?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">30. </span><a href="#question30"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}>I requested
+                            my report in Excel format, but I received it in CSV format. Why?</a>
+                    </li>
+                    <li style="margin-bottom: 10px;"><span style="color: #173770;">31. </span><a href="#question31"
+                            style="color: #173770; text-decoration: underline;" onclick={scrollToQuestion}> I
+                            accidentally deleted the email with my report attached. Do I have to start
+                            from scratch?
+                        </a>
+                    </li>
+
+                </ul>
+
+                <div id="question1" data-ref="question1" style="margin-bottom: 20px; margin-top: 30px">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">1. What
+                        information do I need to place an order?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>Shipping and Billing addresses</li>
+                        <li>ISBN or Title of the items you wish to order</li>
+                        <li>Your name and phone number</li>
+                        <li>Your email address for order confirmation</li>
+                        <li>Your Purchase Order number (if billing to a Board of Education or if required by your
+                            account)</li>
+                    </ul>
+                </div>
+
+                <div id="question2" data-ref="question2" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">2. Can I ship
+                        this order to a one-time drop-ship address?</h3>
+                    <p style="color: #173770; font-size: 20px">For accounts that are not wholesalers, yes you can. At
+                        the beginning of an order, after you choose your Billing address, you should have the option of
+                        selecting an
+                        existing Shipping Address, if none of those addresses is the location you need to use,
+                        click the Specify One-Time Shipping Address in the checkout box. This will remove
+                        your options and you will be able to enter the one-time address at checkout.</p>
+                </div>
+
+                <div id="question3" data-ref="question3" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">3. How long will
+                        you retain back orders?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>Backorders will be canceled 1yr of your order date.</li>
+                    </ul>
+                </div>
+
+                <div id="question4" data-ref="question4" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">4. What is a
+                        Promotion Code? Is one required?</h3>
+                    <p style="color: #173770; font-size: 20px">A Promotion Code is not necessary to place an order. From
+                        time to time, we may offer special promotions. If you are placing a promotional order based on
+                        information
+                        provided by your Sales Rep, enter the Promotion Code on the checkout page.
+                    </p>
+                </div>
+
+                <div id="question5" data-ref="question5" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">5. Can I use a
+                        credit card to pay for my order?</h3>
+                    <p style="color: #173770; font-size: 20px">Yes, you can pay for your order now using a credit card
+                        instead of being invoiced for future payments. On the Checkout page under ”Billing Information”
+                        enter the credit card number,
+                        expiration date, and name on the card.
+                    </p>
+                </div>
+
+                <div id="question6" data-ref="question6" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">6. How will my
+                        order ship?</h3>
+                    <p style="color: #173770; font-size: 20px">You need only provide the shipping service level that you
+                        would like for this order (Ground, 2nd Day Air or Next Day Air) on the Checkout page. If you
+                        have permanent shipping preferences on your account, we will ship via your carrier. Otherwise,
+                        we will choose an appropriate carrier for you.</p>
+                    <p style="color: #173770; font-size: 20px">International orders to an established, permanent Ship-To
+                        address will be shipped using an air carrier of our choosing. Should you prefer to use a carrier
+                        of your choosing, please contact customer service prior to placing your order so that we may
+                        establish your carrier as a shipping option on your account. Orders will usually ship via UPS
+                        international, Pilot 2nd Day air or Activair Airfreight. At this time My Savvas Orders cannot
+                        accept International one time drop-ship addresses.</p>
+                </div>
+
+                <div id="question7" data-ref="question7" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">7. Can I place a
+                        rush order?</h3>
+                    <p style="color: #173770; font-size: 20px">Yes -Orders with a selected shipping service level of 2
+                        nd Day Air or Next Day Air will
+                        be treated as rush orders and, if placed before 12:30pm ET on a business day, will
+                        ship the same day (as long as your account is in good standing) There are additional
+                        shipping charges when selecting 2nd day or Next day shipping options.
+                    </p>
+                </div>
+                <div id="question8" data-ref="question8" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">8. When will my
+                        order ship?</h3>
+                    <p style="color: #173770; font-size: 20px">All orders placed through My Savvas Orders will be
+                        processed with
+                        the same priority as those we receive by telephone or fax. Ground shipments normally leave our
+                        warehouse within 2-3 business days.</p>
+                </div>
+                <div id="question9" data-ref="question9" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">9. How do I check
+                        on the status of my order?</h3>
+                    <p style="color: #173770; font-size: 20px">You may track your order using your P.O. Number or
+                        Document Control Number directly on My Savvas Orders. Order status will be available immediately
+                        after you
+                        receive the order confirmation email.
+                    </p>
+                    <p style="color: #173770; font-size: 20px">Status Updated: This column will tell you when the status
+                        updated to the current information
+                    </p>
+                    <p style="color: #173770; font-size: 20px">Status Key:</p>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>In Queue - The order went to the warehouse and is waiting to be packed. Note that the number
+                            indicates the quantity.</li>
+                        <li>Fulfillment in Process - The order line item is being packed at the warehouse.</li>
+                        <li>Being Fulfilled - Indicates that a digital item is in process but not yet
+                            available for use.
+                        </li>
+                        <li>BO - The item is on backorder. Click the hyperlink on BO to check for
+                            an expected due in stock date.
+                        </li>
+                        <li>Shipped - The order/item has shipped and you should be able to view
+                            tracking information
+                        </li>
+                        <li>Fulfilled - Indicates a digital item is available for use
+                        </li>
+                        <li>Canceled - The item has been canceled; click on the code to see why
+                            the item was canceled.
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="question10" data-ref="question10" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">10. I need more
+                        information about a title. Where can I find it?</h3>
+                    <p style="color: #173770; font-size: 20px">Click on the title itself. This will bring you to the
+                        Title Summary page with additional information.</p>
+                    <p style="color: #173770; font-size: 20px">You may also contact your Account Manager or Customer
+                        Service to provide you with content information on the title.</p>
+                    <p style="color: #173770; font-size: 20px">K12 Customer<br>
+                    <a href="www.support.savvas.com" target="_blank">
+                    <span>www.support.savvas.com</span></a><br>
+                    800-848-9500 – Mon-Fri 8:00am-6:00pm ET</p>
+                </div>
+
+                <div id="question11" data-ref="question11" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">11. How do I find
+                        supplements to this text?</h3>
+                    <p style="color: #173770; font-size: 20px">For K12 titles, supplements can be located by searching
+                        with the Program Name on the Product Search page
+                    </p>
+                </div>
+
+                <div id="question12" data-ref="question12" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">12. On some
+                        items, why is the price listed as N/A (Not Available)?</h3>
+                    <p style="color: #173770; font-size: 20px">At times, the final price cannot be established until the
+                        item approaches its publication date. As that date nears, log on to My Savvas Orders Price and
+                        Availability check for final pricing. The item can still be ordered.
+                    </p>
+                </div>
+
+                <div id="question13" data-ref="question13" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">13. How do I
+                        change the quantity of an item on this order?</h3>
+                    <p style="color: #173770; font-size: 20px">To change the quantity of an item already in your
+                        Shopping Cart, click on the &quot;Shopping Cart&quot; link at the top of the page, make any
+                        necessary changes.
+                    </p>
+                </div>
+                <!-- new -->
+                <div id="question14" data-ref="question14" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">14. Can I enter
+                        my order now and delay the delivery?</h3>
+                    <p style="color: #173770; font-size: 20px">Yes, you can. On the Checkout page under &quot;Order
+                        Information&quot; in the &quot;Requested
+                        Ship Date&quot; field, enter the date after which you would like to receive the shipment.
+                        The order will ship on or after that date, but not before. Please bear in mind that we
+                        do not reserve inventory for Future Ship orders. So it is possible that the item(s)
+                        could become on backorder between the date you enter the order and the date the
+                        order actually is processed in the warehouse.
+                    </p>
+                </div>
+
+                <div id="question15" data-ref="question15" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">15. How do I use
+                        Copy &amp; Paste to quickly add items to my Order?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>You can copy and paste using the Multi ISBN tab</li>
+                        <li>ISBN must be 10, 13 or 14 significant digits.</li>
+                        <li>ISBNs should be in a column not a line</li>
+                        <li>Add a space after each ISBN then add the quantity you wish to order</li>
+                    </ul>
+                </div>
+
+                <div id="question16" data-ref="question16" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">16. How do I use
+                        Copy &amp; Paste to quickly enter ISBNs in Price and Availability?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>You can copy and paste using the Multi ISBN tab</li>
+                        <li>ISBN must be 10, 13 or 14 significant digits</li>
+                        <li>ISBNs should be in a column not a line</li>
+                        <li>Do not include decimal points, + or – signs.</li>
+                    </ul>
+                </div>
+
+                <div id="question17" data-ref="question17" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">17. How do I
+                        correctly format the ISBNs before I use Copy &amp; Paste to check
+                        Price and Availability?
+                    </h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>You can copy and paste using the Multi ISBN tab</li>
+                        <li>ISBN must be 10, 13 or 14 significant digits</li>
+                        <li>ISBNs should be in a column not a line</li>
+                        <li>Do not include decimal points, + or – signs.</li>
+                    </ul>
+                </div>
+
+                <div id="question18" data-ref="question18" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">18. What are
+                        &quot;Custom Reports&quot;?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>The “Custom Reports” functionality gives you the ability to search for order
+                            and ISBN information and create a report that adapts to your specific needs.
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="question19" data-ref="question19" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">19. What kind of
+                        reports can I get?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>Order Stats Report - Summary - Displays the status of one or more orders.
+                            Standard report shows order placed within the last 12 months. The summary
+                            version returns basic order information.
+                        </li>
+                        <li> Order Status Detail Report - Displays the status of one or more orders.
+                            Information provided = due in stock date, invoice number and ship date(if
+                            applicable). Standard report shows order placed within the last 12 months.
+                        </li>
+                        <li> Order status Report - Tracking - Displays the status of one or more orders.
+                            Information provided = carrier, parcel and tracking information. Standard
+                            report shows order placed within the last 12 months.
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="question20" data-ref="question20" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">20. How do I know
+                        which report to choose?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>To view a description of each report, simply select the report in the drop
+                            down list and the report description will appear in the same section. To see a
+                            sample of the selected report scroll to the top of the page and click “View
+                            Sample”.
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="question21" data-ref="question21" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">21. I want to
+                        check the status of multiple ISBNs or Purchase Orders. Do I have
+                        to enter them by hand?
+                    </h3>
+                    <p style="color: #173770; font-size: 20px">You can Copy &amp; Paste lists of ISBNs or Purchase Order
+                        Numbers from your own files
+                        right into the appropriate fields on any of the available pre-made reports or using the
+                        customer report option.
+                    </p>
+                </div>
+
+                <div id="question22" data-ref="question22" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">22. How can I
+                        Copy and Paste ISBNs and PO combinations?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>There are separate fields for each type of information, you will need to
+                            copy/paste or type the information in the correct field.
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="question23" data-ref="question23" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">23. Can I enter
+                        combinations of POs and ISBNs? Yes</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>There are separate fields for each type of information, you will need to
+                            copy/paste or type the information in the correct field.
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="question24" data-ref="question24" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">24. Can I search by only part of my PO number?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>No, you must have the complete PO number.
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="question25" data-ref="question25" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">25. What if I
+                        want to upload my Order Status request on an Excel spreadsheet?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>After you run the report, you can click “Download to Excel” located at the top
+                            right of the page.
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="question26" data-ref="question26" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">26. How can I
+                        specify the date range for which I want to generate the report?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>You can either run the report for a specific date range or order period
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="question27" data-ref="question27" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">27. Can I specify
+                        the item status for my Order Status Reports? Yes
+                    </h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>You can choose to base your report on order status
+                            i. All
+                            ii. Open
+                            iii. Canceled
+                            iv. Fulfilled.
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="question28" data-ref="question28" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">28. I want to run
+                        the same report every month. Do I have to re-enter the same
+                        information each time? No
+                    </h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>Once you have run the report you can save it and you will be prompted to
+                            create the “New report Name” . The report will show up in the Reports
+                            section drop down list.
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="question29" data-ref="question29" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">29. How will I
+                        receive my report?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>Once you run the report it will show on screen, then you can choose to Email
+                            or Download the report to Excel.</li>
+                    </ul>
+                </div>
+
+                <div id="question30" data-ref="question30" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">30. I requested
+                        my report in Excel format, but I received it in CSV format. Why?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>If the results from your query are too large to fit on an Excel Spreadsheet, you will
+                            receive a CSV file instead. If the report is larger than you expected, you may want to
+                            refine your search criteria.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- <div id="question11" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">30. I requested
+                        my report in Excel format, but I received it in CSV format. Why?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>If the results from your query are too large to fit on an Excel Spreadsheet, you will
+                            receive a CSV file instead. If the report is larger than you expected, you may want to
+                            refine your search criteria.
+                        </li>
+                    </ul>
+                </div> -->
+
+                <div id="question31" data-ref="question31" style="margin-bottom: 20px;">
+                    <h3 style="color: #173770; margin-bottom: 10px; font-weight: 600; font-size: 20px">31. I accidentally deleted the email with my report attached. Do I have to start from scratch?</h3>
+                    <ul
+                        style="list-style-type: circle; padding-left: 50px; margin-top: 5px; color: #173770; font-size: 20px">
+                        <li>If you did not save the report you will need to start over.</li>
+                    </ul>
+                </div>
+            </div>
+        </lightning-card>
+    </template>
+    <template if:true={showSiteTraining}>
+        <c-scc_site-training-l-w-c></c-scc_site-training-l-w-c>
+    </template>
+    <template if:true={showCreateCase}>
+        <c-scc_create-support-case></c-scc_create-support-case>
+    </template>    
+</template>

@@ -1,0 +1,20 @@
+<template>
+    <div>
+        <p class ="bold 16px Arial">Service Appointment Status by Account</p>
+    </div>
+    <div class="picklist-container">
+        <lightning-combobox
+            label="CSM Users"
+            value={selectedUserId}
+            options={csmUserOptions}
+            onchange={handleUserChange}
+            disabled={isPicklistDisabled}>
+        </lightning-combobox>
+    </div>
+    <div class="chart-container">
+        <canvas></canvas>
+        <div class="chart-note">
+            {graphText}
+        </div>
+    </div>
+</template>

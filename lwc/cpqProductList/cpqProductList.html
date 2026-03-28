@@ -1,0 +1,328 @@
+<!--
+*********************************************************
+  Component Name       : cpqProductList
+  Created Date         : 4/24/2024  
+  Author               : Frank Berni - Cognizant
+  Description          : Nested component for CpqProductSelection LWC. Holds all Products filtered by Product Category along with additional manual filters
+  
+  Modifications Log
+  <Date>       <Author>            <Modification>
+  4/24/2024     Frank Berni        Initial Version: Ticket W-014433 
+  5/02/2024     Frank Berni        Implemented a custom toast component to properly give feedback to users
+  5/03/2024     Frank Berni        Implemented a data table that displays information for category products and ability to select/deselect all or one product
+  5/08/2024     Frank Berni        Removed lightning-layout tag so that table can fit entire screen
+  5/10/2024     Frank Berni        Added Back button to render Category Tree and hide Product List
+  5/13/2024     Frank Berni        Ticket W-014412: Added interaction with Search by ISBN bar
+  5/15/2024     Frank Berni        Removed Back to Categories button and styling changes
+  5/16/2024     Frank Berni        Ticket W-014412: Modified search by ISBN where now searches by ISBN or Description 
+                                   > Ticket W-014516: Pulling data from Product2 relationship and updated table to reflect changes
+  5/17/2024     Frank Berni        Ticket W-014412: Changed ISBN10__c to ProductCode (This field is the source of truth of ISBN)
+  5/19/2024     Frank Berni        Removed Grade Band, Solution Type and Duration as Columns. Modified Spinner logic to account for large data loads
+  5/20/2024     Frank Berni        Ticket W-014516: Created filters for Product List to further condense available options
+  5/21/2024     Frank Berni        Ticket W-014516: added final filter that was on hold Program Series
+  5/22/2024     Frank Berni        Updated Apex methods to reflect new parameter of recordId
+  6/03/2024     Frank Berni        Added additional columns to table and word-wrap styling for Description. Changed Net Price to a slider filter
+                                   > W-014667: Refined filter combobox options to adjust based on returned data values. Deprecated fetchPicklistValues function
+  6/04/2024     Frank Berni        Refined Net Price slider filter - removed exccess styling, made slider span width of the table, replaced parseInt with parseFloat
+  6/13/2024     Frank Berni        Updated Product List to use ProductTableWrapper results from refactored Apex
+  6/14/2024     Frank Berni        Adding feedback from Sprint 4 demo: Max Net Price Filter does not go beyond 3600, darkened filter field labels, 
+                                   > Net Prices show in proper currency format, Net Price Filter size is reduced, UI clean up changes
+  6/17/2024     Frank Berni        Created pagination for product list, user can control # of records displayed and navigate pages with next and previous. # of Products shown at the bottom
+  6/26/2024     Frank Berni        Adjusted size of input field for Copyright Year to match expected size of value, minor style changes to filter fields
+  8/09/2024     Frank Berni        UAT Feedback: W-015727 Add Selected Products button has CSS styling added to it so it always appear at bottom right when scrolling
+                                    > Moved Total Products count above Table
+  8/12/2024     Frank Berni        W-015738: Updated refs and variables to support multi select category functionality
+  8/21/2024     Frank Berni        W-015851: Updated checkbox sizes to be larger
+  8/26/2024     Frank Berni        FB-134: Modified Select All checkbox logic to work only within the active page to avoid confusion
+  9/16/2024     Frank Berni        W-016058: Replacing Grade Band as a filter with Grade Level instead
+  9/30/2024     Frank Berni        W-016199: Adding a Reset Filters button to clear all active filters 
+*********************************************************
+-->
+<template>
+
+    <!-- Renders Toast Messages since lightning out does not support typical toast events -->
+    <c-cpq-toast auto-close-time="6000" top-style=true></c-cpq-toast>
+
+    <!-- Spinner for ProductList -->
+    <template if:false={isLoaded}>
+        <div class="demo-only demo-only_viewport" style="height:6rem;position:relative">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+            <span class="slds-assistive-text">Loading</span>
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+            </div>
+            </div>
+    </template>
+
+    
+    <template if:true={isLoaded}>
+        <!-- Renders if selected category has products returned -->
+        <template if:true={showCategoryProducts}>
+            <!-- Filter by: text and then only the name of each filter field -->
+            <lightning-layout-item size="6" padding="around-small">
+                <h1 class="filter">Filter by:</h1>
+            </lightning-layout-item>
+            <lightning-layout-item size="6" padding="around-small">
+                <!-- Ticket W-014516: Filter Fields for Audience, Product Sub Type, Product Version, Grade Level (W-016058), Copyright Year, Duration, Solution Type, Price -->
+                <div class="slds-p-around_small">
+                    <div class="slds-grid slds-grid_vertical-align-start">
+                        <!-- styling class filter - to bolden and darken label for easier legibility -->
+                        <!-- Audience -->
+                        <div class="slds-col filter">
+                            <lightning-combobox
+                            label="Audience"
+                            name="Audience"
+                            data-id="filterAudience"
+                            value={filters.Audience}
+                            options={audienceOptions}
+                            onchange={handleFilterChange}
+                            ></lightning-combobox>
+                        </div>
+                        <!-- Product Sub Type -->
+                        <div class="slds-col filter">
+                            <lightning-combobox
+                            label="Product Sub Type"
+                            name="Product_Sub_Type"
+                            data-id="filterProductSubType"
+                            value={filters.Product_Sub_Type}
+                            options={productSubTypeOptions}
+                            onchange={handleFilterChange}
+                            ></lightning-combobox>
+                        </div>
+                        <!-- While Program Series is not a picklist, converting it to Combobox makes better sense  -->
+                        <div class="slds-col filter">
+                            <lightning-combobox
+                            label="Program Series"
+                            name="Program_Series"
+                            data-id="filterProgramSeries"
+                            value={filters.Program_Series}
+                            options={programSeriesOptions}
+                            onchange={handleFilterChange}
+                            ></lightning-combobox>
+                        </div>
+                        <!-- W-016058: replaced Grade Band with Grade Level -->
+                        <div class="slds-col filter">
+                            <lightning-combobox
+                            label="Grade Level"
+                            name="Grade_Level"
+                            data-id="filterGradeLevel"
+                            value={filters.Grade_Level}
+                            options={gradeLevelOptions}
+                            onchange={handleFilterChange}
+                            ></lightning-combobox>
+                        </div>
+                        <!-- Solution Type -->
+                        <div class="slds-col filter">
+                            <lightning-combobox
+                            label="Solution Type"
+                            name="Solution_Type"
+                            data-id="filterSolutionType"
+                            value={filters.Solution_Type}
+                            options={solutionTypeOptions}
+                            onchange={handleFilterChange}
+                            ></lightning-combobox>
+                        </div>
+                        <!-- While Duration is not a picklist, converting it to Combobox makes better sense -->
+                        <div class="slds-col filter">
+                            <lightning-combobox
+                            label="Duration"
+                            name="Duration"
+                            data-id="filterDuration"
+                            value={filters.Duration}
+                            options={durationOptions}
+                            onchange={handleFilterChange}
+                            ></lightning-combobox>
+                        </div>
+                        <!-- Copyright Year -->
+                        <!-- added width styling to shrink down size of input field -->
+                        <div class="slds-col filter" style="width: auto;">
+                            <lightning-input
+                            label="Copyright Year"
+                            name="Copyright_Year"
+                            placeholder="i.e. 2020"
+                            data-id="filterCopyrightYear"
+                            onchange={handleFilterChange}
+                            style="max-width: 92px;"
+                            ></lightning-input>
+                        </div>
+                    </div>
+                    <!-- putting Net Price Slider on a separate line from above filters -->
+                    <div class="slds-grid slds-grid_vertical-align-start">
+                        <!-- changing Net Price to be a slider instead of text filter -->
+                        <!-- conditionally hide if slider's max net price is zero or not a number -->
+                        <template if:false={hideSlider}>
+                        <!-- Net Price -->
+                        <div class="slds-col slds-form-element">
+                            <!-- styling class slider added -->
+                                <!-- building slider from scratch for easier styling -->
+                            <label class="slds-form-element__label" for="price-slider">
+                                <span class="slds-slider-label">
+                                    <span class="slds-slider-label__label slider">Filter at or below the selected Net Price</span>
+                                    <span class="slds-slider-label__range slider">{minNetPrice} - {maxNetPriceLabel}</span>
+                                </span>
+                            </label>
+                            <div class="slds-form-element__control">
+                                <!-- adjusting slider size so it doesn't span entire window. -->
+                                    <div class="slds-slider slds-size_large">
+                                    <input type="range" id="price-slider" data-id="Net_Price" 
+                                    min="0" max={maxNetPriceValue} step="10" value={filters.Net_Price} 
+                                    onchange={handleSliderChange} class="slds-slider__range"
+                                    />
+                                    <span class="slds-slider__value slider" aria-hidden="true">{filteredNetPrice}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                        <!-- NEW W-016199 Reset all filters back to default-->
+                        <div class="slds-col resetButton">
+                            <lightning-button label="Reset Filters" onclick={handleResetFilters}></lightning-button>
+                        </div>
+                        <!-- moved record total above table -->
+                        <!-- Displaying total products-->
+                        <div class="slds-clearfix">
+                            <div class="slds-float_right" style="padding-right: 4px">
+                                <span class="slds-badge"> Total Products: {totalProducts}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <!-- div to wrap table and set max width -->
+                <div class="table-container">
+                    <!-- Table built from scratch: lightning-datatable would not render properly -->
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered product-table">
+                        <!-- Header Column Labels -->
+                        <thead>
+                            <tr>
+                                <th class="slds-text-title_caps checkbox-col">
+                                    <!-- Select/ Deselect All checkboxes -->
+                                     <!-- added class for styling -->
+                                    <div class="slds-truncate checkbox-div" title="Select All">
+                                        <label>
+                                            <!-- added class for styling to make checkboxes larger -->
+                                             <!-- FB-134 add checked attribute to control when this is checked and modify onchange to onclick -->
+                                            <input class="checkboxes" type="checkbox" checked={isAllSelected} onchange={selectAllCategoryProducts}></input>
+                                            <span class="slds-checkbox_faux"></span>
+                                            <span class="slds-assistive-text">Select All</span>
+                                        </label>
+                                    </div>
+                                </th>
+                                <!-- Columns based on Product2 fields -->
+                                <th class="slds-text-title_caps isbn-col">ISBN</th>
+                            <!-- conditionally render Category Family column on a termSearch-->
+                            <template if:true={termSearch}>
+                                <th class="slds-text-title_caps category-col" style="word-wrap: break-word; white-space: normal">Category Family</th>
+                            </template>
+                                <th class="slds-text-title_caps description-col">Description</th>
+                                <th class="slds-text-title_caps audience-col">Audience</th>
+                                <th class="slds-text-title_caps subtype-col">Sub Type</th>
+                                <!-- added columns for missing fields -->
+                                <th class="slds-text-title_caps programseries-col">Program Series</th>
+                                <!-- W-016058: replaced Grade Band with Grade -->
+                                <th class="slds-text-title_caps gradeLevel-col">Grade Level</th>
+                                <th class="slds-text-title_caps solutiontype-col">Solution Type</th>
+                                <th class="slds-text-title_caps duration-col">Duration</th>
+                                <!-- added columns for missing fields -->
+                                <th class="slds-text-title_caps copyright-col" style="word-wrap: break-word; white-space: normal">Copyright Year</th>
+                                <th class="slds-text-title_caps price-col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- updated categoryProductsFiltered to paginatedProducts -->
+                            <!-- Looping through returned CategoryProducts and displaying them in rows -->
+                            <template for:each={paginatedProducts} for:item="catProduct">
+                                <tr key={catProduct.id}>
+                                    <!-- Single select for each category product -->
+                                    <td data-label="Select">
+                                        <!-- added class for styling -->
+                                        <div class="slds-truncate checkbox-div">
+                                            <label>
+                                                <!-- added class for styling to make checkboxes larger -->
+                                                 <!-- FB-134 add checked attribute to control when this is checked and modify onchange to onclick -->
+                                                <input class="checkboxes" type="checkbox" data-id={catProduct.id} checked={catProduct.selected} onclick={handleCatProductSelection}></input>
+                                                <span class="slds-checkbox_faux"></span>
+                                                <span class="slds-assistive-text">Select Row</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <!-- Row data based on returned category product Product2 fields -->
+                                    <!-- ISBN property is used here -->
+                                    <td data-label="ISBN" title={catProduct.isbn}>{catProduct.isbn}</td>
+                                    <!-- Product fields used from here on -->
+                                    <!-- Category Family conditionally renders on a term search to avoid confusion -->
+                                    <template if:true={termSearch}>
+                                        <td data-label="Category Family" style="width: 200px; word-wrap: break-word; white-space: normal" title={catProduct.categoryFamily}>{catProduct.categoryFamily}</td>
+                                    </template>
+                                    <!-- all variables have been modified to match ProductTableData wrapper variables -->
+                                    <!-- added word-wrap and white-space stylings to have Description wrap properly -->
+                                    <td data-label="Description" style="width: 245px; word-wrap: break-word; white-space: normal" title={catProduct.description}>{catProduct.description}</td>
+                                    <td data-label="Audience" title={catProduct.audience}>{catProduct.audience}</td>
+                                    <td data-label="Sub Type" title={catProduct.productSubType} style="word-wrap: break-word; white-space: normal">{catProduct.productSubType}</td>
+                                    <!-- add row data for missing fields -->
+                                    <td data-label="Program Series" title={catProduct.programSeries}>{catProduct.programSeries}</td>
+                                    <!-- W-016058: replaced Grade Band with Grade Level -->
+                                    <td data-label="Grade Level" title={catProduct.gradeLevel} style="width: 130px; word-wrap: break-word; white-space: normal">{catProduct.gradeLevel}</td>
+                                    <td data-label="Solution Type" title={catProduct.solutionType} style="word-wrap: break-word; white-space: normal">{catProduct.solutionType}</td>
+                                    <td data-label="Duration" title={catProduct.duration}>{catProduct.duration}</td>
+                                    <!-- add row data for missing fields -->
+                                    <td data-label="Copyright Year" title={catProduct.copyrightYear}>{catProduct.copyrightYear}</td>
+                                    <!-- price format matches proper currency i.e. $50.50 for USD -->
+                                    <td data-label="Price" title={catProduct.netPrice}>{catProduct.netPriceFormatted}</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+            <!--RECORDS PER PAGE-->
+            <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread" style="padding-top: 0.5em;">
+                <!-- dropdown to control number of displayed products -->
+                <div class="slds-col">
+                    <div class="slds-list_inline slds-p-bottom_xx-small">
+                        <label class="slds-text-color_weak slds-p-horizontal_x-small" for="recordsPerPage">Page Size:</label>
+                        <div class="slds-select_container">
+                            <select class="slds-select" id="recordsPerPage" onchange={handleRecordsPerPage}>
+                                <template for:each={pageSizeOptions} for:item="option">
+                                    <option key={option} value={option}>{option}</option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- buttons next and previous-->
+                <div class="slds-align_absolute-center" style="height:5rem">
+                    <lightning-button disabled={disablePrevious} icon-name="utility:chevronleft" label="Previous" alternative-text="Previous" onclick={handlePreviousPage}></lightning-button>
+                    &nbsp;
+                    <span class="slds-badge">Showing {currentPage} &nbsp;of&nbsp; {totalPages} &nbsp;&nbsp;Page(s)</span>
+                    &nbsp;
+                    <lightning-button disabled={disableNext} icon-name="utility:chevronright" label="Next" alternative-text="Next" onclick={handleNextPage} class="slds-p-horizontal_x-small" icon-position="right"></lightning-button>
+                </div>
+                
+            </div>
+            </lightning-layout-item>
+        </template>
+
+        <!-- Renders if selected category has no products -->
+        <template if:false={showCategoryProducts}>
+            <lightning-card>
+                <!-- conditionally change no products returned message if category or search is done -->
+                <lightning-layout-item size="6" padding="around-small">
+                    <h1 style="color: red;">{noProductsReturnedMsg}</h1>
+                </lightning-layout-item>
+            </lightning-card>
+        </template>
+
+        <!-- Feedback 66 - add button-container class tho this div, update CSS file -->
+        <!-- Inserts products and directs user to ProductCart-->
+        <div class="slds-grid slds-grid_align-spread button-container">
+            <div class="slds-col"></div>
+            <div class="slds-col"></div>
+            <div class="slds-col">
+                <div>
+                    <lightning-button variant="brand" label="Add Selected Products" onclick={insertSelectedProducts}></lightning-button> 
+                </div>
+            </div>
+        </div>
+    </template>
+</template>
