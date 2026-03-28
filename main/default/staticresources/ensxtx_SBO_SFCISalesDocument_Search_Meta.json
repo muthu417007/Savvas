@@ -1,0 +1,936 @@
+{
+  "FieldMaps": {
+    "ensxtx_SBO_SFCISalesDocument_Search.SEARCHPARAMS": {
+      "FromSalesDocumentNumber": {
+        "FriendlyName": "FromSalesDocumentNumber",
+        "TechnicalName": "VBELN_FR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ToSalesDocumentNumber": {
+        "FriendlyName": "ToSalesDocumentNumber",
+        "TechnicalName": "VBELN_TO",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToParty": {
+        "FriendlyName": "SoldToParty",
+        "TechnicalName": "KUNAG",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToParty": {
+        "FriendlyName": "ShipToParty",
+        "TechnicalName": "KUNWE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CustomerPONumber": {
+        "FriendlyName": "CustomerPONumber",
+        "TechnicalName": "BSTNK",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Material": {
+        "FriendlyName": "Material",
+        "TechnicalName": "MATNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "TransactionGroup": {
+        "FriendlyName": "TransactionGroup",
+        "TechnicalName": "TRVOG",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "FromCreateDate": {
+        "FriendlyName": "FromCreateDate",
+        "TechnicalName": "ERDAT_FR",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "ToCreateDate": {
+        "FriendlyName": "ToCreateDate",
+        "TechnicalName": "ERDAT_TO",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "OpenOnly": {
+        "FriendlyName": "OpenOnly",
+        "TechnicalName": "X_OPENONLY",
+        "FieldType": "Boolean",
+        "FieldWidth": 1
+      },
+      "CompletedOnly": {
+        "FriendlyName": "CompletedOnly",
+        "TechnicalName": "X_COMPLETEDONLY",
+        "FieldType": "Boolean",
+        "FieldWidth": 1
+      },
+      "Username": {
+        "FriendlyName": "Username",
+        "TechnicalName": "USERNAME",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesDocumentVersionNumber": {
+        "FriendlyName": "SalesDocumentVersionNumber",
+        "TechnicalName": "VSNMR_V",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "YourReference": {
+        "FriendlyName": "YourReference",
+        "TechnicalName": "IHREZ",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToPurchaseOrderNumber": {
+        "FriendlyName": "ShipToPurchaseOrderNumber",
+        "TechnicalName": "BSTKD_E",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "X_DeliveryBlock": {
+        "FriendlyName": "X_DeliveryBlock",
+        "TechnicalName": "X_DELIVERY_BLOCK",
+        "FieldType": "Boolean",
+        "FieldWidth": 1
+      },
+      "X_BillingBlock": {
+        "FriendlyName": "X_BillingBlock",
+        "TechnicalName": "X_BILLING_BLOCK",
+        "FieldType": "Boolean",
+        "FieldWidth": 1
+      },
+      "X_CreditBlock": {
+        "FriendlyName": "X_CreditBlock",
+        "TechnicalName": "X_CREDIT_BLOCK",
+        "FieldType": "Boolean",
+        "FieldWidth": 1
+      }
+    },
+    "ensxtx_SBO_SFCISalesDocument_Search.SALESDOCTYPE": {
+      "SalesDocumentType": {
+        "FriendlyName": "SalesDocumentType",
+        "TechnicalName": "AUART",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "ensxtx_SBO_SFCISalesDocument_Search.CHANGED_DATE": {
+      "ChangedDateBegin": {
+        "FriendlyName": "ChangedDateBegin",
+        "TechnicalName": "CHBDATE",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "ChangedDateEnd": {
+        "FriendlyName": "ChangedDateEnd",
+        "TechnicalName": "CHEDATE",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      }
+    },
+    "ensxtx_SBO_SFCISalesDocument_Search.CUSTOM": {
+      "FIELD": {
+        "FriendlyName": "FIELD",
+        "TechnicalName": "FIELD",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "VALUE": {
+        "FriendlyName": "VALUE",
+        "TechnicalName": "VALUE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "ensxtx_SBO_SFCISalesDocument_Search.SEARCHRESULT": {
+      "SalesDocument": {
+        "FriendlyName": "SalesDocument",
+        "TechnicalName": "VBELN",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CustomerPONumber": {
+        "FriendlyName": "CustomerPONumber",
+        "TechnicalName": "BSTNK",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CreateDate": {
+        "FriendlyName": "CreateDate",
+        "TechnicalName": "ERDAT",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "SalesDocumentType": {
+        "FriendlyName": "SalesDocumentType",
+        "TechnicalName": "AUART",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesDocumentTypeDescription": {
+        "FriendlyName": "SalesDocumentTypeDescription",
+        "TechnicalName": "AUART_TEXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToParty": {
+        "FriendlyName": "SoldToParty",
+        "TechnicalName": "KUNAG",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToName": {
+        "FriendlyName": "SoldToName",
+        "TechnicalName": "KUNAG_NAME",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToCity": {
+        "FriendlyName": "SoldToCity",
+        "TechnicalName": "KUNAG_CITY1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToRegion": {
+        "FriendlyName": "SoldToRegion",
+        "TechnicalName": "KUNAG_REGION",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToRegionDescription": {
+        "FriendlyName": "SoldToRegionDescription",
+        "TechnicalName": "KUNAG_REGION_BEZEI",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToCountry": {
+        "FriendlyName": "SoldToCountry",
+        "TechnicalName": "KUNAG_COUNTRY",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToCountryDescription": {
+        "FriendlyName": "SoldToCountryDescription",
+        "TechnicalName": "KUNAG_COUNTRY_LANDX",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToParty": {
+        "FriendlyName": "ShipToParty",
+        "TechnicalName": "KUNWE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToName": {
+        "FriendlyName": "ShipToName",
+        "TechnicalName": "KUNWE_NAME",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToCity": {
+        "FriendlyName": "ShipToCity",
+        "TechnicalName": "KUNWE_CITY1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToRegion": {
+        "FriendlyName": "ShipToRegion",
+        "TechnicalName": "KUNWE_REGION",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToRegionDescription": {
+        "FriendlyName": "ShipToRegionDescription",
+        "TechnicalName": "KUNWE_REGION_BEZEI",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToCountry": {
+        "FriendlyName": "ShipToCountry",
+        "TechnicalName": "KUNWE_COUNTRY",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToCountryDescription": {
+        "FriendlyName": "ShipToCountryDescription",
+        "TechnicalName": "KUNWE_COUNTRY_LANDX",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "NetValueInDocumentCurrency": {
+        "FriendlyName": "NetValueInDocumentCurrency",
+        "TechnicalName": "NETWR",
+        "FieldType": "Decimal",
+        "FieldWidth": 1
+      },
+      "TaxAmountInDocumentCurrency": {
+        "FriendlyName": "TaxAmountInDocumentCurrency",
+        "TechnicalName": "MWSBP",
+        "FieldType": "Decimal",
+        "FieldWidth": 1
+      },
+      "SDDocumentCurrency": {
+        "FriendlyName": "SDDocumentCurrency",
+        "TechnicalName": "WAERK",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "OrderStatus": {
+        "FriendlyName": "OrderStatus",
+        "TechnicalName": "ORDERSTATUS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SalesDocumentVersionNumber": {
+        "FriendlyName": "SalesDocumentVersionNumber",
+        "TechnicalName": "VSNMR_V",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "YourReference": {
+        "FriendlyName": "YourReference",
+        "TechnicalName": "IHREZ",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToPurchaseOrderNumber": {
+        "FriendlyName": "ShipToPurchaseOrderNumber",
+        "TechnicalName": "BSTKD_E",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "TransactionGroup": {
+        "FriendlyName": "TransactionGroup",
+        "TechnicalName": "TRVOG",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DeliveryBlock": {
+        "FriendlyName": "DeliveryBlock",
+        "TechnicalName": "LIFSK",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DeliveryBlockDescription": {
+        "FriendlyName": "DeliveryBlockDescription",
+        "TechnicalName": "LIFSK_TEXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "BillingBlock": {
+        "FriendlyName": "BillingBlock",
+        "TechnicalName": "FAKSK",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "BillingBlockDescription": {
+        "FriendlyName": "BillingBlockDescription",
+        "TechnicalName": "FAKSK_TEXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CreditBlock": {
+        "FriendlyName": "CreditBlock",
+        "TechnicalName": "CMGST",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CreditBlockDescription": {
+        "FriendlyName": "CreditBlockDescription",
+        "TechnicalName": "CMGST_TEXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DeliveryStatus": {
+        "FriendlyName": "DeliveryStatus",
+        "TechnicalName": "DLVSTS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DeliveryStatusDescription": {
+        "FriendlyName": "DeliveryStatusDescription",
+        "TechnicalName": "DLVSTS_TEXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "TotalQuantity": {
+        "FriendlyName": "TotalQuantity",
+        "TechnicalName": "TOTQTY",
+        "FieldType": "Decimal",
+        "FieldWidth": 1
+      },
+      "GoodsIssuedQuantity": {
+        "FriendlyName": "GoodsIssuedQuantity",
+        "TechnicalName": "PGIQTY",
+        "FieldType": "Decimal",
+        "FieldWidth": 1
+      },
+      "LastChangedDate": {
+        "FriendlyName": "LastChangedDate",
+        "TechnicalName": "AEDAT",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "StartDate": {
+        "FriendlyName": "StartDate",
+        "TechnicalName": "VBEGDAT",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "EndDate": {
+        "FriendlyName": "EndDate",
+        "TechnicalName": "VENDDAT",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "CUSTOM01": {
+        "FriendlyName": "CUSTOM01",
+        "TechnicalName": "CUSTOM01",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM02": {
+        "FriendlyName": "CUSTOM02",
+        "TechnicalName": "CUSTOM02",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM03": {
+        "FriendlyName": "CUSTOM03",
+        "TechnicalName": "CUSTOM03",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM04": {
+        "FriendlyName": "CUSTOM04",
+        "TechnicalName": "CUSTOM04",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM05": {
+        "FriendlyName": "CUSTOM05",
+        "TechnicalName": "CUSTOM05",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM06": {
+        "FriendlyName": "CUSTOM06",
+        "TechnicalName": "CUSTOM06",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM07": {
+        "FriendlyName": "CUSTOM07",
+        "TechnicalName": "CUSTOM07",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM08": {
+        "FriendlyName": "CUSTOM08",
+        "TechnicalName": "CUSTOM08",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM09": {
+        "FriendlyName": "CUSTOM09",
+        "TechnicalName": "CUSTOM09",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM10": {
+        "FriendlyName": "CUSTOM10",
+        "TechnicalName": "CUSTOM10",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "TotalItems": {
+        "FriendlyName": "TotalItems",
+        "TechnicalName": "TOTIT",
+        "FieldType": "Short",
+        "FieldWidth": 1
+      }
+    }
+  },
+  "StructMap": {
+    "SEARCHPARAMS": {
+      "Name": "SEARCHPARAMS",
+      "ItemType": "ensxtx_SBO_SFCISalesDocument_Search.SEARCHPARAMS",
+      "FieldMap": {
+        "FromSalesDocumentNumber": {
+          "FriendlyName": "FromSalesDocumentNumber",
+          "TechnicalName": "VBELN_FR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ToSalesDocumentNumber": {
+          "FriendlyName": "ToSalesDocumentNumber",
+          "TechnicalName": "VBELN_TO",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToParty": {
+          "FriendlyName": "SoldToParty",
+          "TechnicalName": "KUNAG",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToParty": {
+          "FriendlyName": "ShipToParty",
+          "TechnicalName": "KUNWE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CustomerPONumber": {
+          "FriendlyName": "CustomerPONumber",
+          "TechnicalName": "BSTNK",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Material": {
+          "FriendlyName": "Material",
+          "TechnicalName": "MATNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "TransactionGroup": {
+          "FriendlyName": "TransactionGroup",
+          "TechnicalName": "TRVOG",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "FromCreateDate": {
+          "FriendlyName": "FromCreateDate",
+          "TechnicalName": "ERDAT_FR",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "ToCreateDate": {
+          "FriendlyName": "ToCreateDate",
+          "TechnicalName": "ERDAT_TO",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "OpenOnly": {
+          "FriendlyName": "OpenOnly",
+          "TechnicalName": "X_OPENONLY",
+          "FieldType": "Boolean",
+          "FieldWidth": 1
+        },
+        "CompletedOnly": {
+          "FriendlyName": "CompletedOnly",
+          "TechnicalName": "X_COMPLETEDONLY",
+          "FieldType": "Boolean",
+          "FieldWidth": 1
+        },
+        "Username": {
+          "FriendlyName": "Username",
+          "TechnicalName": "USERNAME",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesDocumentVersionNumber": {
+          "FriendlyName": "SalesDocumentVersionNumber",
+          "TechnicalName": "VSNMR_V",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "YourReference": {
+          "FriendlyName": "YourReference",
+          "TechnicalName": "IHREZ",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToPurchaseOrderNumber": {
+          "FriendlyName": "ShipToPurchaseOrderNumber",
+          "TechnicalName": "BSTKD_E",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "X_DeliveryBlock": {
+          "FriendlyName": "X_DeliveryBlock",
+          "TechnicalName": "X_DELIVERY_BLOCK",
+          "FieldType": "Boolean",
+          "FieldWidth": 1
+        },
+        "X_BillingBlock": {
+          "FriendlyName": "X_BillingBlock",
+          "TechnicalName": "X_BILLING_BLOCK",
+          "FieldType": "Boolean",
+          "FieldWidth": 1
+        },
+        "X_CreditBlock": {
+          "FriendlyName": "X_CreditBlock",
+          "TechnicalName": "X_CREDIT_BLOCK",
+          "FieldType": "Boolean",
+          "FieldWidth": 1
+        }
+      }
+    },
+    "CHANGED_DATE": {
+      "Name": "CHANGED_DATE",
+      "ItemType": "ensxtx_SBO_SFCISalesDocument_Search.CHANGED_DATE",
+      "FieldMap": {
+        "ChangedDateBegin": {
+          "FriendlyName": "ChangedDateBegin",
+          "TechnicalName": "CHBDATE",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "ChangedDateEnd": {
+          "FriendlyName": "ChangedDateEnd",
+          "TechnicalName": "CHEDATE",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        }
+      }
+    }
+  },
+  "CollectionMap": {
+    "SALESDOCTYPE": {
+      "Name": "SALESDOCTYPE",
+      "ItemType": "ensxtx_SBO_SFCISalesDocument_Search.SALESDOCTYPE",
+      "FieldMap": {
+        "SalesDocumentType": {
+          "FriendlyName": "SalesDocumentType",
+          "TechnicalName": "AUART",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    },
+    "CUSTOM": {
+      "Name": "CUSTOM",
+      "ItemType": "ensxtx_SBO_SFCISalesDocument_Search.CUSTOM",
+      "FieldMap": {
+        "FIELD": {
+          "FriendlyName": "FIELD",
+          "TechnicalName": "FIELD",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "VALUE": {
+          "FriendlyName": "VALUE",
+          "TechnicalName": "VALUE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    },
+    "SEARCHRESULT": {
+      "Name": "SEARCHRESULT",
+      "ItemType": "ensxtx_SBO_SFCISalesDocument_Search.SEARCHRESULT",
+      "FieldMap": {
+        "SalesDocument": {
+          "FriendlyName": "SalesDocument",
+          "TechnicalName": "VBELN",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CustomerPONumber": {
+          "FriendlyName": "CustomerPONumber",
+          "TechnicalName": "BSTNK",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CreateDate": {
+          "FriendlyName": "CreateDate",
+          "TechnicalName": "ERDAT",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "SalesDocumentType": {
+          "FriendlyName": "SalesDocumentType",
+          "TechnicalName": "AUART",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesDocumentTypeDescription": {
+          "FriendlyName": "SalesDocumentTypeDescription",
+          "TechnicalName": "AUART_TEXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToParty": {
+          "FriendlyName": "SoldToParty",
+          "TechnicalName": "KUNAG",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToName": {
+          "FriendlyName": "SoldToName",
+          "TechnicalName": "KUNAG_NAME",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToCity": {
+          "FriendlyName": "SoldToCity",
+          "TechnicalName": "KUNAG_CITY1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToRegion": {
+          "FriendlyName": "SoldToRegion",
+          "TechnicalName": "KUNAG_REGION",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToRegionDescription": {
+          "FriendlyName": "SoldToRegionDescription",
+          "TechnicalName": "KUNAG_REGION_BEZEI",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToCountry": {
+          "FriendlyName": "SoldToCountry",
+          "TechnicalName": "KUNAG_COUNTRY",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToCountryDescription": {
+          "FriendlyName": "SoldToCountryDescription",
+          "TechnicalName": "KUNAG_COUNTRY_LANDX",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToParty": {
+          "FriendlyName": "ShipToParty",
+          "TechnicalName": "KUNWE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToName": {
+          "FriendlyName": "ShipToName",
+          "TechnicalName": "KUNWE_NAME",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToCity": {
+          "FriendlyName": "ShipToCity",
+          "TechnicalName": "KUNWE_CITY1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToRegion": {
+          "FriendlyName": "ShipToRegion",
+          "TechnicalName": "KUNWE_REGION",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToRegionDescription": {
+          "FriendlyName": "ShipToRegionDescription",
+          "TechnicalName": "KUNWE_REGION_BEZEI",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToCountry": {
+          "FriendlyName": "ShipToCountry",
+          "TechnicalName": "KUNWE_COUNTRY",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToCountryDescription": {
+          "FriendlyName": "ShipToCountryDescription",
+          "TechnicalName": "KUNWE_COUNTRY_LANDX",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "NetValueInDocumentCurrency": {
+          "FriendlyName": "NetValueInDocumentCurrency",
+          "TechnicalName": "NETWR",
+          "FieldType": "Decimal",
+          "FieldWidth": 1
+        },
+        "TaxAmountInDocumentCurrency": {
+          "FriendlyName": "TaxAmountInDocumentCurrency",
+          "TechnicalName": "MWSBP",
+          "FieldType": "Decimal",
+          "FieldWidth": 1
+        },
+        "SDDocumentCurrency": {
+          "FriendlyName": "SDDocumentCurrency",
+          "TechnicalName": "WAERK",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "OrderStatus": {
+          "FriendlyName": "OrderStatus",
+          "TechnicalName": "ORDERSTATUS",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SalesDocumentVersionNumber": {
+          "FriendlyName": "SalesDocumentVersionNumber",
+          "TechnicalName": "VSNMR_V",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "YourReference": {
+          "FriendlyName": "YourReference",
+          "TechnicalName": "IHREZ",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToPurchaseOrderNumber": {
+          "FriendlyName": "ShipToPurchaseOrderNumber",
+          "TechnicalName": "BSTKD_E",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "TransactionGroup": {
+          "FriendlyName": "TransactionGroup",
+          "TechnicalName": "TRVOG",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DeliveryBlock": {
+          "FriendlyName": "DeliveryBlock",
+          "TechnicalName": "LIFSK",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DeliveryBlockDescription": {
+          "FriendlyName": "DeliveryBlockDescription",
+          "TechnicalName": "LIFSK_TEXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "BillingBlock": {
+          "FriendlyName": "BillingBlock",
+          "TechnicalName": "FAKSK",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "BillingBlockDescription": {
+          "FriendlyName": "BillingBlockDescription",
+          "TechnicalName": "FAKSK_TEXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CreditBlock": {
+          "FriendlyName": "CreditBlock",
+          "TechnicalName": "CMGST",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CreditBlockDescription": {
+          "FriendlyName": "CreditBlockDescription",
+          "TechnicalName": "CMGST_TEXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DeliveryStatus": {
+          "FriendlyName": "DeliveryStatus",
+          "TechnicalName": "DLVSTS",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DeliveryStatusDescription": {
+          "FriendlyName": "DeliveryStatusDescription",
+          "TechnicalName": "DLVSTS_TEXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "TotalQuantity": {
+          "FriendlyName": "TotalQuantity",
+          "TechnicalName": "TOTQTY",
+          "FieldType": "Decimal",
+          "FieldWidth": 1
+        },
+        "GoodsIssuedQuantity": {
+          "FriendlyName": "GoodsIssuedQuantity",
+          "TechnicalName": "PGIQTY",
+          "FieldType": "Decimal",
+          "FieldWidth": 1
+        },
+        "LastChangedDate": {
+          "FriendlyName": "LastChangedDate",
+          "TechnicalName": "AEDAT",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "StartDate": {
+          "FriendlyName": "StartDate",
+          "TechnicalName": "VBEGDAT",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "EndDate": {
+          "FriendlyName": "EndDate",
+          "TechnicalName": "VENDDAT",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "CUSTOM01": {
+          "FriendlyName": "CUSTOM01",
+          "TechnicalName": "CUSTOM01",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM02": {
+          "FriendlyName": "CUSTOM02",
+          "TechnicalName": "CUSTOM02",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM03": {
+          "FriendlyName": "CUSTOM03",
+          "TechnicalName": "CUSTOM03",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM04": {
+          "FriendlyName": "CUSTOM04",
+          "TechnicalName": "CUSTOM04",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM05": {
+          "FriendlyName": "CUSTOM05",
+          "TechnicalName": "CUSTOM05",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM06": {
+          "FriendlyName": "CUSTOM06",
+          "TechnicalName": "CUSTOM06",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM07": {
+          "FriendlyName": "CUSTOM07",
+          "TechnicalName": "CUSTOM07",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM08": {
+          "FriendlyName": "CUSTOM08",
+          "TechnicalName": "CUSTOM08",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM09": {
+          "FriendlyName": "CUSTOM09",
+          "TechnicalName": "CUSTOM09",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM10": {
+          "FriendlyName": "CUSTOM10",
+          "TechnicalName": "CUSTOM10",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "TotalItems": {
+          "FriendlyName": "TotalItems",
+          "TechnicalName": "TOTIT",
+          "FieldType": "Short",
+          "FieldWidth": 1
+        }
+      }
+    }
+  }
+}

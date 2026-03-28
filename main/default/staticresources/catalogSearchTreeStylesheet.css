@@ -1,0 +1,130 @@
+.menu .slds-tree__item:hover{
+    background: none;
+}
+.menu .slds-tree__item a:hover{
+    text-decoration: none;
+}
+.menu [aria-level="1"]>.slds-tree__item a span{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.2px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    color: #173770;
+}
+.menu [aria-level="2"]>.slds-tree__item a span, .menu [aria-level="3"]>.slds-tree__item a span{
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    color: #173770;
+}
+.menu [aria-level="4"]>.slds-tree__item a span, .menu [aria-level="5"]>.slds-tree__item a span, .menu [aria-level="6"]>.slds-tree__item a span, .menu [aria-level="7"]>.slds-tree__item a span, .menu [aria-level="8"]>.slds-tree__item a span, .menu [aria-level="9"]>.slds-tree__item a span, .menu [aria-level="10"]>.slds-tree__item a span, .menu [aria-level="11"]>.slds-tree__item a span, .menu [aria-level="12"]>.slds-tree__item a span{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    color: #173770;
+}
+.menu .toggle-panel-button .slds-icon{
+	--slds-c-icon-color-foreground: #0C1E3D;
+	width: 20px;
+	cursor: pointer;
+}
+.menu .slds-tree__item button:before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: #679608;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+}
+.menu .slds-tree__item button:after {
+    content: ">";
+    font-size: 17px;
+    position: absolute;
+    left: 24%;
+    color: #fff;
+    transform: rotate(90deg);
+    line-height: 20px;
+}
+.menu lightning-tree-item[aria-expanded="true"]>.slds-tree__item button:before{
+	background-color: #2150A3;
+}
+.menu lightning-tree-item[aria-expanded="true"]>.slds-tree__item button:after{
+	transform: rotate(-90deg);
+	left: 2px;
+    right: 5px;
+}
+.menu .slds-tree__item{
+	padding: 10px 40px 10px 0;
+}
+.menu lightning-tree-item .slds-button.slds-button_icon{
+	position: absolute;
+    right: 13px;
+    height: 20px;
+    width: 20px;
+    z-index: 2;
+	margin-top: -3px;
+}
+.menu lightning-tree-item .slds-button.slds-button_icon svg{
+	display: none;
+}
+.menu [aria-level="1"]>.slds-tree__item{
+	padding-left: 20px;
+	border-bottom: 1px solid #AFC3D8;
+}
+.menu [aria-level="2"]>.slds-tree__item{
+	padding-left: 30px;
+}
+.menu [aria-level="3"]>.slds-tree__item{
+	padding-left: 45px;
+}
+.menu [aria-level="4"]>.slds-tree__item{
+	padding-left: 58px;
+}
+.menu [aria-level="5"]>.slds-tree__item{
+	padding-left: 83px;
+}
+.menu [aria-level="6"]>.slds-tree__item{
+	padding-left: 93px;
+}
+.menu [aria-level="7"]>.slds-tree__item{
+	padding-left: 103px;
+}
+.menu [aria-level="8"]>.slds-tree__item{
+	padding-left: 113px;
+}
+.menu [aria-level="9"]>.slds-tree__item{
+	padding-left: 123px;
+}
+.menu [aria-level="10"]>.slds-tree__item{
+	padding-left: 133px;
+}
+.menu [aria-level="11"]>.slds-tree__item{
+	padding-left: 143px;
+}
+.menu [aria-level="12"]>.slds-tree__item{
+	padding-left: 153px;
+}
+.menu .slds-tree [role=treeitem][aria-selected=true]>.slds-tree__item{
+	background: none;
+	box-shadow: none;
+}
+.menu .slds-tree [role=treeitem][aria-selected=true]>.slds-tree__item a span{
+	font-weight: 600;
+}
+.slds-tree [role=treeitem]:focus>.slds-tree__item{
+	box-shadow: 0 0 0 1px #0C1E3D !important;
+	text-decoration: none !important;
+	outline: none !important;
+	border: none !important;
+	background: none;
+}
+.menu .slds-tree_container{
+	width: 658px;
+    max-width: none;
+}

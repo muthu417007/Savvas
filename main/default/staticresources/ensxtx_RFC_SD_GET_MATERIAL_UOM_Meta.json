@@ -1,0 +1,59 @@
+{
+  "FieldMaps": {
+    "ensxtx_RFC_SD_GET_MATERIAL_UOM.RESULT": {
+      "IV_MATNR": {
+        "FriendlyName": "IV_MATNR",
+        "TechnicalName": "IV_MATNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "ensxtx_RFC_SD_GET_MATERIAL_UOM.ET_OUTPUT": {
+      "MEINH": {
+        "FriendlyName": "MEINH",
+        "TechnicalName": "MEINH",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "MEINH_INTERNAL": {
+        "FriendlyName": "MEINH_INTERNAL",
+        "TechnicalName": "MEINH_INTERNAL",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "MSEHL": {
+        "FriendlyName": "MSEHL",
+        "TechnicalName": "MSEHL",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    }
+  },
+  "StructMap": {},
+  "CollectionMap": {
+    "ET_OUTPUT": {
+      "Name": "ET_OUTPUT",
+      "ItemType": "ensxtx_RFC_SD_GET_MATERIAL_UOM.ET_OUTPUT",
+      "FieldMap": {
+        "MEINH": {
+          "FriendlyName": "MEINH",
+          "TechnicalName": "MEINH",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "MEINH_INTERNAL": {
+          "FriendlyName": "MEINH_INTERNAL",
+          "TechnicalName": "MEINH_INTERNAL",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "MSEHL": {
+          "FriendlyName": "MSEHL",
+          "TechnicalName": "MSEHL",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  }
+}

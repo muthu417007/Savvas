@@ -1,0 +1,40 @@
+{
+  "FieldMaps": {
+    "RFC_PM_GET_UOM.RESULT": {},
+    "RFC_PM_GET_UOM.ET_UOM": {
+      "MSEH3": {
+        "FriendlyName": "MSEH3",
+        "TechnicalName": "MSEH3",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "MSEHL": {
+        "FriendlyName": "MSEHL",
+        "TechnicalName": "MSEHL",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    }
+  },
+  "StructMap": {},
+  "CollectionMap": {
+    "ET_UOM": {
+      "Name": "ET_UOM",
+      "ItemType": "RFC_PM_GET_UOM.ET_UOM",
+      "FieldMap": {
+        "MSEH3": {
+          "FriendlyName": "MSEH3",
+          "TechnicalName": "MSEH3",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "MSEHL": {
+          "FriendlyName": "MSEHL",
+          "TechnicalName": "MSEHL",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  }
+}

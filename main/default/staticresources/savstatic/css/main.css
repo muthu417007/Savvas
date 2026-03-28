@@ -1,0 +1,68 @@
+
+table.cstmTable th,
+tr.custom-background,
+tr.custom-background:hover,
+tr.custom-background:hover td{
+    background: linear-gradient(#1DACEA, #1284B5);
+    color:#fff;
+    margin:8px 0px
+}
+.tblColum-del button{
+    border:none;
+}
+button[disabled]{
+    opacity: 0.7;
+    cursor: not-allowed!important;
+}
+
+.tblColum-del svg{
+    width:25px;
+    height:25px;
+}
+
+table.cstmTable td{
+    padding-top:0.5rem;
+}
+table.cstmTable td .slds-input{
+    width:80px;
+}
+.tblwidth-equal {
+    background-color: #fff;
+}
+/* .tblwidth-equal table th{
+   width:140px;
+} */
+.slds-truncate.white-normal{
+    white-space:normal;
+}
+tr.custom-background{
+    height:4em;
+}
+tr.custom-background td{
+vertical-align: middle;
+}
+.btnOther{
+color: #0b87bc;
+font-weight: bold;
+}
+.lbl-remove .slds-form-element__label:empty,
+label.slds-form-element__label:empty,
+.removeTd-empty tr td:empty{ 
+    display:none;
+}
+.minwidth-200{
+    min-width:200px;
+}
+table.cstmTable td .minwidth-200  .slds-input{
+    min-width:200px;
+}
+.head-lbl{
+    font-size:1.2em;
+    font-weight:bold!important;
+}
+.nextDisabled{
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity:0.5;
+    }
+

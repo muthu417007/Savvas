@@ -1,0 +1,355 @@
+BODY {
+	font-family: Salesforce Sans;
+	overflow: hidden;
+}
+
+TABLE {
+	width: initial;
+}
+
+BUTTON {
+	font-size: 16px;
+	height: 40px;
+	min-width: 120px;
+}
+
+H6 {
+	font-weight: bold;
+	font-size: 16px;
+	padding-bottom: 10px;
+}
+
+LABEL.radio {
+	width: 70px;
+	display: inline-block;
+	font-weight: 200;
+	margin-left: 10px;
+}
+
+#header {
+	background-color: #02C2B9;
+	border-bottom: none;
+	height: 40px;
+	padding: 9px 30px;
+}
+
+#headerTitle {
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	text-align: center;
+	color: white;
+	font-size: 16px;
+	width: 90%;
+}
+
+.headerIcon {
+	background-color: inherit !important;
+	padding: 0 !important;
+	margin-top: -10px !important;
+	height: 35px !important;
+	width: 35px !important;
+	fill: white;
+}
+
+#main {
+	width: 100%;
+	height: 98%;
+	padding: 20px;
+}
+
+#inputSearch {
+	font-size: 14px;
+	padding: 5px 12px;
+	min-height: 0px;
+	width: 100%;
+}
+
+#assetPane {
+	width: 25%;
+	height: 100%;
+	overflow-y: hidden;
+	float: left;
+	margin-top: 3px;
+}
+
+#assetList {
+	height: 77%;
+	overflow-y: scroll;
+	padding: 0px 10px;
+}
+
+#rightPane {
+	float: right;
+	width: 75%;
+	height: 95%;
+}
+
+#leftConfig {
+	float: left;
+	height: 100%;
+	width: 60%;
+	overflow-y: scroll;
+}
+
+#rightConfig {
+	float: right;
+	width: 40%;
+	height: 100%;
+	padding: 0px 10px 0px 45px;
+}
+
+#editorContainer { 
+	display: none;
+}
+
+#scheduleConfig {
+	display: none;
+	margin-right: -4px;
+}
+
+#btnBar {
+	display: flex; display: -webkit-flex; display: -moz-flex;
+	justify-content: flex-end; -webkit-justify-content: flex-end; -moz-justify-content: flex-end;
+	margin: 0px -4px 30px 0px;
+}
+
+#btnReports, #btnSOQL {
+	width: 50%;
+}
+
+#btnRun {
+	background-color: #2EC2BA;
+	border-color: #2EC2BA;
+}
+
+#btnSave {
+	background-color: #2D93ED;
+	border-color: #2D93ED;
+	float: right;
+	margin-top: 50px;
+}
+
+#btnClear {
+	background-color: white;
+	border-color: #C5D3E0;
+	color: #C5D3E0;
+}
+
+#resultsContainer {
+	display: none;	
+	height: 200px;
+	margin-bottom: 30px;
+	overflow: scroll;
+}
+
+#tableContainer {
+	height: 170px;
+	overflow-y: scroll;
+}
+
+#resultsHeader {
+	display: flex; display: -webkit-flex; display: -moz-flex;
+	justify-content: space-between; -webkit-justify-content: space-between; -moz-justify-content: space-between;
+}
+
+#resultsCloseIcon {
+	height: 15px;
+	width: 15px;
+	background-color: #C5D3E0;
+	fill: white;
+	border-radius: 50%;
+	margin-top: 5px;
+	cursor: pointer;
+}
+
+.extractActionIcon {
+	height: 20px;
+	width: 20px;
+	background-color: #2EC2BA;
+	fill: white;
+	border-radius: 50%;
+	margin-left: 5px;
+	cursor: pointer;
+	display: none;
+}
+
+.extracttile:hover .extractActionIcon { 
+	display: inline-block;
+}
+
+.extractActionIcon.delete {
+	background-color: #D4504C;
+	fill: white;
+}
+
+#resultsTable {
+	font-size: 12px;
+	color: #4a4a4a;
+	line-height: 12px;
+	font-weight: 400;
+	padding: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+#resultsTable > tbody > tr > td {
+	padding: 4px 8px !important;
+	line-height: 14px;
+	border-top: 1px solid #efefef;
+}
+
+#resultsTable > thead > tr > th {
+	border-bottom: 0;
+	background-color: #2EC2BA;
+	color: white;
+	padding: 2px 8px;
+	border-top: 1px solid #efefef;
+}
+
+#editor {
+	height: 160px;
+	width: 100%;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 0.25rem;
+}
+
+.editorPreview {
+	height: 100px;
+	width: 95%;
+	margin: 10px;
+	border: 1px solid #ccc;
+	border-radius: 0.25rem;
+}
+
+#loading {
+	display: none;
+}
+
+.button-group {
+	display: flex; display: -webkit-flex; display: -moz-flex;
+	justify-content: center; -webkit-justify-content: center; -moz-justify-content: center;
+}
+
+.assetListing {
+	padding: 5px 5px;
+	color: #1970BD;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.noteText {
+	font-size: 12px;
+	font-weight: 200;
+	color: #CCCCCC;
+}
+
+#metadata {
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.metadataIcon {
+	height: 24px;
+	width: 24px;
+	background-color: #1970BD;
+	fill: white;
+	border-radius: 50%;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+.metadataListing {
+	padding: 5px 10px;
+	color: #1970BD;
+	font-weight: normal;
+}
+
+.navbar-brand {
+	padding: 0;
+}
+
+.nav-tabs > li {
+	font-size: 16px;
+	font-weight: 200;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-bottom: 2px solid #02c2b9;
+  color: #02c2b9;
+}
+
+.nav-tabs > li > a:hover {
+  background-color: transparent;
+  border: 0;
+  color: #02c2b9;
+}
+
+.nav-tabs > li > a {
+  color: #c2c2c2;
+}
+
+.navContainer, .tab-content {
+	width: 90%;
+	max-width: 1170px;
+	margin: 0px auto 20px auto;
+}
+
+.tab-content {
+	height: 90%;
+}
+
+.input-text {
+	width: 240px;
+	margin: 0px 0px 10px 10px;
+}
+
+.input-text.radio {
+	display: inline-block;
+}
+
+.fixed-table-container thead th .th-inner {
+	padding: 2px 8px;
+	line-height: 14px;
+}
+
+#scheduleConfig > .bootstrap-select > .dropdown-menu.open {
+	max-height: 240px !important;
+}
+
+#scheduleConfig > .bootstrap-select > .dropdown-menu.open > .dropdown-menu.inner {
+	max-height: 230px !important;
+}
+
+#existing {
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.extracttile {
+	max-height: 200px !important;
+	width: 95% !important;
+	padding: 20px !important;
+	margin-bottom: 20px !important;
+	border-radius: 0;
+	border: 0;
+	border-bottom: 1px solid #c5d3e0;
+}
+
+#deleteModal {
+	height: 200px;
+	width: 500px;
+}
+
+#metadataModal {
+	height: 600px;
+	width: 500px;
+}
+
+.modal--body {
+	overflow-y: scroll;
+}

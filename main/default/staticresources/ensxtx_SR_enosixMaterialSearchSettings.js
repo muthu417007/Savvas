@@ -1,0 +1,4 @@
+{
+  "UseSalesOrganization": true,
+  "UseDistributionChannel": true
+}

@@ -1,0 +1,796 @@
+{
+  "FieldMaps": {
+    "ensxtx_SBO_SFCIDelivery_Search.SEARCHPARAMS": {
+      "Route": {
+        "FriendlyName": "Route",
+        "TechnicalName": "ROUTE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "MeansOfTransportID": {
+        "FriendlyName": "MeansOfTransportID",
+        "TechnicalName": "TRAID",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "FromCreateDate": {
+        "FriendlyName": "FromCreateDate",
+        "TechnicalName": "ERDAT_FR",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "ToCreateDate": {
+        "FriendlyName": "ToCreateDate",
+        "TechnicalName": "ERDAT_TO",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "DeliveryDateFrom": {
+        "FriendlyName": "DeliveryDateFrom",
+        "TechnicalName": "LFDAT_FR",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "DeliveryDateTo": {
+        "FriendlyName": "DeliveryDateTo",
+        "TechnicalName": "LFDAT_TO",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "DeliveryFrom": {
+        "FriendlyName": "DeliveryFrom",
+        "TechnicalName": "VBELN_FR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DeliveryTo": {
+        "FriendlyName": "DeliveryTo",
+        "TechnicalName": "VBELN_TO",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToParty": {
+        "FriendlyName": "SoldToParty",
+        "TechnicalName": "KUNAG",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToParty": {
+        "FriendlyName": "ShipToParty",
+        "TechnicalName": "KUNWE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShippingPoint": {
+        "FriendlyName": "ShippingPoint",
+        "TechnicalName": "VSTEL",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShippingConditions": {
+        "FriendlyName": "ShippingConditions",
+        "TechnicalName": "VSBED",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DeliveryPriority": {
+        "FriendlyName": "DeliveryPriority",
+        "TechnicalName": "LPRIO",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "BillofLading": {
+        "FriendlyName": "BillofLading",
+        "TechnicalName": "BOLNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "PGIDateFrom": {
+        "FriendlyName": "PGIDateFrom",
+        "TechnicalName": "WADAT_FR",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "PGIDateTo": {
+        "FriendlyName": "PGIDateTo",
+        "TechnicalName": "WADAT_TO",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "Username": {
+        "FriendlyName": "Username",
+        "TechnicalName": "USERNAME",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "X_Open": {
+        "FriendlyName": "X_Open",
+        "TechnicalName": "X_OPEN",
+        "FieldType": "Boolean",
+        "FieldWidth": 1
+      },
+      "X_Picked": {
+        "FriendlyName": "X_Picked",
+        "TechnicalName": "X_PICKED",
+        "FieldType": "Boolean",
+        "FieldWidth": 1
+      },
+      "X_Packed": {
+        "FriendlyName": "X_Packed",
+        "TechnicalName": "X_PACKED",
+        "FieldType": "Boolean",
+        "FieldWidth": 1
+      },
+      "X_PGIed": {
+        "FriendlyName": "X_PGIed",
+        "TechnicalName": "X_PGIED",
+        "FieldType": "Boolean",
+        "FieldWidth": 1
+      }
+    },
+    "ensxtx_SBO_SFCIDelivery_Search.DELIVERYTYPE": {
+      "DeliveryType": {
+        "FriendlyName": "DeliveryType",
+        "TechnicalName": "LFART",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "ensxtx_SBO_SFCIDelivery_Search.CUSTOM": {
+      "FIELD": {
+        "FriendlyName": "FIELD",
+        "TechnicalName": "FIELD",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "VALUE": {
+        "FriendlyName": "VALUE",
+        "TechnicalName": "VALUE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "ensxtx_SBO_SFCIDelivery_Search.SEARCHRESULT": {
+      "Delivery": {
+        "FriendlyName": "Delivery",
+        "TechnicalName": "VBELN",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Route": {
+        "FriendlyName": "Route",
+        "TechnicalName": "ROUTE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "MeansOfTransportID": {
+        "FriendlyName": "MeansOfTransportID",
+        "TechnicalName": "TRAID",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "BillofLading": {
+        "FriendlyName": "BillofLading",
+        "TechnicalName": "BOLNR",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CreateDate": {
+        "FriendlyName": "CreateDate",
+        "TechnicalName": "ERDAT",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "DeliveryDate": {
+        "FriendlyName": "DeliveryDate",
+        "TechnicalName": "LFDAT",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "PGIDate": {
+        "FriendlyName": "PGIDate",
+        "TechnicalName": "WADAT_IST",
+        "FieldType": "Date",
+        "FieldWidth": 1
+      },
+      "DeliveryType": {
+        "FriendlyName": "DeliveryType",
+        "TechnicalName": "LFART",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DeliveryTypeText": {
+        "FriendlyName": "DeliveryTypeText",
+        "TechnicalName": "LFART_TEXT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToParty": {
+        "FriendlyName": "SoldToParty",
+        "TechnicalName": "KUNAG",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToName": {
+        "FriendlyName": "SoldToName",
+        "TechnicalName": "KUNAG_NAME",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToCity": {
+        "FriendlyName": "SoldToCity",
+        "TechnicalName": "KUNAG_CITY1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToRegion": {
+        "FriendlyName": "SoldToRegion",
+        "TechnicalName": "KUNAG_REGION",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToRegionDescription": {
+        "FriendlyName": "SoldToRegionDescription",
+        "TechnicalName": "KUNAG_REGION_BEZEI",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToCountry": {
+        "FriendlyName": "SoldToCountry",
+        "TechnicalName": "KUNAG_COUNTRY",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "SoldToCountryDescription": {
+        "FriendlyName": "SoldToCountryDescription",
+        "TechnicalName": "KUNAG_COUNTRY_LANDX",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToParty": {
+        "FriendlyName": "ShipToParty",
+        "TechnicalName": "KUNWE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToName": {
+        "FriendlyName": "ShipToName",
+        "TechnicalName": "KUNWE_NAME",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToCity": {
+        "FriendlyName": "ShipToCity",
+        "TechnicalName": "KUNWE_CITY1",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToRegion": {
+        "FriendlyName": "ShipToRegion",
+        "TechnicalName": "KUNWE_REGION",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToRegionDescription": {
+        "FriendlyName": "ShipToRegionDescription",
+        "TechnicalName": "KUNWE_REGION_BEZEI",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToCountry": {
+        "FriendlyName": "ShipToCountry",
+        "TechnicalName": "KUNWE_COUNTRY",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShipToCountryDescription": {
+        "FriendlyName": "ShipToCountryDescription",
+        "TechnicalName": "KUNWE_COUNTRY_LANDX",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShippingPoint": {
+        "FriendlyName": "ShippingPoint",
+        "TechnicalName": "VSTEL",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "ShippingConditions": {
+        "FriendlyName": "ShippingConditions",
+        "TechnicalName": "VSBED",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DeliveryPriority": {
+        "FriendlyName": "DeliveryPriority",
+        "TechnicalName": "LPRIO",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "NetOrderValue": {
+        "FriendlyName": "NetOrderValue",
+        "TechnicalName": "NETWR",
+        "FieldType": "Decimal",
+        "FieldWidth": 1
+      },
+      "SalesDocumentCurrency": {
+        "FriendlyName": "SalesDocumentCurrency",
+        "TechnicalName": "WAERK",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "DeliveryStatus": {
+        "FriendlyName": "DeliveryStatus",
+        "TechnicalName": "DELV_STAT",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM01": {
+        "FriendlyName": "CUSTOM01",
+        "TechnicalName": "CUSTOM01",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM02": {
+        "FriendlyName": "CUSTOM02",
+        "TechnicalName": "CUSTOM02",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM03": {
+        "FriendlyName": "CUSTOM03",
+        "TechnicalName": "CUSTOM03",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM04": {
+        "FriendlyName": "CUSTOM04",
+        "TechnicalName": "CUSTOM04",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM05": {
+        "FriendlyName": "CUSTOM05",
+        "TechnicalName": "CUSTOM05",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM06": {
+        "FriendlyName": "CUSTOM06",
+        "TechnicalName": "CUSTOM06",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM07": {
+        "FriendlyName": "CUSTOM07",
+        "TechnicalName": "CUSTOM07",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM08": {
+        "FriendlyName": "CUSTOM08",
+        "TechnicalName": "CUSTOM08",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM09": {
+        "FriendlyName": "CUSTOM09",
+        "TechnicalName": "CUSTOM09",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "CUSTOM10": {
+        "FriendlyName": "CUSTOM10",
+        "TechnicalName": "CUSTOM10",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    }
+  },
+  "StructMap": {
+    "SEARCHPARAMS": {
+      "Name": "SEARCHPARAMS",
+      "ItemType": "ensxtx_SBO_SFCIDelivery_Search.SEARCHPARAMS",
+      "FieldMap": {
+        "Route": {
+          "FriendlyName": "Route",
+          "TechnicalName": "ROUTE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "MeansOfTransportID": {
+          "FriendlyName": "MeansOfTransportID",
+          "TechnicalName": "TRAID",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "FromCreateDate": {
+          "FriendlyName": "FromCreateDate",
+          "TechnicalName": "ERDAT_FR",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "ToCreateDate": {
+          "FriendlyName": "ToCreateDate",
+          "TechnicalName": "ERDAT_TO",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "DeliveryDateFrom": {
+          "FriendlyName": "DeliveryDateFrom",
+          "TechnicalName": "LFDAT_FR",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "DeliveryDateTo": {
+          "FriendlyName": "DeliveryDateTo",
+          "TechnicalName": "LFDAT_TO",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "DeliveryFrom": {
+          "FriendlyName": "DeliveryFrom",
+          "TechnicalName": "VBELN_FR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DeliveryTo": {
+          "FriendlyName": "DeliveryTo",
+          "TechnicalName": "VBELN_TO",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToParty": {
+          "FriendlyName": "SoldToParty",
+          "TechnicalName": "KUNAG",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToParty": {
+          "FriendlyName": "ShipToParty",
+          "TechnicalName": "KUNWE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShippingPoint": {
+          "FriendlyName": "ShippingPoint",
+          "TechnicalName": "VSTEL",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShippingConditions": {
+          "FriendlyName": "ShippingConditions",
+          "TechnicalName": "VSBED",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DeliveryPriority": {
+          "FriendlyName": "DeliveryPriority",
+          "TechnicalName": "LPRIO",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "BillofLading": {
+          "FriendlyName": "BillofLading",
+          "TechnicalName": "BOLNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "PGIDateFrom": {
+          "FriendlyName": "PGIDateFrom",
+          "TechnicalName": "WADAT_FR",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "PGIDateTo": {
+          "FriendlyName": "PGIDateTo",
+          "TechnicalName": "WADAT_TO",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "Username": {
+          "FriendlyName": "Username",
+          "TechnicalName": "USERNAME",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "X_Open": {
+          "FriendlyName": "X_Open",
+          "TechnicalName": "X_OPEN",
+          "FieldType": "Boolean",
+          "FieldWidth": 1
+        },
+        "X_Picked": {
+          "FriendlyName": "X_Picked",
+          "TechnicalName": "X_PICKED",
+          "FieldType": "Boolean",
+          "FieldWidth": 1
+        },
+        "X_Packed": {
+          "FriendlyName": "X_Packed",
+          "TechnicalName": "X_PACKED",
+          "FieldType": "Boolean",
+          "FieldWidth": 1
+        },
+        "X_PGIed": {
+          "FriendlyName": "X_PGIed",
+          "TechnicalName": "X_PGIED",
+          "FieldType": "Boolean",
+          "FieldWidth": 1
+        }
+      }
+    }
+  },
+  "CollectionMap": {
+    "DELIVERYTYPE": {
+      "Name": "DELIVERYTYPE",
+      "ItemType": "ensxtx_SBO_SFCIDelivery_Search.DELIVERYTYPE",
+      "FieldMap": {
+        "DeliveryType": {
+          "FriendlyName": "DeliveryType",
+          "TechnicalName": "LFART",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    },
+    "CUSTOM": {
+      "Name": "CUSTOM",
+      "ItemType": "ensxtx_SBO_SFCIDelivery_Search.CUSTOM",
+      "FieldMap": {
+        "FIELD": {
+          "FriendlyName": "FIELD",
+          "TechnicalName": "FIELD",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "VALUE": {
+          "FriendlyName": "VALUE",
+          "TechnicalName": "VALUE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    },
+    "SEARCHRESULT": {
+      "Name": "SEARCHRESULT",
+      "ItemType": "ensxtx_SBO_SFCIDelivery_Search.SEARCHRESULT",
+      "FieldMap": {
+        "Delivery": {
+          "FriendlyName": "Delivery",
+          "TechnicalName": "VBELN",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Route": {
+          "FriendlyName": "Route",
+          "TechnicalName": "ROUTE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "MeansOfTransportID": {
+          "FriendlyName": "MeansOfTransportID",
+          "TechnicalName": "TRAID",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "BillofLading": {
+          "FriendlyName": "BillofLading",
+          "TechnicalName": "BOLNR",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CreateDate": {
+          "FriendlyName": "CreateDate",
+          "TechnicalName": "ERDAT",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "DeliveryDate": {
+          "FriendlyName": "DeliveryDate",
+          "TechnicalName": "LFDAT",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "PGIDate": {
+          "FriendlyName": "PGIDate",
+          "TechnicalName": "WADAT_IST",
+          "FieldType": "Date",
+          "FieldWidth": 1
+        },
+        "DeliveryType": {
+          "FriendlyName": "DeliveryType",
+          "TechnicalName": "LFART",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DeliveryTypeText": {
+          "FriendlyName": "DeliveryTypeText",
+          "TechnicalName": "LFART_TEXT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToParty": {
+          "FriendlyName": "SoldToParty",
+          "TechnicalName": "KUNAG",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToName": {
+          "FriendlyName": "SoldToName",
+          "TechnicalName": "KUNAG_NAME",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToCity": {
+          "FriendlyName": "SoldToCity",
+          "TechnicalName": "KUNAG_CITY1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToRegion": {
+          "FriendlyName": "SoldToRegion",
+          "TechnicalName": "KUNAG_REGION",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToRegionDescription": {
+          "FriendlyName": "SoldToRegionDescription",
+          "TechnicalName": "KUNAG_REGION_BEZEI",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToCountry": {
+          "FriendlyName": "SoldToCountry",
+          "TechnicalName": "KUNAG_COUNTRY",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "SoldToCountryDescription": {
+          "FriendlyName": "SoldToCountryDescription",
+          "TechnicalName": "KUNAG_COUNTRY_LANDX",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToParty": {
+          "FriendlyName": "ShipToParty",
+          "TechnicalName": "KUNWE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToName": {
+          "FriendlyName": "ShipToName",
+          "TechnicalName": "KUNWE_NAME",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToCity": {
+          "FriendlyName": "ShipToCity",
+          "TechnicalName": "KUNWE_CITY1",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToRegion": {
+          "FriendlyName": "ShipToRegion",
+          "TechnicalName": "KUNWE_REGION",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToRegionDescription": {
+          "FriendlyName": "ShipToRegionDescription",
+          "TechnicalName": "KUNWE_REGION_BEZEI",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToCountry": {
+          "FriendlyName": "ShipToCountry",
+          "TechnicalName": "KUNWE_COUNTRY",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShipToCountryDescription": {
+          "FriendlyName": "ShipToCountryDescription",
+          "TechnicalName": "KUNWE_COUNTRY_LANDX",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShippingPoint": {
+          "FriendlyName": "ShippingPoint",
+          "TechnicalName": "VSTEL",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "ShippingConditions": {
+          "FriendlyName": "ShippingConditions",
+          "TechnicalName": "VSBED",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DeliveryPriority": {
+          "FriendlyName": "DeliveryPriority",
+          "TechnicalName": "LPRIO",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "NetOrderValue": {
+          "FriendlyName": "NetOrderValue",
+          "TechnicalName": "NETWR",
+          "FieldType": "Decimal",
+          "FieldWidth": 1
+        },
+        "SalesDocumentCurrency": {
+          "FriendlyName": "SalesDocumentCurrency",
+          "TechnicalName": "WAERK",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "DeliveryStatus": {
+          "FriendlyName": "DeliveryStatus",
+          "TechnicalName": "DELV_STAT",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM01": {
+          "FriendlyName": "CUSTOM01",
+          "TechnicalName": "CUSTOM01",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM02": {
+          "FriendlyName": "CUSTOM02",
+          "TechnicalName": "CUSTOM02",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM03": {
+          "FriendlyName": "CUSTOM03",
+          "TechnicalName": "CUSTOM03",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM04": {
+          "FriendlyName": "CUSTOM04",
+          "TechnicalName": "CUSTOM04",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM05": {
+          "FriendlyName": "CUSTOM05",
+          "TechnicalName": "CUSTOM05",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM06": {
+          "FriendlyName": "CUSTOM06",
+          "TechnicalName": "CUSTOM06",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM07": {
+          "FriendlyName": "CUSTOM07",
+          "TechnicalName": "CUSTOM07",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM08": {
+          "FriendlyName": "CUSTOM08",
+          "TechnicalName": "CUSTOM08",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM09": {
+          "FriendlyName": "CUSTOM09",
+          "TechnicalName": "CUSTOM09",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "CUSTOM10": {
+          "FriendlyName": "CUSTOM10",
+          "TechnicalName": "CUSTOM10",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  }
+}

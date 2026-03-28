@@ -1,0 +1,168 @@
+{
+  "FieldMaps": {
+    "SBO_EnosixBOConfigValue_Search.SEARCHPARAMS": {
+      "CustomizingID": {
+        "FriendlyName": "CustomizingID",
+        "TechnicalName": "CID",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "BusinessObject": {
+        "FriendlyName": "BusinessObject",
+        "TechnicalName": "BOTYPE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    },
+    "SBO_EnosixBOConfigValue_Search.SEARCHRESULT": {
+      "CustomizingID": {
+        "FriendlyName": "CustomizingID",
+        "TechnicalName": "CID",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "BusinessObject": {
+        "FriendlyName": "BusinessObject",
+        "TechnicalName": "BOTYPE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "BusinessObjectTransaction": {
+        "FriendlyName": "BusinessObjectTransaction",
+        "TechnicalName": "BOPROCESS",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "VariableType": {
+        "FriendlyName": "VariableType",
+        "TechnicalName": "VARTYPE",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "VariableName": {
+        "FriendlyName": "VariableName",
+        "TechnicalName": "VARNAME",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "VariableCount": {
+        "FriendlyName": "VariableCount",
+        "TechnicalName": "NUMB",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Sign": {
+        "FriendlyName": "Sign",
+        "TechnicalName": "SIGN",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Option": {
+        "FriendlyName": "Option",
+        "TechnicalName": "OPTI",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "Low": {
+        "FriendlyName": "Low",
+        "TechnicalName": "LOW",
+        "FieldType": "String",
+        "FieldWidth": 1
+      },
+      "High": {
+        "FriendlyName": "High",
+        "TechnicalName": "HIGH",
+        "FieldType": "String",
+        "FieldWidth": 1
+      }
+    }
+  },
+  "StructMap": {
+    "SEARCHPARAMS": {
+      "Name": "SEARCHPARAMS",
+      "ItemType": "SBO_EnosixBOConfigValue_Search.SEARCHPARAMS",
+      "FieldMap": {
+        "CustomizingID": {
+          "FriendlyName": "CustomizingID",
+          "TechnicalName": "CID",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "BusinessObject": {
+          "FriendlyName": "BusinessObject",
+          "TechnicalName": "BOTYPE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  },
+  "CollectionMap": {
+    "SEARCHRESULT": {
+      "Name": "SEARCHRESULT",
+      "ItemType": "SBO_EnosixBOConfigValue_Search.SEARCHRESULT",
+      "FieldMap": {
+        "CustomizingID": {
+          "FriendlyName": "CustomizingID",
+          "TechnicalName": "CID",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "BusinessObject": {
+          "FriendlyName": "BusinessObject",
+          "TechnicalName": "BOTYPE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "BusinessObjectTransaction": {
+          "FriendlyName": "BusinessObjectTransaction",
+          "TechnicalName": "BOPROCESS",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "VariableType": {
+          "FriendlyName": "VariableType",
+          "TechnicalName": "VARTYPE",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "VariableName": {
+          "FriendlyName": "VariableName",
+          "TechnicalName": "VARNAME",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "VariableCount": {
+          "FriendlyName": "VariableCount",
+          "TechnicalName": "NUMB",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Sign": {
+          "FriendlyName": "Sign",
+          "TechnicalName": "SIGN",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Option": {
+          "FriendlyName": "Option",
+          "TechnicalName": "OPTI",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "Low": {
+          "FriendlyName": "Low",
+          "TechnicalName": "LOW",
+          "FieldType": "String",
+          "FieldWidth": 1
+        },
+        "High": {
+          "FriendlyName": "High",
+          "TechnicalName": "HIGH",
+          "FieldType": "String",
+          "FieldWidth": 1
+        }
+      }
+    }
+  }
+}

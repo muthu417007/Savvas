@@ -1,0 +1,10 @@
+.srf-modal .slds-modal__container{
+    height: 90vh;
+    margin: 5em auto;
+}
+
+.srf-modal .slds-modal__container section{
+	-webkit-overflow-scrolling: touch;
+    overflow: auto;
+	height: 90vh;
+}
